@@ -1,20 +1,24 @@
 <h1>Listing insurances</h1>
 
-<table>
+<table class="listing">
   <tr>
-  <% for column in Insurance.content_columns %>
-    <th><%= column.human_name %></th>
-  <% end %>
+    <th>Name</th>
+    <th>Adresse</th>
   </tr>
-  
 <% for insurance in @insurances %>
-  <tr>
-  <% for column in Insurance.content_columns %>
-    <td><%=h insurance.send(column.name) %></td>
-  <% end %>
-    <td><%= link_to 'Show', :action => 'show', :id => insurance %></td>
-    <td><%= link_to 'Edit', :action => 'edit', :id => insurance %></td>
-    <td><%= link_to 'Destroy', { :action => 'destroy', :id => insurance }, :confirm => 'Are you sure?', :post => true %></td>
+  <tr onmouseover="showActions(<%= insurance.id %>)" onmouseout="hideActions(<%= insurance.id %>)">
+    <td>
+      <%= link_to insurance.vcard.full_name, :action => 'show', :id => insurance %>
+    </td>
+    <td style="height: 32px; width: 50%">
+      <span style="float: left">
+        <%=h insurance.vcard.street_address %>, <%=h insurance.vcard.locality %>
+      </span>
+      <span id="actions_<%= insurance.id %>" style="display:none; float: right">
+        <%= link_to image_tag("edit"), :action => 'edit', :id => insurance %>
+        <%= link_to image_tag("remove"), { :action => 'destroy', :id => insurance }, :confirm => 'Wirklich löschen?' %>
+      </span>
+    </td>
   </tr>
 <% end %>
 </table>

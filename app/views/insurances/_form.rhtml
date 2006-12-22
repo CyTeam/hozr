@@ -1,5 +1,13 @@
 <%= error_messages_for 'insurance' %>
 
 <!--[form:insurance]-->
+<p><label for="vcard_full_name">Name</label><br/>
+<%= text_field 'vcard', 'full_name'  %></p>
+
+<p><label for="vcard_street_address">Strasse</label><br/>
+<%= text_field 'vcard', 'street_address'  %></p>
+
+<p><label for="vcard_locality">Ort</label><br/>
+<%= text_field 'vcard', 'locality'  %></p>
 <!--[eoform:insurance]-->
 

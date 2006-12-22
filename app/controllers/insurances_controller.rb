@@ -14,6 +14,7 @@ class InsurancesController < ApplicationController
 
   def show
     @insurance = Insurance.find(params[:id])
+    @vcard = @insurance.vcard
   end
 
   def new
@@ -22,6 +23,8 @@ class InsurancesController < ApplicationController
 
   def create
     @insurance = Insurance.new(params[:insurance])
+    @insurance.vcard = Vcard.new(params[:vcard])
+
     if @insurance.save
       flash[:notice] = 'Insurance was successfully created.'
       redirect_to :action => 'list'
@@ -32,13 +35,15 @@ class InsurancesController < ApplicationController
 
   def edit
     @insurance = Insurance.find(params[:id])
+    @vcard = @insurance.vcard
   end
 
   def update
     @insurance = Insurance.find(params[:id])
-    if @insurance.update_attributes(params[:insurance])
+    @vcard = @insurance.vcard
+    if @vcard.update_attributes(params[:vcard]) and @insurance.update_attributes(params[:insurance])
       flash[:notice] = 'Insurance was successfully updated.'
-      redirect_to :action => 'show', :id => @insurance
+      redirect_to :action => 'list'
     else
       render :action => 'edit'
     end
