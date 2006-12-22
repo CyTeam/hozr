@@ -1,0 +1,8 @@
+<% for column in Insurance.content_columns %>
+<p>
+  <b><%= column.human_name %>:</b> <%=h @insurance.send(column.name) %>
+</p>
+<% end %>
+
+<%= link_to 'Edit', :action => 'edit', :id => @insurance %> |
+<%= link_to 'Back', :action => 'list' %>

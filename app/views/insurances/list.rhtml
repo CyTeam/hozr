@@ -1,0 +1,27 @@
+<h1>Listing insurances</h1>
+
+<table>
+  <tr>
+  <% for column in Insurance.content_columns %>
+    <th><%= column.human_name %></th>
+  <% end %>
+  </tr>
+  
+<% for insurance in @insurances %>
+  <tr>
+  <% for column in Insurance.content_columns %>
+    <td><%=h insurance.send(column.name) %></td>
+  <% end %>
+    <td><%= link_to 'Show', :action => 'show', :id => insurance %></td>
+    <td><%= link_to 'Edit', :action => 'edit', :id => insurance %></td>
+    <td><%= link_to 'Destroy', { :action => 'destroy', :id => insurance }, :confirm => 'Are you sure?', :post => true %></td>
+  </tr>
+<% end %>
+</table>
+
+<%= link_to 'Previous page', { :page => @insurance_pages.current.previous } if @insurance_pages.current.previous %>
+<%= link_to 'Next page', { :page => @insurance_pages.current.next } if @insurance_pages.current.next %> 
+
+<br />
+
+<%= link_to 'New insurance', :action => 'new' %>
