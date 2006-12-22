@@ -12,7 +12,7 @@
     </td>
     <td style="height: 32px; width: 50%">
       <span style="float: left">
-        <%=h insurance.vcard.street_address %>, <%=h insurance.vcard.locality %>
+        <%=h insurance.vcard.street_address %>, <%=h insurance.vcard.postal_code %> <%=h insurance.vcard.locality %>; <%=h "Tel: #{insurance.vcard.phone_number}" unless insurance.vcard.phone_number == '' %>
       </span>
       <span id="actions_<%= insurance.id %>" style="display:none; float: right">
         <%= link_to image_tag("edit"), :action => 'edit', :id => insurance %>

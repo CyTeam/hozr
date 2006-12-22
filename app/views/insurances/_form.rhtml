@@ -1,13 +1,25 @@
 <%= error_messages_for 'insurance' %>
 
 <!--[form:insurance]-->
-<p><label for="vcard_full_name">Name</label><br/>
-<%= text_field 'vcard', 'full_name'  %></p>
+<p>
+  <label for="vcard_full_name">Name</label>:
+  <%= text_field 'vcard', 'full_name'  %>
+</p>
 
-<p><label for="vcard_street_address">Strasse</label><br/>
-<%= text_field 'vcard', 'street_address'  %></p>
+<p>
+  <label for="vcard_street_address">Strasse</label>:
+  <%= text_field 'vcard', 'street_address'  %>
+</p>
 
-<p><label for="vcard_locality">Ort</label><br/>
-<%= text_field 'vcard', 'locality'  %></p>
+<p>
+  <label for="vcard_locality">PLZ/Ort</label>:
+  <%= text_field 'vcard', 'postal_code', :size => '7'  %> <%= text_field 'vcard', 'locality'  %>
+</p>
+
+<p>
+  <label for="vcard_street_address">Telefon</label>:
+  <%= text_field 'vcard', 'phone_number'  %>
+</p>
+
 <!--[eoform:insurance]-->
 

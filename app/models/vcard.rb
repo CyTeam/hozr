@@ -1,5 +1,6 @@
 class Vcard < ActiveRecord::Base
-    has_one :address
+  has_one :address
+  has_many :phone_numbers
 
   def scaffold_name
     full_name
@@ -86,5 +87,17 @@ class Vcard < ActiveRecord::Base
       create_address
     end
     address.country_name = value
+  end
+
+  def phone_number=(value)
+    phone_numbers.build(:number => value, :phone_number_type => 'business')
+  end
+
+  def phone_number
+    begin
+      phone_numbers[0].number
+    rescue
+      return ''
+    end
   end
 end
