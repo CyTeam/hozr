@@ -1,8 +1,6 @@
-<% for column in Doctor.content_columns %>
-<p>
-  <b><%= column.human_name %>:</b> <%=h @doctor.send(column.name) %>
-</p>
-<% end %>
+<%= @doctor.vcard.given_name  %> <%= @doctor.vcard.family_name  %><br/>
+<%= @doctor.vcard.street_address  %><br/>
+<%= @doctor.vcard.postal_code  %> <%= @doctor.vcard.locality %><br/>
 
 <%= link_to 'Edit', :action => 'edit', :id => @doctor %> |
 <%= link_to 'Back', :action => 'list' %>

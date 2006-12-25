@@ -4,16 +4,13 @@ class DoctorsController < ApplicationController
     render :action => 'list'
   end
 
-  # GETs should be safe (see http://www.w3.org/2001/tag/doc/whenToUseGet.html)
-  verify :method => :post, :only => [ :destroy, :create, :update ],
-         :redirect_to => { :action => :list }
-
   def list
     @doctor_pages, @doctors = paginate :doctors, :per_page => 10
   end
 
   def show
     @doctor = Doctor.find(params[:id])
+    @vcard = @doctor.vcard
   end
 
   def new
@@ -22,6 +19,8 @@ class DoctorsController < ApplicationController
 
   def create
     @doctor = Doctor.new(params[:doctor])
+    @doctor.vcard = Vcard.new(params[:vcard])
+    
     if @doctor.save
       flash[:notice] = 'Doctor was successfully created.'
       redirect_to :action => 'list'
@@ -32,11 +31,13 @@ class DoctorsController < ApplicationController
 
   def edit
     @doctor = Doctor.find(params[:id])
+    @vcard = @doctor.vcard
   end
 
   def update
     @doctor = Doctor.find(params[:id])
-    if @doctor.update_attributes(params[:doctor])
+    @vcard = @doctor.vcard
+    if @vcard.update_attributes(params[:vcard]) and @doctor.update_attributes(params[:doctor])
       flash[:notice] = 'Doctor was successfully updated.'
       redirect_to :action => 'show', :id => @doctor
     else

@@ -1,20 +1,24 @@
 <h1>Listing doctors</h1>
 
-<table>
+<table class="listing">
   <tr>
-  <% for column in Doctor.content_columns %>
-    <th><%= column.human_name %></th>
-  <% end %>
+    <th>Name</th><th>Adresse</th>
   </tr>
   
 <% for doctor in @doctors %>
-  <tr>
-  <% for column in Doctor.content_columns %>
-    <td><%=h doctor.send(column.name) %></td>
-  <% end %>
-    <td><%= link_to 'Show', :action => 'show', :id => doctor %></td>
-    <td><%= link_to 'Edit', :action => 'edit', :id => doctor %></td>
-    <td><%= link_to 'Destroy', { :action => 'destroy', :id => doctor }, :confirm => 'Are you sure?', :post => true %></td>
+  <tr onmouseover="showActions(<%= doctor.id %>)" onmouseout="hideActions(<%= doctor.id %>)">
+    <td>
+      <%= link_to doctor.vcard.family_name + ", " + doctor.vcard.given_name, :action => 'show', :id => doctor %>
+    </td>
+    <td style="height: 32px; width: 50%">
+      <span style="float: left">
+        <%=h doctor.vcard.street_address %>, <%=h doctor.vcard.postal_code %> <%=h doctor.vcard.locality %>
+      </span>
+      <span id="actions_<%= doctor.id %>" style="display:none; float: right">
+        <%= link_to image_tag("edit"), :action => 'edit', :id => doctor %>
+        <%= link_to image_tag("remove"), { :action => 'destroy', :id => doctor }, :confirm => 'Wirklich löschen?' %>
+      </span>
+    </td>
   </tr>
 <% end %>
 </table>

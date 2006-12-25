@@ -1,5 +1,20 @@
 <%= error_messages_for 'doctor' %>
 
 <!--[form:doctor]-->
+<p><label for="vcard_given_name">Vorname</label><br/>
+<%= text_field 'vcard', 'given_name'  %></p>
+
+<p><label for="vcard_family_name">Nachname</label><br/>
+<%= text_field 'vcard', 'family_name'  %></p>
+
+<p><label for="vcard_street_address">Strasse</label><br/>
+<%= text_field 'vcard', 'street_address'  %></p>
+
+<p><label for="vcard_locality">Ort</label><br/>
+<%= text_field 'vcard', 'locality'  %></p>
+
+<p><label for="vcard_postal_code">PLZ</label><br/>
+<%= text_field 'vcard', 'postal_code'  %></p>
+
 <!--[eoform:doctor]-->
 
