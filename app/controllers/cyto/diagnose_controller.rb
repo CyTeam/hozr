@@ -1,8 +1,8 @@
 include Cyto
 
 class Cyto::DiagnoseController < ApplicationController
-  auto_complete_for :finding_class, :selection, :select => "*, code || ' - ' || description as selection", :limit =>12
-  auto_complete_for :classification, :description, :limit => 12
+  auto_complete_for :finding_class, :selection, :select => "*, code || ' - ' || name as selection", :limit =>12
+  auto_complete_for :classification, :name, :limit => 12
 
   def index
     second_entry_pap_form
@@ -28,13 +28,13 @@ class Cyto::DiagnoseController < ApplicationController
     finding_class_selection = params[:finding_class][:selection]
     finding_class_code = finding_class_selection.split(' - ')[0]
     finding_class = FindingClass.find_by_code(finding_class_code)
-    render_text "<li>#{finding_class.description}<input type='hidden' name='finding_ids[]' value='#{finding_class.id}' readonly='readonly' /></li>"
+    render_text "<li>#{finding_class.name}<input type='hidden' name='finding_ids[]' value='#{finding_class.id}' readonly='readonly' /></li>"
   end
 
   def add_top_finding
     top_finding_class_id = params[:top_finding_id]
     finding_class = FindingClass.find(top_finding_class_id)
-    render_text "<li>#{finding_class.description}<input type='hidden' name='finding_ids[]' value='#{finding_class.id}' readonly='readonly' /></li>"
+    render_text "<li>#{finding_class.name}<input type='hidden' name='finding_ids[]' value='#{finding_class.id}' readonly='readonly' /></li>"
   end
 
   def result_report
