@@ -1,0 +1,61 @@
+<%= error_messages_for 'patient' %>
+
+<!--[form:patient]-->
+<p><label for="vcard_given_name">Vorname</label><br/>
+<%= text_field 'vcard', 'given_name'  %></p>
+
+<p><label for="vcard_family_name">Nachname</label><br/>
+<%= text_field 'vcard', 'family_name'  %></p>
+
+<p><label for="vcard_street_address">Strasse</label><br/>
+<%= text_field 'vcard', 'street_address'  %></p>
+
+<p><label for="vcard_locality">Ort</label><br/>
+<%= text_field 'vcard', 'locality'  %></p>
+
+<p><label for="vcard_postal_code">PLZ</label><br/>
+<%= text_field 'vcard', 'postal_code'  %></p>
+
+<p><label for="billing_vcard_given_name">Vorname</label><br/>
+<%= text_field 'billing_vcard', 'given_name'  %></p>
+
+<p><label for="billing_vcard_family_name">Nachname</label><br/>
+<%= text_field 'billing_vcard', 'family_name'  %></p>
+
+<p><label for="billing_vcard_street_address">Strasse</label><br/>
+<%= text_field 'billing_vcard', 'street_address'  %></p>
+
+<p><label for="billing_vcard_locality">Ort</label><br/>
+<%= text_field 'billing_vcard', 'locality'  %></p>
+
+<p><label for="billing_vcard_postal_code">PLZ</label><br/>
+<%= text_field 'billing_vcard', 'postal_code'  %></p>
+
+<p><label for="patient_birth_date">Geburtsdatum</label><br/>
+<%= date_select 'patient', 'birth_date'  %></p>
+
+<p><label for="patient_doctor_id">Arzt</label><br/>
+<select name="patient[doctor_id]">
+ <% @doctors.each do |doctor| %>
+ <option value="<%= doctor.id %>"> 
+ <%= doctor.vcard.family_name + ", " + doctor.vcard.given_name%>
+ </option>
+ <% end %>
+ </select>
+
+<p><label for="patient_insurance_id">Versicherung</label><br/>
+<select name="patient[insurance_id]">
+ <% @insurances.each do |insurance| %>
+ <option value="<%= insurance.id %>"> 
+ <%= insurance.vcard.full_name %>
+ </option>
+ <% end %>
+ </select>
+
+<p><label for="patient_insurance_nr">Versicherungsnr.</label><br/>
+<%= text_field 'patient', 'insurance_nr'  %></p>
+
+<p><label for="patient_sex">Geschlecht</label><br/>
+<%= text_field 'patient', 'sex'  %></p>
+<!--[eoform:patient]-->
+

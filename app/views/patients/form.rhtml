@@ -1,0 +1,92 @@
+<h1>Ersteingabe</h1>
+<%= start_form_tag :action => 'update_form', :id => @patient %>
+	<table width="100%" cellspacing="4px" cellpadding="4px">
+		<tbody>
+			<tr>
+				<td style="width: 50%; height: 100%" rowspan="3">
+					<fieldset id="properties" style="height: 100%">
+					<legend>Personalien</legend>
+					<div class="col1">
+						<label for="name">Name:</label>
+						<%= text_field 'patient', 'family_name', 'size' => '20', 'accesskey' => 'p', 'tabindex' => '1' %><br/>
+						<label for="vorname">Vorname:</label>
+						<%= text_field 'patient', 'tx_Vorname', 'size' => '20', 'accesskey' => 'v', 'tabindex' => '2' %><br/>
+						<label for="addresse">Adresse:</label>
+						<%= text_field 'patient', 'tx_Strasse', 'size' => '20', 'accesskey' => 's', 'tabindex' => '3' %><br/>
+						<label for="plz">PLZ:</label>
+						<%= text_field 'patient', 'tx_PLZ', 'size' => '20', 'accesskey' => 'l', 'tabindex' => '4' %><br/>
+						<label for="ort">Ort:</label>
+						<%= text_field 'patient', 'tx_Ort', 'size' => '20', 'accesskey' => 'o', 'tabindex' => '5' %><br/>
+						<label for="geburtstag">Geburtstag:</label>
+						<%= date_select 'patient', 'tx_Geburtsdatum', 'size' => '20', 'accesskey' => 'g', 'tabindex' => '6' %><br/>
+						<label for="sex">Geschlecht:</label>
+						<%= select 'patient', 'Geschlecht_ID', { 'männlich' => '1', 'weiblich' => '2' }, { 'tabindex' => '7' } %><br/>
+						<label for="fakt_aktiv">Faktura aktiv:</label>
+						<%= check_box 'patient', 'tf_fakt_Aktiv' %><br/>
+						<label for="fakt_aktiv">Mahnstopp:</label>
+						<%= check_box 'patient', 'tf_Mahnen', {}, 1, 0 %><br/>
+					</div>
+					<div class="col2">
+						<label for="fakt_name">Name:</label>
+						<%= text_field 'patient', 'tx_fakt_Name', 'size' => '20', 'accesskey' => 'p', 'tabindex' => '1' %><br/>
+						<label for="fakt_vorname">Vorname:</label>
+						<%= text_field 'patient', 'tx_fakt_Vorname', 'size' => '20', 'accesskey' => 'v', 'tabindex' => '2' %><br/>
+						<label for="fakt_addresse">Adresse:</label>
+						<%= text_field 'patient', 'tx_fakt_Strasse', 'size' => '20', 'accesskey' => 's', 'tabindex' => '3' %><br/>
+						<label for="fakt_plz">PLZ:</label>
+						<%= text_field 'patient', 'tx_fakt_PLZ', 'size' => '20', 'accesskey' => 'l', 'tabindex' => '4' %><br/>
+						<label for="fakt_ort">Ort:</label>
+						<%= text_field 'patient', 'tx_fakt_Ort', 'size' => '20', 'accesskey' => 'o', 'tabindex' => '5' %><br/>
+					</div>
+					</fieldset>
+				</td>
+				<td>
+					<fieldset id="properties">
+						<legend>Arzt</legend>
+						<div class="main">
+							<label for="zuwarzt">Arzt:</label>
+							<%= select('patient', "doctor_id", Doctor.find_all.collect {|p| [ p.family_name, p.id ]}) %>
+							<br/>
+						</div>
+					</fieldset>
+				</td>
+			</tr>
+			<tr>
+				<td style="height: 100%">
+					<fieldset id="properties" style="height: 100%">
+						<legend>Krankenkasse</legend>
+						<div class="main">
+							<label for="krankenkasse">Krankenkasse:</label>
+							<%= select('patient', "insurance_id", Insurance.find_all.collect {|p| [ p.name, p.id ]}) %>
+							<br/>
+							<label for="versicherungsnr">Mitglieder Nr.</label>
+							<%= text_field 'patient', 'insurance_nr', 'size' => '20', 'accesskey' => 'v', 'tabindex' => '10' %>
+						</div>
+					</fieldset>
+				</td>
+			</tr>
+			<tr>
+				<td style="height: 100%">
+					<fieldset id="properties" style="height:100%">
+						<legend>Eingangs Nr.</legend>
+						<input type="text" name="in_EingangJahr" size="2"/>/<input type="text" name="in_EingangsNr" size="6"/>
+					</fieldset>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<fieldset id="properties">
+						<legend>Bemerkungen</legend>
+						<div class="main">
+							<%= text_area('patient', 'mo_Bemerkung', 'style' => 'width: 100%; height: 7em') %>
+						</div>
+					</fieldset>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<%= submit_tag 'Daten mutieren' %>
+	<%= submit_tag 'Untersuchung anlegen' %>
+	<%= submit_tag 'Rechnungen anzeigen' %>
+<%= end_form_tag %>
+<%= render :partial => 'pap_summary' %>
