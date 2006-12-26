@@ -1,10 +1,5 @@
 class Doctor < ActiveRecord::Base
   belongs_to :vcard
-  @scaffold_include = [:vcard]
-
-  def scaffold_name
-    vcard.full_name
-  end
 
   def family_name
     vcard.family_name

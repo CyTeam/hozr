@@ -2,10 +2,6 @@ class Vcard < ActiveRecord::Base
   has_one :address
   has_many :phone_numbers
 
-  def scaffold_name
-    full_name
-  end
-
   def full_name
     if super
       return super
