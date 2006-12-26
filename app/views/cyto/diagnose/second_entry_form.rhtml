@@ -1,5 +1,8 @@
 <%
-	@pap_order_form = PapOrderForm.find(16)
+begin
+  @order_form = OrderForm.find(16)
+rescue
+end
 %>
 
 <table style="width: 100%; height: 100%">
