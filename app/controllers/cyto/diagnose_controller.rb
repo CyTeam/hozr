@@ -16,6 +16,7 @@ class Cyto::DiagnoseController < ApplicationController
 
   def deprecated_create_case
     @case = Case.new(params[:case])
+    @case.finding_class_ids = params[:finding_ids]
     if @case.save
       flash[:notice] = 'Case was successfully created.'
       redirect_to :action => 'deprecated_second_entry_pap_form'
