@@ -1,0 +1,2 @@
+module Cyto::TopFindingClassesHelper
+end

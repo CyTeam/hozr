@@ -1,0 +1,8 @@
+<% for column in TopFindingClass.content_columns %>
+<p>
+  <b><%= column.human_name %>:</b> <%=h @top_finding_class.send(column.name) %>
+</p>
+<% end %>
+
+<%= link_to 'Edit', :action => 'edit', :id => @top_finding_class %> |
+<%= link_to 'Back', :action => 'list' %>
