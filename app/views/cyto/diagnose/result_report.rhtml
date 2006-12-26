@@ -1,18 +1,21 @@
 <%
-	@pap_order_form = PapOrderForm.find(16)
+begin
+  @order_form = OrderForm.find(16)
+rescue
+end
 %>
 
 <div style="background-color: white; font-family: ChollaSansRegular,Arial; font-size: 11pt; line-height: 100%; position: absolute; top: 2.2cm; left: 2.2cm">
 <div id="patient" style="position: absolute; top: 0cm; left: 0cm">
-	Frau<br />
-	Beispiel Marianne<br />
-	Musterstr. 1a<br />
-	8005 Zürich<br />
-	1.1.1944<br />
+  Frau<br />
+  Beispiel Marianne<br />
+  Musterstr. 1a<br />
+  8005 Zürich<br />
+  1.1.1944<br />
 </div>
 <div style="font-family: ChollaSansThin; position: absolute; top: 1.8cm; left: 0cm">
-	<br/>
-	KK: Sanitas
+  <br/>
+  KK: Sanitas
 </div>
 
 <div id="doctor" style="position: absolute; top: 0cm; left: 6.5cm">
@@ -32,7 +35,7 @@ Ihr Auftrag Nr. 06/33555
 </div>
 
 <div style="position: absolute; top: 5.8cm; left: 0cm">
-<%= image_tag url_for_image_column("pap_order_form", "file", :remarks) %>
+<%= image_tag url_for_image_column("order_form", "file", :remarks) unless @order_form.nil? %>
 </div>
 
 <div style="font-family: ChollaSansBold; position: absolute; top: 9.4cm; left: 0cm">
@@ -45,7 +48,7 @@ PAP II
 
 <div style="font-family: ChollaSansThin; position: absolute; top: 11cm; left: 0cm">
 <% for finding in @findings %>
-<%= finding.description %><br />
+<%= finding.name %><br />
 <% end %>
 </div>
 </div>
