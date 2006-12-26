@@ -1,7 +1,7 @@
 class CreateCytoExaminationMethods < ActiveRecord::Migration
   def self.up
     create_table :examination_methods do |t|
-      # t.column :name, :string
+      t.column :name, :string
     end
   end
 
