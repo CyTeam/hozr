@@ -1,0 +1,51 @@
+<%
+	@pap_order_form = PapOrderForm.find(16)
+%>
+
+<div style="background-color: white; font-family: ChollaSansRegular,Arial; font-size: 11pt; line-height: 100%; position: absolute; top: 2.2cm; left: 2.2cm">
+<div id="patient" style="position: absolute; top: 0cm; left: 0cm">
+	Frau<br />
+	Beispiel Marianne<br />
+	Musterstr. 1a<br />
+	8005 Zürich<br />
+	1.1.1944<br />
+</div>
+<div style="font-family: ChollaSansThin; position: absolute; top: 1.8cm; left: 0cm">
+	<br/>
+	KK: Sanitas
+</div>
+
+<div id="doctor" style="position: absolute; top: 0cm; left: 6.5cm">
+Herr Dr. med.<br />
+Hans Muster<br />
+Beispielstr. 27<br />
+8001 Zürich
+</div>
+
+<div id="meta" style="position: absolute; top: 1.8cm; left: 6.5cm; font-family: ChollaSansThin">
+Entnahme vom: 27.3.2006<br />
+Eingang am: 29.3.2006
+</div>
+
+<div style="font-family: ChollaSansBold; position: absolute; top: 3.4cm; left: 0cm">
+Ihr Auftrag Nr. 06/33555
+</div>
+
+<div style="position: absolute; top: 5.8cm; left: 0cm">
+<%= image_tag url_for_image_column("pap_order_form", "file", :remarks) %>
+</div>
+
+<div style="font-family: ChollaSansBold; position: absolute; top: 9.4cm; left: 0cm">
+Befund
+</div>
+
+<div style="font-family: ChollaSansBold; font-size: 12pt; border: solid 1pt; position: absolute; top: 10cm; left: 0cm; width: 10.4cm; padding: 4px">
+PAP II
+</div>
+
+<div style="font-family: ChollaSansThin; position: absolute; top: 11cm; left: 0cm">
+<% for finding in @findings %>
+<%= finding.description %><br />
+<% end %>
+</div>
+</div>
