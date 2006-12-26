@@ -3,6 +3,7 @@
 	<% end %>
 
 	<%= form_remote_tag :update => "findings", :position => "bottom", :url => url_for(:action => "add_finding"), :id => "finding_classes",  :after => "$('finding_class_selection').value = ''" %>
+    <label for="case_praxistar_eingangsnr">Befund:</label>
 		<%= text_field_with_auto_complete :finding_class, :selection, :frequency => 0.5 %>
 		<%= submit_tag "Los" %>
 	<%= end_form_tag %>

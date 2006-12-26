@@ -9,6 +9,21 @@ class Cyto::DiagnoseController < ApplicationController
     render :action => 'second_entry_pap_form'
   end
 
+  def deprecated_second_entry_form
+#    if params[:case][:praxistar_eingangsnr].
+    @case = Case.new(params[:case])
+  end
+
+  def deprecated_create_case
+    @case = Case.new(params[:case])
+    if @case.save
+      flash[:notice] = 'Case was successfully created.'
+      redirect_to :action => 'deprecated_second_entry_pap_form'
+    else
+      render :deprecated_second_entry_form
+    end
+  end
+  
   def second_entry_pap_form
   end
 
@@ -25,10 +40,18 @@ class Cyto::DiagnoseController < ApplicationController
   end
   
   def add_finding
-    finding_class_selection = params[:finding_class][:selection]
-    finding_class_code = finding_class_selection.split(' - ')[0]
-    finding_class = FindingClass.find_by_code(finding_class_code)
-    render_text "<li>#{finding_class.name}<input type='hidden' name='finding_ids[]' value='#{finding_class.id}' readonly='readonly' /></li>"
+    begin
+      if params[:finding_class][:selection] > ''
+        finding_class_code = params[:finding_class][:selection].split(' - ')[0]
+      elsif params[:finding_class][:code]
+        finding_class_code = params[:finding_class][:code]
+      end
+      
+      finding_class = FindingClass.find_by_code(finding_class_code)
+      render_text "<li>#{finding_class.name}<input type='hidden' name='finding_ids[]' value='#{finding_class.id}' readonly='readonly' /></li>"
+    rescue
+      render_text "<li style='color: red'>Unbekannter Code: #{finding_class_code}</li>"
+    end
   end
 
   def add_top_finding

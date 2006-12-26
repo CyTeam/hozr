@@ -1,0 +1,11 @@
+<h1>Zweiteingabe - PAP Status</h1>
+<%= form_tag( :action => "deprecated_second_entry_form" ) %>
+<fieldset style="width: 95%">
+  <legend>Befund</legend>
+  <p>
+    <label for="case_praxistar_eingangsnr">Eingangsnr:</label>
+    <%= text_field "case", "praxistar_eingangsnr", :size => 8 %>
+  </p>
+  <%= submit_tag "Weiter" %>
+</fieldset>
+<%= end_form_tag %>
