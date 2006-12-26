@@ -2,7 +2,10 @@
 
 <!--[form:classification]-->
 <p><label for="classification_name">Name</label><br/>
-<%= text_area 'classification', 'name'  %></p>
+<%= text_field 'classification', 'name'  %></p>
+
+<p><label for="classification_code">Code</label><br/>
+<%= text_field 'classification', 'code', :size => 5  %></p>
 
 <p><label for="classification_color">Color</label><br/>
 <%= text_field 'classification', 'color'  %></p>
