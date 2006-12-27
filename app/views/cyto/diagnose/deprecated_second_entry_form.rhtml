@@ -68,7 +68,7 @@ Event.observe(window, 'load', function() {$('finding_class_code').focus()}, fals
         <legend>Geschichte</legend>
         <dl>
           <% for a_case in @patient.cases %>
-          <dt class="PAP_<%=h a_case.classification.code %>" style="font-weight: bold"><%=h a_case.examination_date.strftime('%b. %g') unless a_case.examination_date.nil?%>: #<%=h a_case.praxistar_eingangsnr.split('/')[0] %><dt/>
+          <dt class="PAP_<%=h a_case.classification.code %>" style="font-weight: bold"><%=h a_case.examination_date.strftime('%b. %g') unless a_case.examination_date.nil? %>: #<%=h a_case.praxistar_eingangsnr.split('/')[0] %><dt/>
           <dd><div style="font-weight: bold"><%=h a_case.classification.name %></div>(<%=h a_case.finding_classes.collect { |c| c.code }.join(', ') %>)</dd>
           <% end %>
         </dl>
