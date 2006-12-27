@@ -9,9 +9,9 @@ Event.observe(window, 'load', function() {$('finding_class_code').focus()}, fals
   <p>
   <%= form_remote_tag :update => "findings", :position => "bottom", :url => url_for(:action => "add_finding"), :id => "finding_classes",  :after => "$('finding_class_selection').value = ''; $('finding_class_code').value = ''; $('finding_class_code').focus() " %>
     <label for="case_praxistar_eingangsnr">Text:</label>
-    <%= text_field_with_auto_complete :finding_class, :selection, :frequency => 0.5 %>
+    <%= text_field_with_auto_complete :finding_class, :selection, {:tabindex => 1}, :frequency => 0.5 %>
     <label for="case_praxistar_eingangsnr">Code:</label>
-    <%= text_field :finding_class, :code, :size => 5, :tabindex => 1 %>
+    <%= text_field :finding_class, :code, :size => 5, :tabindex => 2 %>
     <%= submit_tag "Los" %>
   <%= end_form_tag %>
   </p>
@@ -30,18 +30,18 @@ Event.observe(window, 'load', function() {$('finding_class_code').focus()}, fals
     <legend>Erfassung</legend>
     <p>
       <label for="case_classification">PAP Status:</label>
-      <%= select "case", "classification_id", Classification.find_all.collect { |c| [ "#{c.code} - #{c.name}", c.id ] }, {},  :tabindex => 2 %>
+      <%= select "case", "classification_id", Classification.find_all.collect { |c| [ "#{c.code} - #{c.name}", c.id ] }, {},  :tabindex => 3 %>
     </p>
     <p>
       <label for="case_examination_date">Abstrichdatum:</label>
-      <%= text_field "case", "examination_date", :tabindex => 3 %>
+      <%= text_field "case", "examination_date", :tabindex => 4 %>
     </p>
     <p>
       <label for="case_examination_date">Method:</label>
-      <%= select "case", "examination_method_id", ExaminationMethod.find_all.collect { |m| [ m.name, m.id ] }, {}, :tabindex => 4 %>
+      <%= select "case", "examination_method_id", ExaminationMethod.find_all.collect { |m| [ m.name, m.id ] }, {}, :tabindex => 5 %>
     </p>
   </fieldset>
   <div>
-    <%= submit_tag "Erstellen", :tabindex => 5 %>
+    <%= submit_tag "Erstellen", :tabindex => 6 %>
   </div>
 <%= end_form_tag %>
