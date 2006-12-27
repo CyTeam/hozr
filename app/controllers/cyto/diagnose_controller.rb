@@ -24,7 +24,7 @@ class Cyto::DiagnoseController < ApplicationController
       flash[:notice] = 'Case was successfully created.'
       redirect_to :action => 'deprecated_second_entry_pap_form'
     else
-      render :deprecated_second_entry_form
+      render :action => 'deprecated_second_entry_form'
     end
   end
   
