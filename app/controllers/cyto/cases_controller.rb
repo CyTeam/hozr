@@ -9,7 +9,7 @@ class Cyto::CasesController < ApplicationController
          :redirect_to => { :action => :list }
 
   def list
-    @case_pages, @cases = paginate :cases, :per_page => 10
+    @case_pages, @cases = paginate :cases, :per_page => 144, :order => 'praxistar_eingangsnr DESC'
   end
 
   def show
