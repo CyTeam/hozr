@@ -1,6 +1,7 @@
 class Doctor < ActiveRecord::Base
   belongs_to :vcard
-
+  has_many :cases
+  
   def family_name
     vcard.family_name
   end
