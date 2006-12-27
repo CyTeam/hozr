@@ -20,7 +20,7 @@
       <div><%=h "#{finding.code} - #{finding.name}" %></div>
     <% end %>
     </td>
-    <td><%=h a_case.doctor.family_name unless a_case.doctor %></td>
+    <td><%=h a_case.doctor.family_name unless a_case.doctor.nil? %></td>
     <td />
     <td><%= link_to 'Edit', :action => 'edit', :id => a_case %></td>
     <td><%= link_to 'Destroy', { :action => 'destroy', :id => a_case }, :confirm => 'Are you sure?', :post => true %></td>
