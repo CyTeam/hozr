@@ -5,7 +5,6 @@ class Cyto::DiagnoseController < ApplicationController
   auto_complete_for :classification, :name, :limit => 12
 
   def index
-    second_entry_pap_form
     render :action => 'second_entry_pap_form'
   end
 
@@ -29,9 +28,6 @@ class Cyto::DiagnoseController < ApplicationController
     end
   end
   
-  def second_entry_pap_form
-  end
-
   def upload_order_form
   end
   
@@ -39,6 +35,10 @@ class Cyto::DiagnoseController < ApplicationController
   end
   
   def second_entry_form
+    case Classification.find(params[:classification]).code
+    when '2a', '2-3a'
+      render :action => 'second_entry_agus_ascus_form'
+    end
   end
   
   def second_entry_queue_list

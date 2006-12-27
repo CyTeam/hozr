@@ -1,0 +1,32 @@
+<h1>AGUS/ASCUS</h1>
+<%
+code = Classification.find(params[:classification]).code
+
+def classification_button(code)
+  classification = Classification.find_by_code(code)
+  
+  button_to classification.name, { :action => "second_entry_form", :classification => classification.id }, :style => "background-color: #{classification.color}"
+end
+%>
+
+<style>
+.button-to div input{ 
+  display: inline;
+  width: 12em; 
+  height: 3em; 
+  font-weight: bold
+}
+
+td {
+  padding-bottom: 10px;
+  padding-top: 10px;
+}
+</style>
+  
+<table>
+  <tr>
+    <td><%= classification_button(code + 'g') %></td>
+    <td><%= classification_button(code + 's') %></td>
+    <td><%= classification_button(code + 'g/as') %></td>
+  </tr>
+</table>
