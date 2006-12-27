@@ -1,11 +1,4 @@
 <h1>Beurteilung</h1>
-<%
-def classification_button(id)
-  classification = Classification.find(id)
-  
-  button_to classification.name, { :action => "second_entry_form", :classification => classification.id }, :style => "background-color: #{classification.color}"
-end
-%>
 
 <style>
 .button-to div input{ 
@@ -23,28 +16,28 @@ td {
   
 <table>
   <tr>
-    <td><%= classification_button(1) %></td>
-    <td><%= classification_button(2) %></td>
+    <td><%= classification_button('1') %></td>
+    <td><%= classification_button('2') %></td>
   </tr>
   <tr>
-    <td><%= classification_button(3) %></td>
-    <td><%= classification_button(4) %></td>
+    <td><%= classification_button('2a') %></td>
+    <td><%= classification_button('2-3a') %></td>
   </tr>
   <tr>
-    <td><%= classification_button(5) %></td>
-    <td><%= classification_button(13) %></td>
-    <td><%= classification_button(6) %></td>
-    <td><%= classification_button(14) %></td>
-    <td><%= classification_button(15) %></td>
+    <td><%= classification_button('3l-c1') %></td>
+    <td><%= classification_button('3m-c1-2') %></td>
+    <td><%= classification_button('3m-c2') %></td>
+    <td><%= classification_button('3s-c2-3') %></td>
+    <td><%= classification_button('3s-c3') %></td>
   </tr>
   <tr>
-    <td><%= classification_button(7) %></td>
-    <td><%= classification_button(8) %></td>
-    <td><%= classification_button(12) %></td>
+    <td><%= classification_button('4') %></td>
+    <td><%= classification_button('5') %></td>
+    <td><%= classification_button('az') %></td>
   </tr>
   <tr>
-    <td><%= classification_button(9) %></td>
-    <td><%= classification_button(10) %></td>
-    <td><%= classification_button(11) %></td>
+    <td><%= classification_button('mam') %></td>
+    <td><%= classification_button('sput') %></td>
+    <td><%= classification_button('hpv') %></td>
   </tr>
 </table>
