@@ -4,44 +4,75 @@ Event.observe(window, 'load', function() {$('finding_class_code').focus()}, fals
 //]]>
 </script>
 
-<fieldset style="width: 100%">
-  <legend>Befunde</legend>
-  <p>
-  <%= form_remote_tag :update => "findings", :position => "bottom", :url => url_for(:action => "add_finding"), :id => "finding_classes",  :after => "$('finding_class_selection').value = ''; $('finding_class_code').value = ''; $('finding_class_code').focus() " %>
-    <label for="case_praxistar_eingangsnr">Text:</label>
-    <%= text_field_with_auto_complete :finding_class, :selection, {:tabindex => 1}, :frequency => 0.5 %>
-    <label for="case_praxistar_eingangsnr">Code:</label>
-    <%= text_field :finding_class, :code, :size => 5, :tabindex => 2 %>
-    <%= submit_tag "Los" %>
-  <%= end_form_tag %>
-  </p>
-</fieldset>
-
-<%= form_tag( :action => "deprecated_create_case" ) %>
-  <%= hidden_field "case", "praxistar_eingangsnr"%>
-  
-  <fieldset style="width: 100%; min-height: 160">
-  <legend>Befunde</legend>
-    <ul id="findings">
-    </ul>
-  </fieldset>
-  
-  <fieldset style="width: 100%">
-    <legend>Erfassung</legend>
-    <p>
-      <label for="case_classification">PAP Status:</label>
-      <%= select "case", "classification_id", Classification.find_all.collect { |c| [ "#{c.code} - #{c.name}", c.id ] }, {},  :tabindex => 3 %>
-    </p>
-    <p>
-      <label for="case_examination_date">Abstrichdatum:</label>
-      <%= text_field "case", "examination_date", :tabindex => 4 %>
-    </p>
-    <p>
-      <label for="case_examination_date">Method:</label>
-      <%= select "case", "examination_method_id", ExaminationMethod.find_all.collect { |m| [ m.name, m.id ] }, {}, :tabindex => 5 %>
-    </p>
-  </fieldset>
-  <div>
-    <%= submit_tag "Erstellen", :tabindex => 6 %>
-  </div>
-<%= end_form_tag %>
+<table style="width: 100%; height: 100%">
+  <tr style="vertical-align: top">
+    <td id="diagnoses" style="min-width: 700px">
+      <fieldset style="width: 100%">
+        <legend>Befunde</legend>
+        <p>
+        <%= form_remote_tag :update => "findings", :position => "bottom", :url => url_for(:action => "add_finding"), :id => "finding_classes",  :after => "$('finding_class_selection').value = ''; $('finding_class_code').value = ''; $('finding_class_code').focus() " %>
+          <label for="case_praxistar_eingangsnr">Text:</label>
+          <%= text_field_with_auto_complete :finding_class, :selection, {:tabindex => 1}, :frequency => 0.5 %>
+          <label for="case_praxistar_eingangsnr">Code:</label>
+          <%= text_field :finding_class, :code, :size => 5, :tabindex => 2 %>
+          <%= submit_tag "Los" %>
+        <%= end_form_tag %>
+        </p>
+      </fieldset>
+      
+      <%= form_tag( :action => "deprecated_create_case" ) %>
+        <%= hidden_field "case", "praxistar_eingangsnr"%>
+        
+        <fieldset style="width: 100%; min-height: 160">
+        <legend>Befunde</legend>
+          <ul id="findings">
+          </ul>
+        </fieldset>
+        
+        <fieldset style="width: 100%">
+          <legend>Erfassung</legend>
+          <p>
+            <label for="case_classification">PAP Status:</label>
+            <%= select "case", "classification_id", Classification.find_all.collect { |c| [ "#{c.code} - #{c.name}", c.id ] }, {},  :tabindex => 3 %>
+          </p>
+          <p>
+            <label for="case_examination_date">Abstrichdatum:</label>
+            <%= text_field "case", "examination_date", :tabindex => 4 %>
+          </p>
+          <p>
+            <label for="case_examination_date">Method:</label>
+            <%= select "case", "examination_method_id", ExaminationMethod.find_all.collect { |m| [ m.name, m.id ] }, {}, :tabindex => 5 %>
+          </p>
+        </fieldset>
+        <div>
+          <%= submit_tag "Erstellen", :tabindex => 6 %>
+        </div>
+      <%= end_form_tag %>
+    </td>
+    <td id="personal-information" style="min-width: 200px">
+      <fieldset style="width: 100%; line-height: 0.8em;">
+        <legend>Arzt</legend>
+        <p>Dr. <%=h "#{@doctor.vcard.full_name}" %></p>
+        <% for number in @doctor.vcard.phone_numbers %>
+          <p><%=h number.phone_number_type.humanize %>: <%=h number.number %></p>
+        <% end %>
+      </fieldset>
+      <fieldset style="width: 100%; line-height: 0.2em; margin-top: 30px">
+        <legend>Patient</legend>
+        <p style="font-weight: bold"><%=h @patient.vcard.full_name %></p>
+        <p><%=h @patient.vcard.street_address %></p>
+        <p><%=h @patient.vcard.locality %> <%=h @patient.vcard.postal_code %></p>
+        <p><%=h @patient.birth_date %></p>
+      </fieldset>
+      <fieldset style="width: 100%; min-height: 200px; font-size: 80%; line-height: 1.3em; margin-top: 30px">
+        <legend>Geschichte</legend>
+        <dl>
+          <% for a_case in @patient.cases %>
+          <dt class="PAP_<%=h a_case.classification.code %>" style="font-weight: bold"><%=h a_case.examination_date.strftime('%b. %g') unless a_case.examination_date.nil?%>: #<%=h a_case.praxistar_eingangsnr.split('/')[0] %><dt/>
+          <dd><div style="font-weight: bold"><%=h a_case.classification.name %></div>(<%=h a_case.finding_classes.collect { |c| c.code }.join(', ') %>)</dd>
+          <% end %>
+        </dl>
+      </fieldset>
+    </td>
+  </tr>
+</table>
