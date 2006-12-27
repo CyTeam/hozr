@@ -96,4 +96,16 @@ class Vcard < ActiveRecord::Base
       return ''
     end
   end
+
+  def fax_number=(value)
+    phone_numbers.build(:number => value, :phone_number_type => 'fax')
+  end
+
+  def fax_number
+    begin
+      fax_numbers[0].number
+    rescue
+      return ''
+    end
+  end
 end
