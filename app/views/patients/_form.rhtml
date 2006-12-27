@@ -1,35 +1,43 @@
 <%= error_messages_for 'patient' %>
 
 <!--[form:patient]-->
-<p><label for="vcard_given_name">Vorname</label><br/>
-<%= text_field 'vcard', 'given_name'  %></p>
+<div>
+<span style="border: solid 1px black"><%= link_to_function "Adresse", "hide('billing_address'); show('address')" %></span>
+<span style="border: solid 1px black"><%= link_to_function "Rechnungsadresse", "hide('address'); show('billing_address')" %></span>
+</div>
 
-<p><label for="vcard_family_name">Nachname</label><br/>
-<%= text_field 'vcard', 'family_name'  %></p>
-
-<p><label for="vcard_street_address">Strasse</label><br/>
-<%= text_field 'vcard', 'street_address'  %></p>
-
-<p><label for="vcard_locality">Ort</label><br/>
-<%= text_field 'vcard', 'locality'  %></p>
-
-<p><label for="vcard_postal_code">PLZ</label><br/>
-<%= text_field 'vcard', 'postal_code'  %></p>
-
-<p><label for="billing_vcard_given_name">Vorname</label><br/>
-<%= text_field 'billing_vcard', 'given_name'  %></p>
-
-<p><label for="billing_vcard_family_name">Nachname</label><br/>
-<%= text_field 'billing_vcard', 'family_name'  %></p>
-
-<p><label for="billing_vcard_street_address">Strasse</label><br/>
-<%= text_field 'billing_vcard', 'street_address'  %></p>
-
-<p><label for="billing_vcard_locality">Ort</label><br/>
-<%= text_field 'billing_vcard', 'locality'  %></p>
-
-<p><label for="billing_vcard_postal_code">PLZ</label><br/>
-<%= text_field 'billing_vcard', 'postal_code'  %></p>
+<div id="address" style="border: solid 1px black">
+  <p><label for="vcard_given_name">Vorname</label><br/>
+  <%= text_field 'vcard', 'given_name'  %></p>
+  
+  <p><label for="vcard_family_name">Nachname</label><br/>
+  <%= text_field 'vcard', 'family_name'  %></p>
+  
+  <p><label for="vcard_street_address">Strasse</label><br/>
+  <%= text_field 'vcard', 'street_address'  %></p>
+  
+  <p><label for="vcard_locality">Ort</label><br/>
+  <%= text_field 'vcard', 'locality'  %></p>
+  
+  <p><label for="vcard_postal_code">PLZ</label><br/>
+  <%= text_field 'vcard', 'postal_code'  %></p>
+</div>
+<div id="billing_address" style="display: none; border: solid 1px black">
+  <p><label for="billing_vcard_given_name">Vorname</label><br/>
+  <%= text_field 'billing_vcard', 'given_name'  %></p>
+  
+  <p><label for="billing_vcard_family_name">Nachname</label><br/>
+  <%= text_field 'billing_vcard', 'family_name'  %></p>
+  
+  <p><label for="billing_vcard_street_address">Strasse</label><br/>
+  <%= text_field 'billing_vcard', 'street_address'  %></p>
+  
+  <p><label for="billing_vcard_locality">Ort</label><br/>
+  <%= text_field 'billing_vcard', 'locality'  %></p>
+  
+  <p><label for="billing_vcard_postal_code">PLZ</label><br/>
+  <%= text_field 'billing_vcard', 'postal_code'  %></p>
+</div>
 
 <p><label for="patient_birth_date">Geburtsdatum</label><br/>
 <%= date_select 'patient', 'birth_date'  %></p>
