@@ -10,7 +10,11 @@ class Cyto::DiagnoseController < ApplicationController
   end
 
   def deprecated_second_entry_form
-#    if params[:case][:praxistar_eingangsnr].
+    if Case.praxistar_eingangsnr_exists?(params[:case][:praxistar_eingangsnr])
+      flash[:warning] = 'Eingangsnr bereits vergeben'
+      redirect_to :action => :deprecated_second_entry_pap_form
+    end
+
     @case = Case.new(params[:case])
   end
 

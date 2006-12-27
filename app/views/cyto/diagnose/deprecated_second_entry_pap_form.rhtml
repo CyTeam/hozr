@@ -5,6 +5,11 @@ Event.observe(window, 'load', function() {$('case_praxistar_eingangsnr').focus()
 </script>
 
 <h1>Zweiteingabe - PAP Status</h1>
+
+<% if flash[:warning] %>
+<p class="note" style="background-color: red"><%= flash[:warning] %></p>
+<% end %>
+
 <%= form_tag( :action => "deprecated_second_entry_form" ) %>
 <fieldset style="width: 95%">
   <legend>Befund</legend>
