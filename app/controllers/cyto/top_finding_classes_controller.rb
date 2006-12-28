@@ -1,3 +1,5 @@
+include Cyto
+
 class Cyto::TopFindingClassesController < ApplicationController
   def index
     list
