@@ -1,17 +1,16 @@
 <h1>Listing top_finding_classes</h1>
 
-<table>
+<table class="listing">
   <tr>
-  <% for column in TopFindingClass.content_columns %>
-    <th><%= column.human_name %></th>
-  <% end %>
+    <th>PAP</th>
+    <th>Code</th>
   </tr>
   
 <% for top_finding_class in @top_finding_classes %>
   <tr>
-  <% for column in TopFindingClass.content_columns %>
-    <td><%=h top_finding_class.send(column.name) %></td>
-  <% end %>
+    <td><%=h top_finding_class.classification.name %></td>
+    <td><%=h top_finding_class.finding_class.name %></td>
+    
     <td><%= link_to 'Show', :action => 'show', :id => top_finding_class %></td>
     <td><%= link_to 'Edit', :action => 'edit', :id => top_finding_class %></td>
     <td><%= link_to 'Destroy', { :action => 'destroy', :id => top_finding_class }, :confirm => 'Are you sure?', :post => true %></td>
