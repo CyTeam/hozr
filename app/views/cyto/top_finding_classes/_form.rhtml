@@ -1,7 +1,0 @@
-<%= error_messages_for 'top_finding_class' %>
-
-<!--[form:top_finding_class]-->
-<%= select("top_finding_class", "classification_id", Classification.find_all.collect {|p| [ p.name, p.id ] }) %>
-<%= select("top_finding_class", "finding_class_id", FindingClass.find_all.collect {|p| [ p.name, p.id ] }) %>
-<!--[eoform:top_finding_class]-->
-

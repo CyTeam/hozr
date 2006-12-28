@@ -11,8 +11,6 @@
     <td><%=h top_finding_class.classification.name %></td>
     <td><%=h top_finding_class.finding_class.name %></td>
     
-    <td><%= link_to 'Show', :action => 'show', :id => top_finding_class %></td>
-    <td><%= link_to 'Edit', :action => 'edit', :id => top_finding_class %></td>
     <td><%= link_to 'Destroy', { :action => 'destroy', :id => top_finding_class }, :confirm => 'Are you sure?', :post => true %></td>
   </tr>
 <% end %>
@@ -23,4 +21,4 @@
 
 <br />
 
-<%= link_to 'New top_finding_class', :action => 'new' %>
+<%= link_to 'New classification top findings', :action => 'edit_classification' %>

@@ -1,0 +1,10 @@
+<h1>Editing top_finding_class</h1>
+
+<%= start_form_tag :action => 'update_classification' %>
+  <!--[form:top_finding_class]-->
+  <%= select("top_finding_class", "classification_id", Classification.find_all.collect {|p| [ p.name, p.id ] }) %>
+  <%= text_field "top_finding_class", "finding_class_codes" %>
+  <!--[eoform:top_finding_class]-->
+
+  <%= submit_tag 'Edit' %>
+<%= end_form_tag %>

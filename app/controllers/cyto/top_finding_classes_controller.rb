@@ -12,38 +12,19 @@ class Cyto::TopFindingClassesController < ApplicationController
     @top_finding_class_pages, @top_finding_classes = paginate :top_finding_classes, :per_page => 10
   end
 
-  def show
-    @top_finding_class = TopFindingClass.find(params[:id])
-  end
-
-  def new
-    @top_finding_class = TopFindingClass.new
-  end
-
-  def create
-    @top_finding_class = TopFindingClass.new(params[:top_finding_class])
-    if @top_finding_class.save
-      flash[:notice] = 'TopFindingClass was successfully created.'
-      redirect_to :action => 'list'
-    else
-      render :action => 'new'
+  def update_classification
+    classification = Classification.find(params[:top_finding_class][:classification_id])
+    
+    for finding_class_code in params[:top_finding_class][:finding_class_codes].split(' ')
+      top_finding = TopFindingClass.new
+      top_finding.classification = classification
+      top_finding.finding_class = FindingClass.find_by_code(finding_class_code)
+      top_finding.save
     end
+  
+    redirect_to :action => :list
   end
-
-  def edit
-    @top_finding_class = TopFindingClass.find(params[:id])
-  end
-
-  def update
-    @top_finding_class = TopFindingClass.find(params[:id])
-    if @top_finding_class.update_attributes(params[:top_finding_class])
-      flash[:notice] = 'TopFindingClass was successfully updated.'
-      redirect_to :action => 'show', :id => @top_finding_class
-    else
-      render :action => 'edit'
-    end
-  end
-
+  
   def destroy
     TopFindingClass.find(params[:id]).destroy
     redirect_to :action => 'list'
