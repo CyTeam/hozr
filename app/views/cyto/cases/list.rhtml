@@ -24,6 +24,7 @@
     <td><%=h a_case.patient.name unless a_case.patient.nil? %></td>
     <td><%=h a_case.doctor.name unless a_case.doctor.nil? %></td>
     <td />
+    <td><%= link_to 'Zweite machen', :action => 'second_entry_pap_form', :id => a_case %></td>
     <td><%= link_to 'Edit', :action => 'edit', :id => a_case %></td>
     <td><%= link_to 'Destroy', { :action => 'destroy', :id => a_case }, :confirm => 'Are you sure?', :post => true %></td>
   </tr>
