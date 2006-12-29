@@ -17,4 +17,8 @@ class Doctor < ActiveRecord::Base
   def given_name=(name)
     vcard.given_name = name
   end
+
+  def name
+    vcard.full_name
+  end
 end
