@@ -1,1 +1,4 @@
-<li><%= compact.name %></li>
+<li>
+    <%= link_to_remote image_tag("delete"), :update => "findings", :url => url_for(:action => "remove_finding", "finding_id" => compact.id, :id => @case) %>
+  <%= compact.name %>
+</li>

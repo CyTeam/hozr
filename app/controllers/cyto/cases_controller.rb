@@ -45,6 +45,14 @@ class Cyto::CasesController < ApplicationController
     end
   end
   
+  def remove_finding
+    @case = Case.find(params[:id])
+
+    @case.finding_classes.delete(FindingClass.find(params[:finding_id]))
+    
+    render :partial => 'list_findings'
+  end
+    
   def add_finding
     @case = Case.find(params[:id])
     
