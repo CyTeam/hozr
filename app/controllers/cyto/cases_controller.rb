@@ -70,8 +70,11 @@ class Cyto::CasesController < ApplicationController
       
       @case.finding_classes << finding_class
       
-    rescue
+    rescue ActiveRecord::AssociationTypeMismatch
       flash.now[:error] = "Unbekannter Code: #{finding_class_code}"
+    
+    rescue ActiveRecord::StatementInvalid
+      flash.now[:error] = "Code bereits eingegeben"
     end
     
     render :partial => 'list_findings'
