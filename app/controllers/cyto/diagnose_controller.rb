@@ -31,13 +31,6 @@ class Cyto::DiagnoseController < ApplicationController
   def upload_order_form
   end
   
-  def second_entry_form
-    case Classification.find(params[:classification]).code
-    when '2a', '2-3a'
-      render :action => 'second_entry_agus_ascus_form'
-    end
-  end
-  
   def second_entry_queue_list
   end
   

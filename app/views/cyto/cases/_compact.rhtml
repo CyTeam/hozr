@@ -1,0 +1,2 @@
+<dt class="PAP_<%=h compact.classification.code %>" style="font-weight: bold"><%=h compact.examination_date.strftime('%b. %g') unless compact.examination_date.nil? %>: #<%=h compact.praxistar_eingangsnr.split('/')[0] %><dt/>
+<dd><div style="font-weight: bold"><%=h compact.classification.name %></div>(<%=h compact.finding_classes.collect { |c| c.code }.join(', ') %>)</dd>
