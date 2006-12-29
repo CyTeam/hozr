@@ -50,6 +50,7 @@ Event.observe(window, 'load', function() {$('finding_class_code').focus()}, fals
       <%= end_form_tag %>
     </td>
     <td id="personal-information" style="min-width: 200px">
+      <% if ! @doctor.nil? %>
       <fieldset style="width: 100%; line-height: 0.8em;">
         <legend>Arzt</legend>
         <p>Dr. <%=h "#{@doctor.vcard.full_name}" %></p>
@@ -57,6 +58,8 @@ Event.observe(window, 'load', function() {$('finding_class_code').focus()}, fals
           <p><%=h number.phone_number_type.humanize %>: <%=h number.number %></p>
         <% end %>
       </fieldset>
+      <% end %>
+      <% if ! @patient.nil? %>
       <fieldset style="width: 100%; line-height: 0.2em; margin-top: 30px">
         <legend>Patient</legend>
         <p style="font-weight: bold"><%=h @patient.vcard.full_name %></p>
@@ -73,6 +76,7 @@ Event.observe(window, 'load', function() {$('finding_class_code').focus()}, fals
           <% end %>
         </dl>
       </fieldset>
+      <% end %>
     </td>
   </tr>
 </table>
