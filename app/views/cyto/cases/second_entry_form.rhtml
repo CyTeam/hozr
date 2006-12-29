@@ -32,18 +32,17 @@ end
       </fieldset>
     </td>
     <td id="personal-information" style="min-width: 200px">
-      <fieldset style="width: 100%; line-height: 0.8em;">
-        <legend>Arzt</legend>
-        <p>Dr. Hans Muster</p>
-        <p>Tel: 044/272 00 11</p>
-        <p>Fax: 044/272 00 12</p>
-      </fieldset>
-      <fieldset style="width: 100%; line-height: 0.2em; margin-top: 30px">
+      <fieldset style="width: 100%; line-height: 0.2em">
         <legend>Patient</legend>
         <%= render :partial => "vcards/show", :locals => { :vcard => @case.patient.vcard } %>
         <%=h @case.patient.birth_date %></p>
       </fieldset>
-      <fieldset style="width: 100%; min-height: 200px; font-size: 80%; line-height: 1.3em; margin-top: 30px">
+      <fieldset style="width: 100%; line-height: 0.2em; margin-top: 10px">
+        <legend>Arzt</legend>
+        <%= render :partial => "vcards/show", :locals => { :vcard => @case.doctor.vcard } %>
+        <%= render :partial => "vcards/show_phone_numbers", :locals => { :vcard => @case.doctor.vcard } %>
+      </fieldset>
+      <fieldset style="width: 100%; min-height: 200px; font-size: 80%; line-height: 1.3em; margin-top: 10px">
         <legend>Geschichte</legend>
         <dl>
           <dt style="background-color: yellow; font-weight: bold">Sept. 04: #28033<dt/>

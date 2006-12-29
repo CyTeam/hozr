@@ -1,0 +1,3 @@
+<% for number in vcard.phone_numbers %>
+  <p><%=h number.phone_number_type.humanize %>: <%=h number.number %></p>
+<% end %>
