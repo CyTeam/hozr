@@ -1,4 +1,6 @@
 class Cyto::CasesController < ApplicationController
+  auto_complete_for :finding_class, :selection, :select => "*, code || ' - ' || name as selection", :limit =>12
+  
   def index
     list
     render :action => 'list'
@@ -43,6 +45,30 @@ class Cyto::CasesController < ApplicationController
     end
   end
   
+  def add_finding
+    @case = Case.find(params[:id])
+    
+    begin
+      if params[:finding_id]
+        finding_class_id = params[:finding_id]
+        finding_class = FindingClass.find(finding_class_id)
+      elsif params[:finding_class][:selection] > ''
+        finding_class_code = params[:finding_class][:selection].split(' - ')[0]
+        finding_class = FindingClass.find_by_code(finding_class_code)
+      elsif params[:finding_class][:code]
+        finding_class_code = params[:finding_class][:code]
+        finding_class = FindingClass.find_by_code(finding_class_code)
+      end
+      
+      @case.finding_classes << finding_class
+      
+    rescue
+      flash.now[:error] = "Unbekannter Code: #{finding_class_code}"
+    end
+    
+    render :partial => 'list_findings'
+  end
+
   def edit
     @case = Case.find(params[:id])
   end

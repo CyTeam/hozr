@@ -1,8 +1,8 @@
 	<% for finding_class in TopFindingClass.find_all_by_classification_id(params[:classification]) %>
-		<%= button_to_function finding_class.finding_class.name, remote_function(:update => "findings", :position => "bottom", :url => url_for(:action => "add_top_finding", "top_finding_id" => finding_class.finding_class.id )), :style => "height: 2.5em; width: 14em" %>
+		<%= button_to_function finding_class.finding_class.name, remote_function(:update => "findings", :url => url_for(:action => "add_finding", "finding_id" => finding_class.finding_class.id, :id => @case )), :style => "height: 2.5em; width: 14em" %>
 	<% end %>
 
-	<%= form_remote_tag :update => "findings", :position => "bottom", :url => url_for(:action => "add_finding"), :id => "finding_classes",  :after => "$('finding_class_selection').value = ''" %>
+	<%= form_remote_tag :update => "findings", :url => url_for(:action => "add_finding", :id => @case), :id => "finding_classes",  :after => "$('finding_class_selection').value = ''" %>
     <label for="case_praxistar_eingangsnr">Befund:</label>
 		<%= text_field_with_auto_complete :finding_class, :selection, :frequency => 0.5 %>
 		<%= submit_tag "Los" %>

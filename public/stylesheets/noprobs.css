@@ -310,3 +310,14 @@ table.listing tbody tr.even { background-color: #fcfcfc }
 table.listing tbody tr.odd { background-color: #f7f7f7 }
 table.listing tbody tr:hover { background: #eed !important }
 
+
+
+
+
+/* Hozr */
+.flash_error {
+  border: solid 2px black;
+  background: red;
+  font-weight: bold;
+}
+

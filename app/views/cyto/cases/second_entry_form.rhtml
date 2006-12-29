@@ -17,8 +17,9 @@ end
       <fieldset style="width: 95%; min-height: 160px">
         <legend>Resultat</legend>
         <%= form_tag( :action => "result_report" ) %>
-          <ul id="findings">
-          </ul>
+          <div id="findings">
+            <%= render :partial => 'list_findings' %>
+          </div>
           <div>
             <%= submit_tag "Erstellen" %>
             <%= submit_tag "P16" %>
