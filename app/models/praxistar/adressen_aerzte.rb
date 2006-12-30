@@ -6,8 +6,7 @@ class Praxistar::AdressenAerzte < Praxistar::Base
     Doctor.delete_all
 
     for a in find_all
-      Doctor.new(
-        :id => a.ID_Arztadresse,
+      d = Doctor.new(
         :vcard => Vcard.new(
           :locality => a.tx_Prax_Ort,
           :fax_number => a.tx_Prax_Fax,
@@ -19,7 +18,9 @@ class Praxistar::AdressenAerzte < Praxistar::Base
         ),
         :code => a.tx_ErfassungsNr,
         :speciality => a.tx_Fachgebiet
-      ).save
+      )
+      d.id = a.ID_Arztadresse
+      d.save
     end
   end
 end
