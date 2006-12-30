@@ -1,3 +1,5 @@
+include Cyto
+
 class Cyto::CasesController < ApplicationController
   auto_complete_for :finding_class, :selection, :select => "*, code || ' - ' || name as selection", :limit =>12
   
