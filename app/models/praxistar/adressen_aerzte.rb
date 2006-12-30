@@ -1,5 +1,5 @@
-class Praxistar::AdressenAerzte < ActiveRecord::Base
-  set_table_name "Adressen_\304rzte"
+class Praxistar::AdressenAerzte < Praxistar::Base
+  set_table_name "Adressen_Ärzte"
   set_primary_key "ID_Arztadresse"
 
   establish_connection(
