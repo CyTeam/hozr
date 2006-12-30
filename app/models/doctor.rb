@@ -6,22 +6,22 @@ class Doctor < ActiveRecord::Base
   has_many :cases
   
   def family_name
-    vcard.family_name
+    praxis.family_name
   end
 
   def family_name=(name)
-    vcard.family_name = name
+    praxis.family_name = name
   end
 
   def given_name
-    vcard.given_name
+    praxis.given_name
   end
 
   def given_name=(name)
-    vcard.given_name = name
+    praxis.given_name = name
   end
 
   def name
-    vcard.full_name
+    praxis.full_name
   end
 end
