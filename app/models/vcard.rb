@@ -3,11 +3,10 @@ class Vcard < ActiveRecord::Base
   has_many :phone_numbers
 
   def full_name
-    if super
-      return super
-    else
-      return family_name + ", " + given_name
-    end
+    result = read_attribute(:full_name)
+    result ||= [ family_name, given_name ].compact.join(', ')
+    
+    return result
   end
 
   def post_office_box
@@ -15,7 +14,7 @@ class Vcard < ActiveRecord::Base
   end
 
   def post_office_box=(value)
-    address ||= create_address
+    create_address if post_office_box.nil?
     address.post_office_box = value
   end
 
@@ -24,9 +23,7 @@ class Vcard < ActiveRecord::Base
   end
 
   def extended_address=(value)
-    if address.nil?
-      create_address
-    end
+    create_address if address.nil?
     address.extended_address = value
   end
 
@@ -35,9 +32,7 @@ class Vcard < ActiveRecord::Base
   end
 
   def street_address=(value)
-    if address.nil?
-      create_address
-    end
+    create_address if address.nil?
     address.street_address = value
   end
 
@@ -46,9 +41,7 @@ class Vcard < ActiveRecord::Base
   end
 
   def locality=(value)
-    if address.nil?
-      create_address
-    end
+    create_address  if address.nil?
     address.locality = value
   end
 
@@ -57,9 +50,7 @@ class Vcard < ActiveRecord::Base
   end
 
   def region=(value)
-    if address.nil?
-      create_address
-    end
+    create_address if address.nil?
     address.region = value
   end
 
@@ -68,9 +59,7 @@ class Vcard < ActiveRecord::Base
   end
 
   def postal_code=(value)
-    if address.nil?
-      create_address
-    end
+    create_address if address.nil?
     address.postal_code = value
   end
 
@@ -79,9 +68,7 @@ class Vcard < ActiveRecord::Base
   end
 
   def country_name=(value)
-    if address.nil?
-      create_address
-    end
+    create_address if address.nil?
     address.country_name = value
   end
 
