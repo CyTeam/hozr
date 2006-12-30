@@ -31,8 +31,8 @@
 <% end %>
 </table>
 
-<%= link_to 'Previous page', { :page => @case_pages.current.previous } if @case_pages.current.previous %>
-<%= link_to 'Next page', { :page => @case_pages.current.next } if @case_pages.current.next %> 
+<%= link_to 'Previous page', { :page => @case_pages.current.previous, :order => params[:order] } if @case_pages.current.previous %>
+<%= link_to 'Next page', { :page => @case_pages.current.next, :order => params[:order] } if @case_pages.current.next %> 
 
 <br />
 
