@@ -3,6 +3,8 @@ class Praxistar::AdressenAerzte < Praxistar::Base
   set_primary_key "ID_Arztadresse"
 
   def self.import
+    Doctor.delete_all
+
     for a in find_all
       Doctor.new(
         :id => a.ID_Arztadresse,
@@ -20,5 +22,4 @@ class Praxistar::AdressenAerzte < Praxistar::Base
       ).save
     end
   end
-
 end

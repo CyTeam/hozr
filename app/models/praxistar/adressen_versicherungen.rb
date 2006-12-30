@@ -3,6 +3,8 @@ class Praxistar::AdressenVersicherungen < Praxistar::Base
   set_primary_key "ID_Versicherung"
 
   def self.import
+    Insurance.delete_all
+
     for a in find_all
       Insurance.new(
         :id => a.ID_Versicherung,
