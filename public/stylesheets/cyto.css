@@ -1,12 +1,14 @@
-.PAP_1 {color:black; background-color: white; }
-.PAP_2 {color:black; background-color: white; }
-.PAP_2a {color: black; background-color: yellow; }
-.PAP_2-3a {color: black; background-color: yellow; }
-.PAP_3l {color: black; background-color: #0066FF; }
-.PAP_3m {color: black; background-color: #0066FF; }
-.PAP_3s {color: black; background-color: #0066FF; }
-.PAP_4 {color: black; background-color: red; }
-.PAP_5 {color: black; background-color: red; }
-.PAP_hpv {color: black; background-color: #00CC00; }
-.PAP_mam {color: black; background-color: #00CC00; }
-.PAP_sput {color: black; background-color: #00CC00; }
+.PAP_1, input.PAP_1 {color:black; background-color: white; }
+.PAP_2, input.PAP_2 {color:black; background-color: white; }
+.PAP_2A, input.PAP_2A {color: black; background-color: yellow; }
+.PAP_2-3A, input.PAP_2-3A {color: black; background-color: yellow; }
+.PAP_3L, .PAP_3M-c1-2, .PAP_3S-c2-3, input.PAP_3L {color: black; background-color: #0066FF; }
+input.PAP_3M-c1-2, input.PAP_3S-c2-3 {color: black; background-color: #7eafff }
+.PAP_3L, input.PAP_3L {color: black; background-color: #0066FF; }
+.PAP_3M, input.PAP_3M {color: black; background-color: #0066FF; }
+.PAP_3S, input.PAP_3S {color: black; background-color: #0066FF; }
+.PAP_4, input.PAP_4 {color: black; background-color: red; }
+.PAP_5, input.PAP_5 {color: black; background-color: red; }
+.PAP_hpv, input.PAP_hpv {color: black; background-color: #00CC00; }
+.PAP_mam, input.PAP_mam {color: black; background-color: #00CC00; }
+.PAP_sput, input.PAP_sput {color: black; background-color: #00CC00; }
