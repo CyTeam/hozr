@@ -4,21 +4,23 @@
   <tr>
     <th>Name</th>
     <th>Adresse</th>
+    <th>Zu Handen</th>
   </tr>
 <% for insurance in @insurances %>
   <tr onmouseover="showActions(<%= insurance.id %>)" onmouseout="hideActions(<%= insurance.id %>)">
     <td>
-      <%= link_to insurance.vcard.full_name, :action => 'show', :id => insurance %>
+      <%= link_to h(insurance.name), :action => 'show', :id => insurance %>
     </td>
     <td style="height: 32px; width: 50%">
       <span style="float: left">
-        <%=h insurance.vcard.street_address %>, <%=h insurance.vcard.postal_code %> <%=h insurance.vcard.locality %>; <%=h "Tel: #{insurance.vcard.phone_number}" unless insurance.vcard.phone_number == '' %>
+        <%=h insurance.street_address %>, <%=h insurance.postal_code %> <%=h insurance.locality %>; <%=h "Tel: #{insurance.phone_number}" unless insurance.phone_number == '' %>
       </span>
       <span id="actions_<%= insurance.id %>" style="display:none; float: right">
         <%= link_to image_tag("edit"), :action => 'edit', :id => insurance %>
         <%= link_to image_tag("remove"), { :action => 'destroy', :id => insurance }, :confirm => 'Wirklich löschen?' %>
       </span>
     </td>
+    <td><%=h insurance.extended_address %>
   </tr>
 <% end %>
 </table>
