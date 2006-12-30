@@ -7,12 +7,21 @@ class Praxistar::AdressenAerzte < Praxistar::Base
 
     for a in find_all
       d = Doctor.new(
-        :vcard => Vcard.new(
+        :praxis => Vcard.new(
           :locality => a.tx_Prax_Ort,
           :fax_number => a.tx_Prax_Fax,
           :phone_number => a.tx_Prax_Telefon1,
           :postal_code => a.tx_Prax_PLZ,
           :street_address => a.tx_Prax_Strasse,
+          :family_name => a.tx_Name,
+          :given_name => a.tx_Vorname
+        ),
+        :private => Vcard.new(
+          :locality => a.tx_Priv_Ort,
+          :fax_number => a.tx_Priv_Fax,
+          :phone_number => a.tx_Priv_Telefon1,
+          :postal_code => a.tx_Priv_PLZ,
+          :street_address => a.tx_Priv_Strasse,
           :family_name => a.tx_Name,
           :given_name => a.tx_Vorname
         ),
