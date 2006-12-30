@@ -20,17 +20,17 @@ class Insurance < ActiveRecord::Base
     vcard.post_office_box = value
   end
 
-  def extended_vcard
-    vcard.extended_vcard
+  def extended_address
+    vcard.extended_address
   end
 
-  def extended_vcard=(value)
+  def extended_address=(value)
     create_vcard if vcard.nil?
-    vcard.extended_vcard = value
+    vcard.extended_address = value
   end
 
-  def street_vcard
-    vcard.street_vcard
+  def street_address
+    vcard.street_address
   end
 
   def street_address=(value)
@@ -75,27 +75,21 @@ class Insurance < ActiveRecord::Base
   end
 
   def phone_number=(value)
-    phone_numbers.build(:number => value, :phone_number_type => 'business')
+    create_vcard if vcard.nil?
+    vcard.phone_number = value
   end
 
   def phone_number
-    begin
-      phone_numbers[0].number
-    rescue
-      return ''
-    end
+    vcard.phone_number
   end
 
   def fax_number=(value)
-    phone_numbers.build(:number => value, :phone_number_type => 'fax')
+    create_vcard if vcard.nil?
+    vcard.fax_number = value
   end
 
   def fax_number
-    begin
-      fax_numbers[0].number
-    rescue
-      return ''
-    end
+    vcard.fax_number
   end
 
 
