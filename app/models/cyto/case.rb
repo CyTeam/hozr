@@ -30,11 +30,15 @@ class Cyto::Case < ActiveRecord::Base
   end
   
   def examination_date=(value)
-    day, month, year = value.split('.')
-    month ||= Date.today.month
-    year ||= Date.today.year
-    year = 2000 + year.to_i if year.to_i < 100
-    
-    write_attribute(:examination_date, "#{year}-#{month}-#{day}")
+    if value.is_a?(String)
+      day, month, year = value.split('.')
+      month ||= Date.today.month
+      year ||= Date.today.year
+      year = 2000 + year.to_i if year.to_i < 100
+      
+      write_attribute(:examination_date, "#{year}-#{month}-#{day}")
+    else
+      write_attribute(:examination_date, value)
+    end
   end
 end
