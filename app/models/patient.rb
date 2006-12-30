@@ -8,6 +8,6 @@ class Patient < ActiveRecord::Base
   has_many :finished_cases, :class_name => 'Cyto::Case', :conditions => 'classification_id IS NOT NULL'
   
   def name
-    vcard.full_name
+    vcard.full_name unless vcard.nil?
   end
 end
