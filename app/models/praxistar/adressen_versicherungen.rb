@@ -1,14 +1,6 @@
-class Praxistar::AdressenVersicherungen < ActiveRecord::Base
+class Praxistar::AdressenVersicherungen < Praxistar::Base
   set_table_name "Adressen_Versicherungen"
   set_primary_key "ID_Versicherung"
-
-  establish_connection(
-    :adapter => 'sqlserver',
-    :mode => 'odbc',
-    :dsn => 'praxistar',
-    :username => 'sa',
-    :password => 'pioneer'
-  )
 
   def self.import
     for a in find_all
