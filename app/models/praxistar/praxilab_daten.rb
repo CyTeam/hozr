@@ -7,17 +7,21 @@ class Praxistar::PraxilabDaten < Praxistar::Base
   def self.import
     Case.delete_all
 
-    for a in find(:all, :limit => 50000)
-      print "#{a.ID_Praxilab}\n"
-      
-      d = Case.new(
-        :patient_id => a.Patient_ID,
-        :doctor_id => a.Arzt_ID,
-        :examination_date => a.dt_Beurteilung,
-        :classification_id => a.PAP_ID
-      )
-      d.id = a.ID_Praxilab
-      d.save
+    for a in find(:all)
+      begin
+        d = Cyto::Case.new(
+          :patient_id => a.Patient_ID,
+          :doctor_id => a.Arzt_ID,
+          :examination_date => a.dt_Beurteilung,
+          :classification_id => a.PAP_ID
+        )
+        d.id = a.ID_Praxilab
+        d.save
+      rescue Exception => ex
+        print "ID: #{a.ID_Patient} => #{ex.message}\n\n"
+        print ex.backtrace.join("\n\t")
+        print "\n\n"
+      end
     end
   end
 end

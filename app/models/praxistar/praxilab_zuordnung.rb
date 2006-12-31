@@ -6,14 +6,16 @@ class Praxistar::PraxilabZuordnung < Praxistar::Base
   def self.import
     #Classification.delete_all
 
-    for a in find(:all, :limit => 100)
-      print "#{a.Praxilab_ID}\n"
-      
+    for a in find(:all)
       begin
         c = Cyto::Case.find(a.Praxilab_ID)
         c.finding_classes<< FindingClass.find(a.Diagnosenliste_ID)
       rescue ActiveRecord::RecordNotFound
-        print " not yet imported\n"
+        print "ID: #{a.Praxilab_ID} => not yet imported\n"
+      rescue Exception => ex
+        print "ID: #{a.Praxilab_ID}, Diagnose: #{a.Diagnosenliste_ID} => #{ex.message}\n\n"
+        print ex.backtrace.join("\n\t")
+        print "\n\n"
       end
     end
   end
