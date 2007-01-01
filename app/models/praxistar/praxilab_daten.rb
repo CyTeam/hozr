@@ -15,6 +15,12 @@ class Praxistar::PraxilabDaten < Praxistar::Base
           :examination_date => a.dt_Beurteilung,
           :classification_id => a.PAP_ID
         )
+        
+        begin
+            d.screener = Employee.find_by_code(a.tx_Zytologe)
+        rescue ActiveRecord::RecordNotFound
+        end
+        
         d.id = a.ID_Praxilab
         d.save
       rescue Exception => ex

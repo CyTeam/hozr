@@ -3,6 +3,7 @@ class Cyto::Case < ActiveRecord::Base
   belongs_to :classification
   belongs_to :patient
   belongs_to :doctor
+  belongs_to :screener, :class_name => 'Employee', :foreign_key => :screener_id
   
   has_and_belongs_to_many :finding_classes
 
