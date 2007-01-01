@@ -14,31 +14,24 @@
   </table>
 </fieldset>
 
+<p><label for="patient_use_billing_address">Fakturaadresse aktiv</label><br/>
+<%= check_box 'patient', 'use_billing_address'  %></p>
+
 <p><label for="patient_birth_date">Geburtsdatum</label><br/>
 <%= date_select 'patient', 'birth_date'  %></p>
 
 <p><label for="patient_doctor_id">Arzt</label><br/>
-<select name="patient[doctor_id]">
- <% @doctors.each do |doctor| %>
- <option value="<%= doctor.id %>"> 
- <%= doctor.family_name + ", " + doctor.given_name%>
- </option>
- <% end %>
- </select>
+<%= select "patient", "doctor_id", Doctor.find(:all).collect { |d| [d.name, d.id] } %>
 
 <p><label for="patient_insurance_id">Versicherung</label><br/>
-<select name="patient[insurance_id]">
- <% @insurances.each do |insurance| %>
- <option value="<%= insurance.id %>"> 
- <%= insurance.vcard.full_name %>
- </option>
- <% end %>
- </select>
+<%= select "patient", "insurance_id", Insurance.find(:all).collect { |i| [i.name, i.id] } %>
 
 <p><label for="patient_insurance_nr">Versicherungsnr.</label><br/>
 <%= text_field 'patient', 'insurance_nr'  %></p>
 
 <p><label for="patient_sex">Geschlecht</label><br/>
-<%= text_field 'patient', 'sex'  %></p>
+M&auml;nnlich: <%= radio_button 'patient', 'sex', 1 %>
+Weiblich: <%= radio_button 'patient', 'sex', 2  %>
+</p>
 <!--[eoform:patient]-->
 
