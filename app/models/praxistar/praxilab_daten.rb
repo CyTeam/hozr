@@ -29,7 +29,7 @@ class Praxistar::PraxilabDaten < Praxistar::Base
         d.logger.info("ID: #{a.ID_Praxilab} => non unique eingangsnr\n\n")
         print "ID: #{a.ID_Praxilab} => non unique eingangsnr\n\n"
       rescue Exception => ex
-        print "ID: #{a.ID_Patient} => #{ex.message}\n\n"
+        print "ID: #{a.ID_Praxilab} => #{ex.message}\n\n"
         print ex.backtrace.join("\n\t")
         print "\n\n"
       end
