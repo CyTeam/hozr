@@ -2,13 +2,13 @@
 
 <table class="listing">
   <tr>
-    <th>Eingangsnr <%=sort_header('praxistar_eingangsnr') %></th>
-    <th>Abstrichdatum <%=sort_header('praxistar_eingangsnr') %></th>
-    <th>PAP <%=sort_header('classification_id') %></th>
-    <th>Diagnose <%=sort_header('praxistar_eingangsnr') %></th>
-    <th>Patient <%=sort_header('patient_id') %></th>
-    <th>Arzt <%=sort_header('doctor_id') %></th>
-    <th>Zytologin <%=sort_header('screener_id') %></th>
+    <%=sort_header('praxistar_eingangsnr', 'Eingangsnr') %>
+    <%=sort_header('examination_date', 'Abstrichdatum') %>
+    <%=sort_header('classification_id', 'Klassifikation') %>
+    <th>Diagnose</th>
+    <%=sort_header('patient_id', 'Patient') %>
+    <%=sort_header('doctor_id', 'Arzt') %>
+    <%=sort_header('screener_id', 'Zytologin') %>
     <th>Scan</th>
   </tr>
   
