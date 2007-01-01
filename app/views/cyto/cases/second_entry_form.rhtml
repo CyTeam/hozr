@@ -41,8 +41,8 @@ end
     <td id="personal-information" style="min-width: 200px">
       <fieldset style="width: 100%; line-height: 0.2em">
         <legend>Patient</legend>
-        <%= render :partial => "vcards/show", :locals => { :vcard => @case.patient.vcard } %>
-        <%=h @case.patient.birth_date %></p>
+        <%= render :partial => "vcards/show", :locals => { :vcard => @case.patient.vcard } unless @case.patient.nil? %>
+        <%=h @case.patient.birth_date unless @case.patient.nil? %></p>
       </fieldset>
       <fieldset style="width: 100%; line-height: 0.2em; margin-top: 10px">
         <legend>Arzt</legend>
@@ -52,7 +52,7 @@ end
       <fieldset style="width: 100%; min-height: 200px; font-size: 80%; line-height: 1.3em; margin-top: 10px">
         <legend>Geschichte</legend>
         <dl>
-          <%= render :partial => 'compact', :collection => @case.patient.finished_cases %>
+          <%= render :partial => 'compact', :collection => @case.patient.finished_cases unless @case.patient.nil? %>
         </dl>
       </fieldset>
     </td>
