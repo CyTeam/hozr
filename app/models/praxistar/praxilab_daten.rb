@@ -13,7 +13,9 @@ class Praxistar::PraxilabDaten < Praxistar::Base
           :patient_id => a.Patient_ID,
           :doctor_id => a.Arzt_ID,
           :examination_date => a.dt_Beurteilung,
-          :classification_id => a.PAP_ID
+          :classification_id => a.PAP_ID,
+          :praxistar_eingangsnr => sprintf("%02d", a.in_EingangJahr.to_i) + "/" + sprintf("%05d", a.in_EingangsNr.to_i),
+          :entry_date => a.dt_Eingang
         )
         
         begin
@@ -23,6 +25,9 @@ class Praxistar::PraxilabDaten < Praxistar::Base
         
         d.id = a.ID_Praxilab
         d.save
+      rescue ActiveRecord::StatementInvalid
+        d.logger.info("ID: #{a.ID_Praxilab} => non unique eingangsnr\n\n")
+        print "ID: #{a.ID_Praxilab} => non unique eingangsnr\n\n"
       rescue Exception => ex
         print "ID: #{a.ID_Patient} => #{ex.message}\n\n"
         print ex.backtrace.join("\n\t")
