@@ -1,2 +1,2 @@
 <dt class="PAP_<%=h compact.classification.code %>" style="font-weight: bold"><%=h compact.examination_date.strftime('%b. %g') unless compact.examination_date.nil? %>: #<%=h compact.praxistar_eingangsnr.split('/')[0] unless compact.praxistar_eingangsnr.nil? %><dt/>
-<dd><div style="font-weight: bold"><%=h compact.classification.name %></div>(<%=h compact.finding_classes.collect { |c| c.code }.join(', ') %>)</dd>
+<dd><div style="font-weight: bold"><%=h compact.classification.name %></div>(<%= render_partial "/cyto/finding_classes/compact", :collection => compact.finding_classes %>)</dd>
