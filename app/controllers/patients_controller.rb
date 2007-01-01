@@ -1,7 +1,7 @@
 class PatientsController < ApplicationController
   def index
     list
-    render :action => 'search'
+    render :action => 'list'
   end
 
   def list
