@@ -56,7 +56,7 @@ class Cyto::CasesController < ApplicationController
 
     @case.finding_classes.delete(FindingClass.find(params[:finding_id]))
     
-    render :partial => 'list_findings'
+    render :partial => '/cyto/finding_classes/list_findings'
   end
     
   def add_finding
@@ -83,7 +83,7 @@ class Cyto::CasesController < ApplicationController
       flash.now[:error] = "Code bereits eingegeben"
     end
     
-    render :partial => 'list_findings'
+    render :partial => '/cyto/finding_classes/list_findings'
   end
 
   def edit

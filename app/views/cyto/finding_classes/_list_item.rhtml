@@ -1,0 +1,4 @@
+<li style="list-style-type: none">
+    <%= link_to_remote image_tag("remove"), :update => "findings", :url => url_for(:action => "remove_finding", "finding_id" => list_item.id, :id => @case) %>
+  <%= list_item.name %>
+</li>
