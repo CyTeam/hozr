@@ -8,11 +8,11 @@
 <% for doctor in @doctors %>
   <tr onmouseover="showActions(<%= doctor.id %>)" onmouseout="hideActions(<%= doctor.id %>)">
     <td>
-      <%= link_to doctor.vcard.family_name + ", " + doctor.vcard.given_name, :action => 'show', :id => doctor %>
+      <%= link_to doctor.family_name + ", " + doctor.given_name, :action => 'show', :id => doctor %>
     </td>
     <td style="height: 32px; width: 50%">
       <span style="float: left">
-        <%=h doctor.vcard.street_address %>, <%=h doctor.vcard.postal_code %> <%=h doctor.vcard.locality %>
+        <%=h doctor.praxis.street_address %>, <%=h doctor.praxis.postal_code %> <%=h doctor.praxis.locality %>
       </span>
       <span id="actions_<%= doctor.id %>" style="display:none; float: right">
         <%= link_to image_tag("edit"), :action => 'edit', :id => doctor %>

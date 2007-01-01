@@ -21,7 +21,7 @@
 <select name="patient[doctor_id]">
  <% @doctors.each do |doctor| %>
  <option value="<%= doctor.id %>"> 
- <%= doctor.vcard.family_name + ", " + doctor.vcard.given_name%>
+ <%= doctor.family_name + ", " + doctor.given_name%>
  </option>
  <% end %>
  </select>
