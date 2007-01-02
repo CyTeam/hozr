@@ -21,7 +21,14 @@ class Praxistar::AdressenVersicherungen < Praxistar::Base
   end
 
   def self.export
-    for h in Insurance.find(:all)
+    last_export = Exports.find(:first, :conditions => "model = '#{self.name}'", :order => "finished_at DESC")
+    
+    find_params = {
+      :conditions => [ "updated_at >= ?", last_export.started_at ]
+    }
+    export = Exports.new(:started_at => Time.now, :find_params => find_params, :model => self.name)
+
+    for h in Insurance.find(:all, find_params)
       attributes = {
         :tx_Telefon => h.phone_number,
         :tx_Ort => h.locality,
@@ -33,11 +40,16 @@ class Praxistar::AdressenVersicherungen < Praxistar::Base
       }
       if exists?(h.id)
         update(h.id, attributes)
+        export.update_count += 1
       else
         p = new(attributes)
         p.id = h.id
         p.save
+        export.create_count += 1
       end
     end
+  
+    export.finished_at = Time.now
+    export.save
   end
 end
