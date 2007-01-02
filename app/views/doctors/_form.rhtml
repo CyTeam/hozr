@@ -3,10 +3,14 @@
 <!--[form:doctor]-->
 <fieldset>
   <legend>
-    <%= link_to_function "Praxis", "show('vcard_vcard')" %>
+    <%= link_to_function "Praxis", "hide('private_vcard'); show('praxis_vcard')" %>
+    <%= link_to_function "Privat", "hide('praxis_vcard'); show('private_vcard')" %>
   </legend>
-  <table id="vcard_vcard">
-    <%= render :partial => 'vcards/form', :locals => { :vcard_name => 'vcard', :vcard => @vcard } %>
+  <table id="praxis_vcard">
+    <%= render :partial => 'vcards/form', :locals => { :vcard_name => 'praxis_vcard', :vcard => @doctor.praxis } %>
+  </table>
+  <table id="private_vcard" style="display: none">
+    <%= render :partial => 'vcards/form', :locals => { :vcard_name => 'private_vcard', :vcard => @doctor.private } %>
   </table>
 </fieldset>
 <!--[eoform:doctor]-->

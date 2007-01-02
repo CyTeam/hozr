@@ -10,7 +10,6 @@ class DoctorsController < ApplicationController
 
   def show
     @doctor = Doctor.find(params[:id])
-    @vcard = @doctor.vcard
   end
 
   def new
@@ -19,7 +18,8 @@ class DoctorsController < ApplicationController
 
   def create
     @doctor = Doctor.new(params[:doctor])
-    @doctor.vcard = Vcard.new(params[:vcard])
+    @doctor.praxis = Vcard.new(params[:praxis_vcard])
+    @doctor.private = Vcard.new(params[:private_vcard])
     
     if @doctor.save
       flash[:notice] = 'Doctor was successfully created.'
@@ -31,13 +31,11 @@ class DoctorsController < ApplicationController
 
   def edit
     @doctor = Doctor.find(params[:id])
-    @vcard = @doctor.vcard
   end
 
   def update
     @doctor = Doctor.find(params[:id])
-    @vcard = @doctor.vcard
-    if @vcard.update_attributes(params[:vcard]) and @doctor.update_attributes(params[:doctor])
+    if @doctor.praxis.update_attributes(params[:praxis_vcard]) and @doctor.private.update_attributes(params[:private_vcard]) and @doctor.update_attributes(params[:doctor])
       flash[:notice] = 'Doctor was successfully updated.'
       redirect_to :action => 'show', :id => @doctor
     else
