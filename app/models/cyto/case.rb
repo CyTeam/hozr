@@ -12,10 +12,10 @@ class Cyto::Case < ActiveRecord::Base
     left, right = value.split('/')
     if right.nil?
       year = '06'
-      number = sprintf("%05d", left)
+      number = sprintf("%05d", left.to_i)
     else
-      year = sprintf("%02d", left)
-      number = sprintf("%05d", right)
+      year = sprintf("%02d", left.to_i)
+      number = sprintf("%05d", right.to_i)
     end
     
     return "#{year}/#{number}"
