@@ -11,6 +11,7 @@ class Praxistar::PatientenPersonalien < Praxistar::Base
           :vcard => Vcard.new(
             :locality => a.tx_Ort,
             :phone_number => a.tx_TelefonP,
+            :mobile_number => a.tx_TelefonN,
             :postal_code => a.tx_PLZ,
             :street_address => a.tx_Strasse,
             :family_name => a.tx_Name,
