@@ -2,6 +2,28 @@ include Cyto
 
 class Cyto::CasesController < ApplicationController
   auto_complete_for :finding_class, :selection, :select => "*, code || ' - ' || name as selection", :limit =>12
+#  auto_complete_for :patient, :family_name, :joins => "JOIN vcards ON patients.vcard_id = vcards.id", :limit => 12
+  
+  def auto_complete_for_patient_full_name
+    @patients = Patient.find(:all, 
+      :conditions => [ 'LOWER(given_name || " " || family_name) LIKE ?',
+      '%' + params[:patient][:full_name].downcase + '%' ], 
+     :joins => "JOIN vcards ON patients.vcard_id = vcards.id",
+      :order => 'family_name ASC',
+      :limit => 8)
+    render :partial => 'full_names'
+  end
+    
+  def auto_complete_for_patient_family_name
+     find_options = { 
+       :conditions => [ "LOWER(family_name) LIKE ?", '%' + params[:patient][:family_name].downcase + '%' ],
+       :order => "family_name ASC",
+       :joins => "JOIN vcards ON patients.vcard_id = vcards.id",
+       :limit => 12 }
+
+       @items = Patient.find(:all, find_options)
+       render :inline => "<%= auto_complete_result @items, 'family_name' %>"
+  end
   
   def index
     list
