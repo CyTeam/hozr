@@ -22,10 +22,6 @@ Event.observe(window, 'load', function() {$('finding_class_code').focus()}, fals
               <td><label for="case_doctor_id">Arzt:</label></td>
               <td><%= f.select :doctor_id, Doctor.find(:all).collect { |m| [ m.name, m.id ] } %></td>
             </tr>
-             <tr>
-              <td><label for="case_doctor_id">Versicherung</label></td>
-              <td><%= f.select :insurance_id, Insurance.find(:all).collect { |m| [ m.name, m.id ] } %></td>
-            </tr>
             <tr>
               <td><label for="case_examination_method_id">Methode</label></td>
               <td><%= f.select :examination_method_id, ExaminationMethod.find_all.collect { |m| [ m.name, m.id ] } %></td>
