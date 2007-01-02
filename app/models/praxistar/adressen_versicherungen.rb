@@ -19,4 +19,25 @@ class Praxistar::AdressenVersicherungen < Praxistar::Base
       i.save
     end
   end
+
+  def self.export
+    for h in Insurance.find(:all)
+      attributes = {
+        :tx_Telefon => h.phone_number,
+        :tx_Ort => h.locality,
+        :tx_FAX => h.fax_number,
+        :tx_ZuHanden => h.extended_address,
+        :tx_PLZ => h.postal_code,
+        :tx_Strasse => h.street_address,
+        :tx_Name => h.name
+      }
+      if exists?(h.id)
+        update(h.id, attributes)
+      else
+        p = new(attributes)
+        p.id = h.id
+        p.save
+      end
+    end
+  end
 end
