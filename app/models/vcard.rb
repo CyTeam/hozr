@@ -78,7 +78,10 @@ class Vcard < ActiveRecord::Base
 
   def phone_number
     begin
-      phone_numbers[0].number
+      numbers = phone_numbers.find(:all, :conditions => "phone_number_type = 'phone'")
+      numbers.collect { |phone_number|
+         phone_number.number if phone_number.number.strip != ''
+      }.compact.join(", ")
     rescue
       return ''
     end
@@ -86,7 +89,10 @@ class Vcard < ActiveRecord::Base
 
   def mobile_number
     begin
-      phone_numbers.find(:first, :condition => "phone_number_type = 'mobile'")[:number]
+      numbers = phone_numbers.find(:all, :condition => "phone_number_type = 'mobile'")
+      numbers.collect { |phone_number|
+         phone_number.number if phone_number.number.strip != ''
+      }.compact.join(", ")
     rescue
       return ''
     end
@@ -102,7 +108,10 @@ class Vcard < ActiveRecord::Base
 
   def fax_number
     begin
-      fax_numbers[0].number
+      numbers = phone_numbers.find(:all, :conditions => "phone_number_type = 'fax'")
+      numbers.collect { |phone_number|
+         phone_number.number if phone_number.number.strip != ''
+      }.compact.join(", ")
     rescue
       return ''
     end
