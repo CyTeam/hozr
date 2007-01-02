@@ -15,7 +15,8 @@ class Praxistar::PatientenPersonalien < Praxistar::Base
             :postal_code => a.tx_PLZ,
             :street_address => a.tx_Strasse,
             :family_name => a.tx_Name,
-            :given_name => a.tx_Vorname
+            :given_name => a.tx_Vorname,
+            :honorific_prefix => [a.tx_Anrede, a.tx_Titel].join(' ')
           ),
           :billing_vcard => Vcard.new(
             :locality => a.tx_fakt_Ort,
@@ -23,7 +24,8 @@ class Praxistar::PatientenPersonalien < Praxistar::Base
             :street_address => a.tx_fakt_Strasse,
             :family_name => a.tx_fakt_Name,
             :given_name => a.tx_fakt_Vorname,
-            :extended_address => a.tx_fakt_ZuHanden
+            :extended_address => a.tx_fakt_ZuHanden,
+            :honorific_prefix => [a.tx_fakt_Anrede, a.tx_fakt_Titel].join('')
           ),
           :insurance_id => a.KK_Garant_ID,
           :insurance_nr => a.tx_KK_MitgliedNr,
@@ -34,7 +36,9 @@ class Praxistar::PatientenPersonalien < Praxistar::Base
           :remarks => a.mo_Bemerkung,
           :sex => a.Geschlecht_ID,
           :dunning_stop => a.tf_Mahnen,
-          :use_billing_address => a.tf_fakt_Aktiv
+          :use_billing_address => a.tf_fakt_Aktiv,
+          :deceased => a.tf_Exitus,
+          :remarks => a.mo_Bemerkung
         )
         p.id = a.ID_Patient
         p.save
