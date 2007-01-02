@@ -73,7 +73,7 @@ class Vcard < ActiveRecord::Base
   end
 
   def phone_number=(value)
-    phone_numbers.build(:number => value, :phone_number_type => 'business')
+    phone_numbers.build(:number => value, :phone_number_type => 'phone')
   end
 
   def phone_number
