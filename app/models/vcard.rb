@@ -84,6 +84,18 @@ class Vcard < ActiveRecord::Base
     end
   end
 
+  def mobile_number
+    begin
+      phone_numbers.find(:first, :condition => "phone_number_type = 'mobile'")[:number]
+    rescue
+      return ''
+    end
+  end
+    
+  def mobile_number=(value)
+    phone_numbers.build(:number => value, :phone_number_type => 'mobile')
+  end
+
   def fax_number=(value)
     phone_numbers.build(:number => value, :phone_number_type => 'fax')
   end
