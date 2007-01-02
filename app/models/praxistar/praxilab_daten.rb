@@ -15,7 +15,8 @@ class Praxistar::PraxilabDaten < Praxistar::Base
           :examination_date => a.dt_Beurteilung,
           :classification_id => a.PAP_ID,
           :praxistar_eingangsnr => sprintf("%02d", a.in_EingangJahr.to_i) + "/" + sprintf("%05d", a.in_EingangsNr.to_i),
-          :entry_date => a.dt_Eingang
+          :entry_date => a.dt_Eingang,
+          :praxistar_leistungsblatt_id => a.Leistungsblatt_ID
         )
         
         begin
