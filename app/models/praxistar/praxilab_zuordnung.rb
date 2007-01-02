@@ -4,7 +4,7 @@ class Praxistar::PraxilabZuordnung < Praxistar::Base
   set_table_name "Praxilab_Zuordnung"
 
   def self.import
-    #Classification.delete_all
+    Classification.connection.delete('DELETE FROM cases_finding_classes')
 
     for a in find(:all)
       begin
