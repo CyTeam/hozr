@@ -30,6 +30,6 @@ class Praxistar::Base < ActiveRecord::Base
     export.finished_at = Time.now
     export.save
   
-    print export.to_s
+    print export.attributes.to_yaml
   end
 end
