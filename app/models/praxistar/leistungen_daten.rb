@@ -10,6 +10,7 @@ class Praxistar::LeistungenDaten < Praxistar::Base
     self.sg_ALZeit = leistung.duration
     self.sg_Faktor_AL = leistung.F_AL
     self.sg_Faktor_TL = leistung.F_TL
+    self.tx_Referenzcode = leistung.master.LNR unless leistung.master.nil?
   end
   
   def tx_Tarifcode=(value)
