@@ -51,8 +51,6 @@ class PatientsController < ApplicationController
     @patient = Patient.find(params[:id])
     @vcard = @patient.vcard
     @billing_vcard = @patient.billing_vcard
-    @insurances = Insurance.find_all
-    @doctors = Doctor.find_all
   end
 
   def update
