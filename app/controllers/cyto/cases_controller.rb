@@ -9,6 +9,7 @@ class Cyto::CasesController < ApplicationController
       :conditions => [ 'LOWER(given_name || " " || family_name) LIKE ?',
       '%' + params[:patient][:full_name].downcase + '%' ], 
      :joins => "JOIN vcards ON patients.vcard_id = vcards.id",
+     :select => "patients.*",
       :order => 'family_name ASC',
       :limit => 8)
     render :partial => 'full_names'
@@ -18,6 +19,7 @@ class Cyto::CasesController < ApplicationController
      find_options = { 
        :conditions => [ "LOWER(family_name) LIKE ?", '%' + params[:patient][:family_name].downcase + '%' ],
        :order => "family_name ASC",
+       :select => "patients.*",
        :joins => "JOIN vcards ON patients.vcard_id = vcards.id",
        :limit => 12 }
 
@@ -47,7 +49,9 @@ class Cyto::CasesController < ApplicationController
   end
 
   def create
+    params[:case][:patient_id] = params[:patient][:full_name].split(' ')[0].to_i
     @case = Case.new(params[:case])
+    
     if @case.save
       flash[:notice] = 'Case was successfully created.'
       redirect_to :action => 'list'
