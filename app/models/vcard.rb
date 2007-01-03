@@ -2,6 +2,8 @@ class Vcard < ActiveRecord::Base
   has_one :address
   has_many :phone_numbers
 
+  has_one :patient
+
   def full_name
     result = read_attribute(:full_name)
     result ||= [ family_name, given_name ].compact.join(', ')
