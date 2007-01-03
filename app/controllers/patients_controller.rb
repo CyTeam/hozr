@@ -27,7 +27,7 @@ class PatientsController < ApplicationController
     @patient.billing_vcard = Vcard.new(params[:billing_vcard])
     if @patient.save
       flash[:notice] = 'Patient was successfully created.'
-      redirect_to :action => 'search'
+      redirect_to :action => 'list'
     else
       render :action => 'new'
     end
@@ -41,7 +41,7 @@ class PatientsController < ApplicationController
     @patient = Patient.find(params[:id])
     if @patient.update_attributes(params[:patient])
       flash[:notice] = 'Patientendaten mutiert'
-      redirect_to :action => 'search'
+      redirect_to :action => 'list'
     else
       render :action => 'form'
     end
