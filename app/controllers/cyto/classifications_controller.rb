@@ -40,7 +40,7 @@ class Cyto::ClassificationsController < ApplicationController
     @classification = Classification.find(params[:id])
     if @classification.update_attributes(params[:classification])
       flash[:notice] = 'Classification was successfully updated.'
-      redirect_to :action => 'show', :id => @classification
+      redirect_to :action => 'edit', :id => @classification.id + 1
     else
       render :action => 'edit'
     end
