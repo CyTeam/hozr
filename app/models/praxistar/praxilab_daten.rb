@@ -20,9 +20,9 @@ class Praxistar::PraxilabDaten < Praxistar::Base
         )
         
         begin
-            d.screener = Employee.find_by_code(a.tx_Zytologe)
+          d.screener = Employee.find_by_code(a.tx_Zytologe)
         rescue ActiveRecord::RecordNotFound
-          d.logger.info "ID: #{a.ID_Praxilab} => screener '#{d.screener}' not found"
+          #d.logger.info "ID: #{a.ID_Praxilab} => screener '#{d.screener}' not found"
         end
         
         d.id = a.ID_Praxilab
