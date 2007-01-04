@@ -42,4 +42,20 @@ class Cyto::Case < ActiveRecord::Base
       write_attribute(:examination_date, value)
     end
   end
+
+  def praxistar_create_leistungsblatt
+    blatt = Praxistar::LeistungenBlatt.new
+    blatt.hozr_case = self
+    blatt.save
+    self.praxistar_leistungsblatt_id = blatt.id
+    save
+  end
+
+  def self.praxistar_create_all_leistungsblatt
+    cases_to_book = self.find(:all, :conditions => "praxistar_leistungsblatt_id is null and classification_id is not null and praxistar_eingangsnr > '06/30000'")
+  
+    for a_case in cases_to_book
+      a_case.praxistar_create_leistungsblatt
+    end
+  end
 end
