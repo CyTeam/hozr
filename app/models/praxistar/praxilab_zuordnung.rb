@@ -8,6 +8,7 @@ class Praxistar::PraxilabZuordnung < Praxistar::Base
 
     for a in find(:all)
       begin
+        print "#{a.Praxilab_ID}\n"
         c = Cyto::Case.find(a.Praxilab_ID)
         c.finding_classes<< FindingClass.find(a.Diagnosenliste_ID)
       rescue ActiveRecord::RecordNotFound
