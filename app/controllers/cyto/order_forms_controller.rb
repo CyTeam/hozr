@@ -1,0 +1,53 @@
+include Cyto
+
+class Cyto::OrderFormsController < ApplicationController
+  def index
+    list
+    render :action => 'list'
+  end
+
+  # GETs should be safe (see http://www.w3.org/2001/tag/doc/whenToUseGet.html)
+  verify :method => :post, :only => [ :destroy, :create, :update ],
+         :redirect_to => { :action => :list }
+
+  def list
+    @order_form_pages, @order_forms = paginate :order_forms, :per_page => 10
+  end
+
+  def show
+    @order_form = OrderForm.find(params[:id])
+  end
+
+  def new
+    @order_form = OrderForm.new
+  end
+
+  def create
+    @order_form = OrderForm.new(params[:order_form])
+    if @order_form.save
+      flash[:notice] = 'OrderForm was successfully created.'
+      redirect_to :action => 'list'
+    else
+      render :action => 'new'
+    end
+  end
+
+  def edit
+    @order_form = OrderForm.find(params[:id])
+  end
+
+  def update
+    @order_form = OrderForm.find(params[:id])
+    if @order_form.update_attributes(params[:order_form])
+      flash[:notice] = 'OrderForm was successfully updated.'
+      redirect_to :action => 'show', :id => @order_form
+    else
+      render :action => 'edit'
+    end
+  end
+
+  def destroy
+    OrderForm.find(params[:id]).destroy
+    redirect_to :action => 'list'
+  end
+end
