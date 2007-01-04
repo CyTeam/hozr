@@ -7,7 +7,7 @@
 <p><label for="classification_code">Code</label><br/>
 <%= text_field 'classification', 'code', :size => 5  %></p>
 
-<p><label for="classification_color">Color</label><br/>
-<%= text_field 'classification', 'color'  %></p>
+<p><label for="classification_examination_method_id">Methode</label><br/>
+<%= select 'classification', 'examination_method_id', ExaminationMethod.find_all.collect { |m| [ m.name, m.id ] }  %></p>
 <!--[eoform:classification]-->
 

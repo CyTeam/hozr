@@ -2,16 +2,16 @@
 
 <table>
   <tr>
-  <% for column in Classification.content_columns %>
-    <th><%= column.human_name %></th>
-  <% end %>
+    <th>Code</th>
+    <th>Name</th>
+    <th>Methode</th>
   </tr>
   
 <% for classification in @classifications %>
   <tr>
-  <% for column in Classification.content_columns %>
-    <td><%=h classification.send(column.name) %></td>
-  <% end %>
+    <td><%=h classification.code %></td>
+    <td><%=h classification.name %></td>
+    <td><%=h classification.examination_method.name unless classification.examination_method.nil? %></td>
     <td><%= link_to 'Show', :action => 'show', :id => classification %></td>
     <td><%= link_to 'Edit', :action => 'edit', :id => classification %></td>
     <td><%= link_to 'Destroy', { :action => 'destroy', :id => classification }, :confirm => 'Are you sure?', :post => true %></td>

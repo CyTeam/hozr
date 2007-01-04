@@ -11,7 +11,7 @@ class Cyto::ClassificationsController < ApplicationController
          :redirect_to => { :action => :list }
 
   def list
-    @classification_pages, @classifications = paginate :classifications, :per_page => 100
+    @classification_pages, @classifications = paginate :classifications, :per_page => 100, :order => 'examination_method_id DESC, name'
   end
 
   def show

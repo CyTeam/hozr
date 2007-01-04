@@ -10,7 +10,7 @@ class Praxistar::PraxilabPap < Praxistar::Base
     for a in find(:all)
       print "#{a.ID_PAP}\n"
       p = Classification.new(
-        :method_id => a.tf_Neu,
+        :examination_method_id => a.tf_Neu,
         :code => a.tx_PAP
       )
       p.id = a.ID_PAP
