@@ -11,7 +11,6 @@ class Cyto::ClassificationTarmedLeistungensController < ApplicationController
          :redirect_to => { :action => :list }
 
   def list
-    @classification_tarmed_leistungen_pages, @classification_tarmed_leistungens = paginate :classification_tarmed_leistungens, :per_page => 10
   end
 
   def update_classification
