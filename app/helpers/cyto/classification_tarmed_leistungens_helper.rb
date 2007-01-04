@@ -1,0 +1,2 @@
+module Cyto::ClassificationTarmedLeistungensHelper
+end

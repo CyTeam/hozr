@@ -1,0 +1,27 @@
+<h1>Listing classification_tarmed_leistungens</h1>
+
+<dl>
+  <% for classification in Classification.find(:all) %>
+    <dt style="font-weight: bold"><%=h classification.name %></dt>
+    <% for tarmed_leistungen in classification.tarmed_leistungen %>
+      <dd><span style="font-weight: bold"><%=h tarmed_leistungen.LNR %></span> - <%=h tarmed_leistungen.name %></dd>
+    <% end %>
+  <% end %>
+</dl>
+<% for classification_tarmed_leistungen in @classification_tarmed_leistungens %>
+  <tr>
+    <td><%=h classification_tarmed_leistungen.classification.name %></td>
+    <td><%=h classification_tarmed_leistungen.tarmed_leistung.LNR %></td>
+    <td><%=h classification_tarmed_leistungen.tarmed_leistung.name %></td>
+    
+    <td><%= link_to 'Destroy', { :action => 'destroy', :id => classification_tarmed_leistungen }, :confirm => 'Are you sure?', :post => true %></td>
+  </tr>
+<% end %>
+</table>
+
+<%= link_to 'Previous page', { :page => @classification_tarmed_leistungen_pages.current.previous } if @classification_tarmed_leistungen_pages.current.previous %>
+<%= link_to 'Next page', { :page => @classification_tarmed_leistungen_pages.current.next } if @classification_tarmed_leistungen_pages.current.next %> 
+
+<br />
+
+<%= link_to 'New classification_tarmed_leistungen', :action => 'edit_classification' %>
