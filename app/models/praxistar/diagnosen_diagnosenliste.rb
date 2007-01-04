@@ -7,7 +7,7 @@ class Praxistar::DiagnosenDiagnosenliste < Praxistar::Base
   def self.import
     FindingClass.delete_all
 
-    for a in find(:all)
+    for a in find(:all, :conditions => 'Mandant_ID = 1')
       print "#{a.ID_Diagnosenliste}\n"
       p = FindingClass.new(
         :name => a.tx_Diagnosentext,
