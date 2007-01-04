@@ -1,24 +1,10 @@
-<h1>Listing top_finding_classes</h1>
+<h1>Top Befunde</h1>
 
-<table class="listing">
-  <tr>
-    <th>PAP</th>
-    <th>Code</th>
-  </tr>
-  
-<% for top_finding_class in @top_finding_classes %>
-  <tr>
-    <td><%=h top_finding_class.classification.name %></td>
-    <td><%=h top_finding_class.finding_class.name %></td>
-    
-    <td><%= link_to 'Destroy', { :action => 'destroy', :id => top_finding_class }, :confirm => 'Are you sure?', :post => true %></td>
-  </tr>
-<% end %>
-</table>
-
-<%= link_to 'Previous page', { :page => @top_finding_class_pages.current.previous } if @top_finding_class_pages.current.previous %>
-<%= link_to 'Next page', { :page => @top_finding_class_pages.current.next } if @top_finding_class_pages.current.next %> 
-
-<br />
-
-<%= link_to 'New classification top findings', :action => 'edit_classification' %>
+<dl>
+  <% for classification in Classification.find(:all, :order => 'name') %>
+    <dt style="font-weight: bold"><%= link_to h(classification.name), :controller => 'top_finding_classes', :action => 'edit_classification', 'top_finding_class[classification_id]' => classification.id %> (<%= classification.examination_method.name %>)</dt>
+    <% for finding_class in classification.top_finding_classes %>
+      <dd><span style="font-weight: bold"><%=h finding_class.code %></span> - <%=h finding_class.name %></dd>
+    <% end %>
+  <% end %>
+</dl>
