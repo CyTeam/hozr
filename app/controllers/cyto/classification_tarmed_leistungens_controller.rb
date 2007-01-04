@@ -1,3 +1,5 @@
+include Cyto
+
 class Cyto::ClassificationTarmedLeistungensController < ApplicationController
   def index
     list
