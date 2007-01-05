@@ -19,6 +19,8 @@ class PatientsController < ApplicationController
     @patient = Patient.new
     @insurances = Insurance.find_all
     @doctors = Doctor.find_all
+  
+    @patient.sex = 2
   end
 
   def create
