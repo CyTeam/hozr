@@ -64,6 +64,8 @@ class Cyto::CasesController < ApplicationController
 
   def first_entry
     @case = Case.find(params[:id])
+  
+    @case.examination_method_id = 1
   end
 
   def first_entry_update
