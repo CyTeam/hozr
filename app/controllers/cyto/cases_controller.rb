@@ -71,9 +71,11 @@ class Cyto::CasesController < ApplicationController
   def first_entry_update
     params[:case][:patient_id] = params[:patient][:full_name].split(' ')[0].to_i
     params[:case][:entry_date] = Time.now
-    update
+    
+    @case = Case.find(params[:id])
+    @case.update_attributes(params[:case])
   
-    @case.insurance = @case.insurance
+    @case.insurance = @case.patient.insurance
     @case.insurance_nr = @case.patient.insurance_nr
     @case.save
     redirect_to :action => 'first_entry_queue'
