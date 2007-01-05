@@ -40,6 +40,20 @@ class Cyto::CasesController < ApplicationController
     @case_pages, @cases = paginate :cases, :per_page => 144, :order => params[:order]
   end
 
+  def first_entry_queue
+    params[:order] ||= 'id'
+    
+    @case_pages, @cases = paginate :cases, :per_page => 144, :order => params[:order], :conditions => 'entry_date IS NULL'
+    render :action => :list
+  end
+  
+  def second_entry_queue
+    params[:order] ||= 'id'
+    
+    @case_pages, @cases = paginate :cases, :per_page => 144, :order => params[:order], :conditions => 'entry_date IS NOT NULL AND screened_at IS NULL'
+    render :action => :list
+  end
+  
   def show
     @case = Case.find(params[:id])
   end
