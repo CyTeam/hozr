@@ -40,7 +40,11 @@ class Cyto::FindingClassesController < ApplicationController
     @finding_class = FindingClass.find(params[:id])
     if @finding_class.update_attributes(params[:finding_class])
       flash[:notice] = 'FindingClass was successfully updated.'
-      redirect_to :action => 'show', :id => @finding_class
+      if FindingClass.exists?(@finding_class.id + 1)
+        redirect_to :action => 'edit', :id => @finding_class.id + 1
+      else
+        redirect_to :action => 'list'
+      end
     else
       render :action => 'edit'
     end
