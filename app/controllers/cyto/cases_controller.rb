@@ -76,7 +76,7 @@ class Cyto::CasesController < ApplicationController
     @case.insurance = @case.insurance
     @case.insurance_nr = @case.patient.insurance_nr
     @case.save
-    redirect_to :action => 'list'
+    redirect_to :action => 'first_entry_queue'
   end
   
   def create
