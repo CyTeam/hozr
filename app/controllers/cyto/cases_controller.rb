@@ -6,7 +6,7 @@ class Cyto::CasesController < ApplicationController
   
   def auto_complete_for_patient_full_name
     @patients = Patient.find(:all, 
-      :conditions => [ 'LOWER(given_name || " " || family_name) LIKE ?',
+      :conditions => [ 'given_name || " " || family_name LIKE ?',
       '%' + params[:patient][:full_name].downcase + '%' ], 
      :joins => "JOIN vcards ON patients.vcard_id = vcards.id",
      :select => "patients.*",
