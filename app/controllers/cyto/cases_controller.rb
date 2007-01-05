@@ -65,10 +65,14 @@ class Cyto::CasesController < ApplicationController
   def first_entry
     @case = Case.find(params[:id])
   
+    @case.doctor_id = session[:first_entry][:doctor_id] unless session[:first_entry].nil?
     @case.examination_method_id = 1
   end
 
   def first_entry_update
+    session[:first_entry] = {} if session[:first_entry].nil?
+    session[:first_entry][:doctor_id] = params[:case][:doctor_id]
+    
     params[:case][:patient_id] = params[:patient][:full_name].split(' ')[0].to_i
     params[:case][:entry_date] = Time.now
     
