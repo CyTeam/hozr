@@ -11,7 +11,7 @@ class Cyto::FindingClassesController < ApplicationController
          :redirect_to => { :action => :list }
 
   def list
-    @finding_class_pages, @finding_classes = paginate :finding_classes, :per_page => 10
+    @finding_class_pages, @finding_classes = paginate :finding_classes, :per_page => 100
   end
 
   def show
