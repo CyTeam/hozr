@@ -1,7 +1,7 @@
 <%= error_messages_for 'case' %>
 
 <!--[form:case]-->
-<%= image_tag url_for_image_column(@case.order_form, "file", :address) unless @case.order_form.nil?
+<%= image_tag url_for_image_column(@case.order_form, "file", :address) unless @case.order_form.nil? %>
 
 <p><label for="case_examination_date">Examination date</label><br/>
 <%= text_field 'case', 'examination_date'  %></p>
