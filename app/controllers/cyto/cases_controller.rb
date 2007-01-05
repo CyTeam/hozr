@@ -24,7 +24,7 @@ class Cyto::CasesController < ApplicationController
        :limit => 12 }
 
        @items = Patient.find(:all, find_options)
-       render :inline => "<%= auto_complete_result @items, 'family_name' %>"
+       render :inline => "<%= auto_complete_result_patient @items, 'family_name' %>"
   end
   
   def index
