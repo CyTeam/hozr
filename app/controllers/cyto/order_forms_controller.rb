@@ -30,7 +30,7 @@ class Cyto::OrderFormsController < ApplicationController
     
     if @order_form.save
       flash[:notice] = 'OrderForm was successfully created.'
-      redirect_to :action => 'list'
+      redirect_to :controller => 'cases', :action => 'first_entry_queue'
     else
       render :action => 'new'
     end
