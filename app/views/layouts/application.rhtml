@@ -28,11 +28,12 @@
         </div>
         <div id="HeaderMenus">
           <ul>
-            <li><%= link_to "Diagnose", :controller => "/cyto/diagnose"%></li>
-            <li><%= link_to "Fälle", :controller => "/cyto/cases"%></li>
-            <li><%= link_to "Patienten", :controller => "/patients"%></li>
-            <li><%= link_to "Ärzte", :controller => "/doctors"%></li>
-            <li><%= link_to "Versicherungen", :controller => "/insurances"%></li>
+            <li><%= link_to "Ersteingabe", :controller => "/cyto/cases", :action => :first_entry_queue %></li>
+            <li><%= link_to "Zweiteingabe", :controller => "/cyto/cases", :action => :second_entry_queue %></li>
+            <li><%= link_to "Fälle", :controller => "/cyto/cases" %></li>
+            <li><%= link_to "Patienten", :controller => "/patients" %></li>
+            <li><%= link_to "Ärzte", :controller => "/doctors" %></li>
+            <li><%= link_to "Versicherungen", :controller => "/insurances" %></li>
           </ul>
         </div>
 
