@@ -168,9 +168,9 @@ class Cyto::CasesController < ApplicationController
     @case = Case.find(params[:id])
     if @case.update_attributes(params[:case])
       flash[:notice] = 'Case was successfully updated.'
-#      redirect_to :action => 'show', :id => @case
+      redirect_to :action => 'show', :id => @case
     else
-#      render :action => 'edit'
+      render :action => 'edit'
     end
   end
 
