@@ -25,7 +25,10 @@
     <td><%=h a_case.patient.name unless a_case.patient.nil? %></td>
     <td><%=h a_case.doctor.name unless a_case.doctor.nil? %></td>
     <td><%=h a_case.screener.code unless a_case.screener.nil? %></td>
-    <td><%= link_to "Auftrag", url_for_file_column(a_case.order_form, "file") %> <%= link_to "Klinische Symptome", url_for_file_column(a_case.order_form, "file", "remarks") %> <%= link_to "Personalien", url_for_file_column(a_case.order_form, "file", "address") %></td>
+    <td><% if a_case.order_form %>
+      <%= link_to "Auftrag", url_for_file_column(a_case.order_form, "file") %> <%= link_to "Klinische Symptome", url_for_file_column(a_case.order_form, "file", "remarks") %> <%= link_to "Personalien", url_for_file_column(a_case.order_form, "file", "address") %>
+    <% end %>
+    </td>
     <td><%= link_to 'Erste machen', :action => 'first_entry', :id => a_case if a_case.ready_for_first_entry %> <%= link_to 'Zweite machen', :action => 'second_entry_pap_form', :id => a_case if a_case.ready_for_second_entry %></td>
     <td><%= link_to 'Edit', :action => 'edit', :id => a_case %></td>
     <td><%= link_to 'Destroy', { :action => 'destroy', :id => a_case }, :confirm => 'Are you sure?', :post => true %></td>
