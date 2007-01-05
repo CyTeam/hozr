@@ -24,6 +24,10 @@ class Cyto::OrderFormsController < ApplicationController
 
   def create
     @order_form = OrderForm.new(params[:order_form])
+    a_case = Case.new
+    a_case.save
+    @order_form.a_case = a_case
+    
     if @order_form.save
       flash[:notice] = 'OrderForm was successfully created.'
       redirect_to :action => 'list'

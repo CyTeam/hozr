@@ -4,13 +4,6 @@ Event.observe(window, 'load', function() {$('finding_class_code').focus()}, fals
 //]]>
 </script>
 
-<%
-begin
-  @order_form = OrderForm.find(16)
-rescue
-end
-%>
-
 <table style="width: 100%; height: 100%">
   <tr style="vertical-align: top">
     <td id="diagnoses" style="min-width: 700px">
@@ -22,7 +15,7 @@ end
       </fieldset>
       <fieldset style="width: 95%; min-height: 160px">
         <legend>Resultat</legend>
-        <%= form_tag( :action => "result_report" ) %>
+        <%= form_tag( :action => "second_entry_update", :id => @case ) %>
           <div id="findings">
             <%= render :partial => '/cyto/finding_classes/list_findings' %>
           </div>
@@ -35,7 +28,7 @@ end
       </fieldset>
       <fieldset style="width: 95%; text-align: center">
         <legend>Bemerkungen</legend>
-        <%= image_tag url_for_image_column("order_form", "file", :remarks) unless @order_form.nil? %>
+        <%= image_tag url_for_image_column(@case.order_form, "file", :remarks) unless @case.order_form.nil? %>
       </fieldset>
     </td>
     <td id="personal-information" style="min-width: 200px">

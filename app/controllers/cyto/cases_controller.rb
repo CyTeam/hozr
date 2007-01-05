@@ -45,9 +45,24 @@ class Cyto::CasesController < ApplicationController
   end
 
   def new
-    @case = Case.new
+    redirect_to :controller => '/cyto/order_forms', :action => 'new'
   end
 
+  def first_entry
+    @case = Case.find(params[:id])
+  end
+
+  def first_entry_update
+    params[:case][:patient_id] = params[:patient][:full_name].split(' ')[0].to_i
+    params[:case][:entry_date] = Time.now
+    update
+  
+    @case.insurance = @case.insurance
+    @case.insurance_nr = @case.patient.insurance_nr
+    @case.save
+    redirect_to :action => 'list'
+  end
+  
   def create
     params[:case][:patient_id] = params[:patient][:full_name].split(' ')[0].to_i
     @case = Case.new(params[:case])
@@ -75,6 +90,23 @@ class Cyto::CasesController < ApplicationController
   
     @case.classification = classification
     @case.save
+  end
+  
+  def second_entry_update
+    @case = Case.find(params[:id])
+    
+    @case.screened_at = Time.now
+    @case.save
+  
+    render :action => 'result_report', :id => @case
+  end
+  
+  def sign
+    @case = Case.find(params[:id])
+    @case.screened_at = Time.now
+    @case.save
+  
+    redirect_to :action => :list
   end
   
   def remove_finding
@@ -120,9 +152,9 @@ class Cyto::CasesController < ApplicationController
     @case = Case.find(params[:id])
     if @case.update_attributes(params[:case])
       flash[:notice] = 'Case was successfully updated.'
-      redirect_to :action => 'show', :id => @case
+#      redirect_to :action => 'show', :id => @case
     else
-      render :action => 'edit'
+#      render :action => 'edit'
     end
   end
 

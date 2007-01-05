@@ -7,7 +7,16 @@ class Cyto::Case < ActiveRecord::Base
   belongs_to :insurance
   
   has_and_belongs_to_many :finding_classes
-
+  has_one :order_form
+  
+  def ready_for_first_entry
+    entry_date.nil?
+  end
+  
+  def ready_for_second_entry
+    !entry_date.nil? && screened_at.nil?
+  end
+  
   private
   def self.parse_eingangsnr(value)
     left, right = value.split('/')
