@@ -17,6 +17,16 @@ class Cyto::Case < ActiveRecord::Base
     !entry_date.nil? && screened_at.nil?
   end
   
+  def self.new_order_form(order_form_scan)
+    order_form = OrderForm.new
+    order_form.file = File.new(order_form_scan)
+    order_form.save
+    
+    a_case = new
+    a_case.order_form = order_form
+    a_case.save
+  end
+  
   private
   def self.parse_eingangsnr(value)
     left, right = value.split('/')
