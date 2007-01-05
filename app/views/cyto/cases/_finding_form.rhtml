@@ -1,3 +1,8 @@
+<% for finding_class_code in ['a', 'b', 'c'] %>
+  <% finding_class = FindingClass.find_by_code(finding_class_code) %>
+  <%= button_to_function finding_class.name, remote_function(:update => "findings", :url => url_for(:action => "add_finding", "finding_id" => finding_class.id, :id => @case )), :style => "height: 2.5em; width: 14em", :class => "Finding_#{finding_class.code}" %>
+<% end %>
+
 <% for finding_class in TopFindingClass.find_all_by_classification_id(params[:classification]) %>
   <%= button_to_function finding_class.finding_class.name, remote_function(:update => "findings", :url => url_for(:action => "add_finding", "finding_id" => finding_class.finding_class.id, :id => @case )), :style => "height: 2.5em; width: 14em" %>
 <% end %>
