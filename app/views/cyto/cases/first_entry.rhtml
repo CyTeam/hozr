@@ -21,7 +21,7 @@ Event.observe(window, 'load', function() {$('finding_class_code').focus()}, fals
             <%= f.text_field :examination_date, :label => "Abstrichdatum" %>
             <tr>
               <td><label for="case_patient_full_name">Patient:</label></td>
-              <td><%= text_field_with_auto_complete :patient, :full_name, :select => 'name_id', :frequency => 0.05 %></td>
+              <td><%= text_field_with_auto_complete :patient, :full_name, :select => 'name_id', :frequency => 0.5, :min_chars => 3 %></td>
             </tr>
             <tr>
               <td><label for="case_doctor_id">Arzt:</label></td>
