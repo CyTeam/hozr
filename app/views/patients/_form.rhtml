@@ -24,7 +24,7 @@
 <%= select "patient", "doctor_id", Doctor.find(:all).collect { |d| [d.name, d.id] } %>
 
 <p><label for="patient_insurance_id">Versicherung</label><br/>
-<%= select "patient", "insurance_id", Insurance.find(:all).collect { |i| [i.name, i.id] } %>
+<%= select "patient", "insurance_id", Insurance.find(:all).collect { |i| [i.name, i.id] }, { :include_blank => true } %>
 
 <p><label for="patient_insurance_nr">Versicherungsnr.</label><br/>
 <%= text_field 'patient', 'insurance_nr'  %></p>
