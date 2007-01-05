@@ -21,6 +21,9 @@ Event.observe(window, 'load', function() {$('patient_full_name').focus()}, false
                 <td><label for="patient_full_name">Patient:</label></td>
                 <td><%= text_field_with_auto_complete :patient, :full_name, :select => 'name_id', :frequency => 0.5, :min_chars => 3 %></td>
               <tr>
+                <%= f.text_field :praxistar_eingangsnr, :label => "Eingangsnummer" %>
+              </tr>
+              <tr>
               <%= f.text_field :examination_date, :label => "Abstrichdatum" %>
               </tr>
               <tr>
