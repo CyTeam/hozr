@@ -18,7 +18,7 @@
 <%= check_box 'patient', 'use_billing_address'  %></p>
 
 <p><label for="patient_birth_date">Geburtsdatum</label><br/>
-<%= date_select 'patient', 'birth_date'  %></p>
+<%= text_field 'patient', 'birth_date'  %></p>
 
 <p><label for="patient_doctor_id">Arzt</label><br/>
 <%= select "patient", "doctor_id", Doctor.find(:all).collect { |d| [d.name, d.id] } %>
