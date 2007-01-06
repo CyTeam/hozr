@@ -29,7 +29,7 @@ class ActiveRecord::ConnectionAdapters::MysqlAdapter
 end
 
 class Cyto::CasesController < ApplicationController
-  auto_complete_for :finding_class, :selection, :select => "*, code || ' - ' || name as selection", :limit =>12
+  auto_complete_for :finding_class, :selection, :select => "*, #{FindingClass.connection.concat(:code, ' - ', :name)} AS selection", :limit =>12
 #  auto_complete_for :patient, :family_name, :joins => "JOIN vcards ON patients.vcard_id = vcards.id", :limit => 12
   
   def auto_complete_for_patient_full_name
