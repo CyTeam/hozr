@@ -1,12 +1,40 @@
 include Cyto
 
+class ActiveRecord::ConnectionAdapters::SQLiteAdapter
+  def concat(*params)
+    params.map { |param|
+      case param.class.name
+      when 'String'
+        quote(param)
+      when 'Symbol'
+        param.to_s
+      end
+    }.join(' || ')
+  end
+end
+
+class ActiveRecord::ConnectionAdapters::MysqlAdapter
+  def concat(*params)
+    params.map! { |param|
+      case param.class.name
+      when 'String'
+        quote(param)
+      when 'Symbol'
+        param.to_s
+      end
+    }
+
+    return "CONCAT( #{params.join(', ')} )"
+  end
+end
+
 class Cyto::CasesController < ApplicationController
   auto_complete_for :finding_class, :selection, :select => "*, code || ' - ' || name as selection", :limit =>12
 #  auto_complete_for :patient, :family_name, :joins => "JOIN vcards ON patients.vcard_id = vcards.id", :limit => 12
   
   def auto_complete_for_patient_full_name
     @patients = Patient.find(:all, 
-      :conditions => [ "CONCAT(family_name, ' ', given_name) LIKE ?",
+      :conditions => [ Patient.connection.concat(:family_name, ' ', :given_name) + " LIKE ?",
       '%' + params[:patient][:full_name].downcase.gsub(' ', '%') + '%' ], 
      :joins => "JOIN vcards ON patients.vcard_id = vcards.id",
      :select => "patients.*",
