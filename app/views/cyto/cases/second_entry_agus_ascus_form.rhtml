@@ -1,6 +1,6 @@
 <h1>AGUS/ASCUS</h1>
 <%
-code = Classification.find(params[:classification]).code
+code = @case.classification.code
 %>
 
 <style>
@@ -19,8 +19,8 @@ td {
   
 <table>
   <tr>
-    <td><%= classification_button(code + 'g') %></td>
-    <td><%= classification_button(code + 's') %></td>
-    <td><%= classification_button(code + 'g/as') %></td>
+    <td><%= classification_button(code + 'G') %></td>
+    <td><%= classification_button(code + 'G_AS') %></td>
+    <td><%= classification_button(code + 'S') %></td>
   </tr>
 </table>

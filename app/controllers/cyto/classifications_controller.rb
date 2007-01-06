@@ -23,13 +23,13 @@ class Cyto::ClassificationsController < ApplicationController
   end
 
   def create
-    @classification = Classification.new(params[:classification])
-    if @classification.save
-      flash[:notice] = 'Classification was successfully created.'
-      redirect_to :action => 'list'
-    else
-      render :action => 'new'
+    for examination_method in ExaminationMethod.find(:all)
+      classification = Classification.new(params[:classification].merge({:examination_method => examination_method}))
+    
+      classification.save
     end
+    
+    redirect_to :action => 'list'
   end
 
   def edit

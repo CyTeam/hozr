@@ -109,13 +109,13 @@ class Cyto::CasesController < ApplicationController
     @case = Case.find(params[:id])
     
     classification = Classification.find(params[:case][:classification])
-    case classification.code
-    when '2a', '2-3a'
-      redirect_to :action => 'second_entry_agus_ascus_form'
-    end
-  
     @case.classification = classification
     @case.save
+    
+    case classification.code
+    when '2A', '2-3A'
+      render :action => 'second_entry_agus_ascus_form'
+    end
   end
   
   def second_entry_update

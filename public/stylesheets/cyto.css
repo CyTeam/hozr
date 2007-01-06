@@ -1,7 +1,8 @@
 .PAP_1, input.PAP_1 {color:black; background-color: white; }
 .PAP_2, input.PAP_2 {color:black; background-color: white; }
-.PAP_2A, input.PAP_2A {color: black; background-color: yellow; }
-.PAP_2-3A, input.PAP_2-3A {color: black; background-color: yellow; }
+.PAP_2A, .PAP_2AG, .PAP_2AS, .PAP_2AG_AS, input.PAP_2A, input.PAP_2AG, input.PAP_2AS {color: black; background-color: yellow; }
+.PAP_2-3A, .PAP_2-3AG, .PAP_2-3AS, .PAP_2-3AG_AS, input.PAP_2-3A, input.PAP_2-3AG, input.PAP_2-3AS {color: black; background-color: yellow; }
+input.PAP_2AG_AS, input.PAP_2-3AG_AS {color: black; background-color: #ffff97;}
 .PAP_3L, .PAP_3M-c1-2, .PAP_3S-c2-3, input.PAP_3L {color: black; background-color: #0066FF; }
 input.PAP_3M-c1-2, input.PAP_3S-c2-3 {color: black; background-color: #7eafff }
 .PAP_3L, input.PAP_3L {color: black; background-color: #0066FF; }
