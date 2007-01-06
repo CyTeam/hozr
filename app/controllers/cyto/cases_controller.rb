@@ -121,12 +121,10 @@ class Cyto::CasesController < ApplicationController
   def second_entry_update
     @case = Case.find(params[:id])
     
-    @case.screened_at = Time.now
-    @case.save
-  
     render :action => 'result_report', :id => @case
   end
   
+
   def sign
     @case = Case.find(params[:id])
     @case.screened_at = Time.now
