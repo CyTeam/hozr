@@ -19,14 +19,15 @@ class PatientsController < ApplicationController
     @patient = Patient.new
     @insurances = Insurance.find_all
     @doctors = Doctor.find_all
-  
-    @patient.sex = 2
   end
 
   def create
     @patient = Patient.new(params[:patient])
     @patient.vcard = Vcard.new(params[:vcard])
     @patient.billing_vcard = Vcard.new(params[:billing_vcard])
+    
+    params[:patient][:sex] = HonorificPrefix.find_by_name(@patient.vcard.honorific_prefix).sex
+
     if @patient.save
       flash[:notice] = 'Patient was successfully created.'
       redirect_to :action => 'list'
@@ -41,6 +42,8 @@ class PatientsController < ApplicationController
 
   def update_form
     @patient = Patient.find(params[:id])
+    params[:patient][:sex] = HonorificPrefix.find_by_name(@patient.vcard.honorific_prefix).sex
+    
     if @patient.update_attributes(params[:patient])
       flash[:notice] = 'Patientendaten mutiert'
       redirect_to :action => 'list'
@@ -62,6 +65,9 @@ class PatientsController < ApplicationController
       @patient.create_billing_vcard
     end
     @billing_vcard = @patient.billing_vcard
+    
+    params[:patient][:sex] = HonorificPrefix.find_by_name(@patient.vcard.honorific_prefix).sex
+
     if @vcard.update_attributes(params[:vcard]) and @billing_vcard.update_attributes(params[:billing_vcard]) and @patient.update_attributes(params[:patient])
       flash[:notice] = 'Patient was successfully updated.'
       redirect_to :action => 'list'
