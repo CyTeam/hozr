@@ -1,0 +1,27 @@
+<h1>Listing honorific_prefixes</h1>
+
+<table>
+  <tr>
+  <% for column in HonorificPrefix.content_columns %>
+    <th><%= column.human_name %></th>
+  <% end %>
+  </tr>
+  
+<% for honorific_prefix in @honorific_prefixes %>
+  <tr>
+  <% for column in HonorificPrefix.content_columns %>
+    <td><%=h honorific_prefix.send(column.name) %></td>
+  <% end %>
+    <td><%= link_to 'Show', :action => 'show', :id => honorific_prefix %></td>
+    <td><%= link_to 'Edit', :action => 'edit', :id => honorific_prefix %></td>
+    <td><%= link_to 'Destroy', { :action => 'destroy', :id => honorific_prefix }, :confirm => 'Are you sure?', :post => true %></td>
+  </tr>
+<% end %>
+</table>
+
+<%= link_to 'Previous page', { :page => @honorific_prefix_pages.current.previous } if @honorific_prefix_pages.current.previous %>
+<%= link_to 'Next page', { :page => @honorific_prefix_pages.current.next } if @honorific_prefix_pages.current.next %> 
+
+<br />
+
+<%= link_to 'New honorific_prefix', :action => 'new' %>

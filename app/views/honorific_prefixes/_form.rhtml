@@ -1,0 +1,12 @@
+<%= error_messages_for 'honorific_prefix' %>
+
+<!--[form:honorific_prefix]-->
+<p><label for="honorific_prefix_sex">Geschlecht</label><br/>
+M&auml;nnlich: <%= radio_button 'honorific_prefix', 'sex', 1 %>
+Weiblich: <%= radio_button 'honorific_prefix', 'sex', 2  %>
+</p>
+
+<p><label for="honorific_prefix_name">Anrede</label><br/>
+<%= text_field 'honorific_prefix', 'name'  %></p>
+<!--[eoform:honorific_prefix]-->
+
