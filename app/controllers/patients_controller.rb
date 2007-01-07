@@ -1,4 +1,7 @@
 class PatientsController < ApplicationController
+  auto_complete_for_vcard :vcard
+  auto_complete_for_vcard :billing_vcard
+  
   def index
     list
     render :action => 'list'

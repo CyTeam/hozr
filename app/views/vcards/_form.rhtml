@@ -1,11 +1,8 @@
 <% fields_for vcard_name, vcard, :builder => Rubaidh::TabularForm::TabularFormBuilder do |address| %>
-  <tr>
-    <td><label for="<%=h vcard_name %>_honorific_prefix">Anrede:</label></td>
-    <td><%= address.select 'honorific_prefix', HonorificPrefix.find(:all).collect { |prefix| prefix.name }, :label => "Ort"  %></td>
-  </tr>
-  <%= address.text_field 'family_name', :label => "Nachname"  %>
-  <%= address.text_field 'given_name', :label => "Vorname"  %>
-  <%= address.text_field 'street_address', :label => "Strasse"  %>
+  <%= address.select 'honorific_prefix', HonorificPrefix.find(:all).collect { |prefix| prefix.name }, :label => "Anrede"  %>
+  <%= address.text_field_with_auto_complete :family_name, :label => 'Nachname' %>
+  <%= address.text_field_with_auto_complete :given_name, :label => 'Vorname' %>
+  <%= address.text_field_with_auto_complete :street_address, :label => "Strasse"  %>
   <%= address.text_field 'postal_code', :label => "PLZ"  %>
   <%= address.text_field 'locality', :label => "Ort"  %>
 <% end %>
