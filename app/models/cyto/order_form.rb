@@ -1,7 +1,7 @@
 class Cyto::OrderForm < ActiveRecord::Base
   file_column :file, :magick => {
     :versions => {
-      :full => {:size => "480"},
+      :full => {:size => "550"},
       :address => {:transformation => Proc.new { |image| image.crop(::Magick::NorthWestGravity, image.rows, image.columns * 0.5, true) }, :size => "560"},
       :remarks => {:transformation => :extract_remarks },
       :result_remarks => {:transformation => :extract_remarks, :size => "410"}
