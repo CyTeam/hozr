@@ -2,8 +2,36 @@
   background-color: white;
   width: 14.8cm;
   height: 21cm;
-  border: solid 1px black;
 }
+
+@media screen {
+  .sheet_a5 {
+    border: solid 1px black;
+  }
+}
+
+@media print {
+  body {
+    background: white;
+  }
+
+  input[type=submit] {
+    border: none;
+    background: white;
+  }
+}
+
+.title {
+  font-family: ChollaSansBold;
+}
+
+.sheet_a5 #subject {
+  position: absolute;
+  top: 3.4cm;
+  left: 0cm;
+  width: 10cm;
+}
+
 
 .report {
   font-family: ChollaSansRegular,Arial;
@@ -11,10 +39,6 @@
   position: absolute;
   top: 2.2cm;
   left: 2.2cm;
-}
-
-.title {
-  font-family: ChollaSansBold;
 }
 
 .report #patient {
@@ -45,13 +69,6 @@
   top: 1.8cm;
   left: 6.5cm;
   width: 5cm;
-}
-
-.report #subject {
-  position: absolute;
-  top: 3.4cm;
-  left: 0cm;
-  width: 10cm;
 }
 
 .report #remarks {
