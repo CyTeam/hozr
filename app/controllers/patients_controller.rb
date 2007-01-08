@@ -20,8 +20,6 @@ class PatientsController < ApplicationController
 
   def new
     @patient = Patient.new
-    @insurances = Insurance.find_all
-    @doctors = Doctor.find_all
   end
 
   def create
