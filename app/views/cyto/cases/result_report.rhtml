@@ -2,7 +2,7 @@
 <div class="report">
 <div id="patient">
 <%= render :partial => "/vcards/show", :locals => {:vcard => @case.patient.vcard} %><br/>
-<%=h @case.patient.birth_date %><br />
+<%=h @case.patient.birth_date.strftime("%d.%m.%Y") %><br />
 </div>
 
 <% if !@case.insurance.nil? %>
@@ -16,8 +16,8 @@ KK: <%=h @case.insurance.name %> <%=h "##{@case.insurance_nr}" unless @case.insu
 </div>
 
 <div id="case">
-Entnahme vom: <%=h @case.examination_date %><br />
-Eingang am: <%=h @case.entry_date %>
+Entnahme vom: <%=h @case.examination_date.strftime("%d.%m.%Y") %><br />
+Eingang am: <%=h @case.entry_date.strftime("%d.%m.%Y") %>
 </div>
 
 <div id="subject" class="title">
@@ -43,7 +43,7 @@ Befund
 </div>
 
 <div id="signature">
-  <%= button_to "Visum: U. Ivkovic, #{Date.today}", :action => 'sign', :id => @case %>
+  <%= button_to "Visum: U. Ivkovic, #{Date.today.strftime("%d.%m.%Y")}", :action => 'sign', :id => @case %>
 </div>
 </div>
 </div>
