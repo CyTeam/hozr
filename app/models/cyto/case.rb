@@ -17,6 +17,10 @@ class Cyto::Case < ActiveRecord::Base
     !entry_date.nil? && screened_at.nil?
   end
   
+  def ready_for_result_report_printing
+    !entry_date.nil? && !screened_at.nil? && result_report_printed_at.nil?
+  end
+  
   def self.new_order_form(order_form_scan)
     order_form = OrderForm.new
     order_form.file = File.new(order_form_scan)

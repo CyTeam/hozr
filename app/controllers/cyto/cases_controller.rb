@@ -134,7 +134,10 @@ class Cyto::CasesController < ApplicationController
     render :action => 'result_report', :id => @case
   end
   
-
+  def result_report
+    @case = Case.find(params[:id])
+  end
+  
   def sign
     @case = Case.find(params[:id])
     @case.screened_at = Time.now
