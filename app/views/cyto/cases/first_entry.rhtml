@@ -23,7 +23,7 @@ Event.observe(window, 'load', function() {$('patient_full_name').focus()}, false
                       <td><%= text_field_with_auto_complete :patient, :full_name, :select => 'name_id', :frequency => 0.5, :min_chars => 3, :label => 'Patient' %></td>
                     <%= f.text_field :praxistar_eingangsnr, :label => "Eingangsnummer" %>
                     <%= f.text_field :examination_date, :label => "Abstrichdatum" %>
-                    <%= f.select :doctor_id, Doctor.find(:all).collect { |m| [ m.name, m.id ] }, :label => 'Arzt' %>
+                    <%= f.select :doctor_id, Doctor.find(:all, :include => :praxis, :order => 'family_name, given_name').collect { |m| [ m.name, m.id ] }, :label => 'Arzt' %>
                     <%= f.select :examination_method_id, ExaminationMethod.find_all.collect { |m| [ m.name, m.id ] }, :label => 'Methode' %>
                   </table>
                 </fieldset>
