@@ -27,7 +27,7 @@ class PatientsController < ApplicationController
     @patient.vcard = Vcard.new(params[:vcard])
     @patient.billing_vcard = Vcard.new(params[:billing_vcard])
     
-    params[:patient][:sex] = HonorificPrefix.find_by_name(@patient.vcard.honorific_prefix).sex
+    @patient.sex = HonorificPrefix.find_by_name(@patient.vcard.honorific_prefix).sex
 
     if @patient.save
       flash[:notice] = 'Patient was successfully created.'
@@ -67,7 +67,7 @@ class PatientsController < ApplicationController
     end
     @billing_vcard = @patient.billing_vcard
     
-    params[:patient][:sex] = HonorificPrefix.find_by_name(@patient.vcard.honorific_prefix).sex
+    params[:patient][:sex] = HonorificPrefix.find_by_name(params[:vcard][:honorific_prefix]).sex
 
     if @vcard.update_attributes(params[:vcard]) and @billing_vcard.update_attributes(params[:billing_vcard]) and @patient.update_attributes(params[:patient])
       flash[:notice] = 'Patient was successfully updated.'
