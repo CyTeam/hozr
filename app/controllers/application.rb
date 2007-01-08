@@ -62,6 +62,32 @@ module ActionController
   end
 end
 
+
+class ActionView::Helpers::FormBuilder
+  def text_field_with_auto_complete(method, tag_options = {}, completion_options = {})
+    @template.text_field_with_auto_complete(@object_name, method, tag_options, completion_options)
+  end
+end
+
+
+module Rubaidh
+  module TabularForm
+    class TabularFormBuilder
+      def select(field, choices, options)
+        field = field.to_s
+        label_text, required = extract_tabular_options(field, options)
+        generic_field(field, super, label_text)
+      end
+      
+      def text_field_with_auto_complete(field, tag_options = {}, completion_options = {})
+        field = field.to_s
+        label_text, required = extract_tabular_options(field, completion_options)
+        generic_field(field, super, label_text)
+      end
+    end
+  end
+end
+
 # Filters added to this controller will be run for all controllers in the application.
 # Likewise, all the methods added will be available for all controllers.
 class ApplicationController < ActionController::Base
