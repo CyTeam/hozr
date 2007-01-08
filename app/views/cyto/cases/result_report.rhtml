@@ -1,48 +1,48 @@
-<div style="background-color: white; width: 14.8cm; height: 21cm; border: solid 1px black">
-<div style="font-family: ChollaSansRegular,Arial; font-size: 11pt; line-height: 100%; position: absolute; top: 2.2cm; left: 2.2cm">
-<div id="patient" style="position: absolute; top: 0cm; left: 0cm; width: 5cm">
+<div class="sheet_a5">
+<div class="report">
+<div id="patient">
 <%= render :partial => "/vcards/show", :locals => {:vcard => @case.patient.vcard} %><br/>
 <%=h @case.patient.birth_date %><br />
 </div>
 
 <% if !@case.insurance.nil? %>
-<div style="font-family: ChollaSansThin; position: absolute; top: 1.8cm; left: 0cm; width: 5cm">
+<div id="insurance">
 KK: <%=h @case.insurance.name %> <%=h "##{@case.insurance_nr}" unless @case.insurance_nr.nil? or @case.insurance_nr == 0 %>
 </div>
 <% end %>
 
-<div id="doctor" style="position: absolute; top: 0cm; left: 6.5cm; width: 5cm">
+<div id="doctor">
 <%= render :partial => "/vcards/show", :locals => {:vcard => @case.doctor.praxis} %>
 </div>
 
-<div id="meta" style="position: absolute; top: 1.8cm; left: 6.5cm; width: 5cm; font-family: ChollaSansThin">
+<div id="case">
 Entnahme vom: <%=h @case.examination_date %><br />
 Eingang am: <%=h @case.entry_date %>
 </div>
 
-<div style="font-family: ChollaSansBold; position: absolute; top: 3.4cm; left: 0cm; width: 10cm">
+<div id="subject" class="title">
 Ihr Auftrag Nr. <%=h @case.praxistar_eingangsnr %>
 </div>
 
-<div style="position: absolute; top: 4.2cm; left: 0cm">
+<div id="remarks">
 <%= image_tag url_for_image_column(@case.order_form, "file", :result_remarks) unless @case.order_form.nil? %>
 </div>
 
-<div style="font-family: ChollaSansBold; position: absolute; top: 9.4cm; left: 0cm">
+<div id="finding_title" class="title">
 Befund
 </div>
 
-<div class="PAP_<%=h @case.classification.code %>" style="font-family: ChollaSansBold; font-size: 12pt; border: solid 1pt; position: absolute; top: 10cm; left: 0cm; width: 10.4cm; padding: 4px">
+<div id="classification" class="PAP_<%=h @case.classification.code %>">
 <%=h @case.classification.name %>
 </div>
 
-<div style="font-family: ChollaSansThin; position: absolute; top: 11cm; left: 0cm; width: 10.4cm">
+<div id="findings">
 <% for finding in @case.finding_classes %>
 <%=h finding.name %><br />
 <% end %>
 </div>
 
-<div style="position: absolute; top: 14cm; left: 5cm">
+<div id="signature">
   <%= button_to "Visum: U. Ivkovic, #{Date.today}", :action => 'sign', :id => @case %>
 </div>
 </div>
