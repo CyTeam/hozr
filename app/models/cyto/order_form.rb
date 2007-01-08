@@ -4,7 +4,7 @@ class Cyto::OrderForm < ActiveRecord::Base
       :full => {:size => "550"},
       :address => {:transformation => Proc.new { |image| image.crop(::Magick::NorthWestGravity, image.rows, image.columns * 0.5, true) }, :size => "560"},
       :remarks => {:transformation => :extract_remarks },
-      :result_remarks => {:transformation => :extract_remarks, :size => "410"}
+      :result_remarks => {:transformation => :extract_result_remarks, :size => "620"}
     }
   }
 
@@ -23,6 +23,19 @@ class Cyto::OrderForm < ActiveRecord::Base
 #   framed = whited.border(10, 10, 'black')
     resized = whited.resize(0.22)
     return resized
+  end
+
+  def extract_result_remarks(image)
+    cropped = image.crop(::Magick::NorthWestGravity, 0, 1200, image.rows, image.columns * 0.45, true)
+    bordered = cropped.border(20, 20, '#AEBCDF')
+#    bordered.fuzz = '15%'
+    bordered.fuzz = 0.15
+    trimmed = bordered.trim
+    despeckled = trimmed.despeckle
+    despeckled.fuzz = 1500
+    whited = despeckled.opaque('#EAEAF6', 'white')
+#   framed = whited.border(10, 10, 'black')
+    return whited
   end
 
 end
