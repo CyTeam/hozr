@@ -19,7 +19,8 @@ Event.observe(window, 'load', function() {$('patient_full_name').focus()}, false
                 <fieldset style="width: 100%">
                   <legend>Erfassung</legend>
                   <table>
-                    <%= f.text_field_with_auto_complete :full_name, :select => 'name_id', :frequency => 0.5, :min_chars => 3, :label => 'Patient' %>
+                      <td><label for="patient_full_name">Patient:</label></td>
+                      <td><%= text_field_with_auto_complete :patient, :full_name, :select => 'name_id', :frequency => 0.5, :min_chars => 3, :label => 'Patient' %></td>
                     <%= f.text_field :praxistar_eingangsnr, :label => "Eingangsnummer" %>
                     <%= f.text_field :examination_date, :label => "Abstrichdatum" %>
                     <%= f.select :doctor_id, Doctor.find(:all).collect { |m| [ m.name, m.id ] }, :label => 'Arzt' %>
