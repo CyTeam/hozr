@@ -53,7 +53,7 @@ class Cyto::CasesController < ApplicationController
   end
 
   def p16_queue
-    @case_pages, @cases = paginate :cases, :per_page => 144, :order => params[:order], :conditions => "(needs_p16 = 't' OR needs_p16 = 1) AND screened_at IS NULL"
+    @case_pages, @cases = paginate :cases, :per_page => 144, :order => params[:order], :conditions => "(needs_p16 = 1) AND screened_at IS NULL"
     render :action => :list
   end
   
