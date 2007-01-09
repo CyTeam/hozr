@@ -132,7 +132,14 @@ class Cyto::CasesController < ApplicationController
   def second_entry_update
     @case = Case.find(params[:id])
     
-    render :action => 'result_report', :id => @case
+    case params[:commit]
+    when "Erstellen", "HPV"
+      render :action => 'result_report', :id => @case
+    when "P16"
+      @case.needs_p16 = true
+      @case.save
+      render :action => 'result_report', :id => @case
+    end
   end
   
   def result_report
