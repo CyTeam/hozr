@@ -12,6 +12,7 @@ KK: <%=h @case.insurance.name %> <%=h "##{@case.insurance_nr}" unless @case.insu
 <% end %>
 
 <div id="doctor">
+<%=h @case.doctor.praxis.honorific_prefix %><br />
 <%= render :partial => "/vcards/show", :locals => {:vcard => @case.doctor.praxis} %>
 </div>
 
