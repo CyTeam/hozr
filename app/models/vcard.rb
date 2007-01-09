@@ -6,7 +6,7 @@ class Vcard < ActiveRecord::Base
 
   def full_name
     result = read_attribute(:full_name)
-    result ||= [ family_name, given_name ].compact.join(', ')
+    result ||= [ given_name, family_name ].compact.join(' ')
     
     return result
   end
