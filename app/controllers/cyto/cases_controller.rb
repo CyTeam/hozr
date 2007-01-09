@@ -1,3 +1,5 @@
+require "net/http"
+
 include Cyto
 
 class Cyto::CasesController < ApplicationController
@@ -149,7 +151,19 @@ class Cyto::CasesController < ApplicationController
   def result_report_for_pdf
     result_report
     
-    render :action => :result_report, :layout => 'result_report_pdf'
+    render :action => :result_report, :layout => 'result_report_for_pdf'
+  end
+  
+  def result_report_pdf
+    h = Net::HTTP.new('localhost', 80)
+    h.open_timeout = 30  # secs
+    h.read_timeout = 120  # secs
+
+    resp, data = h.get("/~shuerlimann/html2ps_v213_dev/public_html/demo/html2ps.php?process_mode=single&URL=http%3A%2F%2Flocalhost%3A3000%2Fcyto%2Fcases%2Fresult_report_for_pdf%2F#{params[:id]}&pixels=570&scalepoints=1&renderimages=1&renderlinks=0&media=A5&cssmedia=print&leftmargin=0&rightmargin=0&topmargin=0&bottommargin=0&pslevel=3&method=fpdf&pdfversion=1.3&output=0&convert=Convert+File", nil)
+    
+    aFile = File.new("public/testfile", 'w')
+    aFile.print(data)
+    aFile.close
   end
   
   def sign
