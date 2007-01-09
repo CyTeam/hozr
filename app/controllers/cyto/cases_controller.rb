@@ -49,10 +49,14 @@ class Cyto::CasesController < ApplicationController
          :redirect_to => { :action => :list }
 
   def list
+    params[:order] ||= 'praxistar_eingangsnr'
+    
     @case_pages, @cases = paginate :cases, :per_page => 144, :order => params[:order]
   end
 
   def p16_queue
+    params[:order] ||= 'praxistar_eingangsnr'
+    
     @case_pages, @cases = paginate :cases, :per_page => 144, :order => params[:order], :conditions => "(needs_p16 = 1) AND screened_at IS NULL"
     render :action => :list
   end
