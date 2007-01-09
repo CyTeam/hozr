@@ -142,6 +142,8 @@ class Cyto::CasesController < ApplicationController
   
   def second_entry_update
     @case = Case.find(params[:id])
+
+    @case.screened_at ||= Date.today
     
     case params[:commit]
     when "Erstellen", "HPV"
