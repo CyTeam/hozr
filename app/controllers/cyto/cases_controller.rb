@@ -155,6 +155,7 @@ class Cyto::CasesController < ApplicationController
   
   def result_report
     @case = Case.find(params[:id])
+    @case.screened_at = Date.today
   end
   
   def result_report_for_pdf
