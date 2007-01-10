@@ -70,7 +70,28 @@ class Cyto::Case < ActiveRecord::Base
       write_attribute(:examination_date, value)
     end
   end
+  
+  def examination_date_before_type_cast
+    read_attribute(:examination_date).strftime("%d.%m.%Y") unless read_attribute(:examination_date).nil?
+  end
+  
+  def entry_date=(value)
+    if value.is_a?(String)
+      day, month, year = value.split('.')
+      month ||= Date.today.month
+      year ||= Date.today.year
+      year = 2000 + year.to_i if year.to_i < 100
+      
+      write_attribute(:entry_date, "#{year}-#{month}-#{day}")
+    else
+      write_attribute(:entry_date, value)
+    end
+  end
 
+  def entry_date_before_type_cast
+    read_attribute(:entry_date).strftime("%d.%m.%Y") unless read_attribute(:entry_date).nil?
+  end
+  
   def praxistar_create_leistungsblatt
     blatt = Praxistar::LeistungenBlatt.new
     blatt.hozr_case = self
