@@ -1,4 +1,4 @@
-@media screen {
+/*@media screen { */
   .PAP_1, input.PAP_1 {color:black; background-color: white; }
   .PAP_2, input.PAP_2 {color:black; background-color: white; }
   .PAP_2A, .PAP_2AG, .PAP_2AS, .PAP_2AG_AS, input.PAP_2A, input.PAP_2AG, input.PAP_2AS {color: black; background-color: yellow; }
@@ -14,14 +14,15 @@
   .PAP_hpv, input.PAP_hpv {color: black; background-color: #00CC00; }
   .PAP_mam, input.PAP_mam {color: black; background-color: #00CC00; }
   .PAP_sput, input.PAP_sput {color: black; background-color: #00CC00; }
-}
+/*} */
 
 input.Finding_a {color: black; background-color: #00CC00; }
 input.Finding_b {color: black; background-color: yellow; }
 input.Finding_c {color: black; background-color: red; }
 
-@media print {
+/*@media print {
   .PAP_2A, .PAP_2AG, .PAP_2AS, .PAP_2AG_AS {color: black; background-color: yellow; }
   .PAP_2-3A, .PAP_2-3AG, .PAP_2-3AS, .PAP_2-3AG_AS {color: black; background-color: yellow; }
   .PAP_3, .PAP_3L, .PAP_3M, .PAP_3S, .PAP_4, .PAP_5 {color: black; background-color: #FF9191; }
 }
+*/
