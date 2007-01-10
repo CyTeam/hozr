@@ -88,12 +88,6 @@ module Rubaidh
   end
 end
 
-class Date
-  def to_s
-    strftime("%d.%m.%Y")
-  end
-end
-
 # Filters added to this controller will be run for all controllers in the application.
 # Likewise, all the methods added will be available for all controllers.
 class ApplicationController < ActionController::Base
