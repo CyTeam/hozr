@@ -120,7 +120,7 @@ class Vcard < ActiveRecord::Base
   end
 
   def salutation
-    case praxis.honorific_prefix
+    case honorific_prefix
     when 'Herr Dr. med'
       result = "Sehr geehrter Herr Dr."
     when 'Frau Dr. med'
