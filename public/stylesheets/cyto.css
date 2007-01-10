@@ -14,6 +14,11 @@ input.PAP_3M-c1-2, input.PAP_3S-c2-3 {color: black; background-color: #7eafff }
 .PAP_mam, input.PAP_mam {color: black; background-color: #00CC00; }
 .PAP_sput, input.PAP_sput {color: black; background-color: #00CC00; }
 
+@media print {
+  .PAP_3L, .PAP_3M-c1-2, .PAP_3M, .PAP_3S-c2-3, .PAP_3S {color: black; background-color: blue; }
+  .PAP_4, .PAP_5 {color: black; background-color: #FF9191; }
+}
+
 input.Finding_a {color: black; background-color: #00CC00; }
 input.Finding_b {color: black; background-color: yellow; }
 input.Finding_c {color: black; background-color: red; }
