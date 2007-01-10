@@ -121,18 +121,22 @@ class Vcard < ActiveRecord::Base
 
   def salutation
     case honorific_prefix
-    when 'Herr Dr. med'
-      result = "Sehr geehrter Herr Dr."
-    when 'Frau Dr. med'
-      result = "Sehr geehrte Frau Dr."
+    when 'Herr Dr. med.'
+      result = "Sehr geehrter Herr Dr. " + family_name
+    when 'Frau Dr. med.'
+      result = "Sehr geehrte Frau Dr. " + family_name
+    when 'Herr Dr.'
+      result = "Sehr geehrter Herr Dr. " + family_name
+    when 'Frau Dr.'
+      result = "Sehr geehrte Frau Dr. " + family_name
     when 'Herr'
-      result = "Sehr geehrter Herr"
+      result = "Sehr geehrter Herr " + family_name
     when 'Frau'
-      result = "Sehr geehrte Frau"
+      result = "Sehr geehrte Frau " + family_name
     when 'Br.'
-      result = "Sehr geehrter Bruder"
+      result = "Sehr geehrter Bruder " + family_name
     when 'Sr.'
-      result = "Sehr geehrte Schwester"
+      result = "Sehr geehrte Schwester " + family_name
     else
       result = "Sehr geehrte Damen und Herren"
     end
