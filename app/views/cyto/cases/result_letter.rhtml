@@ -1,0 +1,76 @@
+<div class="sheet_a4">
+<div class="letter">
+
+<div id="doctor">
+<%=h @doctor.praxis.honorific_prefix %><br />
+<%= render :partial => "/vcards/show", :locals => {:vcard => @doctor.praxis} %>
+</div>
+
+<div id="date">
+Zürich, <%= Date.today.strftime("%d.%m.%Y") %>
+</div>
+
+<div id="subject" class="title">
+Ihre Befunde
+</div>
+
+<div id="salutation">
+Sehr geehrte Damen und Herren
+</div>
+
+<div id="text">
+Anbei finden Sie Ihre Befunde in unserem neuen Layout. 
+<br />
+Neu werden positive Befunde farbig hervorgehoben.
+<br />
+<br />
+Legende:
+<br />  
+<br />
+<div style="font-family: ChollaSansBold; font-size: 12pt; border: solid 1pt; width: 4cm; padding: 4px;" class="PAP_1">
+PAP I
+</div>
+<br />
+<div style="font-family: ChollaSansBold; font-size: 12pt; border: solid 1pt; width: 4cm; padding: 4px;" class="PAP_2">
+PAP II
+</div>
+<br />
+<div style="font-family: ChollaSansBold; font-size: 12pt; border: solid 1pt; width: 4cm; padding: 4px;" class="PAP_2A">
+PAP II agus/ascus
+</div>
+<br />
+<div style="font-family: ChollaSansBold; font-size: 12pt; border: solid 1pt; width: 4cm; padding: 4px;" class="PAP_3L">
+PAP III CIN I LSIL
+</div>
+<br />
+<div style="font-family: ChollaSansBold; font-size: 12pt; border: solid 1pt; width: 4cm; padding: 4px;" class="PAP_3M">
+PAP III CIN II HSIL
+</div>
+<br />
+<div style="font-family: ChollaSansBold; font-size: 12pt; border: solid 1pt; width: 4cm; padding: 4px;" class="PAP_3S">
+PAP III CIN III HSIL
+</div>
+<br />
+<div style="font-family: ChollaSansBold; font-size: 12pt; border: solid 1pt; width: 4cm; padding: 4px;" class="PAP_4">
+PAP IV CIN III
+</div>
+<br />
+<div style="font-family: ChollaSansBold; font-size: 12pt; border: solid 1pt; width: 4cm; padding: 4px;" class="PAP_5">
+PAP V
+</div>
+<br />
+<br />
+Bei allfälligen Fragen stehen wir Ihnen gerne zur Verfügung
+<br />
+<br />
+<br />
+<br />
+Mit freundlichen Grüssen
+<br />
+<br />
+ZytoLabor
+</div>
+
+
+</div>
+</div>
