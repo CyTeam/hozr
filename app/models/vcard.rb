@@ -118,4 +118,24 @@ class Vcard < ActiveRecord::Base
       return ''
     end
   end
+
+  def salutation
+    case praxis.honorific_prefix
+    when 'Herr Dr. med'
+      result = "Sehr geehrter Herr Dr."
+    when 'Frau Dr. med'
+      result = "Sehr geehrte Frau Dr."
+    when 'Herr'
+      result = "Sehr geehrter Herr"
+    when 'Frau'
+      result = "Sehr geehrte Frau"
+    when 'Br.'
+      result = "Sehr geehrter Bruder"
+    when 'Sr.'
+      result = "Sehr geehrte Schwester"
+    else
+      result = "Sehr geehrte Damen und Herren"
+    end
+    return result
+  end
 end
