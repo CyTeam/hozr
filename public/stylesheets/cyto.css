@@ -15,7 +15,7 @@ input.PAP_3M-c1-2, input.PAP_3S-c2-3 {color: black; background-color: #7eafff }
 .PAP_sput, input.PAP_sput {color: black; background-color: #00CC00; }
 
 @media print {
-  .PAP_3L, .PAP_3M-c1-2, .PAP_3M, .PAP_3S-c2-3, .PAP_3S {color: black; background-color: blue; }
+  .PAP_3L, .PAP_3M-c1-2, .PAP_3M, .PAP_3S-c2-3, .PAP_3S {color: black; background-color: #99CCFF; }
   .PAP_4, .PAP_5 {color: black; background-color: #FF9191; }
 }
 
