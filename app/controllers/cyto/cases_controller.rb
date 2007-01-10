@@ -239,4 +239,14 @@ class Cyto::CasesController < ApplicationController
     Case.find(params[:id]).destroy
     redirect_to :action => 'list'
   end
+
+  def result_letter
+    @doctor = Doctor.find(params[:id])
+  end
+
+  def result_letter_for_pdf
+    @doctor = Doctor.find(params[:id])
+
+    render :action => 'result_letter', :layout => 'result_letter_for_pdf'
+  end
 end
