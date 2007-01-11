@@ -9,6 +9,14 @@ class ActiveRecord::ConnectionAdapters::SQLiteAdapter
       end
     }.join(' || ')
   end
+
+  def true
+    "'t'"
+  end
+  
+  def false
+    "'f'"
+  end
 end
 
 class ActiveRecord::ConnectionAdapters::MysqlAdapter
@@ -23,6 +31,14 @@ class ActiveRecord::ConnectionAdapters::MysqlAdapter
     }
 
     return "CONCAT( #{params.join(', ')} )"
+  end
+  
+  def true
+    "1"
+  end
+  
+  def false
+    "0"
   end
 end
 
