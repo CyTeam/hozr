@@ -1,43 +1,73 @@
-<h1>Beurteilung</h1>
-
 <style>
 .button-to div input{
   display: inline;
   width: 12em; 
-  height: 3em; 
+  height: 2.6em; 
   font-weight: bold
 }
 
 td {
-  padding-bottom: 10px;
-  padding-top: 10px;
+  padding-bottom: 2px;
+  padding-top: 2px;
 }
 </style>
   
-<table>
-  <tr>
-    <td><%= classification_button('1') %></td>
-    <td><%= classification_button('2') %></td>
-  </tr>
-  <tr>
-    <td><%= classification_button('2A') %></td>
-    <td><%= classification_button('2-3A') %></td>
-  </tr>
-  <tr>
-    <td><%= classification_button('3L') %></td>
-    <td><%= classification_button('3M-c1-2') %></td>
-    <td><%= classification_button('3M') %></td>
-    <td><%= classification_button('3S-c2-3') %></td>
-    <td><%= classification_button('3S') %></td>
-  </tr>
-  <tr>
-    <td><%= classification_button('4') %></td>
-    <td><%= classification_button('5') %></td>
-    <td><%= classification_button('az') %></td>
-  </tr>
-  <tr>
-    <td><%= classification_button('mam') %></td>
-    <td><%= classification_button('sput') %></td>
-    <td><%= classification_button('hpv') %></td>
+<table style="width: 100%; height: 100%">
+  <tr style="vertical-align: top">
+    <td id="diagnoses" style="min-width: 800px">
+      <fieldset style="width: 98%; text-align: center">
+        <legend>Bemerkungen</legend>
+        <%= image_tag url_for_image_column(@case.order_form, "file", :remarks), :size => "470" unless @case.order_form.nil? %>
+         <%= image_tag url_for_image_column(@case.order_form, "file", :address), :size => "300" unless @case.order_form.nil? %>
+     </fieldset>
+      <fieldset style="width: 98%">
+        <legend>Klassifikation</legend>
+        <table>
+          <tr>
+            <td><%= classification_button('1') %></td>
+            <td><%= classification_button('2') %></td>
+          </tr>
+          <tr>
+            <td><%= classification_button('2A') %></td>
+            <td><%= classification_button('2-3A') %></td>
+          </tr>
+          <tr>
+            <td><%= classification_button('3L') %></td>
+            <td><%= classification_button('3M-c1-2') %></td>
+            <td><%= classification_button('3M') %></td>
+            <td><%= classification_button('3S-c2-3') %></td>
+            <td><%= classification_button('3S') %></td>
+          </tr>
+          <tr>
+            <td><%= classification_button('4') %></td>
+            <td><%= classification_button('5') %></td>
+            <td><%= classification_button('az') %></td>
+          </tr>
+          <tr>
+            <td><%= classification_button('mam') %></td>
+            <td><%= classification_button('sput') %></td>
+            <td><%= classification_button('hpv') %></td>
+          </tr>
+        </table>
+      </fieldset>
+    </td>
+    <td id="personal-information" style="min-width: 150px">
+      <fieldset style="width: 100%">
+        <legend>Patient</legend>
+        <%= render :partial => "vcards/show", :locals => { :vcard => @case.patient.vcard } unless @case.patient.nil? %><br/>
+        <%=h @case.patient.birth_date unless @case.patient.nil? %></p>
+      </fieldset>
+      <fieldset style="width: 100%; margin-top: 10px">
+        <legend>Arzt</legend>
+        <%= render :partial => "vcards/show", :locals => { :vcard => @case.doctor.praxis } %><br/>
+        <%= render :partial => "vcards/show_phone_numbers", :locals => { :vcard => @case.doctor.praxis } %>
+      </fieldset>
+      <fieldset style="width: 100%; min-height: 200px; font-size: 80%; line-height: 1.3em; margin-top: 10px">
+        <legend>Geschichte</legend>
+        <dl>
+          <%= render :partial => 'compact', :collection => @case.patient.finished_cases unless @case.patient.nil? %>
+        </dl>
+      </fieldset>
+    </td>
   </tr>
 </table>
