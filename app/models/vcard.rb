@@ -12,7 +12,7 @@ class Vcard < ActiveRecord::Base
   end
 
   def abbreviated_name
-    "#{given_name[0]}. #{family_name}"
+    "#{given_name[0..0]}. #{family_name}"
   end
   
   def post_office_box
