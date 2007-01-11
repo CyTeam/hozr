@@ -17,8 +17,8 @@ td {
     <td id="diagnoses" style="min-width: 800px">
       <fieldset style="width: 98%; text-align: center">
         <legend>Bemerkungen</legend>
-        <%= image_tag url_for_image_column(@case.order_form, "file", :remarks), :size => "470" unless @case.order_form.nil? %>
-         <%= image_tag url_for_image_column(@case.order_form, "file", :address), :size => "300" unless @case.order_form.nil? %>
+        <%= link_to image_tag(url_for_image_column(@case.order_form, "file", :remarks), :size => "470"), url_for_image_column(@case.order_form, "file", :remarks) unless @case.order_form.nil? %>
+         <%= link_to image_tag(url_for_image_column(@case.order_form, "file", :address), :size => "300"), url_for_image_column(@case.order_form, "file", :address) unless @case.order_form.nil? %>
      </fieldset>
       <fieldset style="width: 98%">
         <legend>Klassifikation</legend>

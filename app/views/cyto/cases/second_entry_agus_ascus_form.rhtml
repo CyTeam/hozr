@@ -21,7 +21,7 @@ td {
     <td id="diagnoses" style="min-width: 700px">
       <fieldset style="width: 95%; text-align: center">
         <legend>Bemerkungen</legend>
-        <%= image_tag url_for_image_column(@case.order_form, "file", :remarks) unless @case.order_form.nil? %>
+        <%= link_to image_tag(url_for_image_column(@case.order_form, "file", :remarks)), url_for_image_column(@case.order_form, "file", :remarks) unless @case.order_form.nil? %>
       </fieldset>
       <fieldset style="width: 95%">
         <legend>Klassifikation</legend>
