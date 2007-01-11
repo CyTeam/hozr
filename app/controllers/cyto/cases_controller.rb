@@ -143,15 +143,15 @@ class Cyto::CasesController < ApplicationController
   def second_entry_update
     @case = Case.find(params[:id])
 
-    @case.screened_at ||= Date.today
-    
     case params[:commit]
     when "Erstellen", "HPV"
+      @case.screened_at ||= Date.today
+    
       render :action => 'result_report', :id => @case
     when "P16"
       @case.needs_p16 = true
       @case.save
-      render :action => 'result_report', :id => @case
+      redirect_to :action => 'second_entry_queue'
     end
   end
   
