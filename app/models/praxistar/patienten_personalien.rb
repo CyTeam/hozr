@@ -36,7 +36,7 @@ class Praxistar::PatientenPersonalien < Praxistar::Base
       :sex => a.Geschlecht_ID,
       :dunning_stop => a.tf_Mahnen,
       :use_billing_address => a.tf_fakt_Aktiv,
-      :deceased => a.tf_Exitus
+      :deceased => a.tf_Exitus,
     }
   end
   
@@ -107,6 +107,8 @@ class Praxistar::PatientenPersonalien < Praxistar::Base
         :tf_Mahnen => hozr_record.dunning_stop,
         :tf_fakt_Aktiv => hozr_record.use_billing_address,
         :tf_Exitus => hozr_record.deceased,
+        
+        :ln_Patienten_Nr => hozr_record.id + 200000,
         
         # const attributes
         :Mandant_ID => 1
