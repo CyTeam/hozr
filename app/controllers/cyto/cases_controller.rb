@@ -183,7 +183,7 @@ class Cyto::CasesController < ApplicationController
     @case.screened_at = Time.now
     @case.save
   
-    redirect_to :action => :list
+    redirect_to :action => :second_entry_queue
   end
   
   def remove_finding
