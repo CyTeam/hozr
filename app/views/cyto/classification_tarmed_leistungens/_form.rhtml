@@ -8,7 +8,7 @@
 <p><label for="classification_tarmed_leistungen_position">Position</label><br/>
 <%= text_field 'classification_tarmed_leistungen', 'position'  %></p>
 
-<p><label for="classification_tarmed_leistungen_parent">Parent</label><br/>
-<%= text_field 'classification_tarmed_leistungen', 'parent'  %></p>
+<p><label for="classification_tarmed_leistungen_parent_id">Parent</label><br/>
+<%= select("classification_tarmed_leistungen", "parent_id", @classification_tarmed_leistungen.tarmed_leistung.masters.collect {|l| [ "#{l.id} - #{l.name[0..25]}", l.id ] }, { :include_blank => true }) %>
 <!--[eoform:classification_tarmed_leistungen]-->
 
