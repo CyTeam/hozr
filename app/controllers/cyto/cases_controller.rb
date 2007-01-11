@@ -183,7 +183,8 @@ class Cyto::CasesController < ApplicationController
     @case.screened_at = Time.now
     @case.save
   
-    redirect_to :action => :second_entry_queue
+    next_case = Case.find :first, :conditions => ["entry_date IS NOT NULL AND screened_at IS NULL AND praxistar_eingangsnr > ? AND praxistar_eingangsnr < '90/'", @case.praxistar_eingangsnr]
+    redirect_to :action => 'second_entry_pap_form', :id => next_case
   end
   
   def remove_finding
