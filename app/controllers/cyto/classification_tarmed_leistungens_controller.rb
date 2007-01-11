@@ -1,5 +1,3 @@
-include Cyto
-
 class Cyto::ClassificationTarmedLeistungensController < ApplicationController
   def index
     list
@@ -11,6 +9,44 @@ class Cyto::ClassificationTarmedLeistungensController < ApplicationController
          :redirect_to => { :action => :list }
 
   def list
+    @classification_tarmed_leistungen_pages, @classification_tarmed_leistungens = paginate :classification_tarmed_leistungens, :per_page => 10
+  end
+
+  def show
+    @classification_tarmed_leistungen = ClassificationTarmedLeistungen.find(params[:id])
+  end
+
+  def new
+    @classification_tarmed_leistungen = ClassificationTarmedLeistungen.new
+  end
+
+  def create
+    @classification_tarmed_leistungen = ClassificationTarmedLeistungen.new(params[:classification_tarmed_leistungen])
+    if @classification_tarmed_leistungen.save
+      flash[:notice] = 'ClassificationTarmedLeistungen was successfully created.'
+      redirect_to :action => 'list'
+    else
+      render :action => 'new'
+    end
+  end
+
+  def edit
+    @classification_tarmed_leistungen = ClassificationTarmedLeistungen.find(params[:id])
+  end
+
+  def update
+    @classification_tarmed_leistungen = ClassificationTarmedLeistungen.find(params[:id])
+    if @classification_tarmed_leistungen.update_attributes(params[:classification_tarmed_leistungen])
+      flash[:notice] = 'ClassificationTarmedLeistungen was successfully updated.'
+      redirect_to :action => 'show', :id => @classification_tarmed_leistungen
+    else
+      render :action => 'edit'
+    end
+  end
+
+  def destroy
+    ClassificationTarmedLeistungen.find(params[:id]).destroy
+    redirect_to :action => 'list'
   end
 
   def update_classification
@@ -22,4 +58,5 @@ class Cyto::ClassificationTarmedLeistungensController < ApplicationController
     
     redirect_to :action => :list
   end
+
 end
