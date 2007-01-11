@@ -11,7 +11,7 @@ class Praxistar::LeistungenDaten < Praxistar::Base
     self.sg_ALZeit = leistung.duration
     self.sg_Faktor_AL = leistung.F_AL
     self.sg_Faktor_TL = leistung.F_TL
-    self.tx_Referenzcode = leistung_zuordnung.patent.LNR unless leistung_zuordnung.parent.nil?
+    self.tx_Referenzcode = leistung_zuordnung.parent.LNR unless leistung_zuordnung.parent.nil?
   end
   
   def tx_Tarifcode=(value)
