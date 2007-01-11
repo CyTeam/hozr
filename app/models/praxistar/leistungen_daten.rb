@@ -2,7 +2,8 @@ class Praxistar::LeistungenDaten < Praxistar::Base
   set_table_name "Leistungen_Daten"
   set_primary_key "ID_Leistungsdaten"
   
-  def tarmed_leistung=(leistung)
+  def tarmed_leistung=(leistung_zuordnung)
+    leistung = leistung_zuordnung.tarmed_leistung
     self.tx_Tarifcode = leistung.LNR
     self.tx_Fakturatext = leistung.name
     self.sg_Taxpunkte_TL = leistung.TP_TL
@@ -10,7 +11,7 @@ class Praxistar::LeistungenDaten < Praxistar::Base
     self.sg_ALZeit = leistung.duration
     self.sg_Faktor_AL = leistung.F_AL
     self.sg_Faktor_TL = leistung.F_TL
-    self.tx_Referenzcode = leistung.master.LNR unless leistung.master.nil?
+    self.tx_Referenzcode = leistung_zuordnung.patent.LNR unless leistung_zuordnung.parent.nil?
   end
   
   def tx_Tarifcode=(value)
