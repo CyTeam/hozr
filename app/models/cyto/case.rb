@@ -9,6 +9,14 @@ class Cyto::Case < ActiveRecord::Base
   has_and_belongs_to_many :finding_classes
   has_one :order_form
   
+  def exactly_one_of_group(group_name)
+    ( finding_classes.collect { |f| f.id } & Cyto::FindingGroup.find_by_name(group_name).finding_classes.collect { |f| f.id } ).size == 1
+  end
+  
+  def validate_findings
+    exactly_one_of_group('Zustand') && exactly_one_of_group('Kontrolle')
+  end
+  
   def ready_for_first_entry
     entry_date.nil?
   end
