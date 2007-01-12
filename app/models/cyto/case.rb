@@ -115,7 +115,7 @@ class Cyto::Case < ActiveRecord::Base
     
     for a_case in cases_to_book
       a_case.praxistar_create_leistungsblatt
-      export.created_count += 1
+      export.create_count += 1
     end
   
     export.finished_at
