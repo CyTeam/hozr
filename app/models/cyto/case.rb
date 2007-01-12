@@ -109,7 +109,7 @@ class Cyto::Case < ActiveRecord::Base
   end
 
   def self.praxistar_create_all_leistungsblatt
-    cases_to_book = self.find(:all, :conditions => "praxistar_leistungsblatt_id is null and classification_id is not null and praxistar_eingangsnr > '06/30000'")
+    cases_to_book = self.find(:all, :conditions => "praxistar_leistungsblatt_id IS NULL AND screened_at IS NOT NULL AND classification_id IS NOT NULL AND praxistar_eingangsnr > '06/30000'")
   
     export = Praxistar::Exports.new(:started_at => Time.now, :model => self.name)
     
