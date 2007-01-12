@@ -10,10 +10,10 @@ class Cyto::CasesController < ApplicationController
     @patients = Patient.find(:all, 
       :conditions => [ Patient.connection.concat(:family_name, ' ', :given_name) + " LIKE ?",
       '%' + params[:patient][:full_name].downcase.gsub(' ', '%') + '%' ], 
-     :joins => "JOIN vcards ON patients.vcard_id = vcards.id",
-     :select => "patients.*",
+      :joins => "JOIN vcards ON patients.vcard_id = vcards.id",
+      :select => "patients.*",
       :order => 'family_name ASC',
-      :limit => 8)
+      :limit => 30)
     render :partial => 'full_names'
   end
     
@@ -33,7 +33,7 @@ class Cyto::CasesController < ApplicationController
        :order => "family_name ASC",
        :select => "patients.*",
        :joins => "JOIN vcards ON patients.vcard_id = vcards.id",
-       :limit => 12 }
+       :limit => 30}
 
        @items = Patient.find(:all, find_options)
        render :inline => "<%= auto_complete_result_patient @items, 'family_name' %>"
