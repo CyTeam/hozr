@@ -49,7 +49,7 @@ module ActionController
       module ClassMethods
         def auto_complete_for_vcard_field(object, method, options = {})
           case method.to_s
-          when 'street_address'
+          when 'street_address', 'locality'
             model = Address
           else
             model = Vcard
@@ -72,6 +72,7 @@ module ActionController
             auto_complete_for_vcard_field object, :family_name, :limit => 12
             auto_complete_for_vcard_field object, :given_name, :limit => 12
             auto_complete_for_vcard_field object, :street_address, :limit => 12
+            auto_complete_for_vcard_field object, :locality, :limit => 12
         end
       end
     end

@@ -4,5 +4,5 @@
   <%= address.text_field_with_auto_complete :given_name, :label => 'Vorname' %>
   <%= address.text_field_with_auto_complete :street_address, :label => "Strasse"  %>
   <%= address.text_field 'postal_code', :label => "PLZ"  %>
-  <%= address.text_field 'locality', :label => "Ort"  %>
+  <%= address.text_field_with_auto_complete :locality, :label => "Ort"  %>
 <% end %>
