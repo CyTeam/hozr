@@ -1,4 +1,8 @@
-<h1>Listing patients</h1>
+<h1>Patienten</h1>
+
+<%= start_form_tag :action=> :search %>
+  Name: <%= text_field_with_auto_complete :patient, :full_name, :select => 'name_id', :frequency => 0.5, :min_chars => 3, :label => 'Patient' %> <%= submit_tag 'Suchen', :style => "display: inline" %>
+<%= end_form_tag %>
 
 <table class="listing">
   <tr>
