@@ -3,7 +3,7 @@
   <%= button_to_function finding_class.name, remote_function(:update => "findings", :url => url_for(:action => "add_finding", "finding_id" => finding_class.id, :id => @case ), :after => "$('finding_class_selection').value = ''; $('finding_class_code').value = ''; $('finding_class_code').focus() " ), :style => "height: 2.5em; width: 14em", :class => "Finding_#{finding_class.code}"%>
 <% end %><br />
 
-<% for finding_class in TopFindingClass.find_all_by_classification_id(params[:case][:classification]) %>
+<% for finding_class in TopFindingClass.find_all_by_classification_id(@case.classification) %>
   <%= button_to_function finding_class.finding_class.name, remote_function(:update => "findings", :url => url_for(:action => "add_finding", "finding_id" => finding_class.finding_class.id, :id => @case ), :after => "$('finding_class_selection').value = ''; $('finding_class_code').value = ''; $('finding_class_code').focus() " ), :style => "height: 2.5em; width: 14em"%>
 <% end %>
 

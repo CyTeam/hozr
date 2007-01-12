@@ -130,11 +130,13 @@ class Cyto::CasesController < ApplicationController
   def second_entry_form
     @case = Case.find(params[:id])
     
-    classification = Classification.find(params[:case][:classification])
-    @case.classification = classification
-    @case.save
+    if params[:case] && params[:case][:classification]
+      classification = Classification.find(params[:case][:classification])
+      @case.classification = classification
+      @case.save
+    end
     
-    case classification.code
+    case @case.classification.code
     when '2A', '2-3A'
       render :action => 'second_entry_agus_ascus_form'
     end
