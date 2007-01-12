@@ -31,5 +31,6 @@ class Praxistar::Base < ActiveRecord::Base
     export.save
   
     print export.attributes.to_yaml
+    return export
   end
 end

@@ -121,6 +121,6 @@ class Cyto::Case < ActiveRecord::Base
     export.finished_at
     export.save
   
-    @export = export
+    return export
   end
 end
