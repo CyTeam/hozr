@@ -100,12 +100,18 @@ class Cyto::CasesController < ApplicationController
     session[:first_entry] = {} if session[:first_entry].nil?
     session[:first_entry][:doctor_id] = params[:case][:doctor_id]
     
-    params[:case][:patient_id] = params[:patient][:full_name].split(' ')[0].to_i
     params[:case][:entry_date] = Time.now
     
     @case = Case.find(params[:id])
     @case.update_attributes(params[:case])
-  
+    
+    patient = Patient.find(params[:patient][:full_name].split(' ')[0].to_i)
+    patient.doctor = @case.doctor
+    patient.doctor_patient_nr = params[:patient][:doctor_patient_nr]
+    patient.save
+    
+    @case.patient = patient
+    
     @case.insurance = @case.patient.insurance
     @case.insurance_nr = @case.patient.insurance_nr
     @case.save

@@ -19,8 +19,14 @@ Event.observe(window, 'load', function() {$('patient_full_name').focus()}, false
                 <fieldset style="width: 100%">
                   <legend>Erfassung</legend>
                   <table>
+                    <tr>
                       <td><label for="patient_full_name">Patient:</label></td>
                       <td><%= text_field_with_auto_complete :patient, :full_name, :select => 'name_id', :frequency => 0.5, :min_chars => 3, :label => 'Patient' %></td>
+                    </tr>
+                    <tr>
+                      <td><label for="patient_doctor_patient_nr">Patientennr.:</label></td>
+                      <td><%= text_field :patient, :doctor_patient_nr %></td>
+                    </tr>
                     <%= f.text_field :praxistar_eingangsnr, :label => "Eingangsnummer" %>
                     <%= f.text_field :examination_date, :label => "Abstrichdatum" %>
                     <%= f.select :doctor_id, Doctor.find(:all, :include => :praxis, :order => 'family_name, given_name').collect { |m| [ m.name, m.id ] }, :label => 'Arzt' %>

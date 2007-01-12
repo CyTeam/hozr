@@ -23,6 +23,9 @@
 <p><label for="patient_doctor_id">Arzt</label><br/>
 <%= select "patient", "doctor_id", Doctor.find(:all, :include => :praxis, :order => 'family_name, given_name').collect { |d| [d.name, d.id] } %>
 
+<p><label for="patient_doctor_patient_nr"></label><br/>
+<%= text_field 'patient', 'doctor_patient_nr'  %></p>
+
 <fieldset>
   <legend>Krankenversicherung</legend>
   <p><label for="patient_insurance_id">Versicherung</label><br/>
