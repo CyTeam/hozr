@@ -48,6 +48,12 @@ class Cyto::CasesController < ApplicationController
   verify :method => :post, :only => [ :destroy, :create, :update ],
          :redirect_to => { :action => :list }
 
+  def search
+    @case_pages, @cases = paginate :cases, :per_page => 144, :conditions => [ "praxistar_eingangsnr = ?", Case.parse_eingangsnr(params[:case_search][:praxistar_eingangsnr] ) ]
+  
+    render :action => :list
+  end
+  
   def list
     params[:order] ||= 'praxistar_eingangsnr'
     
