@@ -47,7 +47,7 @@ class Cyto::Case < ActiveRecord::Base
   def self.parse_eingangsnr(value)
     left, right = value.split('/')
     if right.nil?
-      year = '06'
+      year = '07'
       number = sprintf("%05d", left.to_i)
     else
       year = sprintf("%02d", left.to_i)
