@@ -115,11 +115,12 @@ class Cyto::CasesController < ApplicationController
     @case.insurance = @case.patient.insurance
     @case.insurance_nr = @case.patient.insurance_nr
     @case.save
+    
     next_open = Case.find :first, :conditions => ["entry_date IS NULL"]
     if next_open.nil?
-    redirect_to :action => 'first_entry_queue'
+      redirect_to :action => 'first_entry_queue'
     else
-    redirect_to :action => 'first_entry', :id => next_open
+      redirect_to :action => 'first_entry', :id => next_open
     end
   end
   
@@ -199,8 +200,12 @@ class Cyto::CasesController < ApplicationController
     @case.screened_at = Time.now
     @case.save
   
-    next_case = Case.find :first, :conditions => ["entry_date IS NOT NULL AND screened_at IS NULL AND praxistar_eingangsnr > ? AND praxistar_eingangsnr < '90/'", @case.praxistar_eingangsnr]
-    redirect_to :action => 'second_entry_pap_form', :id => next_case
+    next_open = Case.find :first, :conditions => ["entry_date IS NOT NULL AND screened_at IS NULL AND praxistar_eingangsnr > ? AND praxistar_eingangsnr < '90/'", @case.praxistar_eingangsnr]
+    if next_open.nil?
+      redirect_to :action => 'second_entry_queue'
+    else
+      redirect_to :action => 'second_entry_pap_form', :id => next_open
+    end
   end
   
   def remove_finding
