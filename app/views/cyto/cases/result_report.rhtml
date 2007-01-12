@@ -44,7 +44,7 @@ Befund
 </div>
 
 <div id="signature">
-  <%= button_to "Visum: U. Ivkovic, #{@case.screened_at.strftime("%d.%m.%Y")}", :action => 'sign', :id => @case %>
+  <%= button_to "Visum: #{@case.screener.work_vcard.abbreviated_name unless @case.screener.nil?}, #{@case.screened_at.strftime("%d.%m.%Y")}", :action => 'sign', :id => @case %>
 </div>
 
 <div id="label1">
