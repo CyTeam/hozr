@@ -1,9 +1,9 @@
 <h1>Auftragsformularimport Status</h1>
 <% for import in Praxistar::Imports.find(:all, :conditions => "model = 'Cyto::OrderForm' AND finished_at IS NULL") %>
   <p>
-    Gestartet um: <%=h @import.started_at %><br/>
-    Anzahl: <%=h @import.update_count %><br/>
-    Erledigt: <%=h @import.create_count %><br/>
+    Gestartet um: <%=h import.started_at %><br/>
+    Anzahl: <%=h import.update_count %><br/>
+    Erledigt: <%=h import.create_count %><br/>
   </p>
 <% end %>
 <%= button_to "Neu laden", :action => :import_order_forms_status %>
