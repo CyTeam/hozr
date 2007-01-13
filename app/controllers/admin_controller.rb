@@ -4,6 +4,7 @@ class AdminController < ApplicationController
   end
 
   def praxistar_create_all_leistungsblatt
+    praxistar_patienten_personalien_export
     @export = Cyto::Case.praxistar_create_all_leistungsblatt
   end
 
