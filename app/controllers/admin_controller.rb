@@ -1,6 +1,4 @@
 class AdminController < ApplicationController
-  ORDER_FORM_DIR='/mnt/worker/hozr-order-forms/order-*'
-  
   def index
   end
 
@@ -14,12 +12,11 @@ class AdminController < ApplicationController
   end
 
   def import_order_forms
-    order_form_files = Dir.glob(ORDER_FORM_DIR)
-  
-    for order_form_file in order_form_files
-      Cyto::OrderForm.new(:file => File.new(order_form_file))
+    fork do
+      Cyto::OrderForm.import_order_forms
     end
-  
-    render :action => 'index'
+    
+    sleep 3
+    render :action => 'import_order_forms_status'
   end
 end

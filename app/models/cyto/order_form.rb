@@ -1,4 +1,6 @@
 class Cyto::OrderForm < ActiveRecord::Base
+  ORDER_FORM_DIR='/mnt/worker/hozr-order-forms/order-*'
+  
   file_column :file, :magick => {
     :versions => {
       :full => {:size => "550"},
@@ -38,4 +40,24 @@ class Cyto::OrderForm < ActiveRecord::Base
     return whited
   end
 
+  def self.import_order_forms
+    order_form_files = Dir.glob(ORDER_FORM_DIR)
+  
+    import = Praxistar::Imports.new(:started_at => Time.now, :model => self.name)
+    
+    import.update_count = order_form_files.size
+    import.save
+    
+    for order_form_file in order_form_files
+      order_form = Cyto::OrderForm.new(:file => File.new(order_form_file))
+      order_form.save
+      import.create_count += 1
+      import.save
+    end
+  
+    import.finished_at = Time.now
+    import.save
+    
+    return import
+  end
 end
