@@ -33,14 +33,29 @@ class Cyto::Case < ActiveRecord::Base
     !entry_date.nil? && !screened_at.nil? && result_report_printed_at.nil?
   end
   
-  def self.new_order_form(order_form_scan)
-    order_form = OrderForm.new
-    order_form.file = File.new(order_form_scan)
-    order_form.save
-    
-    a_case = new
-    a_case.order_form = order_form
-    a_case.save
+  def initialize(params = {})
+    case params.class.name
+    when 'String'
+      initialize_from_order_form_file_name(params)
+    when 'File'
+      initialize_from_order_form_file(params)
+    when 'Cyto::OrderForm'
+      initialize_from_order_form(params)
+    else
+      super(params)
+    end
+  end
+  
+  def initialize_from_order_form_file_name(order_form_file_name)
+    initialize_from_order_form_file(File.new(order_form_file_name))
+  end
+  
+  def initialize_from_order_form_file(order_form_file)
+    initialize_from_order_form(Cyto::OrderForm.new(:file => order_form_file))
+  end
+  
+  def initialize_from_order_form(order_form)
+    initialize(:order_form => order_form)
   end
   
   private

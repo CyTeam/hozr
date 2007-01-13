@@ -49,9 +49,8 @@ class Cyto::OrderForm < ActiveRecord::Base
     import.save
     
     for order_form_file in order_form_files
-      order_form = Cyto::OrderForm.new(:file => File.new(order_form_file))
-      order_form.save
-      Cyto::Case.new_order_form(order_form)
+      a_case = Cyto::Case.new(order_form_file)
+      a_case.save
       
       import.create_count += 1
       import.save
