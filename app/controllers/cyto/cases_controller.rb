@@ -208,7 +208,7 @@ class Cyto::CasesController < ApplicationController
     when 'mam', 'sput'
       render :action => :eg_result_report_for_pdf, :layout => 'result_report_for_pdf'
     else
-      render :action => :result_report_for_pdf, :layout => 'result_report_for_pdf'
+      render :action => :result_report, :layout => 'result_report_for_pdf'
     end
   end
   
