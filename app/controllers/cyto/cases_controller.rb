@@ -201,7 +201,8 @@ class Cyto::CasesController < ApplicationController
   end
   
   def result_report_for_pdf
-    result_report
+    @case = Case.find(params[:id])
+    @case.screened_at ||= Date.today
     
     case @case.classification.code
     when 'mam', 'sput'
