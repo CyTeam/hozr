@@ -12,6 +12,10 @@ class Cyto::Case < ActiveRecord::Base
   def exactly_one_of_group(group_name)
     ( finding_classes.collect { |f| f.id } & Cyto::FindingGroup.find_by_name(group_name).finding_classes.collect { |f| f.id } ).size == 1
   end
+
+  def at_least_one_of_group(group_name)
+    ( finding_classes.collect { |f| f.id } & Cyto::FindingGroup.find_by_name(group_name).finding_classes.collect { |f| f.id } ).size >= 1
+  end
   
   def validate_findings
     exactly_one_of_group('Zustand') && exactly_one_of_group('Kontrolle')
