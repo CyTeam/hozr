@@ -16,6 +16,8 @@ class Cyto::DiagnoseController < ApplicationController
     elsif !@case.screened_at.nil?
       flash[:warning] = "Zweiteingabe bereits gemacht: #{params[:case][:praxistar_eingangsnr]}"
       redirect_to :action => 'deprecated_second_entry_pap_form'
+    else
+      @case.examination_method_id = 1
     end
   end
 
