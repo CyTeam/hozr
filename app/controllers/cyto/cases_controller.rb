@@ -12,7 +12,7 @@ class Cyto::CasesController < ApplicationController
                            :theme_advanced_buttons1 => %w{bold italic underline separator indent outdent separator bullist forecolor backcolor separator undo redo},
                            :theme_advanced_buttons2 => [],
                            :theme_advanced_buttons3 => []},
-              :only => [:new, :edit, :show, :index, :eg_result_report, :second_entry_form])
+              :only => [:new, :edit, :show, :index, :result_report, :second_entry_form])
 
   auto_complete_for :finding_class, :selection, :limit => 12
 #  auto_complete_for :patient, :family_name, :joins => "JOIN vcards ON patients.vcard_id = vcards.id", :limit => 12
@@ -188,13 +188,16 @@ class Cyto::CasesController < ApplicationController
     end
   end
   
-  def eg_result_report
-    @case = Case.find(params[:id])
-  end
-  
   def result_report
     @case = Case.find(params[:id])
     @case.screened_at ||= Date.today
+  
+    case @case.classification.code
+    when 'mam', 'sput'
+      render :action => :eg_result_report
+    else
+      render :action => :result_report
+    end
   end
   
   def result_report_for_pdf
@@ -204,7 +207,7 @@ class Cyto::CasesController < ApplicationController
     when 'mam', 'sput'
       render :action => :eg_result_report_for_pdf, :layout => 'result_report_for_pdf'
     else
-      render :action => :result_report, :layout => 'result_report_for_pdf'
+      render :action => :result_report_for_pdf, :layout => 'result_report_for_pdf'
     end
   end
   
