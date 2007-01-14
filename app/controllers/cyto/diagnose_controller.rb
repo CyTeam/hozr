@@ -9,17 +9,23 @@ class Cyto::DiagnoseController < ApplicationController
   end
 
   def deprecated_second_entry_form
-    if Case.praxistar_eingangsnr_exists?(params[:case][:praxistar_eingangsnr])
-      flash[:warning] = 'Eingangsnr bereits vergeben'
-      redirect_to :action => :deprecated_second_entry_pap_form
+    @case = Case.find_by_praxistar_eingangsnr(params[:case][:praxistar_eingangsnr])
+    if @case.nil?
+      flash[:warning] = "Eingangsnr nicht gefunden: #{params[:case][:praxistar_eingangsnr]}"
+      redirect_to :action => 'deprecated_second_entry_pap_form'
+    elsif !@case.screened_at.nil?
+      flash[:warning] = "Zweiteingabe bereits gemacht: #{params[:case][:praxistar_eingangsnr]}"
+      redirect_to :action => 'deprecated_second_entry_pap_form'
     end
-
-    @case = Case.new(params[:case])
   end
 
   def deprecated_create_case
-    @case = Case.new(params[:case])
+    @case = Case.find(params[:id])
     @case.finding_class_ids = params[:finding_ids]
+    @case.screener = Employee.find_by_code('admin')
+    @case.screened_at = Time.now
+    
+    @case.update_attributes(params[:case])
     if @case.save
       flash[:notice] = 'Case was successfully created.'
       redirect_to :action => 'deprecated_second_entry_pap_form'

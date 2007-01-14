@@ -20,9 +20,7 @@ Event.observe(window, 'load', function() {$('finding_class_code').focus()}, fals
         </p>
       </fieldset>
       
-      <%= form_tag( :action => "deprecated_create_case" ) %>
-        <%= hidden_field "case", "praxistar_eingangsnr"%>
-        
+      <%= form_tag( :action => "deprecated_create_case", :id => @case ) %>
         <fieldset style="width: 100%; min-height: 160">
         <legend>Befunde</legend>
           <ul id="findings">
@@ -50,33 +48,22 @@ Event.observe(window, 'load', function() {$('finding_class_code').focus()}, fals
       <%= end_form_tag %>
     </td>
     <td id="personal-information" style="min-width: 200px">
-      <% if ! @doctor.nil? %>
-      <fieldset style="width: 100%; line-height: 0.8em;">
-        <legend>Arzt</legend>
-        <p>Dr. <%=h "#{@doctor.vcard.full_name}" %></p>
-        <% for number in @doctor.vcard.phone_numbers %>
-          <p><%=h number.phone_number_type.humanize %>: <%=h number.number %></p>
-        <% end %>
-      </fieldset>
-      <% end %>
-      <% if ! @patient.nil? %>
-      <fieldset style="width: 100%; line-height: 0.2em; margin-top: 30px">
+      <fieldset style="width: 100%">
         <legend>Patient</legend>
-        <p style="font-weight: bold"><%=h @patient.vcard.full_name %></p>
-        <p><%=h @patient.vcard.street_address %></p>
-        <p><%=h @patient.vcard.locality %> <%=h @patient.vcard.postal_code %></p>
-        <p><%=h @patient.birth_date %></p>
+        <%= render :partial => "vcards/show", :locals => { :vcard => @case.patient.vcard } unless @case.patient.nil? %><br/>
+        <%=h @case.patient.birth_date unless @case.patient.nil? %></p>
       </fieldset>
-      <fieldset style="width: 100%; min-height: 200px; font-size: 80%; line-height: 1.3em; margin-top: 30px">
+      <fieldset style="width: 100%; margin-top: 10px">
+        <legend>Arzt</legend>
+        <%= render :partial => "vcards/show", :locals => { :vcard => @case.doctor.praxis } %><br/>
+        <%= render :partial => "vcards/show_phone_numbers", :locals => { :vcard => @case.doctor.praxis } %>
+      </fieldset>
+      <fieldset style="width: 100%; min-height: 200px; font-size: 80%; line-height: 1.3em; margin-top: 10px">
         <legend>Geschichte</legend>
         <dl>
-          <% for a_case in @patient.cases %>
-          <dt class="PAP_<%=h a_case.classification.code %>" style="font-weight: bold"><%=h a_case.examination_date.strftime('%b. %g') unless a_case.examination_date.nil? %>: #<%=h a_case.praxistar_eingangsnr.split('/')[0] %><dt/>
-          <dd><div style="font-weight: bold"><%=h a_case.classification.name %></div>(<%=h a_case.finding_classes.collect { |c| c.code }.join(', ') %>)</dd>
-          <% end %>
+          <%= render :partial => '/cyto/cases/compact', :collection => @case.patient.finished_cases unless @case.patient.nil? %>
         </dl>
       </fieldset>
-      <% end %>
     </td>
   </tr>
 </table>
