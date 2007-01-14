@@ -1,5 +1,5 @@
 class Cyto::OrderForm < ActiveRecord::Base
-  ORDER_FORM_DIR='/mnt/worker/hozr-order-forms/order-*'
+  ORDER_FORM_DIR='/mnt/worker/hozr-order-forms/'
   
   file_column :file, :magick => {
     :versions => {
@@ -41,7 +41,7 @@ class Cyto::OrderForm < ActiveRecord::Base
   end
 
   def self.import_order_forms
-    order_form_files = Dir.glob(ORDER_FORM_DIR)
+    order_form_files = Dir.glob(ORDER_FORM_DIR + "order-*")
   
     import = Praxistar::Imports.new(:started_at => Time.now, :model => self.name)
     
@@ -51,6 +51,8 @@ class Cyto::OrderForm < ActiveRecord::Base
     for order_form_file in order_form_files
       a_case = Cyto::Case.new(order_form_file)
       a_case.save
+      
+      File.move(order_form_file, ORDER_FORM_DIR + "done/")
       
       import.create_count += 1
       import.save
