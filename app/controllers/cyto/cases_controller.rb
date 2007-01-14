@@ -3,6 +3,17 @@ require "net/http"
 include Cyto
 
 class Cyto::CasesController < ApplicationController
+  uses_tiny_mce(:options => {:theme => 'advanced',
+                           :browsers => %w{msie gecko},
+                           :theme_advanced_toolbar_location => "top",
+                           :theme_advanced_toolbar_align => "left",
+                           :theme_advanced_resizing => true,
+                           :theme_advanced_resize_horizontal => false,
+                           :theme_advanced_buttons1 => %w{bold italic underline separator indent outdent separator bullist forecolor backcolor separator undo redo},
+                           :theme_advanced_buttons2 => [],
+                           :theme_advanced_buttons3 => []},
+              :only => [:new, :edit, :show, :index, :eg_result_report, :second_entry_form])
+
   auto_complete_for :finding_class, :selection, :limit => 12
 #  auto_complete_for :patient, :family_name, :joins => "JOIN vcards ON patients.vcard_id = vcards.id", :limit => 12
   
@@ -152,6 +163,11 @@ class Cyto::CasesController < ApplicationController
     case @case.classification.code
     when '2A', '2-3A'
       render :action => 'second_entry_agus_ascus_form'
+    when 'mam', 'sput'
+      @case.screened_at ||= Date.today
+      @case.screener = Employee.find_by_code(request.env['REMOTE_USER'])
+      @case.save
+      render :action => 'eg_result_report'
     end
   end
   
@@ -172,6 +188,10 @@ class Cyto::CasesController < ApplicationController
     end
   end
   
+  def eg_result_report
+    @case = Case.find(params[:id])
+  end
+  
   def result_report
     @case = Case.find(params[:id])
     @case.screened_at ||= Date.today
@@ -180,7 +200,12 @@ class Cyto::CasesController < ApplicationController
   def result_report_for_pdf
     result_report
     
-    render :action => :result_report, :layout => 'result_report_for_pdf'
+    case @case.classification.code
+    when 'mam', 'sput'
+      render :action => :eg_result_report_for_pdf, :layout => 'result_report_for_pdf'
+    else
+      render :action => :result_report, :layout => 'result_report_for_pdf'
+    end
   end
   
   def result_report_pdf
@@ -198,6 +223,7 @@ class Cyto::CasesController < ApplicationController
   def sign
     @case = Case.find(params[:id])
     @case.screened_at = Time.now
+    @case.finding_text = params[:case][:finding_text]
     @case.save
   
     next_open = Case.find :first, :conditions => ["entry_date IS NOT NULL AND screened_at IS NULL AND praxistar_eingangsnr > ? AND praxistar_eingangsnr < '90/'", @case.praxistar_eingangsnr]

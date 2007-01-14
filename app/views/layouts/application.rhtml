@@ -7,6 +7,10 @@
     <meta name="keywords" content="zytologie labor limmatplatz zürich arzt zelle" />
     <meta name="description" content="Hozr - Zytolabor Limmatplatz" />
     
+    <% # Include TinyMCE before other JS to avoid problems -%>
+    <%= javascript_include_tiny_mce_if_used %>
+    <%= tiny_mce if using_tiny_mce? %>
+    
     <%= stylesheet_link_tag 'noprobs' %>
     <%= stylesheet_link_tag 'cyto' %>
     <%= stylesheet_link_tag 'result_report' %>

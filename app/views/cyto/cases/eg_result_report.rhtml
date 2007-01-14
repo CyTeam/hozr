@@ -1,0 +1,59 @@
+<div class="sheet_a5">
+<div class="report">
+<div id="patient">
+<% if !(@case.patient.doctor_patient_nr.nil? or @case.patient.doctor_patient_nr == '') %>
+<%=h @case.patient.doctor_patient_nr %><br />
+<% end %>
+<%= render :partial => "/vcards/show", :locals => {:vcard => @case.patient.vcard} %><br/>
+<%=h @case.patient.birth_date.strftime("%d.%m.%Y") unless @case.patient.birth_date.nil? %><br />
+</div>
+
+<div id="insurance">
+<% if !@case.insurance.nil? %>
+<br/>
+<%=h @case.insurance.name %> <%=h "##{@case.insurance_nr}" unless @case.insurance_nr.nil? or @case.insurance_nr.strip == "0" or @case.insurance_nr.strip == "" %>
+<% end %>
+</div>
+
+
+<div id="doctor">
+<%=h @case.doctor.praxis.honorific_prefix %><br />
+<%= render :partial => "/vcards/show", :locals => {:vcard => @case.doctor.praxis} %>
+</div>
+
+<div id="case">
+Entnahme vom: <%=h @case.examination_date.strftime("%d.%m.%Y") %><br />
+Eingang am: <%=h @case.entry_date.strftime("%d.%m.%Y") %>
+</div>
+
+<div id="subject" class="title">
+Ihr Auftrag Nr. <%=h @case.praxistar_eingangsnr %>
+</div>
+
+<%= start_form_tag :action => 'sign', :id => @case %>
+<div id="remarks">
+  <%= text_area 'case', 'finding_text' %>
+</div>
+
+<div id="signature">
+  <%= submit_tag "Visum: #{@case.screener.work_vcard.abbreviated_name unless @case.screener.nil?}, #{@case.screened_at.strftime("%d.%m.%Y")}" %>
+</div>
+<%= end_form_tag %>
+
+<div id="label1">
+<%= render :partial => "/vcards/show", :locals => {:vcard => @case.patient.vcard} %><br/>
+<%=h @case.patient.birth_date.strftime("%d.%m.%Y") %><br />
+</div>
+
+<div id="label2">
+<%= render :partial => "/vcards/show", :locals => {:vcard => @case.patient.vcard} %><br/>
+<%=h @case.patient.birth_date.strftime("%d.%m.%Y") %>
+</div>
+
+<div id="label3">
+<%= render :partial => "/vcards/show", :locals => {:vcard => @case.patient.vcard} %><br/>
+<%=h @case.patient.birth_date.strftime("%d.%m.%Y") %>
+</div>
+
+</div>
+</div>
