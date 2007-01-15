@@ -227,7 +227,7 @@ class Cyto::CasesController < ApplicationController
   def sign
     @case = Case.find(params[:id])
     @case.screened_at = Time.now
-    @case.finding_text = params[:case][:finding_text]
+    @case.finding_text = params[:case][:finding_text] unless params[:case].nil? or params[:case][:finding_text].nil?
     @case.save
   
     next_open = Case.find :first, :conditions => ["entry_date IS NOT NULL AND screened_at IS NULL AND praxistar_eingangsnr > ? AND praxistar_eingangsnr < '90/'", @case.praxistar_eingangsnr]
