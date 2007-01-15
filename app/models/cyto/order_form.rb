@@ -14,7 +14,7 @@ class Cyto::OrderForm < ActiveRecord::Base
 
 
   def extract_remarks(image)
-    cropped = image.crop(::Magick::NorthWestGravity, 0, 1200, image.rows, image.columns * 0.45, true)
+    cropped = image.crop(::Magick::NorthWestGravity, 0, 600, image.rows, image.columns * 0.45, true)
     bordered = cropped.border(20, 20, '#AEBCDF')
 #    bordered.fuzz = '15%'
     bordered.fuzz = 0.15
@@ -23,12 +23,12 @@ class Cyto::OrderForm < ActiveRecord::Base
     despeckled.fuzz = 1500
     whited = despeckled.opaque('#EAEAF6', 'white')
 #   framed = whited.border(10, 10, 'black')
-    resized = whited.resize(0.22)
-    return resized
+#    resized = whited.resize(0.22)
+    return whited
   end
 
   def extract_result_remarks(image)
-    cropped = image.crop(::Magick::NorthWestGravity, 0, 1200, image.rows, image.columns * 0.45, true)
+    cropped = image.crop(::Magick::NorthWestGravity, 0, 600, image.rows, image.columns * 0.45, true)
     bordered = cropped.border(20, 20, '#AEBCDF')
 #    bordered.fuzz = '15%'
     bordered.fuzz = 0.15
