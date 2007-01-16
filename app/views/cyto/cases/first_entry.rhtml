@@ -29,7 +29,7 @@ Event.observe(window, 'load', function() {$('patient_full_name').focus()}, false
                     </tr>
                     <%= f.text_field :praxistar_eingangsnr, :label => "Eingangsnummer" %>
                     <%= f.text_field :examination_date, :label => "Abstrichdatum" %>
-                    <%= f.select :doctor_id, Doctor.find(:all, :include => :praxis, :order => 'family_name, given_name').collect { |m| [ m.name, m.id ] }, :label => 'Arzt' %>
+                    <%= f.select :doctor_id, Doctor.find(:all, :include => :praxis, :order => 'family_name, given_name').collect { |m| [ [ m.family_name, m.given_name ].join(", ") , m.id ] }, :label => 'Arzt' %>
                     <%= f.select :examination_method_id, ExaminationMethod.find_all.collect { |m| [ m.name, m.id ] }, :label => 'Methode' %>
                   </table>
                 </fieldset>
