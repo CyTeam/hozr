@@ -5,7 +5,7 @@ class DoctorsController < ApplicationController
   end
 
   def list
-    @doctor_pages, @doctors = paginate :doctors, :per_page => 10
+    @doctor_pages, @doctors = paginate :doctors, :per_page => 100
   end
 
   def show
