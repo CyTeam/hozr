@@ -103,12 +103,15 @@ class Cyto::CasesController < ApplicationController
   def first_entry
     @case = Case.find(params[:id])
   
-    @case.doctor_id = session[:first_entry][:doctor_id] unless session[:first_entry].nil?
+    session[:first_entry] = {} if session[:first_entry].nil?
+    
+    # Preseed some fields
+    @case.doctor_id = session[:first_entry][:doctor_id]
+    @case.praxistar_eingangsnr = Cyto::CaseNr.next(session[:first_entry][:praxistar_eingangsnr]).to_s
     @case.examination_method_id = 1
   end
 
   def first_entry_update
-    session[:first_entry] = {} if session[:first_entry].nil?
     session[:first_entry][:doctor_id] = params[:case][:doctor_id]
     
     params[:case][:entry_date] = Time.now
