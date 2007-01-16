@@ -18,7 +18,7 @@ class Cyto::Case < ActiveRecord::Base
   end
   
   def validate_findings
-    exactly_one_of_group('Zustand') && exactly_one_of_group('Kontrolle')
+    exactly_one_of_group('Zustand') && at_least_one_of_group('Kontrolle')
   end
   
   def ready_for_first_entry
