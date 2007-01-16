@@ -119,18 +119,36 @@ class Cyto::Case < ActiveRecord::Base
   end
 
   def self.praxistar_create_all_leistungsblatt
-    cases_to_book = self.find(:all, :conditions => "praxistar_leistungsblatt_id IS NULL AND screened_at IS NOT NULL AND classification_id IS NOT NULL AND praxistar_eingangsnr > '06/30000'")
-  
     export = Praxistar::Exports.new(:started_at => Time.now, :model => self.name)
     
-    for a_case in cases_to_book
-      a_case.praxistar_create_leistungsblatt
-      export.create_count += 1
+    records = self.find(:all, :conditions => "praxistar_leistungsblatt_id IS NULL AND screened_at IS NOT NULL AND classification_id IS NOT NULL AND praxistar_eingangsnr > '06/30000'")
+  
+    export.record_count = records.size
+    export.save
+    
+    for h in records
+      begin
+        h.praxistar_create_leistungsblatt
+      
+        export.create_count += 1
+        export.save
+      rescue
+      rescue Exception => ex
+        export.error_ids += h.id
+        export.error_count += 1
+        export.save
+        
+        print "Error #{self.name}(#{h.id}): #{ex.message}\n"
+        logger.info "Error #{self.name}(#{h.id}): #{ex.message}\n"
+        logger.info ex.backtrace.join("\n\t")
+        logger.info "\n"
+      end
     end
   
-    export.finished_at
+    export.finished_at = Time.now
     export.save
   
+    logger.info(export.attributes.to_yaml)
     return export
   end
 end
