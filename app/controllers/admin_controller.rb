@@ -13,7 +13,7 @@ class AdminController < ApplicationController
     end
     
     sleep 3
-    render :action => 'create_leistungsblatt_status'
+    render :action => 'praxistar_patienten_personalien_export_status'
   end
 
   def import_order_forms
