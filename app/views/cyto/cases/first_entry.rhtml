@@ -30,8 +30,8 @@ Event.observe(window, 'load', function() {$('patient_full_name').focus()}, false
                       <td><label for="patient_doctor_patient_nr">Patientennr.:</label></td>
                       <td><%= text_field :patient, :doctor_patient_nr %></td>
                     </tr>
-                    <%= f.text_field :praxistar_eingangsnr, :label => "Eingangsnummer" %>
                     <%= f.text_field :examination_date, :label => "Abstrichdatum" %>
+                    <%= f.text_field :praxistar_eingangsnr, :label => "Eingangsnummer" %>
                     <%= f.select :doctor_id, Doctor.find(:all, :include => :praxis, :order => 'family_name, given_name').collect { |m| [ [ m.family_name, m.given_name ].join(", ") , m.id ] }, :label => 'Arzt' %>
                     <%= f.select :examination_method_id, ExaminationMethod.find_all.collect { |m| [ m.name, m.id ] }, :label => 'Methode' %>
                   </table>
