@@ -112,7 +112,9 @@ class Cyto::CasesController < ApplicationController
   end
 
   def first_entry_update
+    # save fields in session for preseeding
     session[:first_entry][:doctor_id] = params[:case][:doctor_id]
+    session[:first_entry][:praxistar_eingangsnr] = params[:case][:praxistar_eingangsnr]
     
     params[:case][:entry_date] = Time.now
     
