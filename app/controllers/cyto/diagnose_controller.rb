@@ -1,9 +1,19 @@
 include Cyto
 
 class Cyto::DiagnoseController < ApplicationController
-  auto_complete_for :finding_class, :selection, :select => "*, code || ' - ' || name as selection", :limit =>12
+  auto_complete_for :finding_class, :selection, :limit => 12
   auto_complete_for :classification, :name, :limit => 12
 
+  def auto_complete_for_finding_class_selection
+    @finding_classes = FindingClass.find(:all, 
+      :conditions => [ FindingClass.connection.concat(:code, ' - ', :name) + " LIKE ?",
+      '%' + params[:finding_class][:selection].downcase + '%' ],
+      :select => "*, #{FindingClass.connection.concat(:code, ' - ', :name)} AS selection",
+      :order => 'code',
+      :limit => 8)
+    render :inline => "<%= auto_complete_result_finding_class_selection @finding_classes, 'code' %>"
+  end
+    
   def index
     render :action => 'second_entry_pap_form'
   end
