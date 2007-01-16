@@ -132,7 +132,6 @@ class Cyto::Case < ActiveRecord::Base
       
         export.create_count += 1
         export.save
-      rescue
       rescue Exception => ex
         export.error_ids += h.id
         export.error_count += 1
