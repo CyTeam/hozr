@@ -12,7 +12,7 @@
 <% for patient in @patients %>
   <tr onmouseover="showActions(<%= patient.id %>)" onmouseout="hideActions(<%= patient.id %>)">
     <td>
-      <%= link_to patient.vcard.family_name + ", " + patient.vcard.given_name, :action => 'show', :id => patient %>
+      <%= link_to patient.vcard.family_name + ", " + patient.vcard.given_name, :action => 'edit', :id => patient %>
     </td>
     <td><%=h patient.vcard.street_address %>, <%=h patient.vcard.postal_code %> <%=h patient.vcard.locality %></td>
     <td><%=h patient.birth_date %></td>
