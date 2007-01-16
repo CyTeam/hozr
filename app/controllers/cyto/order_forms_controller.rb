@@ -11,7 +11,7 @@ class Cyto::OrderFormsController < ApplicationController
          :redirect_to => { :action => :list }
 
   def list
-    @order_form_pages, @order_forms = paginate :order_forms, :per_page => 10
+    @order_forms = OrderForm.find(:all, :conditions => "created_at >= '2007-01-15'")
   end
 
   def show
