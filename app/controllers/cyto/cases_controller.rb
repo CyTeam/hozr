@@ -25,7 +25,7 @@ class Cyto::CasesController < ApplicationController
       :select => "patients.*",
       :order => 'family_name ASC',
       :limit => 30)
-    render :partial => 'full_names'
+    render :partial => '/patients/full_names'
   end
     
   def auto_complete_for_finding_class_selection
