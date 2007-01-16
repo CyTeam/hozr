@@ -8,7 +8,12 @@ class AdminController < ApplicationController
   end
 
   def praxistar_patienten_personalien_export
-    @export = Praxistar::PatientenPersonalien.export
+    fork do
+      Praxistar::PatientenPersonalien.export
+    end
+    
+    sleep 3
+    render :action => 'create_leistungsblatt_status'
   end
 
   def import_order_forms

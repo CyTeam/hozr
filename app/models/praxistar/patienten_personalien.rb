@@ -51,7 +51,12 @@ class Praxistar::PatientenPersonalien < Praxistar::Base
     
 #    hozr_model.Patient.delete_all
     
-    for praxistar_record in find(:all, find_params)
+    records = find(:all, find_params)
+    
+    import.record_count = records.size
+    import.save
+    
+    for praxistar_record in records
       begin
         attributes = import_attributes(praxistar_record)
 
@@ -59,18 +64,25 @@ class Praxistar::PatientenPersonalien < Praxistar::Base
           hozr_model.update(praxistar_record.id, attributes)
           
           import.update_count += 1
-      else
+        else
           hozr_record = hozr_model.new(attributes)
           hozr_record.id = praxistar_record.id
           hozr_record.save
         
           import.create_count += 1
         end
-    rescue Exception => ex
-          print "ID: #{praxistar_record.id} => #{ex.message}\n\n"
-          logger.info "ID: #{praxistar_record.id} => #{ex.message}\n\n"
-          logger.info ex.backtrace.join("\n\t")
-          logger.info "\n"
+        
+        import.save
+      
+      rescue Exception => ex
+        import.error_ids += h.id
+        import.error_count += 1
+        import.save
+        
+        print "ID: #{praxistar_record.id} => #{ex.message}\n\n"
+        logger.info "ID: #{praxistar_record.id} => #{ex.message}\n\n"
+        logger.info ex.backtrace.join("\n\t")
+        logger.info "\n"
       end
     end
   

@@ -14,23 +14,41 @@ class Praxistar::Base < ActiveRecord::Base
     
     export = Exports.new(:started_at => Time.now, :find_params => find_params, :model => self.name)
 
-    for h in hozr_model.find(:all, find_params)
-      attributes = export_attributes(h)
-      if exists?(h.id)
-        update(h.id, attributes)
-        export.update_count += 1
-      else
-        p = new(attributes)
-        p.id = h.id
-        p.save
-        export.create_count += 1
+    records = hozr_model.find(:all, find_params)
+    
+    export.record_count = records.size
+    export.save
+    
+    for h in records
+      begin
+        attributes = export_attributes(h)
+        if exists?(h.id)
+          update(h.id, attributes)
+          export.update_count += 1
+        else
+          p = new(attributes)
+          p.id = h.id
+          p.save
+          export.create_count += 1
+        end
+          export.save
+      
+      rescue Exception => ex
+        export.error_ids += h.id
+        export.error_count += 1
+        export.save
+        
+        print "Error #{self.name}(#{h.id}): #{ex.message}\n"
+        h.logger.info "Error #{self.name}(#{h.id}): #{ex.message}\n"
+        h.logger.info ex.backtrace.join("\n\t")
+        h.logger.info "\n"
       end
     end
   
     export.finished_at = Time.now
     export.save
   
-    print export.attributes.to_yaml
+    logger.info(export.attributes.to_yaml)
     return export
   end
 end
