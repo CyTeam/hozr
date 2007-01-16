@@ -38,7 +38,7 @@ Event.observe(window, 'load', function() {$('patient_full_name').focus()}, false
                 </div>
               <% end %>
             <%= end_form_tag %>
-            <%= button_to "Löschen", :action => :destroy, :id => @case %>
+            <%= button_to "Löschen", {:action => :destroy, :id => @case}, :tabindex => 7  %>
           </td>
         </tr>
       </table>
