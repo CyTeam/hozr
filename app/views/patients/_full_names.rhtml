@@ -12,6 +12,10 @@
       <% if patient.insurance %>
         <%=h "#{patient.insurance.name} #{"#" + patient.insurance_nr if patient.insurance_nr}" %><br />
       <% end %>
+      <% if patient.finished_cases.size > 0 %>
+        <% last_case = patient.finished_cases[0] %>
+        <strong><%=h "#{last_case.praxistar_eingangsnr}: #{last_case.doctor.praxis.family_name}" %></strong><br />
+      <% end %>
     </div>
   </li>
 <% end %>
