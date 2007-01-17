@@ -9,7 +9,7 @@ class InsurancesController < ApplicationController
          :redirect_to => { :action => :list }
 
   def list
-    @insurance_pages, @insurances = paginate :insurances, :per_page => 10
+    @insurance_pages, @insurances = paginate :insurances, :per_page => 50
   end
 
   def show
