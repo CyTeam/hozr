@@ -42,7 +42,7 @@ class Cyto::OrderForm < ActiveRecord::Base
   end
 
   def self.import_order_forms
-    order_form_files = Dir.glob(ORDER_FORM_DIR)
+    order_form_files = Dir.glob(ORDER_FORM_DIR).sort
   
     import = Praxistar::Imports.new(:started_at => Time.now, :model => self.name)
     
