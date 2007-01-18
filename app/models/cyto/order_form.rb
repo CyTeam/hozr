@@ -1,6 +1,7 @@
 class Cyto::OrderForm < ActiveRecord::Base
   ORDER_FORM_DIR='/mnt/worker/hozr-order-forms/order-*'
   
+  
   file_column :file, :magick => {
     :versions => {
       :full => {:size => "550"},
