@@ -1,4 +1,6 @@
 class PatientsController < ApplicationController
+  helper :doctors
+  
   auto_complete_for_vcard :vcard
   auto_complete_for_vcard :billing_vcard
   

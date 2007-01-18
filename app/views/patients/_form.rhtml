@@ -21,7 +21,7 @@
 <%= text_field 'patient', 'birth_date'  %></p>
 
 <p><label for="patient_doctor_id">Arzt</label><br/>
-<%= select "patient", "doctor_id", Doctor.find(:all, :include => :praxis, :order => 'family_name, given_name').collect { |d| [ [ d.family_name, d.given_name ].join(", "), d.id] } %>
+<%= select_doctors :object => "patient" %>
 
 <p><label for="patient_doctor_patient_nr">Patientennr.</label><br/>
 <%= text_field 'patient', 'doctor_patient_nr'  %></p>
