@@ -1,3 +1,5 @@
+include Cyto
+
 class Mailer < ActionMailer::Base
   TEMP_DIR = File.join(File.dirname(__FILE__), '..', '..', 'tmp', 'mailer')
   
