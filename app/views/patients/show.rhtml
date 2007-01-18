@@ -1,3 +1,9 @@
 <%= render :partial => 'compact', :object => @patient %>
-<%= link_to 'Edit', :action => 'edit', :id => @patient %> |
-<%= link_to 'Back', :action => 'list' %>
+<fieldset style="width: 100%; min-height: 200px; font-size: 80%; line-height: 1.3em; margin-top: 10px">
+  <legend>Geschichte</legend>
+  <dl>
+    <%= render :partial => 'cyto/cases/compact', :collection => @patient.finished_cases %>
+  </dl>
+</fieldset>
+
+<%= link_to 'Edit', :action => 'edit', :id => @patient %>
