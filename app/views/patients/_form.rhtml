@@ -14,17 +14,23 @@
   </table>
 </fieldset>
 
-<p><label for="patient_use_billing_address">Fakturaadresse aktiv</label><br/>
-<%= check_box 'patient', 'use_billing_address'  %></p>
-
-<p><label for="patient_birth_date">Geburtsdatum</label><br/>
-<%= text_field 'patient', 'birth_date'  %></p>
-
-<p><label for="patient_doctor_id">Arzt</label><br/>
-<%= select_doctors :object => "patient" %>
-
-<p><label for="patient_doctor_patient_nr">Patientennr.</label><br/>
-<%= text_field 'patient', 'doctor_patient_nr'  %></p>
+<table>
+<% fields_for "patient", @patient, :builder => Rubaidh::TabularForm::TabularFormBuilder do |f| %>
+  <%= f.check_box 'use_billing_address', :label => "Fakturaadresse aktiv"  %>
+  <%= f.text_field 'birth_date', :label => "Geburtsdatum"  %>
+  <tr>
+    <td>
+      <label for="patient_sex">Geschlecht</label>
+    </td>
+    <td>
+      M&auml;nnlich: <%= radio_button 'patient', 'sex', 1 %>
+      Weiblich: <%= radio_button 'patient', 'sex', 2  %>
+    </td>
+  </tr>
+  <%= select_doctors :form => f %>
+  <%= f.text_field 'doctor_patient_nr', :label => "Patientennr." %>
+<% end %>
+</table>
 
 <fieldset>
   <legend>Krankenversicherung</legend>
@@ -35,9 +41,5 @@
   <%= text_field 'patient', 'insurance_nr'  %></p>
 </fieldset>
 
-<p><label for="patient_sex">Geschlecht</label><br/>
-M&auml;nnlich: <%= radio_button 'patient', 'sex', 1 %>
-Weiblich: <%= radio_button 'patient', 'sex', 2  %>
-</p>
 <!--[eoform:patient]-->
 
