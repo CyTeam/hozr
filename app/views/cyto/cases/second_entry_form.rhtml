@@ -33,11 +33,7 @@ Event.observe(window, 'load', function() {$('finding_class_code').focus()}, fals
     </td>
     <td id="personal-information" style="min-width: 200px">
       <%= render :partial => 'compact_frame', :object => @case.patient %>
-      <fieldset style="width: 100%; margin-top: 10px">
-        <legend>Arzt</legend>
-        <%= render :partial => "vcards/show", :locals => { :vcard => @case.doctor.praxis } %><br/>
-        <%= render :partial => "vcards/show_phone_numbers", :locals => { :vcard => @case.doctor.praxis } %>
-      </fieldset>
+      <%= render :partial => 'compact', :object => @case.doctor %>
       <%= render :partial => 'compact_list', :object => @case.patient.finished_cases unless @case.patient.nil? %>
     </td>
   </tr>

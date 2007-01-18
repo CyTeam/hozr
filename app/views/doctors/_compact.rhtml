@@ -1,0 +1,5 @@
+<fieldset style="width: 100%; margin-top: 10px">
+  <legend>Arzt</legend>
+  <%= render :partial => "vcards/show", :locals => { :vcard => compact.praxis } %><br/>
+  <%= render :partial => "vcards/show_phone_numbers", :locals => { :vcard => compact.praxis } %>
+</fieldset>
