@@ -1,4 +1,4 @@
-<h1>Listing doctors</h1>
+<h1>&Auml;rzte</h1>
 
 <table class="listing">
   <tr>
@@ -24,9 +24,6 @@
 <% end %>
 </table>
 
-<%= link_to 'Previous page', { :page => @doctor_pages.current.previous } if @doctor_pages.current.previous %>
-<%= link_to 'Next page', { :page => @doctor_pages.current.next } if @doctor_pages.current.next %> 
-
 <br />
 
-<%= link_to 'New doctor', :action => 'new' %>
+<%= link_to 'Neuer Arzt', :action => 'new' %>
