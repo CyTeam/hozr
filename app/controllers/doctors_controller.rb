@@ -5,7 +5,9 @@ class DoctorsController < ApplicationController
   end
 
   def list
-    @doctor_pages, @doctors = paginate :doctors, :per_page => 100
+    params[:order] ||= 'family_name, given_name'
+    
+    @doctor_pages, @doctors = paginate :doctors, :per_page => 100, :include => :praxis, :order => params[:order]
   end
 
   def show

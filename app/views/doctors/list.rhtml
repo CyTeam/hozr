@@ -2,7 +2,8 @@
 
 <table class="listing">
   <tr>
-    <th>Name</th><th>Adresse</th>
+    <%= sort_header('family_name, given_name', 'Name') %>
+    <th>Adresse</th>
   </tr>
   
 <% for doctor in @doctors %>
