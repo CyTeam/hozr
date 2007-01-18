@@ -1,6 +1,3 @@
-<%= @patient.vcard.given_name  %> <%= @patient.vcard.family_name  %><br/>
-<%= @patient.vcard.street_address  %><br/>
-<%= @patient.vcard.postal_code  %> <%= @patient.vcard.locality %><br/>
-
+<%= render :partial => 'compact', :object => @patient %>
 <%= link_to 'Edit', :action => 'edit', :id => @patient %> |
 <%= link_to 'Back', :action => 'list' %>
