@@ -1,3 +1,5 @@
-<% for number in vcard.phone_numbers %>
-  <%=h number.phone_number_type.humanize %>: <%=h number.number %><br/>
-<% end %>
+<div class="phone_number">
+  <% for number in vcard.phone_numbers %>
+    <span class="phone_number_type"><%=h number.phone_number_type.humanize %></span>: <%=h number.number %><br/>
+  <% end %>
+</div>

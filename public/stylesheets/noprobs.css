@@ -321,3 +321,18 @@ table.listing tbody tr:hover { background: #eed !important }
   font-weight: bold;
 }
 
+.address {
+  font-size: smaller;
+}
+
+.phone_number {
+  font-size: smaller;
+}
+
+.phone_number_type {
+  font-variant: small-caps;
+}
+
+.full_name {
+  font-weight: bold;
+}
