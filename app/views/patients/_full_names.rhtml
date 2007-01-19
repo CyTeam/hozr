@@ -2,16 +2,7 @@
 <% for patient in @patients do %>
   <li class="contact">
     <div class="id" style="display:none"><%= patient.id %></div>
-    <div class="full_name" style="font-weight:bold"><%=h "#{patient.vcard.family_name} #{patient.vcard.given_name} #{"#" + patient.doctor_patient_nr if patient.doctor_patient_nr}" %></div>
-    <div class="address" style="font-size:smaller">
-      <%=h "#{patient.vcard.street_address}" %><br />
-      <%=h "#{patient.vcard.postal_code} #{patient.vcard.locality}" %><br />
-      <% if patient.birth_date.month == 1 and patient.birth_date.day == 1 %><span style="background-color: red"><% end %>
-      <%=h "#{patient.birth_date.strftime("%d.%m.%Y")}" %><br />
-      <% if patient.birth_date.month == 1 and patient.birth_date.day == 1 %></span><% end %>
-      <% if patient.insurance %>
-        <%=h "#{patient.insurance.name} #{"#" + patient.insurance_nr if patient.insurance_nr}" %><br />
-      <% end %>
+      <%= render :partial => 'compact', :object => patient %>
       <% if !patient.nil? and !patient.finished_cases.nil? and patient.finished_cases.size > 0 %>
         <% last_case = patient.finished_cases[0] %>
         <strong><%=h "#{last_case.praxistar_eingangsnr}: #{last_case.doctor.praxis.family_name unless last_case.doctor.nil? or last_case.doctor.praxis.nil?}" %></strong><br />
