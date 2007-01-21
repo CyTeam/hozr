@@ -1,0 +1,4 @@
+<% patient = label %>
+
+<%= render :partial => "/vcards/show", :locals => {:vcard => patient.vcard} %><br/>
+<%=h patient.birth_date.strftime("%d.%m.%Y") %><br />

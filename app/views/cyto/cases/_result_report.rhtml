@@ -10,11 +10,9 @@
 
 <div id="insurance">
 <% if !@case.insurance.nil? %>
-<br/>
 <%=h @case.insurance.name %> <%=h "##{@case.insurance_nr}" unless @case.insurance_nr.nil? or @case.insurance_nr.strip == "0" or @case.insurance_nr.strip == "" %>
 <% end %>
 </div>
-
 
 <div id="doctor">
 <%=h @case.doctor.praxis.honorific_prefix %><br />
@@ -30,16 +28,29 @@ Eingang am: <%=h @case.entry_date.strftime("%d.%m.%Y") %>
 Ihr Auftrag Nr. <%=h @case.praxistar_eingangsnr %>
 </div>
 
-<%= start_form_tag :action => 'sign', :id => @case %>
-<div id="remarks" style="width: 12cm">
-  <%= @case.finding_text %>
+<div id="remarks">
+<%= image_tag url_for_image_column(@case.order_form, "file", :result_remarks), :size => '410' unless @case.order_form.nil? %>
+</div>
+
+<div id="finding_title" class="title">
+Befund
+</div>
+
+<div id="classification" class="PAP_<%=h @case.classification.code %>">
+<%=h @case.classification.name %>
+</div>
+
+<div id="findings">
+<% for finding in @case.finding_classes %>
+<%=h finding.name %><br />
+<% end %>
 </div>
 
 <div id="signature">
-  <%= submit_tag "Visum: #{@case.screener.work_vcard.abbreviated_name unless @case.screener.nil?}, #{@case.screened_at.strftime("%d.%m.%Y")}" %>
+  <%= button_to "Visum: #{@case.screener.work_vcard.abbreviated_name unless @case.screener.nil?}, #{@case.screened_at.strftime("%d.%m.%Y")}", :action => 'sign', :id => @case %>
 </div>
-<%= end_form_tag %>
 
 <%= render :partial => "/cyto/cases/labels", :object => @case.patient %>
+
 </div>
 </div>

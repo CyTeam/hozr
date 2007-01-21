@@ -1,0 +1,5 @@
+<% patient = labels %>
+
+<% for i in 1..3 %>
+  <div id="label<%= i %>"><%= render :partial => "/cyto/cases/label", :object => patient %></div>
+<% end %>

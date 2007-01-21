@@ -1,0 +1,5 @@
+<% a_case = info %>
+
+<%= render :partial => '/patients/compact_frame', :object => a_case.patient %>
+<%= render :partial => '/doctors/compact_frame', :object => a_case.doctor %>
+<%= render :partial => '/cyto/cases/compact_list', :object => a_case.patient.finished_cases unless a_case.patient.nil? %>
