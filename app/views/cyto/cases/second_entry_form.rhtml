@@ -32,9 +32,7 @@ Event.observe(window, 'load', function() {$('finding_class_code').focus()}, fals
       </fieldset>
     </td>
     <td id="personal-information" style="min-width: 200px">
-      <%= render :partial => 'compact_frame', :object => @case.patient %>
-      <%= render :partial => 'compact', :object => @case.doctor %>
-      <%= render :partial => 'compact_list', :object => @case.patient.finished_cases unless @case.patient.nil? %>
+      <%= render :partial => 'info', :object => @case %>
     </td>
   </tr>
 </table>
