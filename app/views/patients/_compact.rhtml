@@ -1,6 +1,7 @@
 <% patient = compact %>
 
-<div class="full_name"><%=h "#{patient.vcard.family_name} #{patient.vcard.given_name} #{"#" + patient.doctor_patient_nr if patient.doctor_patient_nr and patient.doctor_patient_nr.strip.size > 0}" %></div>
+<div class="full_name"><%= link_to(h("#{patient.vcard.family_name} #{patient.vcard.given_name}"), :controller => '/patients', :action => 'show', :id => patient) %>
+ <%=h ' #' + patient.doctor_patient_nr if patient.doctor_patient_nr and patient.doctor_patient_nr.strip.size > 0 %></div>
 <div class="address">
   <%=h "#{patient.vcard.street_address}" %><br />
   <%=h "#{patient.vcard.postal_code} #{patient.vcard.locality}" %><br />
