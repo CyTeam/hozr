@@ -4,8 +4,10 @@
 <div class="address">
   <%=h "#{patient.vcard.street_address}" %><br />
   <%=h "#{patient.vcard.postal_code} #{patient.vcard.locality}" %><br />
-  <% if patient.birth_date.month == 1 and patient.birth_date.day == 1 %><span style="background-color: red"><% end %>
-  <%=h "#{patient.birth_date.strftime("%d.%m.%Y")}" %><br />
+  <%= if patient.birth_date %>
+    <% if patient.birth_date.month == 1 and patient.birth_date.day == 1 %><span style="background-color: red"><% end %>
+    <%=h "#{patient.birth_date.strftime("%d.%m.%Y")}" %><br />
+  </%= end %>
 </div>
 <div>
   <% if patient.birth_date.month == 1 and patient.birth_date.day == 1 %></span><% end %>
