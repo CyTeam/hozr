@@ -139,7 +139,7 @@ class Cyto::CasesController < ApplicationController
     @case.insurance_nr = @case.patient.insurance_nr
     @case.save
     
-    next_open = Case.find :first, :conditions => ["entry_date IS NULL"]
+    next_open = Case.find :first, :conditions => ["entry_date IS NULL and id > #{@case.id}"]
     if next_open.nil?
       redirect_to :action => 'first_entry_queue'
     else
