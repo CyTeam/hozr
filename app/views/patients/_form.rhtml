@@ -18,15 +18,6 @@
 <% fields_for "patient", @patient, :builder => Rubaidh::TabularForm::TabularFormBuilder do |f| %>
   <%= f.check_box 'use_billing_address', :label => "Fakturaadresse aktiv"  %>
   <%= f.text_field 'birth_date', :label => "Geburtsdatum"  %>
-  <tr>
-    <td>
-      <label for="patient_sex">Geschlecht</label>
-    </td>
-    <td>
-      M&auml;nnlich: <%= radio_button 'patient', 'sex', 1 %>
-      Weiblich: <%= radio_button 'patient', 'sex', 2  %>
-    </td>
-  </tr>
   <%= select_doctors :form => f %>
   <%= f.text_field 'doctor_patient_nr', :label => "Patientennr." %>
 <% end %>
