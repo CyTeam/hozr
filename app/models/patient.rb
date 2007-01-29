@@ -7,6 +7,8 @@ class Patient < ActiveRecord::Base
   has_many :cases
   has_many :finished_cases, :class_name => 'Cyto::Case', :conditions => 'screened_at IS NOT NULL', :order => 'praxistar_eingangsnr DESC'
   
+  validates_presence_of :birth_date
+
   def name
     vcard.full_name unless vcard.nil?
   end
