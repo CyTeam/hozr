@@ -242,7 +242,7 @@ class Cyto::CasesController < ApplicationController
     @case.finding_text = params[:case][:finding_text] unless params[:case].nil? or params[:case][:finding_text].nil?
     @case.save
   
-    next_open = Case.find :first, :conditions => ["entry_date IS NOT NULL AND screened_at IS NULL AND praxistar_eingangsnr > ? AND praxistar_eingangsnr < '90/' AND needs_p16 is NULL", @case.praxistar_eingangsnr]
+    next_open = Case.find :first, :conditions => ["entry_date IS NOT NULL AND screened_at IS NULL AND needs_p16 IS NULL AND praxistar_eingangsnr > ? AND praxistar_eingangsnr < '90/'", @case.praxistar_eingangsnr]
     if next_open.nil?
       redirect_to :action => 'second_entry_queue'
     else
