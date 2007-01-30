@@ -2,5 +2,5 @@
   <%=h compact.examination_date.strftime('%b. %g') unless compact.examination_date.nil? %>: <%=link_to "#" + h(compact.praxistar_eingangsnr), :controller => '/cyto/cases', :action => :show, :id => compact unless compact.praxistar_eingangsnr.nil? %>
 <dt/>
 <dd>
-  <div style="font-weight: bold"><%= link_to image_tag(url_for_image_column(compact.order_form, "file", :remarks), :size => "470"), url_for_image_column(compact.order_form, "file", :remarks) unless compact.order_form.nil? %><%=h compact.classification.name,  unless compact.classification.nil? %></div>(<%= render :partial => "/cyto/finding_classes/compact", :collection => compact.finding_classes, :spacer_template => '/cyto/finding_classes/spacer_template' %>)
+  <div style="font-weight: bold"><%=h compact.classification.name unless compact.classification.nil? %></div>(<%= render :partial => "/cyto/finding_classes/compact", :collection => compact.finding_classes, :spacer_template => '/cyto/finding_classes/spacer_template' %>)
 </dd>
