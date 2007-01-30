@@ -1,3 +1,9 @@
+<script type="text/javascript">
+//<![CDATA[
+Event.observe(window, 'load', function() {$('vcard_honorific_prefix').focus()}, false);
+//]]>
+</script>
+
 <% fields_for vcard_name, vcard, :builder => Rubaidh::TabularForm::TabularFormBuilder do |address| %>
   <%= address.select 'honorific_prefix', HonorificPrefix.find(:all).collect { |prefix| prefix.name }, :selected => vcard.nil? ? "Frau" : vcard.honorific_prefix, :label => "Anrede"  %>
   <%= address.text_field_with_auto_complete :family_name, :label => 'Nachname' %>
