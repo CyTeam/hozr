@@ -29,6 +29,7 @@ Event.observe(window, 'load', function() {$('patient_full_name').focus()}, false
                     </tr>
                     <tr>
                       <td><%= link_to "Neuer Patient", {:controller => '/patients', :action => :new}, :target => "new_patient" %></td>
+                      <td><%= link_to "Patient editieren", {:controller => '/patients'}, :target => "new_patient" %></td>
                     </tr>
                     <tr>
                       <td><label for="patient_doctor_patient_nr">Patientennr.:</label></td>
