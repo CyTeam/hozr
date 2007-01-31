@@ -15,4 +15,7 @@
   <% unless patient.insurance.nil? %>
     <i><%=h "#{patient.insurance.name} #{"#" + patient.insurance_nr if patient.insurance_nr}" %></i><br />
   <% end %>
+  <% unless patient.remarks.nil? %>
+    <i><%=h "#{patient.remarks}"%></i><br />
+  <% end %>
 </div>
