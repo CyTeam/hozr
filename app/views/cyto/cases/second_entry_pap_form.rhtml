@@ -55,6 +55,7 @@ td {
       <fieldset style="width: 100%">
         <legend>Abstrichdatum</legend>
         <%=h @case.examination_date unless @case.examination_date.nil? %></p>
+        <%=h if @case.examination_date.nil? "kein Abstrichdatum gesetzt" %>
       </fieldset>
       <fieldset style="width: 100%">
         <legend>Patient</legend>
