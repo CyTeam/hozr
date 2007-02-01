@@ -3,3 +3,7 @@
 <%= render :partial => '/patients/compact_frame', :object => a_case.patient %>
 <%= render :partial => '/doctors/compact_frame', :object => a_case.doctor %>
 <%= render :partial => '/cyto/cases/compact_list', :object => a_case.patient.finished_cases unless a_case.patient.nil? %>
+      <fieldset style="width: 100%">
+        <legend>Abstrichdatum</legend>
+        <%= if @case.examination_date.nil? then link_to 'Erste machen', :action => 'first_entry', :id => @case.id else @case.examination_date %>
+      </fieldset>
