@@ -1,7 +1,8 @@
 <h1>Untersuche</h1>
 
 <%= start_form_tag :action=> :search %>
-  Eingangsnr: <%= text_field 'case_search', 'praxistar_eingangsnr' %> <%= submit_tag 'Suchen', :style => "display: inline" %>
+  Eingangsnr: <%= text_field 'case_search', 'praxistar_eingangsnr' %>
+  Arzt: <%= select_doctors :object => 'case_search' %> <%= submit_tag 'Suchen', :style => "display: inline" %>
 <%= end_form_tag %>
 
 <table class="listing">

@@ -62,7 +62,17 @@ class Cyto::CasesController < ApplicationController
          :redirect_to => { :action => :list }
 
   def search
-    @case_pages, @cases = paginate :cases, :per_page => 144, :conditions => [ "praxistar_eingangsnr = ?", Case.parse_eingangsnr(params[:case_search][:praxistar_eingangsnr] ) ]
+    conditions = {:sql => [], :params => []}
+    if params[:case_search][:doctor_id] > ""
+      conditions[:sql]<< "doctor_id = ?"
+      conditions[:params]<< params[:case_search][:doctor_id].to_i
+    end
+    if params[:case_search][:praxistar_eingangsnr] > ""
+      conditions[:sql]<< "id = ?"
+      conditions[:params]<< Case.find_by_praxistar_eingangsnr(params[:case_search][:praxistar_eingangsnr]).id || 0
+    end
+    
+    @case_pages, @cases = paginate :cases, :per_page => 144, :conditions =>  [ conditions[:sql].join(" AND "), conditions[:params] ]
   
     render :action => :list
   end
