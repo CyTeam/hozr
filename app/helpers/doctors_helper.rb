@@ -6,7 +6,7 @@ module DoctorsHelper
     if params[:form]
       params[:form].select method, collection, :label => 'Arzt'
     elsif params[:object]
-      select params[:object], method, collection
+      select params[:object], method, collection, :include_blank => true
     else
       raise "Missing :form or :object parameter when calling 'select_doctors'"
     end
