@@ -21,6 +21,48 @@ class Cyto::Case < ActiveRecord::Base
     exactly_one_of_group('Zustand') && at_least_one_of_group('Kontrolle')
   end
   
+  def validate_first_entry
+    valid = true
+    if examination_date.nil?
+      errors.add('examination_date', 'Abstrichdatum muss gesetzt sein')
+      valid = false
+    end
+    
+    if patient_id.nil?
+      errors.add('patient_id', 'Patient muss gesetzt sein')
+      valid = false
+    end
+    
+    if doctor_id.nil?
+      errors.add('doctor_id', 'Arzt muss gesetzt sein')
+      valid = false
+    end
+    
+    if patient_id.nil?
+      errors.add('patient_id', 'Patient muss gesetzt sein')
+      valid = false
+    end
+    
+    if praxistar_eingangsnr.nil?
+      errors.add('praxistar_eingangsnr', 'Eingangsnr muss gesetzt sein')
+      valid = false
+    end
+    
+    return valid
+  end
+  
+  def validate_second_entry
+  end
+  
+  def validate
+    valid = true
+    if ready_for_second_entry
+      valid &&= validate_first_entry
+    end
+  
+    return valid
+  end
+  
   def ready_for_first_entry
     entry_date.nil?
   end
@@ -36,6 +78,7 @@ class Cyto::Case < ActiveRecord::Base
   def ready_for_result_report_printing
     !entry_date.nil? && !screened_at.nil? && result_report_printed_at.nil?
   end
+  
   
   def initialize(params = {})
     case params.class.name

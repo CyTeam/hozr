@@ -138,22 +138,31 @@ class Cyto::CasesController < ApplicationController
     @case = Case.find(params[:id])
     @case.update_attributes(params[:case])
     
-    patient = Patient.find(params[:patient][:full_name].split(' ')[0].to_i)
-    patient.doctor = @case.doctor
-    patient.doctor_patient_nr = params[:patient][:doctor_patient_nr]
-    patient.save
+    begin
+      patient = Patient.find(params[:patient][:full_name].split(' ')[0].to_i)
+      patient.doctor = @case.doctor
+      patient.doctor_patient_nr = params[:patient][:doctor_patient_nr]
+      patient.save
+      
+      @case.patient = patient
     
-    @case.patient = patient
+      @case.insurance = @case.patient.insurance
+      @case.insurance_nr = @case.patient.insurance_nr
+    rescue
+      @case.errors.add('patient_id', 'Patient not found.')
+    end
     
-    @case.insurance = @case.patient.insurance
-    @case.insurance_nr = @case.patient.insurance_nr
-    @case.save
-    
-    next_open = Case.find :first, :conditions => ["entry_date IS NULL and id > #{@case.id}"]
-    if next_open.nil?
-      redirect_to :action => 'first_entry_queue'
+    if @case.save
+      flash[:notice] = 'First entry ok.'
+      
+      next_open = Case.find :first, :conditions => ["entry_date IS NULL and id > #{@case.id}"]
+      if next_open.nil?
+        redirect_to :action => 'first_entry_queue'
+      else
+        redirect_to :action => 'first_entry', :id => next_open
+      end
     else
-      redirect_to :action => 'first_entry', :id => next_open
+      render :action => 'first_entry'
     end
   end
   
