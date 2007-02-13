@@ -187,6 +187,10 @@ class Cyto::CasesController < ApplicationController
 
   def second_entry_pap_form
     @case = Case.find(params[:id])
+    
+    if @case.classification.code
+      redirect_to :action => 'second_entry_form', :id => @case
+    end
   end
   
   def second_entry_form
