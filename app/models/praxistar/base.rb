@@ -34,7 +34,11 @@ class Praxistar::Base < ActiveRecord::Base
           export.save
       
       rescue Exception => ex
-        export.error_ids += h.id
+	if export.error_ids.nil?
+		export.error_ids = h.id.to_s
+	else
+		export.error_ids += ", #{h.id}"
+	end
         export.error_count += 1
         export.save
         
