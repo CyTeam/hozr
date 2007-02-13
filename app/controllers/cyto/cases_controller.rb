@@ -209,8 +209,19 @@ class Cyto::CasesController < ApplicationController
     @case.save
 
     case params[:commit]
-    when "Erstellen", "HPV"
+    when "Erstellen"
       @case.screened_at ||= Date.today
+    when "HPV"
+      @case.screened_at ||= Date.today
+      
+      hpv = @case.clone
+      hpv.praxistar_eingangsnr = '20' + hpv.praxistar_eingangsnr
+      hpv.screened_at = nil
+      hpv.praxistar_leistungsblatt_id = nil
+      hpv.result_report_printed_at = nil
+      hpv.classification = Classification.find :first, :conditions => "code = 'hpv' AND examination_method_id = #{hpv.examination_method_id}"
+      hpv.save
+      
       render :action => 'result_report', :id => @case
     when "P16"
       @case.needs_p16 = true
