@@ -50,12 +50,16 @@ class Cyto::OrderForm < ActiveRecord::Base
     import.update_count = order_form_files.size
     import.save
     
+    p "Anzahl: #{order_form_files.size}"
+
     for order_form_file in order_form_files
       a_case = Cyto::Case.new(order_form_file)
       a_case.save
       
       import.create_count += 1
       import.save
+
+      p "Scan nr: #{import.create_count}"
     end
   
     import.finished_at = Time.now
