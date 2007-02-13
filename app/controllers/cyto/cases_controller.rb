@@ -90,6 +90,13 @@ class Cyto::CasesController < ApplicationController
     render :action => :list
   end
   
+  def hpv_queue
+    params[:order] ||= 'praxistar_eingangsnr'
+    
+    @case_pages, @cases = paginate :cases, :per_page => 144, :order => params[:order], :include => :classification, :conditions => "(classifications.code = 'hpv') AND screened_at IS NULL"
+    render :action => :list
+  end
+  
   def first_entry_queue
     params[:order] ||= 'praxistar_eingangsnr'
     
