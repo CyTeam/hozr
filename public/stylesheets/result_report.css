@@ -83,6 +83,12 @@
   left: 0cm;
 }
 
+.report #hpv_finding_title {
+  position: absolute;
+  top: 7cm;
+  left: 0cm;
+}
+
 .report #classification {
   font-family: ChollaSansBold;
   font-size: 12pt;
@@ -95,6 +101,22 @@
 }
 
 .report #findings {
+  font-family: ChollaSansThin;
+  position: absolute;
+  top: 11cm;
+  left: 0cm;
+  width: 10.4cm;
+}
+
+.report #hpv_findings {
+  font-family: ChollaSansThin;
+  position: absolute;
+  top: 8cm;
+  left: 0cm;
+  width: 10.4cm;
+}
+
+.report #hpv_remarks {
   font-family: ChollaSansThin;
   position: absolute;
   top: 11cm;

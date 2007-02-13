@@ -228,6 +228,8 @@ class Cyto::CasesController < ApplicationController
       @case.save
       redirect_to :action => 'second_entry_queue'
     end
+  
+    redirect_to :action => 'result_report', :id => @case
   end
   
   def result_report
@@ -237,6 +239,8 @@ class Cyto::CasesController < ApplicationController
     case @case.classification.code
     when 'mam', 'sput'
       render :action => :eg_result_report
+    when 'hpv'
+      render :action => :hpv_result_report
     else
       render :action => :result_report
     end
@@ -249,6 +253,8 @@ class Cyto::CasesController < ApplicationController
     case @case.classification.code
     when 'mam', 'sput'
       render :action => :eg_result_report_for_pdf, :layout => 'result_report_for_pdf'
+    when 'hpv'
+      render :action => :hpv_result_report, :layout => 'result_report_for_pdf'
     else
       render :action => :result_report, :layout => 'result_report_for_pdf'
     end
