@@ -197,7 +197,6 @@ class Cyto::CasesController < ApplicationController
     when 'mam', 'sput'
       @case.screened_at ||= Date.today
       @case.screener = Employee.find_by_code(request.env['REMOTE_USER'])
-      @case.save
       render :action => 'eg_result_report'
     end
   end
@@ -275,6 +274,7 @@ class Cyto::CasesController < ApplicationController
   def sign
     @case = Case.find(params[:id])
     @case.screened_at = Time.now
+    @case.screener = Employee.find_by_code(request.env['REMOTE_USER'])
     @case.finding_text = params[:case][:finding_text] unless params[:case].nil? or params[:case][:finding_text].nil?
     @case.save
   
