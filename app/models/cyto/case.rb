@@ -167,6 +167,7 @@ class Cyto::Case < ActiveRecord::Base
     records = self.find(:all, :conditions => "praxistar_leistungsblatt_id IS NULL AND screened_at IS NOT NULL AND classification_id IS NOT NULL AND praxistar_eingangsnr > '06/30000'")
   
     export.record_count = records.size
+    export.error_ids = ''
     export.save
     
     for h in records
@@ -176,7 +177,7 @@ class Cyto::Case < ActiveRecord::Base
         export.create_count += 1
         export.save
       rescue Exception => ex
-        export.error_ids += h.id
+#        export.error_ids += "#{h.id}, "
         export.error_count += 1
         export.save
         
