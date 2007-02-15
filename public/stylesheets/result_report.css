@@ -100,6 +100,17 @@
   padding: 4px;
 }
 
+.report #hpv_classification {
+  font-family: ChollaSansBold;
+  font-size: 12pt;
+  border: solid 1pt;
+  position: absolute;
+  top: 5.5cm;
+  left: 0cm;
+  width: 10.4cm;
+  padding: 4px;
+}
+
 .report #findings {
   font-family: ChollaSansThin;
   position: absolute;

@@ -10,11 +10,9 @@
 
 <div id="insurance">
 <% if !@case.insurance.nil? %>
-<br/>
 <%=h @case.insurance.name %> <%=h "##{@case.insurance_nr}" unless @case.insurance_nr.nil? or @case.insurance_nr.strip == "0" or @case.insurance_nr.strip == "" %>
 <% end %>
 </div>
-
 
 <div id="doctor">
 <%=h @case.doctor.praxis.honorific_prefix %><br />
@@ -32,6 +30,10 @@ Ihr Auftrag Nr. <%=h @case.praxistar_eingangsnr %>
 
 <div id="hpv_finding_title" class="title">
 Befund
+</div>
+
+<div id="hpv_classification" class="PAP_<%=h @case.classification.code %>">
+<%=h @case.classification.name %>
 </div>
 
 <%= start_form_tag :action => 'sign', :id => @case %>
