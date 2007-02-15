@@ -107,7 +107,7 @@ class Cyto::CasesController < ApplicationController
   def second_entry_queue
     params[:order] ||= 'praxistar_eingangsnr'
     
-    @case_pages, @cases = paginate :cases, :per_page => 144, :order => params[:order], :conditions => "entry_date IS NOT NULL AND screened_at IS NULL AND (needs_p16 = 'f' OR needs_p16 = 0) AND praxistar_eingangsnr > '07/' AND praxistar_eingangsnr < '90/'"
+    @case_pages, @cases = paginate :cases, :per_page => 144, :order => params[:order], :conditions => "entry_date IS NOT NULL AND screened_at IS NULL AND (needs_p16 = 'f' OR needs_p16 = 0) AND praxistar_eingangsnr > '07' AND praxistar_eingangsnr < '90'"
     render :action => :list
   end
   
