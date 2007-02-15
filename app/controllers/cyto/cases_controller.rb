@@ -148,7 +148,7 @@ class Cyto::CasesController < ApplicationController
     begin
       patient = Patient.find(params[:patient][:full_name].split(' ')[0].to_i)
       patient.doctor = @case.doctor
-      patient.doctor_patient_nr = params[:patient][:doctor_patient_nr]
+      patient.doctor_patient_nr = params[:patient][:doctor_patient_nr] unless params[:patient][:doctor_patient_nr].nil?
       patient.save
       
       @case.patient = patient
