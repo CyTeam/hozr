@@ -5,10 +5,9 @@ class Praxistar::PraxilabDaten < Praxistar::Base
   set_primary_key "ID_Praxilab"
 
   def self.import
-    Case.delete_all
-
-    for a in find(:all)
+    for a in find(:all, :conditions => "dt_eingang > '2007' AND in_EingangJahr = '06'")
       begin
+	print "Nr: #{a.in_EingangsNr}\n"
         d = Cyto::Case.new(
           :patient_id => a.Patient_ID,
           :doctor_id => a.Arzt_ID,
@@ -19,14 +18,16 @@ class Praxistar::PraxilabDaten < Praxistar::Base
           :praxistar_leistungsblatt_id => a.Leistungsblatt_ID
         )
         
+	print "Nr: #{a.in_EingangsNr} created \n"
         begin
           d.screener = Employee.find_by_code(a.tx_Zytologe)
         rescue ActiveRecord::RecordNotFound
           #d.logger.info "ID: #{a.ID_Praxilab} => screener '#{d.screener}' not found"
         end
         
-        d.id = a.ID_Praxilab
-        d.save
+        d.save!
+	print "Nr: #{a.in_EingangsNr} saved: #{d.id} \n"
+
       rescue ActiveRecord::StatementInvalid
         d.logger.info("ID: #{a.ID_Praxilab} => non unique eingangsnr '#{d.praxistar_eingangsnr}''\n\n")
         print "ID: #{a.ID_Praxilab} => non unique eingangsnr '#{d.praxistar_eingangsnr}'\n\n"
