@@ -227,12 +227,11 @@ class Cyto::CasesController < ApplicationController
       hpv.result_report_printed_at = nil
       hpv.classification = Classification.find :first, :conditions => "code = 'hpv' AND examination_method_id = #{hpv.examination_method_id}"
       hpv.save
-      
-      render :action => 'result_report', :id => @case
     when "P16"
       @case.needs_p16 = true
       @case.save
       redirect_to :action => 'second_entry_queue'
+      return
     end
   
     redirect_to :action => 'result_report', :id => @case
