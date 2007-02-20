@@ -16,4 +16,9 @@ module Cyto::CasesHelper
     items = entries.map { |entry| content_tag("li", phrase ? highlight(entry[field], phrase) : "<span id='#{field}'>#{h(entry[field])} - #{h(entry[:name])}</span>") }
     content_tag("ul", items.uniq)
   end
+  
+  def finding_css_class(finding)
+    css_class = "finding_class_#{finding.code} "
+    css_class += finding.finding_groups.collect { |group| "finding_group_#{group.name}" }.join(' ')
+  end
 end
