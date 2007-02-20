@@ -9,6 +9,18 @@ class Cyto::Case < ActiveRecord::Base
   has_and_belongs_to_many :finding_classes
   has_one :order_form
   
+  def control_findings
+    finding_classes.select { |finding| finding.belongs_to_group?('Kontrolle') }
+  end
+  
+  def quality_findings
+    finding_classes.select { |finding| finding.belongs_to_group?('Zustand') }
+  end
+  
+  def findings
+    finding_classes.select { |finding| !(finding.belongs_to_group?('Zustand') || finding.belongs_to_group?('Kontrolle'))}
+  end
+  
   def exactly_one_of_group(group_name)
     ( finding_classes.collect { |f| f.id } & Cyto::FindingGroup.find_by_name(group_name).finding_classes.collect { |f| f.id } ).size == 1
   end
