@@ -64,7 +64,7 @@ end
   HPV-HRT (High-Risk-Typen):  16, 18, 31, 33, 35, 45, 51, 52, 56<br />
   HPV-LRT (Low-Risk-Typen):  6, 11, 42, 43, 44
 </div>
- 
+
 <div id="signature">
   <%= submit_tag "Visum: #{@case.screener.work_vcard.abbreviated_name unless @case.screener.nil?}, #{@case.screened_at.strftime("%d.%m.%Y")}" %>
 </div>

@@ -2,6 +2,8 @@ class Cyto::CaseNr
   attr_accessor :year, :nr
   
   def initialize(*params)
+    @delimiter='/'
+    
     case params.size
     when 0
       parse(Cyto::Case.maximum(:praxistar_eingangsnr))
@@ -24,18 +26,19 @@ class Cyto::CaseNr
   end
   
   def parse(value)
-    left, right = value.split('/')
+    left, right = value.split(/[\/-]/)
     if right.nil?
       @year = Date.today.strftime("%y").to_i
       @nr = left.to_i
     else
+      @delimiter = value.match(/[\/-]/)
       @year = left.to_i
       @nr = right.to_i
     end
   end
 
   def to_s
-    return "#{sprintf("%02d", @year)}/#{sprintf("%05d", @nr)}"
+    return "#{sprintf("%02d", @year)}#{@delimiter}#{sprintf("%05d", @nr)}"
   end
 
   def inc

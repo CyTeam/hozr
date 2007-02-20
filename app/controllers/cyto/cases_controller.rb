@@ -221,10 +221,11 @@ class Cyto::CasesController < ApplicationController
       @case.screened_at ||= Date.today
       
       hpv = @case.clone
-      hpv.praxistar_eingangsnr = '20' + hpv.praxistar_eingangsnr
+      hpv.praxistar_eingangsnr = @case.praxistar_eingangsnr.gsub /\//, '-'
       hpv.screened_at = nil
       hpv.praxistar_leistungsblatt_id = nil
       hpv.result_report_printed_at = nil
+      hpv.needs_p16 = false
       hpv.classification = Classification.find :first, :conditions => "code = 'hpv' AND examination_method_id = #{hpv.examination_method_id}"
       hpv.save
     when "P16"
