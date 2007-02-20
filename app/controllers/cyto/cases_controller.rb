@@ -77,6 +77,11 @@ class Cyto::CasesController < ApplicationController
     render :action => :list
   end
   
+  def history
+    @case = Case.find(params[:id])
+    redirect_to :controller => '/patients', :action => 'show', :id => @case.patient
+  end
+  
   def list
     params[:order] ||= 'praxistar_eingangsnr'
     
