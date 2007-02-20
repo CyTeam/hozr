@@ -22,16 +22,16 @@
   <tr>
     <td><%=h a_case.entry_date unless a_case.entry_date.nil? %></td>
     <td><%= 
-	if a_case.ready_for_first_entry
-	  link_to h(a_case.praxistar_eingangsnr), :action => 'first_entry', :id => a_case
-	elsif a_case.ready_for_second_entry
-	  link_to h(a_case.praxistar_eingangsnr), :action => 'second_entry_pap_form', :id => a_case
-        elsif a_case.ready_for_p16
-	  link_to h(a_case.praxistar_eingangsnr), :action => 'second_entry_pap_form', :id => a_case
-	else
-	  link_to h(a_case.praxistar_eingangsnr), :action => 'result_report_for_pdf', :id => a_case
-        end
-        %></td>
+      if a_case.ready_for_first_entry
+        link_to h(a_case.praxistar_eingangsnr), :action => 'first_entry', :id => a_case
+      elsif a_case.ready_for_second_entry
+        link_to h(a_case.praxistar_eingangsnr), :action => 'second_entry_pap_form', :id => a_case
+            elsif a_case.ready_for_p16
+        link_to h(a_case.praxistar_eingangsnr), :action => 'second_entry_pap_form', :id => a_case
+      else
+        link_to h(a_case.praxistar_eingangsnr), :action => 'result_report_for_pdf', :id => a_case
+      end
+    %></td>
     <td><%=h a_case.examination_date %></td>
     <td class="PAP_<%=h a_case.classification.code unless a_case.classification.nil? %>" style="border-style: solid; border-width: 4px"><%=h a_case.classification.name unless a_case.classification.nil? %></td>
     <td>
