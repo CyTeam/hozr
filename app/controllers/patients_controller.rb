@@ -28,7 +28,7 @@ class PatientsController < ApplicationController
     end
     if params[:patient][:praxistar_eingangsnr] > ""
       conditions[:sql]<< "id = ?"
-      conditions[:params]<< Case.find_by_praxistar_eingangsnr(params[:patient][:praxistar_eingangsnr]).patient_id
+      conditions[:params]<< Case.find_by_praxistar_eingangsnr(Cyto::CaseNr.new(params[:patient][:praxistar_eingangsnr]).to_s).patient_id
     end
     
     @patient_pages, @patients = paginate :patients, :per_page => 144, :conditions => [ conditions[:sql].join(" AND "), conditions[:params] ]

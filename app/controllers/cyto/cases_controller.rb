@@ -69,7 +69,7 @@ class Cyto::CasesController < ApplicationController
     end
     if params[:case_search][:praxistar_eingangsnr] > ""
       conditions[:sql]<< "id = ?"
-      conditions[:params]<< Case.find_by_praxistar_eingangsnr(params[:case_search][:praxistar_eingangsnr]).id || 0
+      conditions[:params]<< Case.find_by_praxistar_eingangsnr(Cyto::CaseNr.new(params[:case_search][:praxistar_eingangsnr]).to_s).id || 0
     end
     
     @case_pages, @cases = paginate :cases, :per_page => 144, :conditions =>  [ conditions[:sql].join(" AND "), conditions[:params] ]
