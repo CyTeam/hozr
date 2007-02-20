@@ -41,8 +41,17 @@ Befund
 </div>
 
 <div id="findings">
-<% for finding in @case.finding_classes %>
-<%=h finding.name %><br />
+<% for finding in @case.findings %>
+<div class='<%= finding_css_class(finding) %>'><%=h finding.name %></div>
+<% end %>
+</div>
+
+<div id="special_findings">
+<% for finding in @case.quality_findings %>
+<div class='<%= finding_css_class(finding) %>'><%=h finding.name %></div>
+<% end %>
+<% for finding in @case.control_findings %>
+<div class='<%= finding_css_class(finding) %>'><%=h finding.name %></div>
 <% end %>
 </div>
 
