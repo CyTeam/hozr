@@ -1,6 +1,4 @@
-<%= @doctor.praxis.given_name  %> <%= @doctor.praxis.family_name  %><br/>
-<%= @doctor.praxis.street_address  %><br/>
-<%= @doctor.praxis.postal_code  %> <%= @doctor.praxis.locality %><br/>
+<%= render :partial => 'compact', :object => @doctor %>
 
 <%= link_to 'Edit', :action => 'edit', :id => @doctor %> |
 <%= link_to 'Back', :action => 'list' %>
