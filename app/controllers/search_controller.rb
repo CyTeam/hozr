@@ -37,15 +37,43 @@ class SearchController < ApplicationController
     end
   end
   
+  def free_search
+    query = params[:query]
+  
+    conditions = query.split('AND')
+    params[:case] ||= {}
+    params[:doctor] ||= {}
+    for condition in conditions
+      field, value = condition.strip.split(':')
+      
+      # We don't need no spaces here
+      value.strip
+      case field
+      when 'nr'
+        params[:case][:praxistar_eingangsnr] = value
+      when 'eingang', 'eing', 'ed'
+        params[:case][:entry_date] = value
+      when 'abstrich', 'abstr', 'ex', 'ad'
+       params[:case][:examination_date] = value
+      when 'druck', 'dd', 'pa'
+       params[:case][:printed_at] = value
+      when 'arzt', 'ai', 'di'
+       params[:doctor][:doctor_id] = value
+      end
+    end
+    
+    search
+  end
+  
   def search
     # Use key and value arrays to build contitions
     case_keys = []
     case_values = []
     
     # Handle case params
-    case_params = params[:case]
+    case_params = params[:case] || {}
     
-    unless case_params[:praxistar_eingangsnr].empty?
+    unless case_params[:praxistar_eingangsnr].nil? or case_params[:praxistar_eingangsnr].empty?
       if case_params[:praxistar_eingangsnr].match /bis/
         lower_bound, higher_bound = case_params[:praxistar_eingangsnr].split('bis')
         case_keys.push "praxistar_eingangsnr BETWEEN ? AND ?"
@@ -57,7 +85,7 @@ class SearchController < ApplicationController
       end
     end
     
-    unless case_params[:entry_date].empty?
+    unless case_params[:entry_date].nil? or case_params[:entry_date].empty?
       if case_params[:entry_date].match /bis/
         lower_bound, higher_bound = case_params[:entry_date].split('bis')
         case_keys.push "entry_date BETWEEN ? AND ?"
@@ -69,7 +97,7 @@ class SearchController < ApplicationController
       end
     end
     
-    unless case_params[:printed_at].empty?
+    unless case_params[:printed_at].nil? or case_params[:printed_at].empty?
       if case_params[:printed_at].match /bis/
         lower_bound, higher_bound = case_params[:printed_at].split('bis')
         case_keys.push "result_report_printed_at BETWEEN ? AND ?"
@@ -81,7 +109,7 @@ class SearchController < ApplicationController
       end
     end
     
-    unless case_params[:screened_at].empty?
+    unless case_params[:screened_at].nil? or case_params[:screened_at].empty?
       if case_params[:screened_at].match /bis/
         lower_bound, higher_bound = case_params[:screened_at].split('bis')
         case_keys.push "screened_at BETWEEN ? AND ?"
@@ -93,7 +121,7 @@ class SearchController < ApplicationController
       end
     end
     
-    unless case_params[:examination_date].empty?
+    unless case_params[:examination_date].nil? or case_params[:examination_date].empty?
       if case_params[:examination_date].match /bis/
         lower_bound, higher_bound = case_params[:examination_date].split('bis')
         case_keys.push "examination_date BETWEEN ? AND ?"
@@ -105,24 +133,24 @@ class SearchController < ApplicationController
       end
     end
     
-    unless case_params[:screener_id].empty?
+    unless case_params[:screener_id].nil? or case_params[:screener_id].empty?
       case_keys.push "screener_id = ?"
       case_values.push case_params[:screener_id]
     end
     
     # Handle doctor params
-    doctor_params = params[:doctor]
+    doctor_params = params[:doctor] || {}
     
-    unless doctor_params[:doctor_id].empty?
+    unless doctor_params[:doctor_id].nil? or doctor_params[:doctor_id].empty?
       case_keys.push "doctor_id = ?"
       case_values.push doctor_params[:doctor_id]
     end
     
     
     # Handle patient params
-    patient_params = params[:patient]
+    patient_params = params[:patient] || {}
     
-    unless patient_params[:full_name].empty?
+    unless patient_params[:full_name].nil? or patient_params[:full_name].empty?
       case_keys.push "patient_id = ?"
       case_values.push patient_params[:full_name].split(' ')[0].strip
     end
@@ -131,6 +159,7 @@ class SearchController < ApplicationController
     # Build conditions array
     case_conditions = [  case_keys.join(" AND "), *case_values ]
     @case_pages, @cases = paginate :cases, :per_page => 20, :conditions => case_conditions
-    render :template => '/cyto/cases/list'
+    
+    render :template => '/cyto/cases/list', :layout => false
   end
 end
