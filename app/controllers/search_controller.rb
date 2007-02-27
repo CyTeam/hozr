@@ -69,6 +69,30 @@ class SearchController < ApplicationController
       end
     end
     
+    unless case_params[:printed_at].empty?
+      if case_params[:printed_at].match /bis/
+        lower_bound, higher_bound = case_params[:printed_at].split('bis')
+        case_keys.push "result_report_printed_at BETWEEN ? AND ?"
+        case_values.push parse_date(lower_bound.strip).strip
+        case_values.push parse_date(higher_bound.strip).strip
+      else
+        case_keys.push "result_report_printed_at = ? "
+        case_values.push parse_date(case_params[:printed_at]).strip
+      end
+    end
+    
+    unless case_params[:screened_at].empty?
+      if case_params[:screened_at].match /bis/
+        lower_bound, higher_bound = case_params[:screened_at].split('bis')
+        case_keys.push "screened_at BETWEEN ? AND ?"
+        case_values.push parse_date(lower_bound.strip).strip
+        case_values.push parse_date(higher_bound.strip).strip
+      else
+        case_keys.push "screened_at = ? "
+        case_values.push parse_date(case_params[:screened_at]).strip
+      end
+    end
+    
     unless case_params[:examination_date].empty?
       if case_params[:examination_date].match /bis/
         lower_bound, higher_bound = case_params[:examination_date].split('bis')
@@ -81,7 +105,11 @@ class SearchController < ApplicationController
       end
     end
     
-
+    unless case_params[:screener_id].empty?
+      case_keys.push "screener_id = ?"
+      case_values.push case_params[:screener_id]
+    end
+    
     # Handle doctor params
     doctor_params = params[:doctor]
     
