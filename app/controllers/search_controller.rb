@@ -102,7 +102,6 @@ class SearchController < ApplicationController
 
     # Build conditions array
     case_conditions = [  case_keys.join(" AND "), *case_values ]
-p case_conditions.inspect
     @case_pages, @cases = paginate :cases, :per_page => 20, :conditions => case_conditions
     render :template => '/cyto/cases/list'
   end
