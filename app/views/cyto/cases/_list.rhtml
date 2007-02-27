@@ -1,0 +1,50 @@
+<table class="listing">
+  <tr>
+    <%=sort_header('entry_date', 'Erfasst am') %>
+    <%=sort_header('praxistar_eingangsnr', 'Eingangsnr') %>
+    <%=sort_header('examination_date', 'Abstrichdatum') %>
+    <%=sort_header('classification_id', 'Klassifikation') %>
+    <th>Diagnose</th>
+    <%=sort_header('patient_id', 'Patient') %>
+    <%=sort_header('doctor_id', 'Arzt') %>
+    <%=sort_header('screener_id', 'Zytologin') %>
+    <th>Scan</th>
+  </tr>
+  
+<% for a_case in @cases %>
+  <tr>
+    <td><%=h a_case.entry_date unless a_case.entry_date.nil? %></td>
+    <td><%= 
+      if a_case.ready_for_first_entry
+        link_to h(a_case.praxistar_eingangsnr), :action => 'first_entry', :id => a_case
+      elsif a_case.ready_for_second_entry
+        link_to h(a_case.praxistar_eingangsnr), :action => 'second_entry_pap_form', :id => a_case
+            elsif a_case.ready_for_p16
+        link_to h(a_case.praxistar_eingangsnr), :action => 'second_entry_pap_form', :id => a_case
+      else
+        link_to h(a_case.praxistar_eingangsnr), :action => 'result_report_for_pdf', :id => a_case
+      end
+    %></td>
+    <td><%=h a_case.examination_date %></td>
+    <td class="PAP_<%=h a_case.classification.code unless a_case.classification.nil? %>" style="border-style: solid; border-width: 4px"><%=h a_case.classification.name unless a_case.classification.nil? %></td>
+    <td>
+    <% for finding in a_case.finding_classes %>
+      <div><%=h "#{finding.code} - #{finding.name}" %></div>
+    <% end %>
+    </td>
+    <td><%= link_to(h("#{a_case.patient.name}"), {:controller => '/patients', :action => 'show', :id => a_case.patient.id}) unless a_case.patient.nil? %></td>
+    <td><%=h a_case.doctor.name unless a_case.doctor.nil? %></td>
+    <td><%=h a_case.screener.code unless a_case.screener.nil? %></td>
+    <td><% if a_case.order_form %>
+      <%= link_to "Auftrag", url_for_file_column(a_case.order_form, "file") %> <%= link_to "Klinische Symptome", url_for_file_column(a_case.order_form, "file", "remarks") %> <%= link_to "Personalien", url_for_file_column(a_case.order_form, "file", "address") %>
+    <% end %>
+    </td>
+    <td><%= link_to 'Erste machen', :action => 'first_entry', :id => a_case if a_case.ready_for_first_entry %> <%= link_to 'Zweite machen', :action => 'second_entry_pap_form', :id => a_case if a_case.ready_for_second_entry %> <%= link_to 'P16', :action => 'second_entry_pap_form', :id => a_case if a_case.ready_for_p16 %> <%= link_to 'Resultat anzeigen', :action => 'result_report_for_pdf', :id => a_case if a_case.ready_for_result_report_printing %></td>
+    <td><%= link_to 'Edit', :action => 'edit', :id => a_case %></td>
+    <td><%= link_to 'Destroy', { :action => 'destroy', :id => a_case }, :confirm => 'Are you sure?', :post => true %></td>
+  </tr>
+<% end %>
+</table>
+
+<%= link_to 'Previous page', { :page => @case_pages.current.previous, :order => params[:order] } if @case_pages.current.previous %>
+<%= link_to 'Next page', { :page => @case_pages.current.next, :order => params[:order] } if @case_pages.current.next %> 

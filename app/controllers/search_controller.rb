@@ -160,6 +160,6 @@ class SearchController < ApplicationController
     case_conditions = [  case_keys.join(" AND "), *case_values ]
     @case_pages, @cases = paginate :cases, :per_page => 20, :conditions => case_conditions
     
-    render :template => '/cyto/cases/list', :layout => false
+    render :partial => '/cyto/cases/list'
   end
 end
