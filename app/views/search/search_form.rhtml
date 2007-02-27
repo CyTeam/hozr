@@ -1,0 +1,25 @@
+<h1>Suche</h1>
+<%= form_tag( :action => "search" ) %>
+<h2>nach Untersuch</h2>
+<table>
+  <% fields_for 'case', @case, :builder => Rubaidh::TabularForm::TabularFormBuilder do |f| %>
+    <%= f.text_field :praxistar_eingangsnr, :label => "Eingangsnr." %>
+    <%= f.text_field :entry_date, :label => "Erfassung am" %>
+    <%= f.text_field :examination_date, :label => "Abstrich vom" %>
+  <% end %>
+</table>
+  <%= submit_tag "Suchen" %>
+
+<h2>Patient</h2>
+  Name: <%= text_field_with_auto_complete :patient, :full_name, :select => 'name_id', :frequency => 0.5, :min_chars => 3, :label => 'Patient' %>
+  <%= submit_tag "Suchen" %>
+
+<h2>Arzt</h2>
+<table>
+  <% fields_for 'doctor', @doctor, :builder => Rubaidh::TabularForm::TabularFormBuilder do |f| %>
+    <%= select_doctors :form => f %>
+  <% end %>
+</table>
+
+  <%= submit_tag "Suchen" %>
+<%= end_form_tag %>
