@@ -180,3 +180,7 @@
   left: 8.5cm;
   width: 3.5cm
 }
+
+.report #label3 .date_of_birth {
+  display: none;
+}
