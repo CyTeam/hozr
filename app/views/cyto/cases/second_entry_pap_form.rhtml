@@ -51,22 +51,8 @@ td {
         </table>
       </fieldset>
     </td>
-    <td id="personal-information" style="min-width: 150px">
-      <fieldset style="width: 100%">
-        <legend>Abstrichdatum</legend>
-        <%=h @case.examination_date unless @case.examination_date.nil? %></p>
-      </fieldset>
-      <fieldset style="width: 100%">
-        <legend>Patient</legend>
-        <%= render :partial => "vcards/show", :locals => { :vcard => @case.patient.vcard } unless @case.patient.nil? %><br/>
-        <%=h @case.patient.birth_date unless @case.patient.nil? %></p>
-      </fieldset>
-      <fieldset style="width: 100%; margin-top: 10px">
-        <legend>Arzt</legend>
-        <%= render :partial => "vcards/show", :locals => { :vcard => @case.doctor.praxis } %><br/>
-        <%= render :partial => "vcards/show_phone_numbers", :locals => { :vcard => @case.doctor.praxis } %>
-      </fieldset>
-      <%= render :partial => 'compact_list', :object => @case.patient.finished_cases unless @case.patient.nil? %>
+    <td id="personal-information" style="min-width: 200px">
+      <%= render :partial => 'info', :object => @case %>
     </td>
   </tr>
 </table>
