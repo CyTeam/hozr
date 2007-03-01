@@ -16,13 +16,13 @@
     <td><%=h a_case.entry_date unless a_case.entry_date.nil? %></td>
     <td><%= 
       if a_case.ready_for_first_entry
-        link_to h(a_case.praxistar_eingangsnr), :action => 'first_entry', :id => a_case
+        link_to h(a_case.praxistar_eingangsnr), :controller => '/cyto/cases', :action => 'first_entry', :id => a_case
       elsif a_case.ready_for_second_entry
-        link_to h(a_case.praxistar_eingangsnr), :action => 'second_entry_pap_form', :id => a_case
+        link_to h(a_case.praxistar_eingangsnr), :controller => '/cyto/cases', :action => 'second_entry_pap_form', :id => a_case
             elsif a_case.ready_for_p16
-        link_to h(a_case.praxistar_eingangsnr), :action => 'second_entry_pap_form', :id => a_case
+        link_to h(a_case.praxistar_eingangsnr), :controller => '/cyto/cases', :action => 'second_entry_pap_form', :id => a_case
       else
-        link_to h(a_case.praxistar_eingangsnr), :action => 'result_report_for_pdf', :id => a_case
+        link_to h(a_case.praxistar_eingangsnr), :controller => '/cyto/cases', :action => 'result_report_for_pdf', :id => a_case
       end
     %></td>
     <td><%=h a_case.examination_date %></td>
@@ -39,9 +39,14 @@
       <%= link_to "Auftrag", url_for_file_column(a_case.order_form, "file") %> <%= link_to "Klinische Symptome", url_for_file_column(a_case.order_form, "file", "remarks") %> <%= link_to "Personalien", url_for_file_column(a_case.order_form, "file", "address") %>
     <% end %>
     </td>
-    <td><%= link_to 'Erste machen', :action => 'first_entry', :id => a_case if a_case.ready_for_first_entry %> <%= link_to 'Zweite machen', :action => 'second_entry_pap_form', :id => a_case if a_case.ready_for_second_entry %> <%= link_to 'P16', :action => 'second_entry_pap_form', :id => a_case if a_case.ready_for_p16 %> <%= link_to 'Resultat anzeigen', :action => 'result_report_for_pdf', :id => a_case if a_case.ready_for_result_report_printing %></td>
-    <td><%= link_to 'Edit', :action => 'edit', :id => a_case %></td>
-    <td><%= link_to 'Destroy', { :action => 'destroy', :id => a_case }, :confirm => 'Are you sure?', :post => true %></td>
+    <td>
+      <%= link_to 'Erste machen', :controller => '/cyto/cases', :action => 'first_entry', :id => a_case if a_case.ready_for_first_entry %>
+      <%= link_to 'Zweite machen', :controller => '/cyto/cases', :action => 'second_entry_pap_form', :id => a_case if a_case.ready_for_second_entry %>
+      <%= link_to 'P16', :controller => '/cyto/cases', :action => 'second_entry_pap_form', :id => a_case if a_case.ready_for_p16 %>
+      <%= link_to 'Resultat anzeigen', :controller => '/cyto/cases', :action => 'result_report_for_pdf', :id => a_case if a_case.ready_for_result_report_printing %>
+    </td>
+    <td><%= link_to 'Edit', :controller => '/cyto/cases', :action => 'edit', :id => a_case %></td>
+    <td><%= link_to 'Destroy', { :controller => '/cyto/cases', :action => 'destroy', :id => a_case }, :confirm => 'Are you sure?', :post => true %></td>
   </tr>
 <% end %>
 </table>
