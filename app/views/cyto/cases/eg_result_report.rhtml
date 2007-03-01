@@ -40,20 +40,7 @@ Ihr Auftrag Nr. <%=h @case.praxistar_eingangsnr %>
 </div>
 <%= end_form_tag %>
 
-<div id="label1">
-<%= render :partial => "/vcards/show", :locals => {:vcard => @case.patient.vcard} %><br/>
-<%=h @case.patient.birth_date.strftime("%d.%m.%Y") %><br />
-</div>
-
-<div id="label2">
-<%= render :partial => "/vcards/show", :locals => {:vcard => @case.patient.vcard} %><br/>
-<%=h @case.patient.birth_date.strftime("%d.%m.%Y") %>
-</div>
-
-<div id="label3">
-<%= render :partial => "/vcards/show", :locals => {:vcard => @case.patient.vcard} %><br/>
-<%=h @case.patient.birth_date.strftime("%d.%m.%Y") %>
-</div>
+<%= render :partial => "/cyto/cases/labels", :object => @case.patient %>
 
 </div>
 </div>

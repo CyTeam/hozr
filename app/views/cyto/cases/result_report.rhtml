@@ -60,20 +60,7 @@ Befund
   <%= button_to "Visum: #{@case.screener.work_vcard.abbreviated_name unless @case.screener.nil?}, #{@case.screened_at.strftime("%d.%m.%Y")}", :action => 'sign', :id => @case %>
 </div>
 
-<div id="label1">
-<%= render :partial => "/vcards/show", :locals => {:vcard => @case.patient.vcard} %><br/>
-<%=h @case.patient.birth_date.strftime("%d.%m.%Y") %><br />
-</div>
-
-<div id="label2">
-<%= render :partial => "/vcards/show", :locals => {:vcard => @case.patient.vcard} %><br/>
-<%=h @case.patient.birth_date.strftime("%d.%m.%Y") %>
-</div>
-
-<div id="label3">
-<%= render :partial => "/vcards/show", :locals => {:vcard => @case.patient.vcard} %><br/>
-<%=h @case.patient.birth_date.strftime("%d.%m.%Y") %>
-</div>
+<%= render :partial => "/cyto/cases/labels", :object => @case.patient %>
 
 </div>
 </div>
