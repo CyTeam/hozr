@@ -6,6 +6,13 @@ class ReportsController < ApplicationController
   # Then reference it with the named route:
   #   image_tag graph_url(:action => 'show', :id => 42)
 
+  def pap_groups
+    @records = ActiveRecord::Base.find_by_sql('SELECT substr(praxistar_eingangsnr, 1, 2) AS year, classifications.name AS pap, count(*) AS count FROM cases JOIN classifications ON cases.classification_id = classifications.id GROUP BY substr(praxistar_eingangsnr, 1, 2), classifications.code')
+#    Case.find_by_sql('SELECT left(praxistar_eingangsnr, 2) AS year, classifications.name AS pap, count(*) AS count FROM cases JOIN classifications ON cases.classification_id = classifications.id GROUP BY left(praxistar_eingangsnr, 2), classifications.code')
+    
+    render :action => :statistics
+  end
+  
   def cyto_cases
     g = Gruff::Line.new
     # Uncomment to use your own theme or font

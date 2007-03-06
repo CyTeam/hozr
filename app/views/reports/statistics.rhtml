@@ -1,0 +1,15 @@
+<table class="listing">
+  <tr>
+  <% for column in @records[0].attributes.keys || [] %>
+    <th><%= column.humanize %></th>
+  <% end %>
+  </tr>
+
+<% for record in @records %>
+  <tr>
+  <% for column in record.attributes.keys %>
+    <td><%=h record.instance_variable_get('@attributes')[column] %></td>
+  <% end %>
+  </tr>
+<% end %>
+</table>
