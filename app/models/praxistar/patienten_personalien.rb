@@ -104,6 +104,7 @@ class Praxistar::PatientenPersonalien < Praxistar::Base
         :tx_Anrede => hozr_record.vcard.honorific_prefix,
         :tx_fakt_Ort => hozr_record.billing_vcard.locality,
         :tx_fakt_PLZ => hozr_record.billing_vcard.postal_code,
+        :tx_fakt_ZuHanden => hozr_record.billing_vcard.extended_address,
         :tx_fakt_Strasse => hozr_record.billing_vcard.street_address,
         :tx_fakt_Name => hozr_record.billing_vcard.family_name,
         :tx_fakt_Vorname => hozr_record.billing_vcard.given_name,
