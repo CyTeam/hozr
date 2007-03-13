@@ -28,7 +28,7 @@ Event.observe(window, 'load', function() {$('finding_class_code').focus()}, fals
       </fieldset>
       <fieldset style="width: 95%; text-align: center">
         <legend>Bemerkungen</legend>
-        <%= link_to image_tag(url_for_image_column(@case.order_form, "file", :remarks), :size => "680"), url_for_image_column(@case.order_form, "file", :remarks) unless @case.order_form.nil? %>
+        <%= link_to image_tag(url_for_image_column(@case.order_form, "file", :remarks), :size => "680"), url_for_image_column(@case.order_form, "file", :remarks) unless @case.order_form.nil? or url_for_image_column(@case.order_form, "file", :remarks).nil?%>
       </fieldset>
     </td>
     <td id="personal-information" style="min-width: 200px">
