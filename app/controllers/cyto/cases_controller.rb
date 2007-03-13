@@ -296,7 +296,8 @@ class Cyto::CasesController < ApplicationController
       if next_open.nil?
         redirect_to :action => 'p16_queue'
       else
-        redirect_to :action => 'second_entry_pap_form', :id => next_open
+#        redirect_to :action => 'second_entry_pap_form', :id => next_open
+        redirect_to :action => 'p16_queue'
       end
     else
       next_open = Case.find :first, :conditions => ["entry_date IS NOT NULL AND screened_at IS NULL AND needs_p16 = '0' AND praxistar_eingangsnr > ? AND praxistar_eingangsnr < '90/'", @case.praxistar_eingangsnr]
