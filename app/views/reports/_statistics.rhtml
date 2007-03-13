@@ -1,13 +1,15 @@
+<% columns = @columns || @records[0].attributes.keys || [] %>
+
 <table class="listing">
   <tr>
-  <% for column in @records[0].attributes.keys || [] %>
-    <th><%= column.humanize %></th>
+  <% for column in columns %>
+    <%= sort_header column %>
   <% end %>
   </tr>
 
 <% for record in @records %>
   <tr>
-  <% for column in record.attributes.keys %>
+  <% for column in columns %>
     <td><%=h record.instance_variable_get('@attributes')[column] %></td>
   <% end %>
   </tr>

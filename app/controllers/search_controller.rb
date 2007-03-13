@@ -155,7 +155,6 @@ class SearchController < ApplicationController
       case_values.push patient_params[:full_name].split(' ')[0].strip
     end
     
-
     # Build conditions array
     case_conditions = !case_keys.empty? ? [  case_keys.join(" AND "), *case_values ] : nil
     @case_pages, @cases = paginate :cases, :per_page => 20, :conditions => case_conditions
