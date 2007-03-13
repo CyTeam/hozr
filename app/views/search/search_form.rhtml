@@ -3,7 +3,7 @@
 <%= form_remote_tag( :update => 'search_result', :url => {:action => "search"} ) %>
 <table style="width: 100%">
   <tr>
-    <td style="vertical-align: top">
+    <td style="vertical-align: top" rowspan="2">
       <fieldset style="width: 98%">
         <legend>nach Untersuch</legend>
         <table>
@@ -35,15 +35,18 @@
       </fieldset>
     </td>
   </tr>
+  <tr>
+    <td style="vertical-align: top">
+      <%= form_remote_tag( :update => 'search_result', :url => {:action => "free_search"} ) %>
+        <fieldset>
+          <legend>Freie Suche</legend>
+            <%= text_area_tag 'query', nil, :style => "width: 98%; height: 3em" %>
+            <%= submit_tag "Suchen" %>
+        </fieldset>
+      <%= end_form_tag %>
+    </td>
+  </tr>
 </table>
-<%= end_form_tag %>
-
-<%= form_remote_tag( :update => 'search_result', :url => {:action => "free_search"} ) %>
-  <fieldset>
-    <legend>Freie Suche</legend>
-      <%= text_area_tag 'query', nil, :style => "width: 98%; height: 3em" %>
-      <%= submit_tag "Suchen" %>
-  </fieldset>
 <%= end_form_tag %>
 
 <div id="search_result">
