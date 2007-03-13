@@ -312,7 +312,11 @@ class Cyto::CasesController < ApplicationController
   def remove_finding
     @case = Case.find(params[:id])
 
-    @case.finding_classes.delete(FindingClass.find(params[:finding_id]))
+    finding = FindingClass.find(params[:finding_id])
+    @case.finding_classes.delete(finding)
+    @case.finding_text.gsub! "<div>#{finding.name}</div>", ''
+
+    @case.save
     
     render :partial => '/cyto/finding_classes/list_findings'
   end
@@ -333,6 +337,10 @@ class Cyto::CasesController < ApplicationController
       end
       
       @case.finding_classes << finding_class
+      @case.finding_text = '' if @case.finding_text.nil?
+      @case.finding_text += "<div>#{finding_class.name}</div>" unless finding_class.belongs_to_group?('Zustand') || finding_class.belongs_to_group?('Kontrolle')
+      
+      @case.save
       
     rescue ActiveRecord::AssociationTypeMismatch
       flash.now[:error] = "Unbekannter Code: #{finding_class_code}"
@@ -371,5 +379,20 @@ class Cyto::CasesController < ApplicationController
     @doctor = Doctor.find(params[:id])
 
     render :action => 'result_letter', :layout => 'result_letter_for_pdf'
+  end
+
+  def update_finding_text
+    @case = Case.find(params[:id])
+    
+    @case.finding_text = params[:case][:finding_text]
+    @case.save
+  
+    render :partial => 'list_findings'
+  end
+  
+  def edit_finding_text
+    @case = Case.find(params[:id])
+    
+    render :partial => 'edit_finding_text'
   end
 end
