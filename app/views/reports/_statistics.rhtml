@@ -1,5 +1,6 @@
 <% columns = @columns || @records[0].attributes.keys || [] %>
 
+<%= loading_indicator_tag :id => 'search' %>
 <table class="listing">
   <tr>
   <% for column in columns %>
