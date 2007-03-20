@@ -436,7 +436,7 @@ class Cyto::CasesController < ApplicationController
       params[:a_case][case_id.to_s][:doctor_id] = doctor_id
       a_case.update_attributes(params[:a_case][case_id.to_s])
       a_case.save!
-      a_case.assigned_at = Date.now
+      a_case.assigned_at = DateTime.now
       a_case.save
     end
     
