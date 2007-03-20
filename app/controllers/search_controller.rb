@@ -78,7 +78,7 @@ class SearchController < ApplicationController
     }
     
     conditions = !keys.empty? ? [ keys.join(" AND "), *values ] : nil
-    vcard_ids = Vcard.find :all, :conditions => conditions, :select => 'id'
+    vcard_ids = Vcard.find :all, :include => :address, :conditions => conditions, :select => 'id'
   
     patient_conditions = "(vcard_id IN (#{vcard_ids.map {|vcard| vcard.id}.join ', '}) OR billing_vcard_id IN (#{vcard_ids.map {|vcard| vcard.id}.join ', '}))"
     patient_ids = Patient.find :all, :conditions => patient_conditions, :select => 'id'
