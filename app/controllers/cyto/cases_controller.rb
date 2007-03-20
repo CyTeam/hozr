@@ -135,9 +135,7 @@ class Cyto::CasesController < ApplicationController
     session[:first_entry] = {} if session[:first_entry].nil?
     
     # Preseed some fields
-    @case.doctor_id = session[:first_entry][:doctor_id]
-    @case.praxistar_eingangsnr = Cyto::CaseNr.next(session[:first_entry][:praxistar_eingangsnr]).to_s
-    @case.examination_method_id = 1
+    @case.examination_method_id = @case.intra_day_id == 0 ? 0 : 1
   end
 
   def first_entry_update
