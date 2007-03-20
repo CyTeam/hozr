@@ -436,6 +436,8 @@ class Cyto::CasesController < ApplicationController
       params[:a_case][case_id.to_s][:doctor_id] = doctor_id
       a_case.update_attributes(params[:a_case][case_id.to_s])
       a_case.save!
+      a_case.assigned_at = Date.now
+      a_case.save
     end
     
     @cases = Case.find(:all, :conditions => 'assigned_at IS NULL', :order => 'intra_day_id' )
