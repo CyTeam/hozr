@@ -197,6 +197,11 @@ class Cyto::CasesController < ApplicationController
   def second_entry_form
     @case = Case.find(params[:id])
     
+    if @case.finding_text.nil?
+      @case.finding_text = @case.findings.map {|finding| "<div>#{finding.name}</div>"}.join("\n")
+      @case.save
+    end
+
     if params[:case] && params[:case][:classification]
       classification = Classification.find(params[:case][:classification])
       @case.classification = classification
