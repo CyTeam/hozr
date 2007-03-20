@@ -403,6 +403,7 @@ class Cyto::CasesController < ApplicationController
   end
   
   def unassigned_form
+    @first_case = Case.find(:first, :conditions => 'assigned_at IS NULL' )
   end
   
   def unassigned_sort_queue
@@ -436,10 +437,17 @@ class Cyto::CasesController < ApplicationController
       params[:a_case][case_id.to_s][:doctor_id] = doctor_id
       a_case.update_attributes(params[:a_case][case_id.to_s])
       a_case.save!
-      a_case.assigned_at = DateTime.now
-      a_case.save
     end
     
     @cases = Case.find(:all, :conditions => 'assigned_at IS NULL', :order => 'intra_day_id' )
+  end
+
+  def assigned
+    for a_case in Case.find(:all, :conditions => 'assigned_at IS NULL')
+      a_case.assigned_at = DateTime.now
+      a_case.save!
+    end
+    
+    redirect_to :controller => '/cyto/cases', :action => 'first_entry_queue'
   end
 end
