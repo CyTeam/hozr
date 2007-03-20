@@ -2,6 +2,7 @@ include Cyto
 
 class SearchController < ApplicationController
   helper :doctors
+  auto_complete_for_vcard :vcard
   
   def auto_complete_for_patient_full_name
     @patients = Patient.find(:all, 
@@ -63,6 +64,26 @@ class SearchController < ApplicationController
     end
     
     search
+  end
+  
+  def vcard_search
+    vcard_params = params[:vcard] || {}
+    keys = []
+    values = []
+    
+    fields = vcard_params.reject { |key, value| value.nil? or value.empty? }
+    fields.each { |key, value|
+      keys.push "#{key} LIKE ?"
+      values.push '%' + value.downcase.gsub(' ', '%') + '%'
+    }
+    
+    conditions = !keys.empty? ? [ keys.join(" AND "), *values ] : nil
+    vcard_ids = Vcard.find :all, :conditions => conditions, :select => 'id'
+  
+    patient_conditions = "(vcard_id IN (#{vcard_ids.map {|vcard| vcard.id}.join ', '}) OR billing_vcard_id IN (#{vcard_ids.map {|vcard| vcard.id}.join ', '}))"
+    patient_ids = Patient.find :all, :conditions => patient_conditions, :select => 'id'
+    
+    return "(patient_id IN (#{patient_ids.map {|patient| patient.id}.join ', '}))"
   end
   
   def search
@@ -154,6 +175,9 @@ class SearchController < ApplicationController
       case_keys.push "patient_id = ?"
       case_values.push patient_params[:full_name].split(' ')[0].strip
     end
+    
+    # Handle patient vcard params
+    case_keys.push vcard_search
     
     # Build conditions array
     case_conditions = !case_keys.empty? ? [  case_keys.join(" AND "), *case_values ] : nil
