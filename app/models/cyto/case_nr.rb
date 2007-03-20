@@ -6,7 +6,7 @@ class Cyto::CaseNr
     
     case params.size
     when 0
-      parse(Cyto::Case.maximum(:praxistar_eingangsnr))
+      parse(Cyto::Case.maximum(:praxistar_eingangsnr, :conditions => "praxistar_eingangsnr < '90/'"))
       inc!
     when 1
       param = params[0]
