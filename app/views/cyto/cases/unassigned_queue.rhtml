@@ -1,0 +1,26 @@
+<h1>Tages Scans</h1>
+
+<%= form_tag :action => 'assign' %>
+  <table>
+  <% next_eingangs_nr = Cyto::CaseNr.new %>
+  
+  <% for @a_case in @cases %>
+  <% a_case = @a_case %>
+    <tr>
+      <td>
+        <%= image_tag url_for_image_column(@a_case.order_form, "file", :overview), :size => "500px" unless @a_case.order_form.nil? or @a_case.order_form.file.nil?%>
+      </td>
+      <td style="border-top: solid 2px; border-bottom: solid 2px">
+        Tagesnr.: <%=h a_case.intra_day_id %>
+        <br />
+        
+        <% @a_case.praxistar_eingangsnr ||= next_eingangs_nr.to_s; next_eingangs_nr.inc! %>
+        Eingangsnr: <%= text_field "a_case[]", 'praxistar_eingangsnr', :size => 10 %><br />
+        
+        <%= select_doctors :object => 'a_case[]', :method => 'doctor_id' %>
+      </td>
+    </tr>
+  <% end %>
+  </table>
+  <%= submit_tag 'Zuweisen' %>
+<% end_form_tag %>

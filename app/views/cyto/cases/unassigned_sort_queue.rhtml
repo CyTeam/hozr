@@ -1,0 +1,27 @@
+<h1>Tages Scans</h1>
+
+<%= form_tag :action => 'unassigned_queue' %>
+  <table>
+  <% next_eingangs_nr = Cyto::CaseNr.new %>
+  <% intra_day_id = @intra_day_id %>
+  
+  <% for @a_case in @cases %>
+  <% a_case = @a_case %>
+    <tr>
+      <td>
+        <%= image_tag url_for_image_column(@a_case.order_form, "file", :overview), :size => "500px" unless @a_case.order_form.nil? or @a_case.order_form.file.nil?%>
+      </td>
+      <td style="border-top: solid 2px; border-bottom: solid 2px">
+        <% 
+          @a_case.intra_day_id = intra_day_id
+          intra_day_id += 1
+        %>
+        Tagesnr.: <%= text_field "a_case[]", 'intra_day_id', :size => 4 %>
+        <br />
+        <%= button_to_function( 'Löschen', remote_function( :url => {:action => :destroy, :id => a_case }) )%>
+      </td>
+    </tr>
+  <% end %>
+  </table>
+  <%= submit_tag 'Zuweisen' %>
+<% end_form_tag %>

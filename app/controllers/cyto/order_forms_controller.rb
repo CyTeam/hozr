@@ -1,6 +1,8 @@
 include Cyto
 
 class Cyto::OrderFormsController < ApplicationController
+  helper :doctors
+  
   def index
     list
     render :action => 'list'
