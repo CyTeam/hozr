@@ -217,6 +217,7 @@ class Cyto::CasesController < ApplicationController
     @case = Case.find(params[:id])
     
     @case.screener = Employee.find_by_code(request.env['REMOTE_USER'])
+    @case.remarks = params[:case][:remarks]
     @case.save
 
     case params[:commit]

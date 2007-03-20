@@ -42,6 +42,13 @@ Event.observe(window, 'load', function() {$('patient_full_name').focus()}, false
                     <%= f.select :examination_method_id, ExaminationMethod.find_all.collect { |m| [ m.name, m.id ] }, :label => 'Methode' %>
                   </table>
                 </fieldset>
+                
+                <fieldset style="width: 100%">
+                  <legend>Bemerkungen</legend>
+                  <table>
+                    <%= f.text_area :remarks, :label => "Bemerkungen", :cols => 50, :rows => 3 %>
+                  </table>
+                </fieldset>
                 <div>
                   <%= submit_tag "Erstellen", :tabindex => 6 %>
                   <%= submit_tag "Patient editieren", :tabindex => 7 %>
