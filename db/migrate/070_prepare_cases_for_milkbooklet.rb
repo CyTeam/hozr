@@ -4,7 +4,7 @@ class PrepareCasesForMilkbooklet < ActiveRecord::Migration
     add_column :cases, :assigned_screener_id, :datetime
     add_column :cases, :intra_day_id, :integer
   
-    Cyto::Case.update_all "assigned_at = created_at"
+    Cyto::Case.update_all "assigned_at = entry_date"
   end
 
   def self.down
