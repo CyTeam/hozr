@@ -78,7 +78,14 @@ class SearchController < ApplicationController
     }
     
     conditions = !keys.empty? ? [ keys.join(" AND "), *values ] : nil
-    vcard_ids = Vcard.find :all, :include => :address, :conditions => conditions, :select => 'id'
+    if conditions.nil?
+      return nil
+    else
+      return conditions
+    end
+    
+    
+    vcard_ids = Vcard.find :all, :include => :address, :limit => 1000, :conditions => conditions, :select => 'id'
   
     patient_conditions = "(vcard_id IN (#{vcard_ids.map {|vcard| vcard.id}.join ', '}) OR billing_vcard_id IN (#{vcard_ids.map {|vcard| vcard.id}.join ', '}))"
     patient_ids = Patient.find :all, :conditions => patient_conditions, :select => 'id'
@@ -163,7 +170,7 @@ class SearchController < ApplicationController
     doctor_params = params[:doctor] || {}
     
     unless doctor_params[:doctor_id].nil? or doctor_params[:doctor_id].empty?
-      case_keys.push "doctor_id = ?"
+      case_keys.push "cases.doctor_id = ?"
       case_values.push doctor_params[:doctor_id]
     end
     
@@ -177,11 +184,16 @@ class SearchController < ApplicationController
     end
     
     # Handle patient vcard params
-    case_keys.push vcard_search
+    key, *values = vcard_search
+    
+    case_keys.push key
+    case_values.push *values
+    
     
     # Build conditions array
-    case_conditions = !case_keys.empty? ? [  case_keys.join(" AND "), *case_values ] : nil
-    @case_pages, @cases = paginate :cases, :per_page => 20, :conditions => case_conditions
+    case_conditions = !case_keys.compact.empty? ? [  case_keys.compact.join(" AND "), *case_values ] : nil
+    
+    @cases = Case.find :all, :select => 'DISTINCT cases.*', :joins => "LEFT JOIN patients ON patient_id = patients.id LEFT JOIN vcards ON (patients.vcard_id = vcards.id OR patients.billing_vcard_id = vcards.id) LEFT JOIN addresses ON vcards.id = addresses.vcard_id", :conditions => case_conditions, :limit => 100
     
     render :partial => '/cyto/cases/list'
   end
