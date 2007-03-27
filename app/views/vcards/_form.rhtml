@@ -8,8 +8,8 @@ Event.observe(window, 'load', function() {$('vcard_honorific_prefix').focus()}, 
   <%= address.select 'honorific_prefix', HonorificPrefix.find(:all).collect { |prefix| prefix.name }, :include_blank => true, :label => "Anrede"  %>
   <%= address.text_field_with_auto_complete :family_name, :label => 'Nachname' %>
   <%= address.text_field_with_auto_complete :given_name, :label => 'Vorname' %>
-  <%= address.text_field_with_auto_complete :street_address, :label => "Strasse"  %>
-  <%= address.text_field_with_auto_complete :extended_address, :label => "c/o"  %>
+  <%= address.text_field :street_address, :label => "Strasse"  %>
+  <%= address.text_field :extended_address, :label => "c/o"  %>
   <%= address.text_field 'postal_code', :label => "PLZ"  %>
   <%= address.text_field_with_auto_complete :locality, :label => "Ort"  %>
 <% end %>
