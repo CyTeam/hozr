@@ -10,7 +10,6 @@
 
 <div id="insurance">
 <% if !@case.insurance.nil? %>
-<br/>
 <%=h @case.insurance.name %> <%=h "##{@case.insurance_nr}" unless @case.insurance_nr.nil? or @case.insurance_nr.strip == "0" or @case.insurance_nr.strip == "" %>
 <% end %>
 </div>
