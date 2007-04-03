@@ -17,6 +17,7 @@ class Praxistar::Base < ActiveRecord::Base
     records = hozr_model.find(:all, find_params)
     
     export.record_count = records.size
+    export.error_ids = 'none'
     export.save
     
     for h in records
