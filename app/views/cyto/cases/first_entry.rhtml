@@ -22,10 +22,6 @@ Event.observe(window, 'load', function() {$('patient_full_name').focus()}, false
                   <legend>Erfassung</legend>
                   <table>
                     <tr>
-                      <td><label for="patient_praxistar_eingangsnr">Letzte Eingangsnr:</label></td>
-                      <td><%= text_field :patient, :praxistar_eingangsnr, :label => 'Letzte Eingangsnr' %> <%= submit_to_remote "praxistar_eingangsnr", "Suchen", :update => "patient_id", :url => url_for( :action => 'get_patient_by_eingangsnr' ) %></td>
-                    </tr>
-                    <tr>
                       <td><label for="patient_full_name">Patient:</label></td>
                       <td id="patient_id"><%= text_field_with_auto_complete :patient, :full_name, tag_options = {:select => 'name_id'}, completion_options = {:frequency => 0.7, :min_chars => 3} %></td>
                     </tr>
