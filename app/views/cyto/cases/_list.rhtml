@@ -13,17 +13,19 @@
   </tr>
   
 <% for a_case in @cases %>
+  <% case_nr = "#{a_case.praxistar_eingangsnr}" %>
+  <% case_nr += " (#{a_case.intra_day_id})" unless a_case.intra_day_id.nil? %>
   <tr>
     <td><%=h a_case.entry_date unless a_case.entry_date.nil? %></td>
     <td><%= 
       if a_case.ready_for_first_entry
-        link_to h(a_case.praxistar_eingangsnr), :controller => '/cyto/cases', :action => 'first_entry', :id => a_case
+        link_to h(case_nr), :controller => '/cyto/cases', :action => 'first_entry', :id => a_case
       elsif a_case.ready_for_second_entry
-        link_to h(a_case.praxistar_eingangsnr), :controller => '/cyto/cases', :action => 'second_entry_pap_form', :id => a_case
+        link_to h(case_nr), :controller => '/cyto/cases', :action => 'second_entry_pap_form', :id => a_case
             elsif a_case.ready_for_p16
-        link_to h(a_case.praxistar_eingangsnr), :controller => '/cyto/cases', :action => 'second_entry_pap_form', :id => a_case
+        link_to h(case_nr), :controller => '/cyto/cases', :action => 'second_entry_pap_form', :id => a_case
       else
-        link_to h(a_case.praxistar_eingangsnr), :controller => '/cyto/cases', :action => 'result_report_for_pdf', :id => a_case
+        link_to h(case_nr), :controller => '/cyto/cases', :action => 'result_report_for_pdf', :id => a_case
       end
     %></td>
     <td><%=h a_case.examination_date %></td>
