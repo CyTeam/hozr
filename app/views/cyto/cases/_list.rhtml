@@ -3,7 +3,6 @@
   <tr>
     <%=sort_header('entry_date', 'Erfasst am') %>
     <%=sort_header('praxistar_eingangsnr', 'Eingangsnr') %>
-    <%=sort_header('examination_date', 'Abstrichdatum') %>
     <%=sort_header('classification_id', 'Klassifikation') %>
     <th>Diagnose</th>
     <%=sort_header('patient_id', 'Patient') %>
@@ -28,7 +27,6 @@
         link_to h(case_nr), :controller => '/cyto/cases', :action => 'result_report_for_pdf', :id => a_case
       end
     %></td>
-    <td><%=h a_case.examination_date %></td>
     <td class="PAP_<%=h a_case.classification.code unless a_case.classification.nil? %>" style="border-style: solid; border-width: 4px"><%=h a_case.classification.name unless a_case.classification.nil? %></td>
     <td>
     <% for finding in a_case.finding_classes %>
