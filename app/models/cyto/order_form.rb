@@ -1,5 +1,5 @@
 class Cyto::OrderForm < ActiveRecord::Base
-  ORDER_FORM_DIR='/mnt/worker/hozr-order-forms/order-*'
+  ORDER_FORM_DIR='/mnt/worker/hozr-order-forms/current/order-*'
   
   
   file_column :file, :magick => {
