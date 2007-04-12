@@ -18,4 +18,4 @@
 <% end %>
 </table>
 
-<%= link_to "Fertig", :action => 'assigned' %>
+<%= link_to "Fertig", :action => 'assigned', :case_ids => @cases.collect { |a_case| a_case.id }.join(',') %>

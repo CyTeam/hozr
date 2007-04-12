@@ -405,43 +405,42 @@ class Cyto::CasesController < ApplicationController
   end
   
   def unassigned_sort_queue
-    @cases = Case.find(:all, :conditions => 'assigned_at IS NULL' )
+    @cases = Case.find(:all, :conditions => 'assigned_at IS NULL')
     @intra_day_id = params[:case][:intra_day_id].to_i
   end
   
   def unassigned_queue
     case_ids = params[:a_case].keys
-    for case_id in case_ids
-      a_case = Case.find(case_id)
-      a_case.update_attributes(params[:a_case][case_id])
+
+    @cases = Case.find(case_ids)
+    for a_case in @cases
+      a_case.update_attributes(params[:a_case][a_case.id.to_s])
       a_case.save!
     end
-    
-    @cases = Case.find(:all, :conditions => 'assigned_at IS NULL', :order => 'intra_day_id' )
+
+    @cases = Case.find(case_ids)
   end
 
   def assign
-    cases = Case.find(:all, :conditions => 'assigned_at IS NULL', :order => 'intra_day_id' )
-  
-    case_ids = cases.map {|a_case| a_case.id }
-    
     doctor_id = nil
-    for case_id in case_ids
-      a_case = Case.find(case_id)
-      unless params[:a_case][case_id.to_s][:doctor_id].nil? or params[:a_case][case_id.to_s][:doctor_id].empty?
-        doctor_id = params[:a_case][case_id.to_s][:doctor_id]
+
+    case_ids = params[:a_case].keys
+    @cases = Case.find(case_ids, :order => 'intra_day_id' )
+    for a_case in @cases
+      unless params[:a_case][a_case.id.to_s][:doctor_id].nil? or params[:a_case][a_case.id.to_s][:doctor_id].empty?
+        doctor_id = params[:a_case][a_case.id.to_s][:doctor_id]
       end
       
-      params[:a_case][case_id.to_s][:doctor_id] = doctor_id
-      a_case.update_attributes(params[:a_case][case_id.to_s])
+      params[:a_case][a_case.id.to_s][:doctor_id] = doctor_id
+      a_case.update_attributes(params[:a_case][a_case.id.to_s])
       a_case.save!
     end
-    
-    @cases = Case.find(:all, :conditions => 'assigned_at IS NULL', :order => 'intra_day_id' )
   end
 
   def assigned
-    for a_case in Case.find(:all, :conditions => 'assigned_at IS NULL')
+    case_ids = params[:case_ids].split(',')
+    @cases = Case.find(case_ids, :order => 'intra_day_id' )
+    for a_case in @cases
       a_case.assigned_at = DateTime.now
       a_case.save!
     end
