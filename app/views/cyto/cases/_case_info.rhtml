@@ -1,0 +1,14 @@
+<table style="text-align: left; width: 100%">
+  <tr>
+    <th>Entnahmedatum:</th><td><%= case_info.examination_date.strftime('%d.%m.%Y') %></td>
+  </tr>
+  <tr>
+    <th>Eingangsdatum:</th><td><%= case_info.entry_date.strftime('%d.%m.%Y') %></td>
+  </tr>
+  <tr>
+    <th>Tagesnr.:</th><td><%= case_info.intra_day_id %></td>
+  </tr>
+  <tr>
+    <th>Methode:</th><td><%= case_info.examination_method.name %></td>
+  </tr>
+</table>

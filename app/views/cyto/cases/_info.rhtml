@@ -1,5 +1,6 @@
 <% a_case = info %>
 
+<%= render :partial => '/cyto/cases/case_info_frame', :object => a_case %>
 <%= render :partial => '/patients/compact_frame', :object => a_case.patient %>
 <fieldset style="width: 100%; margin-top: 10px">
   <legend>Arzt</legend>
