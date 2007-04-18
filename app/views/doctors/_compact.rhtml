@@ -3,5 +3,5 @@
 <div style="border: solid 1px black; float: left; width: 18em; height: 12em; background-color: yellow; margin: 20px; padding: 5px">
 <%= render :partial => "vcards/show", :locals => { :vcard => doctor.praxis } %><br/>
 <%= render :partial => "vcards/show_phone_numbers", :locals => { :vcard => doctor.praxis } %>
-<%= link_to "[edit]", :url => {:controller => 'doctors', :action => :edit, :id => doctor }%>
+<%= link_to "[edit]", :controller => 'doctors', :action => :edit, :id => doctor %>
 </div>
