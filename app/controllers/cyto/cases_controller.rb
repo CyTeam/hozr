@@ -422,13 +422,13 @@ class Cyto::CasesController < ApplicationController
   def unassigned_queue
     case_ids = params[:a_case].keys
 
-    @cases = Case.find(case_ids)
+    @cases = Case.find(case_ids, :order => 'intra_day_id')
     for a_case in @cases
       a_case.update_attributes(params[:a_case][a_case.id.to_s])
       a_case.save!
     end
 
-    @cases = Case.find(case_ids)
+    @cases = Case.find(case_ids, :order => 'intra_day_id')
   end
 
   def assign
