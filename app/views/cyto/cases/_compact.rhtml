@@ -1,6 +1,6 @@
 <dt class="PAP_<%=h compact.classification.code unless compact.classification.nil? %>" style="font-weight: bold">
   <%=h compact.examination_date.strftime('%b. %g') unless compact.examination_date.nil? %>: <%=link_to "#" + h(compact.praxistar_eingangsnr), :controller => '/cyto/cases', :action => :show, :id => compact unless compact.praxistar_eingangsnr.nil? %>
-<dt/>
+</dt>
 <dd>
   <div style="font-weight: bold"><%=h compact.classification.name unless compact.classification.nil? %></div>
   <% if compact.finding_classes.empty? %>
