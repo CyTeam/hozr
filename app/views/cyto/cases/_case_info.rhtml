@@ -12,7 +12,8 @@
     <th>Methode:</th><td><%= case_info.examination_method.name unless case_info.examination_method.nil? %></td>
   </tr>
   
-  <% photos = Dir.glob('public/photos/' + case_info.praxistar_eingangsnr + '*.png') %>
+  <% photos_path = '/srv/zyto-labor.com/hozr/public/photos/' %>
+  <% photos = Dir.glob( photos_path + case_info.praxistar_eingangsnr + '*.png') %>
   <% unless photos.empty? %>
   <tr>
     <th>Fotos:</th>
@@ -20,7 +21,7 @@
       <% i = 0 %>
       <% for photo in photos %>
         <% i += 1 %>
-        <% photo_url = photo.split('/')[2] + '/' + photo.split('/')[3] %>
+        <% photo_url = photo.gsub(photos_path, '') %>
         <%= link_to "[#{i}]", "/photos/#{photo_url}" %>
       <% end %>
     </td>
