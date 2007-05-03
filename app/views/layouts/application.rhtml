@@ -49,6 +49,7 @@
         </div>
 
         <div id="MainContent">
+            <%= render :partial => 'navigation' if controller.controller_name == 'cases' %>
             <%= @content_for_layout %>
         </div>
     </div>
