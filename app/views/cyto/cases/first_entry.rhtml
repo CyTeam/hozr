@@ -53,6 +53,9 @@ Event.observe(window, 'load', function() {$('patient_full_name').focus()}, false
             <%= end_form_tag %>
             <%= button_to "Löschen", {:action => :destroy, :id => @case}, :tabindex => 9  %>
           </td>
+          <td style="min-width: 200px; vertical-align: top">
+            <%= render :partial => 'info', :object => @case %>
+          </td>
         </tr>
       </table>
     </td>
