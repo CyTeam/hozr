@@ -11,4 +11,19 @@
   <tr>
     <th>Methode:</th><td><%= case_info.examination_method.name %></td>
   </tr>
+  
+  <% photos = Dir.glob('public/photos/' + case_info.praxistar_eingangsnr + '*.png') %>
+  <% unless photos.empty? %>
+  <tr>
+    <th>Fotos:</th>
+    <td>
+      <% i = 0 %>
+      <% for photo in photos %>
+        <% i += 1 %>
+        <% photo_url = photo.split('/')[2] + '/' + photo.split('/')[3] %>
+        <%= link_to "[#{i}]", "/photos/#{photo_url}" %>
+      <% end %>
+    </td>
+  </tr>
+  <% end %>
 </table>
