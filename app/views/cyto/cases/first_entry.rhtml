@@ -33,7 +33,7 @@ Event.observe(window, 'load', function() {$('patient_full_name').focus()}, false
                       <td><%= text_field :patient, :doctor_patient_nr %></td>
                     </tr>
                     <%= f.text_field :examination_date, :label => "Abstrichdatum" %>
-                    <%= f.text_field :praxistar_eingangsnr, :label => "Eingangsnummer" %>
+                    <%= f.text_field :praxistar_eingangsnr, :label => "Eingangsnr." %>
                     <%= select_doctors :form => f %>
                     <%= f.select :examination_method_id, ExaminationMethod.find_all.collect { |m| [ m.name, m.id ] }, :label => 'Methode' %>
                   </table>
