@@ -1,15 +1,15 @@
 <table style="text-align: left; width: 100%">
   <tr>
-    <th>Entnahmedat.:</th><td><%= case_info.examination_date.strftime('%d.%m.%Y') %></td>
+    <th>Entnahmedat.:</th><td><%= case_info.examination_date.strftime('%d.%m.%Y') unless case_info.examination_date.nil? %></td>
   </tr>
   <tr>
-    <th>Eingangsdat.:</th><td><%= case_info.entry_date.strftime('%d.%m.%Y') %></td>
+    <th>Eingangsdat.:</th><td><%= case_info.entry_date.strftime('%d.%m.%Y') unless case_info.entry_date.nil? %></td>
   </tr>
   <tr>
     <th>Tagesnr.:</th><td><%= case_info.intra_day_id %></td>
   </tr>
   <tr>
-    <th>Methode:</th><td><%= case_info.examination_method.name %></td>
+    <th>Methode:</th><td><%= case_info.examination_method.name unless case_info.examination_method.nil? %></td>
   </tr>
   
   <% photos = Dir.glob('public/photos/' + case_info.praxistar_eingangsnr + '*.png') %>
