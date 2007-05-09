@@ -177,10 +177,24 @@ class SearchController < ApplicationController
     
     # Handle patient params
     patient_params = params[:patient] || {}
+    patient_keys = case_keys
+    patient_values = case_values
     
     unless patient_params[:full_name].nil? or patient_params[:full_name].empty?
       case_keys.push "patient_id = ?"
       case_values.push patient_params[:full_name].split(' ')[0].strip
+    end
+    
+    unless patient_params[:birth_date].nil? or patient_params[:birth_date].empty?
+      if patient_params[:birth_date].match /bis/
+        lower_bound, higher_bound = patient_params[:birth_date].split('bis')
+        patient_keys.push "birth_date BETWEEN ? AND ?"
+        patient_values.push parse_date(lower_bound.strip).strip
+        patient_values.push parse_date(higher_bound.strip).strip
+      else
+        patient_keys.push "birth_date = ? "
+        patient_values.push parse_date(patient_params[:birth_date]).strip
+      end
     end
     
     # Handle patient vcard params
