@@ -26,7 +26,7 @@
       <%= patient.text_field :birth_date, :label => "Geburtsdatum" %>
       <%= select_doctors :form => patient %>
       <%= patient.text_field :doctor_patient_nr, :label => "Patientennr." %>
-      <%= patient.text_field :remarks, :label => "Bemerkungen" %>
+      <%= patient.text_area :remarks, :label => "Bemerkungen", :cols => 40, :rows => 3 %>
       <%= patient.check_box :dunning_stop, :label => "Mahnstopp aktiv" %>
     <% end %>
   </table>
