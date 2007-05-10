@@ -83,14 +83,6 @@ class SearchController < ApplicationController
     else
       return conditions
     end
-    
-    
-    vcard_ids = Vcard.find :all, :include => :address, :limit => 1000, :conditions => conditions, :select => 'id'
-  
-    patient_conditions = "(vcard_id IN (#{vcard_ids.map {|vcard| vcard.id}.join ', '}) OR billing_vcard_id IN (#{vcard_ids.map {|vcard| vcard.id}.join ', '}))"
-    patient_ids = Patient.find :all, :conditions => patient_conditions, :select => 'id'
-    
-    return "(patient_id IN (#{patient_ids.map {|patient| patient.id}.join ', '}))"
   end
   
   def search
