@@ -2,32 +2,28 @@
   <table class="listing">
     <%= loading_indicator_tag :id => 'search' %>
     <tr>
-      <th>Name</th><th>Adresse</th><th>Geburtsdatum</th><th>Arzt</th><th>Versicherung</th>
+      <th>Vorname</th>
+      <th>Nachname</th>
+      <th>Strasse</th>
+      <th>PLZ</th>
+      <th>Ort</th>
+      <th>Geburtsdatum</th>
+      <th>PatientenNr.</th>
+      <th>Versicherung</th>
+      <th>VersicherungsNr.</th>
     </tr>
     
   <% for patient in @patients %>
-    <tr onmouseover="showActions(<%= patient.id %>)" onmouseout="hideActions(<%= patient.id %>)">
-      <td>
-        <%= link_to patient.vcard.family_name + ", " + patient.vcard.given_name, :action => 'show', :id => patient %>
-      </td>
-      <td><%=h patient.vcard.street_address %>, <%=h patient.vcard.postal_code %> <%=h patient.vcard.locality %></td>
-      <td><%=h patient.birth_date %></td>
-      <td>
-        <%if patient.doctor %>
-          <%= link_to patient.doctor.family_name + ", " + patient.doctor.given_name, { :controller => 'doctors', :action => 'show', :id => patient.doctor_id } %>
-        <%end %>
-      </td>
-      <td style="height: 32px; width: 30%">
-        <span style="float: left">
-          <%if patient.insurance %>
-            <%= link_to patient.insurance.vcard.full_name, { :controller => 'insurances', :action => 'show', :id => patient.insurance_id } %> #<%=h patient.insurance_nr %>
-          <%end %>
-        </span>
-        <span id="actions_<%= patient.id %>" style="display:none; float: right">
-          <%= link_to image_tag("edit"), :action => 'edit', :id => patient %>
-          <%= link_to image_tag("remove"), { :action => 'destroy', :id => patient }, :confirm => 'Wirklich löschen?' %>
-        </span>
-      </td>
+    <tr>
+      <td><%= patient.vcard.given_name %></td>
+      <td><%= patient.vcard.family_name %></td>
+      <td><%= patient.vcard.street_address %></td>
+      <td><%= patient.vcard.postal_code %></td>
+      <td><%= patient.vcard.locality %></td>
+      <td><%= patient.birth_date %></td>
+      <td><%= patient.doctor_patient_nr %></td>
+      <td><%= patient.insurance.vcard.full_name if patient.insurance %></td>
+      <td><%= patient.insurance_id %></td>
     </tr>
   <% end %>
   </table>
