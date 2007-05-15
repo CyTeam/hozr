@@ -20,20 +20,89 @@ class PatientsController < ApplicationController
     render :action => 'list'
   end
 
-  def search
-    conditions = {:sql => [], :params => []}
-    if params[:patient][:full_name] > ""
-      conditions[:sql]<< "id = ?"
-      conditions[:params]<< Patient.find(params[:patient][:full_name].split(' ')[0].to_i).id
+  def parse_date(value)
+    if value.is_a?(String)
+      if value.match /.*-.*-.*/
+        return value
+      end
+      day, month, year = value.split('.')
+      month ||= Date.today.month
+      year ||= Date.today.year
+      year = 2000 + year.to_i if year.to_i < 100
+      
+      return sprintf("%4d-%02d-%02d", year, month, day)
+    else
+      return value
     end
-    if params[:patient][:praxistar_eingangsnr] > ""
-      conditions[:sql]<< "id = ?"
-      conditions[:params]<< Case.find_by_praxistar_eingangsnr(Cyto::CaseNr.new(params[:patient][:praxistar_eingangsnr]).to_s).patient_id
+  end
+  
+  def vcard_conditions
+    vcard_params = params[:vcard] || {}
+    keys = []
+    values = []
+    
+    fields = vcard_params.reject { |key, value| value.nil? or value.empty? }
+    fields.each { |key, value|
+      keys.push "#{key} LIKE ?"
+      values.push '%' + value.downcase.gsub(' ', '%') + '%'
+    }
+    
+    return !keys.empty? ? [ keys.join(" AND "), *values ] : nil
+  end
+  
+  def patient_conditions
+    parameters = params[:patient]
+    keys = []
+    values = []
+    
+    unless parameters[:full_name].nil? or patient_parameters[:full_name].empty?
+      keys.push "patient_id = ?"
+      values.push patient_parameters[:full_name].split(' ')[0].strip
     end
     
-    @patient_pages, @patients = paginate :patients, :per_page => 144, :conditions => [ conditions[:sql].join(" AND "), conditions[:params] ]
+    unless parameters[:birth_date].nil? or parameters[:birth_date].empty?
+      if parameters[:birth_date].match /bis/
+        lower_bound, higher_bound = parameters[:birth_date].split('bis')
+        keys.push "birth_date BETWEEN ? AND ?"
+        values.push parse_date(lower_bound.strip).strip
+        values.push parse_date(higher_bound.strip).strip
+      else
+        keys.push "birth_date = ? "
+        values.push parse_date(parameters[:birth_date]).strip
+      end
+    end
   
-    render :action => :list
+    return !keys.empty? ? [ keys.join(" AND "), *values ] : nil
+  end
+  
+  def search
+    if vcard_conditions
+        vcard_ids = Vcard.find :all, :include => :address, :limit => 1000, :conditions => vcard_conditions, :select => 'id'
+    
+        vcard_keys = "(vcard_id IN (#{vcard_ids.map {|vcard| vcard.id}.join ', '}) OR billing_vcard_id IN (#{vcard_ids.map {|vcard| vcard.id}.join ', '}))"
+    else
+        vcard_keys = nil
+    end
+    
+    keys = [vcard_keys]
+    values = []
+    
+    patient_keys, *patient_values = patient_conditions
+    keys.push patient_keys
+    values.push *patient_values
+    
+    # Build conditions array
+    conditions = !keys.compact.empty? ? [  keys.compact.join(" AND "), *values ] : nil
+    
+    @patients = Patient.find :all, :conditions => conditions
+    
+    render :partial => 'list'
+  end
+  
+  def search_by_eingangsnr
+    @patients = [ Patient.find(Cyto::Case.find_by_praxistar_eingangsnr(Cyto::CaseNr.new(params[:patient][:praxistar_eingangsnr]).to_s).patient_id) ]
+  
+    render :partial => 'list'
   end
   
   def list

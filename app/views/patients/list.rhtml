@@ -4,40 +4,11 @@
   Name: <%= text_field_with_auto_complete :patient, :full_name, :select => 'name_id', :frequency => 0.5, :min_chars => 3, :label => 'Patient' %> Eingangsnr: <%= text_field :patient, :praxistar_eingangsnr %> <%= submit_tag 'Suchen', :style => "display: inline" %>
 <%= end_form_tag %>
 
-<table class="listing">
-  <tr>
-    <th>Name</th><th>Adresse</th><th>Geburtsdatum</th><th>Arzt</th><th>Versicherung</th>
-  </tr>
-  
-<% for patient in @patients %>
-  <tr onmouseover="showActions(<%= patient.id %>)" onmouseout="hideActions(<%= patient.id %>)">
-    <td>
-      <%= link_to patient.vcard.family_name + ", " + patient.vcard.given_name, :action => 'show', :id => patient %>
-    </td>
-    <td><%=h patient.vcard.street_address %>, <%=h patient.vcard.postal_code %> <%=h patient.vcard.locality %></td>
-    <td><%=h patient.birth_date %></td>
-    <td>
-      <%if patient.doctor %>
-        <%= link_to patient.doctor.family_name + ", " + patient.doctor.given_name, { :controller => 'doctors', :action => 'show', :id => patient.doctor_id } %>
-      <%end %>
-     </td>
-    <td style="height: 32px; width: 30%">
-      <span style="float: left">
-        <%if patient.insurance %>
-          <%= link_to patient.insurance.vcard.full_name, { :controller => 'insurances', :action => 'show', :id => patient.insurance_id } %> #<%=h patient.insurance_nr %>
-        <%end %>
-      </span>
-      <span id="actions_<%= patient.id %>" style="display:none; float: right">
-        <%= link_to image_tag("edit"), :action => 'edit', :id => patient %>
-        <%= link_to image_tag("remove"), { :action => 'destroy', :id => patient }, :confirm => 'Wirklich löschen?' %>
-      </span>
-    </td>
-  </tr>
-<% end %>
-</table>
+<div id="search_form">
+  <%= render :partial => 'search_form' %>
+</div>
 
-<%= link_to 'Previous page', { :page => @patient_pages.current.previous } if @patient_pages.current.previous %>
-<%= link_to 'Next page', { :page => @patient_pages.current.next } if @patient_pages.current.next %> 
+<%= render :partial => 'list' %>
 
 <br />
 
