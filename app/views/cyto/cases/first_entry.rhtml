@@ -9,7 +9,7 @@ Event.observe(window, 'load', function() {$('patient_full_name').focus()}, false
 
 <table>
   <tr>
-    <td style="width: 800px">
+    <td style="min-width: 600px">
       <%= (link_to image_tag(url_for_image_column(@case.order_form, "file", :full)), url_for_file_column(@case.order_form, "file"), :style => 'position: fixed; top: 140px; left: 20px') unless @case.order_form.nil? %>
     </td>
     <td style="vertical-align: top">
