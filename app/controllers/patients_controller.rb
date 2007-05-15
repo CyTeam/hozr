@@ -28,12 +28,21 @@ class PatientsController < ApplicationController
       day, month, year = value.split('.')
       month ||= Date.today.month
       year ||= Date.today.year
-      year = 2000 + year.to_i if year.to_i < 100
+      year = expand_year(year, 1900)
       
       return sprintf("%4d-%02d-%02d", year, month, day)
     else
       return value
     end
+  end
+  
+  def date_only_year?(value)
+    value.is_a?(String) and value.strip.match /^\d{2,4}$/
+  end
+  
+  def expand_year(value, base = 1900)
+    year = value.to_i
+    return year < 100 ? year + base : year
   end
   
   def vcard_conditions
@@ -63,12 +72,23 @@ class PatientsController < ApplicationController
     unless parameters[:birth_date].nil? or parameters[:birth_date].empty?
       if parameters[:birth_date].match /bis/
         lower_bound, higher_bound = parameters[:birth_date].split('bis')
-        keys.push "birth_date BETWEEN ? AND ?"
-        values.push parse_date(lower_bound.strip).strip
-        values.push parse_date(higher_bound.strip).strip
+        if date_only_year?(lower_bound)
+            keys.push "YEAR(birth_date) BETWEEN ? AND ?"
+            values.push expand_year(lower_bound.strip)
+            values.push expand_year(higher_bound.strip)
+        else
+            keys.push "birth_date BETWEEN ? AND ?"
+            values.push parse_date(lower_bound.strip).strip
+            values.push parse_date(higher_bound.strip).strip
+        end
       else
-        keys.push "birth_date = ? "
-        values.push parse_date(parameters[:birth_date]).strip
+        if date_only_year?(parameters[:birth_date])
+            keys.push "YEAR(birth_date) = ?"
+            values.push expand_year(parameters[:birth_date].strip)
+        else
+            keys.push "birth_date = ? "
+            values.push parse_date(parameters[:birth_date]).strip
+        end
       end
     end
   
