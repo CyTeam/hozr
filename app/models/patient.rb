@@ -33,4 +33,20 @@ class Patient < ActiveRecord::Base
   def birth_date
     read_attribute(:birth_date).strftime("%d.%m.%Y") unless read_attribute(:birth_date).nil?
   end
+
+  def in_place_doctor_patient_nr
+    doctor_patient_nr ? doctor_patient_nr : ("&nbsp" * 5)
+  end
+  
+  def in_place_doctor_patient_nr=(value)
+    write_attribute(:doctor_patient_nr, value)
+  end
+
+  def in_place_insurance_nr
+    insurance_nr ? insurance_nr : ("&nbsp" * 5)
+  end
+  
+  def in_place_insurance_nr=(value)
+    write_attribute(:insurance_nr, value)
+  end
 end
