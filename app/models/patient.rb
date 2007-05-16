@@ -29,4 +29,8 @@ class Patient < ActiveRecord::Base
   def birth_date_before_type_cast
     read_attribute(:birth_date).strftime("%d.%m.%Y") unless read_attribute(:birth_date).nil?
   end
+
+  def birth_date
+    read_attribute(:birth_date).strftime("%d.%m.%Y") unless read_attribute(:birth_date).nil?
+  end
 end
