@@ -4,6 +4,15 @@ class PatientsController < ApplicationController
   auto_complete_for_vcard :vcard
   auto_complete_for_vcard :billing_vcard
   
+  in_place_edit_for :vcard, :family_name
+  in_place_edit_for :vcard, :given_name
+  in_place_edit_for :vcard, :street_address
+  in_place_edit_for :vcard, :postal_code
+  in_place_edit_for :vcard, :locality
+  in_place_edit_for :patient, :birth_date
+  in_place_edit_for :patient, :doctor_patient_nr
+  in_place_edit_for :patient, :insurance_nr
+  
   def auto_complete_for_patient_full_name
     @patients = Patient.find(:all, 
       :conditions => [ Patient.connection.concat(:family_name, ' ', :given_name) + " LIKE ?",
