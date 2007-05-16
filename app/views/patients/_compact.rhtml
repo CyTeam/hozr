@@ -6,9 +6,9 @@
   <%= link_to(h("#{patient.vcard.street_address}"), {:controller => '/patients', :action => 'edit', :id => patient}, :target => "_blank") %><br />
   <%=h "#{patient.vcard.postal_code} #{patient.vcard.locality}" %><br />
   <% unless patient.birth_date.nil? %>
-    <% if patient.birth_date.month == 1 and patient.birth_date.day == 1 %><span style="background-color: red"><% end %>
-    <%=h "#{patient.birth_date.strftime("%d.%m.%Y")}" %><br />
-    <% if patient.birth_date.month == 1 and patient.birth_date.day == 1 %></span><% end %>
+    <% if patient.birth_date.starts_with?("01.01.") %><span style="background-color: red"><% end %>
+    <%=h patient.birth_date %><br />
+    <% if patient.birth_date.starts_with?("01.01.") %></span><% end %>
   <% end %>
 </div>
 <div>
