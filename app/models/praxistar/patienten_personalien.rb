@@ -112,7 +112,7 @@ class Praxistar::PatientenPersonalien < Praxistar::Base
         :KK_Garant_ID => hozr_record.insurance_id,
         :tx_KK_MitgliedNr => hozr_record.insurance_nr,
         :ZuwArzt_ID => hozr_record.doctor_id,
-        :tx_Geburtsdatum => hozr_record.birth_date,
+        :tx_Geburtsdatum => hozr_record.birth_date_db,
         :tx_Aufnahmedatum => hozr_record.created_at,
         :dt_Mutationsdatum => hozr_record.updated_at,
         :mo_Bemerkung => hozr_record.remarks,
