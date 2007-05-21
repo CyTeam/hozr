@@ -44,16 +44,16 @@ class Praxistar::Base < ActiveRecord::Base
         export.save
         
         print "Error #{self.name}(#{h.id}): #{ex.message}\n"
-        h.logger.info "Error #{self.name}(#{h.id}): #{ex.message}\n"
-        h.logger.info ex.backtrace.join("\n\t")
-        h.logger.info "\n"
+        h.logger.warn "Error #{self.name}(#{h.id}): #{ex.message}\n"
+        h.logger.warn ex.backtrace.join("\n\t")
+        h.logger.warn "\n"
       end
     end
   
     export.finished_at = Time.now
     export.save
   
-    logger.info(export.attributes.to_yaml)
+    logger.warn(export.attributes.to_yaml)
     return export
   end
 end
