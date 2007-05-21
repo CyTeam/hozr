@@ -1,9 +1,0 @@
-<h1>Leistungsblatt Export Status</h1>
-<% for export in Praxistar::Exports.find(:all, :conditions => "model = 'Cyto::Case' AND finished_at IS NULL") %>
-  <p>
-    Gestartet um: <%=h export.started_at %><br/>
-    Anzahl: <%=h export.record_count %><br/>
-    Erledigt: <%=h export.create_count %><br/>
-  </p>
-<% end %>
-<%= button_to "Neu laden", :action => :praxistar_create_all_leistungsblatt_status %>

@@ -1,0 +1,14 @@
+<table class="listing">
+  <tr>
+    <th>Gestartet um</th>
+    <th>Anzahl</th>
+    <th>Erledigt</th>
+  </tr>
+  <% for export in Praxistar::Exports.find(:all, :conditions => "model = 'Cyto::Case'", :order => 'finished_at DESC', :limit => 10) %>
+    <tr>
+      <td><%=h export.started_at %></td>
+      <td><%=h export.update_count %></td>
+      <td><%=h export.create_count %></td>
+    </tr>
+  <% end %>
+</table>
