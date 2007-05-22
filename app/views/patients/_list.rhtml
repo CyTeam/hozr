@@ -11,6 +11,7 @@
       <th>PatientenNr.</th>
       <th>Versicherung</th>
       <th>VersicherungsNr.</th>
+      <th />
     </tr>
     
   <% for patient in @patients %>
@@ -26,6 +27,11 @@
       <td><%= in_place_editor_field :patient, :in_place_doctor_patient_nr %></td>
       <td><%= patient.insurance.vcard.full_name if patient.insurance %></td>
       <td><%= in_place_editor_field :patient, :in_place_insurance_nr %></td>
+      <td>
+        <%= link_to image_tag("show"), :action => 'show', :id => patient %>
+        <%= link_to image_tag("edit"), :action => 'edit', :id => patient %>
+        <%= link_to image_tag("remove"), { :action => 'destroy', :id => patient }, :confirm => 'Wirklich löschen?' %>
+      </td>
     </tr>
   <% end %>
   </table>
