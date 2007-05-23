@@ -1,4 +1,10 @@
 class DoctorsController < ApplicationController
+  in_place_edit_for :vcard, :family_name
+  in_place_edit_for :vcard, :given_name
+  in_place_edit_for :vcard, :street_address
+  in_place_edit_for :vcard, :postal_code
+  in_place_edit_for :vcard, :locality
+
   def index
     list
     render :action => 'list'
