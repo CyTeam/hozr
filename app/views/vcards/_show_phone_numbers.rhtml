@@ -1,5 +1,6 @@
 <div class="phone_number">
-  <% for @phone_number in vcard.phone_numbers %>
-    <span class="phone_number_type"><%= image_tag @phone_number.phone_number_type, :style => 'vertical-align: middle' %></span> <%= in_place_editor_field :phone_number, :number %><br/>
+  <% for @phone_number in vcard.phone_numbers.select { |nr| !nr.number.strip.empty? } %>
+    <span class="phone_number_type"><%= image_tag @phone_number.phone_number_type, :style => 'vertical-align: middle' %></span>
+    <%= in_place_editor_field :phone_number, :number %><br/>
   <% end %>
 </div>
