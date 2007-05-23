@@ -22,11 +22,12 @@ class Praxistar::Base < ActiveRecord::Base
     
     for h in records
       begin
-        attributes = export_attributes(h)
         if exists?(h.id)
+          attributes = export_attributes(h, false)
           update(h.id, attributes)
           export.update_count += 1
         else
+          attributes = export_attributes(h, true)
           p = new(attributes)
           p.id = h.id
           p.save

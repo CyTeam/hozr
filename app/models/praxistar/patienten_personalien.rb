@@ -92,8 +92,8 @@ class Praxistar::PatientenPersonalien < Praxistar::Base
     print import.attributes.to_yaml
   end
   
-  def self.export_attributes(hozr_record)
-    {
+  def self.export_attributes(hozr_record, new_record)
+    result = {
         :tx_Ort => hozr_record.vcard.locality,
         :tx_TelefonP => hozr_record.vcard.phone_number,
         :tx_TelefonN => hozr_record.vcard.mobile_number,
@@ -121,10 +121,12 @@ class Praxistar::PatientenPersonalien < Praxistar::Base
         :tf_fakt_Aktiv => hozr_record.use_billing_address,
         :tf_Exitus => hozr_record.deceased,
         
-        :ln_Patienten_Nr => hozr_record.id + 200000,
-        
         # const attributes
         :Mandant_ID => 1
       }
+
+      result[:ln_Patienten_Nr] = hozr_record.id + 200000 if new_record
+
+      return result
   end
 end
