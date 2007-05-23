@@ -6,8 +6,8 @@
   <li><%= link_to "Befunde", :controller => 'cyto/finding_classes' %></li>
 
   <li><%= link_to "Mitarbeiter", :controller => 'employees' %></li>
-
   <li>
+    
     <%= link_to_remote("Rechnungen generieren", :update => 'create_all_leistungsblatt_log', :loading => "Element.show('#{loading_indicator_id({:id => 'create_all_leistungsblatt'})}')", :url => {:action => 'praxistar_create_all_leistungsblatt'} ) %></li>
     <div id="create_all_leistungsblatt_log">
       <%= loading_indicator_tag :id => 'create_all_leistungsblatt' %>
@@ -24,6 +24,5 @@
       <%= loading_indicator_tag :id => 'import_order_forms' %>
     </div>
   </li>
-
   <li><%= link_to "Zweiteingabe für PAP aus 2006", :controller => '/cyto/diagnose', :action => 'deprecated_second_entry_pap_form' %></li>
 </ul>
