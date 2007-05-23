@@ -5,7 +5,7 @@
         <legend>Personalien</legend>
         <%= form_remote_tag( :update => 'search_result', :loading => "Element.show('#{loading_indicator_id({:id => 'search'})}')", :url => {:action => "search"} ) %>
           <table>
-            <%= render :partial => '/vcards/form', :locals => { :vcard_name => 'vcard', :vcard => nil } %>
+            <%= render :partial => '/vcards/form', :locals => { :vcard_name => 'vcard', :vcard => nil, :auto_complete => false } %>
             <% fields_for 'patient', @patient, :builder => Rubaidh::TabularForm::TabularFormBuilder do |f| %>
               <%= f.text_field :birth_date, :label => "Geburtsdat." %>
             <% end %>
