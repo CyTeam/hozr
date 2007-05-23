@@ -1,4 +1,8 @@
-<%= render :partial => 'compact', :object => @doctor %>
+<%= render :partial => 'compact_frame', :object => @doctor %>
+
+<div>
+Resultat Brief: <%= link_to 'Anzeigen', "/doctor_letters/doctor-letter-#{@doctor.id}.pdf" %><%= link_to 'Drucken', :action => :print_letter, :id => @doctor %>
+</div>
 
 <%= link_to 'Edit', :action => 'edit', :id => @doctor %> |
 <%= link_to 'Back', :action => 'list' %>

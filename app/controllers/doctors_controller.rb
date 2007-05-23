@@ -55,4 +55,10 @@ class DoctorsController < ApplicationController
     Doctor.find(params[:id]).destroy
     redirect_to :action => 'list'
   end
+
+
+  def print_letter
+    system("/usr/local/bin/hozr_print_doctor_letter.sh", params[:id])
+    render :text => 'Gedruckt'
+  end
 end
