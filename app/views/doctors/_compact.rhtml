@@ -10,6 +10,8 @@
 <div style="background-color: #f9d600; padding: 8px"/>
   <%= render :partial => "vcards/show_phone_numbers", :locals => { :vcard => doctor.praxis } %>
 </div>
-<%= link_to "[Anzeigen]", :controller => 'doctors', :action => :show, :id => doctor %>
-<%= link_to "[Editieren]", :controller => 'doctors', :action => :edit, :id => doctor %>
+<div style="float: right; margin-top: -30px; margin-right: 10px">
+  <%= link_to image_tag("show"), :controller => 'doctors', :action => :show, :id => doctor %>
+  <%= link_to image_tag("edit"), :controller => 'doctors', :action => :edit, :id => doctor %>
+</div>
 </div>
