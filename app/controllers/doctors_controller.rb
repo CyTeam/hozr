@@ -60,7 +60,10 @@ class DoctorsController < ApplicationController
 
 
   def print_letter
-    system("/usr/local/bin/hozr_print_doctor_letter.sh", params[:id])
-    render :text => 'Gedruckt'
+    command = "/usr/local/bin/hozr_print_doctor_letter.sh #{params[:id]}"
+    stream = open("|#{command}")
+    output = stream.read
+ 
+    send_data output, :type => 'text/html; charset=utf-8', :disposition => 'inline'
   end
 end

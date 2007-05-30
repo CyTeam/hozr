@@ -24,5 +24,11 @@
       <%= loading_indicator_tag :id => 'import_order_forms' %>
     </div>
   </li>
+  <li>
+    <%= link_to_remote("Resultate drucken", :update => 'print_result_reports_log', :loading => "Element.show('#{loading_indicator_id({:id => 'print_result_reports'})}')", :url => {:action => 'print_result_reports'} ) %></li>
+    <div id="print_result_reports_log">
+      <%= loading_indicator_tag :id => 'print_result_reports' %>
+    </div>
+  </li>
   <li><%= link_to "Zweiteingabe für PAP aus 2006", :controller => '/cyto/diagnose', :action => 'deprecated_second_entry_pap_form' %></li>
 </ul>
