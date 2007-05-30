@@ -84,27 +84,36 @@ class SearchController < ApplicationController
       return conditions
     end
   end
-  
+
   def search
     # Use key and value arrays to build contitions
     case_keys = []
     case_values = []
-    
+    keys = []
+    values = []
+
     # Handle case params
     case_params = params[:case] || {}
-    
-    unless case_params[:praxistar_eingangsnr].nil? or case_params[:praxistar_eingangsnr].empty?
-      if case_params[:praxistar_eingangsnr].match /bis/
-        lower_bound, higher_bound = case_params[:praxistar_eingangsnr].split('bis')
-        case_keys.push "praxistar_eingangsnr BETWEEN ? AND ?"
-        case_values.push Cyto::CaseNr.new(lower_bound).to_s.strip
-        case_values.push Cyto::CaseNr.new(higher_bound).to_s.strip
-      else
-        case_keys.push "praxistar_eingangsnr = ?"
-        case_values.push Cyto::CaseNr.new(case_params[:praxistar_eingangsnr]).to_s.strip
+
+    # Handle praxistar_eingangsnr
+    all_params = case_params[:praxistar_eingangsnr]
+    unless all_params.nil? or all_params.empty?
+      for param in all_params.split(',').map {|v| v.strip}
+        if param.match /bis/
+          lower_bound, higher_bound = param.split('bis')
+          keys.push "praxistar_eingangsnr BETWEEN ? AND ?"
+          values.push Cyto::CaseNr.new(lower_bound).to_s.strip
+          values.push Cyto::CaseNr.new(higher_bound).to_s.strip
+        else
+          keys.push "praxistar_eingangsnr = ?"
+          values.push Cyto::CaseNr.new(param).to_s.strip
+        end
       end
     end
-    
+    case_keys.push(keys.join(" OR "))
+    case_values.push(*values)
+
+    # Handle entry_date
     unless case_params[:entry_date].nil? or case_params[:entry_date].empty?
       if case_params[:entry_date].match /bis/
         lower_bound, higher_bound = case_params[:entry_date].split('bis')
