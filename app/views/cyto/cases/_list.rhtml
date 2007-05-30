@@ -40,12 +40,6 @@
       <%= link_to "Auftrag", url_for_file_column(a_case.order_form, "file") %> <%= link_to "Klinische Symptome", url_for_file_column(a_case.order_form, "file", "remarks") %> <%= link_to "Personalien", url_for_file_column(a_case.order_form, "file", "address") %>
     <% end %>
     </td>
-    <td>
-      <%= link_to 'Erste machen', :controller => '/cyto/cases', :action => 'first_entry', :id => a_case if a_case.ready_for_first_entry %>
-      <%= link_to 'Zweite machen', :controller => '/cyto/cases', :action => 'second_entry_pap_form', :id => a_case if a_case.ready_for_second_entry %>
-      <%= link_to 'P16', :controller => '/cyto/cases', :action => 'second_entry_pap_form', :id => a_case if a_case.ready_for_p16 %>
-      <%= link_to 'Resultat anzeigen', :controller => '/cyto/cases', :action => 'result_report', :id => a_case if a_case.ready_for_result_report_printing %>
-    </td>
     <td><%= link_to image_tag('editinput'), :controller => '/cyto/cases', :action => 'edit', :id => a_case %></td>
     <td><%= link_to image_tag('remove'), { :controller => '/cyto/cases', :action => 'destroy', :id => a_case }, :confirm => 'Are you sure?', :post => true %></td>
   </tr>
