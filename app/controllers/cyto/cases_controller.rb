@@ -457,4 +457,14 @@ class Cyto::CasesController < ApplicationController
     
     redirect_to :controller => '/cyto/cases', :action => 'first_entry_queue'
   end
+
+  def print_result_report
+    ids = params[:id] ? params[:id] : params[:ids]
+    id_s = []
+    for id in ids
+      system("/usr/local/bin/hozr_print_result_report.sh", id)
+      id_s.push(id.to_s)
+    end
+    render :text => "Gedruckt: #{id_s.join ', '}"
+  end
 end

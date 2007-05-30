@@ -40,10 +40,20 @@
       <%= link_to "Auftrag", url_for_file_column(a_case.order_form, "file") %> <%= link_to "Klinische Symptome", url_for_file_column(a_case.order_form, "file", "remarks") %> <%= link_to "Personalien", url_for_file_column(a_case.order_form, "file", "address") %>
     <% end %>
     </td>
-    <td><%= link_to image_tag('editinput'), :controller => '/cyto/cases', :action => 'edit', :id => a_case %><%= link_to image_tag('remove'), { :controller => '/cyto/cases', :action => 'destroy', :id => a_case }, :confirm => 'Are you sure?', :post => true %></td>
+    <td>
+      <%= link_to image_tag('editinput'), :controller => '/cyto/cases', :action => 'edit', :id => a_case %>
+      <%= link_to image_tag('remove'), { :controller => '/cyto/cases', :action => 'destroy', :id => a_case }, :confirm => 'Are you sure?', :post => true %>
+      <%= link_to image_tag('print'), :controller => '/cyto/cases', :action => :print_result_report, :id => a_case %>
+    </td>
   </tr>
 <% end %>
 </table>
+
+<%= link_to_remote image_tag('print'), :update => 'print_log', :loading => "Element.show('#{loading_indicator_id({:id => 'print'})}')", :url => { :controller => '/cyto/cases', :action => :print_result_report, :ids => @cases.map { |c| c.id } } %>
+
+<div id="print_log" style="border: solid 1px; background-color: #BBBBBB">
+    <%= loading_indicator_tag :id => 'print' %>
+</div>
 
 <%= link_to 'Previous page', { :page => @case_pages.current.previous, :order => params[:order] } if @case_pages and @case_pages.current.previous %>
 <%= link_to 'Next page', { :page => @case_pages.current.next, :order => params[:order] } if @case_pages and @case_pages.current.next %> 
