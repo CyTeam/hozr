@@ -99,8 +99,8 @@ class SearchController < ApplicationController
     all_params = case_params[:praxistar_eingangsnr]
     unless all_params.nil? or all_params.empty?
       for param in all_params.split(',').map {|v| v.strip}
-        if param.match /bis/
-          lower_bound, higher_bound = param.split('bis')
+        if param.match /bis|-/
+          lower_bound, higher_bound = param.split(/bis|-/)
           keys.push "praxistar_eingangsnr BETWEEN ? AND ?"
           values.push Cyto::CaseNr.new(lower_bound).to_s.strip
           values.push Cyto::CaseNr.new(higher_bound).to_s.strip
