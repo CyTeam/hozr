@@ -46,8 +46,8 @@
       <%= link_to 'P16', :controller => '/cyto/cases', :action => 'second_entry_pap_form', :id => a_case if a_case.ready_for_p16 %>
       <%= link_to 'Resultat anzeigen', :controller => '/cyto/cases', :action => 'result_report', :id => a_case if a_case.ready_for_result_report_printing %>
     </td>
-    <td><%= link_to 'Edit', :controller => '/cyto/cases', :action => 'edit', :id => a_case %></td>
-    <td><%= link_to 'Destroy', { :controller => '/cyto/cases', :action => 'destroy', :id => a_case }, :confirm => 'Are you sure?', :post => true %></td>
+    <td><%= link_to image_tag('editinput'), :controller => '/cyto/cases', :action => 'edit', :id => a_case %></td>
+    <td><%= link_to image_tag('remove'), { :controller => '/cyto/cases', :action => 'destroy', :id => a_case }, :confirm => 'Are you sure?', :post => true %></td>
   </tr>
 <% end %>
 </table>
