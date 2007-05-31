@@ -447,6 +447,12 @@ class Cyto::CasesController < ApplicationController
     end
   end
 
+  def assign_list
+    @cases = Case.find(params[:case_ids]
+
+    render :action => 'assign'
+  end
+
   def assigned
     case_ids = params[:case_ids].split(',')
     @cases = Case.find(case_ids, :order => 'intra_day_id' )
