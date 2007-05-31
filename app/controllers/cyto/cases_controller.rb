@@ -454,14 +454,23 @@ class Cyto::CasesController < ApplicationController
     render :action => 'assign'
   end
 
+  # Show list of assignings.
+  def assignings_list
+    @assignings = Case.find_by_sql('SELECT assigned_at, min(intra_day_id) AS min_intra_day_id, max(intra_day_id) AS max_intra_day_id, min(praxistar_eingangsnr) AS min_praxistar_eingangsnr, max(praxistar_eingangsnr) AS max_praxistar_eingangsnr FROM cases GROUP BY assigned_at ORDER BY assigned_at DESC LIMIT 5')
+  end
+
+  # Mark cases as assigned.
   def assigned
     case_ids = params[:case_ids].split(',')
     @cases = Case.find(case_ids, :order => 'intra_day_id' )
+
+    # All cases of one assignment run should have the same timestamp
+    assigned_at = DateTime.now
     for a_case in @cases
-      a_case.assigned_at = DateTime.now
+      a_case.assigned_at = assigned_at
       a_case.save!
     end
-    
+
     redirect_to :controller => '/cyto/cases', :action => 'first_entry_queue'
   end
 
