@@ -110,9 +110,10 @@ class SearchController < ApplicationController
         end
       end
     end
-    case_keys.push(keys.join(" OR "))
-    case_values.push(*values)
 
+    case_keys.push(keys.join(" OR ")) unless keys.empty?
+    case_values.push(*values)
+    
     # Handle entry_date
     unless case_params[:entry_date].nil? or case_params[:entry_date].empty?
       if case_params[:entry_date].match /bis/
@@ -203,7 +204,6 @@ class SearchController < ApplicationController
     
     case_keys.push key
     case_values.push *values
-    
     
     # Build conditions array
     case_conditions = !case_keys.compact.empty? ? [  case_keys.compact.join(" AND "), *case_values ] : nil
