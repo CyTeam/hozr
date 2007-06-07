@@ -8,7 +8,7 @@ class Cyto::OrderForm < ActiveRecord::Base
       :address => {:transformation => Proc.new { |image| image.crop(::Magick::NorthWestGravity, image.rows, image.columns * 0.5, true) }, :size => "560"},
       :remarks => {:transformation => :extract_remarks },
       :result_remarks => {:transformation => :extract_result_remarks, :size => "620"},
-      :overview => {:transformation => Proc.new { |image| image.crop(::Magick::NorthWestGravity, 100, 75, 1055, 360, true) } }
+      :overview => {:transformation => Proc.new { |image| image.crop(::Magick::NorthWestGravity, 0, 75, 1155, 360, true) } }
     }
   }
 
