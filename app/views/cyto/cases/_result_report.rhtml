@@ -41,8 +41,18 @@ Befund
 </div>
 
 <div id="findings">
-<% for finding in @case.finding_classes %>
-<%=h finding.name %><br />
+  <div id="finding_list">
+    <%= render :partial => 'list_findings' %>
+  </div>
+</div>
+
+<div id="special_findings">
+<% for finding in @case.control_findings %>
+<div class='<%= finding_css_class(finding) %>'><%=h finding.name %></div>
+<% end %>
+<br/>
+<% for finding in @case.quality_findings %>
+<div class='<%= finding_css_class(finding) %>'><%=h finding.name %></div>
 <% end %>
 </div>
 
