@@ -448,15 +448,14 @@ class Cyto::CasesController < ApplicationController
   end
 
   def assign_list
-    case_ids = params[:case_ids].split(',')
-    @cases = Case.find(case_ids, :order => 'intra_day_id' )
+    @cases = Case.find(:all, :conditions => ['assigned_at = ?', params[:assigned_at]], :order => 'intra_day_id' )
 
     render :action => 'assign'
   end
 
   # Show list of assignings.
   def assignings_list
-    @assignings = Case.find_by_sql('SELECT assigned_at, min(intra_day_id) AS min_intra_day_id, max(intra_day_id) AS max_intra_day_id, min(praxistar_eingangsnr) AS min_praxistar_eingangsnr, max(praxistar_eingangsnr) AS max_praxistar_eingangsnr FROM cases GROUP BY assigned_at ORDER BY assigned_at DESC LIMIT 5')
+    @assignings = Case.find_by_sql('SELECT assigned_at, min(intra_day_id) AS min_intra_day_id, max(intra_day_id) AS max_intra_day_id, min(praxistar_eingangsnr) AS min_praxistar_eingangsnr, max(praxistar_eingangsnr) AS max_praxistar_eingangsnr, count(*) AS count FROM cases GROUP BY assigned_at ORDER BY assigned_at DESC LIMIT 5')
   end
 
   # Mark cases as assigned.

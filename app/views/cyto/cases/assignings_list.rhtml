@@ -1,14 +1,14 @@
 <h1>Anschreiblisten</h1>
 
-<table>
-  <th>Zugewiesen um</th>
+<table class="listing">
+  <th>Zugewiesen</th>
   <th>Anzahl</th>
   <th>Tagesnummern</th>
   <th>Eingangsnummern</th>
 
 <% for assigning in @assignings %>
   <tr>
-    <td><%= assigning.assigned_at %></td>
+    <td><%= link_to(assigning.assigned_at.strftime('Am %d.%m.%Y um %H:%M'), :controller => '/cyto/cases', :action => 'assign_list', :assigned_at => assigning.assigned_at.strftime('%Y-%m-%d %H:%M:%S')) %></td>
     <td><%= assigning.count %></td>
     <td><%= assigning.min_intra_day_id %> - <%= assigning.max_intra_day_id %></td>
     <td><%= assigning.min_praxistar_eingangsnr %> - <%= assigning.max_praxistar_eingangsnr %></td>

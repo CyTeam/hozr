@@ -30,5 +30,7 @@
       <%= loading_indicator_tag :id => 'print_result_reports' %>
     </div>
   </li>
+  <li><%= link_to "Letzte Anschreiblisten", :controller => '/cyto/cases', :action => 'assignings_list' %></li>
+
   <li><%= link_to "Zweiteingabe für PAP aus 2006", :controller => '/cyto/diagnose', :action => 'deprecated_second_entry_pap_form' %></li>
 </ul>
