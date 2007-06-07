@@ -42,7 +42,7 @@
     </td>
     <td>
       <%= link_to image_tag('editinput'), :controller => '/cyto/cases', :action => 'edit', :id => a_case %>
-      <%= link_to image_tag('remove'), { :controller => '/cyto/cases', :action => 'destroy', :id => a_case }, :confirm => 'Are you sure?', :post => true %>
+      <%= link_to image_tag('remove'), { :controller => '/cyto/cases', :action => 'destroy', :id => a_case }, :confirm => 'Are you sure?', :post => true if false %>
       <%= link_to image_tag('print'), :controller => '/cyto/cases', :action => :print_result_report, :id => a_case %>
     </td>
   </tr>
