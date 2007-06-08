@@ -33,7 +33,7 @@ class ReportsController < ApplicationController
       if value.match /.*-.*-.*/
         return value
       end
-      day, month, year = value.split('.')
+      day, month, year = value.split('.').map {|s| s.to_i}
       month ||= Date.today.month
       year ||= Date.today.year
       year = 2000 + year.to_i if year.to_i < 100

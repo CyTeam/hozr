@@ -34,7 +34,7 @@ class PatientsController < ApplicationController
       if value.match /.*-.*-.*/
         return value
       end
-      day, month, year = value.split('.')
+      day, month, year = value.split('.').map {|s| s.to_i}
       month ||= Date.today.month
       year ||= Date.today.year
       year = expand_year(year, 1900)
