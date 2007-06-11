@@ -1,3 +1,6 @@
+include Cyto
+include Praxistar
+
 class Patient < ActiveRecord::Base
   belongs_to :insurance
   belongs_to :doctor
