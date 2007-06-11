@@ -1,5 +1,3 @@
-include Cyto
-
 class SearchController < ApplicationController
   helper :doctors
   auto_complete_for_vcard :vcard
@@ -208,7 +206,7 @@ class SearchController < ApplicationController
     # Build conditions array
     case_conditions = !case_keys.compact.empty? ? [  case_keys.compact.join(" AND "), *case_values ] : nil
     
-    @cases = Case.find :all, :select => 'DISTINCT cases.*', :joins => "LEFT JOIN patients ON patient_id = patients.id LEFT JOIN vcards ON (patients.vcard_id = vcards.id OR patients.billing_vcard_id = vcards.id) LEFT JOIN addresses ON vcards.id = addresses.vcard_id", :conditions => case_conditions, :limit => 100
+    @cases = Cyto::Case.find :all, :select => 'DISTINCT cases.*', :joins => "LEFT JOIN patients ON patient_id = patients.id LEFT JOIN vcards ON (patients.vcard_id = vcards.id OR patients.billing_vcard_id = vcards.id) LEFT JOIN addresses ON vcards.id = addresses.vcard_id", :conditions => case_conditions, :limit => 100
     
     render :partial => '/cyto/cases/list'
   end
