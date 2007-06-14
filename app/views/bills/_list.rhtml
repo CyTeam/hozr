@@ -1,0 +1,28 @@
+<table class="listing" width="100%">
+	<tr>
+               	<th>Name, Vorname</th>
+               	<th>Adresse</th>
+               	<th>Eingangsnr.</th>
+               	<th>Nummer</th>
+               	<th>Datum</th>
+               	<th>Betrag</th>
+               	<th>Mahnungen</th>
+               	<th>Zahlung</th>
+               	<th>Stornierung</th>
+               	<th>Bemerkung</th>
+	</tr>
+	<% for bill in @bills %>
+	<tr style="color:< %= bill.stornostatus %>">
+		<td style="text-align: left"><b style="color:black"><a href="?action=new_examination&amp;state=edit&amp;patient_id=<%= bill["id_patient"] %>" tabindex="<%= bill["tabindex"] %>"><%= bill["tx_name"] %>, <%= bill["tx_vorname"] %><br/> <%= bill["geburtsdatum"] %></a> <a target="_blank" href="http://tel.search.ch/result.html?private=1&amp;name=<%= bill["tx_name"] %>&amp;ort=<%= bill["tx_ort"] %>&amp;strasse=<%= bill["tx_strasse"] %>"><img width="16" height="16" src="/histo/edit_patient.png" alt="tel.search.ch"/></a></b></td>
+		<td style="text-align: left"><%= bill["tx_strasse"] %>, <%= bill["tx_plz"] %> <%= bill["tx_ort"] %></td>
+		<td style="text-align: right"><%= bill["eingangs_nr"] %> - <%= bill["eingang"] %></td>
+		<td style="text-align: right"><%= bill["rechnung_id"] %></td>
+		<td style="text-align: left"><%= bill["rechnungsdatum"] %></td>
+		<td style="text-align: right; background-color: <%= bill["rechnungsstatus"] %>"><b><%= bill["rechnungsbetrag"] %></b></td>
+		<td style="text-align: left"><b><%= bill["mahnung1"] %> <%= bill["mahnung2"] %> <%= bill["mahnung3"] %></b></td>
+		<td style="text-align: left"><%= bill["zahlung"] %></td>
+		<td style="text-align: left"><b><%= bill["stornierung"] %> <%= bill["storno_grund"] %></b></td>
+		<td style="text-align: left"><%= bill["bemerkung"] %></td>
+	</tr>
+        <% end %>
+</table>
