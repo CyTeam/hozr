@@ -485,7 +485,7 @@ class Cyto::CasesController < ApplicationController
     ids = params[:id] ? params[:id] : params[:ids]
     id_s = []
     for id in ids
-      system("/usr/local/bin/hozr_print_result_report.sh", id)
+      system("/usr/local/bin/hozr_print_result_report.sh", id, "--force")
       id_s.push(id.to_s)
     end
     render :text => "Gedruckt: #{id_s.join ', '}"
