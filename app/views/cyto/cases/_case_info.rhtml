@@ -13,8 +13,8 @@
   </tr>
   
   <% photos_path = '/srv/zyto-labor.com/hozr/public/photos/' %>
-  <% photos = Dir.glob( photos_path + case_info.praxistar_eingangsnr + '*.png') %>
-  <% unless photos.empty? %>
+  <% photos = Dir.glob( photos_path + case_info.praxistar_eingangsnr + '*.png') unless case_info.praxistar_eingangsnr.nil? %>
+  <% unless photos.nil? or photos.empty? %>
   <tr>
     <th>Fotos:</th>
     <td>
