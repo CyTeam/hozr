@@ -168,6 +168,8 @@ class Cyto::CasesController < ApplicationController
       next_open = Case.find :first, :conditions => ["entry_date IS NULL and id > #{@case.id}"]
       if next_open.nil?
         redirect_to :action => 'first_entry_queue'
+      elsif next_open.praxistar_eingangsnr.nil? or next_open.doctor.nil?
+        redirect_to :action => 'unassigned_form'
       else
         redirect_to :action => 'first_entry', :id => next_open
       end
