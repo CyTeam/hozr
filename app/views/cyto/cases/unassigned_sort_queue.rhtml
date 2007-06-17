@@ -1,6 +1,6 @@
 <h1>Tages Scans</h1>
 
-<%= form_tag :action => 'unassigned_queue' %>
+<%= form_tag({:action => 'unassigned_queue'}, :name => "unassigned") %>
   <table>
   <% next_eingangs_nr = Cyto::CaseNr.new %>
   <% intra_day_id = @intra_day_id %>
@@ -11,14 +11,14 @@
       <td>
         <%= link_to(image_tag(url_for_image_column(@a_case.order_form, "file", :head)), url_for_file_column(@a_case.order_form, "file")) unless @a_case.order_form.nil? or @a_case.order_form.file.nil? %>
       </td>
-      <td style="border-top: solid 2px; border-bottom: solid 2px">
+      <td style="border-top: solid 2px; border-bottom: solid 2px; vertical-align: bottom">
         <% 
           @a_case.intra_day_id = intra_day_id
           intra_day_id += 1
         %>
-        Tagesnr.: <%= text_field "a_case[]", 'intra_day_id', :size => 4 %>
-        <br />
-        <%= button_to_function( 'Löschen', remote_function( :url => {:action => :destroy, :id => a_case }) )%>
+        <%= button_to_function( 'Löschen', remote_function( :url => {:action => :destroy, :id => a_case }) )%><br/>
+        Tagesnr.: <%= text_field "a_case[]", 'intra_day_id', :size => 4, :tabindex => intra_day_id + 10000, :onfocus => "this.value = parseInt($('a_case_#{a_case.id - 1}_intra_day_id').value) + 1"%><br/>
+        Abstrichdatum.: <%= text_field "a_case[]", 'examination_date', :size => 8, :tabindex => intra_day_id, :onfocus => "this.value = $('a_case_#{a_case.id - 1}_examination_date').value" %>
       </td>
     </tr>
   <% end %>
