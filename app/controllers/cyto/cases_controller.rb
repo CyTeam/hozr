@@ -419,7 +419,8 @@ class Cyto::CasesController < ApplicationController
   end
   
   def unassigned_form
-    @first_case =Cyto::Case.find(:first, :conditions => 'assigned_at IS NULL' )
+    @first_case = Cyto::Case.find(:first, :conditions => 'assigned_at IS NULL' )
+    @case_count = Cyto::Case.count(:all, :conditions => 'assigned_at IS NULL' )
   end
   
   def unassigned_sort_queue

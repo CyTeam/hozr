@@ -1,5 +1,9 @@
 <h1>Auftragsformular</h1>
 
+<p>
+  Es gibt <%= @case_count %> Auftragsformulare.
+</p>
+
 <% if @first_case %>
   <%= image_tag url_for_image_column(@first_case.order_form, "file", :overview), :size => "500x156" unless @first_case.order_form.nil? or @first_case.order_form.file.nil?%>
 
