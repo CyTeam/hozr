@@ -5,7 +5,7 @@
 <% a_case = @a_case %>
   <tr>
     <td>
-      <%= image_tag url_for_image_column(@a_case.order_form, "file", :overview), :size => "500x156" unless @a_case.order_form.nil? or @a_case.order_form.file.nil?%>
+      <%= link_to(image_tag(url_for_image_column(@a_case.order_form, "file", :head)), url_for_file_column(@a_case.order_form, "file")) unless @a_case.order_form.nil? or @a_case.order_form.file.nil? %>
     </td>
     <td style="border-top: solid 2px; border-bottom: solid 2px">
       Tagesnr.: <%=h a_case.intra_day_id %><br />
