@@ -428,29 +428,14 @@ class Cyto::CasesController < ApplicationController
     @intra_day_id = params[:case][:intra_day_id].to_i
   end
   
-  def unassigned_queue
-    case_ids = params[:a_case].keys
-
-    @cases =Cyto::Case.find(case_ids, :order => 'intra_day_id')
-    for a_case in @cases
-      a_case.update_attributes(params[:a_case][a_case.id.to_s])
-      a_case.save!
-    end
-
-    @cases =Cyto::Case.find(case_ids, :order => 'intra_day_id')
-  end
-
   def assign
-    doctor_id = nil
+    assigned_at = DateTime.now
 
     case_ids = params[:a_case].keys
-    @cases =Cyto::Case.find(case_ids, :order => 'intra_day_id' )
+    @cases = Cyto::Case.find(case_ids, :order => 'intra_day_id' )
+
     for a_case in @cases
-      unless params[:a_case][a_case.id.to_s][:doctor_id].nil? or params[:a_case][a_case.id.to_s][:doctor_id].empty?
-        doctor_id = params[:a_case][a_case.id.to_s][:doctor_id]
-      end
-      
-      params[:a_case][a_case.id.to_s][:doctor_id] = doctor_id
+      a_case.assigned_at = assigned_at
       a_case.update_attributes(params[:a_case][a_case.id.to_s])
       a_case.save!
     end
@@ -465,21 +450,6 @@ class Cyto::CasesController < ApplicationController
   # Show list of assignings.
   def assignings_list
     @assignings =Cyto::Case.find_by_sql('SELECT assigned_at, min(intra_day_id) AS min_intra_day_id, max(intra_day_id) AS max_intra_day_id, min(praxistar_eingangsnr) AS min_praxistar_eingangsnr, max(praxistar_eingangsnr) AS max_praxistar_eingangsnr, count(*) AS count FROM cases GROUP BY assigned_at ORDER BY assigned_at DESC LIMIT 5')
-  end
-
-  # Mark cases as assigned.
-  def assigned
-    case_ids = params[:case_ids].split(',')
-    @cases =Cyto::Case.find(case_ids, :order => 'intra_day_id' )
-
-    # All cases of one assignment run should have the same timestamp
-    assigned_at = DateTime.now
-    for a_case in @cases
-      a_case.assigned_at = assigned_at
-      a_case.save!
-    end
-
-    redirect_to :controller => '/cyto/cases', :action => 'first_entry_queue'
   end
 
   def print_result_report

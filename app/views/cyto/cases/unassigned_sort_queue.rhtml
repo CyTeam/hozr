@@ -1,6 +1,6 @@
 <h1>Tages Scans</h1>
 
-<%= form_tag({:action => 'unassigned_queue'}, :name => "unassigned") %>
+<%= form_tag({:action => 'assign'}, :name => "unassigned") %>
   <table>
   <% next_eingangs_nr = Cyto::CaseNr.new %>
   <% intra_day_id = @intra_day_id %>
@@ -15,10 +15,24 @@
         <% 
           @a_case.intra_day_id = intra_day_id
           intra_day_id += 1
+          @a_case.praxistar_eingangsnr ||= next_eingangs_nr.to_s
+          next_eingangs_nr.inc!
         %>
         <%= button_to_function( 'Löschen', remote_function( :url => {:action => :destroy, :id => a_case }) )%><br/>
-        Tagesnr.: <%= text_field "a_case[]", 'intra_day_id', :size => 4, :tabindex => intra_day_id + 10000, :onfocus => "this.value = parseInt($('a_case_#{a_case.id - 1}_intra_day_id').value) + 1"%><br/>
-        Abstrichdatum.: <%= text_field "a_case[]", 'examination_date', :size => 8, :tabindex => intra_day_id, :onfocus => "this.value = $('a_case_#{a_case.id - 1}_examination_date').value" %>
+        <table>
+          <tr>
+            <td>Eingangsnr:</td><td><%= text_field "a_case[]", 'praxistar_eingangsnr', :size => 10, :tabindex => intra_day_id + 30000 %></td>
+          </tr>
+          <tr>
+            <td>Tagesnr.:</td><td><%= text_field "a_case[]", 'intra_day_id', :size => 4, :tabindex => intra_day_id , :onfocus => "this.value = parseInt($('a_case_#{a_case.id - 1}_intra_day_id').value) + 1" %></td>
+          </tr>
+          <tr>
+            <td>Abstrichdatum.:</td><td><%= text_field "a_case[]", 'examination_date', :size => 8, :tabindex => intra_day_id + 10000, :onfocus => "this.value = $('a_case_#{a_case.id - 1}_examination_date').value" %></td>
+          </tr>
+          <tr>
+            <td>Arzt:</td><td><%= select 'a_case[]', 'doctor_id', Doctor.find(:all, :include => :praxis, :order => 'family_name, given_name').collect { |m| [ [ m.family_name, m.given_name ].join(", ") + " (#{m.praxis.locality})", m.id ] }, { :include_blank => true }, :tabindex => intra_day_id + 20000, :onfocus => "this.value = $('a_case_#{a_case.id - 1}_doctor_id').value" %></td>
+          </tr>
+        </table>
       </td>
     </tr>
   <% end %>
