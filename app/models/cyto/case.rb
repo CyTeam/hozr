@@ -1,13 +1,15 @@
+include Cyto
+
 class Cyto::Case < ActiveRecord::Base
-  belongs_to :examination_method
-  belongs_to :classification
+  belongs_to :examination_method, :class_name => 'Cyto::ExaminationMethod'
+  belongs_to :classification, :class_name => 'Cyto::Classification'
   belongs_to :patient
   belongs_to :doctor
   belongs_to :screener, :class_name => 'Employee', :foreign_key => :screener_id
   belongs_to :insurance
   
   has_and_belongs_to_many :finding_classes
-  has_one :order_form
+  has_one :order_form, :class_name => 'Cyto::OrderForm'
   
   def control_findings
     finding_classes.select { |finding| finding.belongs_to_group?('Kontrolle') }
