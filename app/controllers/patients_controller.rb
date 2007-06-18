@@ -75,9 +75,14 @@ class PatientsController < ApplicationController
     keys = []
     values = []
     
-    unless parameters[:full_name].nil? or patient_parameters[:full_name].empty?
+    unless parameters[:full_name].nil? or parameters[:full_name].empty?
       keys.push "patient_id = ?"
-      values.push patient_parameters[:full_name].split(' ')[0].strip
+      values.push parameters[:full_name].split(' ')[0].strip
+    end
+    
+    unless parameters[:doctor_patient_nr].nil? or parameters[:doctor_patient_nr].empty?
+      keys.push "doctor_patient_nr = ?"
+      values.push parameters[:doctor_patient_nr].strip
     end
     
     unless parameters[:birth_date].nil? or parameters[:birth_date].empty?
