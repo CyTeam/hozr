@@ -121,6 +121,11 @@ class PatientsController < ApplicationController
 
     if vcard_conditions
         vcard_ids = Vcard.find :all, :include => :address, :limit => 1000, :conditions => vcard_conditions, :select => 'id'
+        if vcard_ids == []
+		@patients = []
+		render :partial => 'list'
+		return
+        end
     
         vcard_keys = "(vcard_id IN (#{vcard_ids.map {|vcard| vcard.id}.join ', '}) OR billing_vcard_id IN (#{vcard_ids.map {|vcard| vcard.id}.join ', '}))"
     else
