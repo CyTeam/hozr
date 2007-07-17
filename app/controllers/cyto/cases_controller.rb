@@ -449,7 +449,7 @@ class Cyto::CasesController < ApplicationController
 
   # Show list of assignings.
   def assignings_list
-    @assignings =Cyto::Case.find_by_sql('SELECT assigned_at, min(intra_day_id) AS min_intra_day_id, max(intra_day_id) AS max_intra_day_id, min(praxistar_eingangsnr) AS min_praxistar_eingangsnr, max(praxistar_eingangsnr) AS max_praxistar_eingangsnr, count(*) AS count FROM cases GROUP BY assigned_at ORDER BY assigned_at DESC LIMIT 5')
+    @assignings = Cyto::Case.find_by_sql('SELECT assigned_at, min(intra_day_id) AS min_intra_day_id, max(intra_day_id) AS max_intra_day_id, min(praxistar_eingangsnr) AS min_praxistar_eingangsnr, max(praxistar_eingangsnr) AS max_praxistar_eingangsnr, count(*) AS count FROM cases GROUP BY assigned_at ORDER BY assigned_at DESC LIMIT 10')
   end
 
   def print_result_report
