@@ -453,7 +453,7 @@ class Cyto::CasesController < ApplicationController
   end
 
   def print_result_report
-    ids = params[:id] ? params[:id] : params[:ids]
+    ids = params[:id] ? params[:id] : params[:ids].split('/')
     id_s = []
     for id in ids
       system("/usr/local/bin/hozr_print_result_report.sh", id, "--force")
