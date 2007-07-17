@@ -26,9 +26,9 @@
   </li>
   <li>
     <%= link_to_remote("Resultate drucken", :update => 'print_result_reports_log', :loading => "Element.show('#{loading_indicator_id({:id => 'print_result_reports'})}')", :url => {:action => 'print_result_reports'} ) %></li>
-    <div id="print_result_reports_log">
+    <pre id="print_result_reports_log">
       <%= loading_indicator_tag :id => 'print_result_reports' %>
-    </div>
+    </pre>
   </li>
   <li><%= link_to "Letzte Anschreiblisten", :controller => '/cyto/cases', :action => 'assignings_list' %></li>
 
