@@ -22,6 +22,7 @@ class Vcard < ActiveRecord::Base
   def post_office_box=(value)
     create_address if post_office_box.nil?
     address.post_office_box = value
+    address.save
   end
 
   def extended_address
@@ -31,6 +32,7 @@ class Vcard < ActiveRecord::Base
   def extended_address=(value)
     create_address if address.nil?
     address.extended_address = value
+    address.save
   end
 
   def street_address
@@ -40,6 +42,7 @@ class Vcard < ActiveRecord::Base
   def street_address=(value)
     create_address if address.nil?
     address.street_address = value
+    address.save
   end
 
   def locality
@@ -49,6 +52,7 @@ class Vcard < ActiveRecord::Base
   def locality=(value)
     create_address  if address.nil?
     address.locality = value
+    address.save
   end
 
   def region
@@ -58,6 +62,7 @@ class Vcard < ActiveRecord::Base
   def region=(value)
     create_address if address.nil?
     address.region = value
+    address.save
   end
 
   def postal_code
@@ -67,6 +72,7 @@ class Vcard < ActiveRecord::Base
   def postal_code=(value)
     create_address if address.nil?
     address.postal_code = value
+    address.save
   end
 
   def country_name
@@ -76,6 +82,7 @@ class Vcard < ActiveRecord::Base
   def country_name=(value)
     create_address if address.nil?
     address.country_name = value
+    address.save
   end
 
   def phone_number=(value)
