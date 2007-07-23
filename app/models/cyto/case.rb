@@ -11,6 +11,10 @@ class Cyto::Case < ActiveRecord::Base
   has_and_belongs_to_many :finding_classes
   has_one :order_form, :class_name => 'Cyto::OrderForm'
   
+  def bill
+    Praxistar::Bill.find(:first, :conditions => ['Leistungsblatt_ID = ?', praxistar_leistungsblatt_id])
+  end
+  
   def control_findings
     finding_classes.select { |finding| finding.belongs_to_group?('Kontrolle') }
   end

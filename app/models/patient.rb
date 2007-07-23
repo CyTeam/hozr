@@ -9,12 +9,15 @@ class Patient < ActiveRecord::Base
 
   has_many :cases, :class_name => 'Cyto::Case', :order => 'praxistar_eingangsnr DESC'
   has_many :finished_cases, :class_name => 'Cyto::Case', :conditions => 'screened_at IS NOT NULL', :order => 'praxistar_eingangsnr DESC'
-
-  has_many :payments
-  has_many :bills, :foreign_key => 'Patient_ID'
   
   validates_presence_of :birth_date
   
+  # Manual relations
+  def bills
+    cases.map { |a_case| a_case.bill }
+  end
+  
+  # Attributes
   def name
     vcard.full_name unless vcard.nil?
   end

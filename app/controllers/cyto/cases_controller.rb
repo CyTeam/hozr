@@ -1,7 +1,6 @@
 require "net/http"
 
 include Cyto
-
 class Cyto::CasesController < ApplicationController
   helper :doctors
   
