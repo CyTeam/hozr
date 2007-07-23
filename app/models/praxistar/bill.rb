@@ -6,6 +6,9 @@ class Praxistar::Bill < Praxistar::Base
   belongs_to :insurance, :foreign_key => 'Versicherung_ID'
   belongs_to :doctor, :foreign_key => 'Stellvertretung_ID'
   
+  has_one :account_receivable, :foreign_key => 'Rechnung_ID'
+  has_many :payments, :foreign_key => 'Rechnung_ID'
+    
   def cyto_case
     Cyto::Case.find(:first, :conditions => ['praxistar_leistungsblatt_id = ?', self[:Leistungsblatt_ID]])
   end

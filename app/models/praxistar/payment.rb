@@ -3,4 +3,5 @@ class Praxistar::Payment < Praxistar::Base
   set_primary_key "ID_Zahlungsjournal"
 
   belongs_to :patient, :foreign_key => "Patient_ID"
+  belongs_to :bill, :foreign_key => "Rechnung_ID"
 end
