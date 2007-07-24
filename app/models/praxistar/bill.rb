@@ -12,4 +12,15 @@ class Praxistar::Bill < Praxistar::Base
   def cyto_case
     Cyto::Case.find(:first, :conditions => ['praxistar_leistungsblatt_id = ?', self[:Leistungsblatt_ID]])
   end
+
+  def payment_state
+    return "cancelled" if account_receivable[:tf_Storno]
+    return "payed" unless payments.select { |payment| payment.dt_Bezahldatum }.empty?
+
+    if account_receivable[:dt_Betreibung]
+      return "prosecured"
+    elsif account_receivable[:dt_1Mahnung]
+      return "reminded"
+    end
+  end
 end

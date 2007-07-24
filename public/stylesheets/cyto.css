@@ -23,3 +23,22 @@ input.Finding_a {color: black; background-color: #00CC00; }
 input.Finding_b {color: black; background-color: yellow; }
 input.Finding_c {color: black; background-color: red; }
 
+tr.bill_state_cancelled {
+  color: grey;
+}
+
+td.bill_state_cancelled {
+  background-color: inherit;
+}
+
+td.bill_state_payed {
+  background-color: green;
+}
+
+td.bill_state_reminded {
+  background-color: yellow;
+}
+
+td.bill_state_prosecuted {
+  background-color: red;
+}
