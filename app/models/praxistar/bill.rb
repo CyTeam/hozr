@@ -23,4 +23,22 @@ class Praxistar::Bill < Praxistar::Base
       return "reminded"
     end
   end
+
+  def cancel(reason = "Storniert")
+    account_receivable[:tf_Storno] = true
+    account_receivable["tx_Storno_Begründung"] = reason
+    account_receivable[:tf_Aktiv] = false
+    account_receivable[:dt_Stornodatum] = Date.today
+    account_receivable.save
+    
+    self[:tf_Storno] = true
+    save
+  end
+
+  def reactivate(reason = "Reaktiviert")
+    cancel(reason)
+    a_case = cyto_case
+    a_case.praxistar_leistungsblatt_id = nil
+    a_case.save
+  end
 end

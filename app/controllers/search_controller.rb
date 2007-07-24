@@ -64,6 +64,16 @@ class SearchController < ApplicationController
     search
   end
   
+  def bill_search
+    bill_params = params[:bill]
+    if bill_params[:id].empty?
+      return nil
+    else
+      bill = Praxistar::Bill.find(bill_params[:id])
+      return [ 'patients.id = ?', bill.patient.id ] 
+    end
+  end
+    
   def vcard_search
     vcard_params = params[:vcard] || {}
     keys = []
@@ -202,12 +212,19 @@ class SearchController < ApplicationController
     
     case_keys.push key
     case_values.push *values
+
+    # Handle bill params
+    key, *values = bill_search
+    
+    case_keys.push key
+    case_values.push *values
     
     # Build conditions array
     case_conditions = !case_keys.compact.empty? ? [  case_keys.compact.join(" AND "), *case_values ] : nil
     
     @cases = Cyto::Case.find :all, :select => 'DISTINCT cases.*', :joins => "LEFT JOIN patients ON patient_id = patients.id LEFT JOIN vcards ON (patients.vcard_id = vcards.id OR patients.billing_vcard_id = vcards.id) LEFT JOIN addresses ON vcards.id = addresses.vcard_id", :conditions => case_conditions, :limit => 100
     
+    @include_bill = true
     render :partial => '/cyto/cases/list'
   end
 end

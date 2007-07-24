@@ -9,6 +9,8 @@
     <%=sort_header('doctor_id', 'Arzt') %>
     <%=sort_header('screener_id', 'Zytologin') %>
     <th>Scan</th>
+    <th>Status</th>
+    <% if @include_bill %><th>Rechnung</th><% end %>
   </tr>
   
 <% for a_case in @cases %>
@@ -40,6 +42,12 @@
       <%= link_to "Auftrag", url_for_file_column(a_case.order_form, "file") %> <%= link_to "Klinische Symptome", url_for_file_column(a_case.order_form, "file", "remarks") %> <%= link_to "Personalien", url_for_file_column(a_case.order_form, "file", "address") %>
     <% end %>
     </td>
+    <td>sign:&nbsp;<%= a_case.screened_at.strftime("%d.%m.%Y") unless a_case.screened_at.nil? %><br/>gedr:&nbsp;<%= a_case.result_report_printed_at.strftime("%d.%m.%Y") unless a_case.result_report_printed_at.nil? %></td>
+    <% if @include_bill %>
+      <td class="embedded_bill_state_<%= a_case.bill.payment_state unless a_case.bill.nil? %>">
+        <%= link_to a_case.bill[:ID_Rechnung], :controller => '/bills', :action => 'list', :id => a_case.bill unless a_case.bill.nil? %>
+      </td>
+    <% end %>
     <td>
       <%= link_to image_tag('editinput'), :controller => '/cyto/cases', :action => 'edit', :id => a_case %>
       <%= link_to image_tag('remove'), { :controller => '/cyto/cases', :action => 'destroy', :id => a_case }, :confirm => 'Are you sure?', :post => true if false %>

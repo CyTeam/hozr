@@ -1,10 +1,9 @@
 <fieldset style="width: 98%">
-	<legend>Rechnungssuche</legend>
-
-	<%= form_remote_tag( :update => 'search_result', :loading => "Element.show('#{loading_indicator_id({:id => 'search'})}')", :url => {:action => "search"} ) %>
-		<% fields_for 'bill', @bill, :builder => Rubaidh::TabularForm::TabularFormBuilder do |f| %>
-			<%= text_field :bill, :rechnung_id, :label => "Rechnungsnr." %>
-		<% end %>
-                <%= submit_tag "Suchen" %>
-        <%= end_form_tag %>
+  <legend>Rechnungssuche</legend>
+  <table>
+    <% fields_for 'bill', @bill, :builder => Rubaidh::TabularForm::TabularFormBuilder do |f| %>
+      <%= f.text_field :id, :label => "Rechnungsnr." %>
+    <% end %>
+  </table>
+  <%= submit_tag "Suchen" %>
 </fieldset>

@@ -31,12 +31,24 @@ td.bill_state_cancelled {
   background-color: inherit;
 }
 
+td.embedded_bill_state_payed{
+  background-color: #99FF66;
+}
+
 td.bill_state_payed {
   background-color: green;
 }
 
+td.embedded_bill_state_reminded{
+  background-color: #FFFF66;
+}
+
 td.bill_state_reminded {
   background-color: yellow;
+}
+
+td.embedded_bill_state_prosecuted{
+  background-color: #FF99CC;
 }
 
 td.bill_state_prosecuted {
