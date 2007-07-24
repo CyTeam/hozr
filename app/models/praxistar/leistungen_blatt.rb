@@ -56,12 +56,14 @@ class Praxistar::LeistungenBlatt < Praxistar::Base
     self.dt_BehandlungBis = a_case.examination_date
     self.cu_Totalbetrag = (total * 20.0).round / 20.0
 #    self.tx_Stellvertretung = 
-    self.in_Schuldner = 1
+    
+    self.in_Schuldner = a_case.patient.use_billing_address ? 2 : 1
     vcard = a_case.patient.use_billing_address ? a_case.patient.billing_vcard : a_case.patient.vcard
     self.tx_Schuldner_Anrede = vcard.honorific_prefix
     self.tx_Schuldner_Name = vcard.family_name
     self.tx_Schuldner_Vorname = vcard.given_name
     self.tx_Schuldner_Strasse = vcard.street_address
+    self.tx_Schuldner_zH = vcard.extended_address
     self.tx_Schuldner_PLZ = vcard.postal_code
     self.tx_Schuldner_Ort = vcard.locality
     self.tf_Spez1 = 1
