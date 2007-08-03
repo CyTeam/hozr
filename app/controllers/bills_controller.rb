@@ -10,6 +10,13 @@ class BillsController < ApplicationController
     render :partial => 'list'
   end
 
+  def search_by_patient
+    patient_id = params[:id]
+
+    @bills = Patient.find(patient_id).bills
+    render :action => 'list'
+  end
+
   def list
     @bills = Praxistar::Bill.find(params[:id]).patient.bills
   end

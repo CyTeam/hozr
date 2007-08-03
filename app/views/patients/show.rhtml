@@ -3,3 +3,4 @@
 <%= render :partial => 'cyto/cases/compact_list', :object => @patient.cases %>
 
 <%= link_to 'Edit', :action => 'edit', :id => @patient %>
+<%= link_to 'Rechnungen', :controller => 'bills', :action => 'search_by_patient', :id => @patient %>
