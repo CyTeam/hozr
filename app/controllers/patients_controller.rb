@@ -198,6 +198,11 @@ class PatientsController < ApplicationController
     @billing_vcard = @patient.billing_vcard
   end
 
+  def edit_inline
+    edit
+    render :partial => 'edit'
+  end
+
   def update
     @patient = Patient.find(params[:id])
     @vcard = @patient.vcard

@@ -1,0 +1,4 @@
+<%= start_form_tag :controller => 'patients', :action => 'update', :id => @patient %>
+  <%= render :partial => '/patients/form' %>
+  <%= submit_tag 'Edit' %>
+<%= end_form_tag %>
