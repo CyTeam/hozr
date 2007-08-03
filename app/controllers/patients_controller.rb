@@ -140,7 +140,7 @@ class PatientsController < ApplicationController
   end
   
   def list
-    @patient_pages, @patients = paginate :patients, :per_page => 10
+     @patients = []
   end
 
   def show
