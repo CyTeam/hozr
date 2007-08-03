@@ -107,6 +107,13 @@ class PatientsController < ApplicationController
   end
   
   def search
+    # If entry_nr is given, take it as the only condition
+    eingangsnr = params[:patient][:praxistar_eingangsnr]
+    if !eingangsnr.empty?
+      search_by_eingangsnr
+      return
+    end
+
     if vcard_conditions
         vcard_ids = Vcard.find :all, :include => :address, :limit => 1000, :conditions => vcard_conditions, :select => 'id'
     
