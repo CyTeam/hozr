@@ -18,7 +18,7 @@ class BillsController < ApplicationController
   end
 
   def list
-    @bills = Praxistar::Bill.find(params[:id], :order => 'praxistar_eingangsnr').patient.bills
+    @bills = Praxistar::Bill.find(params[:id]).patient.bills
   end
 
   def cancel
