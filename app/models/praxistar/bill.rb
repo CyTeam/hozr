@@ -25,6 +25,7 @@ class Praxistar::Bill < Praxistar::Base
   end
 
   def cancel(reason = "Storniert")
+    raise "Kann bezahlte Rechnungen nicht stornieren!" if payment_state == "payed"
     account_receivable[:tf_Storno] = true
     account_receivable["tx_Storno_Begründung"] = reason
     account_receivable[:tf_Aktiv] = false
