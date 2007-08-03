@@ -7,7 +7,7 @@
         <table>
           <%= render :partial => '/vcards/form', :locals => { :vcard_name => 'vcard', :vcard => nil } %>
           <% fields_for 'patient', @patient, :builder => Rubaidh::TabularForm::TabularFormBuilder do |f| %>
-	          <%= f.text_field :birth_date, :label => "Geburtsdat." %>
+	          <%= f.text_field :birth_date, :label => "Geburtsdat.", :size => 23 %>
 	        <% end %>
           <% fields_for 'doctor', @doctor, :builder => Rubaidh::TabularForm::TabularFormBuilder do |f| %>
             <%= select_doctors :form => f %>
