@@ -4,9 +4,9 @@
           <table>
             <% fields_for 'patient', @patient, :builder => Rubaidh::TabularForm::TabularFormBuilder do |f| %>
               <tr>
-                <td>EingNr.:</td><td><%= text_field 'patient',:praxistar_eingangsnr, :size => 15, :label => "Eingangsnr." %></td>
                 <td>Geb.:</td><td><%= text_field 'patient', :birth_date, :label => "Geburtsdat.", :size => 15 %></td>
-                <td>PatNr.:</td><td><%= text_field 'patient', :doctor_patient_nr, :label => "Patientennr.", :size => 15 %></td>
+		<td/><td/>
+                <td>EingNr.:</td><td><%= text_field 'case',:praxistar_eingangsnr, :size => 15, :label => "Eingangsnr." %></td>
               </tr>
             <% end %>
             <% vcard_name = 'vcard'; vcard = nil %>
@@ -15,6 +15,7 @@
                 <td>Name:</td>
                 <td><%= text_field 'vcard', :family_name, :size => 15, :label => "Nachname" %></td>
                 <td>Vorname:</td><td><%= text_field 'vcard', :given_name, :size => 15, :label => "Vorname" %></td>
+                <td>PatNr.:</td><td><%= text_field 'patient', :doctor_patient_nr, :label => "Patientennr.", :size => 15 %></td>
               </tr>
               <tr>
                 <td>Strasse:</td>
@@ -26,5 +27,6 @@
             <% end %>
           </table>
           <%= submit_tag "Suchen" %>
+          <%= submit_to_remote "submit", "Neu anlegen", { :url => { :controller => 'patients', :action => 'new' }, :update => 'edit_form' } %>
         <%= end_form_tag %>
       </fieldset>

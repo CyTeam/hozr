@@ -108,7 +108,7 @@ class PatientsController < ApplicationController
   
   def search
     # If entry_nr is given, take it as the only condition
-    eingangsnr = params[:patient][:praxistar_eingangsnr]
+    eingangsnr = params[:case][:praxistar_eingangsnr]
     if !eingangsnr.empty?
       search_by_eingangsnr
       return
@@ -141,7 +141,7 @@ class PatientsController < ApplicationController
   end
   
   def search_by_eingangsnr
-    @patients = [ Patient.find(Cyto::Case.find_by_praxistar_eingangsnr(Cyto::CaseNr.new(params[:patient][:praxistar_eingangsnr]).to_s).patient_id) ]
+    @patients = [ Patient.find(Cyto::Case.find_by_praxistar_eingangsnr(Cyto::CaseNr.new(params[:case][:praxistar_eingangsnr]).to_s).patient_id) ]
   
     render :partial => 'list'
   end
@@ -158,7 +158,11 @@ class PatientsController < ApplicationController
   end
 
   def new
-    @patient = Patient.new
+    patient = params[:patient]
+    @patient = Patient.new(patient)
+    @vcard = Vcard.new(params[:vcard])
+    @vcard.honorific_prefix = 'Frau'
+    render :partial => 'new'
   end
 
   def create

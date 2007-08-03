@@ -1,0 +1,9 @@
+<%= start_form_tag :controller => 'patients', :action => 'create' %>
+  <%= render :partial => '/patients/form' %>
+  <%= submit_to_remote 'submit', 'Anlegen', { :url => {:controller => 'patients', :action => 'create' }, :failure => 'alert("Fehler! Ramon informieren!")', :success => "Element.update('edit_form', '')" } %>
+  <%=
+    button_to_function 'Schliessen' do |page|
+     page.replace_html('edit_form', '')
+    end
+  %>
+<%= end_form_tag %>
