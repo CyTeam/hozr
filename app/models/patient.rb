@@ -9,7 +9,7 @@ class Patient < ActiveRecord::Base
 
   has_many :cases, :class_name => 'Cyto::Case', :order => 'praxistar_eingangsnr DESC'
   has_many :finished_cases, :class_name => 'Cyto::Case', :conditions => 'screened_at IS NOT NULL', :order => 'praxistar_eingangsnr DESC'
-  has_many :bills, :foreign_key => 'Patient_ID', :order => 'ID_Rechnung DESC'
+  has_many :bills, :foreign_key => 'Patient_ID', :order => 'ID_Rechnung'
   
   validates_presence_of :birth_date
   
