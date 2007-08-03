@@ -8,14 +8,14 @@ Event.observe(window, 'load', function() {$('vcard_honorific_prefix').focus()}, 
 <% fields_for vcard_name, vcard, :builder => Rubaidh::TabularForm::TabularFormBuilder do |address| %>
   <%= address.select 'honorific_prefix', HonorificPrefix.find(:all).collect { |prefix| prefix.name }, :include_blank => true, :label => "Anrede"  %>
   <% if auto_complete %>
-    <%= address.text_field_with_auto_complete :family_name, :label => "Nachname" %>
-    <%= address.text_field_with_auto_complete :given_name, :label => "Vorname" %>
+    <%= address.text_field_with_auto_complete :family_name, :size => 15, :label => "Nachname" %>
+    <%= address.text_field_with_auto_complete :given_name, :size => 15, :label => "Vorname" %>
   <% else %>
-    <%= address.text_field :family_name, :label => "Nachname" %>
-    <%= address.text_field :given_name, :label => "Vorname" %>
+    <%= address.text_field :family_name, :size => 15, :label => "Nachname" %>
+    <%= address.text_field :given_name, :size => 15, :label => "Vorname" %>
   <% end %>
-  <%= address.text_field :street_address, :label => "Strasse" %>
-  <%= address.text_field :extended_address, :label => "c/o" %>
-  <%= address.text_field 'postal_code', :label => "PLZ" %>
-  <%= address.text_field_with_auto_complete :locality, :label => "Ort" %>
+  <%= address.text_field :street_address, :size => 15, :label => "Strasse" %>
+  <%= address.text_field :extended_address, :size => 15, :label => "c/o" %>
+  <%= address.text_field 'postal_code', :size => 15, :label => "PLZ" %>
+  <%= address.text_field_with_auto_complete :locality, :size => 15, :label => "Ort" %>
 <% end %>
