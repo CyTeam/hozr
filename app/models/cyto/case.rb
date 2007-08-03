@@ -12,7 +12,7 @@ class Cyto::Case < ActiveRecord::Base
   has_one :order_form, :class_name => 'Cyto::OrderForm'
   
   def bill
-    Praxistar::Bill.find(:first, :conditions => ['Leistungsblatt_ID = ?', praxistar_leistungsblatt_id])
+    Praxistar::Bill.find(:first, :conditions => ['Leistungsblatt_ID = ?', praxistar_leistungsblatt_id], :order => 'ID_Rechnung DESC')
   end
   
   def control_findings
