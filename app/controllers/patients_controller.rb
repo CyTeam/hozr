@@ -123,9 +123,12 @@ class PatientsController < ApplicationController
     values.push *patient_values
     
     # Build conditions array
-    conditions = !keys.compact.empty? ? [  keys.compact.join(" AND "), *values ] : nil
-    
-    @patients = Patient.find :all, :conditions => conditions
+    if keys.compact.empty?
+      @patients = []
+    else
+      conditions = !keys.compact.empty? ? [  keys.compact.join(" AND "), *values ] : nil
+      @patients = Patient.find :all, :conditions => conditions
+    end
     
     render :partial => 'list'
   end
