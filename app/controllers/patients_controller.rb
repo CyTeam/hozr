@@ -199,6 +199,8 @@ class PatientsController < ApplicationController
     params[:patient][:sex] = HonorificPrefix.find_by_name(params[:vcard][:honorific_prefix]).sex
 
     if @vcard.update_attributes(params[:vcard]) and @billing_vcard.update_attributes(params[:billing_vcard]) and @patient.update_attributes(params[:patient])
+      @vcard.save
+      @patient.save
       flash[:notice] = 'Patient was successfully updated.'
       redirect_to :action => 'list'
     else
