@@ -1,6 +1,7 @@
 <%= start_form_tag :controller => 'patients', :action => 'create' %>
   <%= render :partial => '/patients/form' %>
   <%= submit_to_remote 'submit', 'Anlegen', { :url => {:controller => 'patients', :action => 'create' }, :failure => 'alert("Fehler! Ramon informieren!")', :success => "Element.update('edit_form', '')" } %>
+  <%= submit_to_remote 'select', 'Speichern & Übernehmen', { :url => {:controller => '/cyto/cases', :action => 'create_and_set_patient', :id => @case, :patient_id => @patient}, :failure => 'alert("Fehler! Ramon informieren!")', :success => "Element.update('edit_form', '')" } if @case %>
   <%=
     button_to_function 'Schliessen' do |page|
      page.replace_html('edit_form', '')

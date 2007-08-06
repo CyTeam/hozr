@@ -112,6 +112,8 @@ class PatientsController < ApplicationController
   end
   
   def search
+    @case = Cyto::Case.find(params[:case_id]) unless params[:case_id].nil?
+
     # If entry_nr is given, take it as the only condition
     eingangsnr = params[:search][:praxistar_eingangsnr]
     if !eingangsnr.empty?
@@ -172,6 +174,9 @@ class PatientsController < ApplicationController
     @patient = Patient.new(patient)
     @vcard = Vcard.new(params[:vcard])
     @vcard.honorific_prefix = 'Frau'
+
+    @case = Cyto::Case.find(params[:case_id]) unless params[:case_id].nil?
+
     render :partial => 'new'
   end
 
@@ -210,6 +215,8 @@ class PatientsController < ApplicationController
     @patient = Patient.find(params[:id])
     @vcard = @patient.vcard
     @billing_vcard = @patient.billing_vcard
+
+    @case = Cyto::Case.find(params[:case_id]) unless params[:case_id].nil?
   end
 
   def edit_inline

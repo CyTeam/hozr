@@ -129,30 +129,42 @@ class Cyto::CasesController < ApplicationController
   end
   
   def first_entry
-    @case =Cyto::Case.find(params[:id])
-  
-    session[:first_entry] = {} if session[:first_entry].nil?
-    
-    # Preseed some fields
-    @case.examination_method_id = @case.intra_day_id == 0 ? 0 : 1
+    @case = Cyto::Case.find(params[:id])
   end
 
-  def first_entry_update
-    # save fields in session for preseeding
-    session[:first_entry][:doctor_id] = params[:case][:doctor_id]
-    session[:first_entry][:praxistar_eingangsnr] = params[:case][:praxistar_eingangsnr]
-    
-    params[:case][:entry_date] = Time.now
-    
-    @case =Cyto::Case.find(params[:id])
-    @case.update_attributes(params[:case])
+  def set_patient
+    @case = Cyto::Case.find(params[:id])
+    @case.entry_date = Time.now
+    @case.examination_method_id = @case.intra_day_id == 0 ? 0 : 1
     
     begin
-      patient = Patient.find(params[:patient][:full_name].split(' ')[0].to_i)
+
+    # Copy&Paste from patients_controller
+    @patient = Patient.find(params[:patient_id])
+    @vcard = @patient.vcard
+    if @patient.billing_vcard.nil?
+      @patient.create_billing_vcard
+    end
+    @billing_vcard = @patient.billing_vcard
+    
+    params[:patient][:sex] = HonorificPrefix.find_by_name(params[:vcard][:honorific_prefix]).sex
+
+    if @vcard.update_attributes(params[:vcard]) and @billing_vcard.update_attributes(params[:billing_vcard]) and @patient.update_attributes(params[:patient])
+      @vcard.save
+      @patient.save
+      flash[:notice] = 'Patient was successfully updated.'
+#      redirect_to :action => 'list'
+    else
+      flash[:error] = "Couldn't update Patient."
+#      render :action => 'edit'
+    end
+    # END Copy&Paste
+
+      patient = @patient
       patient.doctor = @case.doctor
       patient.doctor_patient_nr = params[:patient][:doctor_patient_nr] unless params[:patient][:doctor_patient_nr].nil?
       patient.save
-      
+
       @case.patient = patient
     
       @case.insurance = @case.patient.insurance
@@ -173,6 +185,7 @@ class Cyto::CasesController < ApplicationController
         redirect_to :action => 'first_entry', :id => next_open
       end
     else
+      flash[:error] = 'Ersteingabe erzeugte Fehler.'
       render :action => 'first_entry'
     end
   end
