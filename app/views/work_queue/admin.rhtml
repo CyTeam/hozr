@@ -12,7 +12,7 @@
 
 <h2>Resultate drucken</h2>
 <p>
-    <%= link_to_remote(image_tag('print_result'), :update => 'print_result_reports_log', :loading => "Element.show('#{loading_indicator_id({:id => 'print_result_reports'})}')", :url => {:controller => '/cyto/cases', :action => 'print_result_reports'} ) %>
+    <%= link_to_remote(image_tag('print_result'), :update => 'print_result_reports_log', :loading => "Element.show('#{loading_indicator_id({:id => 'print_result_reports'})}')", :url => {:controller => '/admin', :action => 'print_result_reports'} ) %>
     <i style="font-size: 13pt">Es gibt <b><%= @print_result_count %></b> Resultate.</i>
     <pre id="print_result_reports_log">
       <%= loading_indicator_tag :id => 'print_result_reports' %>
@@ -21,7 +21,7 @@
 
 <h2>Rechnungen generieren</h2>
 <p>
-    <%= link_to_remote(image_tag('export_bill'), :update => 'create_all_leistungsblatt_log', :loading => "Element.show('#{loading_indicator_id({:id => 'create_all_leistungsblatt'})}')", :url => {:controller => '/cyto/cases', :action => 'praxistar_create_all_leistungsblatt'} ) %>
+    <%= link_to_remote(image_tag('export_bill'), :update => 'create_all_leistungsblatt_log', :loading => "Element.show('#{loading_indicator_id({:id => 'create_all_leistungsblatt'})}')", :url => {:controller => '/admin', :action => 'praxistar_create_all_leistungsblatt'} ) %>
     <i style="font-size: 13pt">Es gibt <b><%= @bill_export_count %></b> Rechnungen.</i>
     <pre id="create_all_leistungsblatt_log">
       <%= loading_indicator_tag :id => 'create_all_leistungsblatt' %>
