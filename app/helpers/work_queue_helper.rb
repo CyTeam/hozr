@@ -1,0 +1,2 @@
+module WorkQueueHelper
+end

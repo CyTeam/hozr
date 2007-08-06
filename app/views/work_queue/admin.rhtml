@@ -1,0 +1,22 @@
+<h2>Resultate drucken</h2>
+<p>Es gibt <%= @print_result_count %> Resultate.</p>
+    <%= link_to_remote("Do it!", :update => 'print_result_reports_log', :loading => "Element.show('#{loading_indicator_id({:id => 'print_result_reports'})}')", :url => {:action => 'print_result_reports'} ) %>
+    <pre id="print_result_reports_log">
+      <%= loading_indicator_tag :id => 'print_result_reports' %>
+    </pre>
+
+<h2>Rechnungen generieren</h2>
+<p>Es gibt <%= @bill_export_count %> Rechnungen.</p>
+<%= link_to_remote("Do it!", :update => 'create_all_leistungsblatt_log', :loading => "Element.show('#{loading_indicator_id({:id => 'create_all_leistungsblatt'})}')", :url => {:action => 'praxistar_create_all_leistungsblatt'} ) %>
+    <pre id="create_all_leistungsblatt_log">
+      <%= loading_indicator_tag :id => 'create_all_leistungsblatt' %>
+    </pre>
+
+<h2>Anschreiben</h2>
+<p>Es gibt <%= @assign_count %> Auftragsformulare.</p>
+<%= link_to "Do it!", :controller => '/cyto/cases', :action => 'unassigned_form' %>
+
+<h2>Erste machen</h2>
+<%= image_tag 'first_entry' %><p>Es gibt <%= @first_entry_count %> Ersteingaben.</p>
+<%= link_to "Do it!", :controller => '/cyto/cases', :action => 'unassigned_form' %>
+
