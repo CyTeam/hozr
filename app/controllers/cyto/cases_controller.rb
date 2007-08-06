@@ -137,15 +137,21 @@ class Cyto::CasesController < ApplicationController
     @case.entry_date = Time.now
     @case.examination_method_id = @case.intra_day_id == 0 ? 0 : 1
     
-    begin
+      if params[:patient_id]
+        @patient = Patient.find(params[:patient_id])
+        @patient.create_billing_vcard if @patient.billing_vcard.nil?
+      else
+        @patient = Patient.new(params[:patient])
+        @patient.vcard = Vcard.new(params[:vcard])
+        @patient.billing_vcard = Vcard.new(params[:billing_vcard])
+
+        @patient.save
+      end
+
+      @vcard = @patient.vcard
+      @billing_vcard = @patient.billing_vcard
 
     # Copy&Paste from patients_controller
-    @patient = Patient.find(params[:patient_id])
-    @vcard = @patient.vcard
-    if @patient.billing_vcard.nil?
-      @patient.create_billing_vcard
-    end
-    @billing_vcard = @patient.billing_vcard
     
     params[:patient][:sex] = HonorificPrefix.find_by_name(params[:vcard][:honorific_prefix]).sex
 
@@ -169,9 +175,6 @@ class Cyto::CasesController < ApplicationController
     
       @case.insurance = @case.patient.insurance
       @case.insurance_nr = @case.patient.insurance_nr
-    rescue
-      @case.errors.add('patient_id', 'Patient not found.')
-    end
     
     if @case.save
       flash[:notice] = 'First entry ok.'
