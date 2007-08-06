@@ -175,7 +175,10 @@ class PatientsController < ApplicationController
     @vcard = Vcard.new(params[:vcard])
     @vcard.honorific_prefix = 'Frau'
 
-    @case = Cyto::Case.find(params[:case_id]) unless params[:case_id].nil?
+    if params[:case_id]
+      @case = Cyto::Case.find(params[:case_id])
+      @patient.doctor = @case.doctor
+    end
 
     render :partial => 'new'
   end
@@ -216,7 +219,12 @@ class PatientsController < ApplicationController
     @vcard = @patient.vcard
     @billing_vcard = @patient.billing_vcard
 
-    @case = Cyto::Case.find(params[:case_id]) unless params[:case_id].nil?
+    if params[:case_id]
+      @case = Cyto::Case.find(params[:case_id])
+      @patient.doctor = @case.doctor
+    end
+
+    @vcard.honorific_prexif = HonorificPrefix.find_by_name('Frau') if @vcard.honorific_prefix.nil?
   end
 
   def edit_inline
