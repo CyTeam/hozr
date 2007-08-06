@@ -30,6 +30,9 @@
       <td><%= in_place_editor_field :patient, :in_place_doctor_patient_nr %></td>
       <td><%= patient.insurance.vcard.full_name if patient.insurance %></td>
       <td><%= in_place_editor_field :patient, :in_place_insurance_nr %></td>
+      <td>
+        <%= link_to image_tag("show.png"), :controller => 'patients', :action => 'show', :id => @patient %>
+      </td>
     </tr>
   <% end %>
   </table>
