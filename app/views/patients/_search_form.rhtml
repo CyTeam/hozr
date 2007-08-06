@@ -1,6 +1,12 @@
+<script type="text/javascript">
+//<![CDATA[
+Event.observe(window, 'load', function() {$('patient_birth_date').focus()}, false);
+//]]>
+</script>
+
       <fieldset style="width: 98%">
         <legend>Personalien</legend>
-        <%= form_remote_tag( :update => 'search_result', :loading => "Element.show('#{loading_indicator_id({:id => 'search'})}')", :url => {:controller => '/patients', :action => "search", :case_id => params[:id] } ) %>
+        <%= form_remote_tag( :update => 'search_result', :success => "$('vcard_family_name').focus()", :loading => "Element.show('#{loading_indicator_id({:id => 'search'})}')", :url => {:controller => '/patients', :action => "search", :case_id => params[:id] } ) %>
           <table>
             <% fields_for 'patient', @patient, :builder => Rubaidh::TabularForm::TabularFormBuilder do |f| %>
               <tr>
