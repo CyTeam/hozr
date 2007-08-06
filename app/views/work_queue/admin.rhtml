@@ -1,34 +1,30 @@
-<div style="display: inline">
 <h2>Anschreiben</h2>
-<%= image_tag 'assign' %>
-<p>Es gibt <%= @assign_count %> Auftragsformulare.</p>
-<%= link_to "Do it!", :controller => '/cyto/cases', :action => 'unassigned_form' %>
+<p>
+    <%= link_to image_tag('assign'), :controller => '/cyto/cases', :action => 'unassigned_form' %>
+    <i style="font-size: 13pt">Es gibt <b><%= @assign_count %></b> Auftragsformulare.</i>
+</p>
 
 <h2>Erste machen</h2>
-<%= image_tag 'first_entry' %>
-<p>Es gibt <%= @first_entry_count %> Ersteingaben.</p>
-<%= link_to "Do it!", :controller => '/cyto/cases', :action => 'first_entry_queue' %>
+<p>
+    <%= link_to image_tag('first_entry'), :controller => '/cyto/cases', :action => 'first_entry_queue' %>
+    <i style="font-size: 13pt">Es gibt <b><%= @first_entry_count %></b> Ersteingaben.</i>
+</p>
 
 <h2>Resultate drucken</h2>
-<%= image_tag 'print_result' %>
-<p>Es gibt <%= @print_result_count %> Resultate.</p>
-    <%= link_to_remote("Do it!", :update => 'print_result_reports_log', :loading => "Element.show('#{loading_indicator_id({:id => 'print_result_reports'})}')", :url => {:controller => '/cyto/cases', :action => 'print_result_reports'} ) %>
+<p>
+    <%= link_to_remote(image_tag('print_result'), :update => 'print_result_reports_log', :loading => "Element.show('#{loading_indicator_id({:id => 'print_result_reports'})}')", :url => {:controller => '/cyto/cases', :action => 'print_result_reports'} ) %>
+    <i style="font-size: 13pt">Es gibt <b><%= @print_result_count %></b> Resultate.</i>
     <pre id="print_result_reports_log">
       <%= loading_indicator_tag :id => 'print_result_reports' %>
     </pre>
+</p>
 
 <h2>Rechnungen generieren</h2>
-<%= image_tag 'export_bill' %>
-<p>Es gibt <%= @bill_export_count %> Rechnungen.</p>
-<%= link_to_remote("Do it!", :update => 'create_all_leistungsblatt_log', :loading => "Element.show('#{loading_indicator_id({:id => 'create_all_leistungsblatt'})}')", :url => {:controller => '/cyto/cases', :action => 'praxistar_create_all_leistungsblatt'} ) %>
+<p>
+    <%= link_to_remote(image_tag('export_bill'), :update => 'create_all_leistungsblatt_log', :loading => "Element.show('#{loading_indicator_id({:id => 'create_all_leistungsblatt'})}')", :url => {:controller => '/cyto/cases', :action => 'praxistar_create_all_leistungsblatt'} ) %>
+    <i style="font-size: 13pt">Es gibt <b><%= @bill_export_count %></b> Rechnungen.</i>
     <pre id="create_all_leistungsblatt_log">
       <%= loading_indicator_tag :id => 'create_all_leistungsblatt' %>
     </pre>
-</div>
+</p>
 
-<div style="display: inline">
-<h2>Zweiteingabe</h2>
-<%= image_tag 'first_entry' %>
-<p>Es gibt <%= @second_entry_count %> Zweieingaben.</p>
-<%= link_to "Do it!", :controller => '/cyto/cases', :action => 'second_entry_queue' %>
-</div>
