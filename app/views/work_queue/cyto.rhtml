@@ -1,2 +1,4 @@
-<h1>WorkQueue#cyto</h1>
-<p>Find me in app/views/work_queue/cyto.rhtml</p>
+<h2>Zweiteingabe</h2>
+<%= image_tag 'first_entry' %>
+<p>Es gibt <%= @second_entry_count %> Zweiteingaben.</p>
+<%= link_to "Do it!", :controller => '/cyto/cases', :action => 'second_entry_queue' %>

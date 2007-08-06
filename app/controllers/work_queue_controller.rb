@@ -11,5 +11,6 @@ class WorkQueueController < ApplicationController
   end
 
   def cyto
+    @second_entry_count = Cyto::Case.count(:all, :conditions => 'entry_date IS NOT NULL AND screened_at IS NULL AND needs_p16 = 0')
   end
 end

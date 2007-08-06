@@ -8,25 +8,24 @@
 
   <li><%= link_to "Mitarbeiter", :controller => 'employees' %></li>
   <li>
-    
-    <%= link_to_remote("Rechnungen generieren", :update => 'create_all_leistungsblatt_log', :loading => "Element.show('#{loading_indicator_id({:id => 'create_all_leistungsblatt'})}')", :url => {:action => 'praxistar_create_all_leistungsblatt'} ) %></li>
+    <%= link_to_remote("Rechnungen generieren", :update => 'create_all_leistungsblatt_log', :loading => "Element.show('#{loading_indicator_id({:id => 'create_all_leistungsblatt'})}')", :url => {:action => 'praxistar_create_all_leistungsblatt'} ) %>
     <div id="create_all_leistungsblatt_log">
       <%= loading_indicator_tag :id => 'create_all_leistungsblatt' %>
     </div>
   <li>
-    <%= link_to_remote("Patienten exportieren", :update => 'patient_export_log', :loading => "Element.show('#{loading_indicator_id({:id => 'patient_export'})}')", :url => {:action => 'praxistar_patienten_personalien_export'} ) %></li>
-    <div id="patient_export_log">
+    <%= link_to_remote("Patienten exportieren", :update => 'patient_export_log', :loading => "Element.show('#{loading_indicator_id({:id => 'patient_export'})}')", :url => {:action => 'praxistar_patienten_personalien_export'} ) %>
+    <pre id="patient_export_log">
       <%= loading_indicator_tag :id => 'patient_export' %>
-    </div>
+    </pre>
   </li>
   <li>
     <%= link_to_remote("Auftragsformulare importieren", :update => 'import_order_forms_log', :loading => "Element.show('#{loading_indicator_id({:id => 'import_order_forms'})}')", :url => {:action => 'import_order_forms'} ) %></li>
-    <div id="import_order_forms_log">
+    <pre id="import_order_forms_log">
       <%= loading_indicator_tag :id => 'import_order_forms' %>
-    </div>
+    </pre>
   </li>
   <li>
-    <%= link_to_remote("Resultate drucken", :update => 'print_result_reports_log', :loading => "Element.show('#{loading_indicator_id({:id => 'print_result_reports'})}')", :url => {:action => 'print_result_reports'} ) %></li>
+    <%= link_to_remote("Resultate drucken", :update => 'print_result_reports_log', :loading => "Element.show('#{loading_indicator_id({:id => 'print_result_reports'})}')", :url => {:action => 'print_result_reports'} ) %>
     <pre id="print_result_reports_log">
       <%= loading_indicator_tag :id => 'print_result_reports' %>
     </pre>
