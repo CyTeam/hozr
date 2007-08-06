@@ -144,7 +144,7 @@ class PatientsController < ApplicationController
       @patients = []
     else
       conditions = !keys.compact.empty? ? [  keys.compact.join(" AND "), *values ] : nil
-      @patients = Patient.find :all, :conditions => conditions
+      @patients = Patient.find :all, :conditions => conditions, :include => :vcard, :order => 'family_name'
     end
     
     render :partial => 'list'
