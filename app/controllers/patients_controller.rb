@@ -31,6 +31,7 @@ class PatientsController < ApplicationController
     render :action => 'list'
   end
 
+  # Date helpers
   def parse_date(value)
     if value.is_a?(String)
       if value.match /.*-.*-.*/
@@ -56,14 +57,15 @@ class PatientsController < ApplicationController
     return year < 100 ? year + base : year
   end
   
-  def vcard_conditions
+  # Search helpers
+  def vcard_conditions(vcard_name = 'vcard')
     vcard_params = params[:vcard] || {}
     keys = []
     values = []
     
     fields = vcard_params.reject { |key, value| value.nil? or value.empty? }
     fields.each { |key, value|
-      keys.push "#{key} LIKE ?"
+      keys.push "#{vcard_name}.#{key} LIKE ?"
       values.push '%' + value.downcase.gsub(' ', '%') + '%'
     }
     
@@ -121,22 +123,18 @@ class PatientsController < ApplicationController
       return
     end
 
-    if vcard_conditions
-        vcard_ids = Vcard.find :all, :include => :address, :limit => 1000, :conditions => vcard_conditions, :select => 'id'
-        if vcard_ids == []
-		@patients = []
-		render :partial => 'list'
-		return
-        end
-    
-        vcard_keys = "(vcard_id IN (#{vcard_ids.map {|vcard| vcard.id}.join ', '}) OR billing_vcard_id IN (#{vcard_ids.map {|vcard| vcard.id}.join ', '}))"
-    else
-        vcard_keys = nil
-    end
-    
-    keys = [vcard_keys]
+    keys = []
     values = []
+
+    default_vcard_keys, *default_vcard_values = vcard_conditions('vcards')
+    billing_vcard_keys, *billing_vcard_values = vcard_conditions('billing_vcards_patients')
     
+    unless default_vcard_keys.nil?
+      keys.push "( ( #{default_vcard_keys} ) OR ( #{billing_vcard_keys} ) )"
+      values.push *default_vcard_values
+      values.push *billing_vcard_values
+    end
+
     patient_keys, *patient_values = patient_conditions
     keys.push patient_keys
     values.push *patient_values
@@ -146,7 +144,7 @@ class PatientsController < ApplicationController
       @patients = []
     else
       conditions = !keys.compact.empty? ? [  keys.compact.join(" AND "), *values ] : nil
-      @patients = Patient.find :all, :conditions => conditions, :include => :vcard, :order => 'family_name'
+      @patients = Patient.find :all, :conditions => conditions, :include => [:vcard, :billing_vcard], :order => 'vcards.family_name'
     end
     
     render :partial => 'list'
