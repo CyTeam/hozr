@@ -34,7 +34,7 @@
         </div>
         <div id="HeaderMenus">
           <ul>
-            <li><%= link_to "Ersteingabe", :controller => "/cyto/cases", :action => :first_entry_queue %></li>
+            <li><%= link_to "TODO", :controller => "/work_queue/admin" %></li>
             <li><%= link_to "Zweiteingabe", :controller => "/cyto/cases", :action => :second_entry_queue %></li>
             <li><%= link_to "P16 Liste", :controller => "/cyto/cases", :action => :p16_queue %></li>
             <li><%= link_to "HPV Liste", :controller => "/cyto/cases", :action => :hpv_queue %></li>
@@ -42,7 +42,6 @@
             <li><%= link_to "Patienten", :controller => "/patients" %></li>
             <li><%= link_to "Ärzte", :controller => "/doctors" %></li>
             <li><%= link_to "Statistiken", :controller => "/reports" %></li>
-            <li><%= link_to "Anschreiben", :controller => "/cyto/cases", :action => :unassigned_form %></li>
             <li><%= link_to "Administration", :controller => "/admin" %></li>
           </ul>
         </div>
