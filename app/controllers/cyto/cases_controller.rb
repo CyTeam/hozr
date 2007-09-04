@@ -104,7 +104,7 @@ class Cyto::CasesController < ApplicationController
   def first_entry_queue
     params[:order] ||= 'praxistar_eingangsnr'
     
-    @case_pages, @cases = paginate 'Cyto::Cases', :per_page => 144, :order => params[:order], :conditions => 'entry_date IS NULL'
+    @case_pages, @cases = paginate 'Cyto::Cases', :per_page => 144, :order => params[:order], :conditions => 'entry_date IS NULL AND assigned_at IS NOT NULL'
     render :action => :list
   end
   
