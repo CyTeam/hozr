@@ -28,7 +28,7 @@ class Praxistar::Bill < Praxistar::Base
     raise "Kann bezahlte Rechnungen nicht stornieren!" if payment_state == "payed"
     account_receivable[:tf_Storno] = true
     account_receivable["tx_Storno_Begründung"] = reason
-    account_receivable[:tf_Aktiv] = false
+    account_receivable[:tf_aktiv] = false
     account_receivable[:dt_Stornodatum] = Date.today
     account_receivable.save
     
