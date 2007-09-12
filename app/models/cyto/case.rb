@@ -82,7 +82,7 @@ class Cyto::Case < ActiveRecord::Base
   end
   
   def ready_for_first_entry
-    entry_date.nil?
+    entry_date.nil? && !assigned_at.nil?
   end
   
   def ready_for_second_entry
