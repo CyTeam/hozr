@@ -1,3 +1,5 @@
+include Praxistar
+
 class Praxistar::Base < ActiveRecord::Base
   require 'yaml'
   
