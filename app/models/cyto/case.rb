@@ -199,7 +199,8 @@ class Cyto::Case < ActiveRecord::Base
         export.error_count += 1
         export.save
         
-        print "Error #{self.name}(#{h.id}): #{ex.message}\n"
+#        print "Error #{self.name}(#{h.id}): #{ex.message}\n"
+	print "Error creating bill for case #{h.praxistar_eingangsnr}: #{h.patient.name}, #{h.patient.birth_date}\n\n"
         logger.info "Error #{self.name}(#{h.id}): #{ex.message}\n"
         logger.info ex.backtrace.join("\n\t")
         logger.info "\n"
