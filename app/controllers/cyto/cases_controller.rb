@@ -296,7 +296,7 @@ class Cyto::CasesController < ApplicationController
     @case.screened_at ||= Date.today
     
     case @case.classification.code
-    when 'mam', 'sput'
+    when 'mam'
       render :action => :eg_result_report_for_pdf, :layout => 'result_report_for_pdf'
     when 'hpv'
       render :action => :hpv_result_report, :layout => 'result_report_for_pdf'
