@@ -23,10 +23,14 @@
 <h2>Rechnungen generieren</h2>
 <p>
     <%= link_to_remote(image_tag('export_bill'), :update => 'create_all_leistungsblatt_log', :loading => "Element.show('#{loading_indicator_id({:id => 'create_all_leistungsblatt'})}')", :url => {:controller => '/admin', :action => 'praxistar_create_all_leistungsblatt'} ) %>
-    <i style="font-size: 13pt">Es gibt <b><%= @bill_export_count %></b> Rechnungen.</i>
-    <pre id="create_all_leistungsblatt_log">
-      <%= loading_indicator_tag :id => 'create_all_leistungsblatt' %>
-    </pre>
+    <i style="font-size: 13pt">Es gibt <b><%= @bill_export_count %></b> neue Leistungsbl&auml;tter.</i>
+    <pre id="create_all_leistungsblatt_log"><%= loading_indicator_tag :id => 'create_all_leistungsblatt' %></pre>
+</p>
+
+<h2>Rechnungen drucken</h2>
+<p>
+    <%= image_tag('printer_64.png') %>
+    <i style="font-size: 13pt">Es gibt <b><%= @bill_print_count %></b> neue Rechnungen.</i>
 </p>
 
 </div>
