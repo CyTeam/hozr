@@ -20,6 +20,16 @@ class SearchController < ApplicationController
   def search_form
   end
 
+  # Date helpers
+  def date_only_year?(value)
+    value.is_a?(String) and value.strip.match /^\d{2,4}$/
+  end
+  
+  def expand_year(value, base = 1900)
+    year = value.to_i
+    return year < 100 ? year + base : year
+  end
+  
   def parse_date(value)
     if value.is_a?(String)
       if value.match /.*-.*-.*/
@@ -198,12 +208,23 @@ class SearchController < ApplicationController
     unless patient_params[:birth_date].nil? or patient_params[:birth_date].empty?
       if patient_params[:birth_date].match /bis/
         lower_bound, higher_bound = patient_params[:birth_date].split('bis')
-        patient_keys.push "birth_date BETWEEN ? AND ?"
-        patient_values.push parse_date(lower_bound.strip).strip
-        patient_values.push parse_date(higher_bound.strip).strip
+        if date_only_year?(lower_bound)
+          patient_keys.push "YEAR(birth_date) BETWEEN ? AND ?"
+          patient_values.push parse_date(lower_bound.strip).strip
+          patient_values.push parse_date(higher_bound.strip).strip
+        else
+          patient_keys.push "birth_date BETWEEN ? AND ?"
+          patient_values.push parse_date(lower_bound.strip).strip
+          patient_values.push parse_date(higher_bound.strip).strip
+        end
       else
-        patient_keys.push "birth_date = ? "
-        patient_values.push parse_date(patient_params[:birth_date]).strip
+        if date_only_year?(patient_params[:birth_date])
+          patient_keys.push "YEAR(birth_date) = ? "
+          patient_values.push parse_date(patient_params[:birth_date]).strip
+        else
+          patient_keys.push "birth_date = ? "
+          patient_values.push parse_date(patient_params[:birth_date]).strip
+        end
       end
     end
     
