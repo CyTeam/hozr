@@ -476,4 +476,13 @@ class Cyto::CasesController < ApplicationController
     end
     render :text => "Gedruckt: #{id_s.join ', '}"
   end
+
+  def p16_prepared
+    a_case = Cyto::Case.find(params[:id])
+    a_case.p16_prepared_at = DateTime.now
+    a_case.p16_preparee = Employee.find_by_code(request.env['REMOTE_USER'])
+    a_case.save
+    
+    render :text => "#{a_case.p16_prepared_at.strftime('%d.%m.%Y')} #{a_case.p16_preparee.code}"
+  end
 end

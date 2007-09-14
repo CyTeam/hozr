@@ -42,7 +42,18 @@
       <%= link_to "Auftrag", url_for_file_column(a_case.order_form, "file") %> <%= link_to "Klinische Symptome", url_for_file_column(a_case.order_form, "file", "remarks") %> <%= link_to "Personalien", url_for_file_column(a_case.order_form, "file", "address") %>
     <% end %>
     </td>
-    <td>sign:&nbsp;<%= a_case.screened_at.strftime("%d.%m.%Y") unless a_case.screened_at.nil? %><br/>gedr:&nbsp;<%= a_case.result_report_printed_at.strftime("%d.%m.%Y") unless a_case.result_report_printed_at.nil? %></td>
+    <td>
+      sign:&nbsp;<%= a_case.screened_at.strftime("%d.%m.%Y") unless a_case.screened_at.nil? %><br/>
+      gedr:&nbsp;<%= a_case.result_report_printed_at.strftime("%d.%m.%Y") unless a_case.result_report_printed_at.nil? %>
+      <% if a_case.needs_p16? %>
+        <br/>
+        <% if a_case.p16_prepared_at %>
+          P16:&nbsp;<%= a_case.p16_prepared_at.strftime('%d.%m.%Y') %> <%= a_case.p16_preparee.code %>
+        <% else %>
+          P16:&nbsp;<span id="prepare_p16_<%= a_case.id %>"><%= link_to_remote image_tag('prepare_p16.png'), :update => "prepare_p16_#{a_case.id}", :url => { :controller => '/cyto/cases', :action => 'p16_prepared', :id => a_case } %></span>
+        <% end %>
+      <% end %>
+    </td>
     <% if @include_bill %>
       <td class="embedded_bill_state_<%= a_case.bill.payment_state unless a_case.bill.nil? %>">
         <%= link_to a_case.bill[:ID_Rechnung], :controller => '/bills', :action => 'list', :id => a_case.bill unless a_case.bill.nil? %>
