@@ -56,4 +56,15 @@ class Cyto::OrderFormsController < ApplicationController
     OrderForm.find(params[:id]).destroy
     redirect_to :action => 'list'
   end
+
+  # AJAX functions
+  def head_big
+    @order_form = OrderForm.find(params[:id])
+    render :inline => '<%= (link_to image_tag(url_for_image_column(@order_form, "file", :head_big)), url_for_file_column(@order_form, "file")) unless @order_form.nil? %>'
+  end
+
+  def head_small
+    @order_form = OrderForm.find(params[:id])
+    render :inline => '<%= (link_to image_tag(url_for_image_column(@order_form, "file", :head)), url_for_file_column(@order_form, "file")) unless @order_form.nil? %>'
+  end
 end
