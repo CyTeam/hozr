@@ -130,6 +130,9 @@ class Cyto::CasesController < ApplicationController
   
   def first_entry
     @case = Cyto::Case.find(params[:id])
+
+    # Header image size preferences
+    @header_image_type = session[:header_image_type] || :head
   end
 
   def set_patient
