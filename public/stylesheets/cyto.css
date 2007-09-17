@@ -15,7 +15,8 @@ input.PAP_3M-c1-2, input.PAP_3S-c2-3 {color: black; background-color: #7eafff }
 .PAP_sput, input.PAP_sput {color: black; background-color: #00CC00; }
 
 @media print {
-  .PAP_3L, .PAP_3M-c1-2, .PAP_3M, .PAP_3S-c2-3, .PAP_3S {color: black; background-color: #99CCFF; }
+  .PAP_2A, .PAP_2AG, .PAP_2AS, .PAP_2AG_AS, .PAP_2-3A, .PAP_2-3AG, .PAP_2-3AS, .PAP_2-3AG_AS {color: black; background-color: #FFFF88; }
+  .PAP_3L, .PAP_3M-c1-2, .PAP_3M, .PAP_3S-c2-3, .PAP_3S {color: black; background-color: #BBAAFF; }
   .PAP_4, .PAP_5 {color: black; background-color: #FF9191; }
 }
 
