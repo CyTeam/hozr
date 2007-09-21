@@ -1,0 +1,15 @@
+<h1>PAP Group Liste</h1>
+<table class="listing">
+  <tr>
+    <th>Name</th>
+    <th>Position</th>
+    <th>PAPs</th>
+  </tr>
+  <% for group in @classification_groups %>
+  <tr>
+    <td><%=h group.title %></td>
+    <td><%=h group.position %></td>
+    <td><%=h group.classifications.map {|c| c.name }.uniq.join(', ') %></td>
+  </tr>
+  <% end %>
+</table>
