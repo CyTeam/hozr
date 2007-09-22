@@ -411,6 +411,11 @@ class Cyto::CasesController < ApplicationController
     redirect_to :action => 'list'
   end
 
+  def result_stats_letter
+    @doctor = Doctor.find(params[:id])
+    
+  end
+
   def result_letter
     @doctor = Doctor.find(params[:id])
   end
