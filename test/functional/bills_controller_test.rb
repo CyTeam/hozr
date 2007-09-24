@@ -1,12 +1,12 @@
 require File.dirname(__FILE__) + '/../test_helper'
-require 'bill_controller'
+require 'bills_controller'
 
 # Re-raise errors caught by the controller.
-class BillController; def rescue_action(e) raise e end; end
+class BillsController; def rescue_action(e) raise e end; end
 
-class BillControllerTest < Test::Unit::TestCase
+class BillsControllerTest < Test::Unit::TestCase
   def setup
-    @controller = BillController.new
+    @controller = BillsController.new
     @request    = ActionController::TestRequest.new
     @response   = ActionController::TestResponse.new
   end
