@@ -336,3 +336,9 @@ table.listing tbody tr:hover { background: #eed !important }
 .full_name {
   font-weight: bold;
 }
+
+
+/* letters */
+h3 {
+  font-family: ChollaSansBold;
+}
