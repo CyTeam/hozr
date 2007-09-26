@@ -1,0 +1,34 @@
+<% unless overview_list.classification == @old_classification %>
+  <% unless @old_classification.nil? %>
+    </table>
+    <table class="listing">
+  <% end %>
+  <% @old_classification = overview_list.classification %>
+  <tr class="PAP_<%=h overview_list.classification.code unless overview_list.classification.nil? %>" style="font-weight: bold; border: 0px">
+    <th colspan="5" style="font-size: 0.9em; font-weight: bold; padding: 0.1em 0.5em; border: 0px" ><%=h @old_classification.name %></th>
+  </tr>
+<% end %>
+
+<tr style="font-size: 0.8em;">
+  <td style="width: 33%; border-right: 0px">
+    <b><%= link_to h(overview_list.patient.name), :controller => '/patients', :action => 'show', :id => overview_list.patient %></b>
+    <br/>
+    <%=h overview_list.patient.vcard.street_address %>, <%=h overview_list.patient.vcard.postal_code %>&nbsp;<%=h overview_list.patient.vcard.locality %>
+  </td>
+  <td style="width: 10%; border-left: 0px">
+    <i>Geb:</i>
+    <br/>
+    <%=h overview_list.patient.birth_date %>
+  </td>
+  <td style="width: 33%"><b><%= overview_list.control_findings.map {|f| h(f.name)}.join('<br/>') %></b></td>
+  <td style="width: 12%">
+    <i>Entn.: </i>
+    <br/>
+    <%=h overview_list.examination_date.strftime('%d.%m.%Y') unless overview_list.examination_date.nil? %>
+  </td>
+  <td style="width: 12%">
+   <i>Nr.:</i>
+    <br/>
+   <%=link_to h(overview_list.praxistar_eingangsnr), :controller => '/cyto/cases', :action => 'result_report', :id => overview_list %>
+  </td>
+</tr>
