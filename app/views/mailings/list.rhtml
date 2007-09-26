@@ -49,7 +49,7 @@
   <% end %>
   <tr class="group_body">
     <td/>
-    <td style="text-align: right"><%=h mailing.cases.count %></td>
+    <td style="text-align: right"><%= link_to mailing.cases.count, :action => 'overview', :id => mailing %></td>
     <td><%=h mailing.doctor.name %></td>
   </tr>
 
