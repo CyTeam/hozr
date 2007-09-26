@@ -1,0 +1,72 @@
+<div class="sheet_a4">
+<div class="letter">
+
+<div id="doctor">
+<%=h @doctor.praxis.honorific_prefix %><br />
+<%= render :partial => "/vcards/show", :locals => {:vcard => @doctor.praxis} %>
+</div>
+
+<div id="date">
+Zürich, <%= Date.today.strftime("%d.%m.%Y") %>
+</div>
+
+<div id="subject" class="title">
+Ihre Befunde
+</div>
+
+<div id="salutation">
+<%=h @doctor.praxis.salutation %>
+</div>
+
+<div id="text">
+Anbei finden Sie Ihre Befunde. Neu haben wir einige statistische Daten aufgenommen.
+<br />
+<br />
+
+<% Cyto::CurrentCase.with_scope(:find => {:conditions => ["doctor_id = ? AND screened_at IS NOT NULL", @doctor.id] }) do %>
+
+<h3>&Uuml;bersicht</h3>
+<table class="listing" style="margin-top: 0px">
+  <%= render :partial => '/cyto/cases/overview_list', :collection => @cases %>
+</table>
+
+<h3 style="font-weight: bold; font-size: 13pt">Jahres&uuml;bersicht</h3>
+<% total = Cyto::CurrentCase.count() %>
+<% group_counts = Cyto::CurrentCase.count(:group => 'classification_group_id', :include => 'classification') %>
+<table class="listing" style="width: 45%">
+  <tr>
+    <th>Klassifizierung</th>
+    <th>Anzahl</th>
+    <th>Anteil</th>
+  </tr>
+  <% for group in group_counts %>
+  <tr>
+    <td><%=h ClassificationGroup.find(group[0]).title unless group[0].nil? %></td>
+    <td style="text-align: right"><%=h group[1] %></td>
+    <td style="text-align: right"><%=h group[1] * 100 / total %>%</td>
+  </tr>
+  <% end %>
+  <tr>
+    <td style="border-top: 2px solid; border-bottom: 4px double">Total</td>
+    <td style="text-align: right; border-top: 2px solid; border-bottom: 4px double"><%=h total %></td>
+    <td style="text-align: right; border-top: 2px solid; border-bottom: 4px double"></td>
+  </tr>
+</table>
+<% end %>
+
+<br />
+<br />
+Bei allfälligen Fragen stehen wir Ihnen gerne zur Verfügung
+<br />
+<br />
+<br />
+<br />
+Mit freundlichen Grüssen
+<br />
+<br />
+ZytoLabor
+</div>
+
+
+</div>
+</div>
