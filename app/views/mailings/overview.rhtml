@@ -27,7 +27,10 @@ Anbei finden Sie Ihre Befunde. Neu haben wir einige statistische Daten aufgenomm
 
 <h3>&Uuml;bersicht</h3>
 <table class="listing" style="margin-top: 0px">
-  <%= render :partial => '/cyto/cases/overview_list', :collection => @cases %>
+  <% for class_group in ClassificationGroup.find :all, :order => :position %>
+    <% group_cases = @mailing.cases.select { |c| c.classification.classification_group == class_group } %>
+    <%= render :partial => '/cyto/cases/overview_group', :object => group_cases  unless group_cases.size == 0 %>
+  <% end %>
 </table>
 
 <h3 style="font-weight: bold; font-size: 13pt">Jahres&uuml;bersicht</h3>
