@@ -1,0 +1,26 @@
+<%
+  a_case = overview_item
+%>
+<tr style="font-size: 0.8em;">
+  <td style="width: 33%; border-right: 0px">
+    <b><%= link_to h(a_case.patient.name), :controller => '/patients', :action => 'show', :id => a_case.patient %></b>
+    <br/>
+    <%=h a_case.patient.vcard.street_address %>, <%=h a_case.patient.vcard.postal_code %>&nbsp;<%=h a_case.patient.vcard.locality %>
+  </td>
+  <td style="width: 10%; border-left: 0px">
+    <i>Geb:</i>
+    <br/>
+    <%=h a_case.patient.birth_date %>
+  </td>
+  <td style="width: 33%"><b><%= a_case.control_findings.map {|f| h(f.name)}.join('<br/>') %></b></td>
+  <td style="width: 12%">
+    <i>Entn.: </i>
+    <br/>
+    <%=h a_case.examination_date.strftime('%d.%m.%Y') unless a_case.examination_date.nil? %>
+  </td>
+  <td style="width: 12%">
+   <i>Nr.:</i>
+    <br/>
+   <%=link_to h(a_case.praxistar_eingangsnr), :controller => '/cyto/cases', :action => 'result_report', :id => a_case %>
+  </td>
+</tr>
