@@ -14,7 +14,7 @@ namespace :hozr do
     task :load => :environment do
       ActiveRecord::Base.establish_connection(ENV['DATABASE']) if ENV['DATABASE']
 
-      file = ENV['SCHEMA'] || "db/#{ENV['DATABASE'] || ENV['RAILS_ENV']}schema.rb"
+      file = ENV['SCHEMA'] || "db/#{ENV['DATABASE'] || ENV['RAILS_ENV']}-schema.rb"
       load(file)
     end
   end
