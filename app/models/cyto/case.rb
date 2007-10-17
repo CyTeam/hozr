@@ -16,6 +16,10 @@ class Cyto::Case < ActiveRecord::Base
     Praxistar::Bill.find(:first, :conditions => ['Leistungsblatt_ID = ?', praxistar_leistungsblatt_id], :order => 'ID_Rechnung DESC')
   end
   
+  def active_bill
+    Praxistar::Bill.find(:first, :conditions => ['Leistungsblatt_ID = ? AND tf_Storno = 0', praxistar_leistungsblatt_id], :order => 'ID_Rechnung DESC')
+  end
+  
   def control_findings
     finding_classes.select { |finding| finding.belongs_to_group?('Kontrolle') }
   end
