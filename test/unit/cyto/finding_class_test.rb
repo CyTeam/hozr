@@ -1,7 +1,7 @@
 require File.dirname(__FILE__) + '/../../test_helper'
 
 class Cyto::FindingClassTest < Test::Unit::TestCase
-  fixtures :finding_classes
+  fixtures "cyto/finding_classes" 
 
   # Replace this with your real tests.
   def test_truth

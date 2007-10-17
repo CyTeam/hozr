@@ -1,7 +1,7 @@
 require File.dirname(__FILE__) + '/../../test_helper'
 
 class Cyto::ExaminationMethodTest < Test::Unit::TestCase
-  fixtures :examination_methods
+  fixtures "cyto/examination_methods" 
 
   # Replace this with your real tests.
   def test_truth
