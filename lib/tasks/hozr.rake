@@ -1,6 +1,6 @@
 namespace :hozr do
   namespace :schema do
-    desc "Create a db/schema.rb file that can be portably used against any DB supported by AR"
+    desc "Create a schema dump. Use DATABASE to give the name of the database config. Find the result in 'db/DATABASE-schema.rb'"
     task :dump => :environment do
       ActiveRecord::Base.establish_connection(ENV['DATABASE']) if ENV['DATABASE']
 
@@ -10,7 +10,7 @@ namespace :hozr do
       end
     end
 
-    desc "Load a schema.rb file into the database"
+    desc "Load a schema dump. Use DATABASE to give the name of the database config. Uses 'db/DATABASE-schema.rb'"
     task :load => :environment do
       ActiveRecord::Base.establish_connection(ENV['DATABASE']) if ENV['DATABASE']
 
