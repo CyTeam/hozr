@@ -17,5 +17,13 @@ namespace :hozr do
       file = ENV['SCHEMA'] || "db/#{ENV['DATABASE'] || ENV['RAILS_ENV']}-schema.rb"
       load(file)
     end
+
+    desc "Recreate the TO database from the DATABASE or current database schema"
+    task :clone => "hozr:schema:dump" do
+      ENV['SCHEMA'] ||= "db/#{ENV['DATABASE'] || ENV['RAILS_ENV']}-schema.rb"
+      ENV['DATABASE'] = ENV['TO']
+      ActiveRecord::Schema.verbose = false
+      Rake::Task["hozr:schema:load"].invoke
+    end
   end
 end
