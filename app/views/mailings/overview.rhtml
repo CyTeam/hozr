@@ -19,13 +19,12 @@ Ihre Befunde
 </div>
 
 <div id="text">
-Anbei finden Sie Ihre Befunde. Neu haben wir einige statistische Daten aufgenommen.
-<br />
+Anbei finden Sie Ihre Befunde.
 <br />
 
 <% Cyto::CurrentCase.with_scope(:find => {:conditions => ["doctor_id = ? AND screened_at IS NOT NULL", @doctor.id] }) do %>
 
-<h3>&Uuml;bersicht</h3>
+<h3 style="margin-bottom: 0em; padding-bottom: 0em">&Uuml;bersicht</h3>
 <table class="listing" style="margin-top: 0px">
   <% for class_group in ClassificationGroup.find :all, :order => :position %>
     <% group_cases = @mailing.cases.select { |c| c.classification.classification_group == class_group } %>
@@ -33,6 +32,7 @@ Anbei finden Sie Ihre Befunde. Neu haben wir einige statistische Daten aufgenomm
   <% end %>
 </table>
 
+<!--
 <h3 style="font-weight: bold; font-size: 13pt">Jahres&uuml;bersicht</h3>
 <% total = Cyto::CurrentCase.count() %>
 <% group_counts = Cyto::CurrentCase.count(:group => 'classification_group_id', :include => 'classification') %>
@@ -57,11 +57,10 @@ Anbei finden Sie Ihre Befunde. Neu haben wir einige statistische Daten aufgenomm
 </table>
 <% end %>
 
+-->
 <br />
 <br />
-Bei allfälligen Fragen stehen wir Ihnen gerne zur Verfügung
-<br />
-<br />
+Bei allfälligen Fragen stehen wir Ihnen gerne zur Verfügung.
 <br />
 <br />
 Mit freundlichen Grüssen

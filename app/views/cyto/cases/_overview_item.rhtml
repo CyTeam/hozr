@@ -1,14 +1,14 @@
 <%
   a_case = overview_item
 %>
-<tr style="font-size: 0.8em;">
-  <td style="width: 26%; border-right: 0px">
+<tr style="font-size: 0.8em; vertical-align: top; padding-bottom: 0.2em">
+  <td style="width: 26%; border-right: 0px; vertical-align: top">
     <b><%= link_to h(a_case.patient.name), :controller => '/patients', :action => 'show', :id => a_case.patient %></b>
   </td>
-  <td style="width: 17%; border-left: 0px; text-align: right">
+  <td style="width: 17%; border-left: 0px; text-align: right; padding-top: 2px; padding-right: 1em">
     <%= "<i>Geb:</i>" if @is_first_of_group %> <%=h a_case.patient.birth_date %>
   </td>
-  <td style="width: 25%">
+  <td style="width: 25%; vertical-align: top">
     <b><%= a_case.control_findings.map {|f| h(f.name)}.join('<br/>') %></b>
   </td>
   <td style="width: 17%; text-align: right">
