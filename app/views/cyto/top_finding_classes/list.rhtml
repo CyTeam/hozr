@@ -1,7 +1,7 @@
 <h1>Top Befunde</h1>
 
 <dl>
-  <% for classification in Classification.find(:all, :order => 'name') %>
+  <% for classification in Cyto::Classification.find(:all, :order => 'name') %>
     <dt style="font-weight: bold"><%= link_to h(classification.name), :controller => 'top_finding_classes', :action => 'edit_classification', 'top_finding_class[classification_id]' => classification.id %> (<%= classification.examination_method.name %>)</dt>
     <% for finding_class in classification.top_finding_classes %>
       <dd>
