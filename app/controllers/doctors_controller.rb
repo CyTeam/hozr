@@ -41,6 +41,8 @@ class DoctorsController < ApplicationController
 
   def edit
     @doctor = Doctor.find(params[:id])
+    @praxis_vcard = @doctor.praxis
+    @private_vcard = @doctor.private
   end
 
   def update

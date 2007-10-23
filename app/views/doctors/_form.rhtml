@@ -7,10 +7,10 @@
     <%= link_to_function "Privat", "hide('praxis_vcard'); show('private_vcard')" %>
   </legend>
   <table id="praxis_vcard">
-    <%= render :partial => 'vcards/form', :locals => { :vcard_name => 'praxis_vcard', :vcard => @doctor.praxis } %>
+    <%= render :partial => 'vcards/form', :locals => { :vcard_name => 'praxis_vcard', :vcard => @praxis_vcard } %>
   </table>
   <table id="private_vcard" style="display: none">
-    <%= render :partial => 'vcards/form', :locals => { :vcard_name => 'private_vcard', :vcard => @doctor.private } %>
+    <%= render :partial => 'vcards/form', :locals => { :vcard_name => 'private_vcard', :vcard => @private_vcard } %>
   </table>
 </fieldset>
 <!--[eoform:doctor]-->
