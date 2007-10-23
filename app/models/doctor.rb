@@ -6,7 +6,7 @@ class Doctor < ActiveRecord::Base
   has_many :cases
   
   def family_name
-    praxis.family_name
+    praxis.family_name || ""
   end
 
   def family_name=(name)
@@ -14,7 +14,7 @@ class Doctor < ActiveRecord::Base
   end
 
   def given_name
-    praxis.given_name
+    praxis.given_name || ""
   end
 
   def given_name=(name)
@@ -22,6 +22,6 @@ class Doctor < ActiveRecord::Base
   end
 
   def name
-    praxis.full_name
+    praxis.full_name || ""
   end
 end
