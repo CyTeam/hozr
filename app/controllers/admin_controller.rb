@@ -28,4 +28,10 @@ class AdminController < ApplicationController
     send_data output, :type => 'text/html; charset=utf-8', :disposition => 'inline'
 #     render :text => 'Printed'
   end
+
+  def unsign_case
+    a_case = Cyto::Case.find(params[:id])
+    a_case.signed_at = nil
+    a_case.save
+  end
 end
