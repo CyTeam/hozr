@@ -12,6 +12,7 @@
   <table id="private_vcard" style="display: none">
     <%= render :partial => 'vcards/form', :locals => { :vcard_name => 'private_vcard', :vcard => @private_vcard } %>
   </table>
+  <%= render :partial => "vcards/show_phone_numbers", :locals => { :vcard => @praxis_vcard } %>
 </fieldset>
 <!--[eoform:doctor]-->
 
