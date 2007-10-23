@@ -5,6 +5,7 @@ class Praxistar::Bill < Praxistar::Base
   belongs_to :patient, :foreign_key => 'Patient_ID'
   belongs_to :insurance, :foreign_key => 'Versicherung_ID'
   belongs_to :doctor, :foreign_key => 'Stellvertretung_ID'
+  belongs_to :praxistar_leistungsblatt, :class_name => 'Praxistar::LeistungenBlatt', :foreign_key => 'Leistungsblatt_ID'
   
   has_one :account_receivable, :foreign_key => 'Rechnung_ID'
   has_many :payments, :foreign_key => 'Rechnung_ID'
