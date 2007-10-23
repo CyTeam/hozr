@@ -1,7 +1,7 @@
 require File.dirname(__FILE__) + '/../../test_helper'
 
-class Tarmed::LeistungTest < Test::Unit::TestCase
-  fixtures "tarmed/leistungs"
+class Cyto::BillTest < Test::Unit::TestCase
+  fixtures "cyto/cyto_bills"
 
   # Replace this with your real tests.
   def test_truth

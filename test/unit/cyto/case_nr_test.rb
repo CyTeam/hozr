@@ -3,7 +3,6 @@ require File.dirname(__FILE__) + '/../../test_helper'
 class Cyto::CaseNrTest < Test::Unit::TestCase
   fixtures "cyto/cases"
 
-  # Replace this with your real tests.
   def test_new
     c = Cyto::CaseNr.new
     assert_equal c.to_s, '07/00001'
@@ -29,5 +28,14 @@ class Cyto::CaseNrTest < Test::Unit::TestCase
     c = Cyto::CaseNr.new
     
     assert_equal "#{Date.today.strftime('%y')}/00001", c.to_s
+  end
+
+  def test_next_case
+    c = Cyto::Case.new
+    c.praxistar_eingangsnr = '09/11111'
+    c.save
+    
+    n = Cyto::CaseNr.new
+    assert_equal '09/11112', n.to_s
   end
 end
