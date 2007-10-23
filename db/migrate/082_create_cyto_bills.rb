@@ -1,5 +1,8 @@
 class CreateCytoBills < ActiveRecord::Migration
   def self.up
+    # Drop bills table from 071
+    drop_table :bills
+    
     create_table :bills do |t|
       t.column "case_id", :integer
       t.column "amount", :float
