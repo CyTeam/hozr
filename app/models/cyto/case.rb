@@ -91,7 +91,7 @@ class Cyto::Case < ActiveRecord::Base
   end
   
   def ready_for_second_entry
-    !entry_date.nil? && screened_at.nil? && !needs_p16
+    !entry_date.nil? && screened_at.nil? && !needs_p16?
   end
   
   def ready_for_p16
