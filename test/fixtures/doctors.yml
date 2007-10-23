@@ -1,5 +1,1234 @@
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
-first:
-  id: 1
-another:
-  id: 2
+--- 
+doctor_00087: 
+  updated_at: 2007-01-03 01:30:16 +01:00
+  code: ""
+  speciality: ""
+  id: 87
+  private_vcard: 204
+  praxis_vcard: 203
+  created_at: 2007-01-03 01:30:16 +01:00
+  active: true
+doctor_00142: 
+  updated_at: 2007-01-03 01:30:19 +01:00
+  code: ""
+  speciality: ""
+  id: 142
+  private_vcard: 272
+  praxis_vcard: 271
+  created_at: 2007-01-03 01:30:19 +01:00
+  active: true
+doctor_00114: 
+  updated_at: 2007-01-03 01:30:18 +01:00
+  code: ""
+  speciality: ""
+  id: 114
+  private_vcard: 238
+  praxis_vcard: 237
+  created_at: 2007-01-03 01:30:18 +01:00
+  active: true
+doctor_00143: 
+  updated_at: 2007-01-03 01:30:19 +01:00
+  code: ""
+  speciality: ""
+  id: 143
+  private_vcard: 274
+  praxis_vcard: 273
+  created_at: 2007-01-03 01:30:19 +01:00
+  active: true
+doctor_00115: 
+  updated_at: 2007-01-03 01:30:18 +01:00
+  code: ""
+  speciality: ""
+  id: 115
+  private_vcard: 240
+  praxis_vcard: 239
+  created_at: 2007-01-03 01:30:18 +01:00
+  active: true
+doctor_00171: 
+  updated_at: 2007-01-03 01:30:21 +01:00
+  code: "29"
+  speciality: ""
+  id: 171
+  private_vcard: 312
+  praxis_vcard: 311
+  created_at: 2007-01-03 01:30:21 +01:00
+  active: true
+doctor_00258: 
+  updated_at: 2007-01-03 01:30:12 +01:00
+  code: ""
+  speciality: "Gyn\xC3\xA4kologie und Geburtshilfe FMH"
+  id: 258
+  private_vcard: 132
+  praxis_vcard: 131
+  created_at: 2007-01-03 01:30:12 +01:00
+  active: true
+doctor_00116: 
+  updated_at: 2007-01-03 01:30:18 +01:00
+  code: ""
+  speciality: ""
+  id: 116
+  private_vcard: 242
+  praxis_vcard: 241
+  created_at: 2007-01-03 01:30:18 +01:00
+  active: true
+doctor_00030: 
+  updated_at: 2007-01-03 01:30:11 +01:00
+  code: ""
+  speciality: ""
+  id: 30
+  private_vcard: 112
+  praxis_vcard: 111
+  created_at: 2007-01-03 01:30:11 +01:00
+  active: true
+doctor_00145: 
+  updated_at: 2007-01-03 01:30:19 +01:00
+  code: ""
+  speciality: ""
+  id: 145
+  private_vcard: 276
+  praxis_vcard: 275
+  created_at: 2007-01-03 01:30:19 +01:00
+  active: true
+doctor_00003: 
+  updated_at: 2007-01-03 01:30:09 +01:00
+  code: ""
+  speciality: ""
+  id: 3
+  private_vcard: 62
+  praxis_vcard: 61
+  created_at: 2007-01-03 01:30:09 +01:00
+  active: true
+doctor_00117: 
+  updated_at: 2007-01-03 01:30:18 +01:00
+  code: m1
+  speciality: ""
+  id: 117
+  private_vcard: 244
+  praxis_vcard: 243
+  created_at: 2007-01-03 01:30:18 +01:00
+  active: true
+doctor_00173: 
+  updated_at: 2007-01-03 01:30:21 +01:00
+  code: ""
+  speciality: ""
+  id: 173
+  private_vcard: 314
+  praxis_vcard: 313
+  created_at: 2007-01-03 01:30:21 +01:00
+  active: true
+doctor_00146: 
+  updated_at: 2007-01-03 01:30:20 +01:00
+  code: ""
+  speciality: ""
+  id: 146
+  private_vcard: 278
+  praxis_vcard: 277
+  created_at: 2007-01-03 01:30:20 +01:00
+  active: true
+doctor_00004: 
+  updated_at: 2007-01-03 01:30:09 +01:00
+  code: ""
+  speciality: ""
+  id: 4
+  private_vcard: 64
+  praxis_vcard: 63
+  created_at: 2007-01-03 01:30:09 +01:00
+  active: true
+doctor_00032: 
+  updated_at: 2007-01-03 01:30:11 +01:00
+  code: ""
+  speciality: ""
+  id: 32
+  private_vcard: 116
+  praxis_vcard: 115
+  created_at: 2007-01-03 01:30:11 +01:00
+  active: true
+doctor_00005: 
+  updated_at: 2007-01-03 01:30:09 +01:00
+  code: ""
+  speciality: ""
+  id: 5
+  private_vcard: 66
+  praxis_vcard: 65
+  created_at: 2007-01-03 01:30:09 +01:00
+  active: true
+doctor_00202: 
+  updated_at: 2007-01-03 01:30:22 +01:00
+  code: ""
+  speciality: Allgemeine Medizin FMH
+  id: 202
+  private_vcard: 322
+  praxis_vcard: 321
+  created_at: 2007-01-03 01:30:22 +01:00
+  active: true
+doctor_00119: 
+  updated_at: 2007-01-03 01:30:18 +01:00
+  code: ""
+  speciality: ""
+  id: 119
+  private_vcard: 246
+  praxis_vcard: 245
+  created_at: 2007-01-03 01:30:18 +01:00
+  active: true
+doctor_00175: 
+  updated_at: 2007-01-03 01:30:22 +01:00
+  code: ""
+  speciality: ""
+  id: 175
+  private_vcard: 316
+  praxis_vcard: 315
+  created_at: 2007-01-03 01:30:22 +01:00
+  active: true
+doctor_00033: 
+  updated_at: 2007-01-03 01:30:12 +01:00
+  code: ""
+  speciality: ""
+  id: 33
+  private_vcard: 118
+  praxis_vcard: 117
+  created_at: 2007-01-03 01:30:12 +01:00
+  active: true
+doctor_00147: 
+  updated_at: 2007-01-03 01:30:20 +01:00
+  code: "20"
+  speciality: ""
+  id: 147
+  private_vcard: 280
+  praxis_vcard: 279
+  created_at: 2007-01-03 01:30:20 +01:00
+  active: true
+doctor_00203: 
+  updated_at: 2007-01-03 01:30:22 +01:00
+  code: ""
+  speciality: "Gyn\xC3\xA4kologie FMH"
+  id: 203
+  private_vcard: 324
+  praxis_vcard: 323
+  created_at: 2007-01-03 01:30:22 +01:00
+  active: true
+doctor_00062: 
+  updated_at: 2007-01-03 01:30:14 +01:00
+  code: ""
+  speciality: ""
+  id: 62
+  private_vcard: 168
+  praxis_vcard: 167
+  created_at: 2007-01-03 01:30:14 +01:00
+  active: true
+doctor_00034: 
+  updated_at: 2007-01-03 01:30:12 +01:00
+  code: ""
+  speciality: ""
+  id: 34
+  private_vcard: 120
+  praxis_vcard: 119
+  created_at: 2007-01-03 01:30:12 +01:00
+  active: true
+doctor_00231: 
+  updated_at: 2007-01-03 01:30:23 +01:00
+  code: "31"
+  speciality: ""
+  id: 231
+  private_vcard: 342
+  praxis_vcard: 341
+  created_at: 2007-01-03 01:30:23 +01:00
+  active: true
+doctor_00148: 
+  updated_at: 2007-01-03 01:30:20 +01:00
+  code: "18"
+  speciality: " "
+  id: 148
+  private_vcard: 282
+  praxis_vcard: 281
+  created_at: 2007-01-03 01:30:20 +01:00
+  active: true
+doctor_00006: 
+  updated_at: 2007-01-08 18:10:11 +01:00
+  code: "34"
+  speciality: Allgemeine Medizin FMH
+  id: 6
+  private_vcard: 58
+  praxis_vcard: 57
+  created_at: 2007-01-03 01:30:08 +01:00
+  active: true
+doctor_00063: 
+  updated_at: 2007-01-03 01:30:14 +01:00
+  code: ""
+  speciality: ""
+  id: 63
+  private_vcard: 170
+  praxis_vcard: 169
+  created_at: 2007-01-03 01:30:14 +01:00
+  active: true
+doctor_00035: 
+  updated_at: 2007-01-03 01:30:12 +01:00
+  code: ""
+  speciality: ""
+  id: 35
+  private_vcard: 122
+  praxis_vcard: 121
+  created_at: 2007-01-03 01:30:12 +01:00
+  active: true
+doctor_00149: 
+  updated_at: 2007-01-03 01:30:20 +01:00
+  code: "25"
+  speciality: ""
+  id: 149
+  private_vcard: 284
+  praxis_vcard: 283
+  created_at: 2007-01-03 01:30:20 +01:00
+  active: true
+doctor_00091: 
+  updated_at: 2007-01-03 01:30:16 +01:00
+  code: ""
+  speciality: ""
+  id: 91
+  private_vcard: 208
+  praxis_vcard: 207
+  created_at: 2007-01-03 01:30:16 +01:00
+  active: true
+doctor_00204: 
+  updated_at: 2007-01-03 01:30:22 +01:00
+  code: ""
+  speciality: Allgemeine Medizin FMH
+  id: 204
+  private_vcard: 326
+  praxis_vcard: 325
+  created_at: 2007-01-03 01:30:22 +01:00
+  active: true
+doctor_00092: 
+  updated_at: 2007-01-03 01:30:16 +01:00
+  code: ""
+  speciality: ""
+  id: 92
+  private_vcard: 210
+  praxis_vcard: 209
+  created_at: 2007-01-03 01:30:16 +01:00
+  active: true
+doctor_00205: 
+  updated_at: 2007-01-03 01:30:22 +01:00
+  code: ""
+  speciality: Allgemeine Medizin FMH
+  id: 205
+  private_vcard: 328
+  praxis_vcard: 327
+  created_at: 2007-01-03 01:30:22 +01:00
+  active: true
+doctor_00065: 
+  updated_at: 2007-01-03 01:30:14 +01:00
+  code: ""
+  speciality: ""
+  id: 65
+  private_vcard: 172
+  praxis_vcard: 171
+  created_at: 2007-01-03 01:30:14 +01:00
+  active: true
+doctor_00093: 
+  updated_at: 2007-01-03 01:30:16 +01:00
+  code: ""
+  speciality: ""
+  id: 93
+  private_vcard: 212
+  praxis_vcard: 211
+  created_at: 2007-01-03 01:30:16 +01:00
+  active: true
+doctor_00066: 
+  updated_at: 2007-01-03 01:30:14 +01:00
+  code: ""
+  speciality: ""
+  id: 66
+  private_vcard: 174
+  praxis_vcard: 173
+  created_at: 2007-01-03 01:30:14 +01:00
+  active: true
+doctor_00235: 
+  updated_at: 2007-01-03 01:30:09 +01:00
+  code: ""
+  speciality: "Gyn\xC3\xA4kologie FMH"
+  id: 235
+  private_vcard: 60
+  praxis_vcard: 59
+  created_at: 2007-01-03 01:30:09 +01:00
+  active: true
+doctor_00207: 
+  updated_at: 2007-01-03 01:30:22 +01:00
+  code: ""
+  speciality: "Gyn\xC3\xA4kologie FMH"
+  id: 207
+  private_vcard: 330
+  praxis_vcard: 329
+  created_at: 2007-01-03 01:30:22 +01:00
+  active: true
+doctor_00067: 
+  updated_at: 2007-01-03 01:30:14 +01:00
+  code: ""
+  speciality: ""
+  id: 67
+  private_vcard: 176
+  praxis_vcard: 175
+  created_at: 2007-01-03 01:30:14 +01:00
+  active: true
+doctor_00095: 
+  updated_at: 2007-01-03 01:30:16 +01:00
+  code: ""
+  speciality: ""
+  id: 95
+  private_vcard: 214
+  praxis_vcard: 213
+  created_at: 2007-01-03 01:30:16 +01:00
+  active: true
+doctor_00068: 
+  updated_at: 2007-01-03 01:30:15 +01:00
+  code: "28"
+  speciality: ""
+  id: 68
+  private_vcard: 178
+  praxis_vcard: 177
+  created_at: 2007-01-03 01:30:15 +01:00
+  active: true
+doctor_00123: 
+  updated_at: 2007-01-03 01:30:18 +01:00
+  code: ""
+  speciality: ""
+  id: 123
+  private_vcard: 248
+  praxis_vcard: 247
+  created_at: 2007-01-03 01:30:18 +01:00
+  active: true
+doctor_00237: 
+  updated_at: 2007-01-03 01:30:09 +01:00
+  code: ""
+  speciality: ""
+  id: 237
+  private_vcard: 70
+  praxis_vcard: 69
+  created_at: 2007-01-03 01:30:09 +01:00
+  active: true
+doctor_00151: 
+  updated_at: 2007-01-03 01:30:20 +01:00
+  code: "19"
+  speciality: ""
+  id: 151
+  private_vcard: 286
+  praxis_vcard: 285
+  created_at: 2007-01-03 01:30:20 +01:00
+  active: true
+doctor_00124: 
+  updated_at: 2007-01-03 01:30:18 +01:00
+  code: ""
+  speciality: ""
+  id: 124
+  private_vcard: 250
+  praxis_vcard: 249
+  created_at: 2007-01-03 01:30:18 +01:00
+  active: true
+doctor_00152: 
+  updated_at: 2007-01-03 01:30:20 +01:00
+  code: ""
+  speciality: ""
+  id: 152
+  private_vcard: 288
+  praxis_vcard: 287
+  created_at: 2007-01-03 01:30:20 +01:00
+  active: true
+doctor_00125: 
+  updated_at: 2007-01-03 01:30:18 +01:00
+  code: "33"
+  speciality: ""
+  id: 125
+  private_vcard: 252
+  praxis_vcard: 251
+  created_at: 2007-01-03 01:30:18 +01:00
+  active: true
+doctor_00098: 
+  updated_at: 2007-01-03 01:30:17 +01:00
+  code: ""
+  speciality: ""
+  id: 98
+  private_vcard: 216
+  praxis_vcard: 215
+  created_at: 2007-01-03 01:30:17 +01:00
+  active: true
+doctor_00153: 
+  updated_at: 2007-01-03 01:30:20 +01:00
+  code: "02"
+  speciality: ""
+  id: 153
+  private_vcard: 290
+  praxis_vcard: 289
+  created_at: 2007-01-03 01:30:20 +01:00
+  active: true
+doctor_00011: 
+  updated_at: 2007-01-03 01:30:09 +01:00
+  code: ""
+  speciality: ""
+  id: 11
+  private_vcard: 76
+  praxis_vcard: 75
+  created_at: 2007-01-03 01:30:09 +01:00
+  active: true
+doctor_00040: 
+  updated_at: 2007-01-03 01:30:12 +01:00
+  code: ""
+  speciality: ""
+  id: 40
+  private_vcard: 134
+  praxis_vcard: 133
+  created_at: 2007-01-03 01:30:12 +01:00
+  active: true
+doctor_00099: 
+  updated_at: 2007-01-03 01:30:17 +01:00
+  code: ""
+  speciality: ""
+  id: 99
+  private_vcard: 218
+  praxis_vcard: 217
+  created_at: 2007-01-03 01:30:17 +01:00
+  active: true
+doctor_00154: 
+  updated_at: 2007-01-03 01:30:20 +01:00
+  code: ""
+  speciality: ""
+  id: 154
+  private_vcard: 292
+  praxis_vcard: 291
+  created_at: 2007-01-03 01:30:20 +01:00
+  active: true
+doctor_00183: 
+  updated_at: 2007-01-03 01:30:22 +01:00
+  code: m2
+  speciality: ""
+  id: 183
+  private_vcard: 318
+  praxis_vcard: 317
+  created_at: 2007-01-03 01:30:22 +01:00
+  active: true
+doctor_00041: 
+  updated_at: 2007-01-03 01:30:12 +01:00
+  code: ""
+  speciality: ""
+  id: 41
+  private_vcard: 136
+  praxis_vcard: 135
+  created_at: 2007-01-03 01:30:12 +01:00
+  active: true
+doctor_00155: 
+  updated_at: 2007-01-03 01:30:20 +01:00
+  code: ""
+  speciality: ""
+  id: 155
+  private_vcard: 294
+  praxis_vcard: 293
+  created_at: 2007-01-03 01:30:20 +01:00
+  active: true
+doctor_00013: 
+  updated_at: 2007-01-03 01:30:10 +01:00
+  code: ""
+  speciality: ""
+  id: 13
+  private_vcard: 80
+  praxis_vcard: 79
+  created_at: 2007-01-03 01:30:10 +01:00
+  active: true
+doctor_00042: 
+  updated_at: 2007-01-03 01:30:13 +01:00
+  code: "00"
+  speciality: ""
+  id: 42
+  private_vcard: 138
+  praxis_vcard: 137
+  created_at: 2007-01-03 01:30:13 +01:00
+  active: true
+doctor_00014: 
+  updated_at: 2007-01-03 01:30:10 +01:00
+  code: ""
+  speciality: ""
+  id: 14
+  private_vcard: 82
+  praxis_vcard: 81
+  created_at: 2007-01-03 01:30:10 +01:00
+  active: true
+doctor_00240: 
+  updated_at: 2007-01-03 01:30:09 +01:00
+  code: "35"
+  speciality: "Gyn\xC3\xA4kologie und Geburtshilfe FMH"
+  id: 240
+  private_vcard: 72
+  praxis_vcard: 71
+  created_at: 2007-01-03 01:30:09 +01:00
+  active: true
+doctor_00015: 
+  updated_at: 2007-01-03 01:30:10 +01:00
+  code: ""
+  speciality: ""
+  id: 15
+  private_vcard: 84
+  praxis_vcard: 83
+  created_at: 2007-01-03 01:30:10 +01:00
+  active: true
+doctor_00212: 
+  updated_at: 2007-01-03 01:30:22 +01:00
+  code: ""
+  speciality: ""
+  id: 212
+  private_vcard: 332
+  praxis_vcard: 331
+  created_at: 2007-01-03 01:30:22 +01:00
+  active: true
+doctor_00129: 
+  updated_at: 2007-01-03 01:30:18 +01:00
+  code: "10"
+  speciality: ""
+  id: 129
+  private_vcard: 254
+  praxis_vcard: 253
+  created_at: 2007-01-03 01:30:18 +01:00
+  active: true
+doctor_00071: 
+  updated_at: 2007-01-03 01:30:15 +01:00
+  code: "21"
+  speciality: ""
+  id: 71
+  private_vcard: 180
+  praxis_vcard: 179
+  created_at: 2007-01-03 01:30:15 +01:00
+  active: true
+doctor_00044: 
+  updated_at: 2007-01-03 01:30:13 +01:00
+  code: ""
+  speciality: ""
+  id: 44
+  private_vcard: 142
+  praxis_vcard: 141
+  created_at: 2007-01-03 01:30:13 +01:00
+  active: true
+doctor_00016: 
+  updated_at: 2007-01-03 01:30:10 +01:00
+  code: 08
+  speciality: ""
+  id: 16
+  private_vcard: 86
+  praxis_vcard: 85
+  created_at: 2007-01-03 01:30:10 +01:00
+  active: true
+doctor_00213: 
+  updated_at: 2007-01-03 01:30:22 +01:00
+  code: ""
+  speciality: ""
+  id: 213
+  private_vcard: 334
+  praxis_vcard: 333
+  created_at: 2007-01-03 01:30:22 +01:00
+  active: true
+doctor_00072: 
+  updated_at: 2007-01-03 01:30:15 +01:00
+  code: ""
+  speciality: ""
+  id: 72
+  private_vcard: 182
+  praxis_vcard: 181
+  created_at: 2007-01-03 01:30:15 +01:00
+  active: true
+doctor_00045: 
+  updated_at: 2007-01-03 01:30:13 +01:00
+  code: "16"
+  speciality: ""
+  id: 45
+  private_vcard: 144
+  praxis_vcard: 143
+  created_at: 2007-01-03 01:30:13 +01:00
+  active: true
+doctor_00159: 
+  updated_at: 2007-01-03 01:30:20 +01:00
+  code: "24"
+  speciality: ""
+  id: 159
+  private_vcard: 296
+  praxis_vcard: 295
+  created_at: 2007-01-03 01:30:20 +01:00
+  active: true
+doctor_00017: 
+  updated_at: 2007-01-03 01:30:10 +01:00
+  code: ""
+  speciality: ""
+  id: 17
+  private_vcard: 88
+  praxis_vcard: 87
+  created_at: 2007-01-03 01:30:10 +01:00
+  active: true
+doctor_00073: 
+  updated_at: 2007-01-03 01:30:15 +01:00
+  code: ""
+  speciality: ""
+  id: 73
+  private_vcard: 184
+  praxis_vcard: 183
+  created_at: 2007-01-03 01:30:15 +01:00
+  active: true
+doctor_00270: 
+  updated_at: 2007-01-03 01:30:13 +01:00
+  code: ""
+  speciality: "Gyn\xC3\xA4kologie und Geburtshilfe FMH"
+  id: 270
+  private_vcard: 156
+  praxis_vcard: 155
+  created_at: 2007-01-03 01:30:13 +01:00
+  active: true
+doctor_00046: 
+  updated_at: 2007-01-03 01:30:13 +01:00
+  code: ""
+  speciality: ""
+  id: 46
+  private_vcard: 146
+  praxis_vcard: 145
+  created_at: 2007-01-03 01:30:13 +01:00
+  active: true
+doctor_00101: 
+  updated_at: 2007-01-03 01:30:17 +01:00
+  code: ""
+  speciality: ""
+  id: 101
+  private_vcard: 220
+  praxis_vcard: 219
+  created_at: 2007-01-03 01:30:17 +01:00
+  active: true
+doctor_00271: 
+  updated_at: 2007-01-03 01:30:12 +01:00
+  code: ""
+  speciality: IMF Bukarest
+  id: 271
+  private_vcard: 130
+  praxis_vcard: 129
+  created_at: 2007-01-03 01:30:12 +01:00
+  active: true
+doctor_00047: 
+  updated_at: 2007-01-03 01:30:13 +01:00
+  code: ""
+  speciality: ""
+  id: 47
+  private_vcard: 148
+  praxis_vcard: 147
+  created_at: 2007-01-03 01:30:13 +01:00
+  active: true
+doctor_00102: 
+  updated_at: 2007-01-03 01:30:17 +01:00
+  code: 09
+  speciality: ""
+  id: 102
+  private_vcard: 222
+  praxis_vcard: 221
+  created_at: 2007-01-03 01:30:17 +01:00
+  active: true
+doctor_00272: 
+  updated_at: 2007-01-03 01:30:14 +01:00
+  code: ""
+  speciality: ""
+  id: 272
+  private_vcard: 160
+  praxis_vcard: 159
+  created_at: 2007-01-03 01:30:14 +01:00
+  active: true
+doctor_00130: 
+  updated_at: 2007-01-03 01:30:18 +01:00
+  code: ""
+  speciality: ""
+  id: 130
+  private_vcard: 256
+  praxis_vcard: 255
+  created_at: 2007-01-03 01:30:18 +01:00
+  active: true
+doctor_00103: 
+  updated_at: 2007-01-03 01:30:17 +01:00
+  code: "05"
+  speciality: ""
+  id: 103
+  private_vcard: 224
+  praxis_vcard: 223
+  created_at: 2007-01-03 01:30:17 +01:00
+  active: true
+doctor_00273: 
+  updated_at: 2007-03-26 14:06:13 +02:00
+  code: 
+  speciality: 
+  id: 273
+  private_vcard: 150968
+  praxis_vcard: 150967
+  created_at: 2007-03-26 14:06:13 +02:00
+  active: true
+doctor_00131: 
+  updated_at: 2007-01-03 01:30:19 +01:00
+  code: "01"
+  speciality: ""
+  id: 131
+  private_vcard: 258
+  praxis_vcard: 257
+  created_at: 2007-01-03 01:30:19 +01:00
+  active: true
+doctor_00048: 
+  updated_at: 2007-01-03 01:30:13 +01:00
+  code: ""
+  speciality: "Gyn\xC3\xA4kologie FMH"
+  id: 48
+  private_vcard: 150
+  praxis_vcard: 149
+  created_at: 2007-01-03 01:30:13 +01:00
+  active: true
+doctor_00104: 
+  updated_at: 2007-01-03 01:30:17 +01:00
+  code: ""
+  speciality: ""
+  id: 104
+  private_vcard: 226
+  praxis_vcard: 225
+  created_at: 2007-01-03 01:30:17 +01:00
+  active: true
+doctor_00077: 
+  updated_at: 2007-01-03 01:30:15 +01:00
+  code: "39"
+  speciality: ""
+  id: 77
+  private_vcard: 188
+  praxis_vcard: 187
+  created_at: 2007-01-03 01:30:15 +01:00
+  active: true
+doctor_00274: 
+  updated_at: 2007-05-03 15:09:43 +02:00
+  code: 
+  speciality: 
+  id: 274
+  private_vcard: 152512
+  praxis_vcard: 152511
+  created_at: 2007-05-03 15:09:43 +02:00
+  active: true
+doctor_00246: 
+  updated_at: 2007-01-03 01:30:10 +01:00
+  code: hausi
+  speciality: ""
+  id: 246
+  private_vcard: 94
+  praxis_vcard: 93
+  created_at: 2007-01-03 01:30:10 +01:00
+  active: true
+doctor_00219: 
+  updated_at: 2007-01-03 01:30:15 +01:00
+  code: ""
+  speciality: ""
+  id: 219
+  private_vcard: 186
+  praxis_vcard: 185
+  created_at: 2007-01-03 01:30:15 +01:00
+  active: true
+doctor_00078: 
+  updated_at: 2007-01-03 01:30:15 +01:00
+  code: ""
+  speciality: ""
+  id: 78
+  private_vcard: 190
+  praxis_vcard: 189
+  created_at: 2007-01-03 01:30:15 +01:00
+  active: true
+doctor_00275: 
+  updated_at: 2007-09-11 09:13:50 +02:00
+  code: 
+  speciality: 
+  id: 275
+  private_vcard: 157200
+  praxis_vcard: 157199
+  created_at: 2007-09-11 09:13:50 +02:00
+  active: true
+doctor_00133: 
+  updated_at: 2007-01-03 01:30:19 +01:00
+  code: ""
+  speciality: ""
+  id: 133
+  private_vcard: 260
+  praxis_vcard: 259
+  created_at: 2007-01-03 01:30:19 +01:00
+  active: true
+doctor_00162: 
+  updated_at: 2007-01-03 01:30:21 +01:00
+  code: ""
+  speciality: ""
+  id: 162
+  private_vcard: 298
+  praxis_vcard: 297
+  created_at: 2007-01-03 01:30:21 +01:00
+  active: true
+doctor_00079: 
+  updated_at: 2007-01-03 01:30:15 +01:00
+  code: ""
+  speciality: ""
+  id: 79
+  private_vcard: 192
+  praxis_vcard: 191
+  created_at: 2007-01-03 01:30:15 +01:00
+  active: true
+doctor_00276: 
+  updated_at: 2007-10-02 09:45:38 +02:00
+  code: 
+  speciality: 
+  id: 276
+  private_vcard: 158160
+  praxis_vcard: 158159
+  created_at: 2007-10-02 09:45:38 +02:00
+  active: true
+doctor_00248: 
+  updated_at: 2007-01-03 01:30:10 +01:00
+  code: ""
+  speciality: ""
+  id: 248
+  private_vcard: 98
+  praxis_vcard: 97
+  created_at: 2007-01-03 01:30:10 +01:00
+  active: true
+doctor_00106: 
+  updated_at: 2007-01-03 01:30:17 +01:00
+  code: "32"
+  speciality: ""
+  id: 106
+  private_vcard: 228
+  praxis_vcard: 227
+  created_at: 2007-01-03 01:30:17 +01:00
+  active: true
+doctor_00277: 
+  updated_at: 2007-10-22 10:30:12 +02:00
+  code: 
+  speciality: 
+  id: 277
+  private_vcard: 158812
+  praxis_vcard: 158811
+  created_at: 2007-10-22 10:30:12 +02:00
+  active: true
+doctor_00163: 
+  updated_at: 2007-01-03 01:30:21 +01:00
+  code: ""
+  speciality: ""
+  id: 163
+  private_vcard: 300
+  praxis_vcard: 299
+  created_at: 2007-01-03 01:30:21 +01:00
+  active: true
+doctor_00021: 
+  updated_at: 2007-01-03 01:30:10 +01:00
+  code: ""
+  speciality: ""
+  id: 21
+  private_vcard: 96
+  praxis_vcard: 95
+  created_at: 2007-01-03 01:30:10 +01:00
+  active: true
+doctor_00135: 
+  updated_at: 2007-01-03 01:30:19 +01:00
+  code: ""
+  speciality: ""
+  id: 135
+  private_vcard: 262
+  praxis_vcard: 261
+  created_at: 2007-01-03 01:30:19 +01:00
+  active: true
+doctor_00249: 
+  updated_at: 2007-01-03 01:30:11 +01:00
+  code: "37"
+  speciality: Dr. med. Facharzt FMH
+  id: 249
+  private_vcard: 102
+  praxis_vcard: 101
+  created_at: 2007-01-03 01:30:11 +01:00
+  active: true
+doctor_00164: 
+  updated_at: 2007-01-03 01:30:21 +01:00
+  code: "03"
+  speciality: "Gyn\xC3\xA4kologie und Geburtshilfe FMH"
+  id: 164
+  private_vcard: 302
+  praxis_vcard: 301
+  created_at: 2007-01-03 01:30:21 +01:00
+  active: true
+doctor_00165: 
+  updated_at: 2007-01-03 01:30:21 +01:00
+  code: "12"
+  speciality: ""
+  id: 165
+  private_vcard: 304
+  praxis_vcard: 303
+  created_at: 2007-01-03 01:30:21 +01:00
+  active: true
+doctor_00023: 
+  updated_at: 2007-01-03 01:30:11 +01:00
+  code: ""
+  speciality: ""
+  id: 23
+  private_vcard: 100
+  praxis_vcard: 99
+  created_at: 2007-01-03 01:30:11 +01:00
+  active: true
+doctor_00137: 
+  updated_at: 2007-01-03 01:30:19 +01:00
+  code: ""
+  speciality: ""
+  id: 137
+  private_vcard: 264
+  praxis_vcard: 263
+  created_at: 2007-01-03 01:30:19 +01:00
+  active: true
+doctor_00109: 
+  updated_at: 2007-01-03 01:30:17 +01:00
+  code: "11"
+  speciality: ""
+  id: 109
+  private_vcard: 230
+  praxis_vcard: 229
+  created_at: 2007-01-03 01:30:17 +01:00
+  active: true
+doctor_00166: 
+  updated_at: 2007-01-03 01:30:21 +01:00
+  code: "26"
+  speciality: ""
+  id: 166
+  private_vcard: 306
+  praxis_vcard: 305
+  created_at: 2007-01-03 01:30:21 +01:00
+  active: true
+doctor_00080: 
+  updated_at: 2007-01-03 01:30:15 +01:00
+  code: "17"
+  speciality: ""
+  id: 80
+  private_vcard: 194
+  praxis_vcard: 193
+  created_at: 2007-01-03 01:30:15 +01:00
+  active: true
+doctor_00052: 
+  updated_at: 2007-01-03 01:30:14 +01:00
+  code: ""
+  speciality: ""
+  id: 52
+  private_vcard: 158
+  praxis_vcard: 157
+  created_at: 2007-01-03 01:30:14 +01:00
+  active: true
+doctor_00139: 
+  updated_at: 2007-01-03 01:30:19 +01:00
+  code: ""
+  speciality: ""
+  id: 139
+  private_vcard: 266
+  praxis_vcard: 265
+  created_at: 2007-01-03 01:30:19 +01:00
+  active: true
+doctor_00167: 
+  updated_at: 2007-01-03 01:30:21 +01:00
+  code: ""
+  speciality: ""
+  id: 167
+  private_vcard: 308
+  praxis_vcard: 307
+  created_at: 2007-01-03 01:30:21 +01:00
+  active: true
+doctor_00025: 
+  updated_at: 2007-01-03 01:30:11 +01:00
+  code: "15"
+  speciality: ""
+  id: 25
+  private_vcard: 104
+  praxis_vcard: 103
+  created_at: 2007-01-03 01:30:11 +01:00
+  active: true
+doctor_00222: 
+  updated_at: 2007-01-03 01:30:16 +01:00
+  code: ""
+  speciality: ""
+  id: 222
+  private_vcard: 206
+  praxis_vcard: 205
+  created_at: 2007-01-03 01:30:16 +01:00
+  active: true
+doctor_00251: 
+  updated_at: 2007-01-03 01:30:11 +01:00
+  code: "36"
+  speciality: "Gyn\xC3\xA4kologie und Geburtshilfe FMH"
+  id: 251
+  private_vcard: 110
+  praxis_vcard: 109
+  created_at: 2007-01-03 01:30:11 +01:00
+  active: true
+doctor_00196: 
+  updated_at: 2007-01-03 01:30:22 +01:00
+  code: ""
+  speciality: ""
+  id: 196
+  private_vcard: 320
+  praxis_vcard: 319
+  created_at: 2007-01-03 01:30:22 +01:00
+  active: true
+doctor_00168: 
+  updated_at: 2007-01-03 01:30:21 +01:00
+  code: ""
+  speciality: ""
+  id: 168
+  private_vcard: 310
+  praxis_vcard: 309
+  created_at: 2007-01-03 01:30:21 +01:00
+  active: true
+doctor_00110: 
+  updated_at: 2007-01-03 01:30:17 +01:00
+  code: ""
+  speciality: ""
+  id: 110
+  private_vcard: 232
+  praxis_vcard: 231
+  created_at: 2007-01-03 01:30:17 +01:00
+  active: true
+doctor_00252: 
+  updated_at: 2007-01-03 01:30:11 +01:00
+  code: "40"
+  speciality: "Gyn\xC3\xA4kologie und Geburtshilfe FMH"
+  id: 252
+  private_vcard: 114
+  praxis_vcard: 113
+  created_at: 2007-01-03 01:30:11 +01:00
+  active: true
+doctor_00083: 
+  updated_at: 2007-01-03 01:30:16 +01:00
+  code: ""
+  speciality: ""
+  id: 83
+  private_vcard: 198
+  praxis_vcard: 197
+  created_at: 2007-01-03 01:30:16 +01:00
+  active: true
+doctor_00027: 
+  updated_at: 2007-01-03 01:30:11 +01:00
+  code: "14"
+  speciality: ""
+  id: 27
+  private_vcard: 106
+  praxis_vcard: 105
+  created_at: 2007-01-03 01:30:11 +01:00
+  active: true
+doctor_00253: 
+  updated_at: 2007-01-03 01:30:12 +01:00
+  code: ""
+  speciality: ""
+  id: 253
+  private_vcard: 124
+  praxis_vcard: 123
+  created_at: 2007-01-03 01:30:12 +01:00
+  active: true
+doctor_00111: 
+  updated_at: 2007-01-03 01:30:17 +01:00
+  code: "07"
+  speciality: ""
+  id: 111
+  private_vcard: 234
+  praxis_vcard: 233
+  created_at: 2007-01-03 01:30:17 +01:00
+  active: true
+doctor_00056: 
+  updated_at: 2007-01-03 01:30:14 +01:00
+  code: "06"
+  speciality: ""
+  id: 56
+  private_vcard: 162
+  praxis_vcard: 161
+  created_at: 2007-01-03 01:30:14 +01:00
+  active: true
+doctor_00084: 
+  updated_at: 2007-01-03 01:30:16 +01:00
+  code: ""
+  speciality: ""
+  id: 84
+  private_vcard: 200
+  praxis_vcard: 199
+  created_at: 2007-01-03 01:30:16 +01:00
+  active: true
+doctor_00028: 
+  updated_at: 2007-01-03 01:30:11 +01:00
+  code: "04"
+  speciality: ""
+  id: 28
+  private_vcard: 108
+  praxis_vcard: 107
+  created_at: 2007-01-03 01:30:11 +01:00
+  active: true
+doctor_00226: 
+  updated_at: 2007-01-03 01:30:23 +01:00
+  code: "30"
+  speciality: "Gyn\xC3\xA4kologie FMH"
+  id: 226
+  private_vcard: 338
+  praxis_vcard: 337
+  created_at: 2007-01-03 01:30:23 +01:00
+  active: true
+doctor_00140: 
+  updated_at: 2007-01-03 01:30:19 +01:00
+  code: ""
+  speciality: ""
+  id: 140
+  private_vcard: 268
+  praxis_vcard: 267
+  created_at: 2007-01-03 01:30:19 +01:00
+  active: true
+doctor_00057: 
+  updated_at: 2007-01-03 01:30:14 +01:00
+  code: "23"
+  speciality: ""
+  id: 57
+  private_vcard: 164
+  praxis_vcard: 163
+  created_at: 2007-01-03 01:30:14 +01:00
+  active: true
+doctor_00227: 
+  updated_at: 2007-01-03 01:30:23 +01:00
+  code: ""
+  speciality: Postfach
+  id: 227
+  private_vcard: 340
+  praxis_vcard: 339
+  created_at: 2007-01-03 01:30:23 +01:00
+  active: true
+doctor_00058: 
+  updated_at: 2007-01-03 01:30:14 +01:00
+  code: ""
+  speciality: ""
+  id: 58
+  private_vcard: 166
+  praxis_vcard: 165
+  created_at: 2007-01-03 01:30:14 +01:00
+  active: true
+doctor_00141: 
+  updated_at: 2007-01-03 01:30:19 +01:00
+  code: ""
+  speciality: ""
+  id: 141
+  private_vcard: 270
+  praxis_vcard: 269
+  created_at: 2007-01-03 01:30:19 +01:00
+  active: true
+doctor_00086: 
+  updated_at: 2007-01-03 01:30:16 +01:00
+  code: "27"
+  speciality: ""
+  id: 86
+  private_vcard: 202
+  praxis_vcard: 201
+  created_at: 2007-01-03 01:30:16 +01:00
+  active: true
+doctor_00113: 
+  updated_at: 2007-01-03 01:30:17 +01:00
+  code: ""
+  speciality: ""
+  id: 113
+  private_vcard: 236
+  praxis_vcard: 235
+  created_at: 2007-01-03 01:30:17 +01:00
+  active: true
+doctor_00255: 
+  updated_at: 2007-01-03 01:30:12 +01:00
+  code: "38"
+  speciality: ""
+  id: 255
+  private_vcard: 128
+  praxis_vcard: 127
+  created_at: 2007-01-03 01:30:12 +01:00
+  active: true
