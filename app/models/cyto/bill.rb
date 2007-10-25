@@ -20,4 +20,13 @@ class Cyto::Bill < ActiveRecord::Base
     
     bill.save
   end
+
+  def self.import_all_for_doctor(doctor_id)
+    praxistar_bills = Praxistar::Bill.find(:all, :conditions => ['Stellvertretung_ID = ?', doctor_id])
+    for praxistar_bill in praxistar_bills
+      self.import praxistar_bill
+    end
+
+    praxistar_bills.size
+  end
 end
