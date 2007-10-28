@@ -2,7 +2,7 @@
 
 <%= start_form_tag :action => 'update_classification' %>
   <!--[form:top_finding_class]-->
-  <%= select("classification_tarmed_leistungen", "classification_id", Classification.find_all.collect {|p| [ "#{p.code} - #{p.name} (#{p.examination_method.name})", p.id ] }) %>
+  <%= select("classification_tarmed_leistungen", "classification_id", Classification.find(:all).collect {|p| [ "#{p.code} - #{p.name} (#{p.examination_method.name})", p.id ] }) %>
   <%= text_field "classification_tarmed_leistungen", "tarmed_leistungen" %>
   <!--[eoform:top_finding_class]-->
 

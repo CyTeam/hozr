@@ -31,7 +31,7 @@ Event.observe(window, 'load', function() {$('finding_class_code').focus()}, fals
           <legend>Erfassung</legend>
           <p>
             <label for="case_classification">PAP Status:</label>
-            <%= select "case", "classification_id", Classification.find_all.collect { |c| [ "#{c.code} - #{c.name}", c.id ] }, {},  :tabindex => 3 %>
+            <%= select "case", "classification_id", Classification.find(:all).collect { |c| [ "#{c.code} - #{c.name}", c.id ] }, {},  :tabindex => 3 %>
           </p>
           <p>
             <label for="case_examination_date">Abstrichdatum:</label>
@@ -39,7 +39,7 @@ Event.observe(window, 'load', function() {$('finding_class_code').focus()}, fals
           </p>
           <p>
             <label for="case_examination_date">Method:</label>
-            <%= select "case", "examination_method_id", ExaminationMethod.find_all.collect { |m| [ m.name, m.id ] }, {}, :tabindex => 5 %>
+            <%= select "case", "examination_method_id", ExaminationMethod.find(:all).collect { |m| [ m.name, m.id ] }, {}, :tabindex => 5 %>
           </p>
         </fieldset>
         <div>
