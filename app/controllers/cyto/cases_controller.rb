@@ -221,7 +221,7 @@ class Cyto::CasesController < ApplicationController
     end
 
     if params[:case] && params[:case][:classification]
-      classification = Classification.find(params[:case][:classification])
+      classification = Cyto::Classification.find(params[:case][:classification])
       @case.classification = classification
       @case.save
     end
@@ -255,7 +255,7 @@ class Cyto::CasesController < ApplicationController
       hpv.praxistar_leistungsblatt_id = nil
       hpv.result_report_printed_at = nil
       hpv.needs_p16 = false
-      hpv.classification = Classification.find :first, :conditions => "code = 'hpv' AND examination_method_id = #{hpv.examination_method_id}"
+      hpv.classification = Cyto::Classification.find :first, :conditions => "code = 'hpv' AND examination_method_id = #{hpv.examination_method_id}"
       hpv.save
     when "P16"
       @case.needs_p16 = true
