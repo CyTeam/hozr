@@ -16,8 +16,8 @@
         <%=h insurance.street_address %>, <%=h insurance.postal_code %> <%=h insurance.locality %>; <%=h "Tel: #{insurance.phone_number}" unless insurance.phone_number == '' %>
       </span>
       <span id="actions_<%= insurance.id %>" style="display:none; float: right">
-        <%= link_to image_tag("edit"), :action => 'edit', :id => insurance %>
-        <%= link_to image_tag("remove"), { :action => 'destroy', :id => insurance }, :confirm => 'Wirklich löschen?' %>
+        <%= link_to image_tag("edit.png"), :action => 'edit', :id => insurance %>
+        <%= link_to image_tag("remove.png"), { :action => 'destroy', :id => insurance }, :confirm => 'Wirklich löschen?' %>
       </span>
     </td>
     <td><%=h insurance.extended_address %>

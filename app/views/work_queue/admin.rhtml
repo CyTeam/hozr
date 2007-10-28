@@ -1,26 +1,26 @@
 <div style="margin-left: 9em; margin-top: 5em">
 <h2>Anschreiben</h2>
 <p>
-    <%= link_to image_tag('assign'), :controller => '/cyto/cases', :action => 'unassigned_form' %>
+    <%= link_to image_tag('assign.png'), :controller => '/cyto/cases', :action => 'unassigned_form' %>
     <i style="font-size: 13pt">Es gibt <b><%= @assign_count %></b> Auftragsformulare.</i>
 </p>
 
 <h2>Erste machen</h2>
 <p>
-    <%= link_to image_tag('first_entry'), :controller => '/cyto/cases', :action => 'first_entry_queue' %>
+    <%= link_to image_tag('first_entry.png'), :controller => '/cyto/cases', :action => 'first_entry_queue' %>
     <i style="font-size: 13pt">Es gibt <b><%= @first_entry_count %></b> Ersteingaben.</i>
 </p>
 
 <h2>Resultate drucken</h2>
 <p>
-    <%= link_to_remote(image_tag('print_result'), :update => 'print_result_reports_log', :loading => "Element.show('#{loading_indicator_id({:id => 'print_result_reports'})}')", :url => {:controller => '/admin', :action => 'print_result_reports'}, :confirm => "#{@print_result_count} Resultate drucken?" ) %>
+    <%= link_to_remote(image_tag('print_result'), :update => 'print_result_reports_log', :loading => "Element.show('#{loading_indicator_id({:id => 'print_result_reports'})}')", :url => {:controller => '/admin', :action => 'print_result_reports'} ) %>
     <i style="font-size: 13pt">Es gibt <b><%= @print_result_count %></b> Resultate.</i>
     <pre id="print_result_reports_log"><%= loading_indicator_tag :id => 'print_result_reports' %></pre>
 </p>
 
 <h2>Rechnungen generieren</h2>
 <p>
-    <%= link_to_remote(image_tag('export_bill'), :update => 'create_all_leistungsblatt_log', :loading => "Element.show('#{loading_indicator_id({:id => 'create_all_leistungsblatt'})}')", :url => {:controller => '/admin', :action => 'praxistar_create_all_leistungsblatt'}, :confirm => "#{@bill_export_count} Rechnungen generieren?" ) %>
+    <%= link_to_remote(image_tag('export_bill'), :update => 'create_all_leistungsblatt_log', :loading => "Element.show('#{loading_indicator_id({:id => 'create_all_leistungsblatt'})}')", :url => {:controller => '/admin', :action => 'praxistar_create_all_leistungsblatt'} ) %>
     <i style="font-size: 13pt">Es gibt <b><%= @bill_export_count %></b> neue Leistungsbl&auml;tter.</i>
     <pre id="create_all_leistungsblatt_log"><%= loading_indicator_tag :id => 'create_all_leistungsblatt' %></pre>
 </p>
