@@ -33,4 +33,29 @@ class Cyto::Bill < ActiveRecord::Base
 
     praxistar_bills.size
   end
+
+  def self.total_for_doctor(doctor_id)
+    bills = self.find(:all, :include => 'my_case', :conditions => ["doctor_id = ? AND entry_date BETWEEN '2006-10-01' AND '2007-09-30' AND is_storno = 0", doctor_id])
+    bills.map {|b| b.amount}.sum
+  end
+
+  def self.avg_for_doctor(doctor_id)
+    bills = self.find(:all, :include => 'my_case', :conditions => ["doctor_id = ? AND entry_date BETWEEN '2006-10-01' AND '2007-09-30' AND is_storno = 0", doctor_id])
+    if bills.size == 0 
+      return 0
+    else
+      return bills.map {|b| b.amount}.sum / bills.size
+    end
+  end
+
+  def self.count_for_doctor(doctor_id)
+    bills = self.find(:all, :include => 'my_case', :conditions => ["doctor_id = ? AND entry_date BETWEEN '2006-10-01' AND '2007-09-30' AND is_storno = 0", doctor_id])
+    bills.size
+  end  
+
+  def self.report
+    for d in Doctor.find :all
+      puts "#{d.name}:\t#{sprintf "%.2f", Cyto::Bill.total_for_doctor(d.id)} \t(#{Cyto::Bill.count_for_doctor(d.id)} à #{sprintf "%.2f", Cyto::Bill.avg_for_doctor(d.id)})"
+    end
+  end
 end
