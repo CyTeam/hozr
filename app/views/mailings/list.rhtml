@@ -50,7 +50,7 @@
   <tr class="group_body">
     <td/>
     <td style="text-align: right"><%= link_to mailing.cases.count, :action => 'overview', :id => mailing %></td>
-    <td><%=h mailing.doctor.name %></td>
+    <td><%=h mailing.doctor.nil? ? "Unbekannt" : mailing.doctor.name %></td>
   </tr>
 
 <% 
