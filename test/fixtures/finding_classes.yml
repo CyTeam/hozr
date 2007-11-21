@@ -1,0 +1,977 @@
+--- 
+finding_class_00031: 
+  name: Bitte weitere Kontrolle
+  code: "25"
+  id: 31
+finding_class_00112: 
+  name: Atypische Reservezellhyperplasie
+  code: "561"
+  id: 112
+finding_class_00300: 
+  name: "Material nicht repr\xC3\xA4sentativ"
+  code: c
+  id: 300
+finding_class_00006: 
+  name: Kontrolle in 1-3 Jahren
+  code: "1"
+  id: 6
+finding_class_00032: 
+  name: "Weitere Abkl\xC3\xA4rung indiziert"
+  code: "26"
+  id: 32
+finding_class_00113: 
+  name: Zylinderzellhyperplasie
+  code: "565"
+  id: 113
+finding_class_00301: 
+  name: Keine Zellen der Cervix
+  code: "139"
+  id: 301
+finding_class_00007: 
+  name: Kontrolle in 2 Monaten
+  code: "2"
+  id: 7
+finding_class_00033: 
+  name: Kontrolle bei klinischem Verdacht
+  code: "27"
+  id: 33
+finding_class_00114: 
+  name: "Endozervikalzellen mit  Kernver\xC3\xA4nderungen"
+  code: "570"
+  id: 114
+finding_class_00140: 
+  name: Schwer graduierbare Ebpitheldysplasie in Endocerv.
+  code: "735"
+  id: 140
+finding_class_00302: 
+  name: Kontrolle in 6 Monaten
+  code: "6"
+  id: 302
+finding_class_00008: 
+  name: Kontrolle in 3 Monaten
+  code: "3"
+  id: 8
+finding_class_00034: 
+  name: Kontrolle wegen Vorgeschichte
+  code: "28"
+  id: 34
+finding_class_00060: 
+  name: Blutung?
+  code: "248"
+  id: 60
+finding_class_00115: 
+  name: "Endozervikalzellen mit reaktiven Kernver\xC3\xA4nderungen"
+  code: "575"
+  id: 115
+finding_class_00141: 
+  name: Schwer graduierbare Epitheldysplasie in Umwandlungszone
+  code: "740"
+  id: 141
+finding_class_00303: 
+  name: Kontrolle in 4 Monaten
+  code: "4"
+  id: 303
+finding_class_00035: 
+  name: Kontrolle nach Geburt
+  code: "29"
+  id: 35
+finding_class_00061: 
+  name: Stark blutiges Zellbild
+  code: "250"
+  id: 61
+finding_class_00116: 
+  name: Atypische Zylinderzellen
+  code: "576"
+  id: 116
+finding_class_00142: 
+  name: Leichte Dysplasie im Plattenepithel
+  code: "745"
+  id: 142
+finding_class_00304: 
+  name: High-Risk Papillomavirus negativ
+  code: h-neg
+  id: 304
+finding_class_00330: 
+  name: Beurteilung folgt
+  code: "402"
+  id: 330
+finding_class_00036: 
+  name: Curettage
+  code: "30"
+  id: 36
+finding_class_00062: 
+  name: "Blutiges, entz\xC3\xBCndliches Zellbild"
+  code: "255"
+  id: 62
+finding_class_00117: 
+  name: "Path. Ver\xC3\xA4nd. im endocervikalen Bereich"
+  code: "577"
+  id: 117
+finding_class_00143: 
+  name: Leichte Dysplasie in UZ/EZ
+  code: "746"
+  id: 143
+finding_class_00305: 
+  name: High-Risk Papillomavirus positiv
+  code: h-pos
+  id: 305
+finding_class_00037: 
+  name: Kein Zellmaterial aus Endocervikal- und Umwandlungszone vorhanden
+  code: "140"
+  id: 37
+finding_class_00063: 
+  name: "Entz\xC3\xBCndlich ver\xC3\xA4ndertes Zellbild"
+  code: "260"
+  id: 63
+finding_class_00118: 
+  name: Verdacht auf Endometriumszellen
+  code: "579"
+  id: 118
+finding_class_00144: 
+  name: "Leichte-m\xC3\xA4ssige Dysplasie"
+  code: "750"
+  id: 144
+finding_class_00170: 
+  name: Leukoplakie
+  code: "910"
+  id: 170
+finding_class_00306: 
+  name: Low-Risk Papillomavirus negativ
+  code: l-neg
+  id: 306
+finding_class_00332: 
+  name: "Kurzfristige Kontrolle, wenn m\xC3\xB6gl. in der Mitte des Zyklus."
+  code: "33"
+  id: 332
+finding_class_00038: 
+  name: Wenig Zellen der Cervix
+  code: "141"
+  id: 38
+finding_class_00064: 
+  name: "Entz\xC3\xBCndlicher Cervix-Bereich"
+  code: "261"
+  id: 64
+finding_class_00090: 
+  name: "Condylom mit leicht.-m\xC3\xA4ss. Kernatypien"
+  code: "420"
+  id: 90
+finding_class_00119: 
+  name: Endometriumszellen im Abstrich
+  code: "580"
+  id: 119
+finding_class_00145: 
+  name: "Leichte-m\xC3\xA4ssige Dysplasie in UZ/EZ"
+  code: "751"
+  id: 145
+finding_class_00171: 
+  name: Laser
+  code: "990"
+  id: 171
+finding_class_00307: 
+  name: Low-Risk Papillomavirus positiv
+  code: l-pos
+  id: 307
+finding_class_00039: 
+  name: Keine Endometriumszellen im Abstrich
+  code: "142"
+  id: 39
+finding_class_00065: 
+  name: "Stark entz\xC3\xBCndlich ver\xC3\xA4ndertes Zellbild"
+  code: "265"
+  id: 65
+finding_class_00091: 
+  name: "Condylom mit m\xC3\xA4ssigen Kernatypien"
+  code: "425"
+  id: 91
+finding_class_00146: 
+  name: "M\xC3\xA4ssige Dysplasie"
+  code: "755"
+  id: 146
+finding_class_00172: 
+  name: Histobericht
+  code: "999"
+  id: 172
+finding_class_00308: 
+  name: "Kontrolle nicht sp\xC3\xA4ter als in 12 Monaten"
+  code: "8"
+  id: 308
+finding_class_00334: 
+  name: "Rein zytologisch keine AP f\xC3\xBCr Condylom"
+  code: "404"
+  id: 334
+finding_class_00066: 
+  name: "Zellmaterial von Leukozyten \xC3\xBCberlagert"
+  code: "269"
+  id: 66
+finding_class_00092: 
+  name: "Condylom mit m\xC3\xA4ss.-schw. Kernatypien"
+  code: "430"
+  id: 92
+finding_class_00147: 
+  name: "M\xC3\xA4ssige Dysplasie in UZ/EZ"
+  code: "756"
+  id: 147
+finding_class_00335: 
+  name: Wenig Soor
+  code: "286"
+  id: 335
+finding_class_00067: 
+  name: Massiver Bakterienbefall
+  code: "270"
+  id: 67
+finding_class_00093: 
+  name: Condylom mit schweren Kernatypien
+  code: "435"
+  id: 93
+finding_class_00148: 
+  name: "M\xC3\xA4ssig-schwere Dysplasie"
+  code: "760"
+  id: 148
+finding_class_00336: 
+  name: Wenig Bakterien
+  code: "278"
+  id: 336
+finding_class_00094: 
+  name: "Plattenepithelien mit Kernver\xC3\xA4nderungen"
+  code: "500"
+  id: 94
+finding_class_00149: 
+  name: "M\xC3\xA4ssig-schwere Dysplasie in UZ/EZ"
+  code: "761"
+  id: 149
+finding_class_00175: 
+  name: PAP2
+  code: pap2
+  id: 175
+finding_class_00282: 
+  name: Kontrolle in 6-8 Monaten
+  code: "6.8"
+  id: 282
+finding_class_00337: 
+  name: Wenig Leukozyten
+  code: "264"
+  id: 337
+finding_class_00068: 
+  name: "H\xC3\xA4mophilus vaginalis"
+  code: "271"
+  id: 68
+finding_class_00095: 
+  name: "Zellen der UZ mit Kernver\xC3\xA4nderungen"
+  code: "501"
+  id: 95
+finding_class_00176: 
+  name: PAP1
+  code: pap1
+  id: 176
+finding_class_00338: 
+  name: Mischflora
+  code: "259"
+  id: 338
+finding_class_00069: 
+  name: Atrophe Kolpitis
+  code: "272"
+  id: 69
+finding_class_00177: 
+  name: PAP1-2
+  code: pap1-2
+  id: 177
+finding_class_00284: 
+  name: Mamma Zytologie
+  code: mam
+  id: 284
+finding_class_00339: 
+  name: "Kernver\xC3\xA4nderungen in UZ und EZ"
+  code: "502"
+  id: 339
+finding_class_00096: 
+  name: "Plattenepithelien mit reaktiven Kernver\xC3\xA4nderungen"
+  code: "505"
+  id: 96
+finding_class_00285: 
+  name: Condylom H+L pos
+  code: "411"
+  id: 285
+finding_class_00097: 
+  name: Reaktives Zellbild
+  code: "506"
+  id: 97
+finding_class_00179: 
+  name: PAP2-3
+  code: pap2-3
+  id: 179
+finding_class_00286: 
+  name: Kokken
+  code: "268"
+  id: 286
+finding_class_00098: 
+  name: "Zellen der UZ mit reaktiven Kernver\xC3\xA4nderungen"
+  code: "507"
+  id: 98
+finding_class_00287: 
+  name: Lymphozyten
+  code: "273"
+  id: 287
+finding_class_00099: 
+  name: Regenerationsepithel
+  code: "510"
+  id: 99
+finding_class_00288: 
+  name: NICHT suspekt
+  code: "820"
+  id: 288
+finding_class_00289: 
+  name: SUSPEKT
+  code: "821"
+  id: 289
+finding_class_00100: 
+  name: Ausgedehnte Regenerationszone
+  code: "511"
+  id: 100
+finding_class_00020: 
+  name: "Kontrolle nach \xC3\x96strogenapplikation"
+  code: "14"
+  id: 20
+finding_class_00101: 
+  name: Fragliche Regeneration
+  code: "515"
+  id: 101
+finding_class_00021: 
+  name: "Histologische Abkl\xC3\xA4rung indiziert"
+  code: "15"
+  id: 21
+finding_class_00102: 
+  name: Haufen von kernlosen Plattenepithelien
+  code: "520"
+  id: 102
+finding_class_00022: 
+  name: "Sofortige Kontrolle oder histologische Abkl\xC3\xA4rung indiziert"
+  code: "16"
+  id: 22
+finding_class_00103: 
+  name: Hornperle
+  code: "525"
+  id: 103
+finding_class_00023: 
+  name: Bitte Kopie des Histo-Berichtes senden
+  code: "17"
+  id: 23
+finding_class_00104: 
+  name: Parakeratose
+  code: "530"
+  id: 104
+finding_class_00130: 
+  name: "Strahlenver\xC3\xA4nderungen"
+  code: "811"
+  id: 130
+finding_class_00024: 
+  name: Kontrolle nach Behandlung angezeigt
+  code: "18"
+  id: 24
+finding_class_00050: 
+  name: Hormoneinnahme?
+  code: "215"
+  id: 50
+finding_class_00105: 
+  name: "Unregelm\xC3\xA4ssige Parakeratose"
+  code: "535"
+  id: 105
+finding_class_00131: 
+  name: Verdacht auf dysplastische Zellen im Abstrich
+  code: "715"
+  id: 131
+finding_class_00025: 
+  name: Kontrolle nach Polypabtragung angezeigt
+  code: "19"
+  id: 25
+finding_class_00051: 
+  name: Hormonelles Mischbild
+  code: "220"
+  id: 51
+finding_class_00106: 
+  name: Metaplasie
+  code: "536"
+  id: 106
+finding_class_00132: 
+  name: Dysplasie?
+  code: "716"
+  id: 132
+finding_class_00320: 
+  name: "Entz\xC3\xBCndlich-reaktives Zellbild"
+  code: "256"
+  id: 320
+finding_class_00026: 
+  name: Kontrolle nach Spiralenentfernung angezeigt
+  code: "20"
+  id: 26
+finding_class_00052: 
+  name: Postpartaler Aspekt
+  code: "225"
+  id: 52
+finding_class_00107: 
+  name: Viel Mataplasie
+  code: "540"
+  id: 107
+finding_class_00321: 
+  name: "Entz\xC3\xBCndlich-reaktives Zellbild"
+  code: "256"
+  id: 321
+finding_class_00027: 
+  name: "Kontrolle in der zweiten Zyklush\xC3\xA4lfte"
+  code: "21"
+  id: 27
+finding_class_00053: 
+  name: Status nach Geburt?
+  code: "226"
+  id: 53
+finding_class_00108: 
+  name: Unreife Mataplasie
+  code: "545"
+  id: 108
+finding_class_00134: 
+  name: "Nackte, vergr\xC3\xB6sserte Kerne"
+  code: "721"
+  id: 134
+finding_class_00160: 
+  name: Invasives Carcinom
+  code: "786"
+  id: 160
+finding_class_00322: 
+  name: Im vorliegenden Material p16 negativ
+  code: "415"
+  id: 322
+finding_class_00028: 
+  name: Bitte um Wiederholung
+  code: "22"
+  id: 28
+finding_class_00054: 
+  name: Zytolytisches Zellmaterial
+  code: "230"
+  id: 54
+finding_class_00080: 
+  name: Zervizitis
+  code: "320"
+  id: 80
+finding_class_00109: 
+  name: "Unregelm\xC3\xA4ssige Metaplasie"
+  code: "550"
+  id: 109
+finding_class_00135: 
+  name: Dysplastische Zellen im Abstrich
+  code: "725"
+  id: 135
+finding_class_00161: 
+  name: Verdacht auf invasives Carcinom
+  code: "785"
+  id: 161
+finding_class_00029: 
+  name: Nicht beurteilbar
+  code: "23"
+  id: 29
+finding_class_00055: 
+  name: Autolytisches Zellmaterial
+  code: "235"
+  id: 55
+finding_class_00081: 
+  name: Verdacht auf viralen Infekt
+  code: "325"
+  id: 81
+finding_class_00136: 
+  name: Dysplasie in Plattenepithel
+  code: "726"
+  id: 136
+finding_class_00162: 
+  name: Verdacht auf invasives Carcinom in UZ/EZ
+  code: "787"
+  id: 162
+finding_class_00324: 
+  name: "Plattenepithelien und Zylinderzellen mit reaktiven Kernver\xC3\xA4nderungen"
+  code: "498"
+  id: 324
+finding_class_00350: 
+  name: Kontrolle nach Behandlung in 6 Monaten
+  code: "31"
+  id: 350
+finding_class_00056: 
+  name: Leptothrix
+  code: "240"
+  id: 56
+finding_class_00082: 
+  name: Koilozytose
+  code: "400"
+  id: 82
+finding_class_00137: 
+  name: Dysplasie in UZ/EZ
+  code: "727"
+  id: 137
+finding_class_00163: 
+  name: Invasives Carcinom in UZ/EZ
+  code: "788"
+  id: 163
+finding_class_00325: 
+  name: "Plattenepithelien und Zylinderzellen mit Kernver\xC3\xA4nderungen"
+  code: "499"
+  id: 325
+finding_class_00351: 
+  name: Kurzfristige Kontrolle nach Behandlung
+  code: "32"
+  id: 351
+finding_class_00057: 
+  name: Fibrinolisiertes Blut
+  code: "245"
+  id: 57
+finding_class_00083: 
+  name: Verdacht auf Condylom
+  code: "405"
+  id: 83
+finding_class_00138: 
+  name: Verdacht auf endocervikale Dysplasie
+  code: "729"
+  id: 138
+finding_class_00164: 
+  name: Verdacht auf invasives Plattenepithel-Carcinom
+  code: "789"
+  id: 164
+finding_class_00190: 
+  name: PAP3-4 alt
+  code: pap3-4a
+  id: 190
+finding_class_00352: 
+  name: Atypische Zellen
+  code: "566"
+  id: 352
+finding_class_00353: 
+  name: Atypische Zellen
+  code: "563"
+  id: 353
+finding_class_00058: 
+  name: Letzte Menstruation?
+  code: "246"
+  id: 58
+finding_class_00084: 
+  name: Condylom
+  code: "406"
+  id: 84
+finding_class_00139: 
+  name: Dysplasie in der Endocervix
+  code: "730"
+  id: 139
+finding_class_00165: 
+  name: Invasives Plattenepithel-Carcinom
+  code: "790"
+  id: 165
+finding_class_00191: 
+  name: PAP4 alt
+  code: pap4a
+  id: 191
+finding_class_00327: 
+  name: HPV-Typisierung folgt
+  code: "401"
+  id: 327
+finding_class_00059: 
+  name: Mens?
+  code: "247"
+  id: 59
+finding_class_00085: 
+  name: Condylom H:pos L:neg
+  code: "407"
+  id: 85
+finding_class_00166: 
+  name: Verdacht auf Adeno-Carcinom
+  code: "795"
+  id: 166
+finding_class_00192: 
+  name: PAP4-5 alt
+  code: pap4-5a
+  id: 192
+finding_class_00328: 
+  name: IUD?
+  code: "249"
+  id: 328
+finding_class_00086: 
+  name: Condylom L:pos H:neg
+  code: "408"
+  id: 86
+finding_class_00167: 
+  name: Adeno-Carcinom des Endometriums
+  code: "800"
+  id: 167
+finding_class_00193: 
+  name: PAP5 alt
+  code: pap5a
+  id: 193
+finding_class_00329: 
+  name: "Keine auf maligne Neoplasie verd\xC3\xA4chtige Zellen nachgewiesen"
+  code: "701"
+  id: 329
+finding_class_00087: 
+  name: Condylom H&L:neg
+  code: "409"
+  id: 87
+finding_class_00168: 
+  name: Adeno-Carcinom aus der Endocervix
+  code: "805"
+  id: 168
+finding_class_00194: 
+  name: HPV
+  code: hpv
+  id: 194
+finding_class_00088: 
+  name: "Condylom mit Kernver\xC3\xA4nderung"
+  code: "410"
+  id: 88
+finding_class_00169: 
+  name: Uterobrush
+  code: "900"
+  id: 169
+finding_class_00195: 
+  name: PAP0 alt
+  code: pap0a
+  id: 195
+finding_class_00089: 
+  name: Im vorliegenden Material p16 negativ
+  code: "415"
+  id: 89
+finding_class_00010: 
+  name: Kontrolle in 4-6 Monaten
+  code: 4-6
+  id: 10
+finding_class_00011: 
+  name: Kontrolle in 5 Monaten
+  code: "5"
+  id: 11
+finding_class_00012: 
+  name: Kontrolle in 6-8 Monaten
+  code: 6-8
+  id: 12
+finding_class_00120: 
+  name: "Endometriumszellen mit starken Kernver\xC3\xA4nderungen"
+  code: "585"
+  id: 120
+finding_class_00013: 
+  name: Kontrolle in 7 Monaten
+  code: "7"
+  id: 13
+finding_class_00121: 
+  name: Atypische Endometriumszellen
+  code: "586"
+  id: 121
+finding_class_00014: 
+  name: Kontrolle in 8-12 Monaten
+  code: 8-12
+  id: 14
+finding_class_00040: 
+  name: Wenig Plattenepithelien
+  code: "143"
+  id: 40
+finding_class_00122: 
+  name: Intrauteriner Prozess
+  code: "587"
+  id: 122
+finding_class_00310: 
+  name: p16 schwach positiv
+  code: "414"
+  id: 310
+finding_class_00015: 
+  name: Kontrolle in 9 Monaten
+  code: "9"
+  id: 15
+finding_class_00041: 
+  name: Sehr wenig Zellmaterial
+  code: "145"
+  id: 41
+finding_class_00016: 
+  name: Kontrolle in 10 Monaten
+  code: "10"
+  id: 16
+finding_class_00042: 
+  name: "Degenerativ ver\xC3\xA4ndertes Zellmaterial"
+  code: "150"
+  id: 42
+finding_class_00123: 
+  name: Histiozyten
+  code: "590"
+  id: 123
+finding_class_00150: 
+  name: Schwere Dysplasie
+  code: "765"
+  id: 150
+finding_class_00312: 
+  name: Kontrolle in 6 Monaten
+  code: "6"
+  id: 312
+finding_class_00017: 
+  name: Kontrolle in 11 Monaten
+  code: "11"
+  id: 17
+finding_class_00043: 
+  name: Detritus
+  code: "155"
+  id: 43
+finding_class_00124: 
+  name: Riesenzellhistiozyten
+  code: "595"
+  id: 124
+finding_class_00313: 
+  name: Viele Leukozyten
+  code: "266"
+  id: 313
+finding_class_00018: 
+  name: Kontrolle in 12 Monaten
+  code: "12"
+  id: 18
+finding_class_00044: 
+  name: "Mechanisch gesch\xC3\xA4digtes Zellmaterial"
+  code: "160"
+  id: 44
+finding_class_00070: 
+  name: Gardnerella Infektion
+  code: "275"
+  id: 70
+finding_class_00125: 
+  name: Synzytiotrophoblasten
+  code: "600"
+  id: 125
+finding_class_00151: 
+  name: Schwere Dysplasie in UZ/EZ
+  code: "766"
+  id: 151
+finding_class_00340: 
+  name: "Kernver\xC3\xA4nderungen im Plattenepithel und UZ"
+  code: "503"
+  id: 340
+finding_class_00019: 
+  name: Kontrolle mit 2 separaten Abstrichen C & P
+  code: "13"
+  id: 19
+finding_class_00045: 
+  name: Kein Zellmaterial vorhanden
+  code: "165"
+  id: 45
+finding_class_00071: 
+  name: Mischflora
+  code: "280"
+  id: 71
+finding_class_00126: 
+  name: Verdacht auf Polyp
+  code: "601"
+  id: 126
+finding_class_00152: 
+  name: Schwere Dysplasie, verd. auf CA in situ
+  code: "770"
+  id: 152
+finding_class_00315: 
+  name: Viele Bakterien
+  code: "277"
+  id: 315
+finding_class_00341: 
+  name: "nur wenig Kernver\xC3\xA4nderungen"
+  code: "504"
+  id: 341
+finding_class_00046: 
+  name: Atrophisches Zellbild
+  code: "200"
+  id: 46
+finding_class_00072: 
+  name: Verdacht auf Soorinfektion
+  code: "285"
+  id: 72
+finding_class_00127: 
+  name: "Zur Zeit zytologisch unauff\xC3\xA4llig"
+  code: "700"
+  id: 127
+finding_class_00153: 
+  name: Schwere Dysplasie bis CIS
+  code: "771"
+  id: 153
+finding_class_00316: 
+  name: Blutiges Zellbild
+  code: "251"
+  id: 316
+finding_class_00342: 
+  name: "Keine AP f\xC3\xBCr Actinomyces"
+  code: "292"
+  id: 342
+finding_class_00047: 
+  name: Androgenes Zellbild
+  code: "201"
+  id: 47
+finding_class_00073: 
+  name: Soorinfektion
+  code: "290"
+  id: 73
+finding_class_00128: 
+  name: "Zytologisch unauff\xC3\xA4llig"
+  code: "705"
+  id: 128
+finding_class_00154: 
+  name: Schwere Dysplasie , Verd. auf Ca in situ UZ/EZ
+  code: "772"
+  id: 154
+finding_class_00180: 
+  name: PAP3
+  code: pap3
+  id: 180
+finding_class_00317: 
+  name: "Rein zytologisch keine AP f\xC3\xBCr Soor"
+  code: "289"
+  id: 317
+finding_class_00048: 
+  name: "Niedriger Epithelaufbau "
+  code: "205"
+  id: 48
+finding_class_00074: 
+  name: An Actinomycesdrusen erinnernde Bakterienhaufen
+  code: "291"
+  id: 74
+finding_class_00129: 
+  name: Im vorliegenden Material keine Dysplasie nachgewiesen
+  code: "710"
+  id: 129
+finding_class_00155: 
+  name: Schwere Dysplasie bis CIS in UZ/EZ
+  code: "773"
+  id: 155
+finding_class_00181: 
+  name: PAP3-4
+  code: pap3-4
+  id: 181
+finding_class_00318: 
+  name: "D\xC3\xB6derleinzytolyse"
+  code: "281"
+  id: 318
+finding_class_00049: 
+  name: "Hoher Epithelaufbau "
+  code: "210"
+  id: 49
+finding_class_00075: 
+  name: Verdacht auf Trichomonadenbefall
+  code: "295"
+  id: 75
+finding_class_00156: 
+  name: Ca in situ
+  code: "775"
+  id: 156
+finding_class_00182: 
+  name: PAP4
+  code: pap4
+  id: 182
+finding_class_00290: 
+  name: Sputum
+  code: sput
+  id: 290
+finding_class_00076: 
+  name: Trichomonadenbefall
+  code: "300"
+  id: 76
+finding_class_00157: 
+  name: Ca in situ in UZ/EZ
+  code: "776"
+  id: 157
+finding_class_00183: 
+  name: PAP4-5
+  code: pap4-5
+  id: 183
+finding_class_00291: 
+  name: diverse EG
+  code: div
+  id: 291
+finding_class_00077: 
+  name: Verdacht auf Herpes genitalis
+  code: "305"
+  id: 77
+finding_class_00158: 
+  name: Ca in situ, Mikroinvasion nicht auszuschliessen
+  code: "780"
+  id: 158
+finding_class_00184: 
+  name: PAP5
+  code: pap5
+  id: 184
+finding_class_00185: 
+  name: PAP1 alt
+  code: pap1a
+  id: 185
+finding_class_00292: 
+  name: P16 negativ
+  code: "412"
+  id: 292
+finding_class_00078: 
+  name: Chlamydienverdacht
+  code: "310"
+  id: 78
+finding_class_00159: 
+  name: Ca in situ, Mikroinvasion n. auszuschl. in UZ/EZ
+  code: "781"
+  id: 159
+finding_class_00186: 
+  name: PAP1-2 alt
+  code: pap1-2a
+  id: 186
+finding_class_00079: 
+  name: "Follikul\xC3\xA4re Zervizitis"
+  code: "315"
+  id: 79
+finding_class_00293: 
+  name: P16 positiv
+  code: "413"
+  id: 293
+finding_class_00348: 
+  name: "zu wenig Zellmaterial f\xC3\xBCr eine sichere Diagnose"
+  code: "000"
+  id: 348
+finding_class_00349: 
+  name: "Kontrolle nach Behandlung oder histologische Abkl\xC3\xA4rung indiziert"
+  code: k1
+  id: 349
+finding_class_00294: 
+  name: "Pr\xC3\xA4senz von Zylinderzellen"
+  code: "563"
+  id: 294
+finding_class_00187: 
+  name: PAP2 alt
+  code: pap2a
+  id: 187
+finding_class_00268: 
+  name: Vorgeschichte siehe Ordner
+  code: v
+  id: 268
+finding_class_00295: 
+  name: Kontrolle in 12 Monaten
+  code: "100"
+  id: 295
+finding_class_00188: 
+  name: PAP2-3 alt
+  code: pap2-3a
+  id: 188
+finding_class_00296: 
+  name: "Material repr\xC3\xA4sentativ"
+  code: a
+  id: 296
+finding_class_00189: 
+  name: PAP3 alt
+  code: pap3a
+  id: 189
+finding_class_00297: 
+  name: "Material nur bedingt repr\xC3\xA4sentativ"
+  code: b
+  id: 297
+finding_class_00298: 
+  name: Vermehrt Bakterien
+  code: "276"
+  id: 298
+finding_class_00299: 
+  name: Vermehrt Leukozyten
+  code: "267"
+  id: 299
+finding_class_00110: 
+  name: "Atyp. Metapl. entsp. m\xC3\xA4ssiger Dysplasie"
+  code: "555"
+  id: 110
+finding_class_00111: 
+  name: Reservezellhyperplasie
+  code: "560"
+  id: 111
+finding_class_00030: 
+  name: "Nur bedingt repr\xC3\xA4sentativ"
+  code: "24"
+  id: 30

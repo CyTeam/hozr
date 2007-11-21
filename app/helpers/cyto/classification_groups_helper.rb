@@ -1,0 +1,2 @@
+module Cyto::ClassificationGroupsHelper
+end
