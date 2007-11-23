@@ -18,7 +18,7 @@
 <% Cyto::CurrentCase.with_scope(:find => {:conditions => ["doctor_id = ? AND screened_at IS NOT NULL", @doctor.id] }) do %>
 
 <table class="listing" style="margin-top: 0px">
-  <% for class_group in ClassificationGroup.find :all, :order => :position %>
+  <% for class_group in ClassificationGroup.find :all, :order => 'position DESC' %>
     <% group_cases = @mailing.cases.select { |c| c.classification.classification_group == class_group and !(c.needs_p16? and c.screened_at.nil?) } %>
     <%= render :partial => '/cyto/cases/overview_group', :object => group_cases  unless group_cases.size == 0 %>
   <% end %>
