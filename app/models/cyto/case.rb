@@ -184,10 +184,11 @@ class Cyto::Case < ActiveRecord::Base
     save
   end
 
-  def self.praxistar_create_all_leistungsblatt(days_since_print = 7)
+  def self.praxistar_create_all_leistungsblatt(days_since_print = 6.5)
+    hours_since_print = days_since_print * 24
     export = Praxistar::Exports.new(:started_at => Time.now, :model => self.name)
     
-    records = self.find(:all, :conditions => [ "praxistar_leistungsblatt_id IS NULL AND (result_report_printed_at IS NOT NULL AND result_report_printed_at < now() - INTERVAL ? DAY ) AND classification_id IS NOT NULL", days_since_print ])
+    records = self.find(:all, :conditions => [ "praxistar_leistungsblatt_id IS NULL AND (result_report_printed_at IS NOT NULL AND result_report_printed_at < now() - INTERVAL ? HOUR ) AND classification_id IS NOT NULL", hours_since_print ])
   
     export.record_count = records.size
     export.error_ids = ''
