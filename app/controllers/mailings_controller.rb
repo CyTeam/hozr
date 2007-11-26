@@ -21,4 +21,11 @@ class MailingsController < ApplicationController
     overview
     render :action => 'overview', :layout => 'stats_letter_for_pdf'
   end
+
+  def reactivate
+    @mailing = Mailing.find(params[:id])
+    @mailing.reactivate
+    
+    redirect_to :action => 'list'
+  end
 end
