@@ -52,8 +52,15 @@
   <tr class="group_body">
     <td/>
     <td style="text-align: right"><%= link_to mailing.cases.count, :action => 'overview', :id => mailing %></td>
-    <td><%=h mailing.doctor.nil? ? "Unbekannt" : mailing.doctor.name %></td>
-    <td><%= button_to "Reaktivieren", :controller => :mailings, :action => :reactivate, :id => mailing %></td>
+    <td>
+      <%=h mailing.doctor.nil? ? "Unbekannt" : mailing.doctor.name %>
+      <pre id="mailing_log_<%=h mailing.id %>"><%= loading_indicator_tag :id => "mailing_#{mailing.id}" %></pre>
+    </td>
+    <td>
+      <%= button_to "Drucken", :controller => :mailings, :action => :print, :id => mailing %>
+      <%= link_to_remote("Übersicht Drucken", :update => "mailing_log_#{mailing.id}", :loading => "Element.show('#{loading_indicator_id({:id => "mailing_#{mailing.id}"})}')", :url => {:controller => :mailings, :action => :print_overview, :id => mailing }) %>
+      <%= button_to "Reaktivieren", :controller => :mailings, :action => :reactivate, :id => mailing %>
+    </td>
   </tr>
 
 <% 

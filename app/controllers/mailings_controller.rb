@@ -28,4 +28,28 @@ class MailingsController < ApplicationController
     
     redirect_to :action => 'list'
   end
+
+  def print
+    @mailing = Mailing.find(params[:id])
+
+    command = "/usr/local/bin/hozr_print_result_mailing.sh #{@mailing.id}"
+    stream = open("|#{command}")
+    output = stream.read
+ 
+    send_data output, :type => 'text/html; charset=utf-8', :disposition => 'inline'
+  end
+
+  def print_overview
+    @mailing = Mailing.find(params[:id])
+
+    command = "/usr/local/bin/hozr_print_mailing_overview.sh #{@mailing.id}"
+    stream = open("|#{command}")
+    output = stream.read
+ 
+    send_data output, :type => 'text/html; charset=utf-8', :disposition => 'inline'
+  end
+
+
+#  def prepare
+#  end
 end
