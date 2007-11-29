@@ -23,12 +23,56 @@ empty_case:
   p16_prepared_at: nil
   p16_prepared_by: nil
   
+case_ready_for_printing_1:
+  id: 3
+  examination_method_id: 1
+  examination_date: '2007-01-01'
+  classification_id: 1
+  praxistar_eingangsnr: '07/00000'
+  patient_id: 1
+  doctor_id: 1
+  entry_date: '2007-01-02'
+  screener_id: 1
+  insurance_id: 1
+  insurance_nr: '1'
+  praxistar_leistungsblatt_id: 1
+  screened_at: '2007-01-03 13:00'
+  needs_p16: false
+  finding_text: 'nothing found'
+  remarks: 'no remarks'
+  assigned_at: '2007-01-02 10:00'
+  assigned_screener_id: 1
+  intra_day_id: 1
+  p16_prepared_by: 1
+  
+case_ready_for_printing_2:
+  id: 4
+  examination_method_id: 1
+  examination_date: '2007-01-01'
+  classification_id: 1
+  praxistar_eingangsnr: '07/00002'
+  patient_id: 1
+  doctor_id: 2
+  entry_date: '2007-01-02'
+  screener_id: 1
+  insurance_id: 1
+  insurance_nr: '1'
+  praxistar_leistungsblatt_id: 1
+  screened_at: '2007-01-03 13:00'
+  needs_p16: false
+  finding_text: 'nothing found'
+  remarks: 'no remarks'
+  assigned_at: '2007-01-02 10:00'
+  assigned_screener_id: 1
+  intra_day_id: 1
+  p16_prepared_by: 1
+  
 case_one:
   id: 2
   examination_method_id: 1
   examination_date: '2007-01-01'
   classification_id: 1
-  praxistar_eingangsnr: '07/00000'
+  praxistar_eingangsnr: '07/00001'
   patient_id: 1
   doctor_id: 1
   entry_date: '2007-01-02'
