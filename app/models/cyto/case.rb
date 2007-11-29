@@ -1,8 +1,8 @@
 include Cyto
 
 class Cyto::Case < ActiveRecord::Base
-  belongs_to :examination_method, :class_name => 'Cyto::ExaminationMethod'
-  belongs_to :classification, :class_name => 'Cyto::Classification'
+  belongs_to :examination_method, :class_name => 'Cyto::ExaminationMethod', :foreign_key => :examination_method_id
+  belongs_to :classification, :class_name => 'Cyto::Classification', :foreign_key => :classification_id
   belongs_to :patient
   belongs_to :doctor
   belongs_to :screener, :class_name => 'Employee', :foreign_key => :screener_id
