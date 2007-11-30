@@ -1,6 +1,23 @@
 <%
   a_case = overview_item
+  @case_counter += 1
 %>
+<% if @case_counter >= 27 %>
+  </table>
+</table>
+</div>
+</div>
+</div>
+  <?page-break>
+<div class="sheet_a4">
+<div class="letter_follow_page">
+<div class="text">
+<table class="listing" style="margin-top: 0px">
+    
+    <table class="listing">
+
+  <% @case_counter = 0 %>
+<% end %>
 <tr style="font-size: 0.8em; vertical-align: top; padding-bottom: 0.2em">
   <td style="width: 30%; border-right: 0px; vertical-align: top">
     <b><%= link_to h(a_case.patient.name), :controller => '/patients', :action => 'show', :id => a_case.patient %></b>

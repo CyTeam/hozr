@@ -41,6 +41,13 @@
   left: 2.4cm;
 }
 
+.letter_follow_page {
+  font-family: ChollaSansRegular,Arial;
+  font-size: 12pt;
+  position: relative;
+  top: 5cm;
+  left: 2.4cm;
+}
 
 .letter #doctor {
   position: absolute;
@@ -67,6 +74,13 @@
 .letter #text {
   position: absolute;
   top: 7.5cm;
+  left: 0cm;
+  width: 15.5cm;
+}
+
+.letter_follow_page .text {
+  position: relative;
+  top: 1cm;
   left: 0cm;
   width: 15.5cm;
 }
