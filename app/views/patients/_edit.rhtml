@@ -1,6 +1,7 @@
 <%= start_form_tag :controller => '/cyto/cases', :action => 'set_patient', :id => @case, :patient_id => @patient %>
   <%= render :partial => '/patients/form' %>
-  <%= submit_to_remote 'submit', 'Speichern', { :url => {:controller => 'patients', :action => 'update', :id => @patient}, :failure => 'alert("Fehler! Ramon informieren!")', :success => "Element.update('edit_form', '')" } %>
+  <%= submit_to_remote 'submit', 'Speichern', { :url => {:controller => 'patients', :action => 'update', :id => @patient}, :loading => "Element.show('update_indicator')", :failure => 'alert("Fehler! Ramon informieren!")', :success => "Element.hide('update_indicator'); Element.update('edit_form', '')" } %>
+  <%= image_tag "indicator.gif", :style => "display:none;", :id => 'update_indicator', :class => "loading-indicator" %>
   <%= submit_tag 'Speichern & Übernehmen' %>
   <%=
     button_to_function 'Schliessen' do |page|
