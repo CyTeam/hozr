@@ -1,0 +1,49 @@
+<%
+  year = "%02.f" % params[:year]
+%>
+
+<div class="sheet_a4">
+<div class="letter">
+
+  <div id="doctor">
+    <%=h @doctor.praxis.honorific_prefix %><br />
+    <%= render :partial => "/vcards/show", :locals => {:vcard => @doctor.praxis} %>
+  </div>
+
+  <div id="date">
+    Zürich, <%= Date.today.strftime("%d.%m.%Y") %>
+  </div>
+
+  <div id="subject" class="title">
+    PAP Statistik 20<%=h year %>
+  </div>
+
+<div id="text">
+<% Cyto::Case.with_scope(:find => {:conditions => ["praxistar_eingangsnr like '#{year}/%' AND doctor_id = ? AND screened_at IS NOT NULL", @doctor.id] }) do %>
+<h3 style="font-weight: bold; font-size: 13pt">Jahres&uuml;bersicht</h3>
+<% total = Cyto::Case.count() %>
+<% group_counts = Cyto::Case.count(:group => 'classification_group_id', :include => 'classification') %>
+<table class="listing" style="width: 100%">
+  <tr>
+    <th>Klassifizierung</th>
+    <th style="text-align: right">Anzahl</th>
+    <th style="text-align: right">Anteil</th>
+  </tr>
+  <% for group in group_counts %>
+  <% group_object = ClassificationGroup.find(group[0]) %>
+  <tr class="PAP_<%=h group_object.classifications[0].code %>">
+    <td><%=h group_object.title %></td>
+    <td style="text-align: right"><%=h group[1] %></td>
+    <td style="text-align: right"><%=h "%.2f" % (group[1].to_f * 100 / total) %>%</td>
+  </tr>
+  <% end %>
+  <tr>
+    <td style="border-top: 2px solid; border-bottom: 4px double">Total</td>
+    <td style="text-align: right; border-top: 2px solid; border-bottom: 4px double"><%=h total %></td>
+    <td style="text-align: right; border-top: 2px solid; border-bottom: 4px double"></td>
+  </tr>
+</table>
+<% end %>
+</div>
+</div>
+</div>

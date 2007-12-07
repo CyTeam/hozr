@@ -22,6 +22,10 @@ class MailingsController < ApplicationController
     render :action => 'overview', :layout => 'stats_letter_for_pdf'
   end
 
+  def statistics
+    @doctor = Doctor.find(params[:id])
+  end
+
   def reactivate
     @mailing = Mailing.find(params[:id])
     @mailing.reactivate
