@@ -1,0 +1,34 @@
+<div id="search_result">
+  <%= loading_indicator_tag :id => 'search' %>
+<%
+  year = "%02.f" % (params[:year] || '07')
+%>
+
+<% Cyto::Case.with_scope(:find => {:conditions => ["praxistar_eingangsnr like '#{year}/%' AND doctor_id = ? AND screened_at IS NOT NULL", 25] }) do %>
+<% total = Cyto::Case.count() %>
+<% group_counts = Cyto::Case.count(:group => 'classification_group_id', :include => 'classification') %>
+<table class="listing" style="width: 100%">
+  <tr>
+    <th>Klassifizierung</th>
+    <th style="text-align: right">Anzahl</th>
+    <th style="text-align: right">Anteil</th>
+  </tr>
+  <% for group in group_counts %>
+  <% group_object = ClassificationGroup.find(group[0]) %>
+  <tr class="PAP_<%=h group_object.classifications[0].code %>">
+    <td><%=h group_object.title %></td>
+    <td style="text-align: right"><%=h group[1] %></td>
+    <td style="text-align: right"><%=h "%.2f" % (group[1].to_f * 100 / total) %>%</td>
+  </tr>
+  <% end %>
+  <tr>
+    <td style="border-top: 2px solid; border-bottom: 4px double">Total</td>
+    <td style="text-align: right; border-top: 2px solid; border-bottom: 4px double"><%=h total %></td>
+    <td style="text-align: right; border-top: 2px solid; border-bottom: 4px double"></td>
+  </tr>
+</table>
+<% end %>
+</div>
+</div>
+</div>
+</div>
