@@ -19,7 +19,6 @@ class ReportsController < ApplicationController
   #   image_tag graph_url(:action => 'show', :id => 42)
 
   def index
-    render :action => :report_form
   end
   
   def pap_groups
