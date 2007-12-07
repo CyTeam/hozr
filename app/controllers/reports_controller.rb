@@ -176,7 +176,7 @@ class ReportsController < ApplicationController
     # The following doesn't work 'cause of a known bug: :include overrides :select
     # @records = Cyto::Case.find( :all, :select => "classifications.code AS Pap, count(*) AS Anzahl, count(*)/(SELECT count(*) FROM cases)*100.0 AS Prozent", :include => 'classification', :group => 'classifications.code',  :order => "#{order}")
     
-    count = Cyto::Case.find( :all, :conditions => case_conditions).size
+    count = Cyto::Case.count(:conditions => case_conditions)
     
     @records = Cyto::Case.find( :all, :select => "classifications.name AS Pap, count(*) AS Anzahl, count(*)/#{count}*100.0 AS Prozent", :joins => 'LEFT JOIN classifications ON classification_id = classifications.id', :group => 'classifications.code',  :order => order, :conditions => case_conditions)
     
