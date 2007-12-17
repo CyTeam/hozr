@@ -9,6 +9,12 @@ class MailingsController < ApplicationController
     @mailings = Mailing.find(:all, :order => 'created_at DESC', :limit => 50)
   end
 
+  # Show list of unprinted mailings
+  def list_open
+    @mailings = Mailing.find(:all, :order => 'created_at DESC', :conditions => 'printed_at IS NULL')
+    render :action => :list
+  end
+
   # Overview for mailing
   def overview
     @mailing = Mailing.find(params[:id])
@@ -24,8 +30,20 @@ class MailingsController < ApplicationController
 
   def statistics
     @doctor = Doctor.find(params[:id])
+    
+    case_conditions = ['doctor_id = ?', params[:id]]
+    count = Cyto::Case.count(:conditions => case_conditions)
+    Cyto::Case.with_scope(:find => {:conditions => case_conditions }) do
+      @records = Cyto::Case.find( :all, :select => "classifications.name AS Pap, count(*) AS Anzahl, count(*)/#{count}*100.0 AS Prozent", :joins => 'LEFT JOIN classifications ON classification_id = classifications.id', :group => 'classifications.code', :conditions => case_conditions)
+      render :action => 'statistics'
+    end
   end
 
+  def generate
+    Mailing.create_all
+    redirect_to :action => 'list_open'
+  end
+  
   def reactivate
     @mailing = Mailing.find(params[:id])
     @mailing.reactivate
@@ -43,6 +61,19 @@ class MailingsController < ApplicationController
     send_data output, :type => 'text/html; charset=utf-8', :disposition => 'inline'
   end
 
+  def print_all
+    mailings = Mailing.find(:all, :conditions => "printed_at IS NULL")
+    
+    output = ""
+    for mailing in mailings
+      command = "/usr/local/bin/hozr_print_result_mailing.sh #{mailing.id}"
+      stream = open("|#{command}")
+      output += stream.read
+    end
+
+    send_data output, :type => 'text/html; charset=utf-8', :disposition => 'inline'
+  end
+  
   def print_overview
     @mailing = Mailing.find(params[:id])
 

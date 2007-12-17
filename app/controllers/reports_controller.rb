@@ -178,9 +178,11 @@ class ReportsController < ApplicationController
     
     count = Cyto::Case.count(:conditions => case_conditions)
     
-    @records = Cyto::Case.find( :all, :select => "classifications.name AS Pap, count(*) AS Anzahl, count(*)/#{count}*100.0 AS Prozent", :joins => 'LEFT JOIN classifications ON classification_id = classifications.id', :group => 'classifications.code',  :order => order, :conditions => case_conditions)
-    
-    render :partial => 'statistics'
+
+    Cyto::Case.with_scope(:find => {:conditions => case_conditions }) do
+      @records = Cyto::Case.find( :all, :select => "classifications.name AS Pap, count(*) AS Anzahl, count(*)/#{count}*100.0 AS Prozent", :joins => 'LEFT JOIN classifications ON classification_id = classifications.id', :group => 'classifications.code',  :order => order, :conditions => case_conditions)
+      render :partial => 'report'
+    end
   end
   
   def cyto_cases

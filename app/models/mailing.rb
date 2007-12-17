@@ -12,10 +12,13 @@ class Mailing < ActiveRecord::Base
   end
 
   def self.create_all_for_doctor(doctor_id)
-    mailing = self.new
+    mailing = Mailing.find(:first, :conditions => ['printed_at IS NULL AND doctor_id = ?', doctor_id])
+    mailing = self.new if mailing.nil?
     mailing.doctor_id = doctor_id
-    mailing.cases = Cyto::Case.find(:all, :conditions => ["( screened_at IS NOT NULL OR (screened_at IS NULL AND needs_p16 = 1 ) ) AND result_report_printed_at IS NULL AND doctor_id = ?", doctor_id], :order => :praxistar_eingangsnr)
 
+    mailing.cases.clear
+    mailing.cases = Cyto::Case.find(:all, :conditions => ["( screened_at IS NOT NULL OR (screened_at IS NULL AND needs_p16 = 1 ) ) AND result_report_printed_at IS NULL AND doctor_id = ?", doctor_id], :order => :praxistar_eingangsnr)
+    
     return if mailing.cases.empty?
     
     mailing.save!
