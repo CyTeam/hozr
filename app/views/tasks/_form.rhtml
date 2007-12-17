@@ -1,0 +1,16 @@
+<%= error_messages_for 'task' %>
+
+<!--[form:task]-->
+<p><label for="task_created_at">Created at</label><br/>
+<%= datetime_select 'task', 'created_at'  %></p>
+
+<p><label for="task_updated_at">Updated at</label><br/>
+<%= datetime_select 'task', 'updated_at'  %></p>
+
+<p><label for="task_due_on">Due on</label><br/>
+<%= datetime_select 'task', 'due_on'  %></p>
+
+<p><label for="task_amount">Amount</label><br/>
+<%= text_field 'task', 'amount'  %></p>
+<!--[eoform:task]-->
+
