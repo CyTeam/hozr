@@ -1,6 +1,6 @@
 <% doctor = compact %>
 
-<div style="float: left; width: 18em; height: 12em; background-repeat: no-repeat; background-image: url('/images/vcard.png'); margin: 8px; padding: 25px">
+<div style="float: left; width: 18em; height: 12em; background-color: #FFEB55; margin: 8px; padding: 25px">
 <div style="float: right; margin-right: 10px; margin-top: -10px">
   <%= image_tag "user-doctor.png"%>
   <%= image_tag "user-#{(doctor.praxis.honorific_prefix.nil? or doctor.praxis.honorific_prefix.starts_with?("Frau")) ? "female" : "male" }.png" %>
