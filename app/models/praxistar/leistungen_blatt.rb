@@ -80,7 +80,7 @@ class Praxistar::LeistungenBlatt < Praxistar::Base
     self.tf_Test = 0
     self.tf_gesperrt = 0
     self.in_Behandlungsende = 1
-    self.Stellvertretung_ID = a_case.billing_doctor_id
+    self.Stellvertretung_ID = a_case.doctor.billing_doctor_id
   end
   
   def total_amount
