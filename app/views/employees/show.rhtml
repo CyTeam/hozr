@@ -1,8 +1,41 @@
-<% for column in Employee.content_columns %>
-<p>
-  <b><%= column.human_name %>:</b> <%=h @employee.send(column.name) %>
-</p>
-<% end %>
+<h1>Pesonalien</h1>
+<div style="float: left; width: 18em; height: 12em; background-color: #FFEB55; margin: 8px; padding: 25px">
+<div style="float: right; margin-right: 10px; margin-top: -10px">
+</div>
+<% @vcard = @employee.work_vcard %>
+<%= render :partial => "vcards/in_place_edit" %><br/>
+<div style="background-color: #f9d600; padding: 8px; width: 130px"/>
+  <%= render :partial => "vcards/show_phone_numbers", :locals => { :vcard => @vcard } %>
+</div>
+<div style="float: right; margin-top: -30px; margin-right: 10px">
+  <%= link_to image_tag("show.png"), :action => :show, :id => @employee %>
+  <%= link_to image_tag("edit.png"), :action => :edit, :id => @employee %>
+</div>
+</div>
 
-<%= link_to 'Edit', :action => 'edit', :id => @employee %> |
-<%= link_to 'Back', :action => 'list' %>
+<%
+vacancies=[20, 25]
+factor=100
+
+vacancy_level = (Date.today.year - @employee.born_on.year) < 50 ? 0 : 1
+days_per_year = 5 * 52
+holidays = 10
+vacancies = vacancies[vacancy_level]
+workdays_per_year = days_per_year - holidays - vacancies
+%>
+
+<h1>Lohndaten</h1>
+<table>
+  <tr>
+    <th>Pensum in %:</th>
+    <th>Soll-Pensum/Jahr:</th>
+    <th>Ferientage:</th>
+    <th>Feiertage:</th>
+  </tr>
+  <tr>
+    <td><%= @employee.workload %></td>
+    <td><%= @employee.workload * factor * workdays_per_year %></td>
+    <td><%= vacancies %></td>
+    <td><%= holidays %></td>
+  </tr>
+</table>
