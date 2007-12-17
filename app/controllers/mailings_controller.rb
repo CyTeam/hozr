@@ -29,13 +29,24 @@ class MailingsController < ApplicationController
   end
 
   def statistics
-    @doctor = Doctor.find(params[:id])
+    @doctor = Doctor.find(params[:doctor_id])
+    case_conditions = YAML.load(params[:case_conditions])
     
-    case_conditions = ['doctor_id = ?', params[:id]]
     count = Cyto::Case.count(:conditions => case_conditions)
     Cyto::Case.with_scope(:find => {:conditions => case_conditions }) do
       @records = Cyto::Case.find( :all, :select => "classifications.name AS Pap, count(*) AS Anzahl, count(*)/#{count}*100.0 AS Prozent", :joins => 'LEFT JOIN classifications ON classification_id = classifications.id', :group => 'classifications.code', :conditions => case_conditions)
       render :action => 'statistics'
+    end
+  end
+
+  def statistics_for_pdf
+    @doctor = Doctor.find(params[:doctor_id])
+    case_conditions = YAML.load(params[:case_conditions])
+    
+    count = Cyto::Case.count(:conditions => case_conditions)
+    Cyto::Case.with_scope(:find => {:conditions => case_conditions }) do
+      @records = Cyto::Case.find( :all, :select => "classifications.name AS Pap, count(*) AS Anzahl, count(*)/#{count}*100.0 AS Prozent", :joins => 'LEFT JOIN classifications ON classification_id = classifications.id', :group => 'classifications.code', :conditions => case_conditions)
+      render :action => 'statistics', :layout => 'stats_letter_for_pdf'
     end
   end
 
