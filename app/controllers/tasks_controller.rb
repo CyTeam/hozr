@@ -21,7 +21,15 @@ class TasksController < ApplicationController
   end
 
   def create
-    @task = Task.new(params[:task])
+    case params[:task_type][:name]
+    when 'HpvTask'
+      @task = HpvTask.new(params[:task])
+    when 'P16Task'
+      @task = P16Task.new(params[:task])
+    when 'CentrifugeTask'
+      @task = CentrifugeTask.new(params[:task])
+    end
+
     if @task.save
       flash[:notice] = 'Task was successfully created.'
       redirect_to :action => 'list'

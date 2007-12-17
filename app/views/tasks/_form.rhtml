@@ -1,16 +1,9 @@
 <%= error_messages_for 'task' %>
 
 <!--[form:task]-->
-<p><label for="task_created_at">Created at</label><br/>
-<%= datetime_select 'task', 'created_at'  %></p>
-
-<p><label for="task_updated_at">Updated at</label><br/>
-<%= datetime_select 'task', 'updated_at'  %></p>
-
-<p><label for="task_due_on">Due on</label><br/>
-<%= datetime_select 'task', 'due_on'  %></p>
-
-<p><label for="task_amount">Amount</label><br/>
-<%= text_field 'task', 'amount'  %></p>
+  <%= select("task_type", 'name', {"HPV aufbereiten" => 'HpvTask', "P16 aufbereiten" => "P16Task", "Chübele" => "CentrifugeTask"})  %>&nbsp;
+  <%= select 'task', 'employee_id', Employee.find(:all).collect {|e| [e.code, e.id] }  %>&nbsp;
+  <label for="task_due_on">Am:</label><%= text_field 'task', 'due_on', :size => 10 %>&nbsp;
+  <label for="task_amount">Anzahl:</label><%= text_field 'task', 'amount', :value => 1, :size => 3, :style => 'text-align: right' %>
 <!--[eoform:task]-->
 

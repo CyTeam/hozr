@@ -1,20 +1,23 @@
-<h1>Listing tasks</h1>
+<h1>Aufgabenliste</h1>
 
-<table>
+<table class="listing">
   <tr>
-  <% for column in Task.content_columns %>
-    <th><%= column.human_name %></th>
-  <% end %>
+    <th>Aufgabe</th>
+    <th>Anzahl</th>
+    <th>Für</th>
+    <th>Fällig am</th>
   </tr>
   
 <% for task in @tasks %>
   <tr>
-  <% for column in Task.content_columns %>
-    <td><%=h task.send(column.name) %></td>
-  <% end %>
-    <td><%= link_to 'Show', :action => 'show', :id => task %></td>
-    <td><%= link_to 'Edit', :action => 'edit', :id => task %></td>
-    <td><%= link_to 'Destroy', { :action => 'destroy', :id => task }, :confirm => 'Are you sure?', :method => :post %></td>
+    <td><%=h task.title unless task.class == Task %></td>
+    <td><%=h task.amount %></td>
+    <td><%=h task.employee.code unless task.employee.nil? %></td>
+    <td><%=h task.due_on.nil? ? "unbekannt" : task.due_on.strftime('%d.%m.%Y') %></td>
+    <td>
+      <%= link_to 'Show', :action => 'show', :id => task %>
+      <%= link_to 'Destroy', { :action => 'destroy', :id => task }, :confirm => 'Are you sure?', :method => :post %>
+    </td>
   </tr>
 <% end %>
 </table>
