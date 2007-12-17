@@ -24,4 +24,8 @@ class Doctor < ActiveRecord::Base
   def name
     praxis.full_name || ""
   end
+
+  def billing_doctor_id
+    read_attribute(:billing_doctor_id) || id
+  end
 end
