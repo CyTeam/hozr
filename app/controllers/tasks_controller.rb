@@ -12,6 +12,11 @@ class TasksController < ApplicationController
     @task_pages, @tasks = paginate :tasks, :per_page => 10
   end
 
+  def schedule
+    list
+    render :action => 'list'
+  end
+  
   def show
     @task = Task.find(params[:id])
   end
