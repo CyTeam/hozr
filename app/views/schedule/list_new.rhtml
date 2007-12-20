@@ -1,0 +1,20 @@
+<h1>Neue Fälle</h1>
+<table class="listing">
+  <% 
+    old_doctor_id = 0
+    case_count = 0
+   %>
+
+  <% for a_case in @cases %>
+  <tr>
+    <% if a_case.doctor_id == old_doctor_id %>
+      <% case_count += 1 %>
+    <% else %>
+      <% unless old_doctor_id == 0 %>
+        <td><%= case_count %></td><td><%=h Doctor.find(old_doctor_id).name if Doctor.exists?(old_doctor_id) %></td>
+      <% end %>
+      <% case_count = 1; old_doctor_id = a_case.doctor_id %>
+    <% end %>
+  </tr>
+  <% end %>
+</table>
