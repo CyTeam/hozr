@@ -477,12 +477,28 @@ class Cyto::CasesController < ApplicationController
 
   def print_result_report
     ids = params[:id] ? params[:id] : params[:ids].split('/')
-    id_s = []
+    output = "<pre>"
     for id in ids
-      system("/usr/local/bin/hozr_print_result_report.sh", id, "--force")
-      id_s.push(id.to_s)
+      eingangs_nr = Cyto::Case.find(id).praxistar_eingangsnr
+      stream = open("|/usr/local/bin/hozr_print_results.sh --force '#{eingangs_nr}' 2>&1")
+      output += stream.read
     end
-    render :text => "Gedruckt: #{id_s.join ', '}"
+
+    output += "</pre>"
+    send_data output, :type => 'text/html; charset=utf-8', :disposition => 'inline'
+  end
+
+  def print_result_report_as_fax
+    ids = params[:id] ? params[:id] : params[:ids].split('/')
+    output = "<pre>"
+    for id in ids
+      eingangs_nr = Cyto::Case.find(id).praxistar_eingangsnr
+      stream = open("|/usr/local/bin/hozr_print_results.sh --fax --force '#{eingangs_nr}'")
+      output += stream.read
+    end
+
+    output += "</pre>"
+    send_data output, :type => 'text/html; charset=utf-8', :disposition => 'inline'
   end
 
   def p16_prepared
