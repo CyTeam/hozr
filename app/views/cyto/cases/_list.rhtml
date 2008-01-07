@@ -55,8 +55,8 @@
       <% end %>
     </td>
     <% if @include_bill %>
-      <td class="embedded_bill_state_<%= a_case.bill.payment_state unless a_case.bill.nil? %>">
-        <%= link_to a_case.bill[:ID_Rechnung], :controller => '/bills', :action => 'list', :id => a_case.bill unless a_case.bill.nil? %>
+      <td>
+        <%= link_to "Rechnung", :controller => '/bills', :action => 'search_by_patient', :id => a_case.patient %>
       </td>
     <% end %>
     <td>
