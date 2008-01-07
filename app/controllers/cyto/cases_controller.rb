@@ -137,7 +137,8 @@ class Cyto::CasesController < ApplicationController
 
   def set_patient
     @case = Cyto::Case.find(params[:id])
-    @case.entry_date = Time.now
+    # Set entry_date only when setting patient for first time
+    @case.entry_date = Time.now if @case.entry_date.nil?
     @case.examination_method_id = @case.intra_day_id == 0 ? 0 : 1
     
       if params[:patient_id]
