@@ -68,7 +68,7 @@ class Cyto::CasesController < ApplicationController
     end
     if params[:case_search][:praxistar_eingangsnr] > ""
       conditions[:sql]<< "id = ?"
-      conditions[:params]<<Cyto::Case.find_by_praxistar_eingangsnr(Cyto::CaseNr.new(params[:case_search][:praxistar_eingangsnr]).to_s).id || 0
+      conditions[:params]<< Cyto::Case.find_by_praxistar_eingangsnr(Cyto::CaseNr.new(params[:case_search][:praxistar_eingangsnr]).to_s).id || 0
     end
     
     @case_pages, @cases = paginate 'Cyto::Cases', :per_page => 144, :conditions =>  [ conditions[:sql].join(" AND "), conditions[:params] ]
@@ -182,7 +182,7 @@ class Cyto::CasesController < ApplicationController
     if @case.save
       flash[:notice] = 'First entry ok.'
       
-      next_open =Cyto::Case.find :first, :conditions => ["entry_date IS NULL and id > #{@case.id}"]
+      next_open = Cyto::Case.find :first, :conditions => ["entry_date IS NULL and id > #{@case.id}"]
       if next_open.nil?
         redirect_to :action => 'first_entry_queue'
       elsif next_open.praxistar_eingangsnr.nil? or next_open.doctor.nil?
