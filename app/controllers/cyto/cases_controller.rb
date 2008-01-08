@@ -161,6 +161,7 @@ class Cyto::CasesController < ApplicationController
 
     if @vcard.update_attributes(params[:vcard]) and @billing_vcard.update_attributes(params[:billing_vcard]) and @patient.update_attributes(params[:patient])
       @vcard.save
+      @billing_vcard.save
       @patient.save
       flash[:notice] = 'Patient was successfully updated.'
 #      redirect_to :action => 'list'
