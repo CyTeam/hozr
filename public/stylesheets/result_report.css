@@ -81,6 +81,12 @@
   left: 0cm;
 }
 
+.report #eg_remarks {
+  position: absolute;
+  top: 7.2cm;
+  left: 0cm;
+}
+
 .report #finding_title {
   position: absolute;
   top: 9.4cm;
