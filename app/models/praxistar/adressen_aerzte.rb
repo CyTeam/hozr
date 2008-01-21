@@ -33,7 +33,7 @@ class Praxistar::AdressenAerzte < Praxistar::Base
     end
   end
   
-  def self.export_attributes(hozr_record)
+  def self.export_attributes(hozr_record, new_record)
     {
         :tx_Prax_Ort => hozr_record.praxis.locality,
         :tx_Prax_Fax => hozr_record.praxis.fax_number,

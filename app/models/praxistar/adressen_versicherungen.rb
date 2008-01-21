@@ -24,7 +24,7 @@ class Praxistar::AdressenVersicherungen < Praxistar::Base
     end
   end
 
-  def self.export_attributes(hozr_record)
+  def self.export_attributes(hozr_record, new_record)
     {
       :tx_Telefon => hozr_record.phone_number,
       :tx_Ort => hozr_record.locality,
