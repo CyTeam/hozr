@@ -1,5 +1,6 @@
 <h1>Resultat Briefe</h1>
-<%= link_to "Alle Mailings drucken", :action => :print_all %>
+<%= link_to_remote "Alle Mailings drucken", :update => 'print_result_reports_log', :loading => "Element.show('#{loading_indicator_id({:id => 'print_result_reports'})}')", :url => {:action => :print_all} %>
+<pre id="print_result_reports_log"><%= loading_indicator_tag :id => 'print_result_reports' %></pre>
 
 <style>
 .listing tr.group_footer td {
