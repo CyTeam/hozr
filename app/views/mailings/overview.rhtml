@@ -29,8 +29,8 @@
 
 <!--
 <h3 style="font-weight: bold; font-size: 13pt">Jahres&uuml;bersicht</h3>
-<% total = Cyto::CurrentCase.count() %>
-<% group_counts = Cyto::CurrentCase.count(:group => 'classification_group_id', :include => 'classification') %>
+<% total = Cyto::Case.count(:conditions => "(substr(praxistar_eingangsnr, 1,2) = substr(year(now()), 3, 2))") %>
+<% group_counts = Cyto::Case.count(:group => 'classification_group_id', :include => 'classification', :conditions => "(substr(praxistar_eingangsnr, 1,2) = substr(year(now()), 3, 2))") %>
 <table class="listing" style="width: 45%">
   <tr>
     <th>Klassifizierung</th>
