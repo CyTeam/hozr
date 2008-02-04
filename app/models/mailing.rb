@@ -6,9 +6,9 @@ class Mailing < ActiveRecord::Base
     mailing = self.new
     mailing.doctor_id = doctor_id
     mailing.case_ids = case_ids
+
     mailing.save!
-    
-    puts mailing.id
+    return mailing
   end
 
   def self.create_all_for_doctor(doctor_id)

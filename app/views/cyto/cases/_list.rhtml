@@ -69,6 +69,7 @@
 <% end %>
 </table>
 
+<%= link_to "Übersicht generieren", :controller => '/mailings', :action => 'generate_overview_for_case_list', :ids => @cases.map { |c| c.id } %>
 <%= link_to_remote image_tag('print.png'), :update => 'print_log', :loading => "Element.show('#{loading_indicator_id({:id => 'print'})}')", :url => { :controller => '/cyto/cases', :action => :print_result_report, :ids => @cases.map { |c| c.id } } %>
 
 <div id="print_log" style="border: solid 1px; background-color: #BBBBBB">

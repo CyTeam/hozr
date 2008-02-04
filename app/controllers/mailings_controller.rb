@@ -55,6 +55,22 @@ class MailingsController < ApplicationController
     redirect_to :action => 'list_open'
   end
   
+  def generate_overview_for_case_list
+    case_ids = params[:ids].split('/')
+
+    # Check if all cases belong to the same doctor
+    cases = Cyto::Case.find(case_ids)
+    doctor_ids = cases.map {|c| c.doctor_id}
+    raise 'All cases in a mailing need to belong to same doctor' unless doctor_ids.uniq.size == 1
+
+    mailing = Mailing.create(doctor_ids.first, case_ids)
+    # TODO: printed_at is set to suppress printing with next result printing run, better use a flag
+    mailing.printed_at = DateTime.now
+    mailing.save
+    
+    redirect_to :action => 'overview', :id => mailing
+  end
+
   def reactivate
     @mailing = Mailing.find(params[:id])
     @mailing.reactivate
@@ -94,8 +110,4 @@ class MailingsController < ApplicationController
  
     send_data output, :type => 'text/html; charset=utf-8', :disposition => 'inline'
   end
-
-
-#  def prepare
-#  end
 end
