@@ -61,8 +61,8 @@
     </td>
     <td><%=h mailing.printed_at.strftime('%d.%m.%Y') unless mailing.printed_at.nil? %></td>
     <td>
-      <%= button_to "Drucken", :controller => :mailings, :action => :print, :id => mailing %>
-      <%= link_to_remote("Übersicht Drucken", :update => "mailing_log_#{mailing.id}", :loading => "Element.show('#{loading_indicator_id({:id => "mailing_#{mailing.id}"})}')", :url => {:controller => :mailings, :action => :print_overview, :id => mailing }) %>
+      <%= link_to_remote("Alle Resultate drucken", :update => "mailing_log_#{mailing.id}", :loading => "Element.show('#{loading_indicator_id({:id => "mailing_#{mailing.id}"})}')", :url => {:controller => :mailings, :action => :print, :id => mailing }) %><br/>
+      <%= link_to_remote("Nur Übersicht drucken", :update => "mailing_log_#{mailing.id}", :loading => "Element.show('#{loading_indicator_id({:id => "mailing_#{mailing.id}"})}')", :url => {:controller => :mailings, :action => :print_overview, :id => mailing }) %>
       <%= button_to "Reaktivieren", :controller => :mailings, :action => :reactivate, :id => mailing %>
     </td>
   </tr>
