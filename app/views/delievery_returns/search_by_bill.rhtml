@@ -1,5 +1,5 @@
 <%= render :partial => '/cyto/cases/list' %>
 
-<%= form_tag(:action => "create", :id => @cases.first.id ) do %>
+<% form_tag(:action => "create", :id => @cases.first.id ) do -%>
   <%= submit_tag "Erfassen" %>
-<% end %>
+<% end -%>

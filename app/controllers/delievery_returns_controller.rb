@@ -8,10 +8,17 @@ class DelieveryReturnsController < ApplicationController
     bill_params = params[:bill]
     begin
       @cases = [ Praxistar::Bill.find(bill_params[:id]).cyto_case ]
-      render :partial => '/cyto/cases/list'
     rescue ActiveRecord::RecordNotFound
       render :inline => '<h2>Nicht gefunden</h2>'
     end
+  end
+  
+  def create
+    case_id = params[:id]
+    delievery_return = DelieveryReturn.new(:case_id => case_id)
+    delievery_return.save!
+
+    redirect_to :action => :new
   end
   
   def new
