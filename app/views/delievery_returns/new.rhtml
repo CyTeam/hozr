@@ -1,3 +1,7 @@
+<script type="text/javascript">
+Event.observe(window, 'load', function() {$('bill_id').focus()}, false);
+</script>
+
 <h1>Fanpost erfassen</h1>
 
 <%= form_remote_tag( :update => 'search_result', :loading => "Element.show('#{loading_indicator_id({:id => 'search'})}')", :url => {:action => "search_by_bill"} ) %>
