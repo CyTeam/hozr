@@ -43,4 +43,8 @@ class Praxistar::Bill < Praxistar::Base
     a_case.praxistar_leistungsblatt_id = nil
     a_case.save
   end
+
+  def bill_type
+    account_receivable.bill_type
+  end
 end

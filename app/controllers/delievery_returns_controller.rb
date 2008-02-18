@@ -7,16 +7,27 @@ class DelieveryReturnsController < ApplicationController
   def search_by_bill
     bill_params = params[:bill]
     begin
-      @cases = [ Praxistar::Bill.find(bill_params[:id]).cyto_case ]
+      # Pass case as array to standard case list
+      @bill = Praxistar::Bill.find(bill_params[:id])
+      @cases = [ @bill.cyto_case ]
       render :partial => 'search_by_bill'
+
     rescue ActiveRecord::RecordNotFound
       render :inline => '<h2>Nicht gefunden</h2>'
     end
   end
   
   def create
-    case_id = params[:id]
-    delievery_return = DelieveryReturn.new(:case_id => case_id)
+    bill = Praxistar::Bill.find(params[:bill_id])
+    
+    # Set dunning stop and add remark
+    patient = bill.patient
+    patient.dunning_stop = true
+    patient.remarks = "Fanpost #{bill.bill_type}: Manstopp gesetzt am #{Date.today.strftime('%d.%m.%Y')}\n" + patient.remarks
+    patient.save!
+
+    # Create new record
+    delievery_return = DelieveryReturn.new(:bill => bill)
     delievery_return.save!
 
     redirect_to :action => :new
