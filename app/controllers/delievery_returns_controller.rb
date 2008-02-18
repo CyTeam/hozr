@@ -8,6 +8,7 @@ class DelieveryReturnsController < ApplicationController
     bill_params = params[:bill]
     begin
       @cases = [ Praxistar::Bill.find(bill_params[:id]).cyto_case ]
+      render :partial => 'search_by_bill'
     rescue ActiveRecord::RecordNotFound
       render :inline => '<h2>Nicht gefunden</h2>'
     end
