@@ -1,5 +1,16 @@
+<style>
+.booking {
+  text-align: right
+}
+
+table.listing tr td.total {
+  border-top: solid black 2px;
+  border-bottom: double black 4px;
+}
+</style>
+
 <h1>Debitoren</h1>
-<table border="1">
+<table class="listing" style="width: 45%">
   <tr>
     <th>Name</th>
     <th>Soll</th>
@@ -7,38 +18,43 @@
   </tr>
 
   <tr>
-    <td>Offene Posten 2006</td>
-    <td><%=h @opening_saldo %></td>
-    <td></td>
+    <td>Erb&ouml;ffnungssaldo</td>
+    <td class="booking"><%= cu_to_s(@opening_saldo) %></td>
+    <td class="booking"></td>
   </tr>
   <tr>
     <td>Gestellte Rechnungen</td>
-    <td><%=h @gestellte_rechnungen %></td>
-    <td></td>
+    <td class="booking"><%=h cu_to_s(@gestellte_rechnungen) %></td>
+    <td class="booking"></td>
   </tr>
   <tr>
     <td>Stornierte Rechnungen</td>
-    <td></td>
-    <td><%=h @stornierte_rechnungen %></td>
+    <td class="booking"></td>
+    <td class="booking"><%= cu_to_s(@stornierte_rechnungen) %></td>
   </tr>
   <tr>
     <td>Bezahlte Rechnungen</td>
-    <td></td>
-    <td><%=h @bezahlte_rechnungen %></td>
+    <td class="booking"></td>
+    <td class="booking"><%= cu_to_s(@bezahlte_rechnungen) %></td>
   </tr>
   <tr>
     <td>Stornierte Zahlungen</td>
-    <td><%=h @stornierte_zahlungen %></td>
-    <td></td>
+    <td class="booking"><%= cu_to_s(@stornierte_zahlungen) %></td>
+    <td class="booking"></td>
   </tr>
   <tr>
     <td>Debitorenverluste</td>
-    <td></td>
-    <td><%=h @debitoren_verluste %></td>
+    <td class="booking"></td>
+    <td class="booking"><%= cu_to_s(@debitoren_verluste) %></td>
   </tr>
   <tr>
-    <td style="border-top: solid black 2px">Total Offene Posten</td>
-    <td style="border-top: solid black 2px"><%=h @closing_saldo %></td>
-    <td style="border-top: solid black 2px"></td>
+    <td>Saldo</td>
+    <td class="booking"></td>
+    <td class="booking"><%= cu_to_s(@closing_saldo) %></td>
+  </tr>
+  <tr>
+    <td class="total">Total</td>
+    <td class="total booking"><%= cu_to_s(@total) %></td>
+    <td class="total booking"><%= cu_to_s(@total) %></td>
   </tr>
 </table>
