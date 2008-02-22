@@ -1,0 +1,44 @@
+<h1>Debitoren</h1>
+<table border="1">
+  <tr>
+    <th>Name</th>
+    <th>Soll</th>
+    <th>Haben</th>
+  </tr>
+
+  <tr>
+    <td>Offene Posten 2006</td>
+    <td><%=h @opening_saldo %></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Gestellte Rechnungen</td>
+    <td><%=h @gestellte_rechnungen %></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Stornierte Rechnungen</td>
+    <td></td>
+    <td><%=h @stornierte_rechnungen %></td>
+  </tr>
+  <tr>
+    <td>Bezahlte Rechnungen</td>
+    <td></td>
+    <td><%=h @bezahlte_rechnungen %></td>
+  </tr>
+  <tr>
+    <td>Stornierte Zahlungen</td>
+    <td><%=h @stornierte_zahlungen %></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Debitorenverluste</td>
+    <td></td>
+    <td><%=h @debitoren_verluste %></td>
+  </tr>
+  <tr>
+    <td style="border-top: solid black 2px">Total Offene Posten</td>
+    <td style="border-top: solid black 2px"><%=h @closing_saldo %></td>
+    <td style="border-top: solid black 2px"></td>
+  </tr>
+</table>
