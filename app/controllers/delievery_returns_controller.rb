@@ -36,12 +36,25 @@ class DelieveryReturnsController < ApplicationController
   def new
   end
 
+  def overview
+    @new = DelieveryReturn.find(:all, :include => :cyto_case, :order => 'doctor_id', :conditions => ['closed_at IS NULL'])
+    @address_verified = DelieveryReturn.find(:all, :include => :cyto_case, :group_by => 'doctor_id', :conditions => ['closed_at IS NULL AND address_verified_at IS NULL'])
+    @fax_sent = DelieveryReturn.find(:all, :include => :cyto_case, :group_by => 'doctor_id', :conditions => ['closed_at IS NULL AND fax_sent_at IS NOT NULL'])
+  end
+  
   def list_new
+    @delievery_returns = DelieveryReturn.find(:all, :include => :cyto_case, :order => 'doctor_id', :conditions => ['closed_at IS NULL'])
   end
 
   def edit
+    @delievery_return = DelieveryReturn.find(params[:id])
+    @case = @delievery_return.cyto_case
   end
 
+  def update
+    @delievery_return = DelieveryReturn.find(params[:id])
+  end
+  
   def doctor_fax
   end
 
