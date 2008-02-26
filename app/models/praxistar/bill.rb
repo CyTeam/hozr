@@ -8,6 +8,7 @@ class Praxistar::Bill < Praxistar::Base
   belongs_to :praxistar_leistungsblatt, :class_name => 'Praxistar::LeistungenBlatt', :foreign_key => 'Leistungsblatt_ID'
   
   has_one :account_receivable, :foreign_key => 'Rechnung_ID'
+  has_one :bill_journal, :foreign_key => 'Rechnung_ID'
   has_many :payments, :foreign_key => 'Rechnung_ID'
     
   def cyto_case
@@ -31,8 +32,11 @@ class Praxistar::Bill < Praxistar::Base
     account_receivable["tx_Storno_Begründung"] = reason
     account_receivable[:tf_aktiv] = false
     account_receivable[:dt_Stornodatum] = Date.today
-    account_receivable.save
-    
+    account_receivable.save!
+
+    bill_journal[:tf_Storniert] = true
+    bill_journal.save!
+        
     self[:tf_Storno] = true
     save
   end
