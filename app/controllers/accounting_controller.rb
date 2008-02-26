@@ -1,7 +1,8 @@
 class AccountingController < ApplicationController
   def accounts_receivable
     @opening_saldo = 134110.4
-
+    @zuviel_bezahlt = 19933.7
+    
     @gestellte_rechnungen = Praxistar::AccountReceivable.sum('cu_rechnungsbetrag', :conditions => "dt_rechnungsdatum BETWEEN '2007-01-01' AND '2007-12-31' AND dt_1Mahnung IS NULL").to_f
     @stornierte_rechnungen = Praxistar::AccountReceivable.sum('cu_rechnungsbetrag', :conditions => "dt_Stornodatum BETWEEN '2007-01-01' AND '2007-12-31' AND tf_storno = 1  AND dt_1Mahnung IS NULL").to_f
     @gestellte_rechnungen += Praxistar::AccountReceivable.sum('cu_rechnungsbetrag + cu_mahnspesen1', :conditions => "dt_rechnungsdatum BETWEEN '2007-01-01' AND '2007-12-31' AND dt_1Mahnung IS NOT NULL AND dt_2Mahnung IS NULL").to_f
@@ -16,7 +17,7 @@ class AccountingController < ApplicationController
 
     @debitoren_verluste = Praxistar::ReceivableWriteOff.sum('cu_differenz', :conditions => "dt_verbucht = '2007-12-31'").to_f
 
-    @closing_saldo = @opening_saldo + @gestellte_rechnungen - @stornierte_rechnungen - @bezahlte_rechnungen + @stornierte_zahlungen - @debitoren_verluste
+    @closing_saldo = @opening_saldo - @zuviel_bezahlt + @gestellte_rechnungen - @stornierte_rechnungen - @bezahlte_rechnungen + @stornierte_zahlungen - @debitoren_verluste
 
     @total = @opening_saldo + @gestellte_rechnungen + @stornierte_zahlungen
   end
