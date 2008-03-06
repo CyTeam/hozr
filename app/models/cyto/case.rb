@@ -102,6 +102,10 @@ class Cyto::Case < ActiveRecord::Base
     !entry_date.nil? && !screened_at.nil? && result_report_printed_at.nil?
   end
   
+  def ready_for_praxistar_create_leistungsblatt
+    !screened_at.nil? && praxistar_leistungsblatt_id.nil?
+  end
+  
   
   def initialize(params = {})
     case params.class.name

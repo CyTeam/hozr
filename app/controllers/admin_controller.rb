@@ -8,6 +8,12 @@ class AdminController < ApplicationController
     render :partial => 'praxistar_create_all_leistungsblatt_status'
   end
 
+  def praxistar_create_leistungsblatt
+    Cyto::Case.find(params[:id]).praxistar_create_leistungsblatt
+    
+    redirect_to :controller => '/', :action => ''
+  end
+
   def praxistar_patienten_personalien_export
     Praxistar::PatientenPersonalien.export
 
