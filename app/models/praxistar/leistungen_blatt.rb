@@ -26,7 +26,7 @@ class Praxistar::LeistungenBlatt < Praxistar::Base
       leistung.tf_MwstPflicht = 0
       leistung.tf_Fehler = 0
       leistung.tf_Nichtpflichtleistung = 0
-      leistung.cu_Taxpunktwert_TL = 0.9
+      leistung.cu_Taxpunktwert_TL = 0.89
       leistung.sg_Session = 1
       leistung.tx_Tarifnummer = '001'
       leistung.tf_Check = 0
