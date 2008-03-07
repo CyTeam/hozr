@@ -35,6 +35,11 @@ class AdminController < ApplicationController
 #     render :text => 'Printed'
   end
 
+  def batch_reactivate
+    bill_params = params[:bill]
+    Praxistar::Bill.batch_reactivate(bill_params[:ids], bill_params[:reason])
+  end
+  
   def unsign_case
     a_case = Cyto::Case.find(params[:id])
     a_case.signed_at = nil

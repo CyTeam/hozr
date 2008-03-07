@@ -48,6 +48,20 @@ class Praxistar::Bill < Praxistar::Base
     a_case.save
   end
 
+
+  def self.batch_reactivate(ids, reason = nil)
+    bills = self.find(ids.to_a)
+    bills.map {|bill|
+      begin
+        bill.reactivate(reason)
+        puts "Bill #{bill.id}: OK"
+      rescue
+        puts "Bill #{bill.id}: FAILED"
+        puts "  #{$!}: FAILED"
+      end
+    }
+  end
+  
   def bill_type
     account_receivable.bill_type
   end
