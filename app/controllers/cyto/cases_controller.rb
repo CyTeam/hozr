@@ -230,7 +230,7 @@ class Cyto::CasesController < ApplicationController
   def second_entry_queue
     params[:order] ||= 'praxistar_eingangsnr'
 
-    @case_pages, @cases = paginate 'Cyto::Cases', :per_page => 144, :order => params[:order], :conditions => "entry_date IS NOT NULL AND screened_at IS NULL AND (needs_p16 = 'f' OR needs_p16 = 0) AND praxistar_eingangsnr > '07' AND praxistar_eingangsnr < '90' AND NOT praxistar_eingangsnr LIKE '%-%'"
+    @case_pages, @cases = paginate 'Cyto::Cases', :per_page => 144, :order => params[:order], :conditions => "entry_date IS NOT NULL AND screened_at IS NULL AND (needs_p16 = '#{Case.connection.true}' OR needs_hpv = '#{Case.connection.true}') AND praxistar_eingangsnr > '07' AND praxistar_eingangsnr < '90' AND NOT praxistar_eingangsnr LIKE '%-%'"
     render :action => :list
   end
 
@@ -267,36 +267,30 @@ class Cyto::CasesController < ApplicationController
 
     @case.screener = Employee.find_by_code(request.env['REMOTE_USER'])
     @case.remarks = params[:case][:remarks]
-    @case.save
 
     case params[:commit]
     when "Erstellen"
       @case.screened_at ||= Date.today
-    when "HPV"
-      @case.screened_at ||= Date.today
-
-      hpv = @case.clone
-      hpv.praxistar_eingangsnr = @case.praxistar_eingangsnr.gsub /\//, '-'
-      hpv.screened_at = nil
-      hpv.praxistar_leistungsblatt_id = nil
-      hpv.result_report_printed_at = nil
-      hpv.needs_p16 = false
-      hpv.classification = Cyto::Classification.find :first, :conditions => "code = 'hpv' AND examination_method_id = #{hpv.examination_method_id}"
-      hpv.save
+      @case.save
+      redirect_to :action => 'result_report', :id => @case
+      # That's it if it's a normal PAP
+      return
+    when "P16+HPV"
+      @case.needs_hpv = true
+      @case.needs_p16 = true
     when "P16"
       @case.needs_p16 = true
-      @case.save
-
-      next_open = Cyto::Case.find :first, :conditions => ["entry_date IS NOT NULL AND screened_at IS NULL AND needs_p16 = '0' AND praxistar_eingangsnr > ? AND praxistar_eingangsnr < '90/'", @case.praxistar_eingangsnr]
-      if next_open.nil?
-        redirect_to :action => 'second_entry_queue'
-      else
-        redirect_to :action => 'second_entry_pap_form', :id => next_open
-      end
-      return
     end
 
-    redirect_to :action => 'result_report', :id => @case
+    # Common code for hpv and p16.
+    @case.save
+
+    next_open = Cyto::Case.find :first, :conditions => ["entry_date IS NOT NULL AND screened_at IS NULL AND (needs_p16 = '#{Case.connection.true} OR needs_hpv = '#{Case.connection.true}') AND praxistar_eingangsnr > ? AND praxistar_eingangsnr < '90/'", @case.praxistar_eingangsnr]
+    if next_open.nil?
+      redirect_to :action => 'second_entry_queue'
+    else
+      redirect_to :action => 'second_entry_pap_form', :id => next_open
+    end
   end
 
   def remove_finding
@@ -364,20 +358,20 @@ class Cyto::CasesController < ApplicationController
     @case.finding_text = params[:case][:finding_text] unless params[:case].nil? or params[:case][:finding_text].nil?
     @case.save
 
-    if @case.needs_p16?
-      next_open = Cyto::Case.find :first, :conditions => ["entry_date IS NOT NULL AND screened_at IS NULL AND needs_p16 = '1' AND screener_id = ? AND praxistar_eingangsnr > ? AND praxistar_eingangsnr < '90/'", @case.screener_id, @case.praxistar_eingangsnr]
+    if @case.needs_p16? of @case.needs_hpv?
+      next_open = Cyto::Case.find :first, :conditions => ["entry_date IS NOT NULL AND screened_at IS NULL AND (needs_p16 = '#{Case.connection.true}' OR needs_hpv = '#{Case.connection.true}') AND screener_id = ? AND praxistar_eingangsnr > ? AND praxistar_eingangsnr < '90/'", @case.screener_id, @case.praxistar_eingangsnr]
 
       @case.result_report_printed_at = nil
       @case.save
 
       if next_open.nil?
-        redirect_to :action => 'p16_queue'
+        redirect_to :action => 'hpv_p16_queue'
       else
 #        redirect_to :action => 'second_entry_pap_form', :id => next_open
-        redirect_to :action => 'p16_queue'
+        redirect_to :action => 'hpv_p16_queue'
       end
     else
-      next_open = Cyto::Case.find :first, :conditions => ["entry_date IS NOT NULL AND screened_at IS NULL AND needs_p16 = '0' AND praxistar_eingangsnr > ? AND praxistar_eingangsnr < '90/'", @case.praxistar_eingangsnr]
+      next_open = Cyto::Case.find :first, :conditions => ["entry_date IS NOT NULL AND screened_at IS NULL AND (needs_p16 = '#{Case.connection.false}' AND needs_hpv = '#{Case.connection.false}') AND praxistar_eingangsnr > ? AND praxistar_eingangsnr < '90/'", @case.praxistar_eingangsnr]
       if next_open.nil?
         redirect_to :action => 'second_entry_queue'
       else
@@ -396,8 +390,8 @@ class Cyto::CasesController < ApplicationController
     case @case.classification.code
     when 'mam', 'sput'
       render :action => :eg_result_report
-    when 'hpv'
-      render :action => :hpv_result_report
+#    when 'hpv'
+#      render :action => :hpv_result_report
     else
       render :action => :result_report
     end
@@ -422,22 +416,6 @@ class Cyto::CasesController < ApplicationController
     else
       render :action => :result_report, :layout => 'result_report_for_pdf'
     end
-  end
-
-  def result_report_pdf
-    h = Net::HTTP.new('localhost', 80)
-    h.open_timeout = 30  # secs
-    h.read_timeout = 120  # secs
-
-    resp, data = h.get("/~shuerlimann/html2ps_v213_dev/public_html/demo/html2ps.php?process_mode=single&URL=http%3A%2F%2Flocalhost%3A3000%2Fcyto%2Fcases%2Fresult_report_for_pdf%2F#{params[:id]}&pixels=570&scalepoints=1&renderimages=1&renderlinks=0&media=A5&cssmedia=print&leftmargin=0&rightmargin=0&topmargin=0&bottommargin=0&pslevel=3&method=fpdf&pdfversion=1.3&output=0&convert=Convert+File", nil)
-
-    aFile = File.new("public/testfile", 'w')
-    aFile.print(data)
-    aFile.close
-  end
-
-  def result_stats_letter
-    @doctor = Doctor.find(params[:id])
   end
 
   def result_letter
@@ -482,27 +460,38 @@ class Cyto::CasesController < ApplicationController
 
   # P16/HPV
   # =======
-  def p16_queue
+  def hpv_p16_queue
     params[:order] ||= 'praxistar_eingangsnr'
 
-    @case_pages, @cases = paginate 'Cyto::Cases', :per_page => 144, :order => params[:order], :conditions => "(needs_p16 = #{Case.connection.true}) AND screened_at IS NULL"
+    @case_pages, @cases = paginate 'Cyto::Cases', :per_page => 144, :order => params[:order], :conditions => "(needs_p16 = #{Case.connection.true} OR needs_hpv = #{Case.connection.true}) AND screened_at IS NULL"
     render :action => :list
   end
 
-  def hpv_queue
-    params[:order] ||= 'praxistar_eingangsnr'
-
-    @case_pages, @cases = paginate 'Cyto::Cases', :per_page => 144, :order => params[:order], :include => :classification, :conditions => "(classifications.code = 'hpv') AND screened_at IS NULL"
-    render :action => :list
-  end
-
-  def p16_prepared
+  def hpv_p16_prepared
     a_case = Cyto::Case.find(params[:id])
-    a_case.p16_prepared_at = DateTime.now
-    a_case.p16_preparee = Employee.find_by_code(request.env['REMOTE_USER'])
+    a_case.hpv_p16_prepared_at = DateTime.now
+    a_case.hpv_p16_prepared_by = Employee.find_by_code(request.env['REMOTE_USER'])
     a_case.save
 
-    render :text => "#{a_case.p16_prepared_at.strftime('%d.%m.%Y')} #{a_case.p16_preparee.code}"
+    render :text => "#{a_case.hpv_p16_prepared_at.strftime('%d.%m.%Y')} #{a_case.hpv_p16_prepared_by.nil? ? "" : a_case.hpv_p16_prepared_by.code}"
+  end
+
+  # Create a new HPV/P16 case after a case has been closed
+  def create_hpv_p16_for_case
+    @case = Cyto::Case.find(params[:id])
+
+    # Clone the case and set columns
+    hpv = @case.clone
+    hpv.praxistar_eingangsnr = Cyto::CaseNr.new.to_s
+    hpv.screened_at = nil
+    hpv.praxistar_leistungsblatt_id = nil
+    hpv.result_report_printed_at = nil
+    hpv.needs_p16 = true
+    hpv.needs_hpv = true
+    hpv.classification = Cyto::Classification.find :first, :conditions => "code = 'hpv' AND examination_method_id = #{hpv.examination_method_id}"
+    hpv.save
+
+    redirect_to :controller => '/', :action => ''
   end
 
 

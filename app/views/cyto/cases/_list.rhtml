@@ -45,12 +45,12 @@
     <td>
       sign:&nbsp;<%= a_case.screened_at.strftime("%d.%m.%Y") unless a_case.screened_at.nil? %><br/>
       gedr:&nbsp;<%= a_case.result_report_printed_at.strftime("%d.%m.%Y") unless a_case.result_report_printed_at.nil? %>
-      <% if a_case.needs_p16? %>
+      <% if a_case.needs_p16? or a_case.needs_hpv? %>
         <br/>
-        <% if a_case.p16_prepared_at %>
-          P16:&nbsp;<%= a_case.p16_prepared_at.strftime('%d.%m.%Y') %> <%= a_case.p16_preparee.code %>
+        <% if a_case.hpv_p16_prepared_at %>
+          HPV/P16:&nbsp;<%= a_case.hpv_p16_prepared_at.strftime('%d.%m.%Y') %> <%= a_case.hpv_p16_prepared_by.nil? ? "" : a_case.hpv_p16_prepared_by.code %>
         <% else %>
-          P16:&nbsp;<span id="prepare_p16_<%= a_case.id %>"><%= link_to_remote image_tag('prepare_p16.png'), :update => "prepare_p16_#{a_case.id}", :url => { :controller => '/cyto/cases', :action => 'p16_prepared', :id => a_case } %></span>
+          HPV/P16:&nbsp;<span id="prepare_hpv_p16_<%= a_case.id %>"><%= link_to_remote image_tag('prepare_p16.png'), :update => "prepare_hpv_p16_#{a_case.id}", :url => { :controller => '/cyto/cases', :action => 'hpv_p16_prepared', :id => a_case } %></span>
         <% end %>
       <% end %>
     </td>
@@ -65,6 +65,7 @@
       <%= link_to image_tag('print.png', :title => 'Drucke Resultat'), :controller => '/cyto/cases', :action => :print_result_report, :id => a_case %>
       <%= link_to image_tag('fax.png', :title => 'Drucke Fax'), :controller => '/cyto/cases', :action => :print_result_report_as_fax, :id => a_case %>
       <%= link_to image_tag('export_bill_16.png', :title => 'Generiere Leistungsblatt'), :controller => 'admin', :action => :praxistar_create_leistungsblatt, :id => a_case if a_case.ready_for_praxistar_create_leistungsblatt %>
+      <%= link_to image_tag('prepare_p16.png', :title => 'Nachträglicher HPV/P16'), :controller => '/cyto/cases', :action => :create_hpv_p16_for_case, :id => a_case %> <% # unless a_case.result_report_printed_at.nil? %>
     </td>
   </tr>
 <% end %>
