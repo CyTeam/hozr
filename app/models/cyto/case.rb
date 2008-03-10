@@ -7,7 +7,7 @@ class Cyto::Case < ActiveRecord::Base
   belongs_to :doctor
   belongs_to :screener, :class_name => 'Employee', :foreign_key => :screener_id
   belongs_to :insurance
-  belongs_to :p16_preparee, :class_name => 'Employee', :foreign_key => :p16_prepared_by
+  belongs_to :hpv_p16_prepared_by, :class_name => 'Employee', :foreign_key => :hpv_p16_prepared_by
   
   has_and_belongs_to_many :finding_classes
   has_one :order_form, :class_name => 'Cyto::OrderForm'
