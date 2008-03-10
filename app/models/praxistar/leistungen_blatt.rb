@@ -19,7 +19,7 @@ class Praxistar::LeistungenBlatt < Praxistar::Base
       leistung.sg_Anzahl = 1
       leistung.Abrechnungsart_ID = 1
       leistung.tf_Medikament = 0
-      leistung.cu_Taxpunktwert = 0.9
+      leistung.cu_Taxpunktwert = 0.89
       leistung.Subtotal_ID = 9
       leistung.Kostenstelle_ID = 0
       leistung.MwstCode_ID = 0
