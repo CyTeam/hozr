@@ -9,6 +9,8 @@
     <%=sort_header('doctor_id', 'Arzt') %>
     <%=sort_header('screener_id', 'Zytologin') %>
     <th>Scan</th>
+    <th>P16</th>
+    <th>HPV</th>
     <th>Status</th>
     <% if @include_bill %><th>Rechnung</th><% end %>
   </tr>
@@ -42,6 +44,8 @@
       <%= link_to "Auftrag", url_for_file_column(a_case.order_form, "file") %> <%= link_to "Klinische Symptome", url_for_file_column(a_case.order_form, "file", "remarks") %> <%= link_to "Personalien", url_for_file_column(a_case.order_form, "file", "address") %>
     <% end %>
     </td>
+    <td><%= "X" if a_case.needs_p16? %></td>
+    <td><%= "X" if a_case.needs_hpv? %></td>
     <td>
       sign:&nbsp;<%= a_case.screened_at.strftime("%d.%m.%Y") unless a_case.screened_at.nil? %><br/>
       gedr:&nbsp;<%= a_case.result_report_printed_at.strftime("%d.%m.%Y") unless a_case.result_report_printed_at.nil? %>
