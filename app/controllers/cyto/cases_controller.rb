@@ -285,7 +285,7 @@ class Cyto::CasesController < ApplicationController
     # Common code for hpv and p16.
     @case.save
 
-    next_open = Cyto::Case.find :first, :conditions => ["entry_date IS NOT NULL AND screened_at IS NULL AND (needs_p16 = '#{Case.connection.true}' OR needs_hpv = '#{Case.connection.true}') AND praxistar_eingangsnr > ? AND praxistar_eingangsnr < '90/'", @case.praxistar_eingangsnr]
+    next_open = Cyto::Case.find :first, :conditions => ["entry_date IS NOT NULL AND screened_at IS NULL AND (needs_p16 = '#{Case.connection.false}' AND needs_hpv = '#{Case.connection.false}') AND praxistar_eingangsnr > ? AND praxistar_eingangsnr < '90/'", @case.praxistar_eingangsnr]
     if next_open.nil?
       redirect_to :action => 'second_entry_queue'
     else
