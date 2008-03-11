@@ -358,7 +358,7 @@ class Cyto::CasesController < ApplicationController
     @case.finding_text = params[:case][:finding_text] unless params[:case].nil? or params[:case][:finding_text].nil?
     @case.save
 
-    if @case.needs_p16? of @case.needs_hpv?
+    if @case.needs_p16? or @case.needs_hpv?
       next_open = Cyto::Case.find :first, :conditions => ["entry_date IS NOT NULL AND screened_at IS NULL AND (needs_p16 = '#{Case.connection.true}' OR needs_hpv = '#{Case.connection.true}') AND screener_id = ? AND praxistar_eingangsnr > ? AND praxistar_eingangsnr < '90/'", @case.screener_id, @case.praxistar_eingangsnr]
 
       @case.result_report_printed_at = nil
