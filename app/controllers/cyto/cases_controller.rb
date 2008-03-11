@@ -486,6 +486,9 @@ class Cyto::CasesController < ApplicationController
     hpv.screened_at = nil
     hpv.praxistar_leistungsblatt_id = nil
     hpv.result_report_printed_at = nil
+    hpv.finding_classes = []
+    hpv.finding_text = ""
+
     hpv.needs_p16 = true
     hpv.needs_hpv = true
     hpv.classification = Cyto::Classification.find :first, :conditions => "code = 'hpv' AND examination_method_id = #{hpv.examination_method_id}"
