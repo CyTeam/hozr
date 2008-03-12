@@ -15,7 +15,7 @@
   </div>
 
 <div id="text">
-<% Cyto::Case.with_scope(:find => {:conditions => ["doctor_id = ? AND screened_at IS NOT NULL", @doctor.id] }) do %>
+<% Cyto::Case.with_scope(:find => {:conditions => ["doctor_id = ? AND (screened_at IS NOT NULL OR needs_p16 = ? OR needs_p16 = ?)", @doctor.id, true, true ] }) do %>
 
 <table class="listing" style="margin-top: 0px">
   <% @case_counter = 17 %>
