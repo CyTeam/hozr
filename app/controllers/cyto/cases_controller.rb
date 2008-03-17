@@ -122,6 +122,11 @@ class Cyto::CasesController < ApplicationController
     render :action => 'assign'
   end
 
+  def destroy_from_assign
+   Cyto::Case.find(params[:id]).destroy
+   render :text => 'gelöscht'
+  end
+  
   # Show list of assignings from the last 7 days.
   def assignings_list
     @assignings = Cyto::Case.find_by_sql('SELECT assigned_at, min(intra_day_id) AS min_intra_day_id, max(intra_day_id) AS max_intra_day_id, min(praxistar_eingangsnr) AS min_praxistar_eingangsnr, max(praxistar_eingangsnr) AS max_praxistar_eingangsnr, count(*) AS count FROM cases GROUP BY assigned_at HAVING assigned_at > now() - INTERVAL 7 DAY ORDER BY assigned_at DESC')
