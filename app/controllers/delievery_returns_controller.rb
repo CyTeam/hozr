@@ -47,6 +47,15 @@ class DelieveryReturnsController < ApplicationController
     render :action => 'doctor_fax'
   end
 
+  def new_queue
+    next_open = DelieveryReturn.find(:first, :conditions => ['address_verified_at IS NULL AND closed_at IS NULL'])
+    if next_open.nil?
+      redirect_to :action => :overview
+    else
+      redirect_to :action => :edit, :id => next_open
+    end
+  end
+
   def edit
     @delievery_return = DelieveryReturn.find(params[:id])
     @case = @delievery_return.cyto_case
@@ -78,6 +87,7 @@ class DelieveryReturnsController < ApplicationController
       @delievery_return.save!
     end
 
+    redirect_to :action => :new_queue
   end
   
   def doctor_fax

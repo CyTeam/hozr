@@ -8,9 +8,9 @@
           <i style="font-size: 13pt">Neue Fan-Post erfassen.</i>
       </p>
 
-      <h2><%= link_to "Adresse prüfen", :action => 'list_new' %></h2>
+      <h2><%= link_to "Adresse prüfen", :action => :new_queue %></h2>
       <p>
-          <%= link_to image_tag('first_entry.png'), :action => 'list_new' %>
+          <%= link_to image_tag('first_entry.png'), :action => :new_queue %>
           <i style="font-size: 13pt">Es gibt <b><%= @new_count %></b> neu erfasste Fanpost.</i>
       </p>
 
