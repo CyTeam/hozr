@@ -1,5 +1,6 @@
 class DelieveryReturnsController < ApplicationController
-
+  helper :doctors
+  
   def index
     redirect_to :action => :new
   end
