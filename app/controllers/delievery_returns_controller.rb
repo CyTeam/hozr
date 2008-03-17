@@ -2,7 +2,7 @@ class DelieveryReturnsController < ApplicationController
   helper :doctors
   
   def index
-    redirect_to :action => :new
+    redirect_to :action => :overview
   end
   
   def search_by_bill
