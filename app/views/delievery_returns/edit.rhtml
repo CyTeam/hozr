@@ -13,7 +13,14 @@
           <td id="diagnoses">
             <%= error_messages_for 'case' %>
             <div id="search_form">
-              <%= render :partial => '/patients/search_form' %>
+              <% @patient = @case.patient %>
+              <% @vcard = @case.patient.vcard %>
+              <% @billing_vcard = @case.patient.billing_vcard %>
+              <% form_tag :action => 'update', :id => @delievery_return do %>
+                <%= render :partial => '/patients/form' %>
+                <%= submit_tag 'Adresse angepasst' %>
+                <%= submit_tag 'Fax an Arzt' %>
+              <% end %>
             </div>
           </td>
         </tr>
@@ -22,6 +29,12 @@
       <div id="search_result">
         <%= loading_indicator_tag :id => 'search' %>
       </div>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2">
+      <% @bills = @case.patient.bills %>
+      <%= render :partial => '/bills/list' %>      
     </td>
   </tr>
 </table>
