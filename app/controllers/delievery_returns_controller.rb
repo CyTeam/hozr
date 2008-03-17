@@ -44,6 +44,7 @@ class DelieveryReturnsController < ApplicationController
   
   def list_new
     @delievery_returns = DelieveryReturn.find(:all, :include => :cyto_case, :order => 'doctor_id', :conditions => ['closed_at IS NULL'])
+    render :action => 'doctor_fax'
   end
 
   def edit
