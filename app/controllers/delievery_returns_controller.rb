@@ -50,13 +50,38 @@ class DelieveryReturnsController < ApplicationController
   def edit
     @delievery_return = DelieveryReturn.find(params[:id])
     @case = @delievery_return.cyto_case
+
+    # Header image size preferences
+    @header_image_type = session[:header_image_type] || :head
   end
 
   def update
     @delievery_return = DelieveryReturn.find(params[:id])
+    cyto_case = @delievery_return.cyto_case
+    patient = cyto_case.patient
+    bill = cyto_case.active_bill
+    
+    case params[:commit]
+    when "Adresse angepasst"
+      bill.reactivate("Adresse angepasst am #{Date.today.strftime('%d.%m.%Y')}")
+
+      patient.dunning_stop = false
+      patient.remarks = "Fanpost #{bill.bill_type}: Adresse angepasst am #{Date.today.strftime('%d.%m.%Y')}\n" + patient.remarks
+      patient.save!
+
+      @delievery_return.address_verified_at = DateTime.now
+      @delievery_return.closed_at
+      @delievery_return.save!
+
+    when "Fax an Arzt"
+      @delievery_return.address_verified_at = DateTime.now
+      @delievery_return.save!
+    end
+
   end
   
   def doctor_fax
+    @delievery_returns = DelieveryReturn.find(:all, :include => :cyto_case, :order => 'doctor_id', :conditions => ['address_verified_at IS NOT NULL AND closed_at IS NULL'])
   end
 
   def list_sent_faxes
