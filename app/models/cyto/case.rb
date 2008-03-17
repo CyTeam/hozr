@@ -183,9 +183,9 @@ class Cyto::Case < ActiveRecord::Base
   def praxistar_create_leistungsblatt
     blatt = Praxistar::LeistungenBlatt.new
     blatt.hozr_case = self
-    blatt.save
+    blatt.save!
     self.praxistar_leistungsblatt_id = blatt.id
-    save
+    save!
   end
 
   def self.praxistar_create_all_leistungsblatt(days_since_print = 6.5)
