@@ -42,9 +42,9 @@
           <i style="font-size: 13pt">Es gibt <b><%= @order_count %></b> offene Bestellungen.</i>
       </p>
 
-      <h2><%= link_to "Fanpost abarbeiten", :controller => :delievery_returns, :action => 'list_new' %></h2>
+      <h2><%= link_to "Fanpost abarbeiten", :controller => :delievery_returns %></h2>
       <p>
-          <%= link_to image_tag('order_64.png'), :controller => :delievery_returns, :action => 'list_new' %>
+          <%= link_to image_tag('order_64.png'), :controller => :delievery_returns %>
           <i style="font-size: 13pt">Es gibt <b><%= @delievery_return_count %></b> neue Fanpost.</i>
       </p>
 
