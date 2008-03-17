@@ -45,7 +45,12 @@ class Praxistar::Bill < Praxistar::Base
     cancel(reason)
     a_case = cyto_case
     a_case.praxistar_leistungsblatt_id = nil
-    a_case.save
+    a_case.save!
+
+    # Export patient data, in case it changed
+    Praxistar::PatientenPersonalien.export(a_case.patient.id)
+
+    a_case.praxistar_create_leistungsblatt
   end
 
 
