@@ -3,13 +3,6 @@
     <td id="head" style="min-width: 600px">
       <%= (link_to image_tag(url_for_image_column(@case.order_form, "file", @header_image_type)), url_for_file_column(@case.order_form, "file")) unless @case.order_form.nil? %>
     </td>
-    <td>
-      <%= link_to_remote image_tag('zoom-in.png'), :update => 'head', :url => { :controller => '/cyto/order_forms', :action => 'head_big', :id => @case.order_form } %>
-      <%= link_to_remote image_tag('zoom-out.png'), :update => 'head', :url => { :controller => '/cyto/order_forms', :action => 'head_small', :id => @case.order_form } %>
-      <%= link_to image_tag('zoom-full.png'), url_for_file_column(@case.order_form, "file") unless @case.order_form.nil? %>
-      <br/><br/>
-      <%= (link_to image_tag(url_for_image_column(@case.order_form, "file", :foot), :width => 450), url_for_file_column(@case.order_form, "file")) unless @case.order_form.nil? %>
-    </td>
   </tr>
   <tr>
     <td style="vertical-align: top" colspan="2">
