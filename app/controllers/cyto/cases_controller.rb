@@ -408,6 +408,14 @@ class Cyto::CasesController < ApplicationController
     render :action => :list
   end
 
+  def review_done
+    @case = Cyto::Case.find(params[:id])
+    @case.needs_review = false
+    @case.save!
+    
+    redirect_to :action => :review_queue
+  end
+  
   # Results
   # =======
   def result_report

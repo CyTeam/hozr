@@ -70,6 +70,7 @@
       <%= link_to image_tag('fax.png', :title => 'Drucke Fax'), :controller => '/cyto/cases', :action => :print_result_report_as_fax, :id => a_case %>
       <%= link_to image_tag('export_bill_16.png', :title => 'Generiere Leistungsblatt'), :controller => 'admin', :action => :praxistar_create_leistungsblatt, :id => a_case if a_case.ready_for_praxistar_create_leistungsblatt %>
       <%= link_to image_tag('prepare_p16.png', :title => 'Nachträglicher HPV/P16'), :controller => '/cyto/cases', :action => :create_hpv_p16_for_case, :id => a_case %> <% # unless a_case.result_report_printed_at.nil? %>
+      <%= link_to image_tag('select_16.png', :title => '2. Eingabe bestätigen'), :controller => '/cyto/cases', :action => :review_done, :id => a_case if a_case.needs_review? -%>
     </td>
   </tr>
 <% end %>
