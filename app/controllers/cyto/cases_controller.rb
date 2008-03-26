@@ -385,6 +385,14 @@ class Cyto::CasesController < ApplicationController
     end
   end
 
+  # Review Queue
+  # ============
+  def review_queue
+    params[:order] ||= 'praxistar_eingangsnr'
+    
+    @case_pages, @cases = paginate 'Cyto::Cases', :per_page => 144, :order => params[:order], :conditions => [ "needs_review = ?", true ]
+    render :action => :list
+  end
 
   # Results
   # =======
