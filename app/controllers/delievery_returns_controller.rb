@@ -72,14 +72,22 @@ class DelieveryReturnsController < ApplicationController
     
     case params[:commit]
     when "Adresse angepasst"
-      bill.reactivate("Adresse angepasst am #{Date.today.strftime('%d.%m.%Y')}")
+      @vcard = patient.vcard
+      @billing_vcard = patient.billing_vcard
+      @vcard.update_attributes(params[:vcard]) and @billing_vcard.update_attributes(params[:billing_vcard]) and patient.update_attributes(params[:patient])
+      @vcard.save!
+      @billing_vcard.save!
+      patient.save!
 
       patient.dunning_stop = false
       patient.remarks = "Fanpost #{bill.bill_type}: Adresse angepasst am #{Date.today.strftime('%d.%m.%Y')}\n" + patient.remarks
       patient.save!
 
+      # TODO: not nice
+      bill.reactivate("Adresse angepasst am #{Date.today.strftime('%d.%m.%Y')}") unless bill.nil?
+  
       @delievery_return.address_verified_at = DateTime.now
-      @delievery_return.closed_at
+      @delievery_return.closed_at = DateTime.now
       @delievery_return.save!
 
     when "Fax an Arzt"
