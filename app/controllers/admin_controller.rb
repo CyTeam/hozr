@@ -11,7 +11,7 @@ class AdminController < ApplicationController
   def praxistar_create_leistungsblatt
     Cyto::Case.find(params[:id]).praxistar_create_leistungsblatt
     
-    redirect_to :controller => '/', :action => ''
+    redirect_to :controller => 'search', :action => ''
   end
 
   def praxistar_patienten_personalien_export
