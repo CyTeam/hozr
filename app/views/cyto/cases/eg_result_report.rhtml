@@ -43,7 +43,7 @@ Befund
 </div>
 
 <div id="signature">
-  <%= submit_tag "Visum: #{@case.screener.work_vcard.abbreviated_name unless @case.screener.nil?}, #{@case.screened_at.strftime("%d.%m.%Y")}" %>
+  <%= submit_tag "Visum: #{@case.screener.work_vcard.abbreviated_name unless @case.screener.nil?}, #{@case.screened_at.strftime("%d.%m.%Y") unless @case.screened_at.nil?}" %>
 </div>
 <%= end_form_tag %>
 

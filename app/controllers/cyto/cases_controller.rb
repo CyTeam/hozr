@@ -275,7 +275,6 @@ class Cyto::CasesController < ApplicationController
 
     case params[:commit]
     when "Erstellen"
-      @case.screened_at ||= Date.today
       @case.save
       redirect_to :action => 'result_report', :id => @case
       # That's it if it's a normal PAP
