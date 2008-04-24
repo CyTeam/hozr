@@ -362,16 +362,19 @@ class Cyto::CasesController < ApplicationController
     @case.finding_text = params[:case][:finding_text] unless params[:case].nil? or params[:case][:finding_text].nil?
 
     # Check if case needs review
+    low_classifications = ['1', '2']
+    high_classifications = ['3M', '3S', '3M-c1-2', '3S-c2-3', '4', '5']
+
     previous_case = @case.patient.cases[1]
     if previous_case
       # Sudden jump from PAP I/II to CIN I-II and higher
-      low_classifications = ['1', '2']
-      high_classifications = ['3M', '3S', '3M-c1-2', '3S-c2-3', '4', '5']
-
       low_to_high = (low_classifications.include?(previous_case.classification.code) and high_classifications.include?(@case.classification.code))
       high_to_low = (high_classifications.include?(previous_case.classification.code) and low_classifications.include?(@case.classification.code))
       
-      @case.needs_review = low_to_high or high_to_low
+      # Higher than Cin I-II
+      high = high_classifications.include?(@case.classification.code)
+
+      @case.needs_review = low_to_high or high_to_low or high
     end
 
     @case.save
