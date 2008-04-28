@@ -14,7 +14,7 @@ class WorkQueueController < ApplicationController
       @bill_print_count = "Keine Verbinbung zu Praxistar"
     end
     @order_count = Shop::Order.count(:conditions => 'shipped_at IS NULL AND cancelled_at IS NULL')
-    @delievery_return_count = DelieveryReturn.count(:conditions => 'closed_at IS NULL')
+    @delievery_return_count = DelieveryReturn.count(:conditions => 'address_verified_at IS NULL AND closed_at IS NULL')
   end
 
   def cyto
