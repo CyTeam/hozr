@@ -370,13 +370,14 @@ class Cyto::CasesController < ApplicationController
       # Sudden jump from PAP I/II to CIN I-II and higher
       low_to_high = (low_classifications.include?(previous_case.classification.code) and high_classifications.include?(@case.classification.code))
       high_to_low = (high_classifications.include?(previous_case.classification.code) and low_classifications.include?(@case.classification.code))
-      
-      # Higher than Cin I-II
-      high = high_classifications.include?(@case.classification.code)
-
-      @case.needs_review = low_to_high or high_to_low or high
     end
+      
+    # Higher than Cin I-II
+    high = high_classifications.include?(@case.classification.code)
 
+    @case.needs_review = (low_to_high or high_to_low or high)
+
+    # Save
     @case.save
 
     if @case.needs_p16? or @case.needs_hpv?
