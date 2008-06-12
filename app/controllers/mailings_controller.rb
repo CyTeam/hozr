@@ -6,7 +6,7 @@ class MailingsController < ApplicationController
 
   # Show list of mailings
   def list
-    @mailings = Mailing.find(:all, :order => 'created_at DESC', :limit => 50)
+    @mailings = Mailing.find(:all, :order => 'created_at DESC', :limit => 100)
   end
 
   # Show list of unprinted mailings
