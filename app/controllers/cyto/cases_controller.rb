@@ -200,6 +200,9 @@ class Cyto::CasesController < ApplicationController
       @case.insurance = @case.patient.insurance
       @case.insurance_nr = @case.patient.insurance_nr
 
+    @case.first_entry_at ||= Time.now
+    @case.first_entry_by = Employee.find_by_code(request.env['REMOTE_USER'])
+                  
     if @case.save
       flash[:notice] = 'First entry ok.'
 
