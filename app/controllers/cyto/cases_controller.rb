@@ -417,6 +417,10 @@ class Cyto::CasesController < ApplicationController
   def review_done
     @case = Cyto::Case.find(params[:id])
     @case.needs_review = false
+    
+    @case.review_by = Employee.find_by_code(request.env['REMOTE_USER'])
+    @case.review_at = Time.now
+    
     @case.save!
     
     redirect_to :action => :review_queue
