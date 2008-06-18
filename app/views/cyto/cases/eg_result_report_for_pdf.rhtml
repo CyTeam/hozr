@@ -47,6 +47,7 @@ Befund
   <% unless @case.review_by.nil? %>
     <br/>
     <%= button_to "Visum: #{@case.review_by.work_vcard.abbreviated_name}, #{@case.review_at.strftime("%d.%m.%Y") unless @case.review_at.nil?}", :action => 'review_done', :id => @case %>
+  <% end %>
 </div>
 <%= end_form_tag %>
 
