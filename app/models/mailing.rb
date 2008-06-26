@@ -1,6 +1,6 @@
 class Mailing < ActiveRecord::Base
   belongs_to :doctor
-  has_and_belongs_to_many :cases, :class_name => 'Cyto::Case', :order => 'classification_id'
+  has_and_belongs_to_many :cases, :class_name => 'Cyto::Case', :order => 'classification_id, praxistar_eingangsnr'
 
   def self.create(doctor_id, case_ids)
     mailing = self.new
