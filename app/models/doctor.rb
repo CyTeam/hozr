@@ -28,4 +28,13 @@ class Doctor < ActiveRecord::Base
   def billing_doctor_id
     read_attribute(:billing_doctor_id) || id
   end
+
+  # Customers support
+  def uid
+    name.tr(' -', '_').underscore
+  end
+
+  def uidNumber
+    sprintf("%03.0f", id)
+  end
 end

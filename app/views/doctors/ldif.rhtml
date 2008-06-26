@@ -1,0 +1,17 @@
+version: 1
+
+dn: cn=<%= @doctor.name %>,ou=Doctors,ou=Users,dc=intern,dc=zyto-labor,dc=com
+cn: <%= @doctor.name %>
+gidNumber: 3007
+givenName: <%= @doctor.given_name %>
+homeDirectory: /home/zytolabor/customers/<%= @doctor.uid %>
+loginShell: /bin/false
+objectClass: inetOrgPerson
+objectClass: posixAccount
+objectClass: top
+objectClass: simpleSecurityObject
+sn: <%= @doctor.family_name %>
+uid: <%= @doctor.uid %>
+# uid: praxissinger
+uidNumber: 10<%= @doctor.uidNumber %>
+# userPassword: {SHA}/DZyRgyCX4IPLjnmHEiVKD6/Hmo=

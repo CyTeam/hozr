@@ -68,4 +68,12 @@ class DoctorsController < ApplicationController
  
     send_data output, :type => 'text/html; charset=utf-8', :disposition => 'inline'
   end
+
+  # Customers Support
+  # =================
+  # LDIF
+  def ldif
+    @doctor = Doctor.find(params[:id])
+    render :layout => false
+  end
 end
