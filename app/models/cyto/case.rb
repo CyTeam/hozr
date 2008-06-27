@@ -12,6 +12,8 @@ class Cyto::Case < ActiveRecord::Base
   belongs_to :hpv_p16_prepared_by, :class_name => 'Employee', :foreign_key => :hpv_p16_prepared_by
   
   has_and_belongs_to_many :finding_classes
+  has_and_belongs_to_many :mailings
+  
   has_one :order_form, :class_name => 'Cyto::OrderForm'
   
   def bill
