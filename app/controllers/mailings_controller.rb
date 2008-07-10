@@ -81,7 +81,7 @@ class MailingsController < ApplicationController
   def print
     @mailing = Mailing.find(params[:id])
 
-    command = "/usr/local/bin/hozr_print_result_mailing.sh #{@mailing.id}"
+    command = "/usr/local/bin/hozr_print_result_mailing.sh #{@mailing.id} '' #{( ENV['RAILS_ENV'] || 'development' )}"
     stream = open("|#{command}")
     output = stream.read
  
@@ -93,7 +93,7 @@ class MailingsController < ApplicationController
     
     output = ""
     for mailing in mailings
-      command = "/usr/local/bin/hozr_print_result_mailing.sh #{mailing.id}"
+      command = "/usr/local/bin/hozr_print_result_mailing.sh #{mailing.id} '' #{( ENV['RAILS_ENV'] || 'development' )}"
       stream = open("|#{command}")
       output += stream.read
     end

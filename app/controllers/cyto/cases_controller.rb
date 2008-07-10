@@ -476,7 +476,7 @@ class Cyto::CasesController < ApplicationController
     ids = params[:id] ? params[:id] : params[:ids].split('/')
     output = "<pre>"
     for id in ids
-      stream = open("|/usr/local/bin/hozr_print_result_report.sh '#{id}' --force 2>&1")
+      stream = open("|/usr/local/bin/hozr_print_result_report.sh #{id} --force #{(ENV['RAILS_ENV'] || 'development')} 2>&1")
       output += stream.read
     end
 
@@ -488,8 +488,7 @@ class Cyto::CasesController < ApplicationController
     ids = params[:id] ? params[:id] : params[:ids].split('/')
     output = "<pre>"
     for id in ids
-      eingangs_nr = Cyto::Case.find(id).praxistar_eingangsnr
-      stream = open("|/usr/local/bin/hozr_print_results.sh --fax --force '#{eingangs_nr}'")
+      stream = open("|/usr/local/bin/hozr_print_result_report.sh #{id} --fax --force '#{id}' #{(ENV['RAILS_ENV'] || 'development')} 2>&1")
       output += stream.read
     end
 
