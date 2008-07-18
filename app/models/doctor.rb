@@ -37,4 +37,9 @@ class Doctor < ActiveRecord::Base
   def uidNumber
     sprintf("%03.0f", id)
   end
+
+  # Password
+  def password=(value)
+    write_attribute(:password, Digest::SHA256.hexdigest(value))
+  end
 end
