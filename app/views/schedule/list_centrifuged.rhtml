@@ -1,2 +1,16 @@
-<h1>Schedule#list_centrifuged</h1>
-<p>Find me in app/views/schedule/list_centrifuged.rhtml</p>
+<h1>Verteilen</h1>
+<% 
+@cases = Cyto::Case.find(:all, :conditions => ['assigned_at IS NOT NULL AND scheduled_at IS NULL AND doctor_id > 0'])
+
+doctor_ids = @cases.map {|a_case| a_case.doctor_id}.uniq
+%>
+
+<table class="listing">
+<% for @doctor in Doctor.find(doctor_ids) %>
+  <tr>
+    <td><%= @doctor.name %></td>
+    <td><%= @cases.select {|c| c.doctor_id == @doctor.id }.size %></td>
+    <td><%= check_box :doctor, '', :index => @doctor.id %></td>
+  </tr>
+<% end %>
+</table>
