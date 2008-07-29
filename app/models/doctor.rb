@@ -3,7 +3,11 @@ class Doctor < ActiveRecord::Base
   belongs_to :praxis, :class_name => 'Vcard', :foreign_key => 'praxis_vcard'
   belongs_to :private, :class_name => 'Vcard', :foreign_key => 'private_vcard'
   
-  has_many :cases
+  has_many :cases, :class_name => 'Cyto::Case'
+  has_many :patients
+  has_many :mailings
+  has_and_belongs_to_many :offices
+
   
   def family_name
     praxis.family_name || ""
