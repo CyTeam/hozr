@@ -287,9 +287,14 @@ class Cyto::CasesController < ApplicationController
       @case.needs_p16 = true
     when "P16"
       @case.needs_p16 = true
+    when "Review"
+      @case = Cyto::Case.find(params[:id])
+      @case.screened_at = Time.now
+      @case.screener = Employee.find_by_code(request.env['REMOTE_USER'])
+      @case.needs_review = true
     end
 
-    # Common code for hpv and p16.
+    # Common code for hpv, p16 and review.
     @case.save
 
     next_open = Cyto::Case.find :first, :conditions => ["entry_date IS NOT NULL AND screened_at IS NULL AND (needs_p16 = '#{Case.connection.false}' AND needs_hpv = '#{Case.connection.false}') AND praxistar_eingangsnr > ? AND praxistar_eingangsnr < '90/'", @case.praxistar_eingangsnr]
