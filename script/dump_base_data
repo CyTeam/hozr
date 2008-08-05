@@ -1,0 +1,5 @@
+RAILS_ENV=production rake db:data:dump MODEL=Cyto::Classification
+RAILS_ENV=production rake db:data:dump MODEL=Cyto::ClassificationTarmedLeistungen
+RAILS_ENV=production rake db:data:dump MODEL=Cyto::FindingClass
+RAILS_ENV=production rake db:data:dump MODEL=Cyto::FindingGroup
+RAILS_ENV=production rake db:data:dump MODEL=Cyto::FindingClassesFindingGroups
