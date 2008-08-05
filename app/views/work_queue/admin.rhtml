@@ -14,6 +14,24 @@
           <i style="font-size: 13pt">Es gibt <b><%= @first_entry_count %></b> Ersteingaben.</i>
       </p>
 
+      <h2><%= link_to "Zweiteingabe", :controller => '/cyto/cases', :action => 'second_entry_queue' %></h2>
+      <p>
+          <%= link_to image_tag('second_entry.png'), :controller => '/cyto/cases', :action => 'second_entry_queue' %>
+          <i style="font-size: 13pt">Es gibt <b><%= @second_entry_count %></b> Zweiteingaben.</i>
+      </p>
+
+      <h2><%= link_to "HPV/p16", :controller => '/cyto/cases', :action => 'hpv_p16_queue' %></h2>
+      <p>
+          <%= link_to image_tag('second_entry.png'), :controller => '/cyto/cases', :action => 'hpv_p16_queue' %>
+          <i style="font-size: 13pt">Es gibt <b><%= @p16_count %></b> p16 und <b><%= @hpv_count %></b> HPV.</i>
+      </p>
+
+      <h2><%= link_to "Review", :controller => '/cyto/cases', :action => 'second_entry_queue' %></h2>
+      <p>
+          <%= link_to image_tag('second_entry.png'), :controller => '/cyto/cases', :action => 'review_queue' %>
+          <i style="font-size: 13pt">Es gibt <b><%= @review_count %></b> Reviews.</i>
+      </p>
+
       <h2><%= link_to("Resultate drucken", {:controller => '/mailings', :action => 'generate'} ) %></h2>
       <p>
           <%= link_to (image_tag('print_result.png'), {:controller => '/mailings', :action => 'generate'} ) %>
@@ -21,6 +39,9 @@
           <pre id="print_result_reports_log"><%= loading_indicator_tag :id => 'print_result_reports' %></pre>
       </p>
 
+    </td>
+
+    <td style="vertical-align: top; padding-left: 5em">
       <h2><%= link_to_remote("Rechnungen generieren", :update => 'create_all_leistungsblatt_log', :loading => "Element.show('#{loading_indicator_id({:id => 'create_all_leistungsblatt'})}')", :url => {:controller => '/admin', :action => 'praxistar_create_all_leistungsblatt'}, :confirm => "#{@bill_export_count} Rechnungen generieren?" ) %></h2>
       <p>
           <%= link_to_remote(image_tag('export_bill.png'), :update => 'create_all_leistungsblatt_log', :loading => "Element.show('#{loading_indicator_id({:id => 'create_all_leistungsblatt'})}')", :url => {:controller => '/admin', :action => 'praxistar_create_all_leistungsblatt'}, :confirm => "#{@bill_export_count} Rechnungen generieren?" ) %>
@@ -33,9 +54,7 @@
           <%= image_tag('printer_64.png') %>
           <i style="font-size: 13pt">Es gibt <b><%= @bill_print_count %></b> neue Rechnungen.</i>
       </p>
-    </td>
 
-    <td style="vertical-align: top; padding-left: 5em">
       <h2><%= link_to "Bestellung abarbeiten", "http://shop.intern.zyto-labor.com/shop/shipping" %></h2>
       <p>
           <%= link_to image_tag('order_64.png'), "http://shop.intern.zyto-labor.com/shop/shipping" %>
