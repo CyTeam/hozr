@@ -1,0 +1,68 @@
+<h1>Resultat Briefe</h1>
+
+<style>
+.listing tr.group_footer td {
+  border: 0px none;
+  border-top: 1px solid;
+  border-bottom: 3px double;
+}
+
+.listing tr.group_body td {
+  border: 0px none;
+}
+
+.listing tr.group_body {
+  border: 0px none;
+}
+
+</style>
+
+<table class="listing">
+<% 
+  old_created_on = nil
+  case_count = 0
+  doctor_count = 0
+%>
+<% for mailing in @mailings %>
+<% 
+  # group header 'created_on'
+  created_on = mailing.created_at.to_date
+  is_header = !(created_on == old_created_on)
+  is_first_header = old_created_on.nil?
+  
+  case_count += mailing.cases.count
+  doctor_count += 1
+%>
+  <% if is_header %>
+    <% unless is_first_header %>
+      <tr class="group_footer">
+        <td>Total</td>
+        <td style="text-align: right"><%= case_count %></td>
+        <td>für <%= doctor_count %> &Auml;rzte</td>
+	<td/>
+      </tr>
+    <% end %>
+  <tr class="group_header">
+    <th style="width: 12em" title="<%= mailing.created_at.strftime('am %d.%m.%Y um %H:%M') %>"><%=h mailing.created_at.strftime('%a %d. %b') %></td>
+    <th style="width: 5em; text-align: right">Anzahl</th>
+    <th>Arzt</th>
+    <th/>
+  </tr>
+  <% end %>
+  <tr class="group_body">
+    <td/>
+    <td style="text-align: right"><%= link_to mailing.cases.count, :action => 'overview', :id => mailing %></td>
+    <td><%=h mailing.doctor.nil? ? "Unbekannt" : mailing.doctor.name %></td>
+    <td>
+      <%= button_to "Drucken", :controller => :mailings, :action => :print, :id => mailing %>
+      <%= button_to "Reaktivieren", :controller => :mailings, :action => :reactivate, :id => mailing %>
+    </td>
+  </tr>
+
+<% 
+  old_created_on = created_on
+  case_count = 0 if is_header
+  doctor_count = 0 if is_header
+%>
+<% end %>
+</table>
