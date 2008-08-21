@@ -3,4 +3,4 @@
 <span class="date_of_birth"><%=h patient.doctor_patient_nr unless patient.doctor_patient_nr.nil? %></span>
 <%= render :partial => "/vcards/show", :locals => {:vcard => patient.vcard} %><br/>
 <span class="date_of_birth"><%=h patient.birth_date %></span><br />
-<span class="date_of_birth"><%=h @case.insurance.name unless @case.insurance.name.nil? %></span>
+<span class="date_of_birth"><%=h @case.insurance.name unless @case.insurance.nil? %></span>
