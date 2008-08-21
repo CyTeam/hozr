@@ -285,8 +285,10 @@ class Cyto::CasesController < ApplicationController
     when "P16+HPV"
       @case.needs_hpv = true
       @case.needs_p16 = true
+      @case.screened_at = NULL
     when "P16"
       @case.needs_p16 = true
+      @case.screened_at = NULL
     when "Review"
       @case = Cyto::Case.find(params[:id])
       @case.screened_at = Time.now
