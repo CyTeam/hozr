@@ -507,7 +507,7 @@ class Cyto::CasesController < ApplicationController
   # P16/HPV
   # =======
   def hpv_p16_queue
-    params[:order] ||= 'hpv_p16_prepared_at, praxistar_eingangsnr'
+    params[:order] ||= 'praxistar_eingangsnr'
 
     @case_pages, @cases = paginate 'Cyto::Cases', :per_page => 144, :order => params[:order], :conditions => ["(needs_p16 = ? OR needs_hpv = ?) AND screened_at IS NULL", true, true]
     render :action => :list
