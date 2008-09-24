@@ -26,33 +26,7 @@
   <% group_cases = @mailing.cases.sort {|x,y| x.praxistar_eingangsnr <=> y.praxistar_eingangsnr}.select { |c| c.needs_p16? and c.screened_at.nil? } %>
   <%= render :partial => '/cyto/cases/overview_p16_group', :object => group_cases  unless group_cases.size == 0 %>
 </table>
-
-<!--
-<h3 style="font-weight: bold; font-size: 13pt">Jahres&uuml;bersicht</h3>
-<% total = Cyto::Case.count(:conditions => "(substr(praxistar_eingangsnr, 1,2) = substr(year(now()), 3, 2))") %>
-<% group_counts = Cyto::Case.count(:group => 'classification_group_id', :include => 'classification', :conditions => "(substr(praxistar_eingangsnr, 1,2) = substr(year(now()), 3, 2))") %>
-<table class="listing" style="width: 45%">
-  <tr>
-    <th>Klassifizierung</th>
-    <th>Anzahl</th>
-    <th>Anteil</th>
-  </tr>
-  <% for group in group_counts %>
-  <tr>
-    <td><%=h ClassificationGroup.find(group[0]).title unless group[0].nil? %></td>
-    <td style="text-align: right"><%=h group[1] %></td>
-    <td style="text-align: right"><%=h group[1] * 100 / total %>%</td>
-  </tr>
-  <% end %>
-  <tr>
-    <td style="border-top: 2px solid; border-bottom: 4px double">Total</td>
-    <td style="text-align: right; border-top: 2px solid; border-bottom: 4px double"><%=h total %></td>
-    <td style="text-align: right; border-top: 2px solid; border-bottom: 4px double"></td>
-  </tr>
-</table>
 <% end %>
-
--->
 </div>
 </div>
 </div>
