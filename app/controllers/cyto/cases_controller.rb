@@ -373,7 +373,7 @@ class Cyto::CasesController < ApplicationController
 
     # Check if case needs review
     low_classifications = ['1', '2']
-    high_classifications = ['3M', '3S', '3M-c1-2', '3S-c2-3', '4', '5']
+    high_classifications = ['3L', '3M', '3S', '3M-c1-2', '3S-c2-3', '4', '5']
 
     previous_case = @case.patient.cases[1]
     if previous_case
