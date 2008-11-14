@@ -25,8 +25,8 @@
 		<td style="text-align: left"><b><%= bill.account_receivable[:dt_Stornodatum].strftime("%d.%m.%Y") unless bill.account_receivable[:dt_Stornodatum].nil? %> <%= bill.account_receivable["tx_Storno_Begründung"] %></b></td>
 		<td style="text-align: left"><%= bill.patient[:remarks] %></td>
 		<td>
-			<%= link_to "stornieren", {:controller => 'bills', :action => :cancel, :id => bill}, :confirm => "Rechnung #{bill[:ID_Rechnung]} für #{bill.patient.name} stornieren?", :method => :post unless bill.payment_state == "payed" or bill.payment_state == "cancelled" %>
-			<%= link_to "reaktivieren", {:controller => 'bills', :action => :reactivate, :id => bill}, :confirm => "Rechnung #{bill[:ID_Rechnung]} für #{bill.patient.name} reaktivieren?", :method => :post unless bill.payment_state == "payed" or bill.payment_state == "cancelled" %>
+			<%= link_to "stornieren", {:controller => 'bills', :action => :cancel, :id => bill}, :confirm => "#{'ACHTUNG: Rechnung bereits bezahlt oder storniert!' unless bill.canceable?} Rechnung #{bill[:ID_Rechnung]} für #{bill.patient.name} stornieren?", :method => :post %>
+			<%= link_to "reaktivieren", {:controller => 'bills', :action => :reactivate, :id => bill}, :confirm => "#{'ACHTUNG: Rechnung bereits bezahlt oder storniert!' unless bill.canceable?} Rechnung #{bill[:ID_Rechnung]} für #{bill.patient.name} reaktivieren?", :method => :post %>
 		</td>
 	</tr>
         <% end %>
