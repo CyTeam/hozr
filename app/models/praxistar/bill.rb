@@ -74,4 +74,57 @@ class Praxistar::Bill < Praxistar::Base
   def bill_type
     account_receivable.bill_type
   end
+
+  # Fix for ambiguous handling of position 37.0620
+  # ==============================================
+  def self.fix_picky_insurance_cases(ids, insurance_id = 5)
+    self.find(ids).map{|bill| bill.fix_picky_insurance_case(insurance_id)}
+  end
+
+  def fix_picky_insurance_case(insurance_id = 5)
+    a_case = cyto_case
+    puts "Patient #{patient.name}, Rechnung #{id}:"
+
+    if a_case.insurance_id == insurance_id
+      puts "Versicherung ok"
+    elsif a_case.insurance_id.nil?
+      puts "Setze Versicherung"
+      a_case.insurance_id = insurance_id
+      a_case.save
+    else
+      puts "WARN: Versicherung geändert von #{a_case.insurance.name}!"
+      a_case.insurance_id = insurance_id
+      a_case.save
+    end
+
+    patient = a_case.patient
+    patient.remarks += "#{Date.today.strftime('%d.%m.%Y')}: Position 37.0620 gelöscht\n"
+    patient.save
+
+    reactivate("Position 37.0620 gelöscht")
+  end
+
+  def self.fix_all_picky_insurance_payments
+    bills = Praxistar::AccountReceivable.find(:all, :conditions => "tx_Storno_Begründung = 'Position 37.0620 gelöscht'").map{|ar| ar.bill if ar.payment }.compact
+    bills.map {|b| b.fix_picky_insurance_payment}
+  end
+
+  def fix_picky_insurance_payment
+    puts "Patient #{patient.name}, Rechnung #{id}:"
+    
+    old = account_receivable
+    puts "  ##{old.Rechnung_ID} à #{old.cu_rechnungsbetrag}"
+    new = patient.cases.first.bill.account_receivable
+    puts "  ##{new.Rechnung_ID} à #{new.cu_rechnungsbetrag}"
+    payment = payments.first
+    
+    payment.Debitoren_ID = new.id
+    payment.Leistungsblatt_ID = new.Leistungsblatt_ID
+    payment.Rechnung_ID = new.Rechnung_ID
+    payment.save
+
+    patient = payment.patient
+    patient.remarks += "#{Date.today.strftime('%d.%m.%Y')}: Zahlung auf Rechnung ohne Position 37.0620 umgebucht\nRückerstattung von CHF 5.40 fällig\n"
+    patient.save
+  end
 end
