@@ -4,4 +4,5 @@ class Praxistar::Payment < Praxistar::Base
 
   belongs_to :patient, :foreign_key => "Patient_ID"
   belongs_to :bill, :foreign_key => "Rechnung_ID"
+  belongs_to :account_receivable, :foreign_key => "Debitoren_ID"
 end

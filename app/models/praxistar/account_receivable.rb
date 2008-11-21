@@ -3,6 +3,7 @@ class Praxistar::AccountReceivable < Praxistar::Base
   set_primary_key "id_debitoren"
 
   belongs_to :bill, :foreign_key => 'Rechnung_ID'
+  has_one :payment, :foreign_key => 'Debitoren_ID'
 
   def bill_type
     if dt_betreibung
