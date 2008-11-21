@@ -7,7 +7,15 @@ class Praxistar::LeistungenBlatt < Praxistar::Base
   def hozr_case=(a_case)
     i = 1
     total = 0
-    for tarmed_leistung in a_case.classification.tarmed_leistungen
+
+    tarmed_leistungen = a_case.classification.tarmed_leistungen
+    # Don't add position 37.0620 for some insurances
+    picky_insurances = [5] # ['Visana']
+    if picky_insurances.include?(a_case.insurance_id)
+      tarmed_leistungen.delete_if{|l| l.tarmed_leistung_id == '37.0620'}
+    end
+
+    for tarmed_leistung in tarmed_leistungen
       leistung = Praxistar::LeistungenDaten.new
       leistung.tarmed_leistung = tarmed_leistung
       leistung.dt_Erfassungsdatum = a_case.examination_date
