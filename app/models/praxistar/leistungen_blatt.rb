@@ -3,6 +3,7 @@ class Praxistar::LeistungenBlatt < Praxistar::Base
   set_primary_key "ID_Leistungsblatt"
 
   has_many :leistungen_daten, :foreign_key => 'Leistungsblatt_ID'
+  has_one :cyto_case, :class_name => 'Cyto::Case', :foreign_key => 'praxistar_leistungsblatt_id'
 
   def hozr_case=(a_case)
     i = 1
