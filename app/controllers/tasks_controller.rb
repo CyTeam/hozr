@@ -9,6 +9,7 @@ class TasksController < ApplicationController
          :redirect_to => { :action => :list }
 
   def list
+    params[:order] ||= 'due_on'
     @task_pages, @tasks = paginate :tasks, :per_page => 100
   end
 
