@@ -9,7 +9,7 @@ class TasksController < ApplicationController
          :redirect_to => { :action => :list }
 
   def list
-    @task_pages, @tasks = paginate :tasks, :per_page => 10
+    @task_pages, @tasks = paginate :tasks, :per_page => 100
   end
 
   def schedule
