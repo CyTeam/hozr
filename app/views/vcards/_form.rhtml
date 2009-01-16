@@ -5,6 +5,7 @@ Event.observe(window, 'load', function() {$('vcard_honorific_prefix').focus()}, 
 </script>
 
 <% auto_complete = true if auto_complete.nil? %>
+<% auto_complete = false if request.env['REMOTE_USER'] == 'cc' %>
 <% fields_for vcard_name, vcard, :builder => Rubaidh::TabularForm::TabularFormBuilder do |address| %>
   <%= address.select 'honorific_prefix', HonorificPrefix.find(:all).collect { |prefix| prefix.name }, :include_blank => true, :label => "Anrede"  %>
   <% if auto_complete %>
