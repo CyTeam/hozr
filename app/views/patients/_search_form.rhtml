@@ -10,9 +10,9 @@ Event.observe(window, 'load', function() {$('patient_birth_date').focus()}, fals
           <table>
             <% fields_for 'patient', @patient, :builder => Rubaidh::TabularForm::TabularFormBuilder do |f| %>
               <tr>
-                <td>Geb.:</td><td><%= text_field 'patient', :birth_date, :label => "Geburtsdat.", :size => 15 %></td>
+                <td>Geb.:</td><td><%= text_field 'patient', :birth_date, :label => "Geburtsdat.", :size => 15, :autocomplete => 'off' %></td>
 		<td/><td/>
-                <td>EingNr.:</td><td><%= text_field 'search', :praxistar_eingangsnr, :size => 15, :label => "Eingangsnr." %></td>
+                <td>EingNr.:</td><td><%= text_field 'search', :praxistar_eingangsnr, :size => 15, :label => "Eingangsnr.", :autocomplete => 'off' %></td>
               </tr>
             <% end %>
             <% vcard_name = 'vcard'; vcard = nil %>
