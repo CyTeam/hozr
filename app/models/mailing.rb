@@ -20,8 +20,8 @@ class Mailing < ActiveRecord::Base
 
     # Clear in case it an existing mailing
     mailing.cases.clear
-    # An add all cases to mail
-    mailing.cases = Cyto::Case.find(:all, :conditions => ["( screened_at IS NOT NULL OR (screened_at IS NULL AND needs_p16 = 1) ) AND needs_review = 0 AND result_report_printed_at IS NULL AND doctor_id = ?", doctor_id], :order => :praxistar_eingangsnr)
+    # And add all unprinted cases to mailing
+    mailing.cases = Cyto::Case.find(:all, :conditions => ["( screened_at IS NOT NULL OR (screened_at IS NULL AND needs_p16 = 1) ) AND needs_review = 0 AND ((result_report_printed_at IS NULL AND p16_notice_printed_at IS NULL) OR (result_report_printed_at IS NULL AND p16_notice_printed_at IS NOT NULL AND screened_at IS NOT NULL)) AND doctor_id = ?", doctor_id], :order => :praxistar_eingangsnr)
     
     return if mailing.cases.empty?
     
