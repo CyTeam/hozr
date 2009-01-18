@@ -1,0 +1,59 @@
+# Boring file regexps:
+*.hi
+*.o
+*.o.cmd
+# *.ko files aren't boring by default because they might
+# be Korean translations rather than kernel modules.
+# \.ko$
+*.ko.cmd
+*.mod.c
+.tmp_versions
+CVS
+RCS
+*~
+#(^|/)\.[^/]
+_darcs
+*.bak
+*.BAK
+*.orig
+vssver.scc
+*.swp
+MT
+{arch}
+.arch-ids
+,*
+*.class
+*.prof
+.DS_Store
+BitKeeper
+ChangeSet
+.svn
+*.py[co]
+*#*
+*.cvsignore
+Thumbs.db
+
+# joe excludes
+*DEADJOE
+
+# rails excludes
+log
+tmp
+db/*.sqlite3
+db/schema?rb
+db/*-schema?rb
+vendor/plugins
+vendor/rails**
+
+# tiny_mce plugin exclude
+public/javascripts/tiny_mce
+
+# hozr excludes
+public/result_reports
+public/doctor_letters
+public/cyto
+public/page
+public/histo
+public/mailing_overviews
+public/mailing_statistics
+public/photos
