@@ -12,8 +12,8 @@ Event.observe(window, 'load', function() {$('vcard_honorific_prefix').focus()}, 
     <%= address.text_field_with_auto_complete :family_name, :size => 23, :label => "Nachname" %>
     <%= address.text_field_with_auto_complete :given_name, :size => 23, :label => "Vorname" %>
   <% else %>
-    <%= address.text_field :family_name, :size => 23, :label => "Nachname" %>
-    <%= address.text_field :given_name, :size => 23, :label => "Vorname" %>
+    <%= address.text_field :family_name, :size => 23, :label => "Nachname", :autocomplete => 'off' %>
+    <%= address.text_field :given_name, :size => 23, :label => "Vorname", :autocomplete => 'off' %>
   <% end %>
   <%= address.text_field :street_address, :size => 23, :label => "Strasse" %>
   <%= address.text_field :extended_address, :size => 23, :label => "c/o" %>
