@@ -93,10 +93,14 @@
   left: 0cm;
 }
 
-.report #hpv_finding_title {
+.report #hpv_finding_title, .report #eg_finding_title {
   position: absolute;
   top: 7cm;
   left: 0cm;
+}
+
+.report #eg_finding_title {
+  top: 6.4cm;
 }
 
 .finding_group_Kontrolle {
@@ -118,7 +122,7 @@
   padding: 4px;
 }
 
-.report #hpv_classification {
+.report #hpv_classification, .report #eg_classification {
   font-family: ChollaSansBold;
   font-size: 12pt;
   border: solid 1pt;

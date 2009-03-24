@@ -263,7 +263,7 @@ class Cyto::CasesController < ApplicationController
     case @case.classification.code
     when '2A', '2-3A'
       render :action => 'second_entry_agus_ascus_form'
-    when 'mam', 'sput'
+    when 'mam', 'sput', 'extra'
       @case.screened_at ||= Date.today
       @case.screener = Employee.find_by_code(request.env['REMOTE_USER'])
       render :action => 'eg_result_report'
@@ -440,7 +440,7 @@ class Cyto::CasesController < ApplicationController
     @case.screened_at ||= Date.today
 
     case @case.classification.code
-    when 'mam', 'sput'
+    when 'mam', 'sput', 'extra'
       render :action => :eg_result_report
     else
       render :action => :result_report
@@ -459,7 +459,7 @@ class Cyto::CasesController < ApplicationController
     @case.screened_at ||= Date.today
 
     case @case.classification.code
-    when 'mam'
+    when 'mam', 'extra'
       render :action => :eg_result_report_for_pdf, :layout => 'result_report_for_pdf'
     else
       render :action => :result_report, :layout => 'result_report_for_pdf'

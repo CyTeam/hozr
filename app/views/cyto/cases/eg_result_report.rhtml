@@ -29,17 +29,17 @@ Eingang am: <%=h @case.entry_date.strftime("%d.%m.%Y") %>
 Ihr Auftrag Nr. <%=h @case.praxistar_eingangsnr %>
 </div>
 
-<div id="hpv_finding_title" class="title">
+<div id="eg_finding_title" class="title">
 Befund
 </div>
 
-<div id="hpv_classification" class="PAP_<%=h @case.classification.code %>">
+<div id="eg_classification" class="PAP_<%=h @case.classification.code %>">
 <%=h @case.classification.name %>
 </div>
 
 <%= start_form_tag :action => 'sign', :id => @case %>
 <div id="eg_remarks">
-  <%= text_area 'case', 'finding_text' %>
+  <%= text_area 'case', 'finding_text', :rows => 13 %>
 </div>
 
 <div id="signature">
