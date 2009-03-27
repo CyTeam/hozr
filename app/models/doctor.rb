@@ -11,8 +11,13 @@ class Doctor < ActiveRecord::Base
   # CyLab
   has_one :user, :as => :object
 
-  delegate :wants_email, :wants_email=, :to => :user
-  delegate :wants_prints, :wants_prints=, :to => :user
+  def wants_prints
+    if user
+      user.wants_prints
+    else
+      true
+    end
+  end
     
   # Hozr
   def family_name

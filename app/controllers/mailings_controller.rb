@@ -92,7 +92,7 @@ class MailingsController < ApplicationController
     mailings = Mailing.find(:all, :conditions => "printed_at IS NULL")
     
     output = ""
-    for mailing in mailings
+    for mailing in mailings.compact
       if mailing.doctor.wants_prints
         command = "/usr/local/bin/hozr_print_result_mailing.sh #{mailing.id} '' #{( ENV['RAILS_ENV'] || 'development' )}"
         stream = open("|#{command}")
