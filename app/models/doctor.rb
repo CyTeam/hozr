@@ -8,7 +8,13 @@ class Doctor < ActiveRecord::Base
   has_many :mailings
   has_and_belongs_to_many :offices
 
-  
+  # CyLab
+  has_one :user, :as => :object
+
+  delegate :wants_email, :wants_email=, :to => :user
+  delegate :wants_prints, :wants_prints=, :to => :user
+    
+  # Hozr
   def family_name
     praxis.family_name || ""
   end

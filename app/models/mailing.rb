@@ -13,7 +13,7 @@ class Mailing < ActiveRecord::Base
 
   def self.create_all_for_doctor(doctor_id)
     # Check if there's an open mailing
-    mailing = Mailing.find(:first, :conditions => ['printed_at IS NULL AND doctor_id = ?', doctor_id])
+    mailing = Mailing.find(:first, :conditions => ['printed_at IS NULL AND email_delivered_at IS NULL AND doctor_id = ?', doctor_id])
     # Create a new one if not
     mailing = self.new if mailing.nil?
     mailing.doctor_id = doctor_id
