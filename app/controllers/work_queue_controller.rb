@@ -16,9 +16,15 @@ class WorkQueueController < ApplicationController
     begin
       @bill_print_count = Praxistar::LeistungenBlatt.count_by_sql("SELECT count(*) FROM leistungen_blatt JOIN patienten_personalien ON patient_id = id_patient")
     rescue
-      @bill_print_count = "Keine Verbinbung zu Praxistar"
+      @bill_print_count = "Keine Verbindung zu Praxistar"
     end
-    @order_count = Shop::Order.count(:conditions => 'shipped_at IS NULL AND cancelled_at IS NULL')
+
+    begin
+      @order_count = Shop::Order.count(:conditions => 'shipped_at IS NULL AND cancelled_at IS NULL')
+    rescue
+      @order_count = "Keine Verbindung zum Webshop"
+    end
+
     @delievery_return_count = DelieveryReturn.count(:conditions => 'address_verified_at IS NULL AND closed_at IS NULL')
   end
 
