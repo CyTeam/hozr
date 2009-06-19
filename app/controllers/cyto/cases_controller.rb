@@ -376,7 +376,7 @@ class Cyto::CasesController < ApplicationController
     high_classifications = ['3L', '3M', '3S', '3M-c1-2', '3S-c2-3', '4', '5']
 
     previous_case = @case.patient.cases[1]
-    if previous_case
+    if previous_case and not (previous_case.classification.nil?)
       # Sudden jump from PAP I/II to CIN I-II and higher
       low_to_high = (low_classifications.include?(previous_case.classification.code) and high_classifications.include?(@case.classification.code))
       high_to_low = (high_classifications.include?(previous_case.classification.code) and low_classifications.include?(@case.classification.code))
