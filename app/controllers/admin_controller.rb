@@ -26,15 +26,6 @@ class AdminController < ApplicationController
     render :partial => 'import_order_forms_status'
   end
 
-  def print_result_reports
-    command = "/usr/local/bin/hozr_print_all_result_mailings.sh"
-    stream = open("|#{command}")
-    output = stream.read
- 
-    send_data output, :type => 'text/html; charset=utf-8', :disposition => 'inline'
-#     render :text => 'Printed'
-  end
-
   def batch_reactivate
     bill_params = params[:bill]
     Praxistar::Bill.batch_reactivate(bill_params[:ids], bill_params[:reason])
