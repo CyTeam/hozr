@@ -16,7 +16,7 @@
 	<tr class="bill_state_<%= bill.payment_state %>">
 		<td style="text-align: left"><b style="color:black"><%= link_to bill.patient.name, :controller => 'patients', :action => 'show', :id => bill.patient %></b></td>
 		<td style="text-align: left"><%= bill[:tx_Patient_Strasse] %>, <%= bill[:tx_Patient_PLZ] %> <%= bill["tx_Patient_Ort"] %></td>
-		<td style="text-align: right"><%= link_to bill.cyto_case.praxistar_eingangsnr, :controller => 'cyto/cases', :action => :show, :id => bill.cyto_case unless bill.cyto_case.nil? %> - <%= bill.cyto_case.entry_date.strftime("%d.%m.%Y") unless bill.cyto_case.nil? %></td>
+		<td style="text-align: right"><%= link_to bill.cyto_case.praxistar_eingangsnr, :controller => 'cyto/cases', :action => :show, :id => bill.cyto_case unless bill.cyto_case.nil? %> (<%= bill.cyto_case.intra_day_id unless bill.cyto_case.intra_day_id.nil? %>) - <%= bill.cyto_case.entry_date.strftime("%d.%m.%Y") unless bill.cyto_case.nil? %> (<%= bill.cyto_case.first_entry_by.code unless bill.cyto_case.first_entry_by.nil? %>)</td>
 		<td style="text-align: right"><%= bill[:ID_Rechnung] %></td>
 		<td style="text-align: left"><%= bill[:dt_Rechnungsdatum].strftime("%d.%m.%Y") %></td>
 		<td style="text-align: right" class="bill_state_<%= bill.payment_state %>"><b><%= number_to_currency(bill.account_receivable[:cu_rechnungsbetrag], :unit => '') %></b></td>
