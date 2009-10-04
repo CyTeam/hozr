@@ -13,6 +13,11 @@ class Patient < ActiveRecord::Base
   
   validates_presence_of :birth_date
   
+  #TODO: differs from CyLab version as birth_date is overloaded
+  def to_s
+    "#{name} ##{doctor_patient_nr}, #{birth_date}"
+  end
+
   # Attributes
   def name
     vcard.full_name unless vcard.nil?
