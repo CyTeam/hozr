@@ -6,12 +6,14 @@ class MailingsController < ApplicationController
 
   # Show list of mailings
   def list
-    @mailings = Mailing.find(:all, :order => 'created_at DESC', :limit => 100)
+    @mailings = Mailing.find(:all, :include => {:doctor => :user }, :order => 'mailings.created_at DESC', :conditions => ['wants_prints IS NULL OR wants_prints = ?', true], :limit => 100)
+    @email_mailings = Mailing.find(:all, :include => {:doctor => :user }, :order => 'mailings.created_at DESC', :conditions => ['wants_email = ?', true], :limit => 100)
   end
 
   # Show list of unprinted mailings
   def list_open
-    @mailings = Mailing.find(:all, :order => 'created_at DESC', :conditions => 'printed_at IS NULL')
+    @mailings = Mailing.find(:all, :include => {:doctor => :user }, :order => 'mailings.created_at DESC', :conditions => ['printed_at IS NULL AND (wants_prints IS NULL OR wants_prints = ?)', true])
+    @email_mailings = Mailing.find(:all, :include => {:doctor => :user }, :order => 'mailings.created_at DESC', :conditions => ['email_delivered_at IS NULL AND wants_email = ?', true])
     render :action => :list
   end
 

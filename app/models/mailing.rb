@@ -12,16 +12,28 @@ class Mailing < ActiveRecord::Base
   end
 
   def self.create_all_for_doctor(doctor_id)
-    # Check if there's an open mailing
-    mailing = Mailing.find(:first, :conditions => ['printed_at IS NULL AND email_delivered_at IS NULL AND doctor_id = ?', doctor_id])
-    # Create a new one if not
-    mailing = self.new if mailing.nil?
-    mailing.doctor_id = doctor_id
+    d = Doctor.find(doctor_id)
+    mailing = nil
+    
+    if d.wants_prints
+      # Check if there's an open mailing
+      mailing = Mailing.find(:first, :conditions => ['printed_at IS NULL AND doctor_id = ?', doctor_id])
+      # Create a new one if not
+      mailing = self.new if mailing.nil?
+      mailing.doctor_id = doctor_id
 
-    # Clear in case it an existing mailing
-    mailing.cases.clear
-    # And add all unprinted cases to mailing
-    mailing.cases = Cyto::Case.find(:all, :conditions => ["( screened_at IS NOT NULL OR (screened_at IS NULL AND needs_p16 = 1) ) AND needs_review = 0 AND ((result_report_printed_at IS NULL AND p16_notice_printed_at IS NULL) OR (result_report_printed_at IS NULL AND p16_notice_printed_at IS NOT NULL AND screened_at IS NOT NULL)) AND doctor_id = ?", doctor_id], :order => :praxistar_eingangsnr)
+      # Clear in case it an existing mailing
+      mailing.cases.clear
+      # And add all unprinted cases to mailing
+      mailing.cases = Cyto::Case.find(:all, :conditions => ["( screened_at IS NOT NULL OR (screened_at IS NULL AND needs_p16 = 1) ) AND needs_review = 0 AND ((result_report_printed_at IS NULL AND p16_notice_printed_at IS NULL) OR (result_report_printed_at IS NULL AND p16_notice_printed_at IS NOT NULL AND screened_at IS NOT NULL)) AND doctor_id = ?", doctor_id], :order => :praxistar_eingangsnr)
+    else
+      # Create new mail if email wanted
+      mailing = self.new
+      mailing.doctor_id = doctor_id
+      cases = Cyto::Case.find(:all, :conditions => ["email_sent_at IS NULL AND screened_at IS NOT NULL AND needs_review = 0 AND doctor_id = ?", doctor_id], :order => :praxistar_eingangsnr)
+      mailing.cases = cases
+      cases.map{|c| c.email_sent_at = DateTime.now; c.save}
+    end
     
     return if mailing.cases.empty?
     
@@ -30,6 +42,7 @@ class Mailing < ActiveRecord::Base
   end
 
   def self.create_all
+    # TODO: Need to adapt for email
     doctor_ids = Cyto::Case.find(:all, :select => 'DISTINCT doctor_id', :conditions => "( screened_at IS NOT NULL OR (screened_at IS NULL AND needs_p16 = 1) ) AND needs_review = 0 AND result_report_printed_at IS NULL")
 
     for doctor_id in doctor_ids
@@ -49,5 +62,24 @@ class Mailing < ActiveRecord::Base
     rescue
       true
     end
+  end
+
+  # Email delivery
+  # ==============
+  def deliver_by_email
+    done = 0
+    failed = 0
+
+    for a_case in cases
+      begin
+        a_case.deliver_report_by_email
+        done += 1
+      rescue
+        #TODO do something sensible
+        failed += 1
+      end
+    end
+
+    return done, failed
   end
 end

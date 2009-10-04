@@ -16,6 +16,10 @@ class Cyto::Case < ActiveRecord::Base
   
   has_one :order_form, :class_name => 'Cyto::OrderForm'
   
+  def to_s
+    "#{patient.to_s}: PAP Abstrich #{praxistar_eingangsnr}"
+  end
+
   def bill
     Praxistar::Bill.find(:first, :conditions => ['Leistungsblatt_ID = ?', praxistar_leistungsblatt_id], :order => 'ID_Rechnung DESC')
   end
@@ -226,5 +230,19 @@ class Cyto::Case < ActiveRecord::Base
   
     logger.info(export.attributes.to_yaml)
     return export
+  end
+
+  # PDF
+  def pdf_path
+    File.join(RAILS_ROOT, '/public/result_reports/', "result_report-#{id}.pdf")
+  end
+
+  def pdf_name
+    "#{patient.to_s}: PAP Abstrich #{praxistar_eingangsnr}.pdf"
+  end
+
+  # Email
+  def deliver_report_by_email
+    CaseMailer.deliver_report(self)
   end
 end

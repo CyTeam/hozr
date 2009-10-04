@@ -11,6 +11,15 @@ class Doctor < ActiveRecord::Base
   # CyLab
   has_one :user, :as => :object
 
+  delegate :wants_email, :to => :user
+  delegate :email, :email=, :to => :user
+
+  delegate :wants_prints, :to => :user
+
+  has_many :undelivered_mailings, :class_name => 'Mailing', :conditions => ["email_delivered_at IS NULL"]
+
+#  named_scope :wanting_prints, :include => :user, :conditions => ["users.wants_prints = ?", true]
+
   def wants_prints
     if user
       user.wants_prints
@@ -56,5 +65,21 @@ class Doctor < ActiveRecord::Base
   # Password
   def password=(value)
     write_attribute(:password, Digest::SHA256.hexdigest(value))
+  end
+
+  # Email
+  def deliver_mailings_by_email
+    for mailing in undelivered_mailings
+      mailing.deliver_by_email
+      mailing.email_delivered_at = Time.now
+      mailing.save
+    end
+  end
+
+  def self.deliver_all_mailings_by_email
+    # TODO: use self.wanting_emails as in CyLab
+    for doctor in self.find :all, :include => :user, :conditions => ["users.wants_email = ?", true]
+      doctor.deliver_mailings_by_email
+    end
   end
 end
