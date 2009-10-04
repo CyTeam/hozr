@@ -16,6 +16,7 @@ class Praxistar::Bill < Praxistar::Base
   end
 
   def payment_state
+    return "unknown" if account_receivable.nil?
     return "cancelled" if account_receivable[:tf_Storno]
     return "payed" unless payments.select { |payment| payment.dt_Bezahldatum }.empty?
 
