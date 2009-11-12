@@ -8,6 +8,14 @@
   .sheet_a5 {
     border: solid 1px black;
   }
+  .report {
+    margin: 2em;
+    margin-left: 0px;
+  }
+
+  .address, .full_name{
+    line-height: 1.2em;
+  }
 }
 
 @media print {
@@ -83,7 +91,7 @@
 
 .report #eg_remarks {
   position: absolute;
-  top: 7.2cm;
+  top: 8cm;
   left: 0cm;
 }
 
