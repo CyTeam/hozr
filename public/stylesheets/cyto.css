@@ -14,6 +14,8 @@ input.PAP_3M-c1-2, input.PAP_3S-c2-3 {color: black; background-color: #7eafff }
 .PAP_mam, input.PAP_mam {color: black; background-color: #00CC00; }
 .PAP_sput, input.PAP_sput {color: black; background-color: #00CC00; }
 .PAP_extra, input.PAP_extra {color: black; background-color: #00CC00; }
+.PAP_vulva, input.PAP_vulva {color: black; background-color: white; }
+.PAP_vagina, input.PAP_vagina {color: black; background-color: white; }
 
 @media print {
   .PAP_2A, .PAP_2AG, .PAP_2AS, .PAP_2AG_AS, .PAP_2-3A, .PAP_2-3AG, .PAP_2-3AS, .PAP_2-3AG_AS {color: black; background-color: #FFFF88; }
