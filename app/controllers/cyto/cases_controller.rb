@@ -216,6 +216,8 @@ class Cyto::CasesController < ApplicationController
       end
     else
       flash[:error] = 'Ersteingabe erzeugte Fehler.'
+      @header_image_type = session[:header_image_type] || :head
+
       render :action => 'first_entry'
     end
   end
