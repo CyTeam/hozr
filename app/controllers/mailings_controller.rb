@@ -99,8 +99,6 @@ class MailingsController < ApplicationController
         command = "/usr/local/bin/hozr_print_result_mailing.sh #{mailing.id} '' #{( ENV['RAILS_ENV'] || 'development' )}"
         stream = open("|#{command}")
         output += stream.read
-      else
-        output += "Printing is disabled for doctor #{mailing.doctor.name}.\n"
       end
     end
 
