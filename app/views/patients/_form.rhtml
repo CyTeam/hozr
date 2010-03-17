@@ -42,6 +42,9 @@ $('vcard_honorific_prefix').focus()
   </table>
 </fieldset>
 </td>
+<td>
+  <%= render :partial => '/cyto/cases/compact_list', :object => @patient.cases %>
+</td>
 </tr>
 </table>
 <!--[eoform:patient]-->
