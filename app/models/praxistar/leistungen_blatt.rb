@@ -11,7 +11,7 @@ class Praxistar::LeistungenBlatt < Praxistar::Base
 
     tarmed_leistungen = a_case.classification.tarmed_leistungen
     # Don't add position 37.0620 for some insurances
-    picky_insurances = [5] # ['Visana']
+    picky_insurances = [5, 55] # ['Visana', 'Sana24']
     picky_doctors = [285] # ['Bolani']
     if picky_insurances.include?(a_case.insurance_id) or picky_doctors.include?(a_case.doctor_id)
       tarmed_leistungen.delete_if{|l| l.tarmed_leistung_id == '37.0620'}
