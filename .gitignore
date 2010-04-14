@@ -40,7 +40,6 @@ Thumbs.db
 log
 tmp
 db/*.sqlite3
-db/schema?rb
 db/*-schema?rb
 vendor/plugins
 vendor/rails**
