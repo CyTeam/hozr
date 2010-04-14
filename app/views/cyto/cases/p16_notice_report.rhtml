@@ -41,7 +41,7 @@ Das Resultat inklusive P16 folgt innert Tagen.
 <div id="signature">
   <%= submit_tag "Visum: #{@case.screener.work_vcard.abbreviated_name unless @case.screener.nil?}, #{@case.screened_at.strftime("%d.%m.%Y")}" %>
 </div>
-<%= end_form_tag %>
+<% end %>
 
 <%= render :partial => "/cyto/cases/labels", :object => @case.patient %>
 </div>

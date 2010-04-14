@@ -1,7 +1,7 @@
 <%= form_remote_tag :update => 'finding_list', :before => 'tinyMCE.triggerSave()', :url => {:action => 'update_finding_text', :id => @case } %>
   <%= text_area 'case', 'finding_text', :cols => 58, :rows =>5 %>
   <%= submit_tag 'Update' %>
-<%= end_form_tag %>
+<% end %>
 
 <script type="text/javascript">
 tinyMCE.execCommand('mceAddControl', false, 'case_finding_text')

@@ -35,5 +35,5 @@ Event.observe(window, 'load', function() {$('patient_birth_date').focus()}, fals
           <%= submit_tag "Suchen" %>
           <%= submit_to_remote "submit", "Neu anlegen", { :url => { :controller => '/patients', :action => 'new', :case_id => params[:id] }, :update => 'edit_form' } %>
           <input type="reset"/>
-        <%= end_form_tag %>
+        <% end %>
       </fieldset>

@@ -11,7 +11,7 @@ Event.observe(window, 'load', function() {$('bill_id').focus()}, false);
     <% end %>
   </table>
   <%= submit_tag "Suchen" %>
-<%= end_form_tag %>
+<% end %>
 
 <div id="search_result">
   <%= loading_indicator_tag :id => 'search' %>

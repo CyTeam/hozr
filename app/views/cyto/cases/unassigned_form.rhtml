@@ -10,7 +10,7 @@
   <%= form_tag :action => 'unassigned_sort_queue' %>
     Starte mit Tagesnr: <%= text_field 'case', 'intra_day_id', :size => 4 %>
     <%= submit_tag 'Los' %>
-  <%= end_form_tag %>
+  <% end %>
 <% else %>
   Keine neuen Autragsformulare.
 <% end %>

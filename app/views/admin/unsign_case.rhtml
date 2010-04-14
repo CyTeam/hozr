@@ -1,5 +1,5 @@
 <h1>Fall un-signieren</h1>
-<%= form :action => 'unsign_case' %>
+<% form :action => 'unsign_case' do %>
 	<%= text_field :a_case, :id %>
 	<%= submit_button 'Unsignieren' %>
-<%= end_form %>
+<% end %>
