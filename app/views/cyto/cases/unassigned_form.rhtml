@@ -7,7 +7,7 @@
 <% if @first_case %>
   <%= image_tag url_for_image_column(@first_case.order_form, "file", :overview), :size => "500x156" unless @first_case.order_form.nil? or @first_case.order_form.file.nil?%>
 
-  <%= form_tag :action => 'unassigned_sort_queue' %>
+  <% form_tag :action => 'unassigned_sort_queue'  do %>
     Starte mit Tagesnr: <%= text_field 'case', 'intra_day_id', :size => 4 %>
     <%= submit_tag 'Los' %>
   <% end %>

@@ -35,10 +35,10 @@ class Cyto::CasesController < ApplicationController
   end
 
   def auto_complete_for_finding_class_selection
-    @finding_classes = FindingClass.find(:all, 
-      :conditions => [ FindingClass.connection.concat(:code, ' - ', :name) + " LIKE ?",
+    @finding_classes = Cyto::FindingClass.find(:all, 
+      :conditions => [ Cyto::FindingClass.connection.concat(:code, ' - ', :name) + " LIKE ?",
       '%' + params[:finding_class][:selection].downcase + '%' ],
-      :select => "*, #{FindingClass.connection.concat(:code, ' - ', :name)} AS selection",
+      :select => "*, #{Cyto::FindingClass.connection.concat(:code, ' - ', :name)} AS selection",
       :order => 'code',
       :limit => 8)
     render :inline => "<%= auto_complete_result_finding_class_selection @finding_classes, 'code' %>"
@@ -240,7 +240,7 @@ class Cyto::CasesController < ApplicationController
   def second_entry_queue
     params[:order] ||= 'praxistar_eingangsnr'
 
-    @cases = Cyto::Case.paginate(:page => params['page'], :per_page => 144, :order => params[:order], :conditions => "entry_date IS NOT NULL AND screened_at IS NULL AND (needs_p16 = '#{Case.connection.false}' AND needs_hpv = '#{Case.connection.false}') AND praxistar_eingangsnr > '07' AND praxistar_eingangsnr < '90' AND NOT praxistar_eingangsnr LIKE '%-%'")
+    @cases = Cyto::Case.paginate(:page => params['page'], :per_page => 144, :order => params[:order], :conditions => "entry_date IS NOT NULL AND screened_at IS NULL AND (needs_p16 = '#{Cyto::Case.connection.false}' AND needs_hpv = '#{Cyto::Case.connection.false}') AND praxistar_eingangsnr > '07' AND praxistar_eingangsnr < '90' AND NOT praxistar_eingangsnr LIKE '%-%'")
     render :action => :list
   end
 
@@ -312,7 +312,7 @@ class Cyto::CasesController < ApplicationController
   def remove_finding
     @case = Cyto::Case.find(params[:id])
 
-    finding = FindingClass.find(params[:finding_id])
+    finding = Cyto::FindingClass.find(params[:finding_id])
     @case.finding_classes.delete(finding)
     @case.finding_text.gsub! "<div>#{finding.name}</div>", ''
 
@@ -327,13 +327,13 @@ class Cyto::CasesController < ApplicationController
     begin
       if params[:finding_id]
         finding_class_id = params[:finding_id]
-        finding_class = FindingClass.find(finding_class_id)
+        finding_class = Cyto::FindingClass.find(finding_class_id)
       elsif params[:finding_class][:selection] > ''
         finding_class_code = params[:finding_class][:selection].split(' - ')[0]
-        finding_class = FindingClass.find_by_code(finding_class_code)
+        finding_class = Cyto::FindingClass.find_by_code(finding_class_code)
       elsif params[:finding_class][:code]
         finding_class_code = params[:finding_class][:code]
-        finding_class = FindingClass.find_by_code(finding_class_code)
+        finding_class = Cyto::FindingClass.find_by_code(finding_class_code)
       end
 
       @case.finding_classes << finding_class
@@ -393,7 +393,7 @@ class Cyto::CasesController < ApplicationController
     @case.save
 
     if @case.needs_p16? or @case.needs_hpv?
-      next_open = Cyto::Case.find :first, :conditions => ["entry_date IS NOT NULL AND screened_at IS NULL AND (needs_p16 = '#{Case.connection.true}' OR needs_hpv = '#{Case.connection.true}') AND screener_id = ? AND praxistar_eingangsnr > ? AND praxistar_eingangsnr < '90/'", @case.screener_id, @case.praxistar_eingangsnr]
+      next_open = Cyto::Case.find :first, :conditions => ["entry_date IS NOT NULL AND screened_at IS NULL AND (needs_p16 = '#{Cyto::Case.connection.true}' OR needs_hpv = '#{Cyto::Case.connection.true}') AND screener_id = ? AND praxistar_eingangsnr > ? AND praxistar_eingangsnr < '90/'", @case.screener_id, @case.praxistar_eingangsnr]
 
       @case.result_report_printed_at = nil
       @case.save
@@ -405,7 +405,7 @@ class Cyto::CasesController < ApplicationController
         redirect_to :action => 'hpv_p16_queue'
       end
     else
-      next_open = Cyto::Case.find :first, :conditions => ["entry_date IS NOT NULL AND screened_at IS NULL AND (needs_p16 = '#{Case.connection.false}' AND needs_hpv = '#{Case.connection.false}') AND praxistar_eingangsnr > ? AND praxistar_eingangsnr < '90/'", @case.praxistar_eingangsnr]
+      next_open = Cyto::Case.find :first, :conditions => ["entry_date IS NOT NULL AND screened_at IS NULL AND (needs_p16 = '#{Cyto::Case.connection.false}' AND needs_hpv = '#{Cyto::Case.connection.false}') AND praxistar_eingangsnr > ? AND praxistar_eingangsnr < '90/'", @case.praxistar_eingangsnr]
       if next_open.nil?
         redirect_to :action => 'second_entry_queue'
       else
