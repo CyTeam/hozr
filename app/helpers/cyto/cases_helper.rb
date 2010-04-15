@@ -1,6 +1,6 @@
 module Cyto::CasesHelper
   def classification_button(code)
-    classification = Classification.find_by_code_and_examination_method_id(code, @case.examination_method_id)
+    classification = Cyto::Classification.find_by_code_and_examination_method_id(code, @case.examination_method_id)
     
     button_to classification.name, { :action => "second_entry_form", "case[classification]" => classification.id, :id => @case }, :class => "PAP_#{classification.code}"
   end
