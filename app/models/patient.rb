@@ -49,7 +49,7 @@ class Patient < ActiveRecord::Base
   end
 
   def in_place_doctor_patient_nr
-    (doctor_patient_nr.nil? or doctor_patient_nr.strip.empty?) ? ("&nbsp" * 5) : doctor_patient_nr
+    (doctor_patient_nr.nil? or doctor_patient_nr.strip.empty?) ? (" " * 5) : doctor_patient_nr
   end
   
   def in_place_doctor_patient_nr=(value)
@@ -57,7 +57,7 @@ class Patient < ActiveRecord::Base
   end
 
   def in_place_insurance_nr
-    (insurance_nr.nil? or insurance_nr.strip.empty?) ? ("&nbsp" * 5) : insurance_nr
+    (insurance_nr.nil? or insurance_nr.strip.empty?) ? (" " * 5) : insurance_nr
   end
   
   def in_place_insurance_nr=(value)
