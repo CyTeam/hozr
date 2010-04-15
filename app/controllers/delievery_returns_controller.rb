@@ -43,7 +43,7 @@ class DelieveryReturnsController < ApplicationController
   end
   
   def list_new
-    @delievery_returns = DelieveryReturn.find(:all, :include => :cyto_case, :order => 'doctor_id', :conditions => ['closed_at IS NULL'])
+    @delievery_returns = DelieveryReturn.find(:all, :include => :cyto_case, :order => 'cases.doctor_id', :conditions => ['closed_at IS NULL'])
     render :action => 'doctor_fax'
   end
 
@@ -99,7 +99,7 @@ class DelieveryReturnsController < ApplicationController
   end
   
   def doctor_fax
-    @delievery_returns = DelieveryReturn.find(:all, :include => :cyto_case, :order => 'doctor_id', :conditions => ['address_verified_at IS NOT NULL AND closed_at IS NULL'])
+    @delievery_returns = DelieveryReturn.find(:all, :include => :cyto_case, :order => 'doctors.doctor_id', :conditions => ['address_verified_at IS NOT NULL AND closed_at IS NULL'])
   end
 
   def list_sent_faxes

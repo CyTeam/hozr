@@ -13,7 +13,7 @@ class DoctorsController < ApplicationController
   end
 
   def list
-    params[:order] ||= 'family_name, given_name'
+    params[:order] ||= 'vcards.family_name, vcards.given_name'
     
     @doctors = Doctor.find :all,  :include => :praxis, :order => params[:order]
   end
