@@ -1,3 +1,4 @@
+=begin
 class ActiveRecord::ConnectionAdapters::SQLiteAdapter
   def concat(*params)
     params.map { |param|
@@ -18,6 +19,7 @@ class ActiveRecord::ConnectionAdapters::SQLiteAdapter
     "'f'"
   end
 end
+=end
 
 class ActiveRecord::ConnectionAdapters::MysqlAdapter
   def concat(*params)
