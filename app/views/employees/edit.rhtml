@@ -1,6 +1,6 @@
 <h1>Editing employee</h1>
 
-<%= start_form_tag :action => 'update', :id => @employee %>
+<% form_tag :action => 'update', :id => @employee  do %>
   <%= render :partial => 'form' %>
   <%= submit_tag 'Edit' %>
 <% end %>

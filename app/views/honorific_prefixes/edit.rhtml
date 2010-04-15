@@ -1,6 +1,6 @@
 <h1>Editing honorific_prefix</h1>
 
-<%= start_form_tag :action => 'update', :id => @honorific_prefix %>
+<% form_tag :action => 'update', :id => @honorific_prefix  do %>
   <%= render :partial => 'form' %>
   <%= submit_tag 'Edit' %>
 <% end %>

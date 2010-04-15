@@ -1,6 +1,6 @@
 <h1>Editing finding_class</h1>
 
-<%= start_form_tag :action => 'update', :id => @finding_class %>
+<% form_tag :action => 'update', :id => @finding_class  do %>
   <%= render :partial => 'form' %>
   <%= submit_tag 'Edit' %>
 <% end %>
