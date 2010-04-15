@@ -9,7 +9,7 @@ class HonorificPrefixesController < ApplicationController
          :redirect_to => { :action => :list }
 
   def list
-    @honorific_prefix_pages, @honorific_prefixes = paginate :honorific_prefixes, :per_page => 10
+    @honorific_prefixes = HonorificPrefix.paginate(:page => params['page'], :per_page => 10)
   end
 
   def show

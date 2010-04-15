@@ -34,7 +34,7 @@ class Praxistar::AdressenAerzte < Praxistar::Base
   def self.import_all
     Doctor.delete_all
 
-    for a in find_all
+    for a in all
       import(a.id)
     end
   end

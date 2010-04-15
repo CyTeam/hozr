@@ -9,7 +9,7 @@ class EmployeesController < ApplicationController
          :redirect_to => { :action => :list }
 
   def list
-    @employee_pages, @employees = paginate :employees, :per_page => 10
+    @employees = Employee.paginate(:page => params[:page], :per_page => 10)
   end
 
   def show

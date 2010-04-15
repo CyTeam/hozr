@@ -60,4 +60,7 @@ Rails::Initializer.run do |config|
   # i18n
 #  config.i18n.load_path << Dir[File.join(RAILS_ROOT, 'config', 'locales', '*', '*.{rb,yml}')]
 #  config.i18n.default_locale = 'de-CH'
+
+  # Pagination
+  config.gem 'will_paginate'
 end

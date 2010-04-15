@@ -11,19 +11,19 @@ class Cyto::ExaminationMethodsController < ApplicationController
          :redirect_to => { :action => :list }
 
   def list
-    @examination_method_pages, @examination_methods = paginate :examination_methods, :per_page => 10
+    @examination_methods = Cyto::ExaminationMethod.paginate(:page => params['page'], :per_page => 10)
   end
 
   def show
-    @examination_method = ExaminationMethod.find(params[:id])
+    @examination_method = Cyto::ExaminationMethod.find(params[:id])
   end
 
   def new
-    @examination_method = ExaminationMethod.new
+    @examination_method = Cyto::ExaminationMethod.new
   end
 
   def create
-    @examination_method = ExaminationMethod.new(params[:examination_method])
+    @examination_method = Cyto::ExaminationMethod.new(params[:examination_method])
     if @examination_method.save
       flash[:notice] = 'ExaminationMethod was successfully created.'
       redirect_to :action => 'list'
@@ -33,11 +33,11 @@ class Cyto::ExaminationMethodsController < ApplicationController
   end
 
   def edit
-    @examination_method = ExaminationMethod.find(params[:id])
+    @examination_method = Cyto::ExaminationMethod.find(params[:id])
   end
 
   def update
-    @examination_method = ExaminationMethod.find(params[:id])
+    @examination_method = Cyto::ExaminationMethod.find(params[:id])
     if @examination_method.update_attributes(params[:examination_method])
       flash[:notice] = 'ExaminationMethod was successfully updated.'
       redirect_to :action => 'show', :id => @examination_method
@@ -47,7 +47,7 @@ class Cyto::ExaminationMethodsController < ApplicationController
   end
 
   def destroy
-    ExaminationMethod.find(params[:id]).destroy
+    Cyto::ExaminationMethod.find(params[:id]).destroy
     redirect_to :action => 'list'
   end
 end

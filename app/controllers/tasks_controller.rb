@@ -10,7 +10,7 @@ class TasksController < ApplicationController
 
   def list
     params[:order] ||= 'due_on'
-    @task_pages, @tasks = paginate :tasks, :per_page => 100
+    @tasks = Task.paginate(:page => params['page'], :per_page => 100)
   end
 
   def schedule

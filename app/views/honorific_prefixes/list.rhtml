@@ -19,8 +19,7 @@
 <% end %>
 </table>
 
-<%= link_to 'Previous page', { :page => @honorific_prefix_pages.current.previous } if @honorific_prefix_pages.current.previous %>
-<%= link_to 'Next page', { :page => @honorific_prefix_pages.current.next } if @honorific_prefix_pages.current.next %> 
+<%= will_paginate @honorific_prefixes %>
 
 <br />
 

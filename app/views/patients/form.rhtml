@@ -45,7 +45,7 @@
 						<legend>Arzt</legend>
 						<div class="main">
 							<label for="zuwarzt">Arzt:</label>
-							<%= select('patient', "doctor_id", Doctor.find_all.collect {|p| [ p.family_name, p.id ]}) %>
+							<%= select('patient', "doctor_id", Doctor.all.collect {|p| [ p.family_name, p.id ]}) %>
 							<br/>
 						</div>
 					</fieldset>
@@ -57,7 +57,7 @@
 						<legend>Krankenkasse</legend>
 						<div class="main">
 							<label for="krankenkasse">Krankenkasse:</label>
-							<%= select('patient', "insurance_id", Insurance.find_all.collect {|p| [ p.name, p.id ]}) %>
+							<%= select('patient', "insurance_id", Insurance.all.collect {|p| [ p.name, p.id ]}) %>
 							<br/>
 							<label for="versicherungsnr">Mitglieder Nr.</label>
 							<%= text_field 'patient', 'insurance_nr', 'size' => '20', 'accesskey' => 'v', 'tabindex' => '10' %>

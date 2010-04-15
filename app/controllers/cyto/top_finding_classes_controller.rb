@@ -11,7 +11,6 @@ class Cyto::TopFindingClassesController < ApplicationController
          :redirect_to => { :action => :list }
 
   def list
-    @top_finding_class_pages, @top_finding_classes = paginate 'Cyto::TopFindingClasses', :per_page => 10
   end
 
   def update_classification

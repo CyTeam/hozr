@@ -9,7 +9,7 @@
   
 <% for examination_method in @examination_methods %>
   <tr>
-  <% for column in ExaminationMethod.content_columns %>
+  <% for column in Cyto::ExaminationMethod.content_columns %>
     <td><%=h examination_method.send(column.name) %></td>
   <% end %>
     <td><%= link_to 'Show', :action => 'show', :id => examination_method %></td>
@@ -19,8 +19,7 @@
 <% end %>
 </table>
 
-<%= link_to 'Previous page', { :page => @examination_method_pages.current.previous } if @examination_method_pages.current.previous %>
-<%= link_to 'Next page', { :page => @examination_method_pages.current.next } if @examination_method_pages.current.next %> 
+<%= will_paginate @examination_method %>
 
 <br />
 

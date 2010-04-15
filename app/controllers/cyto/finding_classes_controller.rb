@@ -11,19 +11,19 @@ class Cyto::FindingClassesController < ApplicationController
          :redirect_to => { :action => :list }
 
   def list
-    @finding_class_pages, @finding_classes = paginate :finding_classes, :per_page => 100
+    @finding_classes = Cyto::FindingClass.paginate(:page => params['page'], :per_page => 100)
   end
 
   def show
-    @finding_class = FindingClass.find(params[:id])
+    @finding_class = Cyto::FindingClass.find(params[:id])
   end
 
   def new
-    @finding_class = FindingClass.new
+    @finding_class = Cyto::FindingClass.new
   end
 
   def create
-    @finding_class = FindingClass.new(params[:finding_class])
+    @finding_class = Cyto::FindingClass.new(params[:finding_class])
     if @finding_class.save
       flash[:notice] = 'FindingClass was successfully created.'
       redirect_to :action => 'list'
@@ -33,11 +33,11 @@ class Cyto::FindingClassesController < ApplicationController
   end
 
   def edit
-    @finding_class = FindingClass.find(params[:id])
+    @finding_class = Cyto::FindingClass.find(params[:id])
   end
 
   def update
-    @finding_class = FindingClass.find(params[:id])
+    @finding_class = Cyto::FindingClass.find(params[:id])
     if @finding_class.update_attributes(params[:finding_class])
       flash[:notice] = 'FindingClass was successfully updated.'
       if FindingClass.exists?(@finding_class.id + 1)
@@ -51,7 +51,7 @@ class Cyto::FindingClassesController < ApplicationController
   end
 
   def destroy
-    FindingClass.find(params[:id]).destroy
+    Cyto::FindingClass.find(params[:id]).destroy
     redirect_to :action => 'list'
   end
 end

@@ -8,6 +8,6 @@
 <%= text_field 'classification', 'code', :size => 5  %></p>
 
 <p><label for="classification_examination_method_id">Methode</label><br/>
-<%= select 'classification', 'examination_method_id', ExaminationMethod.find_all.collect { |m| [ m.name, m.id ] }  %></p>
+<%= select 'classification', 'examination_method_id', Cyto::ExaminationMethod.all.collect { |m| [ m.name, m.id ] }  %></p>
 <!--[eoform:classification]-->
 

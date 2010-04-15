@@ -11,20 +11,20 @@ class Cyto::ClassificationsController < ApplicationController
          :redirect_to => { :action => :list }
 
   def list
-    @classification_pages, @classifications = paginate 'Cyto::Classifications', :per_page => 100, :order => 'examination_method_id DESC, name'
+    @classifications = Cyto::Classification.paginate(:page => params['page'], :per_page => 100, :order => 'examination_method_id DESC, name')
   end
 
   def show
-    @classification = Classification.find(params[:id])
+    @classification = Cyto::Classification.find(params[:id])
   end
 
   def new
-    @classification = Classification.new
+    @classification = Cyto::Classification.new
   end
 
   def create
-    for examination_method in ExaminationMethod.find(:all)
-      classification = Classification.new(params[:classification].merge({:examination_method => examination_method}))
+    for examination_method in Cyto::ExaminationMethod.find(:all)
+      classification = Cyto::Classification.new(params[:classification].merge({:examination_method => examination_method}))
     
       classification.save
     end
@@ -33,11 +33,11 @@ class Cyto::ClassificationsController < ApplicationController
   end
 
   def edit
-    @classification = Classification.find(params[:id])
+    @classification = Cyto::Classification.find(params[:id])
   end
 
   def update
-    @classification = Classification.find(params[:id])
+    @classification = Cyto::Classification.find(params[:id])
     if @classification.update_attributes(params[:classification])
       flash[:notice] = 'Classification was successfully updated.'
       redirect_to :action => 'edit', :id => @classification.id + 1
@@ -47,7 +47,7 @@ class Cyto::ClassificationsController < ApplicationController
   end
 
   def destroy
-    Classification.find(params[:id]).destroy
+    Cyto::Classification.find(params[:id]).destroy
     redirect_to :action => 'list'
   end
 end

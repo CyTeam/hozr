@@ -75,7 +75,7 @@ class Cyto::CasesController < ApplicationController
       conditions[:params]<< Cyto::Case.find_by_praxistar_eingangsnr(Cyto::CaseNr.new(params[:case_search][:praxistar_eingangsnr]).to_s).id || 0
     end
 
-    @case_pages, @cases = paginate 'Cyto::Cases', :per_page => 144, :conditions =>  [ conditions[:sql].join(" AND "), conditions[:params] ]
+    @cases = Cyto::Case.paginate(:page => params['page'], :per_page => 144, :conditions =>  [ conditions[:sql].join(" AND "), conditions[:params] ])
 
     render :action => :list
   end
@@ -88,7 +88,7 @@ class Cyto::CasesController < ApplicationController
   def list
     params[:order] ||= 'praxistar_eingangsnr'
 
-    @case_pages, @cases = paginate 'Cyto::Cases', :per_page => 144, :order => params[:order]
+    @cases = Cyto::Case.paginate(:page => params['page'], :per_page => 144, :order => params[:order])
   end
 
   # Assigning
@@ -137,7 +137,7 @@ class Cyto::CasesController < ApplicationController
   def first_entry_queue
     params[:order] ||= 'praxistar_eingangsnr'
 
-    @case_pages, @cases = paginate 'Cyto::Cases', :per_page => 144, :order => params[:order], :conditions => 'entry_date IS NULL AND assigned_at IS NOT NULL'
+    @cases = Cyto::Case.paginate(:page => params['page'], :per_page => 144, :order => params[:order], :conditions => 'entry_date IS NULL AND assigned_at IS NOT NULL')
     render :action => :list
   end
 
@@ -240,7 +240,7 @@ class Cyto::CasesController < ApplicationController
   def second_entry_queue
     params[:order] ||= 'praxistar_eingangsnr'
 
-    @case_pages, @cases = paginate 'Cyto::Cases', :per_page => 144, :order => params[:order], :conditions => "entry_date IS NOT NULL AND screened_at IS NULL AND (needs_p16 = '#{Case.connection.false}' AND needs_hpv = '#{Case.connection.false}') AND praxistar_eingangsnr > '07' AND praxistar_eingangsnr < '90' AND NOT praxistar_eingangsnr LIKE '%-%'"
+    @cases = Cyto::Case.paginate(:page => params['page'], :per_page => 144, :order => params[:order], :conditions => "entry_date IS NOT NULL AND screened_at IS NULL AND (needs_p16 = '#{Case.connection.false}' AND needs_hpv = '#{Case.connection.false}') AND praxistar_eingangsnr > '07' AND praxistar_eingangsnr < '90' AND NOT praxistar_eingangsnr LIKE '%-%'")
     render :action => :list
   end
 
@@ -419,7 +419,7 @@ class Cyto::CasesController < ApplicationController
   def review_queue
     params[:order] ||= 'praxistar_eingangsnr'
     
-    @case_pages, @cases = paginate 'Cyto::Cases', :per_page => 144, :order => params[:order], :conditions => [ "needs_review = ?", true ]
+    @cases = Cyto::Case.paginate(:page => params['page'], :per_page => 144, :order => params[:order], :conditions => [ "needs_review = ?", true ])
     render :action => :list
   end
 
@@ -511,7 +511,7 @@ class Cyto::CasesController < ApplicationController
   def hpv_p16_queue
     params[:order] ||= 'praxistar_eingangsnr'
 
-    @case_pages, @cases = paginate 'Cyto::Cases', :per_page => 144, :order => params[:order], :conditions => ["(needs_p16 = ? OR needs_hpv = ?) AND screened_at IS NULL", true, true]
+    @cases = Cyto::Case.paginate(:page => params['page'], :per_page => 144, :order => params[:order], :conditions => ["(needs_p16 = ? OR needs_hpv = ?) AND screened_at IS NULL", true, true])
     render :action => :list
   end
 

@@ -9,7 +9,7 @@ class Praxistar::AdressenVersicherungen < Praxistar::Base
   def self.import
     Insurance.delete_all
 
-    for a in find_all
+    for a in all
       i = Insurance.new(
         :phone_number => a.tx_Telefon,
         :locality => a.tx_Ort,
