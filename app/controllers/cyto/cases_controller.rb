@@ -314,7 +314,10 @@ class Cyto::CasesController < ApplicationController
 
     finding = Cyto::FindingClass.find(params[:finding_id])
     @case.finding_classes.delete(finding)
-    @case.finding_text.gsub! "<div>#{finding.name}</div>", ''
+    name = finding.name
+    quoted_name = name.gsub('ä', '&auml;').gsub('ö', '&ouml;').gsub('ü', '&uuml;').gsub('Ä', '&Auml;').gsub('Ö', '&Ouml;').gsub('Ü', '&Uuml;')
+    
+    @case.finding_text = @case.finding_text.gsub("<div>#{name}</div>", '').gsub("<div>#{quoted_name}</div>", '')
 
     @case.save
 
@@ -337,8 +340,8 @@ class Cyto::CasesController < ApplicationController
       end
 
       @case.finding_classes << finding_class
-      @case.finding_text = '' if @case.finding_text.nil?
-      @case.finding_text += "<div>#{finding_class.name}</div>" unless finding_class.belongs_to_group?('Zustand') || finding_class.belongs_to_group?('Kontrolle')
+      finding_text = @case.finding_text.nil? ? '' : @case.finding_text
+      @case.finding_text = finding_text + "<div>#{finding_class.name}</div>" unless finding_class.belongs_to_group?('Zustand') || finding_class.belongs_to_group?('Kontrolle')
 
       @case.save
 
