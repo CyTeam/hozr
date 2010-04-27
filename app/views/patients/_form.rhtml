@@ -10,8 +10,8 @@ $('vcard_honorific_prefix').focus()
 <td style="height: 100%">
 <fieldset style="min-height: 100%">
   <legend>
-    <%= link_to_function "Adresse", "hide('vcard_billing_address'); show('vcard_vcard')" %>
-    <%= link_to_function "Rechnungsadresse", "hide('vcard_vcard'); show('vcard_billing_address')" %>
+    <%= link_to_function "Adresse", "$('vcard_billing_address').hide(); $('vcard_vcard').show()" %>
+    <%= link_to_function "Rechnungsadresse", "$('vcard_vcard').hide(); $('vcard_billing_address').show()" %>
   </legend>
   <table id="vcard_vcard">
     <%= render :partial => 'vcards/form', :locals => { :vcard_name => 'vcard', :vcard => @vcard } %>
