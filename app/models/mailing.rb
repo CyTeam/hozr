@@ -42,11 +42,29 @@ class Mailing < ActiveRecord::Base
   end
 
   def self.create_all
-    # TODO: Need to adapt for email
-    doctor_ids = Cyto::Case.find(:all, :select => 'DISTINCT doctor_id', :conditions => "( screened_at IS NOT NULL OR (screened_at IS NULL AND needs_p16 = 1) ) AND needs_review = 0 AND result_report_printed_at IS NULL")
+    lock_path = File.join(RAILS_ROOT, 'tmp', 'mailing_create_all.lock')
+    # Exit if lock not available
+    if File.exist?(lock_path)
+      logger.info('Lock not available')
+      return
+    end
+    
+    # Lock available
+    begin
+      # Acquire lock
+      lock = File.new(lock_path, "w")
+      lock.close
+      
+      # TODO: Need to adapt for email
+      doctor_ids = Cyto::Case.find(:all, :select => 'DISTINCT doctor_id', :conditions => "( screened_at IS NOT NULL OR (screened_at IS NULL AND needs_p16 = 1) ) AND needs_review = 0 AND result_report_printed_at IS NULL")
 
-    for doctor_id in doctor_ids
-      self.create_all_for_doctor(doctor_id.doctor_id)
+      for doctor_id in doctor_ids
+        self.create_all_for_doctor(doctor_id.doctor_id)
+      end
+
+    ensure
+      # Release lock
+      File.unlink(lock_path)
     end
   end
 
