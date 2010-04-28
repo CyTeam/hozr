@@ -243,7 +243,8 @@ class PatientsController < ApplicationController
 
     if @vcard.update_attributes(params[:vcard]) and @billing_vcard.update_attributes(params[:billing_vcard]) and @patient.update_attributes(params[:patient])
       @vcard.save
-      @patient.save
+      @patient.touch
+
       flash[:notice] = 'Patient was successfully updated.'
       redirect_to :action => 'list'
     else

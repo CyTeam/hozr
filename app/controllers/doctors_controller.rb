@@ -48,6 +48,8 @@ class DoctorsController < ApplicationController
   def update
     @doctor = Doctor.find(params[:id])
     if @doctor.praxis.update_attributes(params[:praxis_vcard]) and @doctor.private.update_attributes(params[:private_vcard]) and @doctor.update_attributes(params[:doctor])
+      @doctor.touch
+      
       flash[:notice] = 'Doctor was successfully updated.'
       redirect_to :action => 'show', :id => @doctor
     else

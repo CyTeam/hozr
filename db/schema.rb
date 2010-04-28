@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100415090634) do
+ActiveRecord::Schema.define(:version => 20090326134412) do
 
   create_table "account_receivables", :force => true do |t|
   end
@@ -81,11 +81,9 @@ ActiveRecord::Schema.define(:version => 20100415090634) do
 
   add_index "cases", ["doctor_id"], :name => "cases_doctor_id_index"
   add_index "cases", ["insurance_id"], :name => "cases_insurance_id_index"
-  add_index "cases", ["needs_p16"], :name => "index_cases_on_needs_p16"
   add_index "cases", ["patient_id"], :name => "cases_patient_id_index"
   add_index "cases", ["praxistar_eingangsnr"], :name => "cases_praxistar_eingangsnr_index", :unique => true
   add_index "cases", ["result_report_printed_at"], :name => "i1"
-  add_index "cases", ["screened_at"], :name => "index_cases_on_screened_at"
 
   create_table "cases_finding_classes", :id => false, :force => true do |t|
     t.integer "case_id"
