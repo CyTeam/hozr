@@ -118,7 +118,8 @@ class Cyto::CasesController < ApplicationController
 
   def assign_list
     @cases = Cyto::Case.find(:all, :conditions => ['assigned_at = ?', params[:assigned_at]], :order => 'intra_day_id' )
-
+    @assigned_at = params[:assigned_at]
+    
     render :action => 'assign'
   end
 
@@ -134,6 +135,13 @@ class Cyto::CasesController < ApplicationController
 
   def delete_assigning
     @cases = Cyto::Case.find(:all, :conditions => ['assigned_at = ?', params[:assigned_at]] )
+    @cases.map{|c| c.destroy}
+    
+    redirect_to :action => 'assignings_list'
+  end
+  
+  def delete_rest_of_assigning
+    @cases = Cyto::Case.find(:all, :conditions => ['assigned_at = ? AND intra_day_id >= ?', params[:assigned_at], params[:intra_day_id]] )
     @cases.map{|c| c.destroy}
     
     redirect_to :action => 'assignings_list'

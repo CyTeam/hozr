@@ -10,6 +10,9 @@
     <td style="border-top: solid 2px; border-bottom: solid 2px">
       <table>
         <tr>
+          <td><%= link_to image_tag('remove.png'), {:controller => '/cyto/cases', :action => 'delete_rest_of_assigning', :assigned_at => @assigned_at, :intra_day_id => a_case.intra_day_id}, :confirm => "Aufträge ab Tagesnummer #{a_case.intra_day_id} löschen?", :post => true unless @assigned_at.nil? %>
+        </tr>
+        <tr>
           <td>Tagesnr.:</td><td><%=h a_case.intra_day_id %></td>
         </tr>
         <tr>
