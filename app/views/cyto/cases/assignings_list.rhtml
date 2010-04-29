@@ -5,6 +5,7 @@
   <th>Anzahl</th>
   <th>Tagesnummern</th>
   <th>Eingangsnummern</th>
+  <th/>
 
 <% for assigning in @assignings %>
   <tr>
@@ -12,6 +13,7 @@
     <td><%= assigning.count %></td>
     <td><%= assigning.min_intra_day_id %> - <%= assigning.max_intra_day_id %></td>
     <td><%= assigning.min_praxistar_eingangsnr %> - <%= assigning.max_praxistar_eingangsnr %></td>
+    <td><%= link_to image_tag('remove.png'), {:controller => '/cyto/cases', :action => 'delete_assigning', :assigned_at => assigning.assigned_at.strftime('%Y-%m-%d %H:%M:%S')}, :confirm => "#{assigning.count} Aufträge löschen?", :post => true %>
   </tr>
 <% end %>
 </table>

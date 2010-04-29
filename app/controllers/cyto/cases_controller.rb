@@ -132,6 +132,13 @@ class Cyto::CasesController < ApplicationController
     @assignings = Cyto::Case.find_by_sql('SELECT assigned_at, min(intra_day_id) AS min_intra_day_id, max(intra_day_id) AS max_intra_day_id, min(praxistar_eingangsnr) AS min_praxistar_eingangsnr, max(praxistar_eingangsnr) AS max_praxistar_eingangsnr, count(*) AS count FROM cases GROUP BY assigned_at HAVING assigned_at > now() - INTERVAL 7 DAY ORDER BY assigned_at DESC')
   end
 
+  def delete_assigning
+    @cases = Cyto::Case.find(:all, :conditions => ['assigned_at = ?', params[:assigned_at]] )
+    @cases.map{|c| c.destroy}
+    
+    redirect_to :action => 'assignings_list'
+  end
+  
   # First Entry
   # ===========
   def first_entry_queue
