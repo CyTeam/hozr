@@ -1,6 +1,4 @@
 class Cyto::OrderForm < ActiveRecord::Base
-  ORDER_FORM_DIR='/mnt/worker/hozr-order-forms/current/*.jpg'
-  
   file_column :file, :magick => {
     :versions => {
       :full => {:size => "550"},
@@ -44,8 +42,8 @@ class Cyto::OrderForm < ActiveRecord::Base
     return whited
   end
 
-  def self.import_order_forms
-    order_form_files = Dir.glob(ORDER_FORM_DIR).sort
+  def self.import_order_forms(order_form_dir)
+    order_form_files = Dir.glob("#{order_form_dir}/*.jpg").sort
   
     import = Praxistar::Imports.new(:started_at => Time.now, :model => self.name)
     
