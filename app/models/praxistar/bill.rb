@@ -128,4 +128,34 @@ class Praxistar::Bill < Praxistar::Base
     patient.remarks += "#{Date.today.strftime('%d.%m.%Y')}: Zahlung auf Rechnung ohne Position 37.0620 umgebucht\nRückerstattung von CHF 5.40 fällig\n"
     patient.save
   end
+
+  # Set treatment reason
+  def treatment_reason=(reason)
+    case reason
+    when 'Krankheit':
+      self.tf_Spez1 = true
+      self.tf_Spez4 = false
+      self.tf_Spez8 = false
+    when 'Mutterschaft':
+      self.tf_Spez1 = false
+      self.tf_Spez4 = true
+      self.tf_Spez8 = false
+    when 'Vorsorge':
+      self.tf_Spez1 = false
+      self.tf_Spez4 = false
+      self.tf_Spez8 = true
+    end
+    
+    return self
+  end
+
+  def treatment_reason
+    if self.tf_Spez1?
+      return 'Krankheit'
+    elsif self.tf_Spez4?
+      return 'Mutterschaft'
+    elsif self.tf_Spez8?
+      return 'Vorsorge'
+    end
+  end
 end

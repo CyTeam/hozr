@@ -34,4 +34,17 @@ class BillsController < ApplicationController
     list
     render :action => :list
   end
+
+  # Treatment editing
+  def show_treatment_reason
+    @bill = Praxistar::Bill.find(params[:bill][:id])
+  end
+
+  def update_treatment_reason
+    @bill = Praxistar::Bill.find(params[:id])
+    @bill.treatment_reason = params[:bill][:treatment_reason]
+    @bill.save!
+    
+    redirect_to :controller => 'admin'
+  end
 end

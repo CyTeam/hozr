@@ -1,0 +1,18 @@
+<h2>Behandlungsgrund</h2>
+
+<p>
+Nach dem Speichern kann im Praxistar eine Rechnungskopie gedruckt werden, und der Rückforderungsbeleg
+der Patienting zugestellt werden.
+
+Achtung: Es wird KEINE neue Rechnung erstellt, die bestehende Rechnung ist noch gültig. Einzig der
+Rückforderungsbeleg enthält jetzt den neuen Behandlungsgrund.
+</p>
+
+<% form_tag( :controller => 'bills', :action => "update_treatment_reason", :id => @bill.id ) do %>
+  <table>
+    <% fields_for 'bill', @bill, :builder => Rubaidh::TabularForm::TabularFormBuilder do |f| %>
+      <%= f.select :treatment_reason, ['Krankheit', 'Mutterschaft', 'Vorsorge'], :label => "Behandlungsgrund." %>
+    <% end %>
+  </table>
+  <%= submit_tag "Speichern" %>
+<% end %>
