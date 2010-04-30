@@ -206,6 +206,9 @@ class PatientsController < ApplicationController
     params[:patient][:sex] = HonorificPrefix.find_by_name(@patient.vcard.honorific_prefix).sex
     
     if @patient.update_attributes(params[:patient])
+      @patient.touch
+      Praxistar::PatientenPersonalien.export
+
       flash[:notice] = 'Patientendaten mutiert'
       redirect_to :action => 'list'
     else
@@ -244,6 +247,7 @@ class PatientsController < ApplicationController
     if @vcard.update_attributes(params[:vcard]) and @billing_vcard.update_attributes(params[:billing_vcard]) and @patient.update_attributes(params[:patient])
       @vcard.save
       @patient.touch
+      Praxistar::PatientenPersonalien.export
 
       flash[:notice] = 'Patient was successfully updated.'
       redirect_to :action => 'list'
