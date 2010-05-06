@@ -208,6 +208,7 @@ class PatientsController < ApplicationController
     if @patient.update_attributes(params[:patient])
       @patient.touch
       Praxistar::PatientenPersonalien.export
+      @patient.delete_leistungsblaetter
 
       flash[:notice] = 'Patientendaten mutiert'
       redirect_to :action => 'list'
@@ -248,6 +249,7 @@ class PatientsController < ApplicationController
       @vcard.save
       @patient.touch
       Praxistar::PatientenPersonalien.export
+      @patient.delete_leistungsblaetter
 
       flash[:notice] = 'Patient was successfully updated.'
       redirect_to :action => 'list'

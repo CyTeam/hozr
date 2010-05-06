@@ -10,6 +10,7 @@ class Patient < ActiveRecord::Base
   has_many :cases, :class_name => 'Cyto::Case', :order => 'id DESC'
   has_many :finished_cases, :class_name => 'Cyto::Case', :conditions => 'screened_at IS NOT NULL', :order => 'id DESC'
   has_many :bills, :class_name => 'Praxistar::Bill', :foreign_key => 'Patient_ID', :order => 'ID_Rechnung'
+  has_many :praxistar_leistungsblaetter, :class_name => 'Praxistar::LeistungenBlatt'
   
   validates_presence_of :birth_date
   
@@ -62,5 +63,9 @@ class Patient < ActiveRecord::Base
   
   def in_place_insurance_nr=(value)
     write_attribute(:insurance_nr, value)
+  end
+
+  def delete_leistungsblaetter
+    praxistar_leistungsblaetter.map{|l| a_case = l.cyto_case ;a_case.praxistar_leistungsblatt_id = nil; a_case.save; l.destroy}
   end
 end
