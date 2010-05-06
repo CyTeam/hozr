@@ -41,13 +41,13 @@ class Praxistar::PatientenPersonalien < Praxistar::Base
   end
   
   def self.import
-    last_import = Imports.find(:first, :conditions => "model = '#{self.name}'", :order => "finished_at DESC")
+    last_import = Praxistar::Imports.find(:first, :conditions => "model = '#{self.name}'", :order => "finished_at DESC")
     
     find_params = {
       :conditions => [ "dt_mutationsdatum > ? OR tx_aufnahmedatum >= ? ", last_import.started_at, last_import.started_at ]
     } unless last_import.nil?
     
-    import = Imports.new(:started_at => Time.now, :find_params => find_params, :model => self.name)
+    import = Praxistar::Imports.new(:started_at => Time.now, :find_params => find_params, :model => self.name)
     
 #    hozr_model.Patient.delete_all
     
