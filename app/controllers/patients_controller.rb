@@ -258,6 +258,13 @@ class PatientsController < ApplicationController
     end
   end
 
+  def delete_leistungsblaetter
+    @patient = Patient.find(params[:id])
+    
+    @patient.delete_leistungsblaetter
+    render :text => 'Leistungeblaetter gelöscht.'
+  end
+  
   def destroy
     Patient.find(params[:id]).destroy
     redirect_to :action => 'list'

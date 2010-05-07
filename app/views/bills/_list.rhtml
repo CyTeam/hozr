@@ -1,4 +1,17 @@
 <%= loading_indicator_tag :id => 'search' %>
+
+<% if @patient.praxistar_leistungsblaetter.present? %>
+<p id="leistungsblaetter_info">
+Patient hat <%= @patient.praxistar_leistungsblaetter.count %> offene Leistungsblätter.
+<%= link_to_remote image_tag('remove_22.png'),
+      :update => 'leistungsblaetter_info',
+      :url => {:controller => '/patients', :action => 'delete_leistungsblaetter', :id => @patient.id},
+      :title => "Alle offenen Leistungsblätter löschen",
+      :confirm => "#{@patient.praxistar_leistungsblaetter.count} offene Leistungsblätter löschen?"
+%>
+<% end %>
+</p>
+
 <table class="listing" width="100%">
 	<tr>
                	<th>Name, Vorname</th>

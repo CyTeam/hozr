@@ -66,6 +66,13 @@ class Patient < ActiveRecord::Base
   end
 
   def delete_leistungsblaetter
-    praxistar_leistungsblaetter.map{|l| a_case = l.cyto_case ;a_case.praxistar_leistungsblatt_id = nil; a_case.save; l.destroy}
+    for l in praxistar_leistungsblaetter
+      a_case = l.cyto_case
+      if a_case
+        a_case.praxistar_leistungsblatt_id = nil
+        a_case.save
+      end
+      l.destroy
+    end
   end
 end

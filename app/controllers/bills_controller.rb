@@ -6,14 +6,16 @@ class BillsController < ApplicationController
   def search
     bill_id = params[:bill][:id]
 
-    @bills = Praxistar::Bill.find(bill_id).patient.bills
+    @patient = Praxistar::Bill.find(bill_id).patient
+    @bills = @patient.bills
     render :partial => 'list'
   end
 
   def search_by_patient
     patient_id = params[:id]
 
-    @bills = Patient.find(patient_id).bills
+    @patient = Patient.find(patient_id)
+    @bills = @patient.bills
     render :action => 'list'
   end
 
