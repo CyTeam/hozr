@@ -2,6 +2,7 @@ class Doctor < ActiveRecord::Base
   belongs_to :vcard
   belongs_to :praxis, :class_name => 'Vcard', :foreign_key => 'praxis_vcard'
   belongs_to :private, :class_name => 'Vcard', :foreign_key => 'private_vcard'
+  belongs_to :billing_doctor, :class_name => 'Doctor'
   
   has_many :cases, :class_name => 'Cyto::Case'
   has_many :patients
