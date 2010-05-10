@@ -63,4 +63,7 @@ Rails::Initializer.run do |config|
 
   # Pagination
   config.gem 'will_paginate'
+
+  # PDF
+  config.gem 'prawn', :version => '>= 0.8.4'
 end

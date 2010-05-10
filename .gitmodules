@@ -1,0 +1,3 @@
+[submodule "vendor/plugins/prawnto"]
+	path = vendor/plugins/prawnto
+	url = http://github.com/huerlisi/prawnto.git

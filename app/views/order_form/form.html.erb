@@ -1,0 +1,14 @@
+<h1>PAP Zettel mit Arztadressen beschriften</h1>
+<% form_tag :action => 'print' do %>
+<table>
+  <tr>
+    <th>Arzt</th>
+    <td><%= select 'order_form', 'doctor_id', doctors_collection %></td>
+  </tr>
+  <tr>
+    <th>Anzahl</th>
+    <td><%= text_field 'order_form', 'count' %></td>
+  </tr>
+</table>
+<%= submit_tag 'Drucken' %>
+<% end %>
