@@ -66,4 +66,7 @@ Rails::Initializer.run do |config|
 
   # PDF
   config.gem 'prawn', :version => '>= 0.8.4'
+
+  # Barcode
+  config.gem 'barby'
 end
