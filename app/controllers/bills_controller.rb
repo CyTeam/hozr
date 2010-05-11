@@ -20,7 +20,9 @@ class BillsController < ApplicationController
   end
 
   def list
-    @bills = Praxistar::Bill.find(params[:id]).patient.bills
+    @bill = Praxistar::Bill.find(params[:id])
+    @patient = @bill.patient
+    @bills = @patient.bills
   end
 
   def cancel
