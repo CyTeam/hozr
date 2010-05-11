@@ -342,3 +342,19 @@ table.listing tbody tr:hover { background: #eed !important }
 h3 {
   font-family: ChollaSansBold;
 }
+
+/* Flash */
+#errorExplanation, div.flash, .nodata, .warning {
+    padding: 4px 4px 4px 30px;
+    margin-bottom: 12px;
+        font-size: 1.1em;
+        border: 2px solid;
+}
+
+div.flash {margin-top: 8px;}
+div.flash.notice {
+    background: url(../images/true.png) 8px 5px no-repeat;
+        background-color: #dfffdf;
+        border-color: #9fcf9f;
+        color: #005f00;
+}
