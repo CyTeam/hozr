@@ -1,6 +1,7 @@
 class OrderFormController < ApplicationController
   helper :doctors
   
+  
   def print
     @doctor = Doctor.find(params[:order_form][:doctor_id])
     @count = params[:order_form][:count]
@@ -9,8 +10,10 @@ class OrderFormController < ApplicationController
       format.html {}
       format.pdf {
         # Use A5
-        prawnto :prawn => { :page_size => 'A5', :top_margin => 60, :left_margin => 35, :right_margin => 35, :bottom_margin => 23 }
-        render :layout => false
+        prawnto :prawn => { :page_size => 'A5', :top_margin => 35, :left_margin => 12, :right_margin => 12, :bottom_margin => 23 }
+        page = render_to_string(:layout => false)
+        paper_copy = Cups::PrintJob::Transient.new(page, 'hp')
+        paper_copy.print
       }
     end
   end

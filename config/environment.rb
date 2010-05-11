@@ -69,4 +69,7 @@ Rails::Initializer.run do |config|
 
   # Barcode
   config.gem 'barby'
+
+  # Print
+  config.gem 'cups'
 end
