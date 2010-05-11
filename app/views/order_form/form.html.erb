@@ -1,5 +1,6 @@
 <h1>PAP Zettel mit Arztadressen beschriften</h1>
-<% form_tag :action => 'print' do %>
+<div style="display: none" class="flash notice" id="print_flash"></div>
+<% form_remote_tag :url => {:action => 'print'} do %>
 <table>
   <tr>
     <th>Arzt</th>

@@ -14,6 +14,9 @@ class OrderFormController < ApplicationController
         page = render_to_string(:layout => false)
         paper_copy = Cups::PrintJob::Transient.new(page, 'hp')
         paper_copy.print
+        render :update do |page|
+          page.replace_html 'print_flash', "Gedruckt."
+        end
       }
     end
   end
