@@ -4,3 +4,24 @@
 [submodule "vendor/plugins/printable"]
 	path = vendor/plugins/printable
 	url = git://github.com/huerlisi/printable.git
+[submodule "vendor/plugins/form_builders"]
+	path = vendor/plugins/form_builders
+	url = git://github.com/rubaidh/form_builders.git
+[submodule "vendor/plugins/auto_complete"]
+	path = vendor/plugins/auto_complete
+	url = git://github.com/rails/auto_complete.git
+[submodule "vendor/plugins/in_place_editing"]
+	path = vendor/plugins/in_place_editing
+	url = git://github.com/rails/in_place_editing.git
+[submodule "vendor/plugins/acts_as_list"]
+	path = vendor/plugins/acts_as_list
+	url = git://github.com/rails/acts_as_list.git
+[submodule "vendor/plugins/tiny_mce"]
+	path = vendor/plugins/tiny_mce
+	url = shuerlimann@project.client.zytolabor.ch:/srv/client.zytolabor.ch/code/git/rails-plugins/tiny_mce.git
+[submodule "vendor/plugins/file_column"]
+	path = vendor/plugins/file_column
+	url = http://github.com/tekin/file_column.git
+[submodule "vendor/plugins/use_db"]
+	path = vendor/plugins/use_db
+	url = http://github.com/remi/use_db.git
