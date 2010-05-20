@@ -1,8 +1,6 @@
-<% for column in ClassificationTarmedLeistungen.content_columns %>
-<p>
-  <b><%= column.human_name %>:</b> <%=h @classification_tarmed_leistungen.send(column.name) %>
-</p>
-<% end %>
+<dl>
+  <%= render :partial => 'show' %>
+</dl
 
-<%= link_to 'Edit', :action => 'edit', :id => @classification_tarmed_leistungen %> |
+<%= link_to 'Edit', :action => 'edit', :id => @classification %> |
 <%= link_to 'Back', :action => 'list' %>
