@@ -21,7 +21,7 @@
 	url = shuerlimann@project.client.zytolabor.ch:/srv/client.zytolabor.ch/code/git/rails-plugins/tiny_mce.git
 [submodule "vendor/plugins/file_column"]
 	path = vendor/plugins/file_column
-	url = http://github.com/tekin/file_column.git
+	url = git://github.com/huerlisi/file_column.git
 [submodule "vendor/plugins/use_db"]
 	path = vendor/plugins/use_db
 	url = http://github.com/remi/use_db.git
