@@ -81,8 +81,13 @@ ActiveRecord::Schema.define(:version => 20090326134412) do
 
   add_index "cases", ["doctor_id"], :name => "cases_doctor_id_index"
   add_index "cases", ["insurance_id"], :name => "cases_insurance_id_index"
+  add_index "cases", ["insurance_nr"], :name => "insurance_nr"
+  add_index "cases", ["insurance_nr"], :name => "insurance_nr_2"
   add_index "cases", ["patient_id"], :name => "cases_patient_id_index"
   add_index "cases", ["praxistar_eingangsnr"], :name => "cases_praxistar_eingangsnr_index", :unique => true
+  add_index "cases", ["praxistar_eingangsnr"], :name => "praxistar_eingangsnr"
+  add_index "cases", ["praxistar_eingangsnr"], :name => "praxistar_eingangsnr_2"
+  add_index "cases", ["praxistar_leistungsblatt_id"], :name => "praxistar_leistungsblatt_id"
   add_index "cases", ["result_report_printed_at"], :name => "i1"
 
   create_table "cases_finding_classes", :id => false, :force => true do |t|
@@ -153,6 +158,7 @@ ActiveRecord::Schema.define(:version => 20090326134412) do
     t.string   "password",                            :null => false
   end
 
+  add_index "doctors", ["id"], :name => "id"
   add_index "doctors", ["praxis_vcard"], :name => "doctors_praxis_vcard_index"
   add_index "doctors", ["private_vcard"], :name => "doctors_private_vcard_index"
 
