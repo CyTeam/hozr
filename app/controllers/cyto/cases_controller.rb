@@ -581,6 +581,12 @@ class Cyto::CasesController < ApplicationController
   def update
     @case = Cyto::Case.find(params[:id])
     if @case.update_attributes(params[:case])
+      if @case.praxistar_leistungsblatt
+        @case.praxistar_leistungsblatt.delete if @case.praxistar_leistungsblatt
+        @case.praxistar_leistungsblatt_id = nil
+        @case.save
+      end
+      
       flash[:notice] = 'Case was successfully updated.'
       redirect_to :action => 'show', :id => @case
     else

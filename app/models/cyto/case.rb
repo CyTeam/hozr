@@ -196,6 +196,8 @@ class Cyto::Case < ActiveRecord::Base
     save!
   end
 
+  belongs_to :praxistar_leistungsblatt, :class_name => 'Praxistar::LeistungenBlatt'
+
   def self.praxistar_create_all_leistungsblatt(days_since_print = 6.5)
     hours_since_print = days_since_print * 24
     export = Praxistar::Exports.new(:started_at => Time.now, :model => self.name)
