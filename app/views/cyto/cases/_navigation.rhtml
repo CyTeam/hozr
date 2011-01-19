@@ -3,6 +3,6 @@
 <%= link_to "Resultat", :controller => '/cyto/cases', :action => 'result_report', :id => params[:id] %>
 <span style="margin-left: 10em;">
   <%= link_to image_tag('print.png', :title => 'Drucke Resultat'), :controller => '/cyto/cases', :action => :print_result_report, :id => params[:id] %>
-  <%= link_to image_tag('edit_22.png', :title => 'Fall editieren'), {:controller => '/cyto/cases', :action => :edit, :id => params[:id]}, :post => true %>
-  <%= link_to image_tag('remove_22.png', :title => 'Lösche Resultat'), {:controller => '/cyto/cases', :action => :destroy, :id => params[:id]}, :confirm => 'Fall wirklich löschen?', :post => true %>
+  <%= link_to image_tag('edit_22.png', :title => 'Fall editieren'), {:controller => '/cyto/cases', :action => :edit, :id => params[:id]} %>
+  <%= link_to image_tag('remove_22.png', :title => 'Lösche Resultat'), {:controller => '/cyto/cases', :action => :destroy, :id => params[:id]}, :confirm => 'Fall wirklich löschen?', :method => :post %>
 </span>

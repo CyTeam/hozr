@@ -14,7 +14,7 @@
     <td><%=h classification.examination_method.name unless classification.examination_method.nil? %></td>
     <td><%= link_to 'Show', :action => 'show', :id => classification %></td>
     <td><%= link_to 'Edit', :action => 'edit', :id => classification %></td>
-    <td><%= link_to 'Destroy', { :action => 'destroy', :id => classification }, :confirm => 'Are you sure?', :post => true %></td>
+    <td><%= link_to 'Destroy', { :action => 'destroy', :id => classification }, :confirm => 'Are you sure?', :method => :post %></td>
   </tr>
 <% end %>
 </table>

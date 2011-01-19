@@ -17,7 +17,7 @@
       </span>
       <span id="actions_<%= insurance.id %>" style="display:none; float: right">
         <%= link_to image_tag("edit.png"), :action => 'edit', :id => insurance %>
-        <%= link_to image_tag("remove.png"), { :action => 'destroy', :id => insurance }, :confirm => 'Wirklich löschen?' %>
+        <%= link_to image_tag("remove.png"), { :action => 'destroy', :id => insurance }, :confirm => 'Wirklich löschen?', :method => :post %>
       </span>
     </td>
     <td><%=h insurance.extended_address %>

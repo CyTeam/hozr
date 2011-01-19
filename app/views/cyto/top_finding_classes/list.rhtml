@@ -6,7 +6,7 @@
     <% for finding_class in classification.top_finding_classes %>
       <dd>
         <span style="font-weight: bold"><%=h finding_class.code %></span> - <%=h finding_class.name %>
-        <%= link_to image_tag('remove.png'), { :controller => 'top_finding_classes', :action => 'destroy', :id => finding_class }, :confirm => 'Are you sure?', :post => true %>
+        <%= link_to image_tag('remove.png'), { :controller => 'top_finding_classes', :action => 'destroy', :id => finding_class }, :confirm => 'Are you sure?', :method => :post %>
       </dd>
     <% end %>
   <% end %>
