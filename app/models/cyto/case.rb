@@ -202,6 +202,7 @@ class Cyto::Case < ActiveRecord::Base
     
     records = self.find(:all, :conditions => [ "praxistar_leistungsblatt_id IS NULL AND (result_report_printed_at IS NOT NULL AND result_report_printed_at < now() - INTERVAL ? HOUR ) AND classification_id IS NOT NULL", hours_since_print ])
   
+    error_cases = []
     export.record_count = records.size
     export.error_ids = ''
     export.save
@@ -213,7 +214,7 @@ class Cyto::Case < ActiveRecord::Base
         export.create_count += 1
         export.save
       rescue Exception => ex
-#        export.error_ids += "#{h.id}, "
+        error_cases << h
         export.error_count += 1
         export.save
         
@@ -226,6 +227,7 @@ class Cyto::Case < ActiveRecord::Base
     end
   
     export.finished_at = Time.now
+    export.error_ids = error_cases.collect{|c| c.id}.join(', ')
     export.save
   
     logger.info(export.attributes.to_yaml)
