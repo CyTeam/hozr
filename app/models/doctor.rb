@@ -53,10 +53,6 @@ class Doctor < ActiveRecord::Base
     user.save
   end
 
-  has_many :undelivered_mailings, :class_name => 'Mailing', :conditions => ["email_delivered_at IS NULL"]
-
-#  named_scope :wanting_prints, :include => :user, :conditions => ["users.wants_prints = ?", true]
-
   def wants_prints
     if user
       user.wants_prints
@@ -65,6 +61,11 @@ class Doctor < ActiveRecord::Base
     end
   end
     
+  # Helpers
+  def to_s
+    name
+  end
+  
   # Hozr
   def family_name
     praxis.family_name || ""
