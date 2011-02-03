@@ -10,12 +10,48 @@ class Doctor < ActiveRecord::Base
   has_and_belongs_to_many :offices
 
   # CyLab
+  # =====
   has_one :user, :as => :object
-
-  delegate :wants_email, :to => :user
   delegate :email, :email=, :to => :user
 
-  delegate :wants_prints, :to => :user
+  has_and_belongs_to_many :offices
+
+  # HL7
+  named_scope :wanting_hl7, :include => :user, :conditions => ["users.wants_hl7 = ?", true]
+  has_many :undelivered_hl7, :class_name => 'Mailing', :conditions => ["hl7_delivered_at IS NULL"]
+  delegate :wants_hl7, :to => :user
+  def wants_hl7=(value)
+    undelivered_hl7.update_all('hl7_delivered_at = now()')
+
+    # Delegate to user
+    user.wants_hl7 = value
+    user.save
+  end
+
+  # Email
+  named_scope :wanting_emails, :include => :user, :conditions => ["users.wants_email = ?", true]
+  has_many :undelivered_mailings, :class_name => 'Mailing', :conditions => ["email_delivered_at IS NULL"]
+  delegate :wants_email, :wants_email=, :to => :user
+  def wants_email=(value)
+    undelivered_mailings.update_all('email_delivered_at = now()')
+    cases.undelivered.update_all('email_sent_at = now()')
+
+    # Delegate to user
+    user.wants_email = value
+    user.save
+  end
+
+  # Printing
+  named_scope :wanting_prints, :include => :user, :conditions => ["users.wants_prints = ?", true]
+  has_many :undelivered_prints, :class_name => 'Mailing', :conditions => ["printed_at IS NULL"]
+  delegate :wants_prints, :wants_prints=, :to => :user
+  def wants_prints=(value)
+    undelivered_prints.update_all('printed_at = now()')
+    
+    # Delegate to user
+    user.wants_prints = value
+    user.save
+  end
 
   has_many :undelivered_mailings, :class_name => 'Mailing', :conditions => ["email_delivered_at IS NULL"]
 
