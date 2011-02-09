@@ -75,4 +75,12 @@ class Patient < ActiveRecord::Base
       l.destroy
     end
   end
+
+  def open_invoices
+    bills.select{|bill| bill.open?}
+  end
+  
+  def reactivate_open_invoices
+    open_invoices.map{|invoice| invoice.reactivate("Adressänderung")}
+  end
 end

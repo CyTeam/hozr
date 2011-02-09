@@ -209,6 +209,7 @@ class PatientsController < ApplicationController
       @patient.touch
       Praxistar::PatientenPersonalien.export
       @patient.delete_leistungsblaetter
+      @patient.reactivate_open_invoices
 
       flash[:notice] = 'Patientendaten mutiert'
       redirect_to :action => 'list'
@@ -250,8 +251,9 @@ class PatientsController < ApplicationController
       @patient.touch
       Praxistar::PatientenPersonalien.export
       @patient.delete_leistungsblaetter
+      @patient.reactivate_open_invoices
 
-      flash[:notice] = 'Patient was successfully updated.'
+      flash[:notice] = 'Patientendaten mutiert'
       redirect_to :action => 'list'
     else
       render :action => 'edit'

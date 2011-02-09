@@ -11,6 +11,10 @@ class Praxistar::Bill < Praxistar::Base
   has_one :bill_journal, :foreign_key => 'Rechnung_ID'
   has_many :payments, :foreign_key => 'Rechnung_ID'
     
+  def to_s
+    "%s: %s" % [patient.to_s, id]
+  end
+  
   def cyto_case
     Cyto::Case.find(:first, :conditions => ['praxistar_leistungsblatt_id = ?', self[:Leistungsblatt_ID]])
   end
@@ -27,6 +31,11 @@ class Praxistar::Bill < Praxistar::Base
     end
   end
 
+  def open?
+    since = Date.new(2009, 1, 1)
+    !(payment_state == "payed" or payment_state == "cancelled") and dt_Rechnungsdatum >= since
+  end
+  
   def canceable?
     !(payment_state == "payed" or payment_state == "cancelled")
   end
