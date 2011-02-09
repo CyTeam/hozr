@@ -200,11 +200,12 @@ class Cyto::Case < ActiveRecord::Base
 
 
   BILL_DELAY_DAYS = 6.5
-  def self.praxistar_create_all_leistungsblatt(days_since_print = BILL_DELAY_DAYS)
-    hours_since_print = days_since_print * 24
+  named_scope :to_create_leistungsblatt, :conditions => ["praxistar_leistungsblatt_id IS NULL AND (IFNULL(email_sent_at, result_report_printed_at) < now() - INTERVAL ? HOUR ) AND classification_id IS NOT NULL", BILL_DELAY_DAYS * 24]
+
+  def self.praxistar_create_all_leistungsblatt
     export = Praxistar::Exports.new(:started_at => Time.now, :model => self.name)
     
-    records = self.find(:all, :conditions => [ "praxistar_leistungsblatt_id IS NULL AND (result_report_printed_at IS NOT NULL AND result_report_printed_at < now() - INTERVAL ? HOUR ) AND classification_id IS NOT NULL", hours_since_print ])
+    records = self.to_create_leistungsblatt.all
   
     error_cases = []
     export.record_count = records.size

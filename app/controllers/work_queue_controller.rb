@@ -13,7 +13,7 @@ class WorkQueueController < ApplicationController
     @review_count = Cyto::Case.count(:all, :conditions => 'needs_review = 1 AND result_report_printed_at IS NULL')
     @print_result_count = Cyto::Case.count(:all, :include => {:doctor => :user }, :conditions => '(users.wants_prints IS NULL OR users.wants_prints = 1) AND (screened_at IS NOT NULL AND needs_review = 0 OR (screened_at IS NULL and needs_p16 = 1) AND needs_review = 0 ) AND ((result_report_printed_at IS NULL AND p16_notice_printed_at IS NULL) OR (result_report_printed_at IS NULL AND p16_notice_printed_at IS NOT NULL AND screened_at IS NOT NULL))')
     @email_result_count = Cyto::Case.count(:all, :include => {:doctor => :user }, :conditions => 'users.wants_email = 1 AND email_sent_at IS NULL AND screened_at IS NOT NULL AND needs_review = 0')
-    @bill_export_count = Cyto::Case.count(:all, :conditions => [ "praxistar_leistungsblatt_id IS NULL AND (result_report_printed_at IS NOT NULL AND result_report_printed_at < now() - INTERVAL ? HOUR ) AND classification_id IS NOT NULL", Cyto::Case::BILL_DELAY_DAYS * 24 ])
+    @bill_export_count = Cyto::Case.to_create_leistungsblatt.count
     begin
       @bill_print_count = Praxistar::LeistungenBlatt.count_by_sql("SELECT count(*) FROM leistungen_blatt JOIN patienten_personalien ON patient_id = id_patient")
     rescue
