@@ -67,11 +67,22 @@ class ActionController::Base
     end
   end
   
+  def self.auto_complete_for_zip_locality(object)
+    define_method("auto_complete_for_#{object}_zip_locality") do
+      @localities = PostalCode.find(:all,
+        :conditions => [ "zip = :query", {:query => params[object][:zip_locality]} ],
+        :order => 'zip',
+        :limit => 30)
+      render :partial => 'postal_codes/zip_localities'
+    end
+  end
+  
   def self.auto_complete_for_vcard(object)
       auto_complete_for_vcard_field object, :family_name, :limit => 12
       auto_complete_for_vcard_field object, :given_name, :limit => 12
       auto_complete_for_vcard_field object, :street_address, :limit => 12
       auto_complete_for_vcard_field object, :locality, :limit => 12
+      auto_complete_for_zip_locality object
   end
 end
 
