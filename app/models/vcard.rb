@@ -55,6 +55,14 @@ class Vcard < ActiveRecord::Base
     address.save
   end
 
+  def zip_locality
+    "%s %s" % [address.postal_code, address.locality]
+  end
+  
+  def zip_locality=(value)
+    address.postal_code, address.locality = value.split(' ')
+  end
+  
   def region
     address.region
   end

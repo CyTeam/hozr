@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090326134412) do
+ActiveRecord::Schema.define(:version => 20110216125156) do
 
   create_table "account_receivables", :force => true do |t|
   end
@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(:version => 20090326134412) do
     t.string  "address_type"
   end
 
+  add_index "addresses", ["locality"], :name => "locality"
   add_index "addresses", ["vcard_id"], :name => "addresses_vcard_id_index"
 
   create_table "bills", :force => true do |t|
@@ -79,16 +80,19 @@ ActiveRecord::Schema.define(:version => 20090326134412) do
     t.datetime "email_sent_at"
   end
 
-  add_index "cases", ["doctor_id"], :name => "cases_doctor_id_index"
+  add_index "cases", ["assigned_at"], :name => "assigned_at"
+  add_index "cases", ["doctor_id"], :name => "doctor_id"
+  add_index "cases", ["entry_date"], :name => "entry_date"
   add_index "cases", ["insurance_id"], :name => "cases_insurance_id_index"
   add_index "cases", ["insurance_nr"], :name => "insurance_nr"
-  add_index "cases", ["insurance_nr"], :name => "insurance_nr_2"
-  add_index "cases", ["patient_id"], :name => "cases_patient_id_index"
-  add_index "cases", ["praxistar_eingangsnr"], :name => "cases_praxistar_eingangsnr_index", :unique => true
+  add_index "cases", ["needs_hpv"], :name => "needs_hpv"
+  add_index "cases", ["needs_p16"], :name => "needs_p16"
+  add_index "cases", ["needs_review"], :name => "needs_review"
+  add_index "cases", ["patient_id"], :name => "patient_id"
   add_index "cases", ["praxistar_eingangsnr"], :name => "praxistar_eingangsnr"
-  add_index "cases", ["praxistar_eingangsnr"], :name => "praxistar_eingangsnr_2"
   add_index "cases", ["praxistar_leistungsblatt_id"], :name => "praxistar_leistungsblatt_id"
   add_index "cases", ["result_report_printed_at"], :name => "i1"
+  add_index "cases", ["screened_at"], :name => "screened_at"
 
   create_table "cases_finding_classes", :id => false, :force => true do |t|
     t.integer "case_id"
@@ -102,6 +106,8 @@ ActiveRecord::Schema.define(:version => 20090326134412) do
     t.integer "case_id"
     t.integer "finding_class_id"
   end
+
+  add_index "cases_finding_classes_second", ["finding_class_id"], :name => "finding_class_id"
 
   create_table "cases_mailings", :id => false, :force => true do |t|
     t.integer "case_id"
@@ -145,7 +151,11 @@ ActiveRecord::Schema.define(:version => 20090326134412) do
     t.datetime "address_verified_at"
   end
 
-  create_table "doctors", :force => true do |t|
+  add_index "delievery_returns", ["address_verified_at"], :name => "address_verified_at"
+  add_index "delievery_returns", ["fax_sent_at"], :name => "fax_sent_at"
+
+  create_table "doctors", :id => false, :force => true do |t|
+    t.integer  "id",                                  :null => false
     t.string   "code"
     t.string   "speciality"
     t.integer  "praxis_vcard"
@@ -158,6 +168,7 @@ ActiveRecord::Schema.define(:version => 20090326134412) do
     t.string   "password",                            :null => false
   end
 
+  add_index "doctors", ["active"], :name => "active"
   add_index "doctors", ["id"], :name => "id"
   add_index "doctors", ["praxis_vcard"], :name => "doctors_praxis_vcard_index"
   add_index "doctors", ["private_vcard"], :name => "doctors_private_vcard_index"
@@ -166,6 +177,9 @@ ActiveRecord::Schema.define(:version => 20090326134412) do
     t.integer "office_id"
     t.integer "doctor_id"
   end
+
+  add_index "doctors_offices", ["doctor_id"], :name => "doctor_id"
+  add_index "doctors_offices", ["office_id"], :name => "office_id"
 
   create_table "employees", :force => true do |t|
     t.integer "work_vcard_id"
@@ -201,6 +215,9 @@ ActiveRecord::Schema.define(:version => 20090326134412) do
     t.integer "finding_class_id"
     t.integer "finding_group_id"
   end
+
+  add_index "finding_classes_finding_groups", ["finding_class_id"], :name => "finding_class_id"
+  add_index "finding_classes_finding_groups", ["finding_group_id"], :name => "finding_group_id"
 
   create_table "finding_classes_second", :force => true do |t|
     t.text "name"
@@ -240,10 +257,16 @@ ActiveRecord::Schema.define(:version => 20090326134412) do
     t.integer  "doctor_id"
     t.datetime "printed_at"
     t.datetime "email_delivered_at"
+    t.datetime "hl7_delivered_at"
   end
 
   add_index "mailings", ["created_at"], :name => "i1"
   add_index "mailings", ["doctor_id"], :name => "index_mailings_on_doctor_id"
+
+  create_table "new_view", :id => false, :force => true do |t|
+    t.datetime "screened_at"
+    t.integer  "doctor_id"
+  end
 
   create_table "offices", :force => true do |t|
     t.string "name"
@@ -284,6 +307,7 @@ ActiveRecord::Schema.define(:version => 20090326134412) do
   end
 
   add_index "patients", ["billing_vcard_id"], :name => "patients_billing_vcard_id_index"
+  add_index "patients", ["birth_date"], :name => "birth_date"
   add_index "patients", ["doctor_id"], :name => "patients_doctor_id_index"
   add_index "patients", ["insurance_id"], :name => "patients_insurance_id_index"
   add_index "patients", ["updated_at"], :name => "patients_updated_at_index"
@@ -299,6 +323,18 @@ ActiveRecord::Schema.define(:version => 20090326134412) do
   end
 
   add_index "phone_numbers", ["vcard_id"], :name => "phone_numbers_vcard_id_index"
+
+  create_table "postal_codes", :force => true do |t|
+    t.string   "zip_type"
+    t.string   "zip"
+    t.string   "zip_extension"
+    t.string   "locality"
+    t.string   "locality_long"
+    t.string   "canton"
+    t.integer  "imported_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "praxistar_bill_journals", :force => true do |t|
   end
@@ -346,9 +382,12 @@ ActiveRecord::Schema.define(:version => 20090326134412) do
     t.string   "object_type"
     t.boolean  "wants_email",                              :default => false
     t.boolean  "wants_prints",                             :default => true
+    t.boolean  "wants_hl7",                                :default => false
   end
 
   add_index "users", ["login"], :name => "index_users_on_login", :unique => true
+  add_index "users", ["object_id"], :name => "object_id"
+  add_index "users", ["wants_email"], :name => "wants_email"
 
   create_table "vcards", :force => true do |t|
     t.string  "full_name",          :limit => 50
@@ -362,5 +401,9 @@ ActiveRecord::Schema.define(:version => 20090326134412) do
     t.string  "honorific_prefix",   :limit => 50
     t.string  "honorific_suffix",   :limit => 50
   end
+
+  add_index "vcards", ["family_name"], :name => "family_name"
+  add_index "vcards", ["full_name"], :name => "full_name"
+  add_index "vcards", ["given_name"], :name => "given_name"
 
 end

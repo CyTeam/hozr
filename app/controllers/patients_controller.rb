@@ -25,6 +25,14 @@ class PatientsController < ApplicationController
       :limit => 30)
     render :partial => 'full_names'
   end
+
+  def auto_complete_for_vcard_zip_locality
+    @localities = PostalCode.find(:all, 
+      :conditions => [ "zip LIKE :query OR locality LIKE :query", {:query => params[:vcard][:zip_locality].downcase + '%'} ],
+      :order => 'zip',
+      :limit => 30)
+    render :partial => 'postal_codes/zip_localities'
+  end
     
   def index
     list

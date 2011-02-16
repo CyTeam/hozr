@@ -72,4 +72,7 @@ Rails::Initializer.run do |config|
 
   # Print
   config.gem 'cups'
+
+  # Postalcode import
+  config.gem 'fastercsv'
 end
