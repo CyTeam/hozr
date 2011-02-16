@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110216125156) do
+ActiveRecord::Schema.define(:version => 20110216140214) do
 
   create_table "account_receivables", :force => true do |t|
   end
@@ -335,6 +335,8 @@ ActiveRecord::Schema.define(:version => 20110216125156) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "postal_codes", ["zip"], :name => "index_postal_codes_on_zip"
 
   create_table "praxistar_bill_journals", :force => true do |t|
   end

@@ -56,11 +56,22 @@ class Vcard < ActiveRecord::Base
   end
 
   def zip_locality
-    "%s %s" % [address.postal_code, address.locality]
+    result = "%s %s" % [address.postal_code, address.locality]
+    result.strip
   end
   
   def zip_locality=(value)
-    address.postal_code, address.locality = value.split(' ')
+    # 1000 Lausanne
+    # A-89192 Wien
+    # CH 8919 Zug
+    if value.match(/^(([A-Z]{1,2}[- ]?)?[0-9]{4,5}) (.*)$/)
+      address.postal_code = $1
+      address.locality = $3
+    else
+      # Don't loose information otherwise
+      address.postal_code = ''
+      address.locality = value
+    end
   end
   
   def region
