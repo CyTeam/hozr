@@ -23,6 +23,8 @@ class Cyto::CasesController < ApplicationController
   auto_complete_for :finding_class, :selection, :limit => 12
 
   # Auto Completion
+  auto_complete_for_vcard :vcard
+
   def auto_complete_for_patient_full_name
     @patients = Patient.find(:all, 
       :conditions => [ Patient.connection.concat(:family_name, ' ', :given_name) + " LIKE ?",
