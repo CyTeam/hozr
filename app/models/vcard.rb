@@ -77,6 +77,7 @@ class Vcard < ActiveRecord::Base
   end
   
   def zip_locality=(value)
+    create_address if address.nil?
     address.postal_code, address.locality = self.class.parse_zip_locality(value)
   end
   
