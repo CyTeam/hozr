@@ -58,7 +58,7 @@ class PatientsController < ApplicationController
   end
   
   # Search helpers
-  def vcard_conditions(vcard_name = 'vcard')
+  def vcard_conditions
     vcard_params = params[:vcard] || {}
     keys = []
     values = []
@@ -70,7 +70,7 @@ class PatientsController < ApplicationController
       fields[:locality]    = locality if locality.present?
     end
     fields.each { |key, value|
-      keys.push "#{vcard_name}.#{key} LIKE ?"
+      keys.push "#{key} LIKE ?"
       values.push '%' + value.downcase.gsub(' ', '%') + '%'
     }
     
@@ -131,13 +131,11 @@ class PatientsController < ApplicationController
     keys = []
     values = []
 
-    default_vcard_keys, *default_vcard_values = vcard_conditions('vcards')
-    billing_vcard_keys, *billing_vcard_values = vcard_conditions('billing_vcards_patients')
+    default_vcard_keys, *default_vcard_values = vcard_conditions
     
     unless default_vcard_keys.nil?
-      keys.push "( ( #{default_vcard_keys} ) OR ( #{billing_vcard_keys} ) )"
+      keys.push "( #{default_vcard_keys} )"
       values.push *default_vcard_values
-      values.push *billing_vcard_values
     end
 
     patient_keys, *patient_values = patient_conditions
@@ -149,7 +147,7 @@ class PatientsController < ApplicationController
       @patients = []
     else
       conditions = !keys.compact.empty? ? [  keys.compact.join(" AND "), *values ] : nil
-      @patients = Patient.find :all, :conditions => conditions, :include => [:vcard, :billing_vcard], :order => 'vcards.family_name'
+      @patients = Patient.find :all, :conditions => conditions, :include => {:vcard => :address}, :order => 'vcards.family_name'
     end
     
     render :partial => 'list'
