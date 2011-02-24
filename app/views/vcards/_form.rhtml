@@ -17,7 +17,5 @@ Event.observe(window, 'load', function() {$('vcard_honorific_prefix').focus()}, 
   <% end %>
   <%= address.text_field :street_address, :size => 23, :label => "Strasse" %>
   <%= address.text_field :extended_address, :size => 23, :label => "c/o" %>
-  <% unless controller_name == 'search' %>
-    <%= address.text_field_with_auto_complete :zip_locality, :size => 23, :label => "PLZ/Ort" %>
-  <% end %>
+  <%= address.text_field_with_auto_complete :zip_locality, :size => 23, :label => "PLZ/Ort" %>
 <% end %>
