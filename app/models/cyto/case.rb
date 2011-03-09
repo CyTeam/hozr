@@ -16,6 +16,10 @@ class Cyto::Case < ActiveRecord::Base
   
   has_one :order_form, :class_name => 'Cyto::OrderForm'
   
+  # Scopes
+  named_scope :finished, :conditions => ["screened_at IS NOT NULL AND needs_review = ?", false]
+  named_scope :undelivered, :conditions => "email_sent_at IS NULL"
+        
   def to_s
     "#{patient.to_s}: PAP Abstrich #{praxistar_eingangsnr}"
   end
