@@ -1,17 +1,6 @@
 class ReportsController < ApplicationController
   helper :doctors
   
-  def auto_complete_for_patient_full_name
-    @patients = Patient.find(:all, 
-      :conditions => [ Patient.connection.concat(:family_name, ' ', :given_name) + " LIKE ?",
-      '%' + params[:patient][:full_name].downcase.gsub(' ', '%') + '%' ], 
-      :joins => "JOIN vcards ON patients.vcard_id = vcards.id",
-      :select => "patients.*",
-      :order => 'family_name ASC',
-      :limit => 30)
-    render :partial => '/patients/full_names'
-  end
-
   # To make caching easier, add a line like this to config/routes.rb:
   # map.graph "graph/:action/:id/image.png", :controller => "graph"
   #
