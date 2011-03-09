@@ -114,4 +114,12 @@ class MailingsController < ApplicationController
  
     send_data output, :type => 'text/html; charset=utf-8', :disposition => 'inline'
   end
+
+  # Multi Channel
+  def send_by
+    @mailing = Mailing.find(params[:id])
+    @mailing.send_by(params[:channel])
+    
+    render :partial => 'sent_by', :layout => false
+  end
 end

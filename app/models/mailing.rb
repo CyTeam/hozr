@@ -100,4 +100,8 @@ class Mailing < ActiveRecord::Base
 
     return done, failed
   end
+
+  def send_by(channel)
+    SendQueue.create(:mailing => self, :channel => channel.to_s)
+  end
 end
