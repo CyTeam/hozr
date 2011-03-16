@@ -1,6 +1,10 @@
 class SendQueue < ActiveRecord::Base
   belongs_to :mailing
 
+  # Scopes
+  named_scope :sent, :conditions => "sent_at IS NOT NULL"
+  named_scope :unsent, :conditions => {:sent_at => nil}
+  
   # Helpers
   def to_s
     # 13.2.2011: 5 Resultate für Muster per e-mail

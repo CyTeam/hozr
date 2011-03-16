@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110302135326) do
+ActiveRecord::Schema.define(:version => 20110316133729) do
 
   create_table "account_receivables", :force => true do |t|
   end
@@ -354,6 +354,7 @@ ActiveRecord::Schema.define(:version => 20110302135326) do
     t.string   "channel"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.datetime "sent_at"
   end
 
   create_table "shop_orders", :force => true do |t|
