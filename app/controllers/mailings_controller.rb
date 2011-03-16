@@ -11,10 +11,14 @@ class MailingsController < ApplicationController
 
   # Show list of unprinted mailings
   def list_open
-    @mailings = Mailing.with_undelivered_channels
-    render :action => :list
+    @mailings = Mailing.with_unsent_channel
   end
 
+  def generate
+    Mailing.create_all
+    redirect_to :action => 'list_open'
+  end
+  
   # Overview for mailing
   def overview
     @mailing = Mailing.find(params[:id])
@@ -50,11 +54,6 @@ class MailingsController < ApplicationController
     end
   end
 
-  def generate
-    Mailing.create_all
-    redirect_to :action => 'list_open'
-  end
-  
   def generate_overview_for_case_list
     case_ids = params[:ids].split('/')
 
