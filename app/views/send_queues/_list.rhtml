@@ -1,4 +1,4 @@
-<h1>Resultat Emails</h1>
+<h2>Resultat Versand</h2>
 <table class="listing">
 <% 
   old_created_on = nil
@@ -39,7 +39,13 @@
       <%=h mailing.doctor.nil? ? "Unbekannt" : mailing.doctor.name %>
       <pre id="mailing_log_<%=h mailing.id %>"><%= loading_indicator_tag :id => "mailing_#{mailing.id}" %></pre>
     </td>
-    <td><%=h mailing.email_delivered_at.strftime('%d.%m.%Y') unless mailing.email_delivered_at.nil? %></td>
+    <td>
+      <%- for send_queue in mailing.send_queues %>
+        <i><%=h send_queue.channel %>:</i>
+        <%=h send_queue.sent_at.nil? ? "ready to send" : send_queue.sent_at.strftime('%d.%m.%Y') %>
+        <br/>
+      <%- end %>
+    </td>
     <td>
       <%= link_to_remote("Alle Resultate drucken", :update => "mailing_log_#{mailing.id}", :loading => "Element.show('#{loading_indicator_id({:id => "mailing_#{mailing.id}"})}')", :url => {:controller => :mailings, :action => :print, :id => mailing }) %><br/>
       <%= link_to_remote("Nur Übersicht drucken", :update => "mailing_log_#{mailing.id}", :loading => "Element.show('#{loading_indicator_id({:id => "mailing_#{mailing.id}"})}')", :url => {:controller => :mailings, :action => :print_overview, :id => mailing }) %><br/>

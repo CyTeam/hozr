@@ -3,7 +3,7 @@ class Mailing < ActiveRecord::Base
   has_and_belongs_to_many :cases, :class_name => 'Cyto::Case', :order => 'classification_id, praxistar_eingangsnr'
 
   # SendQueue
-  has_many :send_queues
+  has_many :send_queues, :order => 'send_queues.sent_at'
   named_scope :with_unsent_channel, :joins => :send_queues, :conditions => "sent_at IS NULL", :order => 'mailings.created_at'
   
   def self.create(doctor_id, case_ids)
