@@ -5,7 +5,7 @@
   case_count = 0
   doctor_count = 0
 %>
-<% for mailing in Mailing.with_unsent_channel %>
+<% for mailing in @mailings %>
 <% 
   # group header 'created_on'
   created_on = mailing.created_at.to_date
