@@ -2,6 +2,10 @@ class Mailing < ActiveRecord::Base
   belongs_to :doctor
   has_and_belongs_to_many :cases, :class_name => 'Cyto::Case', :order => 'classification_id, praxistar_eingangsnr'
 
+  # SendQueue
+  has_many :send_queues
+  named_scope :with_unsent_channel, :joins => :send_queues, :conditions => "sent_at IS NULL", :order => 'mailings.created_at'
+  
   def self.create(doctor_id, case_ids)
     mailing = self.new
     mailing.doctor_id = doctor_id

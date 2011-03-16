@@ -1,31 +1,11 @@
-<h1>Resultat Briefe</h1>
-<%= link_to_remote "Alle Mailings drucken", :update => 'print_result_reports_log', :loading => "Element.show('#{loading_indicator_id({:id => 'print_result_reports'})}')", :url => {:action => :print_all} %>
-<pre id="print_result_reports_log"><%= loading_indicator_tag :id => 'print_result_reports' %></pre>
-
-<style>
-.listing tr.group_footer td {
-  border: 0px none;
-  border-top: 1px solid;
-  border-bottom: 3px double;
-}
-
-.listing tr.group_body td {
-  border: 0px none;
-}
-
-.listing tr.group_body {
-  border: 0px none;
-}
-
-</style>
-
+<h1>Resultat Emails</h1>
 <table class="listing">
 <% 
   old_created_on = nil
   case_count = 0
   doctor_count = 0
 %>
-<% for mailing in @mailings %>
+<% for mailing in Mailing.with_unsent_channel %>
 <% 
   # group header 'created_on'
   created_on = mailing.created_at.to_date
@@ -48,7 +28,7 @@
     <th style="width: 12em" title="<%= mailing.created_at.strftime('am %d.%m.%Y um %H:%M') %>"><%=h mailing.created_at.strftime('%a %d. %b') %></td>
     <th style="width: 5em; text-align: right">Anzahl</th>
     <th>Arzt</th>
-    <th>Gedruckt am</th>
+    <th>Gesendet am</th>
     <th/>
   </tr>
   <% end %>
@@ -59,10 +39,12 @@
       <%=h mailing.doctor.nil? ? "Unbekannt" : mailing.doctor.name %>
       <pre id="mailing_log_<%=h mailing.id %>"><%= loading_indicator_tag :id => "mailing_#{mailing.id}" %></pre>
     </td>
-    <td><%=h mailing.printed_at.strftime('%d.%m.%Y') unless mailing.printed_at.nil? %></td>
+    <td><%=h mailing.email_delivered_at.strftime('%d.%m.%Y') unless mailing.email_delivered_at.nil? %></td>
     <td>
       <%= link_to_remote("Alle Resultate drucken", :update => "mailing_log_#{mailing.id}", :loading => "Element.show('#{loading_indicator_id({:id => "mailing_#{mailing.id}"})}')", :url => {:controller => :mailings, :action => :print, :id => mailing }) %><br/>
-      <%= link_to_remote("Nur Übersicht drucken", :update => "mailing_log_#{mailing.id}", :loading => "Element.show('#{loading_indicator_id({:id => "mailing_#{mailing.id}"})}')", :url => {:controller => :mailings, :action => :print_overview, :id => mailing }) %>
+      <%= link_to_remote("Nur Übersicht drucken", :update => "mailing_log_#{mailing.id}", :loading => "Element.show('#{loading_indicator_id({:id => "mailing_#{mailing.id}"})}')", :url => {:controller => :mailings, :action => :print_overview, :id => mailing }) %><br/>
+      <%= link_to_remote("E-Mail senden", :update => "mailing_log_#{mailing.id}", :loading => "Element.show('#{loading_indicator_id({:id => "mailing_#{mailing.id}"})}')", :url => {:controller => :mailings, :action => :send_by, :channel => 'email', :id => mailing }) if mailing.doctor.wants_email %><br/>
+      <%= link_to_remote("HL7 senden", :update => "mailing_log_#{mailing.id}", :loading => "Element.show('#{loading_indicator_id({:id => "mailing_#{mailing.id}"})}')", :url => {:controller => :mailings, :action => :send_by, :channel => 'hl7', :id => mailing }) if mailing.doctor.wants_hl7 %>
       <%= button_to "Reaktivieren", :controller => :mailings, :action => :reactivate, :id => mailing %>
     </td>
   </tr>
@@ -74,5 +56,3 @@
 %>
 <% end %>
 </table>
-
-<%= render 'send_queues/list' %>
