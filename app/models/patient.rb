@@ -6,7 +6,7 @@ class Patient < ActiveRecord::Base
   belongs_to :vcard
   belongs_to :billing_vcard, :class_name => 'Vcard', :foreign_key => 'billing_vcard_id'
 
-  has_many :cases, :class_name => 'Case', :order => 'id DESC'
+  has_many :cases, :order => 'id DESC'
   has_many :finished_cases, :class_name => 'Case', :conditions => 'screened_at IS NOT NULL', :order => 'id DESC'
   has_many :bills, :class_name => 'Praxistar::Bill', :foreign_key => 'Patient_ID', :order => 'ID_Rechnung'
   has_many :praxistar_leistungsblaetter, :class_name => 'Praxistar::LeistungenBlatt'

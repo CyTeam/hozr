@@ -1,6 +1,6 @@
 class Case < ActiveRecord::Base
-  belongs_to :examination_method, :class_name => 'ExaminationMethod', :foreign_key => :examination_method_id
-  belongs_to :classification, :class_name => 'Classification', :foreign_key => :classification_id
+  belongs_to :examination_method
+  belongs_to :classification
   belongs_to :patient
   belongs_to :doctor
   belongs_to :screener, :class_name => 'Employee', :foreign_key => :screener_id
@@ -12,7 +12,7 @@ class Case < ActiveRecord::Base
   has_and_belongs_to_many :finding_classes
   has_and_belongs_to_many :mailings
   
-  has_one :order_form, :class_name => 'OrderForm'
+  has_one :order_form
   
   # Scopes
   named_scope :finished, :conditions => ["screened_at IS NOT NULL AND needs_review = ?", false]
