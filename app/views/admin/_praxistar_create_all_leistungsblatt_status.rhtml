@@ -11,7 +11,7 @@
       <td><%=h export.update_count %></td>
       <td><%=h export.create_count %></td>
       <td><% if export.error_ids.present? -%>
-          <% for c in Case.find(export.error_ids.delete(',').split(' ')) -%><%= link_to c.praxistar_eingangsnr, url_for(:controller => 'cyto/cases', :action => 'show', :id => c.id) %> <% end -%>
+          <% for c in Case.find(export.error_ids.delete(',').split(' ')) -%><%= link_to c.praxistar_eingangsnr, url_for(:controller => 'cases', :action => 'show', :id => c.id) %> <% end -%>
         <% end -%></td>
     </tr>
   <% end %>

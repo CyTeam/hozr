@@ -254,6 +254,6 @@ class SearchController < ApplicationController
     end
     
     @include_bill = true
-    render :partial => '/cyto/cases/list'
+    render :partial => 'cases/list'
   end
 end

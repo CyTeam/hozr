@@ -2,33 +2,33 @@
 <table>
   <tr>
     <td style="vertical-align: top">
-      <h2><%= link_to "Anschreiben", :controller => '/cyto/cases', :action => 'unassigned_form' %></h2>
+      <h2><%= link_to "Anschreiben", :controller => 'cases', :action => 'unassigned_form' %></h2>
       <p>
-          <%= link_to image_tag('assign.png'), :controller => '/cyto/cases', :action => 'unassigned_form' %>
+          <%= link_to image_tag('assign.png'), :controller => 'cases', :action => 'unassigned_form' %>
           <i style="font-size: 13pt">Es gibt <b><%= @assign_count %></b> Auftragsformulare.</i>
       </p>
 
-      <h2><%= link_to "Ersteingabe", :controller => '/cyto/cases', :action => 'first_entry_queue' %></h2>
+      <h2><%= link_to "Ersteingabe", :controller => 'cases', :action => 'first_entry_queue' %></h2>
       <p>
-          <%= link_to image_tag('first_entry.png'), :controller => '/cyto/cases', :action => 'first_entry_queue' %>
+          <%= link_to image_tag('first_entry.png'), :controller => 'cases', :action => 'first_entry_queue' %>
           <i style="font-size: 13pt">Es gibt <b><%= @first_entry_count %></b> Ersteingaben.</i>
       </p>
 
-      <h2><%= link_to "Zweiteingabe", :controller => '/cyto/cases', :action => 'second_entry_queue' %></h2>
+      <h2><%= link_to "Zweiteingabe", :controller => 'cases', :action => 'second_entry_queue' %></h2>
       <p>
-          <%= link_to image_tag('second_entry.png'), :controller => '/cyto/cases', :action => 'second_entry_queue' %>
+          <%= link_to image_tag('second_entry.png'), :controller => 'cases', :action => 'second_entry_queue' %>
           <i style="font-size: 13pt">Es gibt <b><%= @second_entry_count %></b> Zweiteingaben.</i>
       </p>
 
-      <h2><%= link_to "HPV/p16", :controller => '/cyto/cases', :action => 'hpv_p16_queue' %></h2>
+      <h2><%= link_to "HPV/p16", :controller => 'cases', :action => 'hpv_p16_queue' %></h2>
       <p>
-          <%= link_to image_tag('second_entry.png'), :controller => '/cyto/cases', :action => 'hpv_p16_queue' %>
+          <%= link_to image_tag('second_entry.png'), :controller => 'cases', :action => 'hpv_p16_queue' %>
           <i style="font-size: 13pt">Es gibt <b><%= @p16_count %></b> p16 (<b><%= @p16_prepared_count %></b> herausgesucht) und <b><%= @hpv_count %></b> HPV</i>
       </p>
 
-      <h2><%= link_to "Review", :controller => '/cyto/cases', :action => 'review_queue' %></h2>
+      <h2><%= link_to "Review", :controller => 'cases', :action => 'review_queue' %></h2>
       <p>
-          <%= link_to image_tag('second_entry.png'), :controller => '/cyto/cases', :action => 'review_queue' %>
+          <%= link_to image_tag('second_entry.png'), :controller => 'cases', :action => 'review_queue' %>
           <i style="font-size: 13pt">Es gibt <b><%= @review_count %></b> Reviews.</i>
       </p>
 

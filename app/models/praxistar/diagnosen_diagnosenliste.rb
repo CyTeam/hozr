@@ -1,5 +1,3 @@
-include Cyto
-
 class Praxistar::DiagnosenDiagnosenliste < Praxistar::Base
   set_table_name "Diagnosen_Diagnosenliste"
   set_primary_key "ID_Diagnosenliste"

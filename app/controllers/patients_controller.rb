@@ -1,5 +1,3 @@
-include Cyto
-
 class PatientsController < ApplicationController
   helper :doctors
   

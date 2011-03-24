@@ -1,5 +1,3 @@
-include Cyto
-
 class Praxistar::PraxilabZuordnung < Praxistar::Base
   set_table_name "Praxilab_Zuordnung"
 

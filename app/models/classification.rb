@@ -1,5 +1,3 @@
-include Cyto
-
 class Classification < ActiveRecord::Base
   has_many :classification_tarmed_leistungen, :order => 'position'
   has_many :tarmed_leistungen, :class_name => 'ClassificationTarmedLeistungen', :order => 'position DESC'

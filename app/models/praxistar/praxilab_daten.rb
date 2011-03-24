@@ -1,5 +1,3 @@
-include Cyto
-
 class Praxistar::PraxilabDaten < Praxistar::Base
   set_table_name "Praxilab_Daten"
   set_primary_key "ID_Praxilab"

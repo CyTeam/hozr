@@ -1,5 +1,3 @@
-include Cyto
-
 class Case < ActiveRecord::Base
   belongs_to :examination_method, :class_name => 'ExaminationMethod', :foreign_key => :examination_method_id
   belongs_to :classification, :class_name => 'Classification', :foreign_key => :classification_id

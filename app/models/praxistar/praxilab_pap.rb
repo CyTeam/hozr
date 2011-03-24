@@ -1,5 +1,3 @@
-include Cyto
-
 class Praxistar::PraxilabPap < Praxistar::Base
   set_table_name "Praxilab_PAP"
   set_primary_key "ID_PAP"
