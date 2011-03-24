@@ -1,6 +1,6 @@
 <h1>Verteilen</h1>
 <% 
-@cases = Cyto::Case.find(:all, :conditions => ['assigned_at IS NOT NULL AND scheduled_at IS NULL AND doctor_id > 0'])
+@cases = Case.find(:all, :conditions => ['assigned_at IS NOT NULL AND scheduled_at IS NULL AND doctor_id > 0'])
 
 doctor_ids = @cases.map {|a_case| a_case.doctor_id}.uniq
 %>

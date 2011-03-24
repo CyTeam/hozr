@@ -1,0 +1,13 @@
+<h1>Top Befunde</h1>
+
+<dl>
+  <% for classification in Classification.find(:all, :order => 'name') %>
+    <dt style="font-weight: bold"><%= link_to h(classification.name), :controller => 'top_finding_classes', :action => 'edit_classification', 'top_finding_class[classification_id]' => classification.id %> (<%= classification.examination_method.name %>)</dt>
+    <% for finding_class in classification.top_finding_classes %>
+      <dd>
+        <span style="font-weight: bold"><%=h finding_class.code %></span> - <%=h finding_class.name %>
+        <%= link_to image_tag('remove.png'), { :controller => 'top_finding_classes', :action => 'destroy', :id => finding_class }, :confirm => 'Are you sure?', :method => :post %>
+      </dd>
+    <% end %>
+  <% end %>
+</dl>

@@ -6,17 +6,19 @@ class MailingsController < ApplicationController
 
   # Show list of mailings
   def list
-    @mailings = Mailing.find(:all, :include => {:doctor => :user }, :order => 'mailings.created_at DESC', :conditions => ['users.wants_prints IS NULL OR users.wants_prints = ?', true], :limit => 100)
-    @email_mailings = Mailing.find(:all, :include => {:doctor => :user }, :order => 'mailings.created_at DESC', :conditions => ['users.wants_email = ?', true], :limit => 100)
+    @mailings = Mailing.find(:all, :order => 'mailings.created_at DESC', :limit => 100)
   end
 
   # Show list of unprinted mailings
   def list_open
-    @mailings = Mailing.find(:all, :include => {:doctor => :user }, :order => 'mailings.created_at DESC', :conditions => ['printed_at IS NULL AND (users.wants_prints IS NULL OR users.wants_prints = ?)', true])
-    @email_mailings = Mailing.find(:all, :include => {:doctor => :user }, :order => 'mailings.created_at DESC', :conditions => ['email_delivered_at IS NULL AND users.wants_email = ?', true])
-    render :action => :list
+    @mailings = Mailing.with_unsent_channel
   end
 
+  def generate
+    Mailing.create_all
+    redirect_to :action => 'list_open'
+  end
+  
   # Overview for mailing
   def overview
     @mailing = Mailing.find(params[:id])
@@ -24,6 +26,13 @@ class MailingsController < ApplicationController
     @doctor = @mailing.doctor
     @cases = @mailing.cases
   end
+  
+  def show
+    overview
+    
+    render 'overview'
+  end
+  
 
   def overview_for_pdf
     overview
@@ -34,9 +43,9 @@ class MailingsController < ApplicationController
     @doctor = Doctor.find(params[:doctor_id])
     case_conditions = YAML.load(params[:case_conditions])
     
-    count = Cyto::Case.count(:conditions => case_conditions)
-    Cyto::Case.send('with_scope', :find => {:conditions => case_conditions }) do
-      @records = Cyto::Case.find( :all, :select => "classifications.name AS Pap, count(*) AS Anzahl, count(*)/#{count}*100.0 AS Prozent", :joins => 'LEFT JOIN classifications ON classification_id = classifications.id', :group => 'classifications.code', :conditions => case_conditions)
+    count = Case.count(:conditions => case_conditions)
+    Case.send('with_scope', :find => {:conditions => case_conditions }) do
+      @records = Case.find( :all, :select => "classifications.name AS Pap, count(*) AS Anzahl, count(*)/#{count}*100.0 AS Prozent", :joins => 'LEFT JOIN classifications ON classification_id = classifications.id', :group => 'classifications.code', :conditions => case_conditions)
       render :action => 'statistics'
     end
   end
@@ -45,23 +54,18 @@ class MailingsController < ApplicationController
     @doctor = Doctor.find(params[:doctor_id])
     case_conditions = YAML.load(params[:case_conditions])
     
-    count = Cyto::Case.count(:conditions => case_conditions)
-    Cyto::Case.send('with_scope', :find => {:conditions => case_conditions }) do
-      @records = Cyto::Case.find( :all, :select => "classifications.name AS Pap, count(*) AS Anzahl, count(*)/#{count}*100.0 AS Prozent", :joins => 'LEFT JOIN classifications ON classification_id = classifications.id', :group => 'classifications.code', :conditions => case_conditions)
+    count = Case.count(:conditions => case_conditions)
+    Case.send('with_scope', :find => {:conditions => case_conditions }) do
+      @records = Case.find( :all, :select => "classifications.name AS Pap, count(*) AS Anzahl, count(*)/#{count}*100.0 AS Prozent", :joins => 'LEFT JOIN classifications ON classification_id = classifications.id', :group => 'classifications.code', :conditions => case_conditions)
       render :action => 'statistics', :layout => 'stats_letter_for_pdf'
     end
   end
 
-  def generate
-    Mailing.create_all
-    redirect_to :action => 'list_open'
-  end
-  
   def generate_overview_for_case_list
     case_ids = params[:ids].split('/')
 
     # Check if all cases belong to the same doctor
-    cases = Cyto::Case.find(case_ids)
+    cases = Case.find(case_ids)
     doctor_ids = cases.map {|c| c.doctor_id}
     raise 'All cases in a mailing need to belong to same doctor' unless doctor_ids.uniq.size == 1
 

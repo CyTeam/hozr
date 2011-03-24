@@ -1,0 +1,91 @@
+<%= loading_indicator_tag :id => 'search' %>
+<table class="listing">
+  <tr>
+    <%=sort_header('entry_date', 'Erfasst am') %>
+    <%=sort_header('praxistar_eingangsnr', 'Eingangsnr') %>
+    <%=sort_header('classification_id', 'Klassifikation') %>
+    <th>Diagnose</th>
+    <%=sort_header('patient_id', 'Patient') %>
+    <%=sort_header('doctor_id', 'Arzt') %>
+    <%=sort_header('screener_id', 'Zytologin') %>
+    <th>Scan</th>
+    <th>P16</th>
+    <th>HPV</th>
+    <th>Status</th>
+    <% if @include_bill %><th>Rechnung</th><% end %>
+  </tr>
+  
+<% for a_case in @cases %>
+  <% case_nr = "#{a_case.praxistar_eingangsnr}" %>
+  <% case_nr += " (#{a_case.intra_day_id})" unless a_case.intra_day_id.nil? %>
+  <tr>
+    <td>
+      <%=h a_case.entry_date unless a_case.entry_date.nil? %>
+      <%=h "(#{a_case.first_entry_by.code})" unless a_case.first_entry_by.nil? %>
+    </td>
+    <td><%= 
+      if a_case.ready_for_first_entry
+        link_to h(case_nr), :controller => 'cases', :action => 'first_entry', :id => a_case
+      elsif a_case.ready_for_second_entry
+        link_to h(case_nr), :controller => 'cases', :action => 'second_entry_pap_form', :id => a_case
+            elsif a_case.ready_for_p16
+        link_to h(case_nr), :controller => 'cases', :action => 'second_entry_pap_form', :id => a_case
+      else
+        link_to h(case_nr), :controller => 'cases', :action => 'result_report', :id => a_case
+      end
+    %></td>
+    <td class="PAP_<%=h a_case.classification.code unless a_case.classification.nil? %>" style="border-style: solid; border-width: 4px"><%=h a_case.classification.name unless a_case.classification.nil? %></td>
+    <td>
+    <% for finding in a_case.finding_classes %>
+      <div><%=h "#{finding.code} - #{finding.name}" %></div>
+    <% end %>
+    </td>
+    <td><%= render :partial => '/patients/compact', :object => a_case.patient unless a_case.patient.nil? %></td>
+    <td><%=h a_case.doctor.name unless a_case.doctor.nil? %></td>
+    <td><%=h a_case.screener.code unless a_case.screener.nil? %></td>
+    <td><% if a_case.order_form %>
+      <%= link_to "Auftrag", url_for_file_column(a_case.order_form, "file") %> <%= link_to "Klinische Symptome", url_for_file_column(a_case.order_form, "file", "remarks") %> <%= link_to "Personalien", url_for_file_column(a_case.order_form, "file", "address") %>
+    <% end %>
+    </td>
+    <td><%= "X" if a_case.needs_p16? %></td>
+    <td><%= "X" if a_case.needs_hpv? %></td>
+    <td>
+      sign:&nbsp;<%= a_case.screened_at.strftime("%d.%m.%Y") unless a_case.screened_at.nil? %><br/>
+      vers:&nbsp;<% for mailing in a_case.mailings %>
+        <%= link_to mailing.created_at.strftime("%d.%m.%Y"), mailing %>
+      <% end %>
+      <% if a_case.needs_p16? or a_case.needs_hpv? %>
+        <br/>
+        <% if a_case.hpv_p16_prepared_at %>
+          HPV/P16:&nbsp;<%= a_case.hpv_p16_prepared_at.strftime('%d.%m.%Y') %> <%= a_case.hpv_p16_prepared_by.nil? ? "" : a_case.hpv_p16_prepared_by.code %>
+        <% else %>
+          HPV/P16:&nbsp;<span id="prepare_hpv_p16_<%= a_case.id %>"><%= link_to_remote image_tag('prepare_p16.png'), :update => "prepare_hpv_p16_#{a_case.id}", :url => { :controller => 'cases', :action => 'hpv_p16_prepared', :id => a_case } %></span>
+        <% end %>
+      <% end %>
+    </td>
+    <% if @include_bill %>
+      <td>
+        <%= link_to "Rechnung", :controller => '/bills', :action => 'search_by_patient', :id => a_case.patient %>
+      </td>
+    <% end %>
+    <td>
+      <%= link_to image_tag('editinput.png'), :controller => 'cases', :action => 'edit', :id => a_case %>
+      <%= link_to image_tag('remove.png'), { :controller => 'cases', :action => 'destroy', :id => a_case }, :confirm => 'Are you sure?', :method => :post if false %>
+      <%= link_to image_tag('print.png', :title => 'Drucke Resultat'), :controller => 'cases', :action => :print_result_report, :id => a_case %>
+      <%= link_to image_tag('fax.png', :title => 'Drucke Fax'), :controller => 'cases', :action => :print_result_report_as_fax, :id => a_case %>
+      <%= link_to image_tag('export_bill_16.png', :title => 'Generiere Leistungsblatt'), :controller => 'admin', :action => :praxistar_create_leistungsblatt, :id => a_case if a_case.ready_for_praxistar_create_leistungsblatt %>
+      <%= link_to image_tag('additional_case.png', :title => 'Nachträglicher HPV/P16'), :controller => 'cases', :action => :create_hpv_p16_for_case, :id => a_case %> <% # unless a_case.result_report_printed_at.nil? %>
+      <%= link_to image_tag('select_16.png', :title => '2. Eingabe bestätigen'), :controller => 'cases', :action => :review_done, :id => a_case if a_case.needs_review? -%>
+    </td>
+  </tr>
+<% end %>
+</table>
+
+<%= link_to "Übersicht generieren", :controller => '/mailings', :action => 'generate_overview_for_case_list', :ids => @cases.map { |c| c.id } %>
+<%= link_to_remote image_tag('print.png'), :update => 'print_log', :loading => "Element.show('#{loading_indicator_id({:id => 'print'})}')", :url => { :controller => 'cases', :action => :print_result_report, :ids => @cases.map { |c| c.id } } %>
+
+<div id="print_log" style="border: solid 1px; background-color: #BBBBBB">
+    <%= loading_indicator_tag :id => 'print' %>
+</div>
+
+<%= will_paginate @cases, :params => {:query => params[:order]} %>

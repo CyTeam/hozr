@@ -1,3 +1,3 @@
 class ClassificationGroup < ActiveRecord::Base
-  has_many :classifications, :class_name => 'Cyto::Classification'
+  has_many :classifications
 end

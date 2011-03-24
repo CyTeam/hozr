@@ -1,0 +1,21 @@
+<%= error_messages_for 'case' %>
+
+<!--[form:case]-->
+<%= image_tag url_for_image_column(@case.order_form, "file", :address) unless @case.order_form.nil? %>
+
+<p><label for="case_examination_date">Abstrichdatum</label><br/>
+<%= text_field 'case', 'examination_date'  %></p>
+
+<p><label for="case_entry_date">Eingangsdatum</label><br/>
+<%= text_field 'case', 'entry_date'  %></p>
+
+<p><label for="case_praxistar_eingangsnr">Eingangsnr</label><br/>
+<%= text_field 'case', 'praxistar_eingangsnr'  %></p>
+
+<p><label for="case_doctor_id">Arzt:</label><br/>
+<%= select :case, :doctor_id, Doctor.find(:all).collect { |m| [ m.name, m.id ] } %></p>
+
+<p><label for="case_examination_method_id">Methode</label><br/>
+<%= select :case, :examination_method_id, ExaminationMethod.all.collect { |m| [ m.name, m.id ] } %></p>
+<!--[eoform:case]-->
+

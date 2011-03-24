@@ -1,5 +1,3 @@
-include Cyto
-
 class PatientsController < ApplicationController
   helper :doctors
   
@@ -119,7 +117,7 @@ class PatientsController < ApplicationController
   end
   
   def search
-    @case = Cyto::Case.find(params[:case_id]) unless params[:case_id].nil?
+    @case = Case.find(params[:case_id]) unless params[:case_id].nil?
 
     # If entry_nr is given, take it as the only condition
     eingangsnr = params[:search][:praxistar_eingangsnr]
@@ -154,7 +152,7 @@ class PatientsController < ApplicationController
   end
   
   def search_by_eingangsnr
-    @patients = [ Patient.find(Cyto::Case.find_by_praxistar_eingangsnr(Cyto::CaseNr.new(params[:search][:praxistar_eingangsnr]).to_s).patient_id) ]
+    @patients = [ Patient.find(Case.find_by_praxistar_eingangsnr(CaseNr.new(params[:search][:praxistar_eingangsnr]).to_s).patient_id) ]
   
     render :partial => 'list'
   end
@@ -178,7 +176,7 @@ class PatientsController < ApplicationController
     @vcard.honorific_prefix = 'Frau'
 
     if params[:case_id]
-      @case = Cyto::Case.find(params[:case_id])
+      @case = Case.find(params[:case_id])
       @patient.doctor = @case.doctor
     end
 
@@ -227,7 +225,7 @@ class PatientsController < ApplicationController
     @billing_vcard = @patient.billing_vcard
 
     if params[:case_id]
-      @case = Cyto::Case.find(params[:case_id])
+      @case = Case.find(params[:case_id])
       @patient.doctor = @case.doctor
     end
 

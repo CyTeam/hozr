@@ -59,3 +59,18 @@ td.embedded_bill_state_prosecuted{
 td.bill_state_prosecuted {
   background-color: red;
 }
+
+/* Grouping for mailings */
+.listing tr.group_footer td {
+  border: 0px none;
+  border-top: 1px solid;
+  border-bottom: 3px double;
+}
+
+.listing tr.group_body td {
+  border: 0px none;
+}
+
+.listing tr.group_body {
+  border: 0px none;
+}

@@ -1,5 +1,3 @@
-include Cyto
-
 class Mailer < ActionMailer::Base
   TEMP_DIR = File.join(File.dirname(__FILE__), '..', '..', 'tmp', 'mailer')
   
@@ -12,7 +10,7 @@ class Mailer < ActionMailer::Base
 
     case email.subject
     when 'hozr_scan_200dpi'
-      page_model = Cyto::OrderForm
+      page_model = OrderForm
     else
       page_model = Page
     end

@@ -3,13 +3,13 @@ class AdminController < ApplicationController
   end
 
   def praxistar_create_all_leistungsblatt
-    Cyto::Case.praxistar_create_all_leistungsblatt
+    Case.praxistar_create_all_leistungsblatt
     
     render :partial => 'praxistar_create_all_leistungsblatt_status'
   end
 
   def praxistar_create_leistungsblatt
-    Cyto::Case.find(params[:id]).praxistar_create_leistungsblatt
+    Case.find(params[:id]).praxistar_create_leistungsblatt
     
     redirect_to :controller => 'search', :action => ''
   end
@@ -21,7 +21,7 @@ class AdminController < ApplicationController
   end
 
   def import_order_forms
-    Cyto::OrderForm.import_order_forms
+    OrderForm.import_order_forms
 
     render :partial => 'import_order_forms_status'
   end
@@ -32,7 +32,7 @@ class AdminController < ApplicationController
   end
   
   def unsign_case
-    a_case = Cyto::Case.find(params[:id])
+    a_case = Case.find(params[:id])
     a_case.signed_at = nil
     a_case.save
   end

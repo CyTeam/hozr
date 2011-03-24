@@ -16,7 +16,7 @@ class Praxistar::Bill < Praxistar::Base
   end
   
   def cyto_case
-    Cyto::Case.find(:first, :conditions => ['praxistar_leistungsblatt_id = ?', self[:Leistungsblatt_ID]])
+    Case.find(:first, :conditions => ['praxistar_leistungsblatt_id = ?', self[:Leistungsblatt_ID]])
   end
 
   def payment_state

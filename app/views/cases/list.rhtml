@@ -1,0 +1,12 @@
+<h1>Untersuche</h1>
+
+<% form_tag :action=> :search  do %>
+  Eingangsnr: <%= text_field 'case_search', 'praxistar_eingangsnr' %>
+  Arzt: <%= select_doctors :object => 'case_search' %> <%= submit_tag 'Suchen', :style => "display: inline" %>
+<% end %>
+
+<%= render :partial => 'cases/list' %>
+
+<br />
+
+<%= link_to 'New case', :action => 'new' %>

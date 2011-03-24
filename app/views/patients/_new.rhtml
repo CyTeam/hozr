@@ -1,4 +1,4 @@
-<% form_tag :controller => '/cyto/cases', :action => 'set_patient', :id => @case  do %>
+<% form_tag :controller => 'cases', :action => 'set_patient', :id => @case  do %>
   <%= render :partial => '/patients/form' %>
   <%= submit_to_remote 'submit', 'Anlegen', { :url => {:controller => 'patients', :action => 'create' }, :failure => 'alert("Fehler! Ramon informieren!")', :success => "Element.update('edit_form', '')" } %>
   <%= submit_tag 'Anlegen & Übernehmen' %>
