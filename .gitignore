@@ -56,3 +56,7 @@ public/histo
 public/mailing_overviews
 public/mailing_statistics
 public/photos
+
+# redcar
+.redcar/
+.project
