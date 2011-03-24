@@ -10,6 +10,18 @@ table.listing tr td.total {
 </style>
 
 <h1>Debitoren</h1>
+
+<p> Start Datum: <%= @sdat %></p>
+<p> End Datum: <%= @edat %> </p>
+
+<!-- http://code.google.com/p/calendardateselect/wiki/Documentation -->
+<%= javascript_include_tag :defaults %>
+<%= calendar_date_select_includes "silver" %>
+<%= calendar_date_select_tag "startd", "", :year_range => 5.years.ago..0.years.from_now, :after_navigate => "log('Current month is ' + (param.getMonth()+1) + '/' + (param.getFullYear()));", :popup => :force %>
+<%= calendar_date_select_tag "etartd", "", :year_range => 5.years.ago..0.years.from_now, :after_navigate => "log('Current month is ' + (param.getMonth()+1) + '/' + (param.getFullYear()));", :popup => :force %>
+
+
+</pre>
 <table class="listing" style="width: 45%">
   <tr>
     <th>Name</th>

@@ -61,6 +61,9 @@ Rails::Initializer.run do |config|
 #  config.i18n.load_path << Dir[File.join(RAILS_ROOT, 'config', 'locales', '*', '*.{rb,yml}')]
 #  config.i18n.default_locale = 'de-CH'
 
+  # calendar_date_select
+  config.gem "calendar_date_select"
+  
   # Pagination
   config.gem 'will_paginate'
 
