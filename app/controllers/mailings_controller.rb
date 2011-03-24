@@ -26,6 +26,13 @@ class MailingsController < ApplicationController
     @doctor = @mailing.doctor
     @cases = @mailing.cases
   end
+  
+  def show
+    overview
+    
+    render 'overview'
+  end
+  
 
   def overview_for_pdf
     overview
