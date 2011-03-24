@@ -60,3 +60,5 @@ public/photos
 # redcar
 .redcar/
 .project
+public/passenger.3000.log
+public/passenger.3000.pid.lock
