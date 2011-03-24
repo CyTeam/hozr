@@ -51,7 +51,9 @@
     <td><%= "X" if a_case.needs_hpv? %></td>
     <td>
       sign:&nbsp;<%= a_case.screened_at.strftime("%d.%m.%Y") unless a_case.screened_at.nil? %><br/>
-      gedr:&nbsp;<%= a_case.result_report_printed_at.strftime("%d.%m.%Y") unless a_case.result_report_printed_at.nil? %>
+      vers:&nbsp;<% for mailing in a_case.mailings %>
+        <%= link_to mailing.created_at.strftime("%d.%m.%Y"), :controller => 'mailings', :action => 'show', :id => mailing.id %>
+      <% end %>
       <% if a_case.needs_p16? or a_case.needs_hpv? %>
         <br/>
         <% if a_case.hpv_p16_prepared_at %>
