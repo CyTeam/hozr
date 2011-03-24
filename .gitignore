@@ -50,7 +50,7 @@ public/javascripts/tiny_mce
 # hozr excludes
 public/result_reports
 public/doctor_letters
-public/cyto
+public/order_form
 public/page
 public/histo
 public/mailing_overviews
