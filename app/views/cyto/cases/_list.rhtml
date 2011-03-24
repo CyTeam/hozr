@@ -52,7 +52,7 @@
     <td>
       sign:&nbsp;<%= a_case.screened_at.strftime("%d.%m.%Y") unless a_case.screened_at.nil? %><br/>
       vers:&nbsp;<% for mailing in a_case.mailings %>
-        <%= link_to mailing.created_at.strftime("%d.%m.%Y"), :controller => 'mailings', :action => 'show', :id => mailing.id %>
+        <%= link_to mailing.created_at.strftime("%d.%m.%Y"), mailing %>
       <% end %>
       <% if a_case.needs_p16? or a_case.needs_hpv? %>
         <br/>
