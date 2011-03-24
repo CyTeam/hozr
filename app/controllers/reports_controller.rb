@@ -81,11 +81,11 @@ class ReportsController < ApplicationController
       if case_params[:praxistar_eingangsnr].match /bis/
         lower_bound, higher_bound = case_params[:praxistar_eingangsnr].split('bis')
         case_keys.push "praxistar_eingangsnr BETWEEN ? AND ?"
-        case_values.push Cyto::CaseNr.new(lower_bound).to_s.strip
-        case_values.push Cyto::CaseNr.new(higher_bound).to_s.strip
+        case_values.push CaseNr.new(lower_bound).to_s.strip
+        case_values.push CaseNr.new(higher_bound).to_s.strip
       else
         case_keys.push "praxistar_eingangsnr = ?"
-        case_values.push Cyto::CaseNr.new(case_params[:praxistar_eingangsnr]).to_s.strip
+        case_values.push CaseNr.new(case_params[:praxistar_eingangsnr]).to_s.strip
       end
     end
     
@@ -163,13 +163,13 @@ class ReportsController < ApplicationController
     case_conditions = !case_keys.empty? ? [  case_keys.join(" AND "), *case_values ] : nil
     
     # The following doesn't work 'cause of a known bug: :include overrides :select
-    # @records = Cyto::Case.find( :all, :select => "classifications.code AS Pap, count(*) AS Anzahl, count(*)/(SELECT count(*) FROM cases)*100.0 AS Prozent", :include => 'classification', :group => 'classifications.code',  :order => "#{order}")
+    # @records = Case.find( :all, :select => "classifications.code AS Pap, count(*) AS Anzahl, count(*)/(SELECT count(*) FROM cases)*100.0 AS Prozent", :include => 'classification', :group => 'classifications.code',  :order => "#{order}")
     
-    count = Cyto::Case.count(:conditions => case_conditions)
+    count = Case.count(:conditions => case_conditions)
     
 
-    Cyto::Case.send('with_scope', :find => {:conditions => case_conditions }) do
-      @records = Cyto::Case.find( :all, :select => "classifications.name AS Pap, count(*) AS Anzahl, count(*)/#{count}*100.0 AS Prozent", :joins => 'LEFT JOIN classifications ON classification_id = classifications.id', :group => 'classifications.code',  :order => order, :conditions => case_conditions)
+    Case.send('with_scope', :find => {:conditions => case_conditions }) do
+      @records = Case.find( :all, :select => "classifications.name AS Pap, count(*) AS Anzahl, count(*)/#{count}*100.0 AS Prozent", :joins => 'LEFT JOIN classifications ON classification_id = classifications.id', :group => 'classifications.code',  :order => order, :conditions => case_conditions)
       @case_conditions = case_conditions
       @doctor_id = doctor_params[:doctor_id]
       render :partial => 'report'
@@ -189,11 +189,11 @@ class ReportsController < ApplicationController
 
     g.title = "Anzahl PAP"
     
-    g.data("Total", [ Cyto::Case.count( :all, :conditions => "praxistar_eingangsnr > '02/' and praxistar_eingangsnr < '99/' and praxistar_eingangsnr < '03/'"), Cyto::Case.count( :all, :conditions => "praxistar_eingangsnr > '03/' and praxistar_eingangsnr < '99/' and praxistar_eingangsnr < '04/'"), Cyto::Case.count( :all, :conditions => "praxistar_eingangsnr > '04/' and praxistar_eingangsnr < '99/' and praxistar_eingangsnr < '05/'"), Cyto::Case.count( :all, :conditions => "praxistar_eingangsnr > '05/' and praxistar_eingangsnr < '99/' and praxistar_eingangsnr < '06/'"), Cyto::Case.count( :all, :conditions => "praxistar_eingangsnr > '06/' and praxistar_eingangsnr < '99/' and praxistar_eingangsnr < '07/'"), Cyto::Case.count( :all, :conditions => "praxistar_eingangsnr > '07/' and praxistar_eingangsnr < '99/' and praxistar_eingangsnr < '08/'")])
+    g.data("Total", [ Case.count( :all, :conditions => "praxistar_eingangsnr > '02/' and praxistar_eingangsnr < '99/' and praxistar_eingangsnr < '03/'"), Case.count( :all, :conditions => "praxistar_eingangsnr > '03/' and praxistar_eingangsnr < '99/' and praxistar_eingangsnr < '04/'"), Case.count( :all, :conditions => "praxistar_eingangsnr > '04/' and praxistar_eingangsnr < '99/' and praxistar_eingangsnr < '05/'"), Case.count( :all, :conditions => "praxistar_eingangsnr > '05/' and praxistar_eingangsnr < '99/' and praxistar_eingangsnr < '06/'"), Case.count( :all, :conditions => "praxistar_eingangsnr > '06/' and praxistar_eingangsnr < '99/' and praxistar_eingangsnr < '07/'"), Case.count( :all, :conditions => "praxistar_eingangsnr > '07/' and praxistar_eingangsnr < '99/' and praxistar_eingangsnr < '08/'")])
 
-    g.data("PAP I", [ Cyto::Case.count( :all, :conditions => "praxistar_eingangsnr > '02/' and praxistar_eingangsnr < '99/' and praxistar_eingangsnr < '03/' and classification_id = 1"), Cyto::Case.count( :all, :conditions => "praxistar_eingangsnr > '03/' and praxistar_eingangsnr < '99/' and praxistar_eingangsnr < '04/' and classification_id = 1"), Cyto::Case.count( :all, :conditions => "praxistar_eingangsnr > '04/' and praxistar_eingangsnr < '99/' and praxistar_eingangsnr < '05/' and classification_id = 1"), Cyto::Case.count( :all, :conditions => "praxistar_eingangsnr > '05/' and praxistar_eingangsnr < '99/' and praxistar_eingangsnr < '06/' and classification_id = 1"), Cyto::Case.count( :all, :conditions => "praxistar_eingangsnr > '06/' and praxistar_eingangsnr < '99/' and praxistar_eingangsnr < '07/' and classification_id = 1"), Cyto::Case.count( :all, :conditions => "praxistar_eingangsnr > '07/' and praxistar_eingangsnr < '99/' and praxistar_eingangsnr < '08/' and classification_id = 1")])
+    g.data("PAP I", [ Case.count( :all, :conditions => "praxistar_eingangsnr > '02/' and praxistar_eingangsnr < '99/' and praxistar_eingangsnr < '03/' and classification_id = 1"), Case.count( :all, :conditions => "praxistar_eingangsnr > '03/' and praxistar_eingangsnr < '99/' and praxistar_eingangsnr < '04/' and classification_id = 1"), Case.count( :all, :conditions => "praxistar_eingangsnr > '04/' and praxistar_eingangsnr < '99/' and praxistar_eingangsnr < '05/' and classification_id = 1"), Case.count( :all, :conditions => "praxistar_eingangsnr > '05/' and praxistar_eingangsnr < '99/' and praxistar_eingangsnr < '06/' and classification_id = 1"), Case.count( :all, :conditions => "praxistar_eingangsnr > '06/' and praxistar_eingangsnr < '99/' and praxistar_eingangsnr < '07/' and classification_id = 1"), Case.count( :all, :conditions => "praxistar_eingangsnr > '07/' and praxistar_eingangsnr < '99/' and praxistar_eingangsnr < '08/' and classification_id = 1")])
 
-    g.data("PAP II", [ Cyto::Case.count( :all, :conditions => "praxistar_eingangsnr > '02/' and praxistar_eingangsnr < '99/' and praxistar_eingangsnr < '03/' and classification_id = 2"), Cyto::Case.count( :all, :conditions => "praxistar_eingangsnr > '03/' and praxistar_eingangsnr < '99/' and praxistar_eingangsnr < '04/' and classification_id = 2"), Cyto::Case.count( :all, :conditions => "praxistar_eingangsnr > '04/' and praxistar_eingangsnr < '99/' and praxistar_eingangsnr < '05/' and classification_id = 2"), Cyto::Case.count( :all, :conditions => "praxistar_eingangsnr > '05/' and praxistar_eingangsnr < '99/' and praxistar_eingangsnr < '06/' and classification_id = 2"), Cyto::Case.count( :all, :conditions => "praxistar_eingangsnr > '06/' and praxistar_eingangsnr < '99/' and praxistar_eingangsnr < '07/' and classification_id = 2"), Cyto::Case.count( :all, :conditions => "praxistar_eingangsnr > '07/' and praxistar_eingangsnr < '99/' and praxistar_eingangsnr < '08/' and classification_id = 2")])
+    g.data("PAP II", [ Case.count( :all, :conditions => "praxistar_eingangsnr > '02/' and praxistar_eingangsnr < '99/' and praxistar_eingangsnr < '03/' and classification_id = 2"), Case.count( :all, :conditions => "praxistar_eingangsnr > '03/' and praxistar_eingangsnr < '99/' and praxistar_eingangsnr < '04/' and classification_id = 2"), Case.count( :all, :conditions => "praxistar_eingangsnr > '04/' and praxistar_eingangsnr < '99/' and praxistar_eingangsnr < '05/' and classification_id = 2"), Case.count( :all, :conditions => "praxistar_eingangsnr > '05/' and praxistar_eingangsnr < '99/' and praxistar_eingangsnr < '06/' and classification_id = 2"), Case.count( :all, :conditions => "praxistar_eingangsnr > '06/' and praxistar_eingangsnr < '99/' and praxistar_eingangsnr < '07/' and classification_id = 2"), Case.count( :all, :conditions => "praxistar_eingangsnr > '07/' and praxistar_eingangsnr < '99/' and praxistar_eingangsnr < '08/' and classification_id = 2")])
 
     g.labels = {0 => '2002', 1 => '2003', 2 => '2004', 3 => '2005', 4 => '2006', 5 => '2007' }
 

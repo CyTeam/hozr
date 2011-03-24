@@ -1,2 +1,2 @@
-module Cyto::FindingClassesHelper
+module FindingClassesHelper
 end

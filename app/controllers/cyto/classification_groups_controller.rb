@@ -1,4 +1,4 @@
-class Cyto::ClassificationGroupsController < ApplicationController
+class ClassificationGroupsController < ApplicationController
   def list
     @classification_groups = ClassificationGroup.find(:all, :order => 'position')
   end

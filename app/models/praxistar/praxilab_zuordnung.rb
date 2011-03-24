@@ -9,7 +9,7 @@ class Praxistar::PraxilabZuordnung < Praxistar::Base
     for a in find(:all)
       begin
         print "#{a.Praxilab_ID}\n"
-        c = Cyto::Case.find(a.Praxilab_ID)
+        c = Case.find(a.Praxilab_ID)
         c.finding_classes<< FindingClass.find(a.Diagnosenliste_ID)
       rescue ActiveRecord::RecordNotFound
         c.logger.info "ID: #{a.Praxilab_ID} => not yet imported\n"

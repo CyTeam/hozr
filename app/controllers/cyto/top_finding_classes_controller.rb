@@ -1,6 +1,6 @@
 include Cyto
 
-class Cyto::TopFindingClassesController < ApplicationController
+class TopFindingClassesController < ApplicationController
   def index
     list
     render :action => 'list'

@@ -16,6 +16,6 @@
 <%= select :case, :doctor_id, Doctor.find(:all).collect { |m| [ m.name, m.id ] } %></p>
 
 <p><label for="case_examination_method_id">Methode</label><br/>
-<%= select :case, :examination_method_id, Cyto::ExaminationMethod.all.collect { |m| [ m.name, m.id ] } %></p>
+<%= select :case, :examination_method_id, ExaminationMethod.all.collect { |m| [ m.name, m.id ] } %></p>
 <!--[eoform:case]-->
 

@@ -5,13 +5,13 @@
     <th>Erledigt</th>
     <th>Fehlerhaft</th>
   </tr>
-  <% for export in Praxistar::Exports.find(:all, :conditions => "model = 'Cyto::Case'", :order => 'finished_at DESC', :limit => 10) %>
+  <% for export in Praxistar::Exports.find(:all, :conditions => "model = 'Case'", :order => 'finished_at DESC', :limit => 10) %>
     <tr>
       <td><%=h export.started_at %></td>
       <td><%=h export.update_count %></td>
       <td><%=h export.create_count %></td>
       <td><% if export.error_ids.present? -%>
-          <% for c in Cyto::Case.find(export.error_ids.delete(',').split(' ')) -%><%= link_to c.praxistar_eingangsnr, url_for(:controller => 'cyto/cases', :action => 'show', :id => c.id) %> <% end -%>
+          <% for c in Case.find(export.error_ids.delete(',').split(' ')) -%><%= link_to c.praxistar_eingangsnr, url_for(:controller => 'cyto/cases', :action => 'show', :id => c.id) %> <% end -%>
         <% end -%></td>
     </tr>
   <% end %>

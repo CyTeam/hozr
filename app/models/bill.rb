@@ -1,5 +1,5 @@
-class Cyto::Bill < ActiveRecord::Base
-  belongs_to :my_case, :class_name => 'Cyto::Case'
+class Bill < ActiveRecord::Base
+  belongs_to :my_case, :class_name => 'Case'
   belongs_to :praxistar_bill, :class_name => 'Praxistar::Bill', :foreign_key => 'praxistar_rechnungs_id'
   belongs_to :praxistar_leistungsblatt, :class_name => 'Praxistar::LeistungenBlatt', :foreign_key => 'praxistar_leistungsblatt_id'
   
@@ -55,7 +55,7 @@ class Cyto::Bill < ActiveRecord::Base
 
   def self.report
     for d in Doctor.find :all
-      puts "#{d.name}:\t#{sprintf "%.2f", Cyto::Bill.total_for_doctor(d.id)} \t(#{Cyto::Bill.count_for_doctor(d.id)} à #{sprintf "%.2f", Cyto::Bill.avg_for_doctor(d.id)})"
+      puts "#{d.name}:\t#{sprintf "%.2f", Bill.total_for_doctor(d.id)} \t(#{Bill.count_for_doctor(d.id)} à #{sprintf "%.2f", Bill.avg_for_doctor(d.id)})"
     end
   end
 end

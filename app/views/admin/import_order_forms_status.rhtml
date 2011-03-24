@@ -4,7 +4,7 @@
     <th>Anzahl</th>
     <th>Erledigt</th>
   </tr>
-  <% for import in Praxistar::Imports.find(:all, :conditions => "model = 'Cyto::OrderForm'", :order => 'finished_at DESC', :limit => 10) %>
+  <% for import in Praxistar::Imports.find(:all, :conditions => "model = 'OrderForm'", :order => 'finished_at DESC', :limit => 10) %>
     <tr>
       <td><%=h import.started_at %></td>
       <td><%=h import.update_count %></td>

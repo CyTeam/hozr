@@ -125,11 +125,11 @@ class SearchController < ApplicationController
         if param.match /bis|-/
           lower_bound, higher_bound = param.split(/bis|-/)
           keys.push "praxistar_eingangsnr BETWEEN ? AND ?"
-          values.push Cyto::CaseNr.new(lower_bound).to_s.strip
-          values.push Cyto::CaseNr.new(higher_bound).to_s.strip
+          values.push CaseNr.new(lower_bound).to_s.strip
+          values.push CaseNr.new(higher_bound).to_s.strip
         else
           keys.push "praxistar_eingangsnr = ?"
-          values.push Cyto::CaseNr.new(param).to_s.strip
+          values.push CaseNr.new(param).to_s.strip
         end
       end
     end
@@ -250,7 +250,7 @@ class SearchController < ApplicationController
       @cases = []
     else
       case_conditions = [ case_keys.compact.join(" AND "), *case_values ]
-      @cases = Cyto::Case.paginate(:page => params['page'], :select => 'DISTINCT cases.*', :joins => "LEFT JOIN patients ON patient_id = patients.id LEFT JOIN vcards ON (patients.vcard_id = vcards.id) LEFT JOIN addresses ON vcards.id = addresses.vcard_id", :conditions => case_conditions, :per_page => 100)
+      @cases = Case.paginate(:page => params['page'], :select => 'DISTINCT cases.*', :joins => "LEFT JOIN patients ON patient_id = patients.id LEFT JOIN vcards ON (patients.vcard_id = vcards.id) LEFT JOIN addresses ON vcards.id = addresses.vcard_id", :conditions => case_conditions, :per_page => 100)
     end
     
     @include_bill = true

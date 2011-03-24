@@ -1,2 +1,2 @@
-module Cyto::OrderFormsHelper
+module OrderFormsHelper
 end

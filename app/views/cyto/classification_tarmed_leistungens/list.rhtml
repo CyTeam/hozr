@@ -1,7 +1,7 @@
 <h1>Tarmed Leistungen pro PAP Status</h1>
 
 <dl>
-  <% for @classification in Cyto::Classification.find(:all, :order => 'name') %>
+  <% for @classification in Classification.find(:all, :order => 'name') %>
     <%= render :partial => 'show' %>
   <% end %>
 </dl>

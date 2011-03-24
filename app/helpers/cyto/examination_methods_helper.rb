@@ -1,2 +1,2 @@
-module Cyto::ExaminationMethodsHelper
+module ExaminationMethodsHelper
 end

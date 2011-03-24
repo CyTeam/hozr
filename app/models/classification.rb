@@ -1,6 +1,6 @@
 include Cyto
 
-class Cyto::Classification < ActiveRecord::Base
+class Classification < ActiveRecord::Base
   has_many :classification_tarmed_leistungen, :order => 'position'
   has_many :tarmed_leistungen, :class_name => 'ClassificationTarmedLeistungen', :order => 'position DESC'
   belongs_to :examination_method

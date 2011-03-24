@@ -1,4 +1,4 @@
-class Cyto::OrderForm < ActiveRecord::Base
+class OrderForm < ActiveRecord::Base
   file_column :file, :magick => {
     :versions => {
       :full => {:size => "550"},
@@ -53,7 +53,7 @@ class Cyto::OrderForm < ActiveRecord::Base
     p "Anzahl: #{order_form_files.size}"
 
     for order_form_file in order_form_files
-      a_case = Cyto::Case.new(order_form_file)
+      a_case = Case.new(order_form_file)
       a_case.save
       
       import.create_count += 1

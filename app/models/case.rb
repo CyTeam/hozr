@@ -1,8 +1,8 @@
 include Cyto
 
-class Cyto::Case < ActiveRecord::Base
-  belongs_to :examination_method, :class_name => 'Cyto::ExaminationMethod', :foreign_key => :examination_method_id
-  belongs_to :classification, :class_name => 'Cyto::Classification', :foreign_key => :classification_id
+class Case < ActiveRecord::Base
+  belongs_to :examination_method, :class_name => 'ExaminationMethod', :foreign_key => :examination_method_id
+  belongs_to :classification, :class_name => 'Classification', :foreign_key => :classification_id
   belongs_to :patient
   belongs_to :doctor
   belongs_to :screener, :class_name => 'Employee', :foreign_key => :screener_id
@@ -14,7 +14,7 @@ class Cyto::Case < ActiveRecord::Base
   has_and_belongs_to_many :finding_classes
   has_and_belongs_to_many :mailings
   
-  has_one :order_form, :class_name => 'Cyto::OrderForm'
+  has_one :order_form, :class_name => 'OrderForm'
   
   # Scopes
   named_scope :finished, :conditions => ["screened_at IS NOT NULL AND needs_review = ?", false]
@@ -45,11 +45,11 @@ class Cyto::Case < ActiveRecord::Base
   end
   
   def exactly_one_of_group(group_name)
-    ( finding_classes.collect { |f| f.id } & Cyto::FindingGroup.find_by_name(group_name).finding_classes.collect { |f| f.id } ).size == 1
+    ( finding_classes.collect { |f| f.id } & FindingGroup.find_by_name(group_name).finding_classes.collect { |f| f.id } ).size == 1
   end
 
   def at_least_one_of_group(group_name)
-    ( finding_classes.collect { |f| f.id } & Cyto::FindingGroup.find_by_name(group_name).finding_classes.collect { |f| f.id } ).size >= 1
+    ( finding_classes.collect { |f| f.id } & FindingGroup.find_by_name(group_name).finding_classes.collect { |f| f.id } ).size >= 1
   end
   
   def validate_findings
@@ -125,7 +125,7 @@ class Cyto::Case < ActiveRecord::Base
       initialize_from_order_form_file_name(params)
     when 'File'
       initialize_from_order_form_file(params)
-    when 'Cyto::OrderForm'
+    when 'OrderForm'
       initialize_from_order_form(params)
     else
       super(params)
@@ -137,7 +137,7 @@ class Cyto::Case < ActiveRecord::Base
   end
   
   def initialize_from_order_form_file(order_form_file)
-    initialize_from_order_form(Cyto::OrderForm.new(:file => order_form_file))
+    initialize_from_order_form(OrderForm.new(:file => order_form_file))
   end
   
   def initialize_from_order_form(order_form)
@@ -146,7 +146,7 @@ class Cyto::Case < ActiveRecord::Base
   
   private
   def self.parse_eingangsnr(value)
-    Cyto::CaseNr.new(value).to_s
+    CaseNr.new(value).to_s
   end
   
   public

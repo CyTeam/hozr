@@ -1,4 +1,4 @@
-class Cyto::CaseNr
+class CaseNr
   attr_accessor :year, :nr
   
   def initialize(*params)
@@ -6,7 +6,7 @@ class Cyto::CaseNr
     
     case params.size
     when 0
-      max_case_nr = Cyto::Case.maximum(:praxistar_eingangsnr, :conditions => "praxistar_eingangsnr < '90/'")
+      max_case_nr = Case.maximum(:praxistar_eingangsnr, :conditions => "praxistar_eingangsnr < '90/'")
       if max_case_nr.nil? or max_case_nr == ''
         parse("1")
       else

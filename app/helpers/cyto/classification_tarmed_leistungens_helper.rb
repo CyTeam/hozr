@@ -1,2 +1,2 @@
-module Cyto::ClassificationTarmedLeistungensHelper
+module ClassificationTarmedLeistungensHelper
 end

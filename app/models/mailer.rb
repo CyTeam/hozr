@@ -12,7 +12,7 @@ class Mailer < ActionMailer::Base
 
     case email.subject
     when 'hozr_scan_200dpi'
-      page_model = Cyto::OrderForm
+      page_model = OrderForm
     else
       page_model = Page
     end

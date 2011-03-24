@@ -1,2 +1,2 @@
-module Cyto::TopFindingClassesHelper
+module TopFindingClassesHelper
 end

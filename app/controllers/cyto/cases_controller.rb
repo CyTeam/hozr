@@ -1,7 +1,7 @@
 require "net/http"
 
 include Cyto
-class Cyto::CasesController < ApplicationController
+class CasesController < ApplicationController
   # Helpers
   # =======
   helper :doctors
@@ -37,10 +37,10 @@ class Cyto::CasesController < ApplicationController
   end
 
   def auto_complete_for_finding_class_selection
-    @finding_classes = Cyto::FindingClass.find(:all, 
-      :conditions => [ Cyto::FindingClass.connection.concat(:code, ' - ', :name) + " LIKE ?",
+    @finding_classes = FindingClass.find(:all, 
+      :conditions => [ FindingClass.connection.concat(:code, ' - ', :name) + " LIKE ?",
       '%' + params[:finding_class][:selection].downcase + '%' ],
-      :select => "*, #{Cyto::FindingClass.connection.concat(:code, ' - ', :name)} AS selection",
+      :select => "*, #{FindingClass.connection.concat(:code, ' - ', :name)} AS selection",
       :order => 'code',
       :limit => 8)
     render :inline => "<%= auto_complete_result_finding_class_selection @finding_classes, 'code' %>"
@@ -74,34 +74,34 @@ class Cyto::CasesController < ApplicationController
     end
     if params[:case_search][:praxistar_eingangsnr] > ""
       conditions[:sql]<< "id = ?"
-      conditions[:params]<< Cyto::Case.find_by_praxistar_eingangsnr(Cyto::CaseNr.new(params[:case_search][:praxistar_eingangsnr]).to_s).id || 0
+      conditions[:params]<< Case.find_by_praxistar_eingangsnr(CaseNr.new(params[:case_search][:praxistar_eingangsnr]).to_s).id || 0
     end
 
-    @cases = Cyto::Case.paginate(:page => params['page'], :per_page => 144, :conditions =>  [ conditions[:sql].join(" AND "), conditions[:params] ])
+    @cases = Case.paginate(:page => params['page'], :per_page => 144, :conditions =>  [ conditions[:sql].join(" AND "), conditions[:params] ])
 
     render :action => :list
   end
 
   def history
-    @case = Cyto::Case.find(params[:id])
+    @case = Case.find(params[:id])
     redirect_to :controller => '/patients', :action => 'show', :id => @case.patient
   end
 
   def list
     params[:order] ||= 'praxistar_eingangsnr'
 
-    @cases = Cyto::Case.paginate(:page => params['page'], :per_page => 144, :order => params[:order])
+    @cases = Case.paginate(:page => params['page'], :per_page => 144, :order => params[:order])
   end
 
   # Assigning
   # =========
   def unassigned_form
-    @first_case = Cyto::Case.find(:first, :conditions => 'assigned_at IS NULL' )
-    @case_count = Cyto::Case.count(:all, :conditions => 'assigned_at IS NULL' )
+    @first_case = Case.find(:first, :conditions => 'assigned_at IS NULL' )
+    @case_count = Case.count(:all, :conditions => 'assigned_at IS NULL' )
   end
 
   def unassigned_sort_queue
-    @cases = Cyto::Case.find(:all, :conditions => 'assigned_at IS NULL')
+    @cases = Case.find(:all, :conditions => 'assigned_at IS NULL')
     @intra_day_id = params[:case][:intra_day_id].to_i
   end
 
@@ -109,7 +109,7 @@ class Cyto::CasesController < ApplicationController
     assigned_at = DateTime.now
 
     case_ids = params[:a_case].keys
-    @cases = Cyto::Case.find(case_ids, :order => 'intra_day_id' )
+    @cases = Case.find(case_ids, :order => 'intra_day_id' )
 
     for a_case in @cases
       a_case.assigned_at = assigned_at
@@ -119,31 +119,31 @@ class Cyto::CasesController < ApplicationController
   end
 
   def assign_list
-    @cases = Cyto::Case.find(:all, :conditions => ['assigned_at = ?', params[:assigned_at]], :order => 'intra_day_id' )
+    @cases = Case.find(:all, :conditions => ['assigned_at = ?', params[:assigned_at]], :order => 'intra_day_id' )
     @assigned_at = params[:assigned_at]
     
     render :action => 'assign'
   end
 
   def destroy_from_assign
-   Cyto::Case.find(params[:id]).destroy
+   Case.find(params[:id]).destroy
    render :text => 'gelöscht'
   end
   
   # Show list of assignings from the last 7 days.
   def assignings_list
-    @assignings = Cyto::Case.find_by_sql('SELECT assigned_at, min(intra_day_id) AS min_intra_day_id, max(intra_day_id) AS max_intra_day_id, min(praxistar_eingangsnr) AS min_praxistar_eingangsnr, max(praxistar_eingangsnr) AS max_praxistar_eingangsnr, count(*) AS count FROM cases GROUP BY assigned_at HAVING assigned_at > now() - INTERVAL 7 DAY ORDER BY assigned_at DESC')
+    @assignings = Case.find_by_sql('SELECT assigned_at, min(intra_day_id) AS min_intra_day_id, max(intra_day_id) AS max_intra_day_id, min(praxistar_eingangsnr) AS min_praxistar_eingangsnr, max(praxistar_eingangsnr) AS max_praxistar_eingangsnr, count(*) AS count FROM cases GROUP BY assigned_at HAVING assigned_at > now() - INTERVAL 7 DAY ORDER BY assigned_at DESC')
   end
 
   def delete_assigning
-    @cases = Cyto::Case.find(:all, :conditions => ['assigned_at = ?', params[:assigned_at]] )
+    @cases = Case.find(:all, :conditions => ['assigned_at = ?', params[:assigned_at]] )
     @cases.map{|c| c.destroy}
     
     redirect_to :action => 'assignings_list'
   end
   
   def delete_rest_of_assigning
-    @cases = Cyto::Case.find(:all, :conditions => ['assigned_at = ? AND intra_day_id >= ?', params[:assigned_at], params[:intra_day_id]] )
+    @cases = Case.find(:all, :conditions => ['assigned_at = ? AND intra_day_id >= ?', params[:assigned_at], params[:intra_day_id]] )
     @cases.map{|c| c.destroy}
     
     redirect_to :action => 'assignings_list'
@@ -154,25 +154,25 @@ class Cyto::CasesController < ApplicationController
   def first_entry_queue
     params[:order] ||= 'praxistar_eingangsnr'
 
-    @cases = Cyto::Case.paginate(:page => params['page'], :per_page => 144, :order => params[:order], :conditions => 'entry_date IS NULL AND assigned_at IS NOT NULL')
+    @cases = Case.paginate(:page => params['page'], :per_page => 144, :order => params[:order], :conditions => 'entry_date IS NULL AND assigned_at IS NOT NULL')
     render :action => :list
   end
 
   def get_patient_by_eingangsnr
-    patient = Cyto::Case.find_by_praxistar_eingangsnr(params[:patient][:praxistar_eingangsnr]).patient
+    patient = Case.find_by_praxistar_eingangsnr(params[:patient][:praxistar_eingangsnr]).patient
 
     render :inline => "<td id='patient_id'><%= text_field 'patient', 'full_name', :value => '#{patient.id} #{patient.vcard.full_name}' %></td>"
   end
 
   def first_entry
-    @case = Cyto::Case.find(params[:id])
+    @case = Case.find(params[:id])
 
     # Header image size preferences
     @header_image_type = session[:header_image_type] || :head
   end
 
   def set_patient
-    @case = Cyto::Case.find(params[:id])
+    @case = Case.find(params[:id])
     # Set entry_date only when setting patient for first time
     @case.entry_date = Time.now if @case.entry_date.nil?
     @case.examination_method_id = @case.intra_day_id == 0 ? 0 : 1
@@ -223,7 +223,7 @@ class Cyto::CasesController < ApplicationController
     if @case.save
       flash[:notice] = 'First entry ok.'
 
-      next_open = Cyto::Case.find :first, :conditions => ["entry_date IS NULL and id > #{@case.id}"]
+      next_open = Case.find :first, :conditions => ["entry_date IS NULL and id > #{@case.id}"]
       if next_open.nil?
         redirect_to :action => 'first_entry_queue'
       elsif next_open.praxistar_eingangsnr.nil? or next_open.doctor.nil?
@@ -241,7 +241,7 @@ class Cyto::CasesController < ApplicationController
 
   def create
     params[:case][:patient_id] = params[:patient][:full_name].split(' ')[0].to_i
-    @case = Cyto::Case.new(params[:case])
+    @case = Case.new(params[:case])
 
     if @case.save
       flash[:notice] = 'Case was successfully created.'
@@ -257,16 +257,16 @@ class Cyto::CasesController < ApplicationController
   def second_entry_queue
     params[:order] ||= 'praxistar_eingangsnr'
 
-    @cases = Cyto::Case.paginate(:page => params['page'], :per_page => 144, :order => params[:order], :conditions => "entry_date IS NOT NULL AND screened_at IS NULL AND (needs_p16 = '#{Cyto::Case.connection.false}' AND needs_hpv = '#{Cyto::Case.connection.false}') AND praxistar_eingangsnr > '07' AND praxistar_eingangsnr < '90' AND NOT praxistar_eingangsnr LIKE '%-%'")
+    @cases = Case.paginate(:page => params['page'], :per_page => 144, :order => params[:order], :conditions => "entry_date IS NOT NULL AND screened_at IS NULL AND (needs_p16 = '#{Case.connection.false}' AND needs_hpv = '#{Case.connection.false}') AND praxistar_eingangsnr > '07' AND praxistar_eingangsnr < '90' AND NOT praxistar_eingangsnr LIKE '%-%'")
     render :action => :list
   end
 
   def second_entry_pap_form
-    @case = Cyto::Case.find(params[:id])
+    @case = Case.find(params[:id])
   end
 
   def second_entry_form
-    @case = Cyto::Case.find(params[:id])
+    @case = Case.find(params[:id])
 
     if @case.finding_text.nil?
       @case.finding_text = @case.findings.map {|finding| "<div>#{finding.name}</div>"}.join("\n")
@@ -274,7 +274,7 @@ class Cyto::CasesController < ApplicationController
     end
 
     if params[:case] && params[:case][:classification]
-      classification = Cyto::Classification.find(params[:case][:classification])
+      classification = Classification.find(params[:case][:classification])
       @case.classification = classification
       @case.save
     end
@@ -290,7 +290,7 @@ class Cyto::CasesController < ApplicationController
   end
 
   def second_entry_update
-    @case = Cyto::Case.find(params[:id])
+    @case = Case.find(params[:id])
 
     @case.screener = Employee.find_by_code(request.env['REMOTE_USER'])
     @case.remarks = params[:case][:remarks]
@@ -309,7 +309,7 @@ class Cyto::CasesController < ApplicationController
       @case.needs_p16 = true
       @case.screened_at = nil
     when "Review"
-      @case = Cyto::Case.find(params[:id])
+      @case = Case.find(params[:id])
       @case.screened_at = Time.now
       @case.screener = Employee.find_by_code(request.env['REMOTE_USER'])
       @case.needs_review = true
@@ -318,7 +318,7 @@ class Cyto::CasesController < ApplicationController
     # Common code for hpv, p16 and review.
     @case.save
 
-    next_open = Cyto::Case.find :first, :conditions => ["entry_date IS NOT NULL AND screened_at IS NULL AND praxistar_eingangsnr > ? AND praxistar_eingangsnr < '90/'", @case.praxistar_eingangsnr]
+    next_open = Case.find :first, :conditions => ["entry_date IS NOT NULL AND screened_at IS NULL AND praxistar_eingangsnr > ? AND praxistar_eingangsnr < '90/'", @case.praxistar_eingangsnr]
     if next_open.nil?
       redirect_to :action => 'second_entry_queue'
     else
@@ -327,9 +327,9 @@ class Cyto::CasesController < ApplicationController
   end
 
   def remove_finding
-    @case = Cyto::Case.find(params[:id])
+    @case = Case.find(params[:id])
 
-    finding = Cyto::FindingClass.find(params[:finding_id])
+    finding = FindingClass.find(params[:finding_id])
     @case.finding_classes.delete(finding)
     name = finding.name
     quoted_name = name.gsub('ä', '&auml;').gsub('ö', '&ouml;').gsub('ü', '&uuml;').gsub('Ä', '&Auml;').gsub('Ö', '&Ouml;').gsub('Ü', '&Uuml;')
@@ -342,18 +342,18 @@ class Cyto::CasesController < ApplicationController
   end
 
   def add_finding
-    @case = Cyto::Case.find(params[:id])
+    @case = Case.find(params[:id])
 
     begin
       if params[:finding_id]
         finding_class_id = params[:finding_id]
-        finding_class = Cyto::FindingClass.find(finding_class_id)
+        finding_class = FindingClass.find(finding_class_id)
       elsif params[:finding_class][:selection] > ''
         finding_class_code = params[:finding_class][:selection].split(' - ')[0]
-        finding_class = Cyto::FindingClass.find_by_code(finding_class_code)
+        finding_class = FindingClass.find_by_code(finding_class_code)
       elsif params[:finding_class][:code]
         finding_class_code = params[:finding_class][:code]
-        finding_class = Cyto::FindingClass.find_by_code(finding_class_code)
+        finding_class = FindingClass.find_by_code(finding_class_code)
       end
 
       @case.finding_classes << finding_class
@@ -373,7 +373,7 @@ class Cyto::CasesController < ApplicationController
   end
 
   def update_finding_text
-    @case = Cyto::Case.find(params[:id])
+    @case = Case.find(params[:id])
 
     @case.finding_text = params[:case][:finding_text]
     @case.save
@@ -382,13 +382,13 @@ class Cyto::CasesController < ApplicationController
   end
 
   def edit_finding_text
-    @case = Cyto::Case.find(params[:id])
+    @case = Case.find(params[:id])
 
     render :partial => 'edit_finding_text'
   end
 
   def sign
-    @case = Cyto::Case.find(params[:id])
+    @case = Case.find(params[:id])
     @case.screened_at = Time.now
     @case.screener = Employee.find_by_code(request.env['REMOTE_USER'])
     @case.finding_text = params[:case][:finding_text] unless params[:case].nil? or params[:case][:finding_text].nil?
@@ -413,7 +413,7 @@ class Cyto::CasesController < ApplicationController
     @case.save
 
     if @case.needs_p16? or @case.needs_hpv?
-      next_open = Cyto::Case.find :first, :conditions => ["entry_date IS NOT NULL AND screened_at IS NULL AND (needs_p16 = '#{Cyto::Case.connection.true}' OR needs_hpv = '#{Cyto::Case.connection.true}') AND screener_id = ? AND praxistar_eingangsnr > ? AND praxistar_eingangsnr < '90/'", @case.screener_id, @case.praxistar_eingangsnr]
+      next_open = Case.find :first, :conditions => ["entry_date IS NOT NULL AND screened_at IS NULL AND (needs_p16 = '#{Case.connection.true}' OR needs_hpv = '#{Case.connection.true}') AND screener_id = ? AND praxistar_eingangsnr > ? AND praxistar_eingangsnr < '90/'", @case.screener_id, @case.praxistar_eingangsnr]
 
       @case.result_report_printed_at = nil
       @case.save
@@ -425,7 +425,7 @@ class Cyto::CasesController < ApplicationController
         redirect_to :action => 'hpv_p16_queue'
       end
     else
-      next_open = Cyto::Case.find :first, :conditions => ["entry_date IS NOT NULL AND screened_at IS NULL AND (needs_p16 = '#{Cyto::Case.connection.false}' AND needs_hpv = '#{Cyto::Case.connection.false}') AND praxistar_eingangsnr > ? AND praxistar_eingangsnr < '90/'", @case.praxistar_eingangsnr]
+      next_open = Case.find :first, :conditions => ["entry_date IS NOT NULL AND screened_at IS NULL AND (needs_p16 = '#{Case.connection.false}' AND needs_hpv = '#{Case.connection.false}') AND praxistar_eingangsnr > ? AND praxistar_eingangsnr < '90/'", @case.praxistar_eingangsnr]
       if next_open.nil?
         redirect_to :action => 'second_entry_queue'
       else
@@ -439,12 +439,12 @@ class Cyto::CasesController < ApplicationController
   def review_queue
     params[:order] ||= 'praxistar_eingangsnr'
     
-    @cases = Cyto::Case.paginate(:page => params['page'], :per_page => 144, :order => params[:order], :conditions => [ "needs_review = ?", true ])
+    @cases = Case.paginate(:page => params['page'], :per_page => 144, :order => params[:order], :conditions => [ "needs_review = ?", true ])
     render :action => :list
   end
 
   def review_done
-    @case = Cyto::Case.find(params[:id])
+    @case = Case.find(params[:id])
     @case.needs_review = false
     
     @case.review_by = Employee.find_by_code(request.env['REMOTE_USER'])
@@ -458,7 +458,7 @@ class Cyto::CasesController < ApplicationController
   # Results
   # =======
   def result_report
-    @case = Cyto::Case.find(params[:id])
+    @case = Case.find(params[:id])
     @case.screened_at ||= Date.today
 
     case @case.classification.code
@@ -470,7 +470,7 @@ class Cyto::CasesController < ApplicationController
   end
 
   def result_report_for_pdf
-    @case = Cyto::Case.find(params[:id])
+    @case = Case.find(params[:id])
 
     if @case.screened_at.nil? and @case.needs_p16?
       @case.screened_at ||= Date.today
@@ -531,12 +531,12 @@ class Cyto::CasesController < ApplicationController
   def hpv_p16_queue
     params[:order] ||= 'praxistar_eingangsnr'
 
-    @cases = Cyto::Case.paginate(:page => params['page'], :per_page => 144, :order => params[:order], :conditions => ["(needs_p16 = ? OR needs_hpv = ?) AND screened_at IS NULL", true, true])
+    @cases = Case.paginate(:page => params['page'], :per_page => 144, :order => params[:order], :conditions => ["(needs_p16 = ? OR needs_hpv = ?) AND screened_at IS NULL", true, true])
     render :action => :list
   end
 
   def hpv_p16_prepared
-    a_case = Cyto::Case.find(params[:id])
+    a_case = Case.find(params[:id])
     a_case.hpv_p16_prepared_at = DateTime.now
     a_case.hpv_p16_prepared_by = Employee.find_by_code(request.env['REMOTE_USER'])
     a_case.save
@@ -546,11 +546,11 @@ class Cyto::CasesController < ApplicationController
 
   # Create a new HPV/P16 case after a case has been closed
   def create_hpv_p16_for_case
-    @case = Cyto::Case.find(params[:id])
+    @case = Case.find(params[:id])
 
     # Clone the case and set columns
     hpv = @case.clone
-    hpv.praxistar_eingangsnr = Cyto::CaseNr.new.to_s
+    hpv.praxistar_eingangsnr = CaseNr.new.to_s
     hpv.screened_at = nil
     hpv.praxistar_leistungsblatt_id = nil
     hpv.result_report_printed_at = nil
@@ -559,7 +559,7 @@ class Cyto::CasesController < ApplicationController
 
     hpv.needs_p16 = true
     hpv.needs_hpv = true
-    hpv.classification = Cyto::Classification.find :first, :conditions => "code = 'hpv' AND examination_method_id = #{hpv.examination_method_id}"
+    hpv.classification = Classification.find :first, :conditions => "code = 'hpv' AND examination_method_id = #{hpv.examination_method_id}"
     hpv.save
 
     redirect_to :controller => '/search'
@@ -569,7 +569,7 @@ class Cyto::CasesController < ApplicationController
   # General
   # =======
   def show
-    @case = Cyto::Case.find(params[:id])
+    @case = Case.find(params[:id])
   end
 
   def new
@@ -577,11 +577,11 @@ class Cyto::CasesController < ApplicationController
   end
 
   def edit
-    @case = Cyto::Case.find(params[:id])
+    @case = Case.find(params[:id])
   end
 
   def update
-    @case = Cyto::Case.find(params[:id])
+    @case = Case.find(params[:id])
     if @case.update_attributes(params[:case])
       if @case.praxistar_leistungsblatt
         @case.praxistar_leistungsblatt.delete if @case.praxistar_leistungsblatt
@@ -597,7 +597,7 @@ class Cyto::CasesController < ApplicationController
   end
 
   def destroy
-   Cyto::Case.find(params[:id]).destroy
+   Case.find(params[:id]).destroy
     redirect_to :action => 'list'
   end
 end

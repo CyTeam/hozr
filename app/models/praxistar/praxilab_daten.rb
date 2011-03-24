@@ -8,7 +8,7 @@ class Praxistar::PraxilabDaten < Praxistar::Base
     for a in find(:all, :conditions => "dt_eingang > '2007' AND in_EingangJahr = '06'")
       begin
 	print "Nr: #{a.in_EingangsNr}\n"
-        d = Cyto::Case.new(
+        d = Case.new(
           :patient_id => a.Patient_ID,
           :doctor_id => a.Arzt_ID,
           :examination_date => a.dt_Beurteilung,

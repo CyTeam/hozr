@@ -2,7 +2,7 @@
 
 <% form_tag({:action => 'assign'}, :name => "unassigned") do %>
   <table>
-  <% next_eingangs_nr = Cyto::CaseNr.new %>
+  <% next_eingangs_nr = CaseNr.new %>
   <% intra_day_id = @intra_day_id %>
   
   <% for @a_case in @cases %>
