@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110316133729) do
+ActiveRecord::Schema.define(:version => 20110328102314) do
 
   create_table "account_receivables", :force => true do |t|
   end
