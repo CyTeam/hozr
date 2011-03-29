@@ -1,0 +1,40 @@
+<head>
+    <%= formtastic_stylesheet_link_tag %>
+</head>
+
+<h1>Objektträger Etiketten Drucken</h1>
+<div style="display: none" class="flash notice" id="print_flash"></div>
+
+<table class="listing" style="width: 45%">
+  <tr>
+    <th>Prax. Nr</th>
+    <th>Doc Name</th>
+    <th>Doc Vorname</th>
+    <th>Pat Name</th>
+    <th>Pat Vorname</th>
+    <th>Pat Geb.</th>
+    <th>Sys ID</th>
+  </tr>
+  
+  
+  <% form_tag do |f| %>
+    <%= text_field_tag "start_praxnr", '11/0', :size => 10 %>
+    <%= text_field_tag "end_praxnr", '11/0', :size => 10 %>
+    <%= submit_tag 'Druken' %>
+  <% end %>
+  
+  
+
+  <% for label in @cases %>
+  <tr>
+    <td><%=h label.praxistar_eingangsnr %></td>
+    <td><%=h label.doctor.family_name unless label.doctor.nil? %></td>
+    <td><%=h label.doctor.given_name unless label.doctor.nil? %></td>
+    <td><%=h label.patient.vcard.family_name unless label.doctor.nil? %></td>
+    <td><%=h label.patient.vcard.given_name unless label.doctor.nil? %></td>
+    <td><%=h label.patient.birth_date unless label.doctor.nil? %></td>
+    <td><%=h label.id %></td>
+    <% end %>
+  </tr>
+</table>
+  
