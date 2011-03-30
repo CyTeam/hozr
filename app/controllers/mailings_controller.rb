@@ -77,16 +77,6 @@ class MailingsController < ApplicationController
     redirect_to :action => 'overview', :id => mailing
   end
 
-  def print
-    @mailing = Mailing.find(params[:id])
-
-    command = "/usr/local/bin/hozr_print_result_mailing.sh #{@mailing.id} '' #{( ENV['RAILS_ENV'] || 'development' )}"
-    stream = open("|#{command}")
-    output = stream.read
- 
-    send_data output, :type => 'text/html; charset=utf-8', :disposition => 'inline'
-  end
-
   def print_all
     print_queue = SendQueue.unsent.by_channel('print')
     
@@ -100,16 +90,6 @@ class MailingsController < ApplicationController
     send_data output, :type => 'text/html; charset=utf-8', :disposition => 'inline'
   end
   
-  def print_overview
-    @mailing = Mailing.find(params[:id])
-
-    command = "/usr/local/bin/hozr_print_mailing_overview.sh #{@mailing.id}"
-    stream = open("|#{command}")
-    output = stream.read
- 
-    redirect_to :action => :show, :id => @mailing.id
-  end
-
   # Multi Channel
   def send_by
     @mailing = Mailing.find(params[:id])
