@@ -11,4 +11,16 @@ class SendQueue < ActiveRecord::Base
     # 13.2.2011: 5 Resultate für Muster per e-mail
     "%s: %i Resultate für %s per %s" % [created_at, mailing.cases.count, channel.to_s, mailing.doctor.to_s]
   end
+
+  # Actions
+  def print
+    command = "/usr/local/bin/hozr_print_result_mailing.sh #{mailing.id} '' #{( ENV['RAILS_ENV'] || 'development' )}"
+    stream = open("|#{command}")
+    output = stream.read
+    
+    self.sent_at = DateTime.now
+    save
+    
+    return output
+  end
 end

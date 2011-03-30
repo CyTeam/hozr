@@ -88,15 +88,13 @@ class MailingsController < ApplicationController
   end
 
   def print_all
-    mailings = Mailing.find(:all, :conditions => "printed_at IS NULL")
+    print_queue = SendQueue.unsent.by_channel('print')
     
     output = ""
-    for mailing in mailings.compact
-      if mailing.doctor.wants_prints
-        command = "/usr/local/bin/hozr_print_result_mailing.sh #{mailing.id} '' #{( ENV['RAILS_ENV'] || 'development' )}"
-        stream = open("|#{command}")
-        output += stream.read
-      end
+    for print_queue in print_queue
+      output += print_queue.print
+      
+      sleep(10)
     end
 
     send_data output, :type => 'text/html; charset=utf-8', :disposition => 'inline'

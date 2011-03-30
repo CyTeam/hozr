@@ -91,6 +91,8 @@ class Mailing < ActiveRecord::Base
     return done, failed
   end
 
+  # Multichannel
+  # ============
   def send_by(channel)
     # Only generate new queue if there's no unsent present, yet
     return false unless send_queues.by_channel(channel).unsent.empty?
