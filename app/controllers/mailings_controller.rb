@@ -116,7 +116,7 @@ class MailingsController < ApplicationController
     stream = open("|#{command}")
     output = stream.read
  
-    send_data output, :type => 'text/html; charset=utf-8', :disposition => 'inline'
+    redirect_to :action => :show, :id => @mailing.id
   end
 
   # Multi Channel
