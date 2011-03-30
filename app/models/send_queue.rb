@@ -4,7 +4,8 @@ class SendQueue < ActiveRecord::Base
   # Scopes
   named_scope :sent, :conditions => "sent_at IS NOT NULL"
   named_scope :unsent, :conditions => {:sent_at => nil}
-  
+  named_scope :by_channel, lambda {|channel| {:conditions => ["channel = ?", channel]} }
+
   # Helpers
   def to_s
     # 13.2.2011: 5 Resultate für Muster per e-mail

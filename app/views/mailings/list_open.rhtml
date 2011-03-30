@@ -1,5 +1,5 @@
 <h2>Resultat Versand</h2>
-<%= link_to_remote "Alle Mailings drucken", :update => 'print_result_reports_log', :loading => "Element.show('#{loading_indicator_id({:id => 'print_result_reports'})}')", :url => {:action => :print_all} %>
+<%= link_to "Alle Mailings versenden", :action => :send_all %>
 <pre id="print_result_reports_log"><%= loading_indicator_tag :id => 'print_result_reports' %></pre>
 
 <%= render 'send_queues/list' %>

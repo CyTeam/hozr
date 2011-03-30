@@ -122,8 +122,17 @@ class MailingsController < ApplicationController
   # Multi Channel
   def send_by
     @mailing = Mailing.find(params[:id])
-    @mailing.send_by(params[:channel])
+    @state = @mailing.send_by(params[:channel])
     
     render :partial => 'sent_by', :layout => false
+  end
+
+  def send_all
+    @mailings = Mailing.with_unsent_channel
+    for mailing in @mailings
+      mailing.send_by_all_channels
+    end
+    
+    redirect_to :action => 'list_open'
   end
 end
