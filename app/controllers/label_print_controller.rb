@@ -28,6 +28,6 @@ class LabelPrintController < ApplicationController
     end
     
     def set_triger
-      system("sudo touch public/triger/triger.txt")
+      system("touch public/triger/triger.txt")
     end
   end
