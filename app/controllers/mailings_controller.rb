@@ -77,13 +77,6 @@ class MailingsController < ApplicationController
     redirect_to :action => 'overview', :id => mailing
   end
 
-  def reactivate
-    @mailing = Mailing.find(params[:id])
-    @mailing.reactivate
-    
-    redirect_to :action => 'list'
-  end
-
   def print
     @mailing = Mailing.find(params[:id])
 
