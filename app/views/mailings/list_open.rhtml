@@ -1,5 +1,6 @@
 <h2>Resultat Versand</h2>
-<%= link_to "Alle Mailings versenden", :action => :send_all %>
+<%= link_to "Alle Mailings freigeben", :action => :send_all %><br/>
+<%= link_to "Freigegebene Resultate drucken", :action => :print_all %>
 <pre id="print_result_reports_log"><%= loading_indicator_tag :id => 'print_result_reports' %></pre>
 
-<%= render 'send_queues/list' %>
+<%= render 'list' %>

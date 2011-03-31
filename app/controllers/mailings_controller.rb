@@ -11,7 +11,7 @@ class MailingsController < ApplicationController
 
   # Show list of unprinted mailings
   def list_open
-    @mailings = Mailing.with_unsent_channel
+    @mailings = Mailing.unsent
   end
 
   def generate
@@ -98,8 +98,15 @@ class MailingsController < ApplicationController
     render :partial => 'sent_by', :layout => false
   end
 
+  def send_by_all_channels
+    @mailing = Mailing.find(params[:id])
+    @state = @mailing.send_by_all_channels
+    
+    render :partial => 'sent_by', :layout => false
+  end
+  
   def send_all
-    @mailings = Mailing.with_unsent_channel
+    @mailings = Mailing.unsent
     for mailing in @mailings
       mailing.send_by_all_channels
     end

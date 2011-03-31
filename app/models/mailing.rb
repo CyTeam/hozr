@@ -5,6 +5,7 @@ class Mailing < ActiveRecord::Base
   # SendQueue
   has_many :send_queues, :order => 'send_queues.sent_at'
   named_scope :with_unsent_channel, :joins => :send_queues, :conditions => "sent_at IS NULL", :order => 'mailings.created_at'
+  named_scope :unsent, :conditions => "printed_at IS NULL AND email_delivered_at IS NULL AND hl7_delivered_at IS NULL"
   
   def self.create(doctor_id, case_ids)
     mailing = self.new

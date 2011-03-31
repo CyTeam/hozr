@@ -2,7 +2,7 @@
 <ul>
   <li><%= link_to "Rechnungstool", :controller => 'bills' %></li>
   <li><%= link_to "Letzte Anschreiblisten", :controller => 'cases', :action => 'assignings_list' %></li>
-  <li><%= link_to "Letzte Resultatbriefe", :controller => '/mailings' %></li>
+  <li><%= link_to "Letzte Resultatbriefe", :controller => 'send_queues' %></li>
   <li><%= link_to "Debitoren", :controller => :accounting, :action => 'accounts_receivable' %></li>
 </ul>
 
