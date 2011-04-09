@@ -1,6 +1,12 @@
 <h1>Objektträger Etiketten Drucken</h1>
 <div style="display: none" class="flash notice" id="print_flash"></div>
 
+<% form_tag do |f| %>
+    <td><%= select_tag 'start_praxnr', options_for_select(label_select) %></td>
+    <td><%= select_tag 'end_praxnr', options_for_select(label_select) %></td>
+    <%= submit_tag 'Drucken' %>
+<% end %>
+
 <table class="listing" style="width: 45%">
   <tr>
     <th>Prax. Nr</th>
@@ -12,15 +18,6 @@
     <th>Sys ID</th>
   </tr>
   
-  
-  <% form_tag do |f| %>
-    <%= text_field_tag "start_praxnr", '11/0', :size => 10 %>
-    <%= text_field_tag "end_praxnr", '11/0', :size => 10 %>
-    <%= submit_tag 'Druken' %>
-  <% end %>
-  
-  
-
   <% for label in @cases %>
   <tr>
     <td><%=h label.praxistar_eingangsnr %></td>
