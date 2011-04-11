@@ -46,11 +46,9 @@
       <%- end %>
     </td>
     <td>
-      <%= link_to_remote("Alle Resultate drucken", :update => "mailing_log_#{mailing.id}", :loading => "Element.show('#{loading_indicator_id({:id => "mailing_#{mailing.id}"})}')", :url => {:controller => :mailings, :action => :print, :id => mailing }) %><br/>
-      <%= link_to_remote("Nur Übersicht drucken", :update => "mailing_log_#{mailing.id}", :loading => "Element.show('#{loading_indicator_id({:id => "mailing_#{mailing.id}"})}')", :url => {:controller => :mailings, :action => :print_overview, :id => mailing }) %><br/>
+      <%= link_to_remote("Resultate drucken", :update => "mailing_log_#{mailing.id}", :loading => "Element.show('#{loading_indicator_id({:id => "mailing_#{mailing.id}"})}')", :url => {:controller => :mailings, :action => :send_by, :channel => 'print', :id => mailing }) if mailing.doctor.wants_prints %><br/>
       <%= link_to_remote("E-Mail senden", :update => "mailing_log_#{mailing.id}", :loading => "Element.show('#{loading_indicator_id({:id => "mailing_#{mailing.id}"})}')", :url => {:controller => :mailings, :action => :send_by, :channel => 'email', :id => mailing }) if mailing.doctor.wants_email %><br/>
       <%= link_to_remote("HL7 senden", :update => "mailing_log_#{mailing.id}", :loading => "Element.show('#{loading_indicator_id({:id => "mailing_#{mailing.id}"})}')", :url => {:controller => :mailings, :action => :send_by, :channel => 'hl7', :id => mailing }) if mailing.doctor.wants_hl7 %>
-      <%= button_to "Reaktivieren", :controller => :mailings, :action => :reactivate, :id => mailing %>
     </td>
   </tr>
 

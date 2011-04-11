@@ -11,7 +11,7 @@ class MailingsController < ApplicationController
 
   # Show list of unprinted mailings
   def list_open
-    @mailings = Mailing.with_unsent_channel
+    @mailings = Mailing.unsent
   end
 
   def generate
@@ -77,53 +77,40 @@ class MailingsController < ApplicationController
     redirect_to :action => 'overview', :id => mailing
   end
 
-  def reactivate
-    @mailing = Mailing.find(params[:id])
-    @mailing.reactivate
-    
-    redirect_to :action => 'list'
-  end
-
-  def print
-    @mailing = Mailing.find(params[:id])
-
-    command = "/usr/local/bin/hozr_print_result_mailing.sh #{@mailing.id} '' #{( ENV['RAILS_ENV'] || 'development' )}"
-    stream = open("|#{command}")
-    output = stream.read
- 
-    send_data output, :type => 'text/html; charset=utf-8', :disposition => 'inline'
-  end
-
   def print_all
-    mailings = Mailing.find(:all, :conditions => "printed_at IS NULL")
+    print_queue = SendQueue.unsent.by_channel('print')
     
     output = ""
-    for mailing in mailings.compact
-      if mailing.doctor.wants_prints
-        command = "/usr/local/bin/hozr_print_result_mailing.sh #{mailing.id} '' #{( ENV['RAILS_ENV'] || 'development' )}"
-        stream = open("|#{command}")
-        output += stream.read
-      end
+    for print_queue in print_queue
+      output += print_queue.print
+      
+      sleep(20)
     end
 
     send_data output, :type => 'text/html; charset=utf-8', :disposition => 'inline'
   end
   
-  def print_overview
-    @mailing = Mailing.find(params[:id])
-
-    command = "/usr/local/bin/hozr_print_mailing_overview.sh #{@mailing.id}"
-    stream = open("|#{command}")
-    output = stream.read
- 
-    send_data output, :type => 'text/html; charset=utf-8', :disposition => 'inline'
-  end
-
   # Multi Channel
   def send_by
     @mailing = Mailing.find(params[:id])
-    @mailing.send_by(params[:channel])
+    @state = @mailing.send_by(params[:channel])
     
     render :partial => 'sent_by', :layout => false
+  end
+
+  def send_by_all_channels
+    @mailing = Mailing.find(params[:id])
+    @state = @mailing.send_by_all_channels
+    
+    render :partial => 'sent_by', :layout => false
+  end
+  
+  def send_all
+    @mailings = Mailing.unsent
+    for mailing in @mailings
+      mailing.send_by_all_channels
+    end
+    
+    redirect_to :action => 'list_open'
   end
 end

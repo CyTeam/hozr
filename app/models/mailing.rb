@@ -5,6 +5,7 @@ class Mailing < ActiveRecord::Base
   # SendQueue
   has_many :send_queues, :order => 'send_queues.sent_at'
   named_scope :with_unsent_channel, :joins => :send_queues, :conditions => "sent_at IS NULL", :order => 'mailings.created_at'
+  named_scope :unsent, :conditions => "printed_at IS NULL AND email_delivered_at IS NULL AND hl7_delivered_at IS NULL"
   
   def self.create(doctor_id, case_ids)
     mailing = self.new
@@ -72,20 +73,6 @@ class Mailing < ActiveRecord::Base
     end
   end
 
-  def reactivate
-    cases.map { |c|
-      c.result_report_printed_at = nil
-      c.save
-    }
-
-    begin
-      File.delete("public/mailing_overviews/mailing_overview-#{id}.ps")
-      File.delete("public/mailing_overviews/mailing_overview-#{id}.pdf")
-    rescue
-      true
-    end
-  end
-
   # Email delivery
   # ==============
   def deliver_by_email
@@ -105,7 +92,19 @@ class Mailing < ActiveRecord::Base
     return done, failed
   end
 
+  # Multichannel
+  # ============
   def send_by(channel)
+    # Only generate new queue if there's no unsent present, yet
+    return false unless send_queues.by_channel(channel).unsent.empty?
+    
     SendQueue.create(:mailing => self, :channel => channel.to_s)
+  end
+
+  # Send on all undelivered channels
+  def send_by_all_channels
+    for channel in doctor.channels
+      send_by(channel)
+    end
   end
 end

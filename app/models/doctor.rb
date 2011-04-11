@@ -16,6 +16,17 @@ class Doctor < ActiveRecord::Base
 
   has_and_belongs_to_many :offices
 
+  # Multichannel
+  # ============
+  def channels
+    channel = []
+    channel << 'hl7' if wants_hl7
+    channel << 'email' if wants_email
+    channel << 'print' if wants_prints
+    
+    channel
+  end
+  
   # HL7
   named_scope :wanting_hl7, :include => :user, :conditions => ["users.wants_hl7 = ?", true]
   has_many :undelivered_hl7, :class_name => 'Mailing', :conditions => ["hl7_delivered_at IS NULL"]
