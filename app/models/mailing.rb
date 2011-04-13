@@ -22,10 +22,10 @@ class Mailing < ActiveRecord::Base
     
     if d.wants_prints
       # Check if there's an open mailing
-      mailing = Mailing.find(:first, :conditions => ['printed_at IS NULL AND doctor_id = ?', doctor_id])
+      mailing = d.mailings.unsent.first
+
       # Create a new one if not
-      mailing = self.new if mailing.nil?
-      mailing.doctor_id = doctor_id
+      mailing = d.mailings.build if mailing.nil?
 
       # Clear in case it an existing mailing
       mailing.cases.clear
