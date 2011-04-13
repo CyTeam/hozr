@@ -39,6 +39,17 @@ class MailingsController < ApplicationController
     render :action => 'overview', :layout => 'stats_letter_for_pdf'
   end
 
+  def print_overview
+    @mailing = Mailing.find(params[:id])
+
+    command = "/usr/local/bin/hozr_print_mailing_overview.sh #{@mailing.id}"
+    stream = open("|#{command}")
+    output = stream.read
+ 
+    redirect_to :action => :show, :id => @mailing.id
+  end
+
+
   def statistics
     @doctor = Doctor.find(params[:doctor_id])
     case_conditions = YAML.load(params[:case_conditions])
