@@ -20,9 +20,13 @@
         <span id="<%= "send_queue_log_#{send_queue.id}" %>"></span>
       </td>
       <td>
-        <%= link_to_remote("Resultate drucken", :update => "send_queue_log_#{send_queue.id}", :loading => "Element.show('#{loading_indicator_id({:id => "mailing_#{mailing.id}"})}')", :url => {:controller => :mailings, :action => :send_by, :channel => 'print', :id => mailing }) if mailing.doctor.wants_prints %><br/>
-        <%= link_to_remote("E-Mail senden", :update => "send_queue_log_#{send_queue.id}", :loading => "Element.show('#{loading_indicator_id({:id => "mailing_#{mailing.id}"})}')", :url => {:controller => :mailings, :action => :send_by, :channel => 'email', :id => mailing }) if mailing.doctor.wants_email %><br/>
-        <%= link_to_remote("HL7 senden", :update => "send_queue_log_#{send_queue.id}", :loading => "Element.show('#{loading_indicator_id({:id => "mailing_#{mailing.id}"})}')", :url => {:controller => :mailings, :action => :send_by, :channel => 'hl7', :id => mailing }) if mailing.doctor.wants_hl7 %>
+        <% if send_queue.sent_at %>
+          <%= link_to_remote("Resultate drucken", :update => "send_queue_log_#{send_queue.id}", :url => {:controller => :mailings, :action => :send_by, :channel => 'print', :id => mailing }) if mailing.doctor.wants_prints %><br/>
+          <%= link_to_remote("E-Mail senden", :update => "send_queue_log_#{send_queue.id}", :url => {:controller => :mailings, :action => :send_by, :channel => 'email', :id => mailing }) if mailing.doctor.wants_email %><br/>
+          <%= link_to_remote("HL7 senden", :update => "send_queue_log_#{send_queue.id}", :url => {:controller => :mailings, :action => :send_by, :channel => 'hl7', :id => mailing }) if mailing.doctor.wants_hl7 %>
+        <% else %>
+          <%= link_to_remote("Resultate drucken", :update => "send_queue_log_#{send_queue.id}", :url => {:action => :print, :id => send_queue }) if mailing.doctor.wants_prints %><br/>
+        <% end %>
       </td>
     </tr>
   <% end -%>

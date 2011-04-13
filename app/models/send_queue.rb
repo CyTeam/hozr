@@ -12,6 +12,10 @@ class SendQueue < ActiveRecord::Base
     "%s: %i Resultate für %s per %s" % [created_at, mailing.cases.count, channel.to_s, mailing.doctor.to_s]
   end
 
+  def sent?
+    ! sent_at.nil?
+  end
+  
   # Actions
   def print
     command = "/usr/local/bin/hozr_print_result_mailing.sh #{mailing.id} '' #{( ENV['RAILS_ENV'] || 'development' )}"

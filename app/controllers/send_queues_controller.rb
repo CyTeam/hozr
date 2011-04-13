@@ -17,7 +17,6 @@ class SendQueuesController < ApplicationController
   def print_all
     print_queues = SendQueue.unsent.by_channel('print')
     
-    output = ""
     for print_queue in print_queues
       print_queue.print
       
@@ -25,5 +24,13 @@ class SendQueuesController < ApplicationController
     end
 
     render :partial => 'send_queues/printed', :collection => print_queues
+  end
+
+  def print
+    @print_queue = SendQueue.find(params[:id])
+    
+    @print_queue.print
+
+    render :partial => 'send_queues/printed', :object => @print_queue
   end
 end
