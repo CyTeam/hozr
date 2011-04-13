@@ -77,19 +77,6 @@ class MailingsController < ApplicationController
     redirect_to :action => 'overview', :id => mailing
   end
 
-  def print_all
-    print_queue = SendQueue.unsent.by_channel('print')
-    
-    output = ""
-    for print_queue in print_queue
-      output += print_queue.print
-      
-      sleep(20)
-    end
-
-    send_data output, :type => 'text/html; charset=utf-8', :disposition => 'inline'
-  end
-  
   # Multi Channel
   def send_by
     @mailing = Mailing.find(params[:id])
