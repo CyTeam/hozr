@@ -1,3 +1,4 @@
+require 'core_ext/string'
 require "net/http"
 
 class CasesController < ApplicationController
@@ -460,11 +461,26 @@ class CasesController < ApplicationController
     @case = Case.find(params[:id])
     @case.screened_at ||= Date.today
 
-    case @case.classification.code
-    when 'mam', 'sput', 'extra'
-      render :action => :eg_result_report
-    else
-      render :action => :result_report
+    respond_to do |format|
+      format.html {
+        case @case.classification.code
+        when 'mam', 'sput', 'extra'
+            render :action => :eg_result_report
+        else
+          render :action => :result_report
+        end
+      }
+      format.pdf {
+        @page_size = params[:page_size] || 'A5'
+
+        case @page_size
+        when 'A5':
+          prawnto :prawn => { :page_size => @page_size, :top_margin => 60, :left_margin => 35, :right_margin => 35, :bottom_margin => 23 }
+        when 'A4':
+          prawnto :prawn => { :page_size => @page_size, :top_margin => 90, :left_margin => 40, :right_margin => 40, :bottom_margin => 40 }
+        end
+        render :layout => false
+      }
     end
   end
 
