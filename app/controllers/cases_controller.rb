@@ -518,26 +518,62 @@ class CasesController < ApplicationController
   # ========
   def print_result_report
     ids = params[:id] ? params[:id] : params[:ids].split('/')
-    output = "<pre>"
+    
+    output = ""
     for id in ids
-      stream = open("|/usr/local/bin/hozr_print_result_report.sh #{id} --force #{(ENV['RAILS_ENV'] || 'development')} 2>&1")
-      output += stream.read
+      @case = Case.find(id)
+
+      output += @case.to_s
+
+      @page_size = params[:page_size] || 'A5'
+
+      case @page_size
+      when 'A5':
+        prawnto :prawn => { :page_size => @page_size, :top_margin => 60, :left_margin => 35, :right_margin => 35, :bottom_margin => 23 }
+        printer = 'hpT3'
+      when 'A4':
+        prawnto :prawn => { :page_size => @page_size, :top_margin => 90, :left_margin => 40, :right_margin => 40, :bottom_margin => 40 }
+        printer = 'HP2840'
+      end
+
+      page = render_to_string(:action => :result_report, :format => :pdf, :layout => false)
+      options = {}
+
+      # Workaround TransientJob not yet accepting options
+      file = Tempfile.new('')
+      file.puts(page)
+      file.close
+
+      paper_copy = Cups::PrintJob.new(file.path, printer, options)
+      paper_copy.print
     end
 
-    output += "</pre>"
-    send_data output, :type => 'text/html; charset=utf-8', :disposition => 'inline'
+    send_data "Gedruckt: #{output}", :type => 'text/html; charset=utf-8', :disposition => 'inline'
   end
 
   def print_result_report_as_fax
     ids = params[:id] ? params[:id] : params[:ids].split('/')
-    output = "<pre>"
+    output = ""
     for id in ids
-      stream = open("|/usr/local/bin/hozr_print_result_report.sh #{id} --fax --force '#{id}' #{(ENV['RAILS_ENV'] || 'development')} 2>&1")
-      output += stream.read
+      @case = Case.find(id)
+
+      output += @case.to_s
+
+      # Use A5
+      prawnto :prawn => { :page_size => 'A5', :top_margin => 60, :left_margin => 35, :right_margin => 35, :bottom_margin => 23 }
+      page = render_to_string(:action => :result_report, :format => :pdf, :layout => false)
+      options = {}
+
+      # Workaround TransientJob not yet accepting options
+      file = Tempfile.new('')
+      file.puts(page)
+      file.close
+
+      paper_copy = Cups::PrintJob.new(file.path, 'hpT2', options)
+      paper_copy.print
     end
 
-    output += "</pre>"
-    send_data output, :type => 'text/html; charset=utf-8', :disposition => 'inline'
+    send_data "Gedruckt: #{output}", :type => 'text/html; charset=utf-8', :disposition => 'inline'
   end
 
 
