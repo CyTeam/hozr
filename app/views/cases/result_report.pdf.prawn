@@ -126,3 +126,39 @@ if @case.review_by and @case.review_at
     pdf.text @case.review_by.work_vcard.abbreviated_name + ", " + @case.review_at.strftime("%d.%m.%Y")
   end
 end
+
+pdf.grid([13,0], [15,4]).bounding_box do
+  pdf.font "Cholla Sans", :size => 12 do
+    pdf.move_down(10)
+    pdf.text @case.patient.vcard.full_name
+    pdf.text @case.patient.vcard.extended_address if @case.patient.vcard.extended_address.present?
+    pdf.text @case.patient.vcard.street_address
+    pdf.text @case.patient.vcard.postal_code + " " + @case.patient.vcard.locality
+  end
+end
+
+pdf.grid([13,5], [15,7]).bounding_box do
+  pdf.indent(10) do
+    pdf.move_down(10)
+    pdf.text [patient_birth_date, patient_nr].compact.join(" / ")
+    pdf.text @case.patient.vcard.full_name
+    pdf.text @case.patient.vcard.extended_address if @case.patient.vcard.extended_address.present?
+    pdf.text @case.patient.vcard.street_address
+    pdf.text @case.patient.vcard.postal_code + " " + @case.patient.vcard.locality
+    pdf.text " "
+    pdf.text @case.patient.insurance.vcard.full_name if @case.patient.insurance
+  end
+end
+
+pdf.grid([13,8], [15,10]).bounding_box do
+  pdf.indent(10) do
+    pdf.move_down(10)
+    pdf.text [patient_birth_date, patient_nr].compact.join(" / ")
+    pdf.text @case.patient.vcard.full_name
+    pdf.text @case.patient.vcard.extended_address if @case.patient.vcard.extended_address.present?
+    pdf.text @case.patient.vcard.street_address
+    pdf.text @case.patient.vcard.postal_code + " " + @case.patient.vcard.locality
+    pdf.text " "
+    pdf.text @case.patient.insurance.vcard.full_name if @case.patient.insurance
+  end
+end
