@@ -23,6 +23,7 @@ pdf.define_grid(:columns => 11, :rows => 16, :gutter => 2) #.show_all('EEEEEE')
 pdf.grid([0,1], [1,4]).bounding_box do
   pdf.text [patient_birth_date, patient_nr].compact.join(" / ")
   pdf.text @case.patient.vcard.full_name
+  pdf.text @case.patient.vcard.extended_address if @case.patient.vcard.extended_address.present?
   pdf.text @case.patient.vcard.street_address
   pdf.text @case.patient.vcard.postal_code + " " + @case.patient.vcard.locality
 end
