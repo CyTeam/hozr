@@ -544,7 +544,7 @@ class CasesController < ApplicationController
       file.puts(page)
       file.close
 
-      paper_copy = Cups::PrintJob.new(file.path, printer, options)
+      paper_copy = Cups::PrintJob.new(file.path, printer)
       paper_copy.print
     end
 
@@ -569,7 +569,7 @@ class CasesController < ApplicationController
       file.puts(page)
       file.close
 
-      paper_copy = Cups::PrintJob.new(file.path, 'hpT2', options)
+      paper_copy = Cups::PrintJob.new(file.path, 'hpT2')
       paper_copy.print
     end
 

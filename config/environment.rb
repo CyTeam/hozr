@@ -74,7 +74,8 @@ Rails::Initializer.run do |config|
   config.gem 'barby'
 
   # Print
-  config.gem 'thorsson_cups', :lib => 'cups'
+#  config.gem 'thorsson_cups', :lib => 'cups'
+  config.gem 'cups'
 
   # Postalcode import
   config.gem 'fastercsv'
