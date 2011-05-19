@@ -79,7 +79,7 @@ class Patient < ActiveRecord::Base
   end
 
   def open_invoices
-    bills.select{|bill| bill.open?}
+    bills.open
   end
   
   def reactivate_open_invoices

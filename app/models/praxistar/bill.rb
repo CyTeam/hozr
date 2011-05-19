@@ -19,6 +19,7 @@ class Praxistar::Bill < Praxistar::Base
     Case.find(:first, :conditions => ['praxistar_leistungsblatt_id = ?', self[:Leistungsblatt_ID]])
   end
 
+  # State
   def payment_state
     return "unknown" if account_receivable.nil?
     return "cancelled" if account_receivable[:tf_Storno]
@@ -31,6 +32,13 @@ class Praxistar::Bill < Praxistar::Base
     end
   end
 
+  # TODO: get rid of since constant as soon as db got cleaned up
+  named_scope :open, {
+    :joins => "LEFT JOIN [Debitoren_Zahlungsjournal] ON Debitoren_Zahlungsjournal.Rechnung_ID = ID_Rechnung LEFT JOIN [debitoren_debitoren] ON debitoren_debitoren.Rechnung_ID = ID_Rechnung",
+    :conditions => ["dt_Bezahldatum IS NULL AND debitoren_debitoren.tf_Storno = ? AND dt_Rechnungsdatum >= ?", false, Date.new(2009, 1, 1)]
+  }
+
+  # TODO: get rid of since constant as soon as db got cleaned up
   def open?
     since = Date.new(2009, 1, 1)
     !(payment_state == "payed" or payment_state == "cancelled") and dt_Rechnungsdatum >= since
@@ -40,6 +48,7 @@ class Praxistar::Bill < Praxistar::Base
     !(payment_state == "payed" or payment_state == "cancelled")
   end
   
+  # Actions
   def cancel(reason = "Storniert")
 #    raise "Kann bezahlte Rechnungen nicht stornieren!" if payment_state == "payed"
     account_receivable[:tf_Storno] = true
