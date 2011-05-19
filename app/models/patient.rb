@@ -9,6 +9,7 @@ class Patient < ActiveRecord::Base
   has_many :cases, :order => 'id DESC'
   has_many :finished_cases, :class_name => 'Case', :conditions => 'screened_at IS NOT NULL', :order => 'id DESC'
   has_many :bills, :class_name => 'Praxistar::Bill', :foreign_key => 'Patient_ID', :order => 'ID_Rechnung'
+  has_one :praxistar_patienten_personalien, :class_name => 'Praxistar::PatientenPersonalien', :foreign_key => 'ID_Patient'
   has_many :praxistar_leistungsblaetter, :class_name => 'Praxistar::LeistungenBlatt'
   
   validates_presence_of :birth_date
