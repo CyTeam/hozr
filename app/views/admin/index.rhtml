@@ -8,6 +8,7 @@
 
 <h1>Datenpflege</h1>
 <ul>
+  <li><%= link_to "Patienten mit Mahnstopp", :controller => 'patients', :action => 'dunning_stopped' %></li>
   <li><%= link_to "Behandlungsgrund ändern", :controller => 'bills', :action => 'edit_treatment_reason' %></li>
   <li><%= link_to "Klassifikationen", :controller => 'classifications' %></li>
   <li><%= link_to "Klassifikationsgruppen", :controller => 'classification_groups' %></li>

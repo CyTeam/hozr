@@ -24,11 +24,16 @@ class PatientsController < ApplicationController
     render :partial => 'full_names'
   end
 
+  # Lists
   def index
     list
     render :action => 'list'
   end
 
+  def dunning_stopped
+    @patients = Patient.dunning_stopped.all
+  end
+  
   # Date helpers
   def parse_date(value)
     if value.is_a?(String)
