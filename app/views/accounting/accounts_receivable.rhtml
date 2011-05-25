@@ -20,6 +20,36 @@ table.listing tr td.total {
 <% end %>
 
 </pre>
+
+<h1>Offene Posten</h1>
+<table class="listing" style="width: 45%">
+  <tr>
+    <th>Valuta</th>
+    <th>Rechnungsbetrag</th>
+    <th>Mahnspesen1</th>
+    <th>Mahnspesen2</th>
+    <th>Mahnspesen3</th>
+    <th>Zahlbetrag</th>
+  </tr>
+
+  <tr>
+    <th><%= @start_date %></th>
+    <th><%= cu_to_s(@opening_saldo['Rechnungsbetrag']) %></th>
+    <th><%= cu_to_s(@opening_saldo['Mahnspesen1']) %></th>
+    <th><%= cu_to_s(@opening_saldo['Mahnspesen2']) %></th>
+    <th><%= cu_to_s(@opening_saldo['Mahnspesen3']) %></th>
+    <th><%= cu_to_s(@opening_saldo['Zahlbetrag']) %></th>
+  </tr>
+  <tr>
+    <th><%= @end_date %></th>
+    <th><%= cu_to_s(@closing_saldo['Rechnungsbetrag']) %></th>
+    <th><%= cu_to_s(@closing_saldo['Mahnspesen1']) %></th>
+    <th><%= cu_to_s(@closing_saldo['Mahnspesen2']) %></th>
+    <th><%= cu_to_s(@closing_saldo['Mahnspesen3']) %></th>
+    <th><%= cu_to_s(@closing_saldo['Zahlbetrag']) %></th>
+  </tr>
+</table>
+
 <table class="listing" style="width: 45%">
   <tr>
     <th>Name</th>
@@ -29,43 +59,38 @@ table.listing tr td.total {
 
   <tr>
     <td>Erb&ouml;ffnungssaldo</td>
-    <td class="booking"><%= cu_to_s(@opening_saldo) %></td>
+    <td class="booking"></td>
     <td class="booking"></td>
   </tr>
   <tr>
     <td>Gestellte Rechnungen</td>
-    <td class="booking"><%=h cu_to_s(@gestellte_rechnungen) %></td>
+    <td class="booking"><%=h cu_to_s(@total_billed) %></td>
     <td class="booking"></td>
   </tr>
   <tr>
     <td>Stornierte Rechnungen</td>
     <td class="booking"></td>
-    <td class="booking"><%= cu_to_s(@stornierte_rechnungen) %></td>
+    <td class="booking"><%= cu_to_s(@total_canceled_bills) %></td>
   </tr>
   <tr>
     <td>Bezahlte Rechnungen</td>
     <td class="booking"></td>
-    <td class="booking"><%= cu_to_s(@bezahlte_rechnungen) %></td>
+    <td class="booking"><%= cu_to_s(@total_paid) %></td>
   </tr>
   <tr>
     <td>Stornierte Zahlungen</td>
-    <td class="booking"><%= cu_to_s(@stornierte_zahlungen) %></td>
+    <td class="booking"><%= cu_to_s(@total_canceled_payments) %></td>
     <td class="booking"></td>
-  </tr>
-  <tr>
-    <td>Zuviel Bezahlt</td>
-    <td class="booking"></td>
-    <td class="booking"><%= cu_to_s(@zuviel_bezahlt) %></td>
   </tr>
   <tr>
     <td>Debitorenverluste</td>
     <td class="booking"></td>
-    <td class="booking"><%= cu_to_s(@debitoren_verluste) %></td>
+    <td class="booking"><%= cu_to_s(@total_write_off) %></td>
   </tr>
   <tr>
     <td>Saldo</td>
     <td class="booking"></td>
-    <td class="booking"><%= cu_to_s(@closing_saldo) %></td>
+    <td class="booking"></td>
   </tr>
   <tr>
     <td class="total">Total</td>

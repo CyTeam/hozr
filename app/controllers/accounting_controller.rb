@@ -23,5 +23,19 @@ class AccountingController < ApplicationController
     @closing_saldo = @opening_saldo - @zuviel_bezahlt + @gestellte_rechnungen - @stornierte_rechnungen - @bezahlte_rechnungen + @stornierte_zahlungen - @debitoren_verluste
 
     @total = @opening_saldo + @gestellte_rechnungen + @stornierte_zahlungen
+
+    # Next two queries should return same amount
+    # @total_billed = Praxistar::AccountReceivable.sum('cu_rechnungsbetrag', :conditions => ["dt_rechnungsdatum BETWEEN ? AND ? AND tf_storno = 0", @start_date, @end_date]).to_f
+    @total_billed = Praxistar::Bill.sum('cu_total', :conditions => ["dt_rechnungsdatum BETWEEN ? AND ? AND tf_storno = 0", @start_date, @end_date]).to_f
+    @total_canceled_bills = Praxistar::AccountReceivable.sum('cu_rechnungsbetrag', :conditions => ["dt_rechnungsdatum BETWEEN ? AND ? AND tf_storno != 0", @start_date, @end_date]).to_f
+
+    @total_paid = Praxistar::Payment.sum('cu_betrag', :conditions => ["dt_bezahldatum BETWEEN ? AND ? AND tf_storno = 0", @start_date, @end_date]).to_f
+    @total_canceled_payments = Praxistar::Payment.sum('cu_betrag', :conditions => ["dt_bezahldatum BETWEEN ? AND ? AND tf_storno != 0", @start_date, @end_date]).to_f
+
+    @total_write_off = Praxistar::ReceivableWriteOff.sum('cu_differenz', :conditions => ["dt_verbucht BETWEEN ? AND ?", @start_date, @end_date]).to_f
+
+    @opening_saldo = Praxistar::AccountReceivable.open(@start_date).saldo.first
+    @closing_saldo = Praxistar::AccountReceivable.open(@end_date).saldo.first
+
   end
 end
