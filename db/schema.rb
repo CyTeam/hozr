@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110328102314) do
+ActiveRecord::Schema.define(:version => 20110524110040) do
 
   create_table "account_receivables", :force => true do |t|
   end
@@ -29,6 +29,17 @@ ActiveRecord::Schema.define(:version => 20110328102314) do
 
   add_index "addresses", ["locality"], :name => "locality"
   add_index "addresses", ["vcard_id"], :name => "addresses_vcard_id_index"
+
+  create_table "aetikettens", :force => true do |t|
+    t.string   "hon_suffix"
+    t.string   "fam_name"
+    t.string   "giv_name"
+    t.string   "ext_address"
+    t.string   "loc"
+    t.string   "postc"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "bills", :force => true do |t|
     t.integer  "case_id"
@@ -282,6 +293,18 @@ ActiveRecord::Schema.define(:version => 20110328102314) do
 
   add_index "order_forms", ["case_id"], :name => "index_order_forms_on_case_id"
 
+  create_table "ot_labels", :force => true do |t|
+    t.text     "prax_nr"
+    t.integer  "sys_id"
+    t.text     "doc_fname"
+    t.text     "doc_gname"
+    t.text     "pat_fname"
+    t.text     "pat_gname"
+    t.text     "pat_bday"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "pages", :force => true do |t|
     t.integer "position"
     t.integer "scan_id"
@@ -355,6 +378,7 @@ ActiveRecord::Schema.define(:version => 20110328102314) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.datetime "sent_at"
+    t.text     "output"
   end
 
   create_table "shop_orders", :force => true do |t|

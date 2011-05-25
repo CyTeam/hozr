@@ -95,7 +95,7 @@ class MailingsController < ApplicationController
     for print_queue in print_queue
       output += print_queue.print
       
-      sleep(20)
+      sleep(30)
     end
 
     send_data output, :type => 'text/html; charset=utf-8', :disposition => 'inline'
