@@ -37,8 +37,14 @@ class AccountingController < ApplicationController
     @opening_saldo = Praxistar::AccountReceivable.open(@start_date)
     @closing_saldo = Praxistar::AccountReceivable.open(@end_date)
 
-    @opening_balance = @opening_saldo.sum('cu_rechnungsbetrag') + @opening_saldo.sum('cu_mahnspesen1') + @opening_saldo.sum('cu_mahnspesen2') + @opening_saldo.sum('cu_mahnspesen3')
-    @closing_balance = @closing_saldo.sum('cu_rechnungsbetrag') + @closing_saldo.sum('cu_mahnspesen1') + @closing_saldo.sum('cu_mahnspesen2') + @closing_saldo.sum('cu_mahnspesen3')
+    @opening_balance = @opening_saldo.sum('cu_rechnungsbetrag')
+      + @opening_saldo.sum("CASE WHEN dt_1Mahnung <= '#{@start_date}' THEN cu_mahnspesen1 ELSE 0 END")
+      + @opening_saldo.sum("CASE WHEN dt_2Mahnung <= '#{@start_date}' THEN cu_mahnspesen2 ELSE 0 END")
+      + @opening_saldo.sum("CASE WHEN dt_3Mahnung <= '#{@start_date}' THEN cu_mahnspesen3 ELSE 0 END")
+    @closing_balance = @closing_saldo.sum('cu_rechnungsbetrag')
+      + @closing_saldo.sum("CASE WHEN dt_1Mahnung <= '#{@end_date}' THEN cu_mahnspesen1 ELSE 0 END")
+      + @closing_saldo.sum("CASE WHEN dt_2Mahnung <= '#{@end_date}' THEN cu_mahnspesen2 ELSE 0 END")
+      + @closing_saldo.sum("CASE WHEN dt_3Mahnung <= '#{@end_date}' THEN cu_mahnspesen3 ELSE 0 END")
 
     @debit_total = @opening_balance + @total_billed + @total_canceled_payments
     @credit_total = @closing_balance + @total_paid + @total_write_off + @total_canceled_bills
