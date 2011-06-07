@@ -58,8 +58,8 @@ table.listing tr td.total {
   </tr>
 
   <tr>
-    <td>Erb&ouml;ffnungssaldo</td>
-    <td class="booking"></td>
+    <td>Er&ouml;ffnungssaldo</td>
+    <td class="booking"><%=h cu_to_s(@opening_balance) %></td>
     <td class="booking"></td>
   </tr>
   <tr>
@@ -90,11 +90,11 @@ table.listing tr td.total {
   <tr>
     <td>Saldo</td>
     <td class="booking"></td>
-    <td class="booking"></td>
+    <td class="booking"><%= cu_to_s(@closing_balance) %></td>
   </tr>
   <tr>
     <td class="total">Total</td>
-    <td class="total booking"><%= cu_to_s(@total) %></td>
-    <td class="total booking"><%= cu_to_s(@total) %></td>
+    <td class="total booking"><%= cu_to_s(@debit_total) %></td>
+    <td class="total booking"><%= cu_to_s(@credit_total) %></td>
   </tr>
 </table>
