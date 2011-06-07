@@ -34,8 +34,8 @@ class AccountingController < ApplicationController
 
     @total_write_off = Praxistar::ReceivableWriteOff.sum('cu_differenz', :conditions => ["dt_verbucht BETWEEN ? AND ?", @start_date, @end_date]).to_f
 
-    @opening_saldo = Praxistar::AccountReceivable.open(@start_date).saldo.first
-    @closing_saldo = Praxistar::AccountReceivable.open(@end_date).saldo.first
+    @opening_saldo = Praxistar::AccountReceivable.open(@start_date)
+    @closing_saldo = Praxistar::AccountReceivable.open(@end_date)
 
   end
 end

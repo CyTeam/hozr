@@ -34,19 +34,19 @@ table.listing tr td.total {
 
   <tr>
     <th><%= @start_date %></th>
-    <th><%= cu_to_s(@opening_saldo['Rechnungsbetrag']) %></th>
-    <th><%= cu_to_s(@opening_saldo['Mahnspesen1']) %></th>
-    <th><%= cu_to_s(@opening_saldo['Mahnspesen2']) %></th>
-    <th><%= cu_to_s(@opening_saldo['Mahnspesen3']) %></th>
-    <th><%= cu_to_s(@opening_saldo['Zahlbetrag']) %></th>
+    <th><%= cu_to_s(@opening_saldo.sum('cu_rechnungsbetrag')) %></th>
+    <th><%= cu_to_s(@opening_saldo.sum('cu_mahnspesen1')) %></th>
+    <th><%= cu_to_s(@opening_saldo.sum('cu_mahnspesen2')) %></th>
+    <th><%= cu_to_s(@opening_saldo.sum('cu_mahnspesen3')) %></th>
+    <th><%= cu_to_s(@opening_saldo.sum('cu_betrag')) %></th>
   </tr>
   <tr>
     <th><%= @end_date %></th>
-    <th><%= cu_to_s(@closing_saldo['Rechnungsbetrag']) %></th>
-    <th><%= cu_to_s(@closing_saldo['Mahnspesen1']) %></th>
-    <th><%= cu_to_s(@closing_saldo['Mahnspesen2']) %></th>
-    <th><%= cu_to_s(@closing_saldo['Mahnspesen3']) %></th>
-    <th><%= cu_to_s(@closing_saldo['Zahlbetrag']) %></th>
+    <th><%= cu_to_s(@closing_saldo.sum('cu_rechnungsbetrag')) %></th>
+    <th><%= cu_to_s(@closing_saldo.sum('cu_mahnspesen1')) %></th>
+    <th><%= cu_to_s(@closing_saldo.sum('cu_mahnspesen2')) %></th>
+    <th><%= cu_to_s(@closing_saldo.sum('cu_mahnspesen3')) %></th>
+    <th><%= cu_to_s(@closing_saldo.sum('cu_betrag')) %></th>
   </tr>
 </table>
 

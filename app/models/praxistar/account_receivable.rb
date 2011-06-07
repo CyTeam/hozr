@@ -12,11 +12,6 @@ class Praxistar::AccountReceivable < Praxistar::Base
       :order => "id_debitoren"
     }
   }
-  named_scope :saldo, lambda{
-    {
-      :select => "sum(cu_rechnungsbetrag) as 'Rechnungsbetrag', sum(cu_betrag) as 'Zahlbetrag', sum(cu_mahnspesen1) as 'Mahnspesen1', sum(cu_mahnspesen2) as 'Mahnspesen2', sum(cu_mahnspesen3) as 'Mahnspesen3'"
-    }
-  }
   
   def to_s
     "%s: %s CHF %0.2f" % [self.bill.patient, self.dt_Rechnungsdatum.strftime('%d.%m.%Y'), self.cu_rechnungsbetrag]
