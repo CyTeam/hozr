@@ -19,7 +19,8 @@ class Praxistar::AccountReceivable < Praxistar::Base
   }
   
   def to_s
-    "%s: %s (gemahnt %s, %s, %s) (stroniert %s) (bezahlt %s) CHF %0.2f" % [self.Rechnung_ID, self.dt_Rechnungsdatum, self.dt_1Mahnung, self.dt_2Mahnung, self.dt_3Mahnung, self.dt_Stornodatum, self.payment ? self.payment.dt_Bezahldatum : '', self.cu_rechnungsbetrag]
+    "%s: %s CHF %0.2f" % [self.bill.patient, self.dt_Rechnungsdatum.strftime('%d.%m.%Y'), self.cu_rechnungsbetrag]
+#    "%s: %s (gemahnt %s, %s, %s) (stroniert %s) (bezahlt %s) CHF %0.2f" % [self.Rechnung_ID, self.dt_Rechnungsdatum, self.dt_1Mahnung, self.dt_2Mahnung, self.dt_3Mahnung, self.dt_Stornodatum, self.payment ? self.payment.dt_Bezahldatum : '', self.cu_rechnungsbetrag]
   end
   
   def bill_type
