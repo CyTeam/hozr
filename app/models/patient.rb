@@ -17,8 +17,13 @@ class Patient < ActiveRecord::Base
   named_scope :dunning_stopped, {:conditions => {:dunning_stop => true} }
   
   #TODO: differs from CyLab version as birth_date is overloaded
-  def to_s
-    "#{name} ##{doctor_patient_nr}, #{birth_date}"
+  def to_s(format = :default)
+    case format
+      when :short
+        name
+      else
+        "#{name} ##{doctor_patient_nr}, #{birth_date}"
+    end
   end
 
   # Attributes
