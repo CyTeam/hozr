@@ -8,7 +8,7 @@ class Praxistar::AccountReceivable < Praxistar::Base
   named_scope :open, lambda{|date|
     {
       :joins => "LEFT JOIN [Debitoren_Zahlungsjournal] ON Debitoren_Zahlungsjournal.Debitoren_ID = debitoren_debitoren.id_debitoren",
-      :conditions => ["(dt_bezahldatum IS NULL OR dt_bezahldatum > :date) AND (debitoren_debitoren.dt_rechnungsdatum < :date) AND (debitoren_debitoren.dt_Stornodatum IS NULL OR debitoren_debitoren.dt_Stornodatum > :date) AND (debitoren_debitoren.modus_id = 9 OR debitoren_debitoren.modus_id = 6) AND (debitoren_debitoren.Mandant_ID = 1)", {:date => date}],
+      :conditions => ["(dt_bezahldatum IS NULL OR dt_bezahldatum > :date) AND (debitoren_debitoren.dt_rechnungsdatum <= :date) AND (debitoren_debitoren.dt_Stornodatum IS NULL OR debitoren_debitoren.dt_Stornodatum > :date) AND (debitoren_debitoren.modus_id = 9 OR debitoren_debitoren.modus_id = 6) AND (debitoren_debitoren.Mandant_ID = 1)", {:date => date}],
       :order => "id_debitoren"
     }
   }
