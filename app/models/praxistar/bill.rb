@@ -12,7 +12,7 @@ class Praxistar::Bill < Praxistar::Base
   has_many :payments, :foreign_key => 'Rechnung_ID'
     
   def to_s
-    "%s: %s" % [patient.to_s, id]
+    "%s: #%s(%s) CHF %0.2f" % [patient.to_s(:short), id, payment_state, cu_TOTAL]
   end
   
   def cyto_case
