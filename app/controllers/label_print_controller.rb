@@ -1,4 +1,5 @@
 class LabelPrintController < ApplicationController
+  helper :label_print
   
   def label
       @start_praxnr = params[:start_praxnr]
@@ -7,7 +8,7 @@ class LabelPrintController < ApplicationController
       label_save
       set_triger
   end
-    
+
     def label_save
       label_delete
       for label in @cases

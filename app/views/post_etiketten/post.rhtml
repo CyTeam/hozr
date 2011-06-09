@@ -1,0 +1,20 @@
+<h1>Post Etiketten Drucken</h1>
+<div style="display: none" class="flash notice" id="print_flash"></div>
+
+<% form_tag :action => 'create' do |f| %>
+    <td><%= select_tag 'doctor_id', options_for_select(doctors_collection) %></td>
+    <%= submit_tag 'Drucken' %>
+<% end %>
+
+<table class="listing" style="width: 45%">
+  <tr>
+    <th>Prax. Nr</th>
+    <th>Doc Name</th>
+    <th>Doc Vorname</th>
+    <th>Pat Name</th>
+    <th>Pat Vorname</th>
+    <th>Pat Geb.</th>
+    <th>Sys ID</th>
+  </tr>
+</table>
+
