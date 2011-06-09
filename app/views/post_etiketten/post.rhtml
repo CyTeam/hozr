@@ -1,7 +1,7 @@
 <h1>Post Etiketten Drucken</h1>
 <div style="display: none" class="flash notice" id="print_flash"></div>
 
-<% form_tag do |f| %>
+<% form_tag :action => 'create' do |f| %>
     <td><%= select_tag 'doctor_id', options_for_select(doctors_collection) %></td>
     <%= submit_tag 'Drucken' %>
 <% end %>

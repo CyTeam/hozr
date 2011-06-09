@@ -1,11 +1,10 @@
 class PostEtikettenController < ApplicationController
 
   def post
-	@prax = params[:doctor_id]
-	print_post_label
   end
 
-  def print_post_label
+  def create
+	@prax = params[:doctor_id]
         @label = Vcard.find(Doctor.find(@prax).praxis_vcard) rescue nil
 
         Aetiketten.delete_all
@@ -19,6 +18,8 @@ class PostEtikettenController < ApplicationController
         po_label.postc=@label.postal_code
         po_label.save
         system("touch public/triger/post_triger.txt")
+
+        render :action => 'post'
   end
 
 end
