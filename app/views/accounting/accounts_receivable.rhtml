@@ -59,12 +59,22 @@ table.listing tr td.total {
 
   <tr>
     <td>Er&ouml;ffnungssaldo</td>
-    <td class="booking"><%=h cu_to_s(@opening_balance) %></td>
+    <td class="booking"><%=link_to cu_to_s(@opening_balance), :action => 'open_bills', :date => @start_date %></td>
     <td class="booking"></td>
   </tr>
   <tr>
     <td>Gestellte Rechnungen</td>
     <td class="booking"><%=h cu_to_s(@total_billed) %></td>
+    <td class="booking"></td>
+  </tr>
+  <tr>
+    <td>Gestellte Mahnspesen 2</td>
+    <td class="booking"><%=h cu_to_s(@total_billed_spesen2) %></td>
+    <td class="booking"></td>
+  </tr>
+  <tr>
+    <td>Gestellte Mahnspesen 3</td>
+    <td class="booking"><%=h cu_to_s(@total_billed_spesen3) %></td>
     <td class="booking"></td>
   </tr>
   <tr>
@@ -90,7 +100,7 @@ table.listing tr td.total {
   <tr>
     <td>Saldo</td>
     <td class="booking"></td>
-    <td class="booking"><%= cu_to_s(@closing_balance) %></td>
+    <td class="booking"><%=link_to cu_to_s(@closing_balance), :action => 'open_bills', :date => @end_date %></td>
   </tr>
   <tr>
     <td class="total">Total</td>

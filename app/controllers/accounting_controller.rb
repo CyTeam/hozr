@@ -26,8 +26,12 @@ class AccountingController < ApplicationController
 
     # Next two queries should return same amount
     # @total_billed = Praxistar::AccountReceivable.sum('cu_rechnungsbetrag', :conditions => ["dt_rechnungsdatum BETWEEN ? AND ? AND tf_storno = 0", @start_date, @end_date]).to_f
-    @total_billed = Praxistar::Bill.sum('cu_total', :conditions => ["dt_rechnungsdatum BETWEEN ? AND ? AND tf_storno = 0", @start_date, @end_date]).to_f
-    @total_canceled_bills = Praxistar::AccountReceivable.sum('cu_rechnungsbetrag', :conditions => ["dt_rechnungsdatum BETWEEN ? AND ? AND tf_storno != 0", @start_date, @end_date]).to_f
+    @total_billed = Praxistar::AccountReceivable.sum('cu_rechnungsbetrag', :conditions => ["dt_rechnungsdatum BETWEEN ? AND ?", @start_date, @end_date]).to_f
+
+    @total_billed_spesen2 = Praxistar::AccountReceivable.sum('cu_mahnspesen2', :conditions => ["dt_2Mahnung BETWEEN ? AND ?", @start_date, @end_date]).to_f
+    @total_billed_spesen3 = Praxistar::AccountReceivable.sum('cu_mahnspesen3', :conditions => ["dt_3Mahnung BETWEEN ? AND ?", @start_date, @end_date]).to_f
+    
+    @total_canceled_bills = Praxistar::AccountReceivable.cancelled(@start_date, @end_date).sum('cu_rechnungsbetrag', :conditions => ["dt_rechnungsdatum BETWEEN ? AND ?", @start_date, @end_date]).to_f
 
     @total_paid = Praxistar::Payment.sum('cu_betrag', :conditions => ["dt_bezahldatum BETWEEN ? AND ? AND tf_storno = 0", @start_date, @end_date]).to_f
     @total_canceled_payments = Praxistar::Payment.sum('cu_betrag', :conditions => ["dt_bezahldatum BETWEEN ? AND ? AND tf_storno != 0", @start_date, @end_date]).to_f
@@ -46,8 +50,13 @@ class AccountingController < ApplicationController
       + @closing_saldo.sum("CASE WHEN dt_2Mahnung <= '#{@end_date}' THEN cu_mahnspesen2 ELSE 0 END")
       + @closing_saldo.sum("CASE WHEN dt_3Mahnung <= '#{@end_date}' THEN cu_mahnspesen3 ELSE 0 END")
 
-    @debit_total = @opening_balance + @total_billed + @total_canceled_payments
+    @debit_total = @opening_balance + @total_billed + @total_billed_spesen2 + @total_billed_spesen3 + @total_canceled_payments
     @credit_total = @closing_balance + @total_paid + @total_write_off + @total_canceled_bills
+  end
 
+  def open_bills
+    @date = params[:date] || Date.today
+
+    @bills = Praxistar::AccountReceivable.open(@date)
   end
 end
