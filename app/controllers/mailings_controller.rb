@@ -72,22 +72,6 @@ class MailingsController < ApplicationController
     end
   end
 
-  def generate_overview_for_case_list
-    case_ids = params[:ids].split('/')
-
-    # Check if all cases belong to the same doctor
-    cases = Case.find(case_ids)
-    doctor_ids = cases.map {|c| c.doctor_id}
-    raise 'All cases in a mailing need to belong to same doctor' unless doctor_ids.uniq.size == 1
-
-    mailing = Mailing.create(doctor_ids.first, case_ids)
-    # TODO: printed_at is set to suppress printing with next result printing run, better use a flag
-    mailing.printed_at = DateTime.now
-    mailing.save
-    
-    redirect_to :action => 'overview', :id => mailing
-  end
-
   def print_all
     print_queue = SendQueue.unsent.by_channel('print')
     
