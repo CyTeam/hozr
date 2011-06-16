@@ -517,6 +517,7 @@ class CasesController < ApplicationController
   # Printing
   # ========
   def print_result_report
+    request.format = :pdf
     ids = params[:id] ? params[:id] : params[:ids].split('/')
     
     output = ""
@@ -536,7 +537,7 @@ class CasesController < ApplicationController
         printer = 'HP2840'
       end
 
-      page = render_to_string(:action => :result_report, :format => :pdf, :layout => false)
+      page = render_to_string(:action => :result_report, :layout => false)
       options = {}
 
       # Workaround TransientJob not yet accepting options

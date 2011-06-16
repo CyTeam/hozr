@@ -2,8 +2,8 @@
 <%= link_to "Zweiteingabe", :controller => 'cases', :action => 'second_entry_pap_form', :id => params[:id] %>
 <%= link_to "Resultat", :controller => 'cases', :action => 'result_report', :id => params[:id] %>
 <span style="margin-left: 10em;">
-  <%= link_to image_tag('fax.png', :title => 'Drucke Fax'), :controller => 'cases', :action => :print_result_report, :format => :pdf, :id => params[:id], :page_size => 'A4' %>
-  <%= link_to image_tag('print.png', :title => 'Drucke Resultat'), :controller => 'cases', :action => :print_result_report, :format => :pdf, :id => params[:id] %>
+  <%= link_to image_tag('fax.png', :title => 'Drucke Fax'), :controller => 'cases', :action => :print_result_report, :id => params[:id], :page_size => 'A4' %>
+  <%= link_to image_tag('print.png', :title => 'Drucke Resultat'), :controller => 'cases', :action => :print_result_report, :id => params[:id] %>
   <%= link_to image_tag('edit_22.png', :title => 'Fall editieren'), {:controller => 'cases', :action => :edit, :id => params[:id]} %>
   <%= link_to image_tag('remove_22.png', :title => 'Lösche Resultat'), {:controller => 'cases', :action => :destroy, :id => params[:id]}, :confirm => 'Fall wirklich löschen?', :method => :post %>
 </span>
