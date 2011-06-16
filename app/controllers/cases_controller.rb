@@ -517,39 +517,32 @@ class CasesController < ApplicationController
   # Printing
   # ========
   def print_result_report
-    request.format = :pdf
-    ids = params[:id] ? params[:id] : params[:ids].split('/')
-    
-    output = ""
-    for id in ids
-      @case = Case.find(id)
+    @case = Case.find(params[:id])
 
-      output += @case.to_s
+    @page_size = params[:page_size] || 'A5'
 
-      @page_size = params[:page_size] || 'A5'
-
-      case @page_size
-      when 'A5':
-        prawnto :prawn => { :page_size => @page_size, :top_margin => 60, :left_margin => 35, :right_margin => 35, :bottom_margin => 23 }
-        printer = 'hpT3'
-      when 'A4':
-        prawnto :prawn => { :page_size => @page_size, :top_margin => 90, :left_margin => 40, :right_margin => 40, :bottom_margin => 40 }
-        printer = 'HP2840'
-      end
-
-      page = render_to_string(:action => :result_report, :layout => false)
-      options = {}
-
-      # Workaround TransientJob not yet accepting options
-      file = Tempfile.new('')
-      file.puts(page)
-      file.close
-
-      paper_copy = Cups::PrintJob.new(file.path, printer)
-      paper_copy.print
+    case @page_size
+    when 'A5':
+      prawnto :prawn => { :page_size => @page_size, :top_margin => 60, :left_margin => 35, :right_margin => 35, :bottom_margin => 23 }
+      printer = 'hpT3'
+    when 'A4':
+      prawnto :prawn => { :page_size => @page_size, :top_margin => 90, :left_margin => 40, :right_margin => 40, :bottom_margin => 40 }
+      printer = 'HP2840'
     end
 
-    send_data "Gedruckt: #{output}", :type => 'text/html; charset=utf-8', :disposition => 'inline'
+    request.format = :pdf
+    page = render_to_string(:action => :result_report, :layout => false)
+    options = {}
+
+    # Workaround TransientJob not yet accepting options
+    file = Tempfile.new('')
+    file.puts(page)
+    file.close
+
+    paper_copy = Cups::PrintJob.new(file.path, printer)
+    paper_copy.print
+
+    send_data "Gedruckt: #{@case}", :type => 'text/html; charset=utf-8', :disposition => 'inline'
   end
 
   # P16/HPV
