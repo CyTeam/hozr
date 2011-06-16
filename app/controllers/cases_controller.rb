@@ -484,25 +484,6 @@ class CasesController < ApplicationController
     end
   end
 
-  def result_report_for_pdf
-    @case = Case.find(params[:id])
-
-    if @case.screened_at.nil? and @case.needs_p16?
-      @case.screened_at ||= Date.today
-      render :action => :p16_notice_report, :layout => 'result_report_for_pdf'
-      return
-    end
-
-    @case.screened_at ||= Date.today
-
-    case @case.classification.code
-    when 'mam', 'extra'
-      render :action => :eg_result_report_for_pdf, :layout => 'result_report_for_pdf'
-    else
-      render :action => :result_report, :layout => 'result_report_for_pdf'
-    end
-  end
-
   def result_letter
     @doctor = Doctor.find(params[:id])
   end
