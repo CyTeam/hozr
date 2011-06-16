@@ -25,6 +25,14 @@ class MailingsController < ApplicationController
     
     @doctor = @mailing.doctor
     @cases = @mailing.cases
+
+    respond_to do |format|
+      format.html {}
+      format.pdf {
+        prawnto :prawn => { :page_size => @page_size, :top_margin => 90, :left_margin => 40, :right_margin => 40, :bottom_margin => 40 }
+        render :layout => false
+      }
+    end
   end
   
   def show
