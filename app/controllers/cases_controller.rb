@@ -552,32 +552,6 @@ class CasesController < ApplicationController
     send_data "Gedruckt: #{output}", :type => 'text/html; charset=utf-8', :disposition => 'inline'
   end
 
-  def print_result_report_as_fax
-    ids = params[:id] ? params[:id] : params[:ids].split('/')
-    output = ""
-    for id in ids
-      @case = Case.find(id)
-
-      output += @case.to_s
-
-      # Use A5
-      prawnto :prawn => { :page_size => 'A5', :top_margin => 60, :left_margin => 35, :right_margin => 35, :bottom_margin => 23 }
-      page = render_to_string(:action => :result_report, :format => :pdf, :layout => false)
-      options = {}
-
-      # Workaround TransientJob not yet accepting options
-      file = Tempfile.new('')
-      file.puts(page)
-      file.close
-
-      paper_copy = Cups::PrintJob.new(file.path, 'hpT2')
-      paper_copy.print
-    end
-
-    send_data "Gedruckt: #{output}", :type => 'text/html; charset=utf-8', :disposition => 'inline'
-  end
-
-
   # P16/HPV
   # =======
   def hpv_p16_queue

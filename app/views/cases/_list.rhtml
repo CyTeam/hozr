@@ -71,8 +71,8 @@
     <td>
       <%= link_to image_tag('editinput.png'), :controller => 'cases', :action => 'edit', :id => a_case %>
       <%= link_to image_tag('remove.png'), { :controller => 'cases', :action => 'destroy', :id => a_case }, :confirm => 'Are you sure?', :method => :post if false %>
+      <%= link_to image_tag('fax.png', :title => 'Drucke Fax'), :controller => 'cases', :action => :print_result_report, :id => a_case, :page_size => 'A4' %>
       <%= link_to image_tag('print.png', :title => 'Drucke Resultat'), :controller => 'cases', :action => :print_result_report, :id => a_case %>
-      <%= link_to image_tag('fax.png', :title => 'Drucke Fax'), :controller => 'cases', :action => :print_result_report_as_fax, :id => a_case %>
       <%= link_to image_tag('export_bill_16.png', :title => 'Generiere Leistungsblatt'), :controller => 'admin', :action => :praxistar_create_leistungsblatt, :id => a_case if a_case.ready_for_praxistar_create_leistungsblatt %>
       <%= link_to image_tag('additional_case.png', :title => 'Nachträglicher HPV/P16'), :controller => 'cases', :action => :create_hpv_p16_for_case, :id => a_case %> <% # unless a_case.result_report_printed_at.nil? %>
       <%= link_to image_tag('select_16.png', :title => '2. Eingabe bestätigen'), :controller => 'cases', :action => :review_done, :id => a_case if a_case.needs_review? -%>
