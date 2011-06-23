@@ -1,4 +1,6 @@
 class MailingsController < ApplicationController
+  helper :cases
+  
   def index
     list
     render :action => 'list'
@@ -64,7 +66,22 @@ class MailingsController < ApplicationController
     redirect_to :action => :show, :id => @mailing.id
   end
 
+  def result_reports
+    @mailing = Mailing.find(params[:id])
+    @cases = @mailing.cases
+    
+    @page_size = params[:page_size] || 'A5'
 
+    case @page_size
+    when 'A5':
+      prawnto :prawn => { :page_size => @page_size, :top_margin => 60, :left_margin => 35, :right_margin => 35, :bottom_margin => 23 }
+    when 'A4':
+      prawnto :prawn => { :page_size => @page_size, :top_margin => 90, :left_margin => 40, :right_margin => 40, :bottom_margin => 40 }
+    end
+
+    render 'cases/result_report', :layout => false
+  end
+  
   def statistics
     @doctor = Doctor.find(params[:doctor_id])
     case_conditions = YAML.load(params[:case_conditions])
