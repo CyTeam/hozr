@@ -1,6 +1,7 @@
 class ClassificationGroup < ActiveRecord::Base
   has_many :classifications
 
+  # Helpers
   def color
     case title
     when 'Azellulär', 'PAP I', 'PAP II'

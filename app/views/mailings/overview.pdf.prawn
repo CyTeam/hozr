@@ -41,62 +41,72 @@ pdf.grid([3,0], [3,9]).bounding_box do
   end
 end
 
-# Table content creation.
-items = @mailing.cases.map do |item|
-  row = [
-    pdf.make_cell(:content => item.patient.name),
-    pdf.make_cell(:content => item.patient.birth_date),
-    pdf.make_cell(:content => item.control_findings.map {|f| h(f.name)}.join("\n")),
-    pdf.make_cell(:content => item.examination_date.strftime('%d.%m.%Y')),
-    pdf.make_cell(:content => item.praxistar_eingangsnr)
-  ]
-end
+classification_groups = ClassificationGroup.all(:order => 'position DESC')
+cases = @mailing.cases
 
-# Table header creation.
-headers = [[
-  pdf.make_cell(:content => "PAP II <i>(#{items.count})</i>", :inline_format => true),
-  "Geb.",
-   "",
-   "Entn.",
-   "Eing.Nr."
-]]
+for group in classification_groups
+  group_cases = cases.finished.by_classification_group(group).find(:all, :order => 'praxistar_eingangsnr')
 
-# Table creation.
-pdf.table headers + items, :header => true,
-                           :width => pdf.margin_box.width,
-                           :cell_style => { :overflow => :shrink_to_fit, :min_font_size => 8 } do
+  # Skip if no entries
+  next if group_cases.empty?
 
-  # General cell styling
-  cells.align  = :left
-  cells.valign = :top
-  cells.border_width = 0
-  cells.size = 10
-  cells.padding = [0, 5, 0, 5]
-  column(0).padding = [0, 5, 0, 0]
-  column(-1).padding = [0, 0, 0, 5]
+  # Table content creation.
+  items = group_cases.map do |item|
+    row = [
+      pdf.make_cell(:content => item.patient.name),
+      pdf.make_cell(:content => item.patient.birth_date),
+      pdf.make_cell(:content => item.control_findings.map {|f| h(f.name)}.join("\n")),
+      pdf.make_cell(:content => item.examination_date.strftime('%d.%m.%Y')),
+      pdf.make_cell(:content => item.praxistar_eingangsnr)
+    ]
+  end
 
-  # Headings styling
-  row(0).font_style = :italic
-  row(0).column(0).font_style = :bold
-  row(0).padding = [0, 5, 3, 5]
-  row(0).column(0).padding = [0, 5, 3, 0]
-  row(0).column(-1).padding = [0, 0, 3, 5]
+  # Table header creation.
+  headers = [[
+    pdf.make_cell(:content => "#{group.title} <i>(#{items.count})</i>", :inline_format => true),
+    "Geb.",
+     "",
+     "Entn.",
+     "Eing.Nr."
+  ]]
 
-  # Columns width
-  column(1).width = 1.8.cm
-  column(3).width = 1.8.cm
-  column(4).width = 1.8.cm
+  # Table creation.
+  pdf.table headers + items, :header => true,
+                             :width => pdf.margin_box.width,
+                             :cell_style => { :overflow => :shrink_to_fit, :min_font_size => 8 } do
 
-  # Columns align
-  column(1).align = :right
-  column(3).align = :right
-  column(4).align = :right
+    # General cell styling
+    cells.align  = :left
+    cells.valign = :top
+    cells.border_width = 0
+    cells.size = 10
+    cells.padding = [0, 5, 0, 5]
+    column(0).padding = [0, 5, 0, 0]
+    column(-1).padding = [0, 0, 0, 5]
 
-  # Columns colors
-  column(0).row(1..-1).text_color = '660000'
-  column(4).row(1..-1).text_color = '660000'
+    # Headings styling
+    row(0).font_style = :italic
+    row(0).column(0).font_style = :bold
+    row(0).padding = [0, 5, 3, 5]
+    row(0).column(0).padding = [0, 5, 3, 0]
+    row(0).column(-1).padding = [0, 0, 3, 5]
 
-  # Columns style
-  column(0).font_style = :bold
-  column(2).font_style = :bold
+    # Columns width
+    column(1).width = 1.8.cm
+    column(3).width = 1.8.cm
+    column(4).width = 1.8.cm
+
+    # Columns align
+    column(1).align = :right
+    column(3).align = :right
+    column(4).align = :right
+
+    # Columns colors
+    column(0).row(1..-1).text_color = '660000'
+    column(4).row(1..-1).text_color = '660000'
+
+    # Columns style
+    column(0).font_style = :bold
+    column(2).font_style = :bold
+  end
 end
