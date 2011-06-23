@@ -92,11 +92,11 @@ class ResultReport < Prawn::Document
       font "Cholla Sans", :style => :thin do
         if @case.finding_text.nil?
           for finding in @case.findings
-            text finding.name
+            text finding.name, :inline_format => true
           end
         else
           # TODO: test if html formatting works
-          text html_unescape(@case.finding_text)
+          text html_unescape(@case.finding_text), :inline_format => true
         end
       end
     end
