@@ -120,20 +120,12 @@ class ResultReport < Prawn::Document
     if @case.screened_by and @case.screened_at
       grid(12, 6).bounding_box do
         text "Visum:"
+        text "Visum:" if @case.review_by and @case.review_at
       end
 
       grid([12,7], [12,9]).bounding_box do
         text @case.screened_by.work_vcard.abbreviated_name + ", " + @case.screened_at.strftime("%d.%m.%Y")
-      end
-    end
-
-    if @case.review_by and @case.review_at
-      grid(13, 6).bounding_box do
-        text "Visum:"
-      end
-
-      grid([13,7], [13,9]).bounding_box do
-        text @case.review_by.work_vcard.abbreviated_name + ", " + @case.review_at.strftime("%d.%m.%Y")
+        text @case.review_by.work_vcard.abbreviated_name + ", " + @case.review_at.strftime("%d.%m.%Y") if @case.review_by and @case.review_at
       end
     end
 
