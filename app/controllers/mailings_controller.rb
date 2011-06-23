@@ -40,12 +40,6 @@ class MailingsController < ApplicationController
     
     render 'overview'
   end
-  
-
-  def overview_for_pdf
-    overview
-    render :action => 'overview', :layout => 'stats_letter_for_pdf'
-  end
 
   # Printing
   # ========
