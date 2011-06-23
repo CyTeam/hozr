@@ -16,9 +16,13 @@ class Case < ActiveRecord::Base
   has_one :order_form
   
   # Scopes
-  named_scope :finished, :conditions => ["screened_at IS NOT NULL AND needs_review = ? AND needs_p16 = ?", false, false]
+  named_scope :finished, :conditions => ["screened_at IS NOT NULL AND needs_review = ?", false]
+  named_scope :unfinished_p16, :conditions => ["screened_at IS NULL AND needs_p16 = ?", true]
   named_scope :undelivered, :conditions => "email_sent_at IS NULL"
-        
+  named_scope :by_classification_group, lambda {|group|
+    {:include => 'classification', :conditions => {'classifications.classification_group_id' => group.id}}
+  }
+
   def to_s
     "#{patient.to_s}: PAP Abstrich #{praxistar_eingangsnr}"
   end
