@@ -470,15 +470,12 @@ class CasesController < ApplicationController
         end
       }
       format.pdf {
-        @page_size = params[:page_size] || 'A5'
-
-        case @page_size
-        when 'A5':
-          prawnto :prawn => { :page_size => @page_size, :top_margin => 60, :left_margin => 35, :right_margin => 35, :bottom_margin => 23 }
-        when 'A4':
-          prawnto :prawn => { :page_size => @page_size, :top_margin => 90, :left_margin => 40, :right_margin => 40, :bottom_margin => 40 }
-        end
-        render :layout => false
+        page_size = params[:page_size] || 'A5'
+        document = @case.to_pdf(page_size)
+        
+        send_data document, :filename => "#{@case.id}.pdf", 
+                            :type => "application/pdf",
+                            :disposition => 'inline'
       }
     end
   end
@@ -487,29 +484,16 @@ class CasesController < ApplicationController
   # ========
   def print_result_report
     @case = Case.find(params[:id])
+    page_size = params[:page_size] || 'A5'
 
-    @page_size = params[:page_size] || 'A5'
-
-    case @page_size
+    case page_size
     when 'A5':
-      prawnto :prawn => { :page_size => @page_size, :top_margin => 60, :left_margin => 35, :right_margin => 35, :bottom_margin => 23 }
       printer = 'hpT3'
     when 'A4':
-      prawnto :prawn => { :page_size => @page_size, :top_margin => 90, :left_margin => 40, :right_margin => 40, :bottom_margin => 40 }
       printer = 'HP2840'
     end
 
-    request.format = :pdf
-    page = render_to_string(:action => :result_report, :layout => false)
-    options = {}
-
-    # Workaround TransientJob not yet accepting options
-    file = Tempfile.new('')
-    file.puts(page)
-    file.close
-
-    paper_copy = Cups::PrintJob.new(file.path, printer)
-    paper_copy.print
+    @case.print(page_size, printer)
 
     send_data "Gedruckt: #{@case}", :type => 'text/html; charset=utf-8', :disposition => 'inline'
   end

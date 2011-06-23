@@ -92,6 +92,52 @@ class Mailing < ActiveRecord::Base
     return done, failed
   end
 
+  # PDF
+  def result_reports_to_pdf(page_size = 'A5')
+    case page_size
+    when 'A5':
+      prawn_options = { :page_size => page_size, :top_margin => 60, :left_margin => 35, :right_margin => 35, :bottom_margin => 23 }
+    when 'A4':
+      prawn_options = { :page_size => page_size, :top_margin => 90, :left_margin => 40, :right_margin => 40, :bottom_margin => 40 }
+    end
+
+    pdf = ResultReport.new(prawn_options)
+    
+    return pdf.to_pdf(cases)
+  end
+  
+  def print_result_reports(page_size, printer)
+    # Workaround TransientJob not yet accepting options
+    file = Tempfile.new('')
+    file.puts(result_reports_to_pdf(page_size))
+    file.close
+
+    paper_copy = Cups::PrintJob.new(file.path, printer)
+    paper_copy.print
+  end
+  
+  def overview_to_pdf
+    prawn_options = { :page_size => 'A4', :top_margin => 140, :left_margin => 60, :right_margin => 60, :bottom_margin => 100 }
+    pdf = MailingOverview.new(prawn_options)
+    
+    return pdf.to_pdf(self)
+  end
+  
+  def print_overview(printer)
+    # Workaround TransientJob not yet accepting options
+    file = Tempfile.new('')
+    file.puts(overview_to_pdf)
+    file.close
+
+    paper_copy = Cups::PrintJob.new(file.path, printer)
+    paper_copy.print
+  end
+  
+  def print(page_size, overview_printer, result_report_printer)
+    print_overview(overview_printer)
+    print_result_reports(page_size, result_report_printer)
+  end
+  
   # Multichannel
   # ============
   def send_by(channel)

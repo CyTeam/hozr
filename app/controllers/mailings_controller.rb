@@ -31,26 +31,13 @@ class MailingsController < ApplicationController
     respond_to do |format|
       format.html {}
       format.pdf {
-        prawnto :prawn => { :page_size => 'A4', :top_margin => 140, :left_margin => 60, :right_margin => 60, :bottom_margin => 100 }
-        render :layout => false
+        document = @mailing.overview_to_pdf
+        
+        send_data document, :filename => "#{@mailing.id}.pdf", 
+                            :type => "application/pdf",
+                            :disposition => 'inline'
       }
     end
-  end
-  
-  def result_reports
-    @mailing = Mailing.find(params[:id])
-    @cases = @mailing.cases
-    
-    @page_size = params[:page_size] || 'A5'
-
-    case @page_size
-    when 'A5':
-      prawnto :prawn => { :page_size => @page_size, :top_margin => 60, :left_margin => 35, :right_margin => 35, :bottom_margin => 23 }
-    when 'A4':
-      prawnto :prawn => { :page_size => @page_size, :top_margin => 90, :left_margin => 40, :right_margin => 40, :bottom_margin => 40 }
-    end
-
-    render 'cases/result_report', :layout => false
   end
   
   def show
@@ -64,51 +51,43 @@ class MailingsController < ApplicationController
   def print_overview
     @mailing = Mailing.find(params[:id])
 
-    prawnto :prawn => { :page_size => 'A4', :top_margin => 140, :left_margin => 60, :right_margin => 60, :bottom_margin => 100 }
     printer = 'hpT2'
-
-    request.format = :pdf
-    page = render_to_string(:action => :overview, :layout => false)
-    options = {}
-
-    # Workaround TransientJob not yet accepting options
-    file = Tempfile.new('')
-    file.puts(page)
-    file.close
-
-    paper_copy = Cups::PrintJob.new(file.path, printer)
-    paper_copy.print
-
+    @mailing.print_overview(printer)
     redirect_to :action => :show, :id => @mailing.id
   end
 
   def print_result_reports
     @mailing = Mailing.find(params[:id])
-
-    @cases = @mailing.cases
     
-    @page_size = params[:page_size] || 'A5'
+    page_size = params[:page_size] || 'A5'
 
-    case @page_size
+    overview_printer = 'hpT2'
+    case page_size
     when 'A5':
-      prawnto :prawn => { :page_size => @page_size, :top_margin => 60, :left_margin => 35, :right_margin => 35, :bottom_margin => 23 }
       printer = 'hpT3'
     when 'A4':
-      prawnto :prawn => { :page_size => @page_size, :top_margin => 90, :left_margin => 40, :right_margin => 40, :bottom_margin => 40 }
       printer = 'HP2840'
     end
 
-    request.format = :pdf
-    page = render_to_string(:action => 'result_reports', :layout => false)
-    options = {}
+    @mailing.print_result_reports(page_size, printer)
 
-    # Workaround TransientJob not yet accepting options
-    file = Tempfile.new('')
-    file.puts(page)
-    file.close
+    redirect_to :action => :show, :id => @mailing.id
+  end
 
-    paper_copy = Cups::PrintJob.new(file.path, printer)
-    paper_copy.print
+  def print
+    @mailing = Mailing.find(params[:id])
+    
+    page_size = params[:page_size] || 'A5'
+
+    overview_printer = 'hpT2'
+    case page_size
+    when 'A5':
+      printer = 'hpT3'
+    when 'A4':
+      printer = 'HP2840'
+    end
+
+    @mailing.print(page_size, overview_printer, printer)
 
     redirect_to :action => :show, :id => @mailing.id
   end

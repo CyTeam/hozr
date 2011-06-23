@@ -247,6 +247,29 @@ class Case < ActiveRecord::Base
   end
 
   # PDF
+  def to_pdf(page_size = 'A5')
+    case page_size
+    when 'A5':
+      prawn_options = { :page_size => page_size, :top_margin => 60, :left_margin => 35, :right_margin => 35, :bottom_margin => 23 }
+    when 'A4':
+      prawn_options = { :page_size => page_size, :top_margin => 90, :left_margin => 40, :right_margin => 40, :bottom_margin => 40 }
+    end
+
+    pdf = ResultReport.new(prawn_options)
+    
+    return pdf.to_pdf(self)
+  end
+  
+  def print(page_size, printer)
+    # Workaround TransientJob not yet accepting options
+    file = Tempfile.new('')
+    file.puts(to_pdf(page_size))
+    file.close
+
+    paper_copy = Cups::PrintJob.new(file.path, printer)
+    paper_copy.print
+  end
+
   def pdf_path
     File.join(RAILS_ROOT, '/public/result_reports/', "result_report-#{id}.pdf")
   end
