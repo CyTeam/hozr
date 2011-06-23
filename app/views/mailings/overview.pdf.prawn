@@ -99,7 +99,7 @@ for group in classification_groups
 
     # Columns width
     column(1).width = 1.8.cm
-    column(2).width = 4.cm
+    column(2).width = 6.cm
     column(3).width = 1.8.cm
     column(4).width = 1.8.cm
 
