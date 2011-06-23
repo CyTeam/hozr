@@ -91,7 +91,7 @@ pdf.grid([10,1], [12,4]).bounding_box do
       end
     else
       # TODO: test if html formatting works
-      pdf.text @case.finding_text.html_unescape
+      pdf.text html_unescape(@case.finding_text)
     end
   end
 end

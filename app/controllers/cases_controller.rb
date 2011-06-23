@@ -1,4 +1,3 @@
-require 'core_ext/string'
 require "net/http"
 
 class CasesController < ApplicationController
