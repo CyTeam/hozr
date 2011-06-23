@@ -18,11 +18,8 @@ class SendQueue < ActiveRecord::Base
   
   # Actions
   def print
-    command = "/usr/local/bin/hozr_print_result_mailing.sh #{mailing.id} '' #{( ENV['RAILS_ENV'] || 'development' )}"
+    mailing.print('A5', 'hpT2', 'hpT3')
 
-    stream = open("|#{command}")
-    self.output = stream.read
-    
     self.sent_at = DateTime.now
     save
   end
