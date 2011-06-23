@@ -47,13 +47,26 @@ class MailingsController < ApplicationController
     render :action => 'overview', :layout => 'stats_letter_for_pdf'
   end
 
+  # Printing
+  # ========
   def print_overview
     @mailing = Mailing.find(params[:id])
 
-    command = "/usr/local/bin/hozr_print_mailing_overview.sh #{@mailing.id}"
-    stream = open("|#{command}")
-    output = stream.read
- 
+    prawnto :prawn => { :page_size => 'A4', :top_margin => 140, :left_margin => 60, :right_margin => 60, :bottom_margin => 100 }
+    printer = 'hpT2'
+
+    request.format = :pdf
+    page = render_to_string(:action => :overview, :layout => false)
+    options = {}
+
+    # Workaround TransientJob not yet accepting options
+    file = Tempfile.new('')
+    file.puts(page)
+    file.close
+
+    paper_copy = Cups::PrintJob.new(file.path, printer)
+    paper_copy.print
+
     redirect_to :action => :show, :id => @mailing.id
   end
 
