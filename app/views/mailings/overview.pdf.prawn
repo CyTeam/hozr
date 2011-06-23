@@ -30,12 +30,12 @@ pdf.grid([0,7], [1,9]).bounding_box do
 end
 
 # Place'n'Date
-pdf.grid([2,7], [2,9]).bounding_box do
+pdf.grid([3,7], [3,9]).bounding_box do
   pdf.text "Affoltern a. A., " + @mailing.created_at.strftime("%d.%m.%Y")
 end
 
 # Subject
-pdf.grid([3,0], [3,9]).bounding_box do
+pdf.grid([4,0], [4,9]).bounding_box do
   pdf.font "Cholla Sans", :style => :bold do
     pdf.text "Befundübersicht"
   end
