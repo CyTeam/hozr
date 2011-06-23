@@ -484,17 +484,6 @@ class CasesController < ApplicationController
     end
   end
 
-  def result_letter
-    @doctor = Doctor.find(params[:id])
-  end
-
-  def result_letter_for_pdf
-    @doctor = Doctor.find(params[:id])
-
-    render :action => 'result_letter', :layout => 'result_letter_for_pdf'
-  end
-
-
   # Printing
   # ========
   def print_result_report
