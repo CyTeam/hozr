@@ -7,6 +7,11 @@ class Mailing < ActiveRecord::Base
   named_scope :with_unsent_channel, :joins => :send_queues, :conditions => "sent_at IS NULL", :order => 'mailings.created_at'
   named_scope :unsent, :conditions => "printed_at IS NULL AND email_delivered_at IS NULL AND hl7_delivered_at IS NULL"
   
+  # String
+  def to_s
+    "%i Resultate für %s" % [cases.count, doctor]
+  end
+
   def self.create(doctor_id, case_ids)
     mailing = self.new
     mailing.doctor_id = doctor_id
