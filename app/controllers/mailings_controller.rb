@@ -119,9 +119,8 @@ class MailingsController < ApplicationController
     
     output = ""
     for print_queue in print_queue
-      output += print_queue.print
-      
-      sleep(30)
+      print_queue.print
+      output += print_queue.mailing.to_s + "<br/>"
     end
 
     send_data output, :type => 'text/html; charset=utf-8', :disposition => 'inline'
