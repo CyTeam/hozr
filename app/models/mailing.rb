@@ -117,7 +117,11 @@ class Mailing < ActiveRecord::Base
     file.puts(result_reports_to_pdf(page_size))
     file.close
 
-    paper_copy = Cups::PrintJob.new(file.path, printer)
+    begin
+      paper_copy = Cups::PrintJob.new(file.path, printer)
+    rescue
+      paper_copy = Cups::PrintJob.new(file.path, printer)
+    end
     paper_copy.print
   end
   
@@ -134,10 +138,14 @@ class Mailing < ActiveRecord::Base
     file.puts(overview_to_pdf)
     file.close
 
-    paper_copy = Cups::PrintJob.new(file.path, printer)
+    begin
+      paper_copy = Cups::PrintJob.new(file.path, printer)
+    rescue
+      paper_copy = Cups::PrintJob.new(file.path, printer)
+    end
     paper_copy.print
   end
-  
+
   def print(page_size, overview_printer, result_report_printer)
     print_overview(overview_printer)
     print_result_reports(page_size, result_report_printer)

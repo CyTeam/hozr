@@ -266,7 +266,11 @@ class Case < ActiveRecord::Base
     file.puts(to_pdf(page_size))
     file.close
 
-    paper_copy = Cups::PrintJob.new(file.path, printer)
+    begin
+      paper_copy = Cups::PrintJob.new(file.path, printer)
+    rescue
+      paper_copy = Cups::PrintJob.new(file.path, printer)
+    end
     paper_copy.print
   end
 
