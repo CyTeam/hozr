@@ -16,6 +16,10 @@ else
   pdf.font "Cholla Sans"
 end
 
+# We accept both a single case or an array
+@cases = [@case] unless @cases
+
+for @case in @cases
 # define grid
 pdf.define_grid(:columns => 11, :rows => 16, :gutter => 2) #.show_all('EEEEEE')
 
@@ -164,4 +168,7 @@ if pdf.page.size == 'A5'
       pdf.text @case.patient.insurance.vcard.full_name if @case.patient.insurance
     end
   end
+end
+
+pdf.start_new_page unless @case == @cases.last
 end
