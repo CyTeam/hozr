@@ -29,7 +29,7 @@ class MailingsController < ApplicationController
     respond_to do |format|
       format.html {}
       format.pdf {
-        prawnto :prawn => { :page_size => 'A4', :top_margin => 90, :left_margin => 40, :right_margin => 40, :bottom_margin => 40 }
+        prawnto :prawn => { :page_size => 'A4', :top_margin => 140, :left_margin => 60, :right_margin => 60, :bottom_margin => 40 }
         render :layout => false
       }
     end
