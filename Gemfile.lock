@@ -41,6 +41,9 @@ GEM
     prawn (0.11.1)
       pdf-reader (>= 0.9.0)
       ttfunk (~> 1.0.0)
+    prawnto (0.0.4)
+      prawn
+      rails (>= 2.1)
     rack (1.1.2)
     rack-test (0.6.0)
       rack (>= 1.0)
@@ -82,6 +85,7 @@ DEPENDENCIES
   hpricot
   mysql2 (~> 0.2.7)
   prawn
+  prawnto
   rails (~> 2.3.11)
   ruby_parser
   shoulda

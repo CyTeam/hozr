@@ -66,6 +66,7 @@ gem 'calendar_date_select'
 
 # PDF generation with PRAWN
 gem 'prawn'
+gem 'prawnto'
 
 # Barcode
 gem 'barby'
