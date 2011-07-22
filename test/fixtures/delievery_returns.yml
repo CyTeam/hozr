@@ -1,9 +1,0 @@
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
-one:
-  id: 1
-  case_id: 1
-  fax_sent_at: 2008-02-18 15:06:26
-two:
-  id: 2
-  case_id: 1
-  fax_sent_at: 2008-02-18 15:06:26
