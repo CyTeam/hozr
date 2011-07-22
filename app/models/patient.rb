@@ -56,22 +56,6 @@ class Patient < ActiveRecord::Base
     read_attribute(:birth_date)
   end
 
-  def in_place_doctor_patient_nr
-    (doctor_patient_nr.nil? or doctor_patient_nr.strip.empty?) ? (" " * 5) : doctor_patient_nr
-  end
-  
-  def in_place_doctor_patient_nr=(value)
-    write_attribute(:doctor_patient_nr, value)
-  end
-
-  def in_place_insurance_nr
-    (insurance_nr.nil? or insurance_nr.strip.empty?) ? (" " * 5) : insurance_nr
-  end
-  
-  def in_place_insurance_nr=(value)
-    write_attribute(:insurance_nr, value)
-  end
-
   def delete_leistungsblaetter
     for l in praxistar_leistungsblaetter
       a_case = l.cyto_case
