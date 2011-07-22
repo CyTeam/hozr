@@ -54,6 +54,11 @@ group :test, :development do
   # gem 'cucumber'
 end
 
+group :development do
+  # RDoc
+  gem 'rdoc'
+end
+
 # Standard helpers
 # ================
 # CRUD
