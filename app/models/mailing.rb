@@ -15,6 +15,10 @@ class Mailing < ActiveRecord::Base
     SendQueue.create(:mailing => self, :channel => "hl7", :sent_at => DateTime.now) if doctor.wants_hl7
   end
 
+  def self.case_count_without_channel
+    without_channel.inject(0) {|sum, mailing| sum += mailing.cases.count}
+  end
+
   # String
   def to_s
     "%i Resultate für %s" % [cases.count, doctor]
