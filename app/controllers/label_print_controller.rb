@@ -29,26 +29,26 @@ class LabelPrintController < ApplicationController
 	Aetiketten.delete_all
   end
 
-    def label_save
-      label_delete
-      for label in @cases
-        ot_label = OtLabel.new
-        ot_label.sys_id=label.id
-        ot_label.prax_nr=label.praxistar_eingangsnr
-        ot_label.doc_fname=label.doctor.family_name
-        ot_label.doc_gname=label.doctor.given_name
-        ot_label.pat_fname=label.patient.vcard.family_name
-        ot_label.pat_gname=label.patient.vcard.given_name
-        ot_label.pat_bday=label.patient.birth_date
-        ot_label.save
-      end
-    end
-    
-    def label_delete
-      OtLabel.delete_all
-    end
-    
-    def set_triger
-      system("touch public/triger/triger.txt")
+  def label_save
+    label_delete
+    for label in @cases
+      ot_label = OtLabel.new
+      ot_label.sys_id=label.id
+      ot_label.prax_nr=label.praxistar_eingangsnr
+      ot_label.doc_fname=label.doctor.family_name
+      ot_label.doc_gname=label.doctor.given_name
+      ot_label.pat_fname=label.patient.vcard.family_name
+      ot_label.pat_gname=label.patient.vcard.given_name
+      ot_label.pat_bday=label.patient.birth_date
+      ot_label.save
     end
   end
+  
+  def label_delete
+    OtLabel.delete_all
+  end
+  
+  def set_triger
+    system("touch public/triger/triger.txt")
+  end
+end
