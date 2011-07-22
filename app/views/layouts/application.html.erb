@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML Basic 1.0//EN" "http://www.w3.org/TR/xhtml-basic/xhtml-basic10.dtd">
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
@@ -17,6 +16,8 @@
     
     <%= javascript_include_tag :defaults %>
     <%= javascript_include_tag "hozr" %>
+
+    <%= csrf_meta_tag %>
 
     <%= calendar_date_select_includes %>
 
@@ -49,7 +50,7 @@
 
         <div id="MainContent">
             <%= render :partial => 'navigation' if controller.controller_name == 'cases' and params[:id] %>
-            <%= @content_for_layout %>
+            <%= yield %>
         </div>
     </div>
 </body>

@@ -4,7 +4,7 @@ source 'http://rubygems.org'
 
 # Rails
 # =====
-gem 'rails', '~> 2.3.11'
+gem 'rails', '~> 3.0.0'
 
 # Database
 gem 'sqlite3'
