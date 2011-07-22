@@ -142,7 +142,7 @@ class MailingsController < ApplicationController
   end
   
   def send_all
-    @mailings = Mailing.unsent
+    @mailings = Mailing.without_channel
     for mailing in @mailings
       mailing.send_by_all_channels
     end
