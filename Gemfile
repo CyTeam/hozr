@@ -67,9 +67,6 @@ gem 'will_paginate'
 
 # Application
 # ===========
-# In Place Editing
-gem 'in_place_editing'
-
 # Calendar
 gem 'calendar_date_select'
 

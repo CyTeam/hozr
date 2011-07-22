@@ -33,7 +33,6 @@ GEM
     fastercsv (1.5.4)
     ffi (1.0.9)
     hpricot (0.8.4)
-    in_place_editing (1.0.0)
     json_pure (1.5.3)
     mime-types (1.16)
     mysql2 (0.2.11)
@@ -87,7 +86,6 @@ DEPENDENCIES
   cups
   fastercsv
   hpricot
-  in_place_editing
   mysql2 (~> 0.2.7)
   prawn
   prawnto
