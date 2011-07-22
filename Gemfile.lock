@@ -10,6 +10,7 @@ GEM
       rack (~> 1.1.0)
     activerecord (2.3.12)
       activesupport (= 2.3.12)
+    activerecord-sqlserver-adapter (2.3.4)
     activeresource (2.3.12)
       activesupport (= 2.3.12)
     activesupport (2.3.12)
@@ -77,6 +78,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  activerecord-sqlserver-adapter
   autotest
   autotest-rails
   barby

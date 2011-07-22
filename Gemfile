@@ -9,6 +9,7 @@ gem 'rails', '~> 2.3.11'
 # Database
 gem 'sqlite3'
 gem 'mysql2', '~> 0.2.7'
+gem 'activerecord-sqlserver-adapter'
 
 # Development
 # ===========
