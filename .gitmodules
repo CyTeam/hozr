@@ -4,9 +4,6 @@
 [submodule "vendor/plugins/auto_complete"]
 	path = vendor/plugins/auto_complete
 	url = https://github.com/david-kerins/auto_complete.git
-[submodule "vendor/plugins/acts_as_list"]
-	path = vendor/plugins/acts_as_list
-	url = git://github.com/rails/acts_as_list.git
 [submodule "vendor/plugins/tiny_mce"]
 	path = vendor/plugins/tiny_mce
 	url = shuerlimann@project.client.zytolabor.ch:/srv/client.zytolabor.ch/code/git/rails-plugins/tiny_mce.git
