@@ -8,20 +8,13 @@ class Mailer < ActionMailer::Base
     temp_dir = File.join(TEMP_DIR, scan.id.to_s)
     FileUtils::mkdir_p(temp_dir)
 
-    case email.subject
-    when 'hozr_scan_200dpi'
-      page_model = OrderForm
-    else
-      page_model = Page
-    end
-    
     if email.has_attachments?
       for attachment in email.attachments
         file = File.new(File.join(temp_dir, attachment.original_filename), 'w')
         file.write(attachment.read)
         file.close
         
-        page = page_model.new(:file => file)
+        page = OrderForm.new(:file => file)
         page.scan = scan
         page.save
       end

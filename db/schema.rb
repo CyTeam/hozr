@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110722071825) do
+ActiveRecord::Schema.define(:version => 20110722092926) do
 
   create_table "account_receivables", :force => true do |t|
   end
@@ -303,12 +303,6 @@ ActiveRecord::Schema.define(:version => 20110722071825) do
     t.text     "pat_bday"
     t.datetime "created_at"
     t.datetime "updated_at"
-  end
-
-  create_table "pages", :force => true do |t|
-    t.integer "position"
-    t.integer "scan_id"
-    t.string  "file"
   end
 
   create_table "patients", :force => true do |t|
