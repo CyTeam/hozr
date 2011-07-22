@@ -67,6 +67,9 @@ gem 'will_paginate'
 
 # Application
 # ===========
+# Multiple Databases
+gem 'use_db'
+
 # Calendar
 gem 'calendar_date_select'
 

@@ -10,6 +10,3 @@
 [submodule "vendor/plugins/file_column"]
 	path = vendor/plugins/file_column
 	url = git://github.com/huerlisi/file_column.git
-[submodule "vendor/plugins/use_db"]
-	path = vendor/plugins/use_db
-	url = http://github.com/remi/use_db.git
