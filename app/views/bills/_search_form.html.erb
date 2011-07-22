@@ -1,7 +1,7 @@
 <fieldset style="width: 98%">
   <legend>Rechnungssuche</legend>
   <table>
-    <% fields_for 'bill', @bill, :builder => Rubaidh::TabularForm::TabularFormBuilder do |f| %>
+    <%= fields_for 'bill', @bill, :builder => Rubaidh::TabularForm::TabularFormBuilder do |f| %>
       <%= f.text_field :id, :label => "Rechnungsnr." %>
     <% end %>
   </table>
