@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110722092926) do
+ActiveRecord::Schema.define(:version => 20110722111049) do
 
   create_table "account_receivables", :force => true do |t|
   end
@@ -153,17 +153,6 @@ ActiveRecord::Schema.define(:version => 20110722092926) do
     t.integer "examination_method_id"
     t.integer "classification_group_id"
   end
-
-  create_table "delievery_returns", :force => true do |t|
-    t.integer  "case_id"
-    t.datetime "fax_sent_at"
-    t.integer  "bill_id"
-    t.datetime "closed_at"
-    t.datetime "address_verified_at"
-  end
-
-  add_index "delievery_returns", ["address_verified_at"], :name => "address_verified_at"
-  add_index "delievery_returns", ["fax_sent_at"], :name => "fax_sent_at"
 
   create_table "doctors", :id => false, :force => true do |t|
     t.integer  "id",                                  :null => false

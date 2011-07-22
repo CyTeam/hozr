@@ -25,8 +25,6 @@ class WorkQueueController < ApplicationController
     rescue
       @order_count = "Keine Verbindung zum Webshop"
     end
-
-    @delievery_return_count = DelieveryReturn.count(:conditions => 'address_verified_at IS NULL AND closed_at IS NULL')
   end
 
   def admin_munin
