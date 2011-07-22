@@ -9,7 +9,6 @@ class CasesController < ApplicationController
 
   # Tiny MCE
   uses_tiny_mce(:options => {:theme => 'advanced',
-                           :browsers => %w{msie gecko},
                            :theme_advanced_toolbar_location => "top",
                            :theme_advanced_toolbar_align => "left",
                            :theme_advanced_resizing => true,
