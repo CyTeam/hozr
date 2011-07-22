@@ -1,3 +1,5 @@
+require 'cups/print_job/transient'
+
 class OrderFormController < ApplicationController
   helper :doctors
   

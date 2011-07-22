@@ -28,7 +28,7 @@ GEM
       xpath (~> 0.1.4)
     childprocess (0.2.0)
       ffi (~> 1.0.6)
-    cups (0.0.6)
+    cups (0.0.7)
     fastercsv (1.5.4)
     ffi (1.0.9)
     hpricot (0.8.4)
