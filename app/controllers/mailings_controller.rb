@@ -13,7 +13,7 @@ class MailingsController < ApplicationController
 
   # Show list of unprinted mailings
   def list_open
-    @mailings = Mailing.unsent
+    @mailings = Mailing.without_channel
   end
 
   def generate

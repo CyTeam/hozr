@@ -6,7 +6,15 @@ class Mailing < ActiveRecord::Base
   has_many :send_queues, :order => 'send_queues.sent_at'
   named_scope :with_unsent_channel, :joins => :send_queues, :conditions => "sent_at IS NULL", :order => 'mailings.created_at'
   named_scope :unsent, :conditions => "printed_at IS NULL AND email_delivered_at IS NULL AND hl7_delivered_at IS NULL"
+  named_scope :without_channel, :include =>:send_queues, :conditions => 'send_queues.id IS NULL'
+
+  after_save :create_hl7_email_channels
   
+  def create_hl7_email_channels
+    SendQueue.create(:mailing => self, :channel => "email", :sent_at => DateTime.now) if doctor.wants_email
+    SendQueue.create(:mailing => self, :channel => "hl7", :sent_at => DateTime.now) if doctor.wants_hl7
+  end
+
   # String
   def to_s
     "%i Resultate für %s" % [cases.count, doctor]
