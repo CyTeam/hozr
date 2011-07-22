@@ -9,6 +9,26 @@ class LabelPrintController < ApplicationController
       set_triger
   end
 
+  def post_label
+	post_label_print
+  end
+   
+  def post_label_print
+	label = Vcard.find(Doctor.find(params[:order_form][:doctor_id]).praxis_vcard)
+	po_label = Aetiketten.new
+	po_label.hon_suffix=label.honorific_prefix
+	po_label.fam_name=label.family_name
+	po_label.giv_name=label.given_name
+	po_label.ext_address=label.praxis.address.street_address
+	po_label.loc=label.praxis.locality
+	po_label.postc=label.praxis.postal_code
+	po_label.save
+  end 
+
+  def post_label_delete
+	Aetiketten.delete_all
+  end
+
     def label_save
       label_delete
       for label in @cases
