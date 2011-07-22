@@ -76,9 +76,6 @@ gem 'file-column', :require => 'rails_file_column'
 # Multiple Databases
 gem 'use_db'
 
-# Calendar
-gem 'calendar_date_select'
-
 # PDF generation with PRAWN
 gem 'prawn'
 gem 'prawnto'

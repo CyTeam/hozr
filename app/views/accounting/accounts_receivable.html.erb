@@ -11,11 +11,9 @@ table.listing tr td.total {
 
 <h1>Debitoren</h1>
 
-<!-- http://code.google.com/p/calendardateselect/wiki/Documentation -->
 <% form_tag do |f| %>
-  <%= calendar_date_select_includes "silver" %>
-  <%= calendar_date_select_tag "start_date", @start_date, :year_range => 5.years.ago..0.years.from_now %>
-  <%= calendar_date_select_tag "end_date", @end_date, :year_range => 5.years.ago..0.years.from_now %>
+  <%= f.input_field :start_date %>
+  <%= f.input_field :end_date %>
   <%= submit_tag 'Berechnen' %>
 <% end %>
 
