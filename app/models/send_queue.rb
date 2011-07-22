@@ -2,9 +2,9 @@ class SendQueue < ActiveRecord::Base
   belongs_to :mailing
 
   # Scopes
-  named_scope :sent, :conditions => "sent_at IS NOT NULL"
-  named_scope :unsent, :conditions => {:sent_at => nil}
-  named_scope :by_channel, lambda {|channel| {:conditions => ["channel = ?", channel]} }
+  scope :sent, where("sent_at IS NOT NULL")
+  scope :unsent, where(:sent_at => nil)
+  scope :by_channel, lambda {|channel| where(:channel => channel) }
 
   # Helpers
   def to_s

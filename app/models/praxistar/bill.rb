@@ -32,12 +32,9 @@ class Praxistar::Bill < Praxistar::Base
     end
   end
 
-  # TODO: get rid of since constant as soon as db got cleaned up
-  named_scope :open, {
-    :joins => "LEFT JOIN [Debitoren_Zahlungsjournal] ON Debitoren_Zahlungsjournal.Rechnung_ID = ID_Rechnung LEFT JOIN [debitoren_debitoren] ON debitoren_debitoren.Rechnung_ID = ID_Rechnung",
-#    :conditions => ["dt_Bezahldatum IS NULL AND debitoren_debitoren.tf_Storno = ? AND Rechnungen_Blatt.dt_Rechnungsdatum >= ?", false, Date.new(2009, 1, 1)]
-    :conditions => ["dt_Bezahldatum IS NULL AND debitoren_debitoren.tf_Storno = ?", false]
-  }
+  scope :open,
+    joins("LEFT JOIN [Debitoren_Zahlungsjournal] ON Debitoren_Zahlungsjournal.Rechnung_ID = ID_Rechnung LEFT JOIN [debitoren_debitoren] ON debitoren_debitoren.Rechnung_ID = ID_Rechnung").
+    where("dt_Bezahldatum IS NULL AND debitoren_debitoren.tf_Storno = ?", false)
 
   # TODO: get rid of since constant as soon as db got cleaned up
   def open?

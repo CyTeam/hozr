@@ -14,7 +14,7 @@ class Patient < ActiveRecord::Base
   
   validates_presence_of :birth_date
   
-  named_scope :dunning_stopped, {:conditions => {:dunning_stop => true} }
+  scope :dunning_stopped, where(:dunning_stop => true)
   
   #TODO: differs from CyLab version as birth_date is overloaded
   def to_s(format = :default)

@@ -28,7 +28,7 @@ class Doctor < ActiveRecord::Base
   end
   
   # HL7
-  named_scope :wanting_hl7, :include => :user, :conditions => ["users.wants_hl7 = ?", true]
+  scope :wanting_hl7, includes(:user).where("users.wants_hl7 = ?", true)
   has_many :undelivered_hl7, :class_name => 'Mailing', :conditions => ["hl7_delivered_at IS NULL"]
   delegate :wants_hl7, :to => :user
   def wants_hl7=(value)
@@ -40,7 +40,7 @@ class Doctor < ActiveRecord::Base
   end
 
   # Email
-  named_scope :wanting_emails, :include => :user, :conditions => ["users.wants_email = ?", true]
+  scope :wanting_emails, includes(:user).where("users.wants_email = ?", true)
   has_many :undelivered_mailings, :class_name => 'Mailing', :conditions => ["email_delivered_at IS NULL"]
   delegate :wants_email, :wants_email=, :to => :user
   def wants_email=(value)
@@ -53,7 +53,7 @@ class Doctor < ActiveRecord::Base
   end
 
   # Printing
-  named_scope :wanting_prints, :include => :user, :conditions => ["users.wants_prints = ?", true]
+  named_scope :wanting_prints, includes(:user).where("users.wants_prints = ?", true)
   has_many :undelivered_prints, :class_name => 'Mailing', :conditions => ["printed_at IS NULL"]
   delegate :wants_prints, :wants_prints=, :to => :user
   def wants_prints=(value)

@@ -5,24 +5,18 @@ class Praxistar::AccountReceivable < Praxistar::Base
   belongs_to :bill, :foreign_key => 'Rechnung_ID'
   has_one :payment, :foreign_key => 'Debitoren_ID'
 
-  named_scope :valid, lambda{|date|
-    {
-      :conditions => ["debitoren_debitoren.dt_Stornodatum IS NULL OR debitoren_debitoren.dt_Stornodatum > :date", {:date => date}]
-    }
+  scope :valid, lambda {|date|
+    where("debitoren_debitoren.dt_Stornodatum IS NULL OR debitoren_debitoren.dt_Stornodatum > :date", {:date => date})
   }
 
-  named_scope :cancelled, lambda{|start_date, end_date|
-    {
-      :conditions => ["debitoren_debitoren.dt_Stornodatum BETWEEN :start_date AND :end_date", {:start_date => start_date, :end_date => end_date}]
-    }
+  scope :cancelled, lambda {|start_date, end_date|
+    where("debitoren_debitoren.dt_Stornodatum BETWEEN :start_date AND :end_date", {:start_date => start_date, :end_date => end_date})
   }
 
-  named_scope :open, lambda{|date|
-    {
-      :joins => "LEFT OUTER JOIN [Debitoren_Zahlungsjournal] ON Debitoren_Zahlungsjournal.Debitoren_ID = debitoren_debitoren.id_debitoren",
-      :conditions => ["(dt_bezahldatum IS NULL OR dt_bezahldatum > :date) AND (debitoren_debitoren.dt_rechnungsdatum <= :date) AND (debitoren_debitoren.dt_Stornodatum IS NULL OR debitoren_debitoren.dt_Stornodatum > :date) AND (debitoren_debitoren.modus_id = 9 OR debitoren_debitoren.modus_id = 6) AND (debitoren_debitoren.Mandant_ID = 1)", {:date => date}],
-      :order => "id_debitoren"
-    }
+  scope :open, lambda {|date|
+   joins("LEFT OUTER JOIN [Debitoren_Zahlungsjournal] ON Debitoren_Zahlungsjournal.Debitoren_ID = debitoren_debitoren.id_debitoren").
+     where("(dt_bezahldatum IS NULL OR dt_bezahldatum > :date) AND (debitoren_debitoren.dt_rechnungsdatum <= :date) AND (debitoren_debitoren.dt_Stornodatum IS NULL OR debitoren_debitoren.dt_Stornodatum > :date) AND (debitoren_debitoren.modus_id = 9 OR debitoren_debitoren.modus_id = 6) AND (debitoren_debitoren.Mandant_ID = 1)", {:date => date}).
+     order("id_debitoren")
   }
   
   def to_s
