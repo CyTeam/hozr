@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110524110040) do
+ActiveRecord::Schema.define(:version => 20110722071825) do
 
   create_table "account_receivables", :force => true do |t|
   end
@@ -380,6 +380,10 @@ ActiveRecord::Schema.define(:version => 20110524110040) do
     t.datetime "sent_at"
     t.text     "output"
   end
+
+  add_index "send_queues", ["channel"], :name => "index_send_queues_on_channel"
+  add_index "send_queues", ["mailing_id"], :name => "index_send_queues_on_mailing_id"
+  add_index "send_queues", ["sent_at"], :name => "index_send_queues_on_sent_at"
 
   create_table "shop_orders", :force => true do |t|
   end
