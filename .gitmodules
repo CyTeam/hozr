@@ -1,12 +1,9 @@
-[submodule "vendor/plugins/printable"]
-	path = vendor/plugins/printable
-	url = git://github.com/huerlisi/printable.git
 [submodule "vendor/plugins/form_builders"]
 	path = vendor/plugins/form_builders
 	url = git://github.com/rubaidh/form_builders.git
 [submodule "vendor/plugins/auto_complete"]
 	path = vendor/plugins/auto_complete
-	url = git://github.com/rails/auto_complete.git
+	url = https://github.com/david-kerins/auto_complete.git
 [submodule "vendor/plugins/in_place_editing"]
 	path = vendor/plugins/in_place_editing
 	url = git://github.com/rails/in_place_editing.git
