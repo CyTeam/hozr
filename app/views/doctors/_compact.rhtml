@@ -6,7 +6,7 @@
   <%= image_tag "user-#{(doctor.praxis.honorific_prefix.nil? or doctor.praxis.honorific_prefix.starts_with?("Frau")) ? "female" : "male" }.png" %>
 </div>
 <% @vcard = doctor.praxis %>
-<%= render :partial => "vcards/in_place_edit" %><br/>
+<%= render :partial => "vcards/show", :locals => { :vcard => @vcard } %><br/>
 <div style="background-color: #f9d600; padding: 8px; width: 130px"/>
   <%= render :partial => "vcards/show_phone_numbers", :locals => { :vcard => doctor.praxis } %>
 </div>

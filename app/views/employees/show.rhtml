@@ -3,7 +3,7 @@
 <div style="float: right; margin-right: 10px; margin-top: -10px">
 </div>
 <% @vcard = @employee.work_vcard %>
-<%= render :partial => "vcards/in_place_edit" %><br/>
+<%= render :partial => "vcards/show", :locals => { :vcard => @vcard } %><br/>
 <div style="background-color: #f9d600; padding: 8px; width: 130px"/>
   <%= render :partial => "vcards/show_phone_numbers", :locals => { :vcard => @vcard } %>
 </div>
