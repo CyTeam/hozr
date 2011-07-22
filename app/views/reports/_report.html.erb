@@ -4,18 +4,6 @@
   year = "%02.f" % (params[:year] || '07')
 %>
 
-<%= link_to "Als Brief", :controller => 'mailings', :action => 'statistics', :case_conditions => @case_conditions.to_yaml, :doctor_id => @doctor_id unless @controller.controller_name == "mailings" %>
-<%
-def url_escape(string)
- string.gsub(/([^ a-zA-Z0-9_.-]+)/n) do
- '%' + $1.unpack('H2' * $1.size).join('%').upcase
- end.tr(' ', '+')
-end
-
-url = url_escape(url_for(:host => 'hozr.intern.zyto-labor.com:81', :escape => false, :only_path => false, :controller => 'mailings', :action => 'statistics_for_pdf', :case_conditions => @case_conditions.to_yaml, :doctor_id => @doctor_id))
-%>
-
-<%= link_to "Als PDF", "http://html2pdf.intern.zyto-labor.com/demo/html2ps.php?process_mode=single&pixels=806&scalepoints=1&renderimages=1&renderlinks=0&media=A4&cssmedia=print&leftmargin=0&rightmargin=0&topmargin=0&bottommargin=0&pslevel=3&method=fpdf&pdfversion=1.3&output=0&convert=Convert+File&URL=#{url}" unless @controller.controller_name == "mailings"%>
 <% total = Case.count() %>
 <% group_counts = Case.count(:group => 'classification_group_id', :include => [{'classification' => 'classification_group'}], :order => 'classification_groups.position DESC') %>
 <table class="listing" style="width: 100%">
