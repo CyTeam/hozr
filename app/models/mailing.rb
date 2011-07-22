@@ -1,6 +1,6 @@
 class Mailing < ActiveRecord::Base
   belongs_to :doctor
-  has_and_belongs_to_many :cases, :order => 'classification_id, praxistar_eingangsnr'
+  has_and_belongs_to_many :cases, :include => {:classification => :classification_group}, :order => 'classification_groups.position DESC, praxistar_eingangsnr'
 
   # SendQueue
   has_many :send_queues, :order => 'send_queues.sent_at'
