@@ -4,9 +4,6 @@
 [submodule "vendor/plugins/auto_complete"]
 	path = vendor/plugins/auto_complete
 	url = https://github.com/david-kerins/auto_complete.git
-[submodule "vendor/plugins/in_place_editing"]
-	path = vendor/plugins/in_place_editing
-	url = git://github.com/rails/in_place_editing.git
 [submodule "vendor/plugins/acts_as_list"]
 	path = vendor/plugins/acts_as_list
 	url = git://github.com/rails/acts_as_list.git
