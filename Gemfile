@@ -67,6 +67,9 @@ gem 'will_paginate'
 
 # Application
 # ===========
+# Wysiwyg
+gem 'tiny_mce'
+
 # Files
 gem 'file-column', :require => 'rails_file_column'
 

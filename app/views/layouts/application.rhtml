@@ -8,8 +8,7 @@
     <meta name="description" content="Hozr - Zytolabor Limmatplatz" />
     
     <% # Include TinyMCE before other JS to avoid problems -%>
-    <%= javascript_include_tiny_mce_if_used %>
-    <%= tiny_mce if using_tiny_mce? %>
+    <%= include_tiny_mce_if_needed %>
     
     <%= stylesheet_link_tag 'noprobs' %>
     <%= stylesheet_link_tag 'cyto' %>
