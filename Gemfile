@@ -67,6 +67,9 @@ gem 'will_paginate'
 
 # Application
 # ===========
+# Files
+gem 'file-column', :require => 'rails_file_column'
+
 # Multiple Databases
 gem 'use_db'
 
