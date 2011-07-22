@@ -1,33 +1,15 @@
 class OrderForm < ActiveRecord::Base
   file_column :file, :magick => {
     :versions => {
-      :full => {:size => "550"},
       :address => {:transformation => Proc.new { |image| image.crop(::Magick::NorthWestGravity, image.rows, image.columns * 0.5, true) }, :size => "560"},
-      :remarks => {:transformation => :extract_remarks },
       :result_remarks => {:transformation => :extract_result_remarks, :size => "620"},
       :overview => {:transformation => Proc.new { |image| image.crop(::Magick::NorthWestGravity, 0, 75, 1155, 360, true) } },
       :head => {:transformation => Proc.new { |image| image.crop(::Magick::NorthWestGravity, 0, 0, 1172, 586, true) }, :size => "500" },
-      :head_big => {:transformation => Proc.new { |image| image.crop(::Magick::NorthWestGravity, 0, 0, 1172, 586, true) }, :size => "750" },
       :foot => {:transformation => Proc.new { |image| image.crop(::Magick::NorthWestGravity, 0, 1137, 1172, 469, true) }, :size => "500" }
     }
   }
 
   belongs_to :a_case, :class_name => 'Case', :foreign_key => 'case_id'
-
-
-  def extract_remarks(image)
-    cropped = image.crop(::Magick::NorthWestGravity, 0, 600, image.rows, image.columns * 0.45, true)
-    bordered = cropped.border(20, 20, '#AEBCDF')
-#    bordered.fuzz = '15%'
-    bordered.fuzz = 0.15
-    trimmed = bordered.trim
-    despeckled = trimmed.despeckle
-    despeckled.fuzz = 1500
-    whited = despeckled.opaque('#EAEAF6', 'white')
-#   framed = whited.border(10, 10, 'black')
-#    resized = whited.resize(0.22)
-    return whited
-  end
 
   def extract_result_remarks(image)
     cropped = image.crop(::Magick::NorthWestGravity, 0, 600, image.rows, image.columns * 0.45, true)
