@@ -1,11 +1,10 @@
 class Mailing < ActiveRecord::Base
   belongs_to :doctor
-  has_and_belongs_to_many :cases, :order => 'classification_id, praxistar_eingangsnr'
+  has_and_belongs_to_many :cases, :include => {:classification => :classification_group}, :order => 'classification_groups.position DESC, praxistar_eingangsnr'
 
   # SendQueue
   has_many :send_queues, :order => 'send_queues.sent_at'
   scope :with_unsent_channel, joins(:send_queues).where(:sent_at => nil).order('mailings.created_at')
-  scope :unsent, where(:printed_at => nil, :email_delivered_at => nil, :hl7_delivered_at => nil)
   scope :without_channel, includes(:send_queues).where('send_queues.id IS NULL')
 
   after_save :create_hl7_email_channels
@@ -13,6 +12,10 @@ class Mailing < ActiveRecord::Base
   def create_hl7_email_channels
     SendQueue.create(:mailing => self, :channel => "email", :sent_at => DateTime.now) if doctor.wants_email
     SendQueue.create(:mailing => self, :channel => "hl7", :sent_at => DateTime.now) if doctor.wants_hl7
+  end
+
+  def self.case_count_without_channel
+    without_channel.inject(0) {|sum, mailing| sum += mailing.cases.count}
   end
 
   # String
@@ -35,7 +38,7 @@ class Mailing < ActiveRecord::Base
     
     if d.wants_prints
       # Check if there's an open mailing
-      mailing = d.mailings.unsent.first
+      mailing = d.mailings.without_channel.first
 
       # Create a new one if not
       mailing = d.mailings.build if mailing.nil?
@@ -131,6 +134,9 @@ class Mailing < ActiveRecord::Base
       paper_copy = Cups::PrintJob.new(file.path, printer)
     end
     paper_copy.print
+
+    # Mark cases as printed
+    cases.map{|a_case| a_case.update_attribute(:result_report_printed_at, DateTime.now) }
   end
   
   def overview_to_pdf
