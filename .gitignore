@@ -36,6 +36,10 @@ Thumbs.db
 # joe excludes
 *DEADJOE
 
+# bundler
+.bundle
+vendor/bundle
+
 # rails excludes
 log
 tmp
