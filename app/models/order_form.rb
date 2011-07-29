@@ -17,13 +17,11 @@ class OrderForm < ActiveRecord::Base
   def extract_result_remarks(image)
     cropped = image.crop(::Magick::NorthWestGravity, 0, 600, image.rows, image.columns * 0.45, true)
     bordered = cropped.border(20, 20, '#AEBCDF')
-#    bordered.fuzz = '15%'
     bordered.fuzz = 0.15
     trimmed = bordered.trim
     despeckled = trimmed.despeckle
     despeckled.fuzz = 1500
     whited = despeckled.opaque('#EAEAF6', 'white')
-#   framed = whited.border(10, 10, 'black')
     return whited
   end
 
