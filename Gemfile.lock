@@ -4,9 +4,8 @@ GIT
   specs:
     prototype_legacy_helper (0.0.0)
 
-GIT
-  remote: https://github.com/partizan/file_column.git
-  revision: 56a34a40864fb69975883a0067d09e7fe34d20da
+PATH
+  remote: /root/src/file_column
   specs:
     file-column (0.3.3)
 
