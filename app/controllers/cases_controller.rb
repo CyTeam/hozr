@@ -4,8 +4,6 @@ class CasesController < ApplicationController
   # Helpers
   # =======
   helper :doctors
-  verify :method => :post, :only => [ :destroy, :create, :update ],
-         :redirect_to => { :action => :list }
 
   # Tiny MCE
   uses_tiny_mce(:options => {:theme => 'advanced',
