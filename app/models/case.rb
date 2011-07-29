@@ -207,7 +207,7 @@ class Case < ActiveRecord::Base
 
 
   BILL_DELAY_DAYS = 6.5
-  named_scope :to_create_leistungsblatt, :conditions => ["praxistar_leistungsblatt_id IS NULL AND (IFNULL(email_sent_at, result_report_printed_at) < now() - INTERVAL ? HOUR ) AND classification_id IS NOT NULL", BILL_DELAY_DAYS * 24]
+  scope :to_create_leistungsblatt, where("praxistar_leistungsblatt_id IS NULL AND (IFNULL(email_sent_at, result_report_printed_at) < now() - INTERVAL ? HOUR ) AND classification_id IS NOT NULL", BILL_DELAY_DAYS * 24)
 
   def self.praxistar_create_all_leistungsblatt
     export = Praxistar::Exports.new(:started_at => Time.now, :model => self.name)

@@ -53,7 +53,7 @@ class Doctor < ActiveRecord::Base
   end
 
   # Printing
-  named_scope :wanting_prints, includes(:user).where("users.wants_prints = ?", true)
+  scope :wanting_prints, includes(:user).where("users.wants_prints = ?", true)
   has_many :undelivered_prints, :class_name => 'Mailing', :conditions => ["printed_at IS NULL"]
   delegate :wants_prints, :wants_prints=, :to => :user
   def wants_prints=(value)
