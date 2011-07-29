@@ -21,6 +21,6 @@ end
 pdf.grid([1,11], [2,11]).bounding_box do
   barcode = Barby::Code39.new("%04d" % @doctor.id)
   pdf.rotate(90, :origin => [0,0]) do
-    barcode.annotate_pdf(pdf, :height => 14, :xdim => 1)
+    barcode.annotate_pdf(pdf, :height => 14, :xdim => 1, :ypos => 20)
   end
 end
