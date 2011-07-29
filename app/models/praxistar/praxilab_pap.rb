@@ -5,7 +5,7 @@ class Praxistar::PraxilabPap < Praxistar::Base
   def self.import
     Classification.delete_all
     
-    for a in find(:all)
+    for a in all
       print "#{a.ID_PAP}\n"
       p = Classification.new(
         :examination_method_id => a.tf_Neu,

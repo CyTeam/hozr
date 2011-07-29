@@ -17,7 +17,7 @@ class ClassificationsController < ApplicationController
   end
 
   def create
-    for examination_method in ExaminationMethod.find(:all)
+    for examination_method in ExaminationMethod.all
       classification = Classification.new(params[:classification].merge({:examination_method => examination_method}))
     
       classification.save

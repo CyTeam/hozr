@@ -9,7 +9,7 @@
             <%= select_doctors :form => f %>
           <% end %>
           <%= fields_for 'case', @case, :builder => Rubaidh::TabularForm::TabularFormBuilder do |f| %>
-            <%= f.select :screener_id, Employee.find(:all).collect { |e| [ "(#{e.code}) #{e.work_vcard.full_name}", e.id ] }, :include_blank => true, :label => "Zytologin" %>
+            <%= f.select :screener_id, Employee.all.collect { |e| [ "(#{e.code}) #{e.work_vcard.full_name}", e.id ] }, :include_blank => true, :label => "Zytologin" %>
             <%= f.text_field :praxistar_eingangsnr, :label => "Eingangsnr." %>
             <%= f.text_field :entry_date, :label => "Erfassung am" %>
             <%= f.text_field :examination_date, :label => "Abstrich vom" %>
