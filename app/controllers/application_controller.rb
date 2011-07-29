@@ -1,26 +1,3 @@
-=begin
-class ActiveRecord::ConnectionAdapters::SQLiteAdapter
-  def concat(*params)
-    params.map { |param|
-      case param.class.name
-      when 'String'
-        quote(param)
-      when 'Symbol'
-        param.to_s
-      end
-    }.join(' || ')
-  end
-
-  def true
-    "'t'"
-  end
-  
-  def false
-    "'f'"
-  end
-end
-=end
-
 class ActiveRecord::ConnectionAdapters::MysqlAdapter
   def concat(*params)
     params.map! { |param|
