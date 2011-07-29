@@ -6,9 +6,9 @@ Event.observe(window, 'load', function() {$('patient_birth_date').focus()}, fals
 
       <fieldset style="width: 98%">
         <legend>Personalien</legend>
-        <% form_remote_tag( :update => 'search_result', :success => "$('vcard_family_name').focus()", :loading => "Element.show('#{loading_indicator_id({:id => 'search'})}')", :url => {:controller => '/patients', :action => "search", :case_id => params[:id] } )  do %>
+        <%= form_remote_tag( :update => 'search_result', :success => "$('vcard_family_name').focus()", :loading => "Element.show('#{loading_indicator_id({:id => 'search'})}')", :url => {:controller => '/patients', :action => "search", :case_id => params[:id] } )  do %>
           <table>
-            <% fields_for 'patient', @patient, :builder => Rubaidh::TabularForm::TabularFormBuilder do |f| %>
+            <%= fields_for 'patient', @patient, :builder => Rubaidh::TabularForm::TabularFormBuilder do |f| %>
               <tr>
                 <td>Geb.:</td><td><%= text_field 'patient', :birth_date, :label => "Geburtsdat.", :size => 15, :autocomplete => 'off' %></td>
 		<td/><td/>
@@ -16,7 +16,7 @@ Event.observe(window, 'load', function() {$('patient_birth_date').focus()}, fals
               </tr>
             <% end %>
             <% vcard_name = 'vcard'; vcard = nil %>
-            <% fields_for vcard_name, vcard, :builder => Rubaidh::TabularForm::TabularFormBuilder do |address| %>
+            <%= fields_for vcard_name, vcard, :builder => Rubaidh::TabularForm::TabularFormBuilder do |address| %>
               <tr>
                 <td>Name:</td>
                 <td><%= text_field 'vcard', :family_name, :size => 15, :label => "Nachname" %></td>

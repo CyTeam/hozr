@@ -8,9 +8,9 @@ Achtung: Es wird KEINE neue Rechnung erstellt, die bestehende Rechnung ist noch 
 Rückforderungsbeleg enthält jetzt den neuen Behandlungsgrund.
 </p>
 
-<% form_tag( :controller => 'bills', :action => "update_treatment_reason", :id => @bill.id ) do %>
+<%= form_tag( :controller => 'bills', :action => "update_treatment_reason", :id => @bill.id ) do %>
   <table>
-    <% fields_for 'bill', @bill, :builder => Rubaidh::TabularForm::TabularFormBuilder do |f| %>
+    <%= fields_for 'bill', @bill, :builder => Rubaidh::TabularForm::TabularFormBuilder do |f| %>
       <%= f.select :treatment_reason, ['Krankheit', 'Mutterschaft', 'Vorsorge'], :label => "Behandlungsgrund." %>
     <% end %>
   </table>
