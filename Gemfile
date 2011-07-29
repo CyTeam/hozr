@@ -63,7 +63,7 @@ end
 # Standard helpers
 # ================
 # CRUD
-gem 'will_paginate'
+gem 'will_paginate', '~> 3.0.pre'
 
 # Application
 # ===========
