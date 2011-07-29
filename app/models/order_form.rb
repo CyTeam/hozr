@@ -30,26 +30,12 @@ class OrderForm < ActiveRecord::Base
   def self.import_order_forms(order_form_dir)
     order_form_files = Dir.glob("#{order_form_dir}/*.jpg").sort
   
-    import = Praxistar::Imports.new(:started_at => Time.now, :model => self.name)
-    
-    import.update_count = order_form_files.size
-    import.save
-    
     p "Anzahl: #{order_form_files.size}"
 
     for order_form_file in order_form_files
       a_case = Case.new(order_form_file)
       a_case.save
-      
-      import.create_count += 1
-      import.save
-
       p "Scan nr: #{import.create_count}"
     end
-  
-    import.finished_at = Time.now
-    import.save
-    
-    return import
   end
 end
