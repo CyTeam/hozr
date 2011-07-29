@@ -5,12 +5,6 @@ module CasesHelper
     button_to classification.name, { :action => "second_entry_form", "case[classification]" => classification.id, :id => @case }, :class => "PAP_#{classification.code}"
   end
 
- def auto_complete_result_patient(entries, field, phrase = nil)
-    return unless entries
-    items = entries.map { |entry| content_tag("li", phrase ? highlight(entry[field], phrase) : "<span id='#{field}_id' style='display: none'>#{h(entry[:id])}</span><span id='#{field}'>#{h(entry[field])}</span>") }
-    content_tag("ul", items.uniq)
-  end
- 
  def auto_complete_result_finding_class_selection(entries, field, phrase = nil)
     return unless entries
     items = entries.map { |entry| content_tag("li", phrase ? highlight(entry[field], phrase) : "<span id='#{field}'>#{h(entry[field])} - #{h(strip_tags(entry[:name]))}</span>".html_safe) }

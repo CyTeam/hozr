@@ -2,17 +2,6 @@ class SearchController < ApplicationController
   helper :doctors
   auto_complete_for_vcard :vcard
   
-  def auto_complete_for_patient_full_name
-    @patients = Patient.find(:all, 
-      :conditions => [ Patient.connection.concat(:family_name, ' ', :given_name) + " LIKE ?",
-      '%' + params[:patient][:full_name].downcase.gsub(' ', '%') + '%' ], 
-      :joins => "JOIN vcards ON patients.vcard_id = vcards.id",
-      :select => "patients.*",
-      :order => 'family_name ASC',
-      :limit => 30)
-    render :partial => '/patients/full_names'
-  end
-
   def index
     redirect_to :action => :search_form
   end

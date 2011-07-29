@@ -21,17 +21,6 @@ class CasesController < ApplicationController
   # Auto Completion
   auto_complete_for_vcard :vcard
 
-  def auto_complete_for_patient_full_name
-    @patients = Patient.find(:all, 
-      :conditions => [ Patient.connection.concat(:family_name, ' ', :given_name) + " LIKE ?",
-      '%' + params[:patient][:full_name].downcase.gsub(' ', '%') + '%' ], 
-      :joins => "JOIN vcards ON patients.vcard_id = vcards.id",
-      :select => "patients.*",
-      :order => 'family_name ASC',
-      :limit => 30)
-    render :partial => '/patients/full_names'
-  end
-
   def auto_complete_for_finding_class_selection
     @finding_classes = FindingClass.find(:all, 
       :conditions => [ FindingClass.connection.concat(:code, ' - ', :name) + " LIKE ?",
@@ -41,19 +30,6 @@ class CasesController < ApplicationController
       :limit => 8)
     render :inline => "<%= auto_complete_result_finding_class_selection @finding_classes, 'code' %>"
   end
-
-  def auto_complete_for_patient_family_name
-     find_options = { 
-       :conditions => [ "LOWER(family_name) LIKE ?", '%' + params[:patient][:family_name].downcase + '%' ],
-       :order => "family_name ASC",
-       :select => "patients.*",
-       :joins => "JOIN vcards ON patients.vcard_id = vcards.id",
-       :limit => 30}
-
-       @items = Patient.find(:all, find_options)
-       render :inline => "<%= auto_complete_result_patient @items, 'family_name' %>"
-  end
-
 
   # Navigation
   # ==========
