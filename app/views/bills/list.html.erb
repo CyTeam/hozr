@@ -4,7 +4,7 @@
   Event.observe(window, 'load', function() {$('bill_id').focus()}, false);
 </script>
 
-<% form_remote_tag( :update => 'search_result', :loading => "Element.show('#{loading_indicator_id({:id => 'search'})}')", :url => {:controller => 'bills', :action => "search"} )  do %>
+<%= form_remote_tag( :update => 'search_result', :loading => "Element.show('#{loading_indicator_id({:id => 'search'})}')", :url => {:controller => 'bills', :action => "search"} )  do %>
   <%= render :partial => 'search_form' %>
 <% end %>
 

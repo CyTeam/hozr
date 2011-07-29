@@ -1,6 +1,6 @@
 <h1>Editing classification</h1>
 
-<% form_tag :action => 'update', :id => @classification  do %>
+<%= form_tag :action => 'update', :id => @classification  do %>
   <%= render :partial => 'form' %>
   <%= submit_tag 'Edit' %>
 <% end %>

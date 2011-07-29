@@ -37,7 +37,7 @@ Befund
 <%=h @case.classification.name %>
 </div>
 
-<% form_tag :action => 'sign', :id => @case  do %>
+<%= form_tag :action => 'sign', :id => @case  do %>
 <div id="eg_remarks">
   <%= text_area 'case', 'finding_text', :rows => 13 %>
 </div>

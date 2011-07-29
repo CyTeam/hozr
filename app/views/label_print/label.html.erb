@@ -1,7 +1,7 @@
 <h1>Objektträger Etiketten Drucken</h1>
 <div style="display: none" class="flash notice" id="print_flash"></div>
 
-<% form_tag do |f| %>
+<%= form_tag do |f| %>
     <td><%= select_tag 'start_praxnr', options_for_select(label_select) %></td>
     <td><%= select_tag 'end_praxnr', options_for_select(label_select) %></td>
     <%= submit_tag 'Drucken' %>

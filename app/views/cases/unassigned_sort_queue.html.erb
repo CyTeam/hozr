@@ -1,6 +1,6 @@
 <h1>Tages Scans</h1>
 
-<% form_tag({:action => 'assign'}, :name => "unassigned") do %>
+<%= form_tag({:action => 'assign'}, :name => "unassigned") do %>
   <table>
   <% next_eingangs_nr = CaseNr.new %>
   <% intra_day_id = @intra_day_id %>

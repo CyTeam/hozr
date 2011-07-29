@@ -15,7 +15,7 @@ Event.observe(window, 'load', function() {$('finding_class_code').focus()}, fals
       </fieldset>
       <fieldset style="width: 95%; min-height: 160px">
         <legend>Resultat</legend>
-        <% form_tag( :action => "second_entry_update", :id => @case )  do %>
+        <%= form_tag( :action => "second_entry_update", :id => @case )  do %>
           <table style="width: 100%; height: 100%">
             <tr>
               <td style="vertical-align: top; width: 100%">

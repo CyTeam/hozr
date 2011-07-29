@@ -1,6 +1,6 @@
 <h1>Post Etiketten Drucken</h1>
 
-<% form_remote_tag :url => {:action => 'post_label'} do %>
+<%= form_remote_tag :url => {:action => 'post_label'} do %>
     <td><%= select 'order_form', 'doctor_id', doctors_collection %></td>
     <%= submit_tag 'Drucken' %>
 <% end %>
