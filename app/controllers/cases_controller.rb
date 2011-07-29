@@ -154,12 +154,6 @@ class CasesController < ApplicationController
     render :action => :list
   end
 
-  def get_patient_by_eingangsnr
-    patient = Case.find_by_praxistar_eingangsnr(params[:patient][:praxistar_eingangsnr]).patient
-
-    render :inline => "<td id='patient_id'><%= text_field 'patient', 'full_name', :value => '#{patient.id} #{patient.vcard.full_name}' %></td>"
-  end
-
   def first_entry
     @case = Case.find(params[:id])
 
