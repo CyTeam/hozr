@@ -13,8 +13,8 @@ module CasesHelper
  
  def auto_complete_result_finding_class_selection(entries, field, phrase = nil)
     return unless entries
-    items = entries.map { |entry| content_tag("li", phrase ? highlight(entry[field], phrase) : "<span id='#{field}'>#{h(entry[field])} - #{h(entry[:name])}</span>") }
-    content_tag("ul", items.uniq)
+    items = entries.map { |entry| content_tag("li", phrase ? highlight(entry[field], phrase) : "<span id='#{field}'>#{h(entry[field])} - #{h(strip_tags(entry[:name]))}</span>".html_safe) }
+    content_tag("ul", items.uniq.join.html_safe)
   end
   
   def finding_css_class(finding)
