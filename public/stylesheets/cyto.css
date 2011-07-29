@@ -76,3 +76,17 @@ td.bill_state_prosecuted {
 .listing tr.group_body {
   border: 0px none;
 }
+
+/* Buttons for second_entry */
+
+#diagnoses .button_to div input{
+  display: inline;
+  width: 12em; 
+  height: 2.6em; 
+  font-weight: bold
+}
+
+#diagnoses td {
+  padding-bottom: 2px;
+  padding-top: 2px;
+}
