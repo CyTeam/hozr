@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110722124810) do
+ActiveRecord::Schema.define(:version => 20110729133153) do
 
   create_table "account_receivables", :force => true do |t|
   end
@@ -41,20 +41,6 @@ ActiveRecord::Schema.define(:version => 20110722124810) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  create_table "bills", :force => true do |t|
-    t.integer  "case_id"
-    t.float    "amount"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.boolean  "is_storno"
-    t.integer  "praxistar_rechnungs_id"
-    t.integer  "praxistar_leistungsblatt_id"
-  end
-
-  add_index "bills", ["case_id"], :name => "index_bills_on_case_id"
-  add_index "bills", ["praxistar_leistungsblatt_id"], :name => "index_bills_on_praxistar_leistungsblatt_id"
-  add_index "bills", ["praxistar_rechnungs_id"], :name => "index_bills_on_praxistar_rechnungs_id"
 
   create_table "cases", :force => true do |t|
     t.integer  "examination_method_id"
