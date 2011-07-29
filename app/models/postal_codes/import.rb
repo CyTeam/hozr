@@ -23,7 +23,7 @@ module PostalCodes
       end
 
       def import_all
-        records = FasterCSV.parse(File.new(File.join(RAILS_ROOT, 'data', 'postal_code.csv')), {:col_sep => "\t", :headers => false})
+        records = FasterCSV.parse(File.new(Rails.root.join('data', 'postal_code.csv')), {:col_sep => "\t", :headers => false})
         for record in records
           import(record)
         end

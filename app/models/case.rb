@@ -275,7 +275,7 @@ class Case < ActiveRecord::Base
   end
 
   def pdf_path
-    File.join(RAILS_ROOT, '/public/result_reports/', "result_report-#{id}.pdf")
+    Rails.root.join('public', 'result_reports', "result_report-#{id}.pdf")
   end
 
   def pdf_name

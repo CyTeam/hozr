@@ -63,7 +63,7 @@ class Mailing < ActiveRecord::Base
   end
 
   def self.create_all
-    lock_path = File.join(RAILS_ROOT, 'tmp', 'mailing_create_all.lock')
+    lock_path = Rails.root.join('tmp', 'mailing_create_all.lock')
     # Exit if lock not available
     if File.exist?(lock_path)
       logger.info('Lock not available')

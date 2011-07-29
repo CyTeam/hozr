@@ -5,7 +5,7 @@ namespace :hozr do
       ActiveRecord::Base.establish_connection(ENV['DATABASE']) if ENV['DATABASE']
 
       require 'active_record/schema_dumper'
-      File.open(ENV['SCHEMA'] || "db/#{ENV['DATABASE'] || ENV['RAILS_ENV']}-schema.rb", "w") do |file|
+      File.open(ENV['SCHEMA'] || "db/#{ENV['DATABASE'] || Rails.env}-schema.rb", "w") do |file|
         ActiveRecord::SchemaDumper.dump(ActiveRecord::Base.connection, file)
       end
     end
@@ -14,13 +14,13 @@ namespace :hozr do
     task :load => :environment do
       ActiveRecord::Base.establish_connection(ENV['DATABASE']) if ENV['DATABASE']
 
-      file = ENV['SCHEMA'] || "db/#{ENV['DATABASE'] || ENV['RAILS_ENV']}-schema.rb"
+      file = ENV['SCHEMA'] || "db/#{ENV['DATABASE'] || Rails.env}-schema.rb"
       load(file)
     end
 
     desc "Recreate the TO database from the DATABASE or current database schema"
     task :clone => "hozr:schema:dump" do
-      ENV['SCHEMA'] ||= "db/#{ENV['DATABASE'] || ENV['RAILS_ENV']}-schema.rb"
+      ENV['SCHEMA'] ||= "db/#{ENV['DATABASE'] || Rails.env}-schema.rb"
       ENV['DATABASE'] = ENV['TO']
       ActiveRecord::Schema.verbose = false
       Rake::Task["hozr:schema:load"].invoke

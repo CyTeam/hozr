@@ -7,13 +7,14 @@ class MailingOverview < Prawn::Document
   def to_pdf(mailing)
     @mailing = mailing
 
+    font_path = Rails.root.join('data', 'fonts', 'cholla')
     font_families.update(
-      "Cholla Sans" => { :bold        => "#{RAILS_ROOT}/data/fonts/cholla/ChollSanBol.ttf",
-                         :bold_italic => "#{RAILS_ROOT}/data/fonts/cholla/ChollSanBolIta.tff",
-                         :normal      => "#{RAILS_ROOT}/data/fonts/cholla/ChollSanReg.ttf",
-                         :italic      => "#{RAILS_ROOT}/data/fonts/cholla/ChollSanIta.ttf",
-                         :thin        => "#{RAILS_ROOT}/data/fonts/cholla/ChollSanThi.ttf",
-                         :thin_italic => "#{RAILS_ROOT}/data/fonts/cholla/ChollSanThiIta.tff" })
+      "Cholla Sans" => { :bold        => font_path.join("ChollSanBol.ttf"),
+                         :bold_italic => font_path.join("ChollSanBolIta.tff"),
+                         :normal      => font_path.join("ChollSanReg.ttf"),
+                         :italic      => font_path.join("ChollSanIta.ttf"),
+                         :thin        => font_path.join("ChollSanThi.ttf"),
+                         :thin_italic => font_path.join("ChollSanThiIta.tff") })
 
     # support page sizes
     case page.size

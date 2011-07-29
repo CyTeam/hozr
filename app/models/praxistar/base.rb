@@ -3,7 +3,7 @@ include Praxistar
 class Praxistar::Base < ActiveRecord::Base
   require 'yaml'
   
-  praxistar_connection = YAML.load(File.open(Rails.root.join("config/database.yml"),"r"))["zytolabor_" + ( ENV['RAILS_ENV'] || 'development' )]
+  praxistar_connection = YAML.load(File.open(Rails.root.join("config/database.yml"),"r"))["zytolabor_" + ( Rails.env || 'development' )]
   
   establish_connection(praxistar_connection)
 
