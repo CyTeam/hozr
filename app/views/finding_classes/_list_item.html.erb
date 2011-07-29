@@ -1,4 +1,4 @@
 <li style="list-style-type: none">
     <%= link_to_remote image_tag("remove.png"), :update => "findings", :url => url_for(:action => "remove_finding", "finding_id" => list_item.id, :id => @case), :after => "$('finding_class_selection').value = ''; $('finding_class_code').value = ''; $('finding_class_code').focus() " %>
-  <%= list_item.name %>
+  <%= list_item.name.html_safe %>
 </li>

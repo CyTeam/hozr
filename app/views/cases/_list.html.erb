@@ -37,7 +37,7 @@
     <td class="PAP_<%=h a_case.classification.code unless a_case.classification.nil? %>" style="border-style: solid; border-width: 4px"><%=h a_case.classification.name unless a_case.classification.nil? %></td>
     <td>
     <% for finding in a_case.finding_classes %>
-      <div><%=h "#{finding.code} - #{finding.name}" %></div>
+      <div><%= finding.code %> - <%= finding.name.html_safe %></div>
     <% end %>
     </td>
     <td><%= render :partial => '/patients/compact', :object => a_case.patient unless a_case.patient.nil? %></td>
