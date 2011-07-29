@@ -46,12 +46,12 @@ class Mailing < ActiveRecord::Base
       # Clear in case it an existing mailing
       mailing.cases.clear
       # And add all unprinted cases to mailing
-      mailing.cases = d.cases.find(:all, :conditions => ["screened_at IS NOT NULL AND needs_review = 0 AND result_report_printed_at IS NULL"], :order => :praxistar_eingangsnr)
+      mailing.cases = d.cases.find.where("screened_at IS NOT NULL AND needs_review = 0 AND result_report_printed_at IS NULL").order(:praxistar_eingangsnr).all
     else
       # Create new mail if email wanted
       mailing = self.new
       mailing.doctor_id = doctor_id
-      cases = Case.find(:all, :conditions => ["email_sent_at IS NULL AND screened_at IS NOT NULL AND needs_review = 0 AND doctor_id = ?", doctor_id], :order => :praxistar_eingangsnr)
+      cases = Case.where("email_sent_at IS NULL AND screened_at IS NOT NULL AND needs_review = 0 AND doctor_id = ?", doctor_id).order(:praxistar_eingangsnr).all
       mailing.cases = cases
       cases.map{|c| c.email_sent_at = DateTime.now; c.save}
     end
@@ -77,7 +77,7 @@ class Mailing < ActiveRecord::Base
       lock.close
       
       # TODO: Need to adapt for email
-      doctor_ids = Case.find(:all, :select => 'DISTINCT doctor_id', :conditions => "( screened_at IS NOT NULL OR (screened_at IS NULL AND needs_p16 = 1) ) AND needs_review = 0 AND result_report_printed_at IS NULL")
+      doctor_ids = Case.select('DISTINCT doctor_id').where("( screened_at IS NOT NULL OR (screened_at IS NULL AND needs_p16 = 1) ) AND needs_review = 0 AND result_report_printed_at IS NULL").all
 
       for doctor_id in doctor_ids
         self.create_all_for_doctor(doctor_id.doctor_id)
