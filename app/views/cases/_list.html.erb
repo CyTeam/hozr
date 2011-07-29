@@ -44,7 +44,7 @@
     <td><%=h a_case.doctor.name unless a_case.doctor.nil? %></td>
     <td><%=h a_case.screener.code unless a_case.screener.nil? %></td>
     <td><% if a_case.order_form %>
-      <%= link_to "Auftrag", url_for_file_column(a_case.order_form, "file") %> <%= link_to "Klinische Symptome", url_for_file_column(a_case.order_form, "file", "remarks") %> <%= link_to "Personalien", url_for_file_column(a_case.order_form, "file", "address") %>
+      <%= link_to "Auftrag", url_for_file_column(a_case.order_form, "file") %> <%= link_to "Klinische Symptome", url_for_file_column(a_case.order_form, "file", "result_remarks") %> <%= link_to "Personalien", url_for_file_column(a_case.order_form, "file", "address") %>
     <% end %>
     </td>
     <td><%= "X" if a_case.needs_p16? %></td>
