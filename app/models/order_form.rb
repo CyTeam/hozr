@@ -1,3 +1,5 @@
+require 'rails_file_column'
+
 class OrderForm < ActiveRecord::Base
   file_column :file, :magick => {
     :versions => {

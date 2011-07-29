@@ -71,7 +71,7 @@ gem 'will_paginate'
 gem 'tiny_mce'
 
 # Files
-gem 'file-column', :require => 'rails_file_column'
+gem 'file-column', :git => 'https://github.com/partizan/file_column.git'
 
 # Multiple Databases
 gem 'use_db'
