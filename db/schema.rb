@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110804074531) do
+ActiveRecord::Schema.define(:version => 20110804114851) do
 
   create_table "account_receivables", :force => true do |t|
   end
@@ -64,10 +64,6 @@ ActiveRecord::Schema.define(:version => 20110804074531) do
     t.integer  "intra_day_id"
     t.datetime "hpv_p16_prepared_at"
     t.integer  "hpv_p16_prepared_by"
-    t.datetime "scheduled_at"
-    t.integer  "scheduled_for"
-    t.datetime "centrifuged_at"
-    t.integer  "centrifuged_by"
     t.boolean  "needs_hpv",                                :default => false
     t.boolean  "needs_review",                             :default => false
     t.integer  "first_entry_by"
@@ -359,15 +355,6 @@ ActiveRecord::Schema.define(:version => 20110804074531) do
   add_index "send_queues", ["sent_at"], :name => "index_send_queues_on_sent_at"
 
   create_table "shop_orders", :force => true do |t|
-  end
-
-  create_table "tasks", :force => true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.datetime "due_on"
-    t.integer  "amount"
-    t.integer  "employee_id"
-    t.text     "type"
   end
 
   create_table "top_finding_classes", :id => false, :force => true do |t|
