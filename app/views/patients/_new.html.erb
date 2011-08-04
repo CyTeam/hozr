@@ -1,6 +1,6 @@
 <%= form_tag :controller => 'cases', :action => 'set_patient', :id => @case  do %>
   <%= render :partial => '/patients/form' %>
-  <%= submit_to_remote 'submit', 'Anlegen', { :url => {:controller => 'patients', :action => 'create' }, :failure => 'alert("Fehler! Ramon informieren!")', :success => "Element.update('edit_form', '')" } %>
+  <%= submit_to_remote 'submit', 'Anlegen', { :url => {:controller => 'patients', :action => 'create' }, :failure => 'alert("Fehler!")', :success => "Element.update('edit_form', '')" } %>
   <%= submit_tag 'Anlegen & Übernehmen' %>
   <%=
     button_to_function 'Schliessen' do |page|
