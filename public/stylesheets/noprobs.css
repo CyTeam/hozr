@@ -42,13 +42,12 @@ body
 /*Styles for the main header menus. */
 #HeaderMenus, #mainnav
 {
-	color:#000000;
+	color: #F8F8F8;
 	height:1.2em;
 	line-height:1.2em;
 	padding-left:11px;
 	margin:0 0 10px 0;
-	background-color: #dcdcdc;
-	border-bottom:solid 2px #a9a9a9;
+	background-color: #AEB9CF;
 }
 #HeaderMenus ul, #mainnav ul
 {
@@ -68,7 +67,7 @@ body
 	font-family: Verdana, Helvetica, Tahoma, Arial, sans-serif;
 	text-decoration:none;
 	background-color:inherit;
-	color:#000000;
+	color:#F8F8F8;
 }
 #HeaderMenus .selected, #mainnav .selected
 {
@@ -138,7 +137,7 @@ body
 }
 #MainContent p, #main p
 {
-	color:#494949;
+	color:#2A5685;
 	text-align: justify;
 	background-color:inherit;
 }
@@ -146,7 +145,7 @@ body
 {
 	text-decoration: none;
 	background-color:inherit;
-	color: #660000;
+	color: #444;
 }
 #MainContent img, #main img
 {
