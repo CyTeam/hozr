@@ -30,7 +30,7 @@
             <td>Abstrichdatum.:</td><td><%= text_field "a_case[]", 'examination_date', :size => 8, :tabindex => intra_day_id + 10000, :onfocus => "this.value = $('a_case_#{a_case.id - 1}_examination_date').value" %></td>
           </tr>
           <tr>
-            <td>Arzt:</td><td><%= select 'a_case[]', 'doctor_id', Doctor.includes(:praxis).order('vcards.family_name, vcards.given_name').where('active = 1').all.collect { |m| [ [ m.family_name, m.given_name ].join(", ") + " (#{m.praxis.locality})", m.id ] }, { :include_blank => true }, :tabindex => intra_day_id + 20000, :onfocus => "this.value = $('a_case_#{a_case.id - 1}_doctor_id').value" %></td>
+            <td>Arzt:</td><td><%= select 'a_case[]', 'doctor_id', doctors_collection, { :include_blank => true }, :tabindex => intra_day_id + 20000, :onfocus => "this.value = $('a_case_#{a_case.id - 1}_doctor_id').value" %></td>
           </tr>
         </table>
       </td>
