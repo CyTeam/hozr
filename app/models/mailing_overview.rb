@@ -53,7 +53,7 @@ class MailingOverview < Prawn::Document
     cases = @mailing.cases
 
     for group in classification_groups
-      group_cases = cases.finished.by_classification_group(group).find.order('praxistar_eingangsnr').all
+      group_cases = cases.finished.by_classification_group(group).order('praxistar_eingangsnr').all
 
       # Skip if no entries
       next if group_cases.empty?
@@ -128,7 +128,7 @@ class MailingOverview < Prawn::Document
       move_down 10
     end
     
-    group_cases = @mailing.doctor.cases.unfinished_p16.find.order('praxistar_eingangsnr').all
+    group_cases = @mailing.doctor.cases.unfinished_p16.order('praxistar_eingangsnr').all
 
     unless group_cases.empty?
       move_down 10
