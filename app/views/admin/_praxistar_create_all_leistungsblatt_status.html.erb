@@ -5,7 +5,7 @@
     <th>Erledigt</th>
     <th>Fehlerhaft</th>
   </tr>
-  <% for export in Praxistar::Exports.find(:all, :conditions => "model = 'Case'", :order => 'finished_at DESC', :limit => 10) %>
+  <% for export in @exports %>
     <tr>
       <td><%=h export.started_at %></td>
       <td><%=h export.update_count %></td>

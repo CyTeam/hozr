@@ -5,6 +5,8 @@ class AdminController < ApplicationController
   def praxistar_create_all_leistungsblatt
     Case.praxistar_create_all_leistungsblatt
     
+    @exports = Praxistar::Exports.where(:model => 'Case').order('finished_at DESC').limit(10).all
+
     render :partial => 'praxistar_create_all_leistungsblatt_status'
   end
 
