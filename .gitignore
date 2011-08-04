@@ -66,3 +66,6 @@ public/triger
 .project
 public/passenger.3000.log
 public/passenger.3000.pid.lock
+
+# label printing
+public/trigger
