@@ -16,12 +16,6 @@ class AdminController < ApplicationController
     redirect_to :controller => 'search', :action => ''
   end
 
-  def praxistar_patienten_personalien_export
-    Praxistar::PatientenPersonalien.export
-
-    render :partial => 'praxistar_patienten_personalien_export_status'
-  end
-
   def batch_reactivate
     bill_params = params[:bill]
     Praxistar::Bill.batch_reactivate(bill_params[:ids], bill_params[:reason])
