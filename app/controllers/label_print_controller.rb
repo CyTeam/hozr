@@ -20,23 +20,22 @@ class LabelPrintController < ApplicationController
     po_label.save
 
     # Trigger printing
-    system("touch public/trigger/post_trigger.txt")
+    system("touch public/trigger/post_triger.txt")
     
     redirect_to :action => :post_label
   end 
 
   # Case labels
   # ===========
-  def label
-    @start_praxnr = params[:start_praxnr]
-    @end_praxnr = params[:end_praxnr]
-    @cases = Case.for_second_entry.where("praxistar_eingangsnr BETWEEN ? AND ?", @start_praxnr, @end_praxnr)
-    label_save
-    set_triger
-  end
+  def case_label_print
+    @start_praxistar_eingangsnr = params[:start_praxistar_eingangsnr]
+    @end_praxistar_eingangsnr = params[:end_praxistar_eingangsnr]
+    @cases = Case.for_second_entry.where("praxistar_eingangsnr BETWEEN ? AND ?", @start_praxistar_eingangsnr, @end_praxistar_eingangsnr)
 
-  def label_save
-    label_delete
+    # Cleanup table
+    OtLabel.delete_all
+
+    # Create new records
     for label in @cases
       ot_label = OtLabel.new
       ot_label.sys_id = label.id
@@ -48,13 +47,10 @@ class LabelPrintController < ApplicationController
       ot_label.pat_bday = label.patient.birth_date
       ot_label.save
     end
-  end
-  
-  def label_delete
-    OtLabel.delete_all
-  end
-  
-  def set_triger
-    system("touch public/triger/triger.txt")
+
+    # Trigger printing
+    system("touch public/trigger/triger.txt")
+    
+    redirect_to :action => :case_label
   end
 end

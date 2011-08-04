@@ -1,0 +1,7 @@
+<h1>Objektträger Etiketten Drucken</h1>
+
+<%= form_tag :action => :case_label_print do |f| %>
+    <%= select_tag 'start_praxnr', options_for_select(label_select) %>
+    <%= select_tag 'end_praxnr', options_for_select(label_select) %>
+    <%= submit_tag 'Drucken' %>
+<% end %>
