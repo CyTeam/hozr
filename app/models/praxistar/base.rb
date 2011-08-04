@@ -8,18 +8,18 @@ class Praxistar::Base < ActiveRecord::Base
   establish_connection(praxistar_connection)
 
   def self.export(record_id = :all)
-    last_export = Praxistar::Exports.find(:first, :conditions => "model = '#{self.name}'", :order => "finished_at DESC")
-    
-    find_params = {
-      :conditions => [ "updated_at >= ?", last_export.started_at ]
-    } unless last_export.nil?
+    last_export = Praxistar::Exports.where(:model => self.name).order("finished_at DESC").first
     
     export = Praxistar::Exports.new(:started_at => Time.now, :find_params => find_params, :model => self.name)
 
     if record_id == :all
-    	records = hozr_model.find(:all, find_params)
+      if last_export.nil?
+        records = hozr_model.all
+      else
+        records = hozr_model.where("updated_at >= ?", last_export.started_at).all
+      end
     else
-    	records = [hozr_model.find(record_id)]
+      records = [hozr_model.find(record_id)]
     end
     
     return if records.compact.empty?

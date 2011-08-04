@@ -15,9 +15,7 @@ class Praxistar::Bill < Praxistar::Base
     "%s: #%s(%s) CHF %0.2f" % [patient.to_s(:short), id, payment_state, cu_TOTAL]
   end
   
-  def cyto_case
-    Case.where('praxistar_leistungsblatt_id = ?', self[:Leistungsblatt_ID]).first
-  end
+  belongs_to :cyto_case, :class_name => 'Case', :foreign_key => 'Leistungsblatt_ID', :primary_key => 'praxistar_leistungsblatt_id'
 
   # State
   def payment_state

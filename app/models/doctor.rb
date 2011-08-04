@@ -127,7 +127,7 @@ class Doctor < ActiveRecord::Base
 
   def self.deliver_all_mailings_by_email
     # TODO: use self.wanting_emails as in CyLab
-    for doctor in self.find :all, :include => :user, :conditions => ["users.wants_email = ?", true]
+    for doctor in self.includes(:user).where("users.wants_email = ?", true).all
       doctor.deliver_mailings_by_email
     end
   end
