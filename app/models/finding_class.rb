@@ -1,6 +1,5 @@
 class FindingClass < ActiveRecord::Base
   has_and_belongs_to_many :cases
-  has_and_belongs_to_many :finding_groups
   belongs_to :finding_group
 
 #  acts_as_habtm_list :scope => :case
