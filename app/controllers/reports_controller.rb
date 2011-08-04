@@ -32,34 +32,6 @@ class ReportsController < ApplicationController
     end
   end
   
-  def free_search
-    query = params[:query]
-  
-    conditions = query.split('AND')
-    params[:case] ||= {}
-    params[:doctor] ||= {}
-    for condition in conditions
-      field, value = condition.strip.split(':')
-      
-      # We don't need no spaces here
-      value.strip
-      case field
-      when 'nr'
-        params[:case][:praxistar_eingangsnr] = value
-      when 'eingang', 'eing', 'ed'
-        params[:case][:entry_date] = value
-      when 'abstrich', 'abstr', 'ex', 'ad'
-       params[:case][:examination_date] = value
-      when 'druck', 'dd', 'pa'
-       params[:case][:printed_at] = value
-      when 'arzt', 'ai', 'di'
-       params[:doctor][:doctor_id] = value
-      end
-    end
-    
-    search
-  end
-  
   def search
     @columns = ['Pap', 'Anzahl', 'Prozent']
     
