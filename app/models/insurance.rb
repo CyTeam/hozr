@@ -1,6 +1,11 @@
 class Insurance < ActiveRecord::Base
   belongs_to :vcard
 
+  # Helper
+  def to_s
+    name
+  end
+
   # Vcard
   def name
     vcard.full_name
