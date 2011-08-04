@@ -1,7 +1,5 @@
 <h1>Tarmed Leistungen pro PAP Status</h1>
 
 <dl>
-  <% for @classification in Classification.find(:all, :order => 'name') %>
-    <%= render :partial => 'show' %>
-  <% end %>
+  <%= render :partial => 'show', :collection => Classification.order('name').all %>
 </dl>

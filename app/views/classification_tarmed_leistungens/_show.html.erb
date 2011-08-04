@@ -1,8 +1,8 @@
 <dt style="font-weight: bold">
-  <%= link_to h(@classification.name), :action => 'show', :id => @classification %> (<%= @classification.examination_method.name %>)
-  <%= link_to image_tag('add.png'), :action => 'new', :classification_id => @classification.id %>
+  <%= link_to h(show.name), :action => 'show', :id => show %> (<%= show.examination_method.name %>)
+  <%= link_to image_tag('add.png'), :action => 'new', :classification_id => show.id %>
 </dt>
-<% for tarmed_leistung in @classification.tarmed_leistungen %>
+<% for tarmed_leistung in show.tarmed_leistungen %>
   <dd>
     <span style="font-weight: bold"><%=h tarmed_leistung.position %>. <%=link_to h( tarmed_leistung.LNR), :action => :edit, :id => tarmed_leistung %> <%=h " Master: #{tarmed_leistung.parent_id}" unless tarmed_leistung.parent_id.nil? %></span> - <%=h tarmed_leistung.name %>
     <%= link_to image_tag('remove_22.png'), :action => 'destroy', :id => tarmed_leistung.id, :method => :post %>
