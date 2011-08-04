@@ -88,6 +88,8 @@ class Case < ActiveRecord::Base
     entry_date.nil? && !assigned_at.nil?
   end
   
+  scope :for_second_entry, where("entry_date IS NOT NULL AND screened_at IS NULL AND needs_p16 = ? AND needs_hpv = ?", false, false)
+
   def ready_for_second_entry
     !entry_date.nil? && screened_at.nil? && !needs_p16?
   end
