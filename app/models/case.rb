@@ -27,14 +27,9 @@ class Case < ActiveRecord::Base
     "#{patient.to_s}: PAP Abstrich #{praxistar_eingangsnr}"
   end
 
-  def bill
-    Praxistar::Bill.find(:first, :conditions => ['Leistungsblatt_ID = ?', praxistar_leistungsblatt_id], :order => 'ID_Rechnung DESC')
-  end
-  
-  def active_bill
-    Praxistar::Bill.find(:first, :conditions => ['Leistungsblatt_ID = ? AND tf_Storno = 0', praxistar_leistungsblatt_id], :order => 'ID_Rechnung DESC')
-  end
-  
+  has_one :bill, :class_name => "Praxistar::Bill", :foreign_key => 'Leistungsblatt_ID', :primary_key => 'praxistar_leistungsblatt_id', :order => 'ID_Rechnung DESC'
+  has_one :active_bill, :class_name => "Praxistar::Bill", :foreign_key => 'Leistungsblatt_ID', :primary_key => 'praxistar_leistungsblatt_id', :order => 'ID_Rechnung DESC', :conditions => "tf_Storno = 0"
+
   def control_findings
     finding_classes.by_finding_group('Kontrolle')
   end
