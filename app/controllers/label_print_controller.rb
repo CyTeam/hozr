@@ -1,6 +1,4 @@
 class LabelPrintController < ApplicationController
-  helper :label_print
-  
   # Post address labels
   # ===================
   def post_label_print
