@@ -19,7 +19,7 @@ class SearchController < ApplicationController
     end
   end
     
-  def vcard_search
+  def vcard_conditions
     vcard_params = params[:vcard] || {}
     keys = []
     values = []
@@ -35,12 +35,7 @@ class SearchController < ApplicationController
       values.push '%' + value.downcase.gsub(' ', '%') + '%'
     }
     
-    conditions = !keys.empty? ? [ keys.join(" AND "), *values ] : nil
-    if conditions.nil?
-      return nil
-    else
-      return conditions
-    end
+    return !keys.empty? ? [ keys.join(" AND "), *values ] : nil
   end
 
   def search
@@ -169,7 +164,7 @@ class SearchController < ApplicationController
     end
     
     # Handle patient vcard params
-    key, *values = vcard_search
+    key, *values = vcard_conditions
     
     case_keys.push key
     case_values.push *values
