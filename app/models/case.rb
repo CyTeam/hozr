@@ -22,11 +22,12 @@ class Case < ActiveRecord::Base
   scope :by_classification_group, lambda {|group|
     includes('classification').where('classifications.classification_group_id' => group.id)
   }
-  scope :assigned, where("entry_date IS NOT NULL and screened_at IS NULL")
-  scope :for_second_entry, assigned.where("needs_p16 = ? AND needs_hpv = ?", false, false)
-  scope :for_hpv, assigned.where("needs_hpv = ?", true)
-  scope :for_p16, assigned.where("needs_p16 = ?", true)
-  scope :for_hpv_or_p16, assigned.where("(needs_p16 = ? OR needs_hpv)", true)
+  scope :unassigned, where("assigned_at IS NULL")
+  scope :first_entry_done, where("entry_date IS NOT NULL and screened_at IS NULL")
+  scope :for_second_entry, first_entry_done.where("needs_p16 = ? AND needs_hpv = ?", false, false)
+  scope :for_hpv, first_entry_done.where("needs_hpv = ?", true)
+  scope :for_p16, first_entry_done.where("needs_p16 = ?", true)
+  scope :for_hpv_or_p16, first_entry_done.where("(needs_p16 = ? OR needs_hpv)", true)
 
   def to_s
     "#{patient.to_s}: PAP Abstrich #{praxistar_eingangsnr}"

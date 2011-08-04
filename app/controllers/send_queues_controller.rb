@@ -6,12 +6,12 @@ class SendQueuesController < ApplicationController
 
   # Show list of mailings
   def list
-    @send_queues = SendQueue.sent.find(:all, :order => 'created_at DESC', :limit => 100)
+    @send_queues = SendQueue.sent.order('created_at DESC').limit(100).all
   end
 
   # Show list of unprinted mailings
   def list_open
-    @send_queues = SendQueue.unsent.find(:all, :order => 'created_at DESC', :limit => 100)
+    @send_queues = SendQueue.unsent.order('created_at DESC').limit(100).all
   end
 
   def print_all

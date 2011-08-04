@@ -64,12 +64,12 @@ class CasesController < ApplicationController
   # Assigning
   # =========
   def unassigned_form
-    @first_case = Case.find(:first, :conditions => 'assigned_at IS NULL' )
-    @case_count = Case.count(:all, :conditions => 'assigned_at IS NULL' )
+    @first_case = Case.unassigned.first
+    @case_count = Case.unassigned.count
   end
 
   def unassigned_sort_queue
-    @cases = Case.find(:all, :conditions => 'assigned_at IS NULL')
+    @cases = Case.unassigned
     @intra_day_id = params[:case][:intra_day_id].to_i
   end
 
@@ -77,7 +77,7 @@ class CasesController < ApplicationController
     assigned_at = DateTime.now
 
     case_ids = params[:a_case].keys
-    @cases = Case.find(case_ids, :order => 'intra_day_id' )
+    @cases = Case.order('intra_day_id').find(case_ids)
 
     for a_case in @cases
       a_case.assigned_at = assigned_at
@@ -87,7 +87,7 @@ class CasesController < ApplicationController
   end
 
   def assign_list
-    @cases = Case.find(:all, :conditions => ['assigned_at = ?', params[:assigned_at]], :order => 'intra_day_id' )
+    @cases = Case.where('assigned_at = ?', params[:assigned_at]).order('intra_day_id').all
     @assigned_at = params[:assigned_at]
     
     render :action => 'assign'
@@ -104,15 +104,13 @@ class CasesController < ApplicationController
   end
 
   def delete_assigning
-    @cases = Case.find(:all, :conditions => ['assigned_at = ?', params[:assigned_at]] )
-    @cases.map{|c| c.destroy}
+    Case.where('assigned_at = ?', params[:assigned_at]).destroy_all
     
     redirect_to :action => 'assignings_list'
   end
   
   def delete_rest_of_assigning
-    @cases = Case.find(:all, :conditions => ['assigned_at = ? AND intra_day_id >= ?', params[:assigned_at], params[:intra_day_id]] )
-    @cases.map{|c| c.destroy}
+    Case.where('assigned_at = ?', params[:assigned_at]).where('intraday_id >= ?', params[:intra_day_id]).destroy_all
     
     redirect_to :action => 'assignings_list'
   end
@@ -185,7 +183,7 @@ class CasesController < ApplicationController
     if @case.save
       flash[:notice] = 'First entry ok.'
 
-      next_open = Case.find :first, :conditions => ["entry_date IS NULL and id > #{@case.id}"]
+      next_open = Case.where("entry_date IS NULL and id > ?", @case.id).first
       if next_open.nil?
         redirect_to :action => 'first_entry_queue'
       elsif next_open.praxistar_eingangsnr.nil? or next_open.doctor.nil?
@@ -280,7 +278,7 @@ class CasesController < ApplicationController
     # Common code for hpv, p16 and review.
     @case.save
 
-    next_open = Case.find :first, :conditions => ["entry_date IS NOT NULL AND screened_at IS NULL AND praxistar_eingangsnr > ? AND praxistar_eingangsnr < '90/'", @case.praxistar_eingangsnr]
+    next_open = Case.first_entry_done.where("praxistar_eingangsnr > ?", @case.praxistar_eingangsnr).first
     if next_open.nil?
       redirect_to :action => 'second_entry_queue'
     else
