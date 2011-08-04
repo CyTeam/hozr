@@ -42,18 +42,6 @@ class Case < ActiveRecord::Base
     finding_classes.by_finding_group(nil)
   end
   
-  def exactly_one_of_group(group_name)
-    ( finding_classes.collect { |f| f.id } & FindingGroup.find_by_name(group_name).finding_classes.collect { |f| f.id } ).size == 1
-  end
-
-  def at_least_one_of_group(group_name)
-    ( finding_classes.collect { |f| f.id } & FindingGroup.find_by_name(group_name).finding_classes.collect { |f| f.id } ).size >= 1
-  end
-  
-  def validate_findings
-    exactly_one_of_group('Zustand') && at_least_one_of_group('Kontrolle')
-  end
-  
   def validate_first_entry
     valid = true
     if examination_date.nil?
