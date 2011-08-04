@@ -36,15 +36,15 @@ class Case < ActiveRecord::Base
   end
   
   def control_findings
-    finding_classes.select { |finding| finding.belongs_to_group?('Kontrolle') }
+    finding_classes.by_finding_group('Kontrolle')
   end
   
   def quality_findings
-    finding_classes.select { |finding| finding.belongs_to_group?('Zustand') }
+    finding_classes.by_finding_group('Zustand')
   end
   
   def findings
-    finding_classes.select { |finding| !(finding.belongs_to_group?('Zustand') || finding.belongs_to_group?('Kontrolle'))}
+    finding_classes.by_finding_group(nil)
   end
   
   def exactly_one_of_group(group_name)

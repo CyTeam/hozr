@@ -2,9 +2,11 @@ class FindingClass < ActiveRecord::Base
   has_and_belongs_to_many :cases
   belongs_to :finding_group
 
-#  acts_as_habtm_list :scope => :case
-
-  def belongs_to_group?(name)
-    finding_groups.collect { |group| group.name }.include?(name)
-  end
+  scope :by_finding_group, lambda {|group_name|
+    if group_name.nil?
+      where(:finding_group_id => nil)
+    else
+      includes(:finding_group).where('finding_groups.name = ?', group_name)
+    end
+  }
 end

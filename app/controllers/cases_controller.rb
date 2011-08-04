@@ -324,7 +324,7 @@ class CasesController < ApplicationController
 
       @case.finding_classes << finding_class
       finding_text = @case.finding_text.nil? ? '' : @case.finding_text
-      @case.finding_text = finding_text + "<div>#{finding_class.name}</div>" unless finding_class.belongs_to_group?('Zustand') || finding_class.belongs_to_group?('Kontrolle')
+      @case.finding_text = finding_text + "<div>#{finding_class.name}</div>" if finding_class.finding_group.nil?
 
       @case.save
 
