@@ -30,7 +30,7 @@ class LabelPrintController < ApplicationController
   def label
     @start_praxnr = params[:start_praxnr]
     @end_praxnr = params[:end_praxnr]
-    @cases = Case.find(:all, :conditions => ["entry_date IS NOT NULL AND screened_at IS NULL AND (needs_p16 = '#{Case.connection.false}' AND needs_hpv = '#{Case.connection.false}') AND praxistar_eingangsnr BETWEEN ? AND ? AND praxistar_eingangsnr > '01' AND praxistar_eingangsnr < '90' AND NOT praxistar_eingangsnr LIKE '%-%'",@start_praxnr,@end_praxnr ])
+    @cases = Case.for_second_entry.where("praxistar_eingangsnr BETWEEN ? AND ?", @start_praxnr, @end_praxnr)
     label_save
     set_triger
   end
