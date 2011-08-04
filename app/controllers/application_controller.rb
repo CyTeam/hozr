@@ -8,13 +8,7 @@ class ActionController::Base
     end
     
     define_method("auto_complete_for_#{object}_#{method}") do
-      find_options = {
-        :select => "DISTINCT #{method}",
-        :conditions => [ "LOWER(#{method}) LIKE ?", params[object][method].downcase + '%' ],
-        :order => "#{method} ASC",
-        :limit => 10 }.merge!(options)
-
-      @items = model.find(:all, find_options)
+      @items = model.select("DISTINCT #{method}").where("LOWER(#{method}) LIKE ?", params[object][method].downcase + '%').order("#{method} ASC").limit(10).all
 
       render :inline => "<%= auto_complete_result @items, '#{method}' %>"
     end
@@ -22,10 +16,7 @@ class ActionController::Base
   
   def self.auto_complete_for_zip_locality(object)
     define_method("auto_complete_for_#{object}_zip_locality") do
-      @localities = PostalCode.find(:all,
-        :conditions => [ "zip = :query", {:query => params[object][:zip_locality]} ],
-        :order => 'zip',
-        :limit => 30)
+      @localities = PostalCode.where("zip = ?", params[object][:zip_locality]).order('zip').limit(30).all
       render :partial => 'postal_codes/zip_localities'
     end
   end

@@ -1,6 +1,6 @@
 class ClassificationGroupsController < ApplicationController
   def list
-    @classification_groups = ClassificationGroup.find(:all, :order => 'position')
+    @classification_groups = ClassificationGroup.order('position').all
   end
   
   def index
