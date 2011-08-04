@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110729133153) do
+ActiveRecord::Schema.define(:version => 20110804074531) do
 
   create_table "account_receivables", :force => true do |t|
   end
@@ -194,9 +194,12 @@ ActiveRecord::Schema.define(:version => 20110729133153) do
   end
 
   create_table "finding_classes", :force => true do |t|
-    t.text "name"
-    t.text "code"
+    t.text    "name"
+    t.text    "code"
+    t.integer "finding_group_id"
   end
+
+  add_index "finding_classes", ["finding_group_id"], :name => "index_finding_classes_on_finding_group_id"
 
   create_table "finding_classes_finding_groups", :id => false, :force => true do |t|
     t.integer "finding_class_id"
