@@ -1,42 +1,35 @@
-<div style="margin-left: 9em; margin-top: 5em">
+<div style="margin-left: 2em; margin-top: 2em">
 <table>
   <tr>
     <td style="vertical-align: top">
       <h2><%= link_to "Anschreiben", :controller => 'cases', :action => 'unassigned_form' %></h2>
       <p>
           <%= link_to image_tag('assign.png'), :controller => 'cases', :action => 'unassigned_form' %>
-          <i style="font-size: 13pt">Es gibt <b><%= @assign_count %></b> Auftragsformulare.</i>
+          <i style="font-size: 12pt"><b><%= @assign_count %></b> Auftragsformulare.</i>
       </p>
 
       <h2><%= link_to "Ersteingabe", :controller => 'cases', :action => 'first_entry_queue' %></h2>
       <p>
           <%= link_to image_tag('first_entry.png'), :controller => 'cases', :action => 'first_entry_queue' %>
-          <i style="font-size: 13pt">Es gibt <b><%= @first_entry_count %></b> Ersteingaben.</i>
+          <i style="font-size: 12pt"><b><%= @first_entry_count %></b> Ersteingaben.</i>
       </p>
 
       <h2><%= link_to "Zweiteingabe", :controller => 'cases', :action => 'second_entry_queue' %></h2>
       <p>
           <%= link_to image_tag('second_entry.png'), :controller => 'cases', :action => 'second_entry_queue' %>
-          <i style="font-size: 13pt">Es gibt <b><%= @second_entry_count %></b> Zweiteingaben.</i>
+          <i style="font-size: 12pt"><b><%= @second_entry_count %></b> Zweiteingaben.</i>
       </p>
 
       <h2><%= link_to "HPV/p16", :controller => 'cases', :action => 'hpv_p16_queue' %></h2>
       <p>
           <%= link_to image_tag('second_entry.png'), :controller => 'cases', :action => 'hpv_p16_queue' %>
-          <i style="font-size: 13pt">Es gibt <b><%= @p16_count %></b> p16 (<b><%= @p16_prepared_count %></b> herausgesucht) und <b><%= @hpv_count %></b> HPV</i>
+          <i style="font-size: 12pt"><b><%= @p16_count %></b> p16 (<b><%= @p16_prepared_count %></b> herausgesucht) und <b><%= @hpv_count %></b> HPV</i>
       </p>
 
       <h2><%= link_to "Review", :controller => 'cases', :action => 'review_queue' %></h2>
       <p>
           <%= link_to image_tag('second_entry.png'), :controller => 'cases', :action => 'review_queue' %>
-          <i style="font-size: 13pt">Es gibt <b><%= @review_count %></b> Reviews.</i>
-      </p>
-
-      <h2><%= link_to("Resultate freigeben", {:controller => '/mailings', :action => 'generate'} ) %></h2>
-      <p>
-          <%= link_to (image_tag('print_result.png'), {:controller => '/mailings', :action => 'generate'} ) %>
-          <i style="font-size: 13pt">Es gibt <b><%= @print_result_count %></b> Resultate (+ <b><%= @email_result_count %></b> per E-Mail).</i>
-          <pre id="print_result_reports_log"><%= loading_indicator_tag :id => 'print_result_reports' %></pre>
+          <i style="font-size: 12pt"><b><%= @review_count %></b> Reviews.</i>
       </p>
 
     </td>
@@ -45,35 +38,32 @@
       <h2><%= link_to_remote("Rechnungen generieren", :update => 'create_all_leistungsblatt_log', :loading => "Element.show('#{loading_indicator_id({:id => 'create_all_leistungsblatt'})}')", :url => {:controller => '/admin', :action => 'praxistar_create_all_leistungsblatt'}, :confirm => "#{@bill_export_count} Rechnungen generieren?" ) %></h2>
       <p>
           <%= link_to_remote(image_tag('export_bill.png'), :update => 'create_all_leistungsblatt_log', :loading => "Element.show('#{loading_indicator_id({:id => 'create_all_leistungsblatt'})}')", :url => {:controller => '/admin', :action => 'praxistar_create_all_leistungsblatt'}, :confirm => "#{@bill_export_count} Rechnungen generieren?" ) %>
-          <i style="font-size: 13pt">Es gibt <b><%= @bill_export_count %></b> neue Leistungsbl&auml;tter.</i>
+          <i style="font-size: 12pt"> <b><%= @bill_export_count %></b> neue Leistungsbl&auml;tter.</i>
+          <i style="font-size: 12pt"> <b><%= @bill_print_count %></b> Rechnungen bereit zum Drucken.</i>
           <pre id="create_all_leistungsblatt_log"><%= loading_indicator_tag :id => 'create_all_leistungsblatt' %></pre>
       </p>
 
-      <h2>Rechnungen drucken</h2>
-      <p>
-          <%= image_tag('printer_64.png') %>
-          <i style="font-size: 13pt">Es gibt <b><%= @bill_print_count %></b> neue Rechnungen.</i>
-      </p>
-
-      <h2><%= link_to "Bestellung abarbeiten", "http://shop.intern.zyto-labor.com/shop/shipping" %></h2>
-      <p>
-          <%= link_to image_tag('order_64.png'), "http://shop.intern.zyto-labor.com/shop/shipping" %>
-          <i style="font-size: 13pt">Es gibt <b><%= @order_count %></b> offene Bestellungen.</i>
-      </p>
-
-      <h2><%= link_to "Papzettel drucken", :controller => '/order_form', :action => :form %></h2>
+      <h2>Drucken</h2>
       <p>
           <%= link_to image_tag('printer_64.png'), :controller => '/order_form', :action => :form %>
+	  <i style="font-size: 12pt">Papzettel Drucken</i>
       </p>
       
-      <h2><%= link_to "Objektträger Etiketten drucken", :controller => '/label_print', :action => :label %></h2>
       <p>
           <%= link_to image_tag('printer_64.png'), :controller => '/label_print', :action => :label %>
+          <i style="font-size: 12pt">Objektträger Etiketten drucken</i>
       </p>
 
-      <h2><%= link_to "Packet Etiketten drucken", :controller => '/post_etiketten', :action => :post %></h2>
       <p>
           <%= link_to image_tag('printer_64.png'), :controller => '/label_print', :action => :post_label %>
+          <i style="font-size: 12pt">Packet Etiketten drucken</i>
+      </p>
+
+      <h2><%= link_to("Resultate freigeben", {:controller => '/mailings', :action => 'generate'} ) %></h2>
+      <p>
+          <%= link_to (image_tag('print_result.png'), {:controller => '/mailings', :action => 'generate'} ) %>
+          <i style="font-size: 12pt"><b><%= @print_result_count %></b> Resultate (+ <b><%= @email_result_count %></b> per E-Mail).</i>
+          <pre id="print_result_reports_log"><%= loading_indicator_tag :id => 'print_result_reports' %></pre>
       </p>
 
     </td>
