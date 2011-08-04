@@ -112,10 +112,12 @@
 }
 
 .finding_group_Kontrolle {
+  font-weight: bold;
   font-family: ChollaSansBold;
 }
 
 .finding_group_Zustand {
+  font-style: italic;
   font-family: ChollaSansItalic;
 }
 
