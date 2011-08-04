@@ -15,7 +15,24 @@ class Patient < ActiveRecord::Base
   validates_presence_of :birth_date
   
   scope :dunning_stopped, where(:dunning_stop => true)
-  
+
+  # Search
+  scope :search, lambda {|params|
+    values = {}
+    params.map{|key, value|
+      if value.match(/bis|-/)
+        values[key] = value.split(/bis|-/)[0].strip..value.split(/bis|-/)[1].strip
+      else
+        values[key] = value.strip
+      end
+    }
+    patients = scoped
+    patients = patients.where(:doctor_patient_nr => values[:doctor_patient_nr].strip) if values[:doctor_patient_nr].present?
+    patients = patients.where(:birth_date => Date.parse_date(values[:birth_date], 1900)) if values[:birth_date].present?
+    
+    patients
+  }
+    
   #TODO: differs from CyLab version as birth_date is overloaded
   def to_s(format = :default)
     case format
