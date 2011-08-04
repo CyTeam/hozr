@@ -501,10 +501,6 @@ class CasesController < ApplicationController
     @case = Case.find(params[:id])
   end
 
-  def new
-    redirect_to :controller => 'order_forms', :action => 'new'
-  end
-
   def edit
     @case = Case.find(params[:id])
   end
