@@ -16,22 +16,6 @@ class ReportsController < ApplicationController
     render :partial => 'statistics'
   end
   
-  def parse_date(value)
-    if value.is_a?(String)
-      if value.match /.*-.*-.*/
-        return value
-      end
-      day, month, year = value.split('.').map {|s| s.to_i}
-      month ||= Date.today.month
-      year ||= Date.today.year
-      year = 2000 + year.to_i if year.to_i < 100
-      
-      return sprintf("%4d-%02d-%02d", year, month, day)
-    else
-      return value
-    end
-  end
-  
   def search
     @columns = ['Pap', 'Anzahl', 'Prozent']
     
@@ -65,11 +49,11 @@ class ReportsController < ApplicationController
       if case_params[:entry_date].match /bis/
         lower_bound, higher_bound = case_params[:entry_date].split('bis')
         case_keys.push "entry_date BETWEEN ? AND ?"
-        case_values.push parse_date(lower_bound.strip).strip
-        case_values.push parse_date(higher_bound.strip).strip
+        case_values.push Date.parse_date(lower_bound.strip)
+        case_values.push Date.parse_date(higher_bound.strip)
       else
         case_keys.push "entry_date = ? "
-        case_values.push parse_date(case_params[:entry_date]).strip
+        case_values.push Date.parse_date(case_params[:entry_date])
       end
     end
     
@@ -77,11 +61,11 @@ class ReportsController < ApplicationController
       if case_params[:printed_at].match /bis/
         lower_bound, higher_bound = case_params[:printed_at].split('bis')
         case_keys.push "result_report_printed_at BETWEEN ? AND ?"
-        case_values.push parse_date(lower_bound.strip).strip
-        case_values.push parse_date(higher_bound.strip).strip
+        case_values.push Date.parse_date(lower_bound.strip)
+        case_values.push Date.parse_date(higher_bound.strip)
       else
         case_keys.push "result_report_printed_at = ? "
-        case_values.push parse_date(case_params[:printed_at]).strip
+        case_values.push Date.parse_date(case_params[:printed_at])
       end
     end
     
@@ -89,11 +73,11 @@ class ReportsController < ApplicationController
       if case_params[:screened_at].match /bis/
         lower_bound, higher_bound = case_params[:screened_at].split('bis')
         case_keys.push "screened_at BETWEEN ? AND ?"
-        case_values.push parse_date(lower_bound.strip).strip
-        case_values.push parse_date(higher_bound.strip).strip
+        case_values.push Date.parse_date(lower_bound.strip)
+        case_values.push Date.parse_date(higher_bound.strip)
       else
         case_keys.push "screened_at = ? "
-        case_values.push parse_date(case_params[:screened_at]).strip
+        case_values.push Date.parse_date(case_params[:screened_at])
       end
     end
     
@@ -101,11 +85,11 @@ class ReportsController < ApplicationController
       if case_params[:examination_date].match /bis/
         lower_bound, higher_bound = case_params[:examination_date].split('bis')
         case_keys.push "examination_date BETWEEN ? AND ?"
-        case_values.push parse_date(lower_bound.strip).strip
-        case_values.push parse_date(higher_bound.strip).strip
+        case_values.push Date.parse_date(lower_bound.strip)
+        case_values.push Date.parse_date(higher_bound.strip)
       else
         case_keys.push "examination_date = ? "
-        case_values.push parse_date(case_params[:examination_date]).strip
+        case_values.push Date.parse_date(case_params[:examination_date])
       end
     end
     

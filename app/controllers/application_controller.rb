@@ -58,7 +58,7 @@ end
 
 class Date
   # Date helpers
-  def self.parse_date(value)
+  def self.parse_date(value, base_year = 2000)
     if value.is_a?(String)
       if value.match /.*-.*-.*/
         return value
@@ -66,7 +66,7 @@ class Date
       day, month, year = value.split('.').map {|s| s.to_i}
       month ||= Date.today.month
       year ||= Date.today.year
-      year = expand_year(year, 1900)
+      year = expand_year(year, base_year)
       
       return sprintf("%4d-%02d-%02d", year, month, day)
     else
@@ -78,7 +78,7 @@ class Date
     value.is_a?(String) and value.strip.match /^\d{2,4}$/
   end
   
-  def self.expand_year(value, base = 1900)
+  def self.expand_year(value, base = 2000)
     year = value.to_i
     return year < 100 ? year + base : year
   end

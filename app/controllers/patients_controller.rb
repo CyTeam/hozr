@@ -14,32 +14,6 @@ class PatientsController < ApplicationController
     @patients = Patient.dunning_stopped.all
   end
   
-  # Date helpers
-  def parse_date(value)
-    if value.is_a?(String)
-      if value.match /.*-.*-.*/
-        return value
-      end
-      day, month, year = value.split('.').map {|s| s.to_i}
-      month ||= Date.today.month
-      year ||= Date.today.year
-      year = expand_year(year, 1900)
-      
-      return sprintf("%4d-%02d-%02d", year, month, day)
-    else
-      return value
-    end
-  end
-  
-  def date_only_year?(value)
-    value.is_a?(String) and value.strip.match /^\d{2,4}$/
-  end
-  
-  def expand_year(value, base = 1900)
-    year = value.to_i
-    return year < 100 ? year + base : year
-  end
-  
   # Search helpers
   def vcard_conditions
     vcard_params = params[:vcard] || {}
@@ -78,22 +52,22 @@ class PatientsController < ApplicationController
     unless parameters[:birth_date].nil? or parameters[:birth_date].empty?
       if parameters[:birth_date].match /bis/
         lower_bound, higher_bound = parameters[:birth_date].split('bis')
-        if date_only_year?(lower_bound)
+        if Date.date_only_year?(lower_bound)
             keys.push "YEAR(birth_date) BETWEEN ? AND ?"
             values.push expand_year(lower_bound.strip)
             values.push expand_year(higher_bound.strip)
         else
             keys.push "birth_date BETWEEN ? AND ?"
-            values.push parse_date(lower_bound.strip).strip
-            values.push parse_date(higher_bound.strip).strip
+            values.push Date.parse_date(lower_bound.strip, 1900)
+            values.push parse_date(higher_bound.strip, 1900)
         end
       else
-        if date_only_year?(parameters[:birth_date])
+        if Date.date_only_year?(parameters[:birth_date])
             keys.push "YEAR(birth_date) = ?"
-            values.push expand_year(parameters[:birth_date].strip)
+            values.push Date.expand_year(parameters[:birth_date].strip)
         else
             keys.push "birth_date = ? "
-            values.push parse_date(parameters[:birth_date]).strip
+            values.push Date.parse_date(parameters[:birth_date], 1900)
         end
       end
     end

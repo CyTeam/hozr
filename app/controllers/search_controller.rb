@@ -9,32 +9,6 @@ class SearchController < ApplicationController
   def search_form
   end
 
-  # Date helpers
-  def date_only_year?(value)
-    value.is_a?(String) and value.strip.match /^\d{2,4}$/
-  end
-  
-  def expand_year(value, base = 1900)
-    year = value.to_i
-    return year < 100 ? year + base : year
-  end
-  
-  def parse_date(value)
-    if value.is_a?(String)
-      if value.match /.*-.*-.*/
-        return value
-      end
-      day, month, year = value.split('.').map {|s| s.to_i}
-      month ||= Date.today.month
-      year ||= Date.today.year
-      year = expand_year(year, 2000)
-      
-      return sprintf("%4d-%02d-%02d", year, month, day)
-    else
-      return value
-    end
-  end
-  
   def bill_search
     bill_params = params[:bill]
     if bill_params[:id].empty?
@@ -103,11 +77,11 @@ class SearchController < ApplicationController
       if case_params[:entry_date].match /bis/
         lower_bound, higher_bound = case_params[:entry_date].split('bis')
         case_keys.push "entry_date BETWEEN ? AND ?"
-        case_values.push parse_date(lower_bound.strip).strip
-        case_values.push parse_date(higher_bound.strip).strip
+        case_values.push Date.parse_date(lower_bound.strip)
+        case_values.push Date.parse_date(higher_bound.strip)
       else
         case_keys.push "entry_date = ? "
-        case_values.push parse_date(case_params[:entry_date]).strip
+        case_values.push Date.parse_date(case_params[:entry_date])
       end
     end
     
@@ -115,11 +89,11 @@ class SearchController < ApplicationController
       if case_params[:printed_at].match /bis/
         lower_bound, higher_bound = case_params[:printed_at].split('bis')
         case_keys.push "result_report_printed_at BETWEEN ? AND ?"
-        case_values.push parse_date(lower_bound.strip).strip
-        case_values.push parse_date(higher_bound.strip).strip
+        case_values.push Date.parse_date(lower_bound.strip)
+        case_values.push Date.parse_date(higher_bound.strip)
       else
         case_keys.push "result_report_printed_at = ? "
-        case_values.push parse_date(case_params[:printed_at]).strip
+        case_values.push Date.parse_date(case_params[:printed_at])
       end
     end
     
@@ -127,11 +101,11 @@ class SearchController < ApplicationController
       if case_params[:screened_at].match /bis/
         lower_bound, higher_bound = case_params[:screened_at].split('bis')
         case_keys.push "screened_at BETWEEN ? AND ?"
-        case_values.push parse_date(lower_bound.strip).strip
-        case_values.push parse_date(higher_bound.strip).strip
+        case_values.push Date.parse_date(lower_bound.strip)
+        case_values.push Date.parse_date(higher_bound.strip)
       else
         case_keys.push "screened_at = ? "
-        case_values.push parse_date(case_params[:screened_at]).strip
+        case_values.push Date.parse_date(case_params[:screened_at])
       end
     end
     
@@ -139,11 +113,11 @@ class SearchController < ApplicationController
       if case_params[:examination_date].match /bis/
         lower_bound, higher_bound = case_params[:examination_date].split('bis')
         case_keys.push "examination_date BETWEEN ? AND ?"
-        case_values.push parse_date(lower_bound.strip).strip
-        case_values.push parse_date(higher_bound.strip).strip
+        case_values.push Date.parse_date(lower_bound.strip)
+        case_values.push Date.parse_date(higher_bound.strip)
       else
         case_keys.push "examination_date = ? "
-        case_values.push parse_date(case_params[:examination_date]).strip
+        case_values.push Date.parse_date(case_params[:examination_date])
       end
     end
     
@@ -174,22 +148,22 @@ class SearchController < ApplicationController
     unless patient_params[:birth_date].nil? or patient_params[:birth_date].empty?
       if patient_params[:birth_date].match /bis/
         lower_bound, higher_bound = patient_params[:birth_date].split('bis')
-        if date_only_year?(lower_bound)
+        if Date.date_only_year?(lower_bound)
           patient_keys.push "YEAR(birth_date) BETWEEN ? AND ?"
-          patient_values.push parse_date(lower_bound.strip).strip
-          patient_values.push parse_date(higher_bound.strip).strip
+          patient_values.push Date.parse_date(lower_bound.strip, 1900)
+          patient_values.push Date.parse_date(higher_bound.strip, 1900)
         else
           patient_keys.push "birth_date BETWEEN ? AND ?"
-          patient_values.push parse_date(lower_bound.strip).strip
-          patient_values.push parse_date(higher_bound.strip).strip
+          patient_values.push Date.parse_date(lower_bound.strip, 1900)
+          patient_values.push Date.parse_date(higher_bound.strip, 1900)
         end
       else
-        if date_only_year?(patient_params[:birth_date])
+        if Date.date_only_year?(patient_params[:birth_date])
           patient_keys.push "YEAR(birth_date) = ? "
-          patient_values.push parse_date(patient_params[:birth_date]).strip
+          patient_values.push Date.parse_date(patient_params[:birth_date], 1900)
         else
           patient_keys.push "birth_date = ? "
-          patient_values.push parse_date(patient_params[:birth_date]).strip
+          patient_values.push Date.parse_date(patient_params[:birth_date], 1900)
         end
       end
     end
