@@ -114,37 +114,10 @@ class SearchController < ApplicationController
     
     
     # Handle patient params
-    patient_params = params[:patient] || {}
-    patient_keys = case_keys
-    patient_values = case_values
-    
-    unless patient_params[:full_name].nil? or patient_params[:full_name].empty?
-      case_keys.push "patient_id = ?"
-      case_values.push patient_params[:full_name].split(' ')[0].strip
-    end
-    
-    unless patient_params[:birth_date].nil? or patient_params[:birth_date].empty?
-      if patient_params[:birth_date].match /bis/
-        lower_bound, higher_bound = patient_params[:birth_date].split('bis')
-        if Date.date_only_year?(lower_bound)
-          patient_keys.push "YEAR(birth_date) BETWEEN ? AND ?"
-          patient_values.push Date.parse_date(lower_bound.strip, 1900)
-          patient_values.push Date.parse_date(higher_bound.strip, 1900)
-        else
-          patient_keys.push "birth_date BETWEEN ? AND ?"
-          patient_values.push Date.parse_date(lower_bound.strip, 1900)
-          patient_values.push Date.parse_date(higher_bound.strip, 1900)
-        end
-      else
-        if Date.date_only_year?(patient_params[:birth_date])
-          patient_keys.push "YEAR(birth_date) = ? "
-          patient_values.push Date.parse_date(patient_params[:birth_date], 1900)
-        else
-          patient_keys.push "birth_date = ? "
-          patient_values.push Date.parse_date(patient_params[:birth_date], 1900)
-        end
-      end
-    end
+    key, *values = patient_conditions
+
+    case_keys.push key
+    case_values.push *values
     
     # Handle patient vcard params
     key, *values = vcard_conditions
