@@ -1,27 +1,3 @@
-class ActiveRecord::ConnectionAdapters::MysqlAdapter
-  def concat(*params)
-    params.map! { |param|
-      case param.class.name
-      when 'String'
-        quote(param)
-      when 'Symbol'
-        param.to_s
-      end
-    }
-
-    return "CONCAT( #{params.join(', ')} )"
-  end
-  
-  def true
-    "1"
-  end
-  
-  def false
-    "0"
-  end
-end
-
-
 class ActionController::Base
   def self.auto_complete_for_vcard_field(object, method, options = {})
     case method.to_s

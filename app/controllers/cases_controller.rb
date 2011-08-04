@@ -22,12 +22,8 @@ class CasesController < ApplicationController
   auto_complete_for_vcard :vcard
 
   def auto_complete_for_finding_class_selection
-    @finding_classes = FindingClass.find(:all, 
-      :conditions => [ FindingClass.connection.concat(:code, ' - ', :name) + " LIKE ?",
-      '%' + params[:finding_class][:selection].downcase + '%' ],
-      :select => "*, #{FindingClass.connection.concat(:code, ' - ', :name)} AS selection",
-      :order => 'code',
-      :limit => 8)
+    @finding_classes = FindingClass.select("*, CONCAT(code, ' - ', name) AS selection").
+                                    where("CONCAT(code, ' - ', name) LIKE ?", '%' + params[:finding_class][:selection].downcase + '%').order('code').limit(8).all
     render :inline => "<%= auto_complete_result_finding_class_selection @finding_classes, 'code' %>"
   end
 
@@ -223,7 +219,7 @@ class CasesController < ApplicationController
   def second_entry_queue
     params[:order] ||= 'praxistar_eingangsnr'
 
-    @cases = Case.paginate(:page => params['page'], :per_page => 144, :order => params[:order], :conditions => "entry_date IS NOT NULL AND screened_at IS NULL AND (needs_p16 = '#{Case.connection.false}' AND needs_hpv = '#{Case.connection.false}') AND praxistar_eingangsnr > '07' AND praxistar_eingangsnr < '90' AND NOT praxistar_eingangsnr LIKE '%-%'")
+    @cases = Case.for_second_entry.paginate(:page => params['page'], :per_page => 144, :order => params[:order])
     render :action => :list
   end
 
@@ -375,23 +371,17 @@ class CasesController < ApplicationController
 
     @case.needs_review = (low_to_high or high_to_low or high)
 
-    # Save
-    @case.save
-
     if @case.needs_p16? or @case.needs_hpv?
-      next_open = Case.find :first, :conditions => ["entry_date IS NOT NULL AND screened_at IS NULL AND (needs_p16 = '#{Case.connection.true}' OR needs_hpv = '#{Case.connection.true}') AND screener_id = ? AND praxistar_eingangsnr > ? AND praxistar_eingangsnr < '90/'", @case.screener_id, @case.praxistar_eingangsnr]
-
       @case.result_report_printed_at = nil
       @case.save
 
-      if next_open.nil?
-        redirect_to :action => 'hpv_p16_queue'
-      else
-#        redirect_to :action => 'second_entry_pap_form', :id => next_open
-        redirect_to :action => 'hpv_p16_queue'
-      end
+      redirect_to :action => 'hpv_p16_queue'
     else
-      next_open = Case.find :first, :conditions => ["entry_date IS NOT NULL AND screened_at IS NULL AND (needs_p16 = '#{Case.connection.false}' AND needs_hpv = '#{Case.connection.false}') AND praxistar_eingangsnr > ? AND praxistar_eingangsnr < '90/'", @case.praxistar_eingangsnr]
+      @case.save
+
+      # Jump to next case
+      next_open = Case.for_second_entry.where("praxistar_eingangsnr > ?", @case.praxistar_eingangsnr).first
+
       if next_open.nil?
         redirect_to :action => 'second_entry_queue'
       else
@@ -498,7 +488,7 @@ class CasesController < ApplicationController
 
     hpv.needs_p16 = true
     hpv.needs_hpv = true
-    hpv.classification = Classification.find :first, :conditions => "code = 'hpv' AND examination_method_id = #{hpv.examination_method_id}"
+    hpv.classification = Classification.where("code = 'hpv' AND examination_method_id = #{hpv.examination_method_id}").first
     hpv.save
 
     redirect_to :controller => '/search'
