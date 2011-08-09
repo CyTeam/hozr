@@ -16,7 +16,7 @@
 umask 0027
 
 # Libraries
-source /usr/local/bin/lib_hozr.sh
+source $(dirname $0)/lib_hozr.sh
 
 ENVIRONMENT=${2:-$ENVIRONMENT}
 

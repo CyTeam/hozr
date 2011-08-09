@@ -14,7 +14,7 @@
 #  GNU General Public License for more details.
 
 # Libraries
-source /usr/local/bin/lib_hozr.sh
+source $(dirname $0)/lib_hozr.sh
 
 # Read config file
 CONFIG_FILE=${CONFIG_FILE:-/etc/hozr/hozr.conf}
