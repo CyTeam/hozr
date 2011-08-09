@@ -24,4 +24,25 @@ class UsersController < AuthorizedController
   def current
     redirect_to current_user
   end
+
+  def unlock
+    @user = User.find(params[:id])
+    
+    @user.unlock_token = nil
+    @user.locked_at = nil
+    
+    @user.save
+    
+    redirect_to users_path
+  end
+
+  def lock
+    @user = User.find(params[:id])
+    
+    @user.locked_at = DateTime.now
+    
+    @user.save
+    
+    redirect_to users_path
+  end
 end

@@ -5,10 +5,18 @@ de:
 
     attributes:
       user:
-        email:    E-Mail
-        password: Passwort
+        email:     E-Mail
+        password:  Passwort
+        login:     Benutzername
+        locked_at: Gesperrt seit
+        last_sign_in_at: Letzter Login
 
   roles:
     admin:    Administration
     sysadmin: System Administration
     zyto:     Zytologie
+
+  crud:
+    action:
+      lock:   Sperren
+      unlock: Entsperren

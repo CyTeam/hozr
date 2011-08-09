@@ -3,7 +3,7 @@
 %h2= t_title
 
 = paginated_section collection do
-  - @attributes = ['name', 'email', 'role_texts', 'created_at', 'locked']
+  - @attributes = ['login', 'email', 'role_texts', 'last_sign_in_at', 'locked_at']
   %table.listing{:class => "#{collection.first.class.to_s.downcase.pluralize} collection"}
     %thead
       %tr
@@ -16,6 +16,7 @@
           - @attributes.each do |field|
             %td= r.send(field) if r.respond_to?(field)
           %td.action-links
-            =link_to t_action(:show), resource_url(r), 'data-href-container' => 'tr'
             =link_to t_action(:edit), edit_resource_url(r)
+            =link_to t_action(:lock), lock_user_path(r), :method => :post unless r.locked_at?
+            =link_to t_action(:unlock), unlock_user_path(r), :method => :post if r.locked_at?
             =link_to t_action(:delete), resource_url(r), :confirm => t_confirm_delete(r), :method => :delete

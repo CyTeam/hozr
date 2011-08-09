@@ -4,7 +4,11 @@ Hozr::Application.routes.draw do
 
   # Authentication
   devise_for :users
-  resources :users
+  resources :users do
+    member do
+      post :lock, :unlock
+    end
+  end
 
   match 'order_form/print' => 'order_form#print', :format => 'pdf'
   match '/:controller(/:action(/:id))'
