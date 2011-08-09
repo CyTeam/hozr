@@ -47,6 +47,9 @@
         </div>
 
         <div id="MainContent">
+          <p class="notice"><%= notice %></p>
+          <p class="alert"><%= alert %></p>
+
             <%= render :partial => 'navigation' if controller.controller_name == 'cases' and params[:id] %>
             <%= yield %>
         </div>
