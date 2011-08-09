@@ -4,7 +4,9 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :trackable, :validatable, :timeoutable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation
+  attr_accessible :email, :password, :password_confirmation, :login
+
+  attr_accessible :object
   belongs_to :object, :polymorphic => true
 
   validates_uniqueness_of   :login
