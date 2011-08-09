@@ -11,6 +11,7 @@
     
     <%= stylesheet_link_tag 'noprobs' %>
     <%= stylesheet_link_tag 'cyto' %>
+    <%= stylesheet_link_tag 'hozr' %>
     <%= stylesheet_link_tag 'result_report' %>
     <%= stylesheet_link_tag 'result_letter' %>
     
@@ -31,6 +32,9 @@
         <div id="Header" style="background-color: #AEB9CF">
           <%= image_tag 'logo-left-small.png' %>
           <%= image_tag 'logo-right-small.png' %>
+          <div id="right-menu">
+            <div><%= render 'users/user_bar' %></div>
+          </div>
         </div>
         <div id="HeaderMenus">
           <ul>
@@ -43,7 +47,6 @@
             <li><%= link_to "Statistiken", :controller => "/reports" %></li>
             <li><%= link_to "Review Liste", :controller => "/cases", :action => :review_queue %></li>
             <li><%= link_to "Administration", :controller => "/admin" %></li>
-            <li><%= link_to "Abmelden", destroy_user_session_path, :method => :delete %></li>
           </ul>
         </div>
 

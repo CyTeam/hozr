@@ -25,15 +25,6 @@ body
 	background-color: #F3F3F3;
 }
 
-#Header a
-{
-	font-weight:normal;
-	font-size:27px;
-	text-decoration:none;
-	background-color: #79A3C1;
-	color:#ffffff;
-}
-
 #header
 {
 	display:none;
