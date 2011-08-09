@@ -7,10 +7,6 @@ module ApplicationHelper
     content_tag('th', links.html_safe)
   end
 
-  def get_user
-    request.env['REMOTE_USER']
-  end
-
   # AJAX helpers
   def loading_indicator_tag(options)
     image_tag "indicator.gif", :style => "display:none;", :id => loading_indicator_id(options), :alt => "loading indicator", :class => "loading-indicator"
