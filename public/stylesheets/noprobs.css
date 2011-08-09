@@ -343,15 +343,15 @@ h3 {
 }
 
 /* Flash */
-#errorExplanation, div.flash, .nodata, .warning {
+p.alert, #errorExplanation, div.flash, .nodata, .warning {
     padding: 4px 4px 4px 30px;
     margin-bottom: 12px;
-        font-size: 1.1em;
-        border: 2px solid;
+    font-size: 1.1em;
+    border: 2px solid #E01B4C;
 }
 
 div.flash {margin-top: 8px;}
-div.flash.notice {
+p.notice, div.flash.notice {
     background: url(../images/true.png) 8px 5px no-repeat;
         background-color: #dfffdf;
         border-color: #9fcf9f;
