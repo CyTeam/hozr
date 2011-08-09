@@ -1,7 +1,7 @@
 #!/bin/bash
 
-#  Copyright 2006-2010 Simon Hürlimann (ZytoLabor) <simon.huerlimann@cyt.ch>
-#  Copyright 2006-2010 ZytoLabor <info@zyto-labor.com>
+#  Copyright 2006-2011 Simon Hürlimann (ZytoLabor) <simon.huerlimann@cyt.ch>
+#  Copyright 2006-2011 ZytoLabor <info@zyto-labor.com>
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
