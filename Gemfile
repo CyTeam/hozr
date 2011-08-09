@@ -67,6 +67,9 @@ gem 'will_paginate', '~> 3.0.pre'
 
 # Application
 # ===========
+# Authentication
+gem 'devise'
+
 # Wysiwyg
 gem 'tiny_mce'
 

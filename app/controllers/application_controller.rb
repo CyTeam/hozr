@@ -88,5 +88,7 @@ end
 # Filters added to this controller will be run for all controllers in the application.
 # Likewise, all the methods added will be available for all controllers.
 class ApplicationController < ActionController::Base
+  before_filter :authenticate_user!
+
   protect_from_forgery
 end
