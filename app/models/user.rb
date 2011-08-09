@@ -11,6 +11,8 @@ class User < ActiveRecord::Base
 
   validates_uniqueness_of   :login
   
+  attr_accessible :login
+
   # Authorization roles
   has_and_belongs_to_many :roles, :autosave => true
   scope :by_role, lambda{|role| include(:roles).where(:name => role)}

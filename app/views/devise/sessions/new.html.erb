@@ -1,8 +1,8 @@
 <h2><%= t('devise.sign_in') %></h2>
 
 <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
-  <p><%= f.label :email, t('activerecord.attributes.user.email') %><br />
-  <%= f.email_field :email %></p>
+  <p><%= f.label :login, t('activerecord.attributes.user.login') %><br />
+  <%= f.text_field :login %></p>
 
   <p><%= f.label :email, t('activerecord.attributes.user.password') %><br />
   <%= f.password_field :password %></p>
