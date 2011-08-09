@@ -10,7 +10,7 @@ class Praxistar::Base < ActiveRecord::Base
   def self.export(record_id = :all)
     last_export = Praxistar::Exports.where(:model => self.name).order("finished_at DESC").first
     
-    export = Praxistar::Exports.new(:started_at => Time.now, :find_params => find_params, :model => self.name)
+    export = Praxistar::Exports.new(:started_at => Time.now, :model => self.name)
 
     if record_id == :all
       if last_export.nil?
