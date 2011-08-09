@@ -1,12 +1,3 @@
 <%= render :partial => 'compact_frame', :object => @doctor %>
 
-<div>
-Resultat Brief: <%= link_to 'Anzeigen', "/doctor_letters/doctor-letter-#{@doctor.id}.pdf" %><%= link_to_remote 'Drucken', :update => 'print_log', :loading => "Element.show('#{loading_indicator_id({:id => 'print'})}')", :url => {:action => :print_letter, :id => @doctor } %>
-</div>
-
-<div id="print_log" style="border: solid 1px; background-color: #BBBBBB">
-    <%= loading_indicator_tag :id => 'print' %>
-</div>
-
-<%= link_to 'Edit', :action => 'edit', :id => @doctor %> |
-<%= link_to 'Back', :action => 'list' %>
+<%= link_to 'Edit', :action => 'edit', :id => @doctor %>

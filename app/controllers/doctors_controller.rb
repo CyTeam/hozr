@@ -56,15 +56,6 @@ class DoctorsController < ApplicationController
     redirect_to :action => 'list'
   end
 
-
-  def print_letter
-    command = "/usr/local/bin/hozr_print_doctor_letter.sh #{params[:id]}"
-    stream = open("|#{command}")
-    output = stream.read
- 
-    send_data output, :type => 'text/html; charset=utf-8', :disposition => 'inline'
-  end
-
   # Customers Support
   # =================
   # LDIF
