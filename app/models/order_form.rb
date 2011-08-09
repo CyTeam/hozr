@@ -33,7 +33,6 @@ class OrderForm < ActiveRecord::Base
     for order_form_file in order_form_files
       a_case = Case.new(order_form_file)
       a_case.save
-      p "Scan nr: #{import.create_count}"
     end
   end
 end
