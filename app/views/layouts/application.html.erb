@@ -43,6 +43,7 @@
             <li><%= link_to "Statistiken", :controller => "/reports" %></li>
             <li><%= link_to "Review Liste", :controller => "cases", :action => :review_queue %></li>
             <li><%= link_to "Administration", :controller => "/admin" %></li>
+            <li><%= link_to "Abmelden", destroy_user_session_path, :method => :delete %></li>
           </ul>
         </div>
 

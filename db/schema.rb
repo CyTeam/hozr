@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110809093910) do
+ActiveRecord::Schema.define(:version => 20110809115313) do
 
   create_table "account_receivables", :force => true do |t|
   end
@@ -332,6 +332,22 @@ ActiveRecord::Schema.define(:version => 20110809093910) do
 
   create_table "praxistar_bill_journals", :force => true do |t|
   end
+
+  create_table "roles", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "roles", ["name"], :name => "index_roles_on_name"
+
+  create_table "roles_users", :id => false, :force => true do |t|
+    t.integer "role_id"
+    t.integer "user_id"
+  end
+
+  add_index "roles_users", ["role_id"], :name => "index_roles_users_on_role_id"
+  add_index "roles_users", ["user_id"], :name => "index_roles_users_on_user_id"
 
   create_table "scans", :force => true do |t|
     t.datetime "created_at"
