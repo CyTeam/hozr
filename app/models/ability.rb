@@ -16,10 +16,13 @@ class Ability
     
     if user.role? :sysadmin
       can :manage, :all
+      cannot :sign, Case
     elsif user.role? :admin
       can :label_print, :label_print
       can :print, :order_form
       can :all, :admin
+      can :manage, Case
+      cannot [:destroy, :sign], Case
     elsif user.role? :zyto
       can :manage, Case
       cannot :destroy, Case
