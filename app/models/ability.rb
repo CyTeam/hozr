@@ -9,7 +9,7 @@ class Ability
   # Main role/ability definitions.
   def initialize(user)
     alias_action :index, :to => :list
-    alias_action :current, :to => :show
+    alias_action [:show, :current], :to => :show
     
     return unless user
     
