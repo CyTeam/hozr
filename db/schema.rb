@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110809115313) do
+ActiveRecord::Schema.define(:version => 20110811093058) do
 
   create_table "account_receivables", :force => true do |t|
   end
@@ -197,14 +197,6 @@ ActiveRecord::Schema.define(:version => 20110809115313) do
 
   add_index "finding_classes", ["finding_group_id"], :name => "index_finding_classes_on_finding_group_id"
 
-  create_table "finding_classes_finding_groups", :id => false, :force => true do |t|
-    t.integer "finding_class_id"
-    t.integer "finding_group_id"
-  end
-
-  add_index "finding_classes_finding_groups", ["finding_class_id"], :name => "finding_class_id"
-  add_index "finding_classes_finding_groups", ["finding_group_id"], :name => "finding_group_id"
-
   create_table "finding_classes_second", :force => true do |t|
     t.text "name"
     t.text "code"
@@ -217,19 +209,6 @@ ActiveRecord::Schema.define(:version => 20110809115313) do
   create_table "honorific_prefixes", :force => true do |t|
     t.integer "sex"
     t.string  "name"
-  end
-
-  create_table "imports", :force => true do |t|
-    t.datetime "started_at"
-    t.datetime "finished_at"
-    t.integer  "update_count", :default => 0
-    t.integer  "create_count", :default => 0
-    t.integer  "error_count",  :default => 0
-    t.string   "error_ids",    :default => ""
-    t.string   "model"
-    t.string   "find_params"
-    t.integer  "pid"
-    t.integer  "record_count"
   end
 
   create_table "insurances", :force => true do |t|
