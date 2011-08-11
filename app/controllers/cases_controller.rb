@@ -1,6 +1,8 @@
 require "net/http"
 
 class CasesController < ApplicationController
+  authorize_resource
+
   # Helpers
   # =======
   helper :doctors

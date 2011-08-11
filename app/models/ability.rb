@@ -20,6 +20,9 @@ class Ability
       can :label_print, :label_print
       can :print, :order_form
       can :all, :admin
+    elsif user.role? :zyto
+      can :manage, Case
+      cannot :destroy, Case
     else
       can [:show, :update], User, :id => user.id
     end

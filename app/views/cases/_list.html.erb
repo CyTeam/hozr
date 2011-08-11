@@ -70,7 +70,7 @@
     <% end %>
     <td>
       <%= link_to image_tag('editinput.png'), :controller => 'cases', :action => 'edit', :id => a_case %>
-      <%= link_to image_tag('remove.png'), { :controller => 'cases', :action => 'destroy', :id => a_case }, :confirm => 'Are you sure?', :method => :post if false %>
+      <%= link_to image_tag('remove.png'), { :controller => 'cases', :action => 'destroy', :id => a_case }, :confirm => 'Fall wirklich löschen?', :method => :post if can? :destroy, Case %>
       <%= link_to image_tag('fax.png', :title => 'Drucke Fax'), :controller => 'cases', :action => :print_result_report, :id => a_case, :page_size => 'A4' %>
       <%= link_to image_tag('print.png', :title => 'Drucke Resultat'), :controller => 'cases', :action => :print_result_report, :id => a_case %>
       <%= link_to image_tag('export_bill_16.png', :title => 'Generiere Leistungsblatt'), :controller => 'admin', :action => :praxistar_create_leistungsblatt, :id => a_case if a_case.ready_for_praxistar_create_leistungsblatt %>
