@@ -1,3 +1,3 @@
 class PhoneNumber < ActiveRecord::Base
-  belongs_to :vcard
+  belongs_to :object, :polymorphic => true
 end

@@ -1,6 +1,6 @@
 class Vcard < ActiveRecord::Base
   has_one :address
-  has_many :phone_numbers
+  has_many :phone_numbers, :as => :object
 
   has_one :patient
 

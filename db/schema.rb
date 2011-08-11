@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110826071141) do
+ActiveRecord::Schema.define(:version => 20110811093058) do
 
   create_table "account_receivables", :force => true do |t|
   end
@@ -96,6 +96,13 @@ ActiveRecord::Schema.define(:version => 20110826071141) do
 
   add_index "cases_finding_classes", ["case_id", "finding_class_id"], :name => "cases_finding_classes_case_id_index", :unique => true
 
+  create_table "cases_finding_classes_second", :id => false, :force => true do |t|
+    t.integer "case_id"
+    t.integer "finding_class_id"
+  end
+
+  add_index "cases_finding_classes_second", ["finding_class_id"], :name => "finding_class_id"
+
   create_table "cases_mailings", :id => false, :force => true do |t|
     t.integer "case_id"
     t.integer "mailing_id"
@@ -104,11 +111,16 @@ ActiveRecord::Schema.define(:version => 20110826071141) do
   add_index "cases_mailings", ["case_id"], :name => "index_cases_mailings_on_case_id"
   add_index "cases_mailings", ["mailing_id"], :name => "index_cases_mailings_on_mailing_id"
 
+  create_table "cases_second", :force => true do |t|
+    t.integer "examination_method_id"
+    t.date    "examination_date"
+    t.integer "classification_id"
+    t.string  "praxistar_eingangsnr",  :limit => 8
+  end
+
   create_table "classification_groups", :force => true do |t|
     t.string  "title"
     t.integer "position"
-    t.string  "color"
-    t.string  "print_color"
   end
 
   create_table "classification_tarmed_leistungens", :force => true do |t|
@@ -185,6 +197,11 @@ ActiveRecord::Schema.define(:version => 20110826071141) do
 
   add_index "finding_classes", ["finding_group_id"], :name => "index_finding_classes_on_finding_group_id"
 
+  create_table "finding_classes_second", :force => true do |t|
+    t.text "name"
+    t.text "code"
+  end
+
   create_table "finding_groups", :force => true do |t|
     t.string "name"
   end
@@ -210,6 +227,11 @@ ActiveRecord::Schema.define(:version => 20110826071141) do
 
   add_index "mailings", ["created_at"], :name => "i1"
   add_index "mailings", ["doctor_id"], :name => "index_mailings_on_doctor_id"
+
+  create_table "new_view", :id => false, :force => true do |t|
+    t.datetime "screened_at"
+    t.integer  "doctor_id"
+  end
 
   create_table "offices", :force => true do |t|
     t.string "name"
