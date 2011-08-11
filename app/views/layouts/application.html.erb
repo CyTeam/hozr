@@ -46,7 +46,9 @@
             <li><%= link_to "Ärzte", :controller => "/doctors" %></li>
             <li><%= link_to "Statistiken", :controller => "/reports" %></li>
             <li><%= link_to "Review Liste", :controller => "/cases", :action => :review_queue %></li>
-            <li><%= link_to "Administration", :controller => "/admin" %></li>
+            <%- if can? :index, :admin %>
+              <li><%= link_to "Administration", :controller => "/admin" %></li>
+            <%- end %>
           </ul>
         </div>
 

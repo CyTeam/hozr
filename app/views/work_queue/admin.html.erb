@@ -35,6 +35,7 @@
     </td>
 
     <td style="vertical-align: top; padding-left: 5em">
+      <%- if can? :praxistar_create_all_leistungsblatt, :admin %>
       <h2><%= link_to_remote("Rechnungen generieren", :update => 'create_all_leistungsblatt_log', :loading => "Element.show('#{loading_indicator_id({:id => 'create_all_leistungsblatt'})}')", :url => {:controller => '/admin', :action => 'praxistar_create_all_leistungsblatt'}, :confirm => "#{@bill_export_count} Rechnungen generieren?" ) %></h2>
       <p>
           <%= link_to_remote(image_tag('export_bill.png'), :update => 'create_all_leistungsblatt_log', :loading => "Element.show('#{loading_indicator_id({:id => 'create_all_leistungsblatt'})}')", :url => {:controller => '/admin', :action => 'praxistar_create_all_leistungsblatt'}, :confirm => "#{@bill_export_count} Rechnungen generieren?" ) %>
@@ -42,6 +43,7 @@
           <i style="font-size: 12pt"> <b><%= @bill_print_count %></b> Rechnungen bereit zum Drucken.</i>
           <pre id="create_all_leistungsblatt_log"><%= loading_indicator_tag :id => 'create_all_leistungsblatt' %></pre>
       </p>
+      <%- end %>
 
       <%- if can? :print, :order_form or can? :label_print, :label_print%>
       <h2>Drucken</h2>
@@ -66,13 +68,14 @@
       </p>
       <%- end %>
 
+      <%- if can? :generate, :mailings %>
       <h2><%= link_to("Resultate freigeben", {:controller => '/mailings', :action => 'generate'} ) %></h2>
       <p>
           <%= link_to (image_tag('print_result.png'), {:controller => '/mailings', :action => 'generate'} ) %>
           <i style="font-size: 12pt"><b><%= @print_result_count %></b> Resultate (+ <b><%= @email_result_count %></b> per E-Mail).</i>
           <pre id="print_result_reports_log"><%= loading_indicator_tag :id => 'print_result_reports' %></pre>
       </p>
-
+      <%- end %>
     </td>
    </tr>
   </table>

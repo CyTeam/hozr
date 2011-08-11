@@ -19,6 +19,7 @@ class Ability
     elsif user.role? :admin
       can :label_print, :label_print
       can :print, :order_form
+      can :all, :admin
     else
       can [:show, :update], User, :id => user.id
     end
