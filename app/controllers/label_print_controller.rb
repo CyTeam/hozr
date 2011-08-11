@@ -1,4 +1,6 @@
 class LabelPrintController < ApplicationController
+  authorize_resource :class => false
+
   # Post address labels
   # ===================
   def post_label_print

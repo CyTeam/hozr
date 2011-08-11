@@ -43,12 +43,18 @@
           <pre id="create_all_leistungsblatt_log"><%= loading_indicator_tag :id => 'create_all_leistungsblatt' %></pre>
       </p>
 
+      <%- if can? :print, :order_form or can? :label_print, :label_print%>
       <h2>Drucken</h2>
+      <%- end %>
+
+      <%- if can? :print, :order_form %>
       <p>
           <%= link_to image_tag('printer_64.png'), :controller => '/order_form', :action => :form %>
 	  <i style="font-size: 12pt">Papzettel Drucken</i>
       </p>
+      <%- end %>
       
+      <%- if can? :label_print, :label_print %>
       <p>
           <%= link_to image_tag('printer_64.png'), :controller => '/label_print', :action => :case_label %>
           <i style="font-size: 12pt">Objektträger Etiketten drucken</i>
@@ -58,6 +64,7 @@
           <%= link_to image_tag('printer_64.png'), :controller => '/label_print', :action => :post_label %>
           <i style="font-size: 12pt">Packet Etiketten drucken</i>
       </p>
+      <%- end %>
 
       <h2><%= link_to("Resultate freigeben", {:controller => '/mailings', :action => 'generate'} ) %></h2>
       <p>

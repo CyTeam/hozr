@@ -1,6 +1,8 @@
 require 'cups/print_job/transient'
 
 class OrderFormController < ApplicationController
+  authorize_resource :class => false
+
   helper :doctors
   
   
