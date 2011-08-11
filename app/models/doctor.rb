@@ -1,9 +1,8 @@
 class Doctor < ActiveRecord::Base
   scope :active, where(:active => true)
 
-  belongs_to :vcard
-  belongs_to :praxis, :class_name => 'Vcard', :foreign_key => 'praxis_vcard'
-  belongs_to :private, :class_name => 'Vcard', :foreign_key => 'private_vcard'
+  has_one :praxis, :class_name => 'Vcard', :as => :object, :conditions => {:vcard_type => 'praxis'}
+  has_one :private, :class_name => 'Vcard', :as => :object, :conditions => {:vcard_type => 'private'}
   belongs_to :billing_doctor, :class_name => 'Doctor'
   
   has_many :cases
