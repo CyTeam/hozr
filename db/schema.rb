@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110811121151) do
+ActiveRecord::Schema.define(:version => 20110811122900) do
 
   create_table "account_receivables", :force => true do |t|
   end
@@ -140,8 +140,6 @@ ActiveRecord::Schema.define(:version => 20110811121151) do
     t.integer  "id",                                  :null => false
     t.string   "code"
     t.string   "speciality"
-    t.integer  "praxis_vcard"
-    t.integer  "private_vcard"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "active",            :default => true
@@ -152,8 +150,6 @@ ActiveRecord::Schema.define(:version => 20110811121151) do
 
   add_index "doctors", ["active"], :name => "active"
   add_index "doctors", ["id"], :name => "id"
-  add_index "doctors", ["praxis_vcard"], :name => "doctors_praxis_vcard_index"
-  add_index "doctors", ["private_vcard"], :name => "doctors_private_vcard_index"
 
   create_table "doctors_offices", :id => false, :force => true do |t|
     t.integer "office_id"
@@ -403,6 +399,7 @@ ActiveRecord::Schema.define(:version => 20110811121151) do
     t.boolean "active",                         :default => true
     t.integer "object_id"
     t.string  "object_type"
+    t.string  "vcard_type"
   end
 
   add_index "vcards", ["family_name"], :name => "family_name"

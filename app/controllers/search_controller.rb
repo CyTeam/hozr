@@ -136,7 +136,7 @@ class SearchController < ApplicationController
       @cases = []
     else
       case_conditions = [ case_keys.compact.join(" AND "), *case_values ]
-      @cases = Case.paginate(:page => params['page'], :select => 'DISTINCT cases.*', :joins => "LEFT JOIN patients ON patient_id = patients.id LEFT JOIN vcards ON (patients.vcard_id = vcards.id) LEFT JOIN addresses ON vcards.id = addresses.vcard_id", :conditions => case_conditions, :per_page => 100)
+      @cases = Case.paginate(:page => params['page'], :select => 'DISTINCT cases.*', :joins => "LEFT JOIN patients ON patient_id = patients.id LEFT JOIN vcards ON (patients.id = vcards.object_id AND vcards.object_type = 'Patient') LEFT JOIN addresses ON vcards.id = addresses.vcard_id", :conditions => case_conditions, :per_page => 100)
     end
     
     @include_bill = true

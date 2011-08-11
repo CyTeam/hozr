@@ -3,8 +3,9 @@ include Praxistar
 class Patient < ActiveRecord::Base
   belongs_to :insurance
   belongs_to :doctor
-  belongs_to :vcard
-  belongs_to :billing_vcard, :class_name => 'Vcard', :foreign_key => 'billing_vcard_id'
+
+  has_one :vcard, :as => :object, :conditions => {:vcard_type => 'private'}
+  has_one :billing_vcard, :class_name => 'Vcard', :as => :object, :conditions => {:vcard_type => 'billing'}
 
   has_many :cases, :order => 'id DESC'
   has_many :finished_cases, :class_name => 'Case', :conditions => 'screened_at IS NOT NULL', :order => 'id DESC'
