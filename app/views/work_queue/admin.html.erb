@@ -68,7 +68,7 @@
       </p>
       <%- end %>
 
-      <%- if can? :generate, :mailings %>
+      <%- if can? :generate, Mailing %>
       <h2><%= link_to("Resultate freigeben", {:controller => '/mailings', :action => 'generate'} ) %></h2>
       <p>
           <%= link_to (image_tag('print_result.png'), {:controller => '/mailings', :action => 'generate'} ) %>
