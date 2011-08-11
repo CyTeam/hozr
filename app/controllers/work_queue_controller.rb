@@ -19,12 +19,6 @@ class WorkQueueController < ApplicationController
     rescue
       @bill_print_count = "Keine Verbindung zu Praxistar"
     end
-
-    begin
-      @order_count = Shop::Order.count(:conditions => 'shipped_at IS NULL AND cancelled_at IS NULL')
-    rescue
-      @order_count = "Keine Verbindung zum Webshop"
-    end
   end
 
   def admin_munin
