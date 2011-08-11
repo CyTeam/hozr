@@ -10,7 +10,7 @@ class Ability
   def initialize(user)
     alias_action :index, :to => :list
     alias_action [:show, :current], :to => :show
-    alias_action [:case_label, :casel_label_print, :post_label, :post_label_print], :to => :label_print
+    alias_action [:case_label, :case_label_print, :post_label, :post_label_print], :to => :label_print
 
     return unless user
     
