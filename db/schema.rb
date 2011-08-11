@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110811113807) do
+ActiveRecord::Schema.define(:version => 20110811115431) do
 
   create_table "account_receivables", :force => true do |t|
   end
@@ -394,17 +394,14 @@ ActiveRecord::Schema.define(:version => 20110811113807) do
   add_index "users", ["wants_email"], :name => "wants_email"
 
   create_table "vcards", :force => true do |t|
-    t.string  "full_name",          :limit => 50
-    t.string  "nickname",           :limit => 50
-    t.integer "address"
-    t.integer "billing_address_id"
-    t.integer "address_id"
-    t.string  "family_name",        :limit => 50
-    t.string  "given_name",         :limit => 50
-    t.string  "additional_name",    :limit => 50
-    t.string  "honorific_prefix",   :limit => 50
-    t.string  "honorific_suffix",   :limit => 50
-    t.boolean "active",                           :default => true
+    t.string  "full_name",        :limit => 50
+    t.string  "nickname",         :limit => 50
+    t.string  "family_name",      :limit => 50
+    t.string  "given_name",       :limit => 50
+    t.string  "additional_name",  :limit => 50
+    t.string  "honorific_prefix", :limit => 50
+    t.string  "honorific_suffix", :limit => 50
+    t.boolean "active",                         :default => true
     t.integer "object_id"
     t.string  "object_type"
   end

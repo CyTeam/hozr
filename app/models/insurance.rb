@@ -1,5 +1,5 @@
 class Insurance < ActiveRecord::Base
-  belongs_to :vcard
+  has_one :vcard, :as => :object
 
   # Helper
   def to_s
