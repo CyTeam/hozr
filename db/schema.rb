@@ -10,10 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110811125904) do
-
-  create_table "account_receivables", :force => true do |t|
-  end
+ActiveRecord::Schema.define(:version => 20110816074156) do
 
   create_table "addresses", :force => true do |t|
     t.string  "post_office_box",  :limit => 50
@@ -95,13 +92,6 @@ ActiveRecord::Schema.define(:version => 20110811125904) do
 
   add_index "cases_finding_classes", ["case_id", "finding_class_id"], :name => "cases_finding_classes_case_id_index", :unique => true
 
-  create_table "cases_finding_classes_second", :id => false, :force => true do |t|
-    t.integer "case_id"
-    t.integer "finding_class_id"
-  end
-
-  add_index "cases_finding_classes_second", ["finding_class_id"], :name => "finding_class_id"
-
   create_table "cases_mailings", :id => false, :force => true do |t|
     t.integer "case_id"
     t.integer "mailing_id"
@@ -109,13 +99,6 @@ ActiveRecord::Schema.define(:version => 20110811125904) do
 
   add_index "cases_mailings", ["case_id"], :name => "index_cases_mailings_on_case_id"
   add_index "cases_mailings", ["mailing_id"], :name => "index_cases_mailings_on_mailing_id"
-
-  create_table "cases_second", :force => true do |t|
-    t.integer "examination_method_id"
-    t.date    "examination_date"
-    t.integer "classification_id"
-    t.string  "praxistar_eingangsnr",  :limit => 8
-  end
 
   create_table "classification_groups", :force => true do |t|
     t.string  "title"
@@ -191,11 +174,6 @@ ActiveRecord::Schema.define(:version => 20110811125904) do
   end
 
   add_index "finding_classes", ["finding_group_id"], :name => "index_finding_classes_on_finding_group_id"
-
-  create_table "finding_classes_second", :force => true do |t|
-    t.text "name"
-    t.text "code"
-  end
 
   create_table "finding_groups", :force => true do |t|
     t.string "name"
@@ -274,9 +252,6 @@ ActiveRecord::Schema.define(:version => 20110811125904) do
   add_index "patients", ["insurance_id"], :name => "patients_insurance_id_index"
   add_index "patients", ["updated_at"], :name => "patients_updated_at_index"
 
-  create_table "payments", :force => true do |t|
-  end
-
   create_table "phone_numbers", :force => true do |t|
     t.string  "number",            :limit => 50
     t.string  "phone_number_type", :limit => 50
@@ -300,9 +275,6 @@ ActiveRecord::Schema.define(:version => 20110811125904) do
 
   add_index "postal_codes", ["zip"], :name => "index_postal_codes_on_zip"
 
-  create_table "praxistar_bill_journals", :force => true do |t|
-  end
-
   create_table "roles", :force => true do |t|
     t.string   "name"
     t.datetime "created_at"
@@ -319,14 +291,6 @@ ActiveRecord::Schema.define(:version => 20110811125904) do
   add_index "roles_users", ["role_id"], :name => "index_roles_users_on_role_id"
   add_index "roles_users", ["user_id"], :name => "index_roles_users_on_user_id"
 
-  create_table "scans", :force => true do |t|
-    t.datetime "created_at"
-  end
-
-  create_table "schema_info", :id => false, :force => true do |t|
-    t.integer "version"
-  end
-
   create_table "send_queues", :force => true do |t|
     t.integer  "mailing_id"
     t.string   "channel"
@@ -339,9 +303,6 @@ ActiveRecord::Schema.define(:version => 20110811125904) do
   add_index "send_queues", ["channel"], :name => "index_send_queues_on_channel"
   add_index "send_queues", ["mailing_id"], :name => "index_send_queues_on_mailing_id"
   add_index "send_queues", ["sent_at"], :name => "index_send_queues_on_sent_at"
-
-  create_table "shop_orders", :force => true do |t|
-  end
 
   create_table "top_finding_classes", :id => false, :force => true do |t|
     t.integer "classification_id"
