@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110811122900) do
+ActiveRecord::Schema.define(:version => 20110811125904) do
 
   create_table "account_receivables", :force => true do |t|
   end
@@ -254,14 +254,12 @@ ActiveRecord::Schema.define(:version => 20110811122900) do
   end
 
   create_table "patients", :force => true do |t|
-    t.integer  "vcard_id"
     t.date     "birth_date"
     t.integer  "insurance_id"
     t.string   "insurance_nr"
     t.integer  "sex"
     t.integer  "only_year_of_birth"
     t.integer  "doctor_id"
-    t.integer  "billing_vcard_id"
     t.text     "remarks",             :limit => 255
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -271,12 +269,10 @@ ActiveRecord::Schema.define(:version => 20110811122900) do
     t.string   "doctor_patient_nr"
   end
 
-  add_index "patients", ["billing_vcard_id"], :name => "patients_billing_vcard_id_index"
   add_index "patients", ["birth_date"], :name => "birth_date"
   add_index "patients", ["doctor_id"], :name => "patients_doctor_id_index"
   add_index "patients", ["insurance_id"], :name => "patients_insurance_id_index"
   add_index "patients", ["updated_at"], :name => "patients_updated_at_index"
-  add_index "patients", ["vcard_id"], :name => "patients_vcard_id_index"
 
   create_table "payments", :force => true do |t|
   end
