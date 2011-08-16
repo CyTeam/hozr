@@ -2,10 +2,45 @@ include Praxistar
 
 class Patient < ActiveRecord::Base
   # Insurance
-  has_many :insurance_policies
+  has_many :insurance_policies, :autosave => true
   accepts_nested_attributes_for :insurance_policies, :reject_if => proc { |attrs| attrs['insurance_id'].blank? }
-  belongs_to :insurance
+  has_many :insurances, :through => :insurance_policies
 
+  def kvg_insurance_policy
+    policy = insurance_policies.by_policy_type('KVG').first
+
+    if policy.nil?
+      policy = insurance_policies.build(:policy_type => 'KVG')
+    end
+
+    return policy
+  end
+
+  def insurance
+    kvg_insurance_policy.insurance
+  end
+  def insurance=(value)
+    kvg_insurance_policy.insurance = value
+    kvg_insurance_policy.save
+  end
+
+  def insurance_id
+    kvg_insurance_policy.insurance_id
+  end
+  def insurance_id=(value)
+    kvg_insurance_policy.insurance_id = value
+    kvg_insurance_policy.save
+  end
+
+  def insurance_nr
+    kvg_insurance_policy.number
+  end
+  def insurance_nr=(value)
+    kvg_insurance_policy.number = value
+    kvg_insurance_policy.save
+  end
+
+  # Doctor
   belongs_to :doctor
 
   has_one :vcard, :as => :object, :conditions => {:vcard_type => 'private'}
