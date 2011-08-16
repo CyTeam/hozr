@@ -1,7 +1,11 @@
 include Praxistar
 
 class Patient < ActiveRecord::Base
+  # Insurance
+  has_many :insurance_policies
+  accepts_nested_attributes_for :insurance_policies, :reject_if => proc { |attrs| attrs['insurance_id'].blank? }
   belongs_to :insurance
+
   belongs_to :doctor
 
   has_one :vcard, :as => :object, :conditions => {:vcard_type => 'private'}
