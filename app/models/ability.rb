@@ -24,9 +24,10 @@ class Ability
       can :manage, Case
     elsif user.role? :zyto
       can :manage, Case
-    else
-      can [:show, :update], User, :id => user.id
     end
+
+    # Allow setting password
+    can [:show, :update], User, :id => user.id
 
     cannot :destroy, Case unless user.role? :sysadmin
     cannot :sign, Case unless user.role? :zyto
