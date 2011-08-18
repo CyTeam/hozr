@@ -1,6 +1,8 @@
 require "net/http"
 
 class CasesController < ApplicationController
+  authorize_resource
+
   # Helpers
   # =======
   helper :doctors
@@ -178,7 +180,7 @@ class CasesController < ApplicationController
       @case.insurance_nr = @case.patient.insurance_nr
 
     @case.first_entry_at ||= Time.now
-    @case.first_entry_by = Employee.find_by_code(request.env['REMOTE_USER'])
+    @case.first_entry_by = current_user.object
                   
     if @case.save
       flash[:notice] = 'First entry ok.'
@@ -244,7 +246,7 @@ class CasesController < ApplicationController
       render :action => 'second_entry_agus_ascus_form'
     when 'mam', 'sput', 'extra'
       @case.screened_at ||= Date.today
-      @case.screener = Employee.find_by_code(request.env['REMOTE_USER'])
+      @case.screener = current_user.object
       render :action => 'eg_result_report'
     end
   end
@@ -252,7 +254,7 @@ class CasesController < ApplicationController
   def second_entry_update
     @case = Case.find(params[:id])
 
-    @case.screener = Employee.find_by_code(request.env['REMOTE_USER'])
+    @case.screener = current_user.object
     @case.remarks = params[:case][:remarks]
 
     case params[:commit]
@@ -271,7 +273,7 @@ class CasesController < ApplicationController
     when "Review"
       @case = Case.find(params[:id])
       @case.screened_at = Time.now
-      @case.screener = Employee.find_by_code(request.env['REMOTE_USER'])
+      @case.screener = current_user.object
       @case.needs_review = true
     end
 
@@ -350,7 +352,7 @@ class CasesController < ApplicationController
   def sign
     @case = Case.find(params[:id])
     @case.screened_at = Time.now
-    @case.screener = Employee.find_by_code(request.env['REMOTE_USER'])
+    @case.screener = current_user.object
     @case.finding_text = params[:case][:finding_text] unless params[:case].nil? or params[:case][:finding_text].nil?
 
     # Check if case needs review
@@ -401,7 +403,7 @@ class CasesController < ApplicationController
     @case = Case.find(params[:id])
     @case.needs_review = false
     
-    @case.review_by = Employee.find_by_code(request.env['REMOTE_USER'])
+    @case.review_by = current_user.object
     @case.review_at = Time.now
     
     @case.save!
@@ -465,7 +467,7 @@ class CasesController < ApplicationController
   def hpv_p16_prepared
     a_case = Case.find(params[:id])
     a_case.hpv_p16_prepared_at = DateTime.now
-    a_case.hpv_p16_prepared_by = Employee.find_by_code(request.env['REMOTE_USER'])
+    a_case.hpv_p16_prepared_by = current_user.object
     a_case.save
 
     render :text => "#{a_case.hpv_p16_prepared_at.strftime('%d.%m.%Y')} #{a_case.hpv_p16_prepared_by.nil? ? "" : a_case.hpv_p16_prepared_by.code}"

@@ -25,15 +25,6 @@ body
 	background-color: #F3F3F3;
 }
 
-#Header a
-{
-	font-weight:normal;
-	font-size:27px;
-	text-decoration:none;
-	background-color: #79A3C1;
-	color:#ffffff;
-}
-
 #header
 {
 	display:none;
@@ -343,17 +334,20 @@ h3 {
 }
 
 /* Flash */
-#errorExplanation, div.flash, .nodata, .warning {
+p.alert, #errorExplanation, div.flash, .nodata, .warning {
     padding: 4px 4px 4px 30px;
     margin-bottom: 12px;
-        font-size: 1.1em;
-        border: 2px solid;
+    font-size: 1.1em;
+    border: 2px solid #E01B4C;
 }
 
 div.flash {margin-top: 8px;}
-div.flash.notice {
+p.notice, div.flash.notice {
+    padding: 4px 4px 4px 30px;
+    margin-bottom: 12px;
+    font-size: 1.1em;
     background: url(../images/true.png) 8px 5px no-repeat;
-        background-color: #dfffdf;
-        border-color: #9fcf9f;
-        color: #005f00;
+    background-color: #dfffdf;
+    border: 2px solid #9fcf9f;
+    color: #005f00;
 }

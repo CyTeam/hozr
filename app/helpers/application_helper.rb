@@ -7,10 +7,6 @@ module ApplicationHelper
     content_tag('th', links.html_safe)
   end
 
-  def get_user
-    request.env['REMOTE_USER']
-  end
-
   # AJAX helpers
   def loading_indicator_tag(options)
     image_tag "indicator.gif", :style => "display:none;", :id => loading_indicator_id(options), :alt => "loading indicator", :class => "loading-indicator"
@@ -45,5 +41,10 @@ module ApplicationHelper
     result.gsub!(/<\/div>|<\/p>|<\/br>|<br[ ]*\/>/, "\n")
 
     return result
+  end
+
+  # Prepare roles to show in select inputs etc.
+  def roles_for_collection
+    Role.all.map{|role| [role.to_s, role.name.to_s]}
   end
 end

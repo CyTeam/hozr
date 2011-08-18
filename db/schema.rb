@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110804114851) do
+ActiveRecord::Schema.define(:version => 20110811093058) do
 
   create_table "account_receivables", :force => true do |t|
   end
@@ -197,14 +197,6 @@ ActiveRecord::Schema.define(:version => 20110804114851) do
 
   add_index "finding_classes", ["finding_group_id"], :name => "index_finding_classes_on_finding_group_id"
 
-  create_table "finding_classes_finding_groups", :id => false, :force => true do |t|
-    t.integer "finding_class_id"
-    t.integer "finding_group_id"
-  end
-
-  add_index "finding_classes_finding_groups", ["finding_class_id"], :name => "finding_class_id"
-  add_index "finding_classes_finding_groups", ["finding_group_id"], :name => "finding_group_id"
-
   create_table "finding_classes_second", :force => true do |t|
     t.text "name"
     t.text "code"
@@ -217,19 +209,6 @@ ActiveRecord::Schema.define(:version => 20110804114851) do
   create_table "honorific_prefixes", :force => true do |t|
     t.integer "sex"
     t.string  "name"
-  end
-
-  create_table "imports", :force => true do |t|
-    t.datetime "started_at"
-    t.datetime "finished_at"
-    t.integer  "update_count", :default => 0
-    t.integer  "create_count", :default => 0
-    t.integer  "error_count",  :default => 0
-    t.string   "error_ids",    :default => ""
-    t.string   "model"
-    t.string   "find_params"
-    t.integer  "pid"
-    t.integer  "record_count"
   end
 
   create_table "insurances", :force => true do |t|
@@ -333,6 +312,22 @@ ActiveRecord::Schema.define(:version => 20110804114851) do
   create_table "praxistar_bill_journals", :force => true do |t|
   end
 
+  create_table "roles", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "roles", ["name"], :name => "index_roles_on_name"
+
+  create_table "roles_users", :id => false, :force => true do |t|
+    t.integer "role_id"
+    t.integer "user_id"
+  end
+
+  add_index "roles_users", ["role_id"], :name => "index_roles_users_on_role_id"
+  add_index "roles_users", ["user_id"], :name => "index_roles_users_on_user_id"
+
   create_table "scans", :force => true do |t|
     t.datetime "created_at"
   end
@@ -381,10 +376,21 @@ ActiveRecord::Schema.define(:version => 20110804114851) do
     t.boolean  "wants_email",                              :default => false
     t.boolean  "wants_prints",                             :default => true
     t.boolean  "wants_hl7",                                :default => false
+    t.string   "encrypted_password",        :limit => 128, :default => "",        :null => false
+    t.integer  "sign_in_count",                            :default => 0
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.integer  "failed_attempts",                          :default => 0
+    t.string   "unlock_token"
+    t.datetime "locked_at"
   end
 
+  add_index "users", ["email"], :name => "index_users_on_email"
   add_index "users", ["login"], :name => "index_users_on_login", :unique => true
   add_index "users", ["object_id"], :name => "object_id"
+  add_index "users", ["unlock_token"], :name => "index_users_on_unlock_token", :unique => true
   add_index "users", ["wants_email"], :name => "wants_email"
 
   create_table "vcards", :force => true do |t|

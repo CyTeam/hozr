@@ -1,4 +1,6 @@
 class MailingsController < ApplicationController
+  authorize_resource
+
   helper :cases
   
   def index

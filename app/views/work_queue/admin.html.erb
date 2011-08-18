@@ -35,20 +35,31 @@
     </td>
 
     <td style="vertical-align: top; padding-left: 5em">
+      <%- if can? :praxistar_create_all_leistungsblatt, :admin %>
       <h2><%= link_to_remote("Rechnungen generieren", :update => 'create_all_leistungsblatt_log', :loading => "Element.show('#{loading_indicator_id({:id => 'create_all_leistungsblatt'})}')", :url => {:controller => '/admin', :action => 'praxistar_create_all_leistungsblatt'}, :confirm => "#{@bill_export_count} Rechnungen generieren?" ) %></h2>
       <p>
           <%= link_to_remote(image_tag('export_bill.png'), :update => 'create_all_leistungsblatt_log', :loading => "Element.show('#{loading_indicator_id({:id => 'create_all_leistungsblatt'})}')", :url => {:controller => '/admin', :action => 'praxistar_create_all_leistungsblatt'}, :confirm => "#{@bill_export_count} Rechnungen generieren?" ) %>
           <i style="font-size: 12pt"> <b><%= @bill_export_count %></b> neue Leistungsbl&auml;tter.</i>
-          <i style="font-size: 12pt"> <b><%= @bill_print_count %></b> Rechnungen bereit zum Drucken.</i>
+          <i style="font-size: 12pt"> <b><span id="bill_print_count" /></b> Rechnungen bereit zum Drucken.</i>
           <pre id="create_all_leistungsblatt_log"><%= loading_indicator_tag :id => 'create_all_leistungsblatt' %></pre>
       </p>
+      <script type="text/javascript">
+        <%= remote_function :update => 'bill_print_count', :url => {:action => 'bill_print_count'}%>
+      </script>
+      <%- end %>
 
+      <%- if can? :print, :order_form or can? :label_print, :label_print%>
       <h2>Drucken</h2>
+      <%- end %>
+
+      <%- if can? :print, :order_form %>
       <p>
           <%= link_to image_tag('printer_64.png'), :controller => '/order_form', :action => :form %>
 	  <i style="font-size: 12pt">Papzettel Drucken</i>
       </p>
+      <%- end %>
       
+      <%- if can? :label_print, :label_print %>
       <p>
           <%= link_to image_tag('printer_64.png'), :controller => '/label_print', :action => :case_label %>
           <i style="font-size: 12pt">Objektträger Etiketten drucken</i>
@@ -58,14 +69,16 @@
           <%= link_to image_tag('printer_64.png'), :controller => '/label_print', :action => :post_label %>
           <i style="font-size: 12pt">Packet Etiketten drucken</i>
       </p>
+      <%- end %>
 
+      <%- if can? :generate, Mailing %>
       <h2><%= link_to("Resultate freigeben", {:controller => '/mailings', :action => 'generate'} ) %></h2>
       <p>
           <%= link_to (image_tag('print_result.png'), {:controller => '/mailings', :action => 'generate'} ) %>
           <i style="font-size: 12pt"><b><%= @print_result_count %></b> Resultate (+ <b><%= @email_result_count %></b> per E-Mail).</i>
           <pre id="print_result_reports_log"><%= loading_indicator_tag :id => 'print_result_reports' %></pre>
       </p>
-
+      <%- end %>
     </td>
    </tr>
   </table>

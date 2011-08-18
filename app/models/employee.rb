@@ -4,6 +4,6 @@ class Employee < ActiveRecord::Base
 
   # Proxies
   def name
-    work_vcard.name
+    (work_vcard || private_vcard).try(:full_name)
   end
 end

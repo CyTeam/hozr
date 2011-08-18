@@ -5,6 +5,8 @@ class OrderFormController < ApplicationController
   
   
   def print
+    authorize! :print, :order_form
+
     @doctor = Doctor.find(params[:order_form][:doctor_id])
     @count = params[:order_form][:count].to_i
     

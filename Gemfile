@@ -67,6 +67,19 @@ gem 'will_paginate', '~> 3.0.pre'
 
 # Application
 # ===========
+# Authentication
+gem 'devise'
+gem 'cancan'
+gem 'lyb_devise_admin', :git => 'https://github.com/huerlisi/lyb_devise_admin.git'
+
+# Helpers
+gem 'inherited_resources'
+gem 'i18n_rails_helpers'
+gem 'haml'
+
+# Formtastic
+gem 'formtastic'
+
 # Wysiwyg
 gem 'tiny_mce'
 
