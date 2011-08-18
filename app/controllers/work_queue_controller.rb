@@ -11,8 +11,8 @@ class WorkQueueController < ApplicationController
     @hpv_count = Case.count(:all, :conditions => ["needs_hpv = ? AND screened_at IS NULL", true])
     @p16_prepared_count = Case.count(:all, :conditions => ["needs_p16 = ? AND screened_at IS NULL AND hpv_p16_prepared_at is not NULL", true])
     @review_count = Case.count(:all, :conditions => 'needs_review = 1 AND result_report_printed_at IS NULL')
-    @print_result_count = Mailing.case_count_without_channel
-    @email_result_count = Case.count(:all, :include => {:doctor => :user }, :conditions => 'users.wants_email = 1 AND email_sent_at IS NULL AND screened_at IS NOT NULL AND needs_review = 0')
+    @print_result_count = Case.includes(:doctor => :user).where('users.wants_prints' => true).for_print.count
+    @email_result_count = Case.includes(:doctor => :user).where('users.wants_email' => true).for_email.count
     @bill_export_count = Case.to_create_leistungsblatt.count
   end
 

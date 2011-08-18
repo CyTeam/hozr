@@ -46,12 +46,12 @@ class Mailing < ActiveRecord::Base
       # Clear in case it an existing mailing
       mailing.cases.clear
       # And add all unprinted cases to mailing
-      mailing.cases = d.cases.where("screened_at IS NOT NULL AND needs_review = 0 AND result_report_printed_at IS NULL").order(:praxistar_eingangsnr).all
+      mailing.cases = d.cases.for_print.order(:praxistar_eingangsnr).all
     else
       # Create new mail if email wanted
       mailing = self.new
       mailing.doctor_id = doctor_id
-      cases = Case.where("email_sent_at IS NULL AND screened_at IS NOT NULL AND needs_review = 0 AND doctor_id = ?", doctor_id).order(:praxistar_eingangsnr).all
+      cases = d.cases.for_email.order(:praxistar_eingangsnr).all
       mailing.cases = cases
       cases.map{|c| c.email_sent_at = DateTime.now; c.save}
     end
