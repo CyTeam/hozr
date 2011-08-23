@@ -5,6 +5,7 @@ class Praxistar::LeistungenBlatt < Praxistar::Base
   has_many :leistungen_daten, :foreign_key => 'Leistungsblatt_ID'
   has_one :cyto_case, :class_name => 'Case', :foreign_key => 'praxistar_leistungsblatt_id'
   has_many :bills, :class_name => 'Praxistar::Bill', :foreign_key => 'Leistungsblatt_ID'
+  belongs_to :patienten_personalien, :foreign_key => 'Patient_ID'
   
   def hozr_case=(a_case)
     i = 1
