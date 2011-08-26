@@ -96,13 +96,6 @@ ActiveRecord::Schema.define(:version => 20110826071141) do
 
   add_index "cases_finding_classes", ["case_id", "finding_class_id"], :name => "cases_finding_classes_case_id_index", :unique => true
 
-  create_table "cases_finding_classes_second", :id => false, :force => true do |t|
-    t.integer "case_id"
-    t.integer "finding_class_id"
-  end
-
-  add_index "cases_finding_classes_second", ["finding_class_id"], :name => "finding_class_id"
-
   create_table "cases_mailings", :id => false, :force => true do |t|
     t.integer "case_id"
     t.integer "mailing_id"
@@ -192,11 +185,6 @@ ActiveRecord::Schema.define(:version => 20110826071141) do
 
   add_index "finding_classes", ["finding_group_id"], :name => "index_finding_classes_on_finding_group_id"
 
-  create_table "finding_classes_second", :force => true do |t|
-    t.text "name"
-    t.text "code"
-  end
-
   create_table "finding_groups", :force => true do |t|
     t.string "name"
   end
@@ -222,11 +210,6 @@ ActiveRecord::Schema.define(:version => 20110826071141) do
 
   add_index "mailings", ["created_at"], :name => "i1"
   add_index "mailings", ["doctor_id"], :name => "index_mailings_on_doctor_id"
-
-  create_table "new_view", :id => false, :force => true do |t|
-    t.datetime "screened_at"
-    t.integer  "doctor_id"
-  end
 
   create_table "offices", :force => true do |t|
     t.string "name"
