@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110811093058) do
+ActiveRecord::Schema.define(:version => 20110826071141) do
 
   create_table "account_receivables", :force => true do |t|
   end
@@ -111,16 +111,11 @@ ActiveRecord::Schema.define(:version => 20110811093058) do
   add_index "cases_mailings", ["case_id"], :name => "index_cases_mailings_on_case_id"
   add_index "cases_mailings", ["mailing_id"], :name => "index_cases_mailings_on_mailing_id"
 
-  create_table "cases_second", :force => true do |t|
-    t.integer "examination_method_id"
-    t.date    "examination_date"
-    t.integer "classification_id"
-    t.string  "praxistar_eingangsnr",  :limit => 8
-  end
-
   create_table "classification_groups", :force => true do |t|
     t.string  "title"
     t.integer "position"
+    t.string  "color"
+    t.string  "print_color"
   end
 
   create_table "classification_tarmed_leistungens", :force => true do |t|
