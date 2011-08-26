@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110816085016) do
+ActiveRecord::Schema.define(:version => 20110826071141) do
 
   create_table "accounts", :force => true do |t|
     t.string   "number"
@@ -159,6 +159,8 @@ ActiveRecord::Schema.define(:version => 20110816085016) do
   create_table "classification_groups", :force => true do |t|
     t.string  "title"
     t.integer "position"
+    t.string  "color"
+    t.string  "print_color"
   end
 
   create_table "classification_tarmed_leistungens", :force => true do |t|
@@ -202,7 +204,7 @@ ActiveRecord::Schema.define(:version => 20110816085016) do
     t.boolean  "active",                          :default => true
     t.integer  "billing_doctor_id"
     t.string   "login"
-    t.string   "password",                                          :null => false
+    t.string   "password"
     t.string   "ean_party",         :limit => 13
     t.string   "zsr",               :limit => 7
     t.text     "remarks"
@@ -428,8 +430,6 @@ ActiveRecord::Schema.define(:version => 20110816085016) do
     t.integer  "tiers_id"
     t.integer  "law_id"
     t.integer  "treatment_id"
-    t.text     "role_title"
-    t.text     "role_type"
     t.string   "place_type",               :default => "Praxis"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -537,8 +537,6 @@ ActiveRecord::Schema.define(:version => 20110816085016) do
 
   create_table "patients", :force => true do |t|
     t.date     "birth_date"
-    t.integer  "insurance_id"
-    t.string   "insurance_nr"
     t.integer  "sex"
     t.integer  "only_year_of_birth"
     t.integer  "doctor_id"
@@ -557,7 +555,6 @@ ActiveRecord::Schema.define(:version => 20110816085016) do
   add_index "patients", ["birth_date"], :name => "birth_date"
   add_index "patients", ["doctor_id"], :name => "patients_doctor_id_index"
   add_index "patients", ["doctor_patient_nr"], :name => "index_patients_on_doctor_patient_nr"
-  add_index "patients", ["insurance_id"], :name => "patients_insurance_id_index"
   add_index "patients", ["updated_at"], :name => "patients_updated_at_index"
 
   create_table "phone_numbers", :force => true do |t|
@@ -722,13 +719,13 @@ ActiveRecord::Schema.define(:version => 20110816085016) do
   end
 
   create_table "tariff_items", :force => true do |t|
-    t.decimal  "amount_mt",                   :precision => 8, :scale => 2
-    t.decimal  "amount_tt",                   :precision => 8, :scale => 2
+    t.decimal  "amount_mt",                  :precision => 8, :scale => 2
+    t.decimal  "amount_tt",                  :precision => 8, :scale => 2
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "code",          :limit => 10
+    t.string   "code"
     t.text     "remark"
-    t.boolean  "obligation",                                                :default => true
+    t.boolean  "obligation",                                               :default => true
     t.string   "type"
     t.string   "tariff_type",   :limit => 3
     t.integer  "vat_class_id"
