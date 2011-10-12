@@ -265,10 +265,6 @@ class Case < ActiveRecord::Base
     paper_copy.print
   end
 
-  def pdf_path
-    Rails.root.join('public', 'result_reports', "result_report-#{id}.pdf")
-  end
-
   def pdf_name
     "#{patient.to_s}: PAP Abstrich #{praxistar_eingangsnr}.pdf"
   end

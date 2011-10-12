@@ -38,7 +38,8 @@ module ApplicationHelper
     end
 
     result.gsub!(/<div>|<p>|<br>/, '')
-    result.gsub!(/<\/div>|<\/p>|<\/br>|<br[ ]*\/>/, "\n")
+    result.gsub!(/<\/br>|<br[ ]*\/>/, "\n")
+    result.gsub!(/<\/div>|<\/p>/, '')
 
     return result
   end
