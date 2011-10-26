@@ -36,7 +36,7 @@
 
     <td style="vertical-align: top; padding-left: 5em">
       <%- if can? :praxistar_create_all_leistungsblatt, :admin %>
-      <h2><%= link_to_remote("Rechnungen generieren", :update => 'create_all_leistungsblatt_log', :loading => "Element.show('#{loading_indicator_id({:id => 'create_all_leistungsblatt'})}')", :url => {:controller => '/admin', :action => 'praxistar_create_all_leistungsblatt'}, :confirm => "#{@bill_export_count} Rechnungen generieren?" ) %></h2>
+      <h2><%= link_to("Rechnungswesen", "https://cydoc.intern.zyto-labor.com/invoices", :target => 'cydoc') %></h2>
       <p>
           <%= link_to_remote(image_tag('export_bill.png'), :update => 'create_all_leistungsblatt_log', :loading => "Element.show('#{loading_indicator_id({:id => 'create_all_leistungsblatt'})}')", :url => {:controller => '/admin', :action => 'praxistar_create_all_leistungsblatt'}, :confirm => "#{@bill_export_count} Rechnungen generieren?" ) %>
           <i style="font-size: 12pt"> <b><%= @bill_export_count %></b> neue Leistungsbl&auml;tter.</i>
