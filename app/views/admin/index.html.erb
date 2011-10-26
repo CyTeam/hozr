@@ -1,18 +1,14 @@
 <h1>Tools</h1>
 <ul>
-  <li><%= link_to "Rechnungstool", :controller => 'bills' %></li>
   <li><%= link_to "Letzte Anschreiblisten", :controller => 'cases', :action => 'assignings_list' %></li>
   <li><%= link_to "Letzte Resultatbriefe", :controller => 'send_queues' %></li>
-  <li><%= link_to "Debitoren", :controller => :accounting, :action => 'accounts_receivable' %></li>
 </ul>
 
 <h1>Datenpflege</h1>
 <ul>
   <li><%= link_to "Patienten mit Mahnstopp", :controller => 'patients', :action => 'dunning_stopped' %></li>
-  <li><%= link_to "Behandlungsgrund ändern", :controller => 'bills', :action => 'edit_treatment_reason' %></li>
   <li><%= link_to "Klassifikationen", :controller => 'classifications' %></li>
   <li><%= link_to "Klassifikationsgruppen", :controller => 'classification_groups' %></li>
-  <li><%= link_to "Tarmed Zuordnungen", :controller => 'classification_tarmed_leistungens' %></li>
   <li><%= link_to "Top Befunde pro Klassifikationen", :controller => 'top_finding_classes' %></li>
   <li><%= link_to "Befunde", :controller => 'finding_classes' %></li>
   <li><%= link_to "Mitarbeiter", :controller => 'employees' %></li>
