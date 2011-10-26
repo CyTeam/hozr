@@ -1,6 +1,7 @@
 <%= link_to "Ersteingabe", :controller => 'cases', :action => 'first_entry', :id => params[:id] %>
 <%= link_to "Zweiteingabe", :controller => 'cases', :action => 'second_entry_pap_form', :id => params[:id] %>
 <%= link_to "Resultat", :controller => 'cases', :action => 'result_report', :id => params[:id] %>
+<%= link_to_cydoc "Rechnung", "sessions/#{Case.find(params[:id]).session_id}" %>
 <span style="margin-left: 10em;">
   <%= link_to image_tag('fax.png', :title => 'Drucke Fax'), :controller => 'cases', :action => :print_result_report, :id => params[:id], :page_size => 'A4' %>
   <%= link_to image_tag('print.png', :title => 'Drucke Resultat'), :controller => 'cases', :action => :print_result_report, :id => params[:id] %>
