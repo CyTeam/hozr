@@ -9,16 +9,6 @@ class SearchController < ApplicationController
   def search_form
   end
 
-  def bill_search
-    bill_params = params[:bill]
-    if bill_params[:id].empty?
-      return nil
-    else
-      bill = Praxistar::Bill.find(bill_params[:id])
-      return [ 'patients.id = ?', bill.patient.id ] 
-    end
-  end
-    
   include Controller::Search
 
   def search
@@ -125,12 +115,6 @@ class SearchController < ApplicationController
     case_keys.push key
     case_values.push *values
 
-    # Handle bill params
-    key, *values = bill_search
-    
-    case_keys.push key
-    case_values.push *values
-    
     # Build conditions array
     if case_keys.compact.empty?
       @cases = []
