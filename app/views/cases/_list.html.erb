@@ -66,7 +66,7 @@
       </td>
       <% if @include_bill %>
         <td>
-          <%= link_to "Rechnung", :controller => '/bills', :action => 'search_by_patient', :id => a_case.patient %>
+          <%= link_to_cydoc "Rechnung", "sessions/#{a_case.session_id}" %>
         </td>
       <% end %>
       <td>
