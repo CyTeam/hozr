@@ -1,4 +1,4 @@
-<%= link_to "Rechnungsübersicht", "https://cydoc.intern.zyto-labor.com/patients/#{@patient.id}?tab=invoices", :target => 'cydoc' %>
+<%= link_to_cydoc "Rechnungsübersicht", "patients/#{@patient.id}?tab=invoices" %>
 
 <%= render :partial => 'edit' %>
 <%= render :partial => 'doctors/compact_frame', :object => @patient.doctor %>

@@ -48,4 +48,9 @@ module ApplicationHelper
   def roles_for_collection
     Role.all.map{|role| [role.to_s, role.name.to_s]}
   end
+
+  # CyDoc
+  def link_to_cydoc(title, path, options = {})
+    link_to title, "https://cydoc.intern.zyto-labor.com/" + path, options.merge(:target => 'cydoc')
+  end
 end
