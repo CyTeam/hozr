@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110826071141) do
+ActiveRecord::Schema.define(:version => 20110830092245) do
 
   create_table "accounts", :force => true do |t|
     t.string   "number"
@@ -124,6 +124,7 @@ ActiveRecord::Schema.define(:version => 20110826071141) do
     t.datetime "review_at"
     t.datetime "p16_notice_printed_at"
     t.datetime "email_sent_at"
+    t.integer  "session_id"
   end
 
   add_index "cases", ["assigned_at"], :name => "assigned_at"
@@ -430,6 +431,8 @@ ActiveRecord::Schema.define(:version => 20110826071141) do
     t.integer  "tiers_id"
     t.integer  "law_id"
     t.integer  "treatment_id"
+    t.text     "role_title"
+    t.text     "role_type"
     t.string   "place_type",               :default => "Praxis"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -719,13 +722,13 @@ ActiveRecord::Schema.define(:version => 20110826071141) do
   end
 
   create_table "tariff_items", :force => true do |t|
-    t.decimal  "amount_mt",                  :precision => 8, :scale => 2
-    t.decimal  "amount_tt",                  :precision => 8, :scale => 2
+    t.decimal  "amount_mt",                   :precision => 8, :scale => 2
+    t.decimal  "amount_tt",                   :precision => 8, :scale => 2
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "code"
+    t.string   "code",          :limit => 10
     t.text     "remark"
-    t.boolean  "obligation",                                               :default => true
+    t.boolean  "obligation",                                                :default => true
     t.string   "type"
     t.string   "tariff_type",   :limit => 3
     t.integer  "vat_class_id"
