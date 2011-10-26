@@ -109,7 +109,6 @@ class PatientsController < ApplicationController
     
     if @patient.update_attributes(params[:patient])
       @patient.touch
-      Praxistar::PatientenPersonalien.export
       @patient.delete_leistungsblaetter
       @patient.reactivate_open_invoices
 
@@ -151,7 +150,6 @@ class PatientsController < ApplicationController
     if @vcard.update_attributes(params[:vcard]) and @billing_vcard.update_attributes(params[:billing_vcard]) and @patient.update_attributes(params[:patient])
       @vcard.save
       @patient.touch
-      Praxistar::PatientenPersonalien.export
       @patient.delete_leistungsblaetter
       @patient.reactivate_open_invoices
 
