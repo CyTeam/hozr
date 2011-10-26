@@ -109,8 +109,6 @@ class PatientsController < ApplicationController
     
     if @patient.update_attributes(params[:patient])
       @patient.touch
-      @patient.delete_leistungsblaetter
-      @patient.reactivate_open_invoices
 
       flash[:notice] = 'Patientendaten mutiert'
       redirect_to :action => 'list'
@@ -150,8 +148,6 @@ class PatientsController < ApplicationController
     if @vcard.update_attributes(params[:vcard]) and @billing_vcard.update_attributes(params[:billing_vcard]) and @patient.update_attributes(params[:patient])
       @vcard.save
       @patient.touch
-      @patient.delete_leistungsblaetter
-      @patient.reactivate_open_invoices
 
       flash[:notice] = 'Patientendaten mutiert'
       redirect_to :action => 'list'
@@ -160,13 +156,6 @@ class PatientsController < ApplicationController
     end
   end
 
-  def delete_leistungsblaetter
-    @patient = Patient.find(params[:id])
-    
-    @patient.delete_leistungsblaetter
-    render :text => 'Leistungeblaetter gelöscht.'
-  end
-  
   def destroy
     Patient.find(params[:id]).destroy
     redirect_to :action => 'list'

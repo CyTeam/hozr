@@ -48,9 +48,6 @@ class Patient < ActiveRecord::Base
 
   has_many :cases, :order => 'id DESC'
   has_many :finished_cases, :class_name => 'Case', :conditions => 'screened_at IS NOT NULL', :order => 'id DESC'
-  has_many :bills, :class_name => 'Praxistar::Bill', :foreign_key => 'Patient_ID', :order => 'ID_Rechnung'
-  has_one :praxistar_patienten_personalien, :class_name => 'Praxistar::PatientenPersonalien', :foreign_key => 'ID_Patient'
-  has_many :praxistar_leistungsblaetter, :class_name => 'Praxistar::LeistungenBlatt'
   
   validates_presence_of :birth_date
   
@@ -111,24 +108,5 @@ class Patient < ActiveRecord::Base
 
   def birth_date_db
     read_attribute(:birth_date)
-  end
-
-  def delete_leistungsblaetter
-    for l in praxistar_leistungsblaetter
-      a_case = l.cyto_case
-      if a_case
-        a_case.praxistar_leistungsblatt_id = nil
-        a_case.save
-      end
-      l.destroy
-    end
-  end
-
-  def open_invoices
-    bills.open
-  end
-  
-  def reactivate_open_invoices
-    open_invoices.map{|invoice| invoice.reactivate("Adressänderung")}
   end
 end
