@@ -108,10 +108,6 @@ class Case < ActiveRecord::Base
     !entry_date.nil? && !screened_at.nil? && result_report_printed_at.nil?
   end
   
-  def ready_for_praxistar_create_leistungsblatt
-    !screened_at.nil? && praxistar_leistungsblatt_id.nil?
-  end
-  
   
   def initialize(params = {})
     case params.class.name
@@ -186,57 +182,6 @@ class Case < ActiveRecord::Base
     read_attribute(:entry_date).strftime("%d.%m.%Y") unless read_attribute(:entry_date).nil?
   end
   
-  def praxistar_create_leistungsblatt
-    blatt = Praxistar::LeistungenBlatt.new
-    blatt.hozr_case = self
-    blatt.save!
-    self.praxistar_leistungsblatt_id = blatt.id
-    save!
-  end
-
-  belongs_to :praxistar_leistungsblatt, :class_name => 'Praxistar::LeistungenBlatt'
-
-
-  BILL_DELAY_DAYS = 6.5
-  scope :to_create_leistungsblatt, where("praxistar_leistungsblatt_id IS NULL AND (IFNULL(email_sent_at, result_report_printed_at) < now() - INTERVAL ? HOUR ) AND classification_id IS NOT NULL", BILL_DELAY_DAYS * 24)
-
-  def self.praxistar_create_all_leistungsblatt
-    export = Praxistar::Exports.new(:started_at => Time.now, :model => self.name)
-    
-    records = self.to_create_leistungsblatt.all
-  
-    error_cases = []
-    export.record_count = records.size
-    export.error_ids = ''
-    export.save
-    
-    for h in records
-      begin
-        h.praxistar_create_leistungsblatt
-      
-        export.create_count += 1
-        export.save
-      rescue Exception => ex
-        error_cases << h
-        export.error_count += 1
-        export.save
-        
-        print "Error #{self.name}(#{h.id}): #{ex.message}\n"
-	print "Error creating bill for case #{h.praxistar_eingangsnr}: #{h.patient.name}, #{h.patient.birth_date}\n\n"
-        logger.info "Error #{self.name}(#{h.id}): #{ex.message}\n"
-        logger.info ex.backtrace.join("\n\t")
-        logger.info "\n"
-      end
-    end
-  
-    export.finished_at = Time.now
-    export.error_ids = error_cases.collect{|c| c.id}.join(', ')
-    export.save
-  
-    logger.info(export.attributes.to_yaml)
-    return export
-  end
-
   # PDF
   def to_pdf(page_size = 'A5')
     case page_size

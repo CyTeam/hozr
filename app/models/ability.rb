@@ -19,7 +19,6 @@ class Ability
     elsif user.role? :admin
       can :label_print, :label_print
       can :print, :order_form
-      can [:praxistar_create_all_leistungsblatt, :praxistar_create_leistungsblatt], :admin
       can :manage, Mailing
       can :manage, Case
     elsif user.role? :zyto
