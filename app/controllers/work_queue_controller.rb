@@ -13,17 +13,6 @@ class WorkQueueController < ApplicationController
     @review_count = Case.count(:all, :conditions => 'needs_review = 1 AND result_report_printed_at IS NULL')
     @print_result_count = Case.includes(:doctor => :user).where('users.wants_prints' => true).for_print.count
     @email_result_count = Case.includes(:doctor => :user).where('users.wants_email' => true).for_email.count
-    @bill_export_count = Case.to_create_leistungsblatt.count
-  end
-
-  def bill_print_count
-    begin
-      bill_print_count = Praxistar::LeistungenBlatt.count_by_sql("SELECT count(*) FROM leistungen_blatt JOIN patienten_personalien ON patient_id = id_patient")
-    rescue
-      bill_print_count = "Keine Verbindung zu Praxistar"
-    end
-
-    render :text => bill_print_count
   end
 
   def admin_munin
