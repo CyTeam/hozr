@@ -1,5 +1,3 @@
-include Praxistar
-
 class Patient < ActiveRecord::Base
   # Insurance
   has_many :insurance_policies, :autosave => true
