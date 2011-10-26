@@ -1,7 +1,0 @@
-<%= form_remote_tag( :update => 'search_result', :loading => "Element.show('#{loading_indicator_id({:id => 'search'})}')", :url => {:controller => 'bills', :action => "search"} )  do %>
-  <%= render :partial => 'search_form' %>
-<% end %>
-
-<div id="search_result">
-  <%= loading_indicator_tag :id => 'search' %>
-</div>
