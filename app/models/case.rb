@@ -64,11 +64,6 @@ class Case < ActiveRecord::Base
       valid = false
     end
     
-    if patient_id.nil?
-      errors.add('patient_id', 'Patient muss gesetzt sein')
-      valid = false
-    end
-    
     if praxistar_eingangsnr.nil?
       errors.add('praxistar_eingangsnr', 'Eingangsnr muss gesetzt sein')
       valid = false
