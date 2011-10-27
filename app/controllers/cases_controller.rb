@@ -144,8 +144,8 @@ class CasesController < ApplicationController
         @patient.create_billing_vcard if @patient.billing_vcard.nil?
       else
         @patient = Patient.new(params[:patient])
-        @patient.vcard = Vcard.new(params[:vcard])
-        @patient.billing_vcard = Vcard.new(params[:billing_vcard])
+        @patient.build_vcard(params[:vcard])
+        @patient.build_billing_vcard(params[:billing_vcard])
 
         @patient.save
       end
