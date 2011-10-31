@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110830092245) do
+ActiveRecord::Schema.define(:version => 20111031091536) do
 
   create_table "accounts", :force => true do |t|
     t.string   "number"
@@ -139,7 +139,9 @@ ActiveRecord::Schema.define(:version => 20110830092245) do
   add_index "cases", ["praxistar_eingangsnr"], :name => "praxistar_eingangsnr"
   add_index "cases", ["praxistar_leistungsblatt_id"], :name => "praxistar_leistungsblatt_id"
   add_index "cases", ["result_report_printed_at"], :name => "i1"
+  add_index "cases", ["review_at"], :name => "index_cases_on_review_at"
   add_index "cases", ["screened_at"], :name => "screened_at"
+  add_index "cases", ["session_id"], :name => "index_cases_on_session_id"
 
   create_table "cases_finding_classes", :id => false, :force => true do |t|
     t.integer "case_id"
