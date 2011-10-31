@@ -36,8 +36,8 @@ Ihr Auftrag Nr. <%=h @case.praxistar_eingangsnr %>
 Befund
 </div>
 
-<div id="classification" class="PAP_<%=h @case.classification.code %>">
-<%=h @case.classification.name %>
+<div id="classification" class="PAP_<%=h @case.classification.try(:code) %>">
+<%=h @case.classification.try(:name) %>
 </div>
 
 <div id="findings">

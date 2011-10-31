@@ -419,7 +419,7 @@ class CasesController < ApplicationController
 
     respond_to do |format|
       format.html {
-        case @case.classification.code
+        case @case.classification.try(:code)
         when 'mam', 'sput', 'extra'
             render :action => :eg_result_report
         else
