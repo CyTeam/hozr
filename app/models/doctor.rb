@@ -21,10 +21,10 @@ class Doctor < ActiveRecord::Base
   # ============
   def channels
     channel = []
-    channel << 'hl7' if wants_hl7?
-    channel << 'email' if wants_email?
-    channel << 'print' if wants_prints?
-    channel << 'overview_email' if wants_overview_email?
+    channel << 'hl7' if wants_hl7
+    channel << 'email' if wants_email
+    channel << 'print' if wants_prints
+    channel << 'overview_email' if wants_overview_email
     
     channel
   end
