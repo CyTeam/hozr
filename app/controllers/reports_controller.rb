@@ -57,18 +57,6 @@ class ReportsController < ApplicationController
       end
     end
     
-    unless case_params[:printed_at].nil? or case_params[:printed_at].empty?
-      if case_params[:printed_at].match /bis/
-        lower_bound, higher_bound = case_params[:printed_at].split('bis')
-        case_keys.push "result_report_printed_at BETWEEN ? AND ?"
-        case_values.push Date.parse_date(lower_bound.strip)
-        case_values.push Date.parse_date(higher_bound.strip)
-      else
-        case_keys.push "result_report_printed_at = ? "
-        case_values.push Date.parse_date(case_params[:printed_at])
-      end
-    end
-    
     unless case_params[:screened_at].nil? or case_params[:screened_at].empty?
       if case_params[:screened_at].match /bis/
         lower_bound, higher_bound = case_params[:screened_at].split('bis')
