@@ -73,25 +73,6 @@ class Mailing < ActiveRecord::Base
     end
   end
 
-  # Email delivery
-  # ==============
-  def deliver_by_email
-    done = 0
-    failed = 0
-
-    for a_case in cases
-      begin
-        a_case.deliver_report_by_email
-        done += 1
-      rescue
-        #TODO do something sensible
-        failed += 1
-      end
-    end
-
-    return done, failed
-  end
-
   # PDF
   def result_reports_to_pdf(page_size = 'A5')
     case page_size

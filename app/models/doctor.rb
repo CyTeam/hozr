@@ -86,20 +86,4 @@ class Doctor < ActiveRecord::Base
   def password=(value)
     write_attribute(:password, Digest::SHA256.hexdigest(value))
   end
-
-  # Email
-  def deliver_mailings_by_email
-    for mailing in undelivered_mailings
-      mailing.deliver_by_email
-      mailing.email_delivered_at = Time.now
-      mailing.save
-    end
-  end
-
-  def self.deliver_all_mailings_by_email
-    # TODO: use self.wanting_emails as in CyLab
-    for doctor in self.includes(:user).where("users.wants_email = ?", true).all
-      doctor.deliver_mailings_by_email
-    end
-  end
 end
