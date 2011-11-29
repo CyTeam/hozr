@@ -18,7 +18,6 @@ class Case < ActiveRecord::Base
   # Scopes
   scope :finished, where("screened_at IS NOT NULL AND needs_review = ?", false)
   scope :unfinished_p16, where("screened_at IS NULL AND needs_p16 = ?", true)
-  scope :undelivered, where("email_sent_at IS NULL")
   scope :by_classification_group, lambda {|group|
     includes('classification').where('classifications.classification_group_id' => group.id)
   }
@@ -27,8 +26,10 @@ class Case < ActiveRecord::Base
   scope :for_second_entry, first_entry_done.where("needs_p16 = ? AND needs_hpv = ?", false, false)
   scope :for_hpv, first_entry_done.where("needs_hpv = ?", true)
   scope :for_p16, first_entry_done.where("needs_p16 = ?", true)
-  scope :for_print, finished.where("result_report_printed_at IS NULL")
-  scope :for_email, finished.where("email_sent_at IS NULL")
+  scope :for_review, first_entry_done.where("needs_review = ?", true)
+
+  scope :undelivered, where("delivered_at IS NULL")
+  scope :for_delivery, finished.undelivered
 
   def to_s
     "#{patient.to_s}: PAP Abstrich #{praxistar_eingangsnr}"
@@ -93,10 +94,6 @@ class Case < ActiveRecord::Base
   
   def ready_for_p16
     screened_at.nil? && needs_p16
-  end
-  
-  def ready_for_result_report_printing
-    !entry_date.nil? && !screened_at.nil? && result_report_printed_at.nil?
   end
   
   

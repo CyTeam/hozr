@@ -10,8 +10,8 @@ class WorkQueueController < ApplicationController
     @p16_count = Case.count(:all, :conditions => ["needs_p16 = ? AND screened_at IS NULL", true])
     @hpv_count = Case.count(:all, :conditions => ["needs_hpv = ? AND screened_at IS NULL", true])
     @p16_prepared_count = Case.count(:all, :conditions => ["needs_p16 = ? AND screened_at IS NULL AND hpv_p16_prepared_at is not NULL", true])
-    @review_count = Case.count(:all, :conditions => 'needs_review = 1 AND result_report_printed_at IS NULL')
-    @result_count = Case.includes(:doctor => :user).where('users.wants_prints' => true).for_print.count
+    @review_count = Case.for_review.count
+    @result_for_delivery_count = Case.for_delivery.count
   end
 
   def cyto

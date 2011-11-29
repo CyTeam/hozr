@@ -372,7 +372,7 @@ class CasesController < ApplicationController
     @case.needs_review = (low_to_high or high_to_low or high)
 
     if @case.needs_p16? or @case.needs_hpv?
-      @case.result_report_printed_at = nil
+      @case.delivered_at = nil
       @case.save
 
       redirect_to :action => 'hpv_p16_queue'
@@ -395,7 +395,7 @@ class CasesController < ApplicationController
   def review_queue
     params[:order] ||= 'praxistar_eingangsnr'
     
-    @cases = Case.paginate(:page => params['page'], :per_page => 144, :order => params[:order], :conditions => [ "needs_review = ?", true ])
+    @cases = Case.for_review.paginate(:page => params['page'], :per_page => 144, :order => params[:order])
     render :action => :list
   end
 
@@ -482,7 +482,7 @@ class CasesController < ApplicationController
     hpv.praxistar_eingangsnr = CaseNr.new.to_s
     hpv.screened_at = nil
     hpv.praxistar_leistungsblatt_id = nil
-    hpv.result_report_printed_at = nil
+    hpv.delivered_at = nil
     hpv.finding_classes = []
     hpv.finding_text = ""
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111031091536) do
+ActiveRecord::Schema.define(:version => 20111129121238) do
 
   create_table "accounts", :force => true do |t|
     t.string   "number"
@@ -107,7 +107,6 @@ ActiveRecord::Schema.define(:version => 20111031091536) do
     t.string   "insurance_nr"
     t.integer  "praxistar_leistungsblatt_id"
     t.datetime "screened_at"
-    t.datetime "result_report_printed_at"
     t.boolean  "needs_p16",                                :default => false
     t.text     "finding_text"
     t.text     "remarks"
@@ -123,11 +122,12 @@ ActiveRecord::Schema.define(:version => 20111031091536) do
     t.integer  "review_by"
     t.datetime "review_at"
     t.datetime "p16_notice_printed_at"
-    t.datetime "email_sent_at"
     t.integer  "session_id"
+    t.datetime "delivered_at"
   end
 
   add_index "cases", ["assigned_at"], :name => "assigned_at"
+  add_index "cases", ["delivered_at"], :name => "index_cases_on_delivered_at"
   add_index "cases", ["doctor_id"], :name => "doctor_id"
   add_index "cases", ["entry_date"], :name => "entry_date"
   add_index "cases", ["insurance_id"], :name => "cases_insurance_id_index"
@@ -138,7 +138,6 @@ ActiveRecord::Schema.define(:version => 20111031091536) do
   add_index "cases", ["patient_id"], :name => "patient_id"
   add_index "cases", ["praxistar_eingangsnr"], :name => "praxistar_eingangsnr"
   add_index "cases", ["praxistar_leistungsblatt_id"], :name => "praxistar_leistungsblatt_id"
-  add_index "cases", ["result_report_printed_at"], :name => "i1"
   add_index "cases", ["review_at"], :name => "index_cases_on_review_at"
   add_index "cases", ["screened_at"], :name => "screened_at"
   add_index "cases", ["session_id"], :name => "index_cases_on_session_id"
@@ -485,9 +484,6 @@ ActiveRecord::Schema.define(:version => 20111031091536) do
   create_table "mailings", :force => true do |t|
     t.datetime "created_at"
     t.integer  "doctor_id"
-    t.datetime "printed_at"
-    t.datetime "email_delivered_at"
-    t.datetime "hl7_delivered_at"
   end
 
   add_index "mailings", ["created_at"], :name => "i1"

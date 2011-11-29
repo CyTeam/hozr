@@ -29,25 +29,16 @@ class Mailing < ActiveRecord::Base
     d = Doctor.find(doctor_id)
     mailing = nil
     
-    if d.wants_prints
-      # Check if there's an open mailing
-      mailing = d.mailings.without_channel.first
+    # Check if there's an open mailing
+    mailing = d.mailings.without_channel.first
 
-      # Create a new one if not
-      mailing = d.mailings.build if mailing.nil?
+    # Create a new one if not
+    mailing = d.mailings.build if mailing.nil?
 
-      # Clear in case it an existing mailing
-      mailing.cases.clear
-      # And add all unprinted cases to mailing
-      mailing.cases = d.cases.for_print.order(:praxistar_eingangsnr).all
-    else
-      # Create new mail if email wanted
-      mailing = self.new
-      mailing.doctor_id = doctor_id
-      cases = d.cases.for_email.order(:praxistar_eingangsnr).all
-      mailing.cases = cases
-      cases.map{|c| c.email_sent_at = DateTime.now; c.save}
-    end
+    # Clear in case it an existing mailing
+    mailing.cases.clear
+    # And add all undelivered cases to mailing
+    mailing.cases = d.cases.for_delivery.order(:praxistar_eingangsnr).all
     
     return if mailing.cases.empty?
     
@@ -70,7 +61,7 @@ class Mailing < ActiveRecord::Base
       lock.close
       
       # TODO: Need to adapt for email
-      doctor_ids = Case.select('DISTINCT doctor_id').where("( screened_at IS NOT NULL OR (screened_at IS NULL AND needs_p16 = 1) ) AND needs_review = 0 AND result_report_printed_at IS NULL").all
+      doctor_ids = Case.select('DISTINCT doctor_id').for_delivery.all
 
       for doctor_id in doctor_ids
         self.create_all_for_doctor(doctor_id.doctor_id)
@@ -127,9 +118,6 @@ class Mailing < ActiveRecord::Base
       paper_copy = Cups::PrintJob.new(file.path, printer)
     end
     paper_copy.print
-
-    # Mark cases as printed
-    cases.map{|a_case| a_case.update_attribute(:result_report_printed_at, DateTime.now) }
   end
   
   def overview_to_pdf
@@ -169,6 +157,9 @@ class Mailing < ActiveRecord::Base
 
   # Send on all undelivered channels
   def send_by_all_channels
+    # Mark cases as delivered
+    cases.map{|a_case| a_case.update_attribute(:delivered_at, DateTime.now) }
+
     for channel in doctor.channels
       send_by(channel)
     end
