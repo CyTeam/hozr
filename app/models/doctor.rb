@@ -12,7 +12,7 @@ class Doctor < ActiveRecord::Base
 
   # CyLab
   # =====
-  has_one :user, :as => :object
+  has_one :user, :as => :object, :autosave => true
   delegate :email, :email=, :to => :user
 
   has_and_belongs_to_many :offices
@@ -21,39 +21,27 @@ class Doctor < ActiveRecord::Base
   # ============
   def channels
     channel = []
-    channel << 'hl7' if wants_hl7
-    channel << 'email' if wants_email
-    channel << 'print' if wants_prints
+    channel << 'hl7' if wants_hl7?
+    channel << 'email' if wants_email?
+    channel << 'print' if wants_prints?
+    channel << 'overview_email' if wants_overview_email?
     
     channel
   end
   
   # HL7
   scope :wanting_hl7, includes(:user).where("users.wants_hl7 = ?", true)
-  delegate :wants_hl7, :to => :user
-  def wants_hl7=(value)
-    # Delegate to user
-    user.wants_hl7 = value
-    user.save
-  end
+  delegate :wants_hl7, :wants_hl7=, :to => :user
 
   # Email
   scope :wanting_emails, includes(:user).where("users.wants_email = ?", true)
   delegate :wants_email, :wants_email=, :to => :user
-  def wants_email=(value)
-    # Delegate to user
-    user.wants_email = value
-    user.save
-  end
+  scope :wanting_overview_emails, includes(:user).where("users.wants_overview_email = ?", true)
+  delegate :wants_overview_email, :wants_overview_email=, :to => :user
 
   # Printing
   scope :wanting_prints, includes(:user).where("users.wants_prints = ?", true)
   delegate :wants_prints, :wants_prints=, :to => :user
-  def wants_prints=(value)
-    # Delegate to user
-    user.wants_prints = value
-    user.save
-  end
     
   # Helpers
   def to_s

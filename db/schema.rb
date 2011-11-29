@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111129121238) do
+ActiveRecord::Schema.define(:version => 20111129135617) do
 
   create_table "accounts", :force => true do |t|
     t.string   "number"
@@ -813,6 +813,7 @@ ActiveRecord::Schema.define(:version => 20111129121238) do
     t.integer  "failed_attempts",                          :default => 0
     t.string   "unlock_token"
     t.datetime "locked_at"
+    t.boolean  "wants_overview_email",                     :default => false
   end
 
   add_index "users", ["email"], :name => "index_users_on_email"
