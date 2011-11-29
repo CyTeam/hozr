@@ -7,13 +7,6 @@ class Mailing < ActiveRecord::Base
   scope :with_unsent_channel, joins(:send_queues).where(:sent_at => nil).order('mailings.created_at')
   scope :without_channel, includes(:send_queues).where('send_queues.id IS NULL')
 
-  after_save :create_hl7_email_channels
-  
-  def create_hl7_email_channels
-    SendQueue.create(:mailing => self, :channel => "email", :sent_at => DateTime.now) if doctor.wants_email
-    SendQueue.create(:mailing => self, :channel => "hl7", :sent_at => DateTime.now) if doctor.wants_hl7
-  end
-
   def self.case_count_without_channel
     without_channel.inject(0) {|sum, mailing| sum += mailing.cases.count}
   end
