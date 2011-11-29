@@ -27,7 +27,6 @@ class Case < ActiveRecord::Base
   scope :for_second_entry, first_entry_done.where("needs_p16 = ? AND needs_hpv = ?", false, false)
   scope :for_hpv, first_entry_done.where("needs_hpv = ?", true)
   scope :for_p16, first_entry_done.where("needs_p16 = ?", true)
-  scope :for_hpv_or_p16, first_entry_done.where("(needs_p16 = ? OR needs_hpv)", true)
   scope :for_print, finished.where("result_report_printed_at IS NULL")
   scope :for_email, finished.where("email_sent_at IS NULL")
 
