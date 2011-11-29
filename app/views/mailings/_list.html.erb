@@ -35,7 +35,7 @@
     <td/>
     <td style="text-align: right"><%= link_to mailing.cases.count, :action => 'overview', :id => mailing %></td>
     <td>
-      <%=h mailing.doctor.nil? ? "Unbekannt" : mailing.doctor.name %>
+      <%=h mailing.doctor.nil? ? "Unbekannt" : "#{mailing.doctor.name} (#{mailing.doctor.channels.join(", ")})" %>
       <pre id="mailing_log_<%=h mailing.id %>"><%= loading_indicator_tag :id => "mailing_#{mailing.id}" %></pre>
     </td>
     <td>
