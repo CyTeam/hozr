@@ -1,5 +1,0 @@
-new.value <%= Case.count(:all, :conditions => "assigned_at IS NULL") %>
-first_entry.value <%= Case.count(:all, :conditions => "entry_date IS NULL AND assigned_at IS NOT NULL") %>
-first_entry.value <%= Case.count(:all, :conditions => "entry_date IS NULL AND assigned_at IS NOT NULL") %>
-p16.value <%= Case.count(:all, :conditions => ["needs_p16 = ? AND screened_at IS NULL", true]) %>
-print_result.value <%= Case.count(:all, :conditions => "(screened_at IS NOT NULL AND needs_review = 0 OR (screened_at IS NULL and needs_p16 = 1) AND needs_review = 0 ) AND result_report_printed_at IS NULL") %>

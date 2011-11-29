@@ -11,13 +11,7 @@ class WorkQueueController < ApplicationController
     @hpv_count = Case.count(:all, :conditions => ["needs_hpv = ? AND screened_at IS NULL", true])
     @p16_prepared_count = Case.count(:all, :conditions => ["needs_p16 = ? AND screened_at IS NULL AND hpv_p16_prepared_at is not NULL", true])
     @review_count = Case.count(:all, :conditions => 'needs_review = 1 AND result_report_printed_at IS NULL')
-    @print_result_count = Case.includes(:doctor => :user).where('users.wants_prints' => true).for_print.count
-    @email_result_count = Case.includes(:doctor => :user).where('users.wants_email' => true).for_email.count
-  end
-
-  def admin_munin
-    admin
-    render :layout => false, :action => 'admin_munin'
+    @result_count = Case.includes(:doctor => :user).where('users.wants_prints' => true).for_print.count
   end
 
   def cyto
