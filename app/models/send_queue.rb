@@ -12,10 +12,6 @@ class SendQueue < ActiveRecord::Base
     "%s: %i Resultate für %s per %s" % [created_at, mailing.cases.count, channel.to_s, mailing.doctor.to_s]
   end
 
-  def sent?
-    ! sent_at.nil?
-  end
-  
   # Actions
   def print
     mailing.print('A5', 'hpT2', 'hpT3')
