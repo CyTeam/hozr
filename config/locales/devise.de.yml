@@ -10,7 +10,7 @@ de:
       unauthenticated: 'Sie müssen sich zuerst anmelden um fortfahren zu können.'
       unconfirmed: 'Sie müssen Ihr Konto zuerst aktivieren.'
       locked: 'Ihr Konto ist gesperrt.'
-      invalid: 'Ungültige E-Mail Adresse oder falsches Passwort.'
+      invalid: 'Ungültiger Benutzername oder falsches Passwort.'
       invalid_token: 'Ungültiger Anmelde-Token.'
       timeout: 'Ihre Sitzung ist abgelaufen. Bitte melden Sie sich erneut an.'
       inactive: 'Ihr Konto wurde noch nicht aktiviert.'
