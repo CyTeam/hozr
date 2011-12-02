@@ -26,7 +26,7 @@ class Case < ActiveRecord::Base
   scope :for_second_entry, first_entry_done.where("needs_p16 = ? AND needs_hpv = ?", false, false)
   scope :for_hpv, first_entry_done.where("needs_hpv = ?", true)
   scope :for_p16, first_entry_done.where("needs_p16 = ?", true)
-  scope :for_review, first_entry_done.where("needs_review = ?", true)
+  scope :for_review, where("needs_review = ?", true)
 
   scope :undelivered, where("delivered_at IS NULL")
   scope :for_delivery, finished.undelivered
