@@ -50,12 +50,4 @@ class DoctorsController < AuthorizedController
     Doctor.find(params[:id]).destroy
     redirect_to doctors_path
   end
-
-  # Customers Support
-  # =================
-  # LDIF
-  def ldif
-    @doctor = Doctor.find(params[:id])
-    render :layout => false
-  end
 end
