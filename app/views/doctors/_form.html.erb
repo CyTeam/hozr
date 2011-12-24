@@ -3,8 +3,8 @@
 <!--[form:doctor]-->
 <fieldset>
   <legend>
-    <%= link_to_function "Praxis", "hide('private_vcard'); show('praxis_vcard')" %>
-    <%= link_to_function "Privat", "hide('praxis_vcard'); show('private_vcard')" %>
+    <%= link_to_function "Praxis", "$('private_vcard').hide(); $('praxis_vcard').show()" %>
+    <%= link_to_function "Privat", "$('praxis_vcard').hide(); $('private_vcard').show()" %>
   </legend>
   <table id="praxis_vcard">
     <%= render :partial => 'vcards/form', :locals => { :vcard_name => 'praxis_vcard', :vcard => @praxis_vcard } %>
