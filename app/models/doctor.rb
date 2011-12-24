@@ -3,8 +3,8 @@
 class Doctor < ActiveRecord::Base
   scope :active, where(:active => true)
 
-  has_one :praxis, :class_name => 'Vcard', :as => :object, :conditions => {:vcard_type => 'praxis'}
-  has_one :private, :class_name => 'Vcard', :as => :object, :conditions => {:vcard_type => 'private'}
+  has_one :praxis, :class_name => 'Vcard', :as => :object, :conditions => {:vcard_type => 'praxis'}, :autosave => true
+  has_one :private, :class_name => 'Vcard', :as => :object, :conditions => {:vcard_type => 'private'}, :autosave => true
   belongs_to :billing_doctor, :class_name => 'Doctor'
   
   has_many :cases
