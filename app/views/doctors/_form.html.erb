@@ -7,10 +7,10 @@
     <%= link_to_function "Privat", "$('praxis_vcard').hide(); $('private_vcard').show()" %>
   </legend>
   <table id="praxis_vcard">
-    <%= render :partial => 'vcards/form', :locals => { :vcard_name => 'praxis_vcard', :vcard => @praxis_vcard } %>
+    <%= render :partial => 'vcards/form', :locals => { :vcard_name => 'praxis_vcard', :vcard => @praxis_vcard, :auto_complete => false } %>
   </table>
   <table id="private_vcard" style="display: none">
-    <%= render :partial => 'vcards/form', :locals => { :vcard_name => 'private_vcard', :vcard => @private_vcard } %>
+    <%= render :partial => 'vcards/form', :locals => { :vcard_name => 'private_vcard', :vcard => @private_vcard, :auto_complete => false } %>
   </table>
   <%= render :partial => "vcards/show_phone_numbers", :locals => { :vcard => @praxis_vcard } unless @praxis_vcard.nil? %>
 </fieldset>

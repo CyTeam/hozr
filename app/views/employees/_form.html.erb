@@ -3,14 +3,14 @@
 <!--[form:employee]-->
 <fieldset>
   <legend>
-    <%= link_to_function "Abeitsadresse", "hide('vcard_work'); show('vcard_private')" %>
-    <%= link_to_function "Privatadresse", "hide('vcard_private'); show('vcard_work')" %>
+    <%= link_to_function "Abeitsadresse", "$('vcard_work').hide(); $('vcard_private').show()" %>
+    <%= link_to_function "Privatadresse", "$('vcard_private').hide(); $('vcard_work').show()" %>
   </legend>
   <table id="vcard_work">
-    <%= render :partial => 'vcards/form', :locals => { :vcard_name => 'work_vcard', :vcard => @employee.work_vcard } %>
+    <%= render :partial => 'vcards/form', :locals => { :vcard_name => 'work_vcard', :vcard => @employee.work_vcard, :auto_complete => false } %>
   </table>
   <table id="vcard_private" style="display: none">
-   <%= render :partial => 'vcards/form', :locals => { :vcard_name => 'private_vcard', :vcard => @employee.private_vcard } %>
+   <%= render :partial => 'vcards/form', :locals => { :vcard_name => 'private_vcard', :vcard => @employee.private_vcard, :auto_complete => false } %>
   </table>
 </fieldset>
 
