@@ -382,7 +382,6 @@ class CasesController < ApplicationController
     hpv = @case.clone
     hpv.praxistar_eingangsnr = CaseNr.new.to_s
     hpv.screened_at = nil
-    hpv.praxistar_leistungsblatt_id = nil
     hpv.delivered_at = nil
     hpv.finding_classes = []
     hpv.finding_text = ""
