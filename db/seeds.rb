@@ -18,3 +18,10 @@ Role.create!([
   {:name => 'zyto'},
   {:name => 'admin'}
 ])
+
+# Examination Methods
+# ===================
+ExaminationMethod.create!([
+  {:name => 'Dünnschicht'},
+  {:name => 'Konventionel'}
+])
