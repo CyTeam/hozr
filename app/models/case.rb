@@ -40,11 +40,11 @@ class Case < ActiveRecord::Base
   end
 
   def control_findings
-    finding_classes.by_finding_group('Kontrolle')
+    finding_classes.control
   end
   
   def quality_findings
-    finding_classes.by_finding_group('Zustand')
+    finding_classes.quality
   end
   
   def findings

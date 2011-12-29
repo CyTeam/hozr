@@ -11,6 +11,8 @@ class FindingClass < ActiveRecord::Base
       includes(:finding_group).where('finding_groups.name = ?', group_name)
     end
   }
+  scope :quality, by_finding_group('Zustand')
+  scope :control, by_finding_group('Kontrolle')
 
   include ActionView::Helpers::SanitizeHelper
   def to_s
