@@ -1,10 +1,25 @@
 # Demo Seed
 # =========
+# Tenant
+tenant = Doctor.create!(
+  :praxis => Vcard.new(:family_name => "Labori", :given_name => "Andre", :street_address => "Hauptstr. 99", :postal_code => "6300", :locality => "Zug")
+)
 
 # User
-user_vcard = Vcard.new(:given_name => 'Peter', :family_name => 'Admin', :street_address => 'Gartenstr. 199c', :postal_code => '8888', :locality => 'Zürich')
-user_person = Employee.new(:work_vcard => user_vcard)
-user = User.new(:login => 'admin', :email => 'admin@example.com', :password => 'demo1234', :password_confirmation => 'demo1234')
-user.object = user_person
-user.role_texts = ['sysadmin']
-user.save
+user = User.create!(
+  :login => 'admin',
+  :email => 'admin@example.com',
+  :password => 'admin1234',
+  :password_confirmation => 'admin1234',
+  :object => tenant,
+  :role_texts => ['sysadmin', 'zyto']
+)
+
+# Doctors
+Doctor.create!(
+  :praxis => Vcard.new(:family_name => "Zuweiser", :given_name => "Peter", :street_address => "Spitalweg 1", :postal_code => "8000", :locality => "Zürich")
+)
+
+doctor = Doctor.create!(
+  :praxis => Vcard.new(:family_name => "Klientes", :given_name => "Melanie", :street_address => "Zentralgasse 99", :postal_code => "6300", :locality => "Zug")
+)
