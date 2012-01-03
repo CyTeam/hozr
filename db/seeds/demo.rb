@@ -64,7 +64,9 @@ for examination_method in ExaminationMethod.all
     {:name => "PAP IIID", :code => "PAP IIID", :classification_group => pap_group, :examination_method => examination_method},
     {:name => "PAP IIIG", :code => "PAP IIIG", :classification_group => pap_group, :examination_method => examination_method},
     {:name => "PAP IV", :code => "PAP IV", :classification_group => pap_group, :examination_method => examination_method},
-    {:name => "PAP V", :code => "PAP V", :classification_group => pap_group, :examination_method => examination_method}
+    {:name => "PAP V", :code => "PAP V", :classification_group => pap_group, :examination_method => examination_method},
+
+    {:name => "Mama", :code => "Mama", :classification_group => eg_group, :examination_method => examination_method}
   ])
 end
 
