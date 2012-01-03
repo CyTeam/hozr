@@ -25,3 +25,10 @@ ExaminationMethod.create!([
   {:name => 'Dünnschicht'},
   {:name => 'Konventionel'}
 ])
+
+# Finding Groups
+# ==============
+FindingGroup.create!([
+  {:name => "Zustand"},
+  {:name => "Kontrolle"}
+])

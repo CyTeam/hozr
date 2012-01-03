@@ -40,6 +40,7 @@ doctor = Doctor.create!(
   :praxis => Vcard.new(:family_name => "Klientes", :given_name => "Melanie", :street_address => "Zentralgasse 99", :postal_code => "6300", :locality => "Zug", :vcard_type => "praxis")
 )
 
+
 # Classifications
 pap_group = ClassificationGroup.create!(
   :title => "PAP",
@@ -63,6 +64,23 @@ for examination_method in ExaminationMethod.all
     {:name => "PAP IIID", :code => "PAP IIID", :classification_group => pap_group, :examination_method => examination_method},
     {:name => "PAP IIIG", :code => "PAP IIIG", :classification_group => pap_group, :examination_method => examination_method},
     {:name => "PAP IV", :code => "PAP IV", :classification_group => pap_group, :examination_method => examination_method},
-    {:name => "PAP V", :code => "PAP V", :classification_group => pap_group, :examination_method => examination_method},
+    {:name => "PAP V", :code => "PAP V", :classification_group => pap_group, :examination_method => examination_method}
   ])
 end
+
+
+# Findings
+quality_group = FindingGroup.find_by_name("Zustand")
+control_group = FindingGroup.find_by_name("Kontrolle")
+
+FindingClass.create!([
+  {:name => "beurteilbar und repräsentativ", :code => "", :finding_group => quality_group},
+  {:name => "beurteilbar, keine Zylinderepithel- und/oder Metaplasiezellen", :code => "", :finding_group => quality_group},
+  {:name => "beurteilbar, aber nicht repräsentativ", :code => "", :finding_group => quality_group},
+  {:name => "nicht beurteilbar", :code => "000", :finding_group => quality_group}
+])
+
+FindingClass.create!([
+  {:name => "Kontrolle in 3 Jahren", :code => "3j", :finding_group => control_group},
+  {:name => "Kontrolle in 6 Monaten", :code => "6m", :finding_group => control_group}
+])
