@@ -2,7 +2,7 @@
 
 # Application
 set :application, 'hozr'
-set :repository,  'git@github.com:huerlisi/hozr.git'
+set :repository,  'git@github.com:CyTeam/hozr.git'
 
 require 'capones_recipes/cookbook/rails'
 require 'capones_recipes/tasks/database/setup'
