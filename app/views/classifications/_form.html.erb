@@ -9,5 +9,8 @@
 
 <p><label for="classification_examination_method_id">Methode</label><br/>
 <%= select 'classification', 'examination_method_id', ExaminationMethod.all.collect { |m| [ m.name, m.id ] }  %></p>
+
+<p><label for="classification_group_id">Gruppe</label><br/>
+<%= select 'classification', 'classification_group_id', ClassificationGroup.all.collect { |m| [ m.title, m.id ] }  %></p>
 <!--[eoform:classification]-->
 
