@@ -3,7 +3,7 @@ module CasesHelper
   def classification_button(code)
     classification = Classification.find_by_code_and_examination_method_id(code, @case.examination_method_id)
     
-    button_to classification.name, second_entry_form_case_path(@case, "case[classification]" => classification.id), :style => "color: black; background-color: #{classification.classification_group.color}"
+    button_to classification.name, second_entry_form_case_path(@case, "case[classification]" => classification.id), :style => "color: black; background-color: ##{classification.classification_group.color}"
   end
 
  def auto_complete_result_finding_class_selection(entries, field, phrase = nil)
