@@ -1,6 +1,5 @@
 <%= error_messages_for 'doctor' %>
 
-<!--[form:doctor]-->
 <fieldset>
   <legend>
     <%= link_to_function "Praxis", "$('private_vcard').hide(); $('praxis_vcard').show()" %>
@@ -14,5 +13,3 @@
   </table>
   <%= render :partial => "vcards/show_phone_numbers", :locals => { :vcard => @praxis_vcard } unless @praxis_vcard.nil? %>
 </fieldset>
-<!--[eoform:doctor]-->
-
