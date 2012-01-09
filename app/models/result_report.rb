@@ -42,7 +42,7 @@ class ResultReport < Prawn::Document
     end
 
     grid([0,7], [1,9]).bounding_box do
-      text @case.doctor.praxis.honorific_prefix
+      text @case.doctor.praxis.honorific_prefix if @case.doctor.praxis.honorific_prefix
       text @case.doctor.praxis.full_name
       text @case.doctor.praxis.street_address
       text @case.doctor.praxis.postal_code + " " + @case.doctor.praxis.locality
