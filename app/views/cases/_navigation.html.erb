@@ -7,4 +7,5 @@
   <%= link_to image_tag('print.png', :title => 'Drucke Resultat'), :controller => 'cases', :action => :print_result_report, :id => params[:id] %>
   <%= link_to image_tag('edit_22.png', :title => 'Fall editieren'), {:controller => 'cases', :action => :edit, :id => params[:id]} %>
   <%= link_to image_tag('remove_22.png', :title => 'Lösche Resultat'), {:controller => 'cases', :action => :destroy, :id => params[:id]}, :confirm => 'Fall wirklich löschen?', :method => :post if can? :destroy, Case %>
+  <%= link_to image_tag('next_22.png', :title => 'Überspringen'), {:controller => 'cases', :action => :first_entry, :id => params[:id].to_i + 1}, :method => :post if action_name == "first_entry" %>
 </span>
