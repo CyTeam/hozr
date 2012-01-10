@@ -34,6 +34,8 @@ module ApplicationHelper
   def cydoc_hostname
     if Rails.env.development?
       hostname = "cydoc-dev"
+    elsif Rails.env.demo?
+      hostname = "cydoc-demo.cyt.ch"
     else
       hostname = "cydoc"
     end
