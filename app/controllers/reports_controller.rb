@@ -109,6 +109,7 @@ class ReportsController < ApplicationController
     # The following doesn't work 'cause of a known bug: :include overrides :select
     # @records = Case.find( :all, :select => "classifications.code AS Pap, count(*) AS Anzahl, count(*)/(SELECT count(*) FROM cases)*100.0 AS Prozent", :include => 'classification', :group => 'classifications.code',  :order => "#{order}")
     
+    case_conditions = [case_conditions, "classification_id IS NOT NULL"].compact.join(" AND ")
     count = Case.count(:conditions => case_conditions)
     
 
