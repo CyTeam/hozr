@@ -296,7 +296,7 @@ class CasesController < ApplicationController
     name = finding.name
     quoted_name = name.gsub('ä', '&auml;').gsub('ö', '&ouml;').gsub('ü', '&uuml;').gsub('Ä', '&Auml;').gsub('Ö', '&Ouml;').gsub('Ü', '&Uuml;')
     
-    @case.finding_text = @case.finding_text.gsub("<div>#{name}</div>", '').gsub("<div>#{quoted_name}</div>", '')
+    @case.finding_text = @case.finding_text.gsub(/<div>#{Regexp.escape(name)}<\/div>(\n)?/, '').gsub("<div>#{quoted_name}</div>", '')
 
     @case.save
 
@@ -320,7 +320,7 @@ class CasesController < ApplicationController
 
       @case.finding_classes << finding_class
       finding_text = @case.finding_text.nil? ? '' : @case.finding_text
-      @case.finding_text = finding_text + "<div>#{finding_class.name}</div>" if finding_class.finding_group.nil?
+      @case.finding_text = finding_text + "<div>#{finding_class.name}</div>\n" if finding_class.finding_group.nil?
 
       @case.save
 
