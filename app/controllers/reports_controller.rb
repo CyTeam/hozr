@@ -96,8 +96,9 @@ class ReportsController < ApplicationController
     
     # The following doesn't work 'cause of a known bug: :include overrides :select
     # @records = Case.find( :all, :select => "classifications.code AS Pap, count(*) AS Anzahl, count(*)/(SELECT count(*) FROM cases)*100.0 AS Prozent", :include => 'classification', :group => 'classifications.code',  :order => "#{order}")
-    @count = Case.count(:conditions => case_conditions)
-
+    
+    @count = Case.finished.count(:conditions => case_conditions)
+    
     @group_counts = Case.count(:conditions => case_conditions, :group => 'classification_group_id', :include => [{'classification' => 'classification_group'}], :order => 'classification_groups.position DESC')
   end
 end
