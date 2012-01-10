@@ -38,6 +38,7 @@
       <h2><%= link_to_cydoc("Rechnungswesen", "invoices") %></h2>
       <p>
           <%= link_to_cydoc image_tag('export_bill.png'), "invoices" %>
+          <i style="font-size: 12pt">Rechnungsübersicht</i>
       </p>
 
       <%- if can? :print, :order_form or can? :label_print, :label_print%>
