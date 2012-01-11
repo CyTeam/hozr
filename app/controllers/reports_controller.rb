@@ -103,13 +103,13 @@ class ReportsController < ApplicationController
       case_values.push patient_params[:full_name].split(' ')[0].strip
     end
     
+    # Only use cases with classifications
+    case_keys.push "classification_id IS NOT NULL"
     # Build conditions array
     case_conditions = !case_keys.empty? ? [  case_keys.join(" AND "), *case_values ] : nil
     
     # The following doesn't work 'cause of a known bug: :include overrides :select
     # @records = Case.find( :all, :select => "classifications.code AS Pap, count(*) AS Anzahl, count(*)/(SELECT count(*) FROM cases)*100.0 AS Prozent", :include => 'classification', :group => 'classifications.code',  :order => "#{order}")
-    
-    case_conditions = [case_conditions, "classification_id IS NOT NULL"].compact.join(" AND ")
     count = Case.count(:conditions => case_conditions)
     
 
