@@ -17,7 +17,17 @@ class Doctor < ActiveRecord::Base
   has_one :user, :as => :object, :autosave => true
   delegate :email, :email=, :to => :user
 
+  # Office
+  # ======
   has_and_belongs_to_many :offices
+  # TODO:
+  # This is kind of a primary office providing printers etc.
+  # But it undermines the assumption that a doctor may belong/
+  # own more than one office.
+  def office
+    offices.first
+  end
+
 
   # Multichannel
   # ============
