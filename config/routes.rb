@@ -15,4 +15,5 @@ Hozr::Application.routes.draw do
 
   # Slidepath
   match 'slidepath/links' => 'slidepath#links'
+  match 'slidepath/scanned_cases' => 'slidepath#scanned_cases'
 end
