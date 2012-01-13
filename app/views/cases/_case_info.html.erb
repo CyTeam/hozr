@@ -12,6 +12,15 @@
     <th>Methode:</th><td><%= case_info.examination_method.name unless case_info.examination_method.nil? %></td>
   </tr>
   
+  <% unless case_info.location_index.empty? %>
+  <tr>
+    <th>Slidepath:</th>
+    <td>
+      <%= link_to_slidepath_case(case_info) %>
+    </td>
+  </tr>
+  <%- end %>
+
   <% photos_path = '/srv/zyto-labor.com/hozr/public/photos/' %>
   <% photos = Dir.glob( photos_path + case_info.praxistar_eingangsnr + '*.png') unless case_info.praxistar_eingangsnr.nil? %>
   <% unless photos.nil? or photos.empty? %>

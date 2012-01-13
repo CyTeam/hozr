@@ -36,4 +36,18 @@ module CasesHelper
 
     return @case.insurance.vcard.full_name + (@case.insurance_nr.present? ? " #{@case.insurance_nr.strip}" : "")
   end
+
+  # SlidePath
+  def slidepath_case_url(location_index)
+    "https://slidepath.zyto-labor.com/dih/webViewer.php?imageHash=#{location_index.image_hash}"
+  end
+
+  def link_to_slidepath_case(a_case)
+    links = []
+    for location_index in a_case.location_index
+      links << link_to("Scan", slidepath_case_url(location_index), :target => 'slidepath')
+    end
+
+    links.join(", ").html_safe
+  end
 end

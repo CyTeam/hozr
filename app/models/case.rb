@@ -206,4 +206,9 @@ class Case < ActiveRecord::Base
   def deliver_report_by_email
     CaseMailer.deliver_report(self)
   end
+
+  # Slidepath
+  def location_index
+    Slidepath::LocationIndex.where("fileName LIKE ?", "#{id}_%")
+  end
 end
