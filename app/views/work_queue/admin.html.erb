@@ -72,6 +72,12 @@
           <pre id="print_result_reports_log"><%= loading_indicator_tag :id => 'print_result_reports' %></pre>
       </p>
       <%- end %>
+
+      <h2><%= link_to "Digital Images", :controller => 'slidepath', :action => 'scanned_cases' %></h2>
+      <p>
+          <%= link_to image_tag('second_entry.png'), :controller => 'slidepath', :action => 'scanned_cases' %>
+      </p>
+
     </td>
    </tr>
   </table>
