@@ -1,1 +1,1 @@
-$('slidepath_links').replace('<%=escape_javascript link_to_slidepath_case(@case) %>');
+$('slidepath_links_<%= @case.id %>').replace('<%=escape_javascript link_to_slidepath_case(@case) %>');

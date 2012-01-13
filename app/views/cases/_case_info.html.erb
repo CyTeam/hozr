@@ -14,7 +14,7 @@
   
   <tr>
     <th>Slidepath:</th>
-    <td><span id="slidepath_links"/></td>
+    <td><span id="slidepath_links_<%= case_info.id %>"/></td>
   </tr>
   <script type="text/javascript">
      <%= remote_function :update => 'slidepath_links', :url => slidepath_links_path(:case_id => case_info.id) %>
