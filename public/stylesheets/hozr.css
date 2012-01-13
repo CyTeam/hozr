@@ -10,3 +10,8 @@
 #user-bar-greeting a, #user-bar-action a {
   color: #444;
 }
+
+/* Slidepath */
+#MainContent .slidepath_links a {
+  color: #165BDB;
+}
