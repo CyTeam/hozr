@@ -12,4 +12,7 @@ Hozr::Application.routes.draw do
 
   match 'order_form/print' => 'order_form#print', :format => 'pdf'
   match '/:controller(/:action(/:id))'
+
+  # Slidepath
+  match 'slidepath/links' => 'slidepath#links'
 end
