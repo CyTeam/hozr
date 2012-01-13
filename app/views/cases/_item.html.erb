@@ -1,0 +1,67 @@
+<% case_nr = "#{item.praxistar_eingangsnr}" %>
+<% case_nr += " (#{item.intra_day_id})" unless item.intra_day_id.nil? %>
+<tr>
+  <td>
+    <%=h item.entry_date unless item.entry_date.nil? %>
+    <%=h "(#{item.first_entry_by.code})" unless item.first_entry_by.nil? %>
+  </td>
+  <td><%= 
+    if item.ready_for_first_entry
+      link_to h(case_nr), :controller => 'cases', :action => 'first_entry', :id => item
+    elsif item.ready_for_second_entry
+      link_to h(case_nr), :controller => 'cases', :action => 'second_entry_pap_form', :id => item
+          elsif item.ready_for_p16
+      link_to h(case_nr), :controller => 'cases', :action => 'second_entry_pap_form', :id => item
+    else
+      link_to h(case_nr), :controller => 'cases', :action => 'result_report', :id => item
+    end
+  %></td>
+  <td class="PAP_<%=h item.classification.code unless item.classification.nil? %>" style="border-style: solid; border-width: 4px"><%=h item.classification.name unless item.classification.nil? %></td>
+  <td>
+  <% for finding in item.finding_classes %>
+    <div><%= finding.code %> - <%= finding.name.html_safe %></div>
+  <% end %>
+  </td>
+  <td><%= render :partial => '/patients/compact', :object => item.patient unless item.patient.nil? %></td>
+  <td><%=h item.doctor.name unless item.doctor.nil? %></td>
+  <td><%=h item.screener.code unless item.screener.nil? %></td>
+  <td>
+    <% if item.order_form %>
+      <%= link_to "Auftrag", url_for_file_column(item.order_form, "file") %> <%= link_to "Klinische Symptome", url_for_file_column(item.order_form, "file", "result_remarks") %> <%= link_to "Personalien", url_for_file_column(item.order_form, "file", "address") %>
+    <% end %>
+    <br/>
+    <span class="slidepath_links" id="slidepath_links_<%= item.id %>"/>
+    <script type="text/javascript">
+      <%= remote_function :url => slidepath_links_path(:case_id => item.id) %>
+    </script>
+  </td>
+  <td><%= "X" if item.needs_p16? %></td>
+  <td><%= "X" if item.needs_hpv? %></td>
+  <td>
+    sign:&nbsp;<%= item.screened_at.strftime("%d.%m.%Y") unless item.screened_at.nil? %><br/>
+    vers:&nbsp;<% for mailing in item.mailings %>
+      <%= link_to mailing.created_at.strftime("%d.%m.%Y"), :controller => 'mailings', :action => :show, :id => mailing.id %>
+    <% end %>
+    <% if item.needs_p16? or item.needs_hpv? %>
+      <br/>
+      <% if item.hpv_p16_prepared_at %>
+        HPV/P16:&nbsp;<%= item.hpv_p16_prepared_at.strftime('%d.%m.%Y') %> <%= item.hpv_p16_prepared_by.nil? ? "" : item.hpv_p16_prepared_by.code %>
+      <% else %>
+        HPV/P16:&nbsp;<span id="prepare_hpv_p16_<%= item.id %>"><%= link_to_remote image_tag('prepare_p16.png'), :update => "prepare_hpv_p16_#{item.id}", :url => { :controller => 'cases', :action => 'hpv_p16_prepared', :id => item } %></span>
+      <% end %>
+    <% end %>
+  </td>
+  <% if @include_bill %>
+    <td>
+      <%= link_to_cydoc "Rechnung", "sessions/#{item.session_id}" %>
+    </td>
+  <% end %>
+  <td>
+    <%= link_to image_tag('editinput.png'), :controller => 'cases', :action => 'edit', :id => item %>
+    <%= link_to image_tag('remove.png'), { :controller => 'cases', :action => 'destroy', :id => item }, :confirm => 'Fall wirklich löschen?', :method => :post if can? :destroy, Case %>
+    <%= link_to image_tag('fax.png', :title => 'Drucke Fax'), :controller => 'cases', :action => :print_result_report, :id => item, :page_size => 'A4' %>
+    <%= link_to image_tag('print.png', :title => 'Drucke Resultat'), :controller => 'cases', :action => :print_result_report, :id => item %>
+    <%= link_to image_tag('additional_case.png', :title => 'Nachträglicher HPV/P16'), :controller => 'cases', :action => :create_hpv_p16_for_case, :id => item %>
+    <%= link_to image_tag('select_16.png', :title => '2. Eingabe bestätigen'), :controller => 'cases', :action => :review_done, :id => item if item.needs_review? -%>
+  </td>
+</tr>
