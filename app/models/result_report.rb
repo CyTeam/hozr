@@ -10,18 +10,19 @@ class ResultReport < Prawn::Document
   
     font_path = Rails.root.join('data', 'fonts', 'cholla')
     font_families.update(
-      "Cholla Sans" => { :bold        => font_path.join("ChollSanBol.ttf"),
-                         :bold_italic => font_path.join("ChollSanBolIta.tff"),
-                         :normal      => font_path.join("ChollSanReg.ttf"),
-                         :italic      => font_path.join("ChollSanIta.ttf"),
-                         :thin        => font_path.join("ChollSanThi.ttf"),
-                         :thin_italic => font_path.join("ChollSanThiIta.tff") })
+      "Cholla Sans" => { :bold        => font_path.join("ChollSanBol.ttf").to_s,
+                         :bold_italic => font_path.join("ChollSanBolIta.tff").to_s,
+                         :normal      => font_path.join("ChollSanReg.ttf").to_s,
+                         :italic      => font_path.join("ChollSanIta.ttf").to_s,
+                         :thin        => font_path.join("ChollSanThi.ttf").to_s,
+                         :thin_italic => font_path.join("ChollSanThiIta.tff").to_s 
+    })
 
     # support page sizes
     case page.size
-    when 'A4':
+    when 'A4'
       font "Cholla Sans", :size => 13
-    when 'A5':
+    when 'A5'
       font "Cholla Sans", :size => 10
     else
       font "Cholla Sans"

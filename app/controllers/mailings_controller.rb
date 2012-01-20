@@ -66,9 +66,9 @@ class MailingsController < ApplicationController
 
     overview_printer = 'hpT2'
     case page_size
-    when 'A5':
+    when 'A5'
       printer = 'hpT3'
-    when 'A4':
+    when 'A4'
       printer = 'HP2840'
     end
 
@@ -84,9 +84,9 @@ class MailingsController < ApplicationController
 
     overview_printer = 'hpT2'
     case page_size
-    when 'A5':
+    when 'A5'
       printer = 'hpT3'
-    when 'A4':
+    when 'A4'
       printer = 'HP2840'
     end
 

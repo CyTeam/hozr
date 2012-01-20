@@ -423,9 +423,9 @@ class CasesController < ApplicationController
     page_size = params[:page_size] || 'A5'
 
     case page_size
-    when 'A5':
+    when 'A5'
       printer = 'hpT3'
-    when 'A4':
+    when 'A4'
       printer = 'HP2840'
     end
 

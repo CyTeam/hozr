@@ -175,9 +175,9 @@ class Case < ActiveRecord::Base
   # PDF
   def to_pdf(page_size = 'A5')
     case page_size
-    when 'A5':
+    when 'A5'
       prawn_options = { :page_size => page_size, :top_margin => 60, :left_margin => 35, :right_margin => 35, :bottom_margin => 23 }
-    when 'A4':
+    when 'A4'
       prawn_options = { :page_size => page_size, :top_margin => 90, :left_margin => 40, :right_margin => 40, :bottom_margin => 40 }
     end
 
