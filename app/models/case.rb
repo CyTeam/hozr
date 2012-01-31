@@ -14,10 +14,8 @@ class Case < ActiveRecord::Base
   has_and_belongs_to_many :mailings
   
   has_one :order_form
-
+  
   # Scopes
-  default_scope order(:praxistar_eingangsnr)
-
   scope :finished, where("screened_at IS NOT NULL AND needs_review = ?", false)
   scope :unfinished_p16, where("screened_at IS NULL AND needs_p16 = ?", true)
   scope :by_classification_group, lambda {|group|
