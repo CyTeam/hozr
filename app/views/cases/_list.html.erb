@@ -1,7 +1,7 @@
 <%= paginated_section @cases, :params => {:query => params[:order]} do %>
   <%= loading_indicator_tag :id => 'search' %>
   <table class="listing">
-    <%= render 'list_header' %>
-    <%= render :partial => 'item', :collection => @cases %>
+    <%= render 'cases/list_header' %>
+    <%= render :partial => 'cases/item', :collection => @cases %>
   </table>
 <% end %>
