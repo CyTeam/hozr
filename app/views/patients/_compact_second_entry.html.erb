@@ -1,8 +1,11 @@
-<% patient = compact %>
+<% patient = compact_second_entry %>
 <% remarks = true if remarks.nil? %>
 
 <div class="full_name"><%= link_to(h("#{patient.vcard.family_name} #{patient.vcard.given_name}"), :controller => '/patients', :action => 'show', :id => patient) %>
+ <%=h ' #' + patient.doctor_patient_nr if patient.doctor_patient_nr and patient.doctor_patient_nr.strip.size > 0 %></div>
 <div class="address">
+  <%=h "#{patient.vcard.street_address}" %><br />
+  <%=h "#{patient.vcard.postal_code} #{patient.vcard.locality}" %><br />
   <% unless patient.birth_date.nil? %>
     <% if patient.birth_date.starts_with?("01.01.") %><span style="background-color: red"><% end %>
     <%=h patient.birth_date %><br />
@@ -10,6 +13,9 @@
   <% end %>
 </div>
 <div>
+  <% unless patient.insurance.nil? %>
+    <i><%=h "#{patient.insurance.name} #{"#" + patient.insurance_nr if patient.insurance_nr}" %></i><br />
+  <% end %>
   <% unless patient.remarks.nil? or (remarks == false) %>
     <i><%=h "#{patient.remarks}"%></i><br />
   <% end %>
