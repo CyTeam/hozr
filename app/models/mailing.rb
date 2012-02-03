@@ -92,6 +92,7 @@ class Mailing < ActiveRecord::Base
   def print_result_reports(page_size, printer)
     # Workaround TransientJob not yet accepting options
     file = Tempfile.new('')
+    file.binmode
     file.puts(result_reports_to_pdf(page_size))
     file.close
 
@@ -113,6 +114,7 @@ class Mailing < ActiveRecord::Base
   def print_overview(printer)
     # Workaround TransientJob not yet accepting options
     file = Tempfile.new('')
+    file.binmode
     file.puts(overview_to_pdf)
     file.close
 
