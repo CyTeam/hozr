@@ -5,16 +5,27 @@
 _darcs
 DEADJOE
 
-# bundler
+# Rails
+# =====
 .bundle
-vendor/bundle
-
-# rails excludes
-log
-tmp
 db/*.sqlite3
 db/*-schema?rb
+log
+tmp
 
+# Vendor
+vendor/cache
+vendor/bundle
+
+# Local
+config/database.yml
+
+# Passenger
+# =========
+tmp/restart.txt
+
+# Rails Plugins
+# =============
 # tiny_mce plugin exclude
 public/javascripts/tiny_mce
 
