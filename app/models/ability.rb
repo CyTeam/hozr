@@ -16,12 +16,14 @@ class Ability
     
     if user.role? :sysadmin
       can :manage, :all
-    elsif user.role? :admin
+    end
+    if user.role? :admin
       can :label_print, :label_print
       can :print, :order_form
       can :manage, Mailing
       can :manage, Case
-    elsif user.role? :zyto
+    end
+    if user.role? :zyto
       can :manage, Case
     end
 
