@@ -90,6 +90,6 @@ mv $order_forms $ORDER_FORM_DIR/current
 
 rails_run "OrderForm.import_order_forms('$ORDER_FORM_DIR/current')"
 
-mv $ORDER_FORM_DIR/current/* $ORDER_FORM_DIR/done
+rm -f $ORDER_FORM_DIR/current/* 
 
 rm $LOCK_FILE
