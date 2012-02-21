@@ -4,7 +4,7 @@
       <fieldset style="width: 98%; text-align: center">
         <legend>Bemerkungen</legend>
         <%= link_to image_tag(url_for_image_column(@case.order_form, "file", :result_remarks), :size => "470x211"), url_for_image_column(@case.order_form, "file", :result_remarks) unless @case.order_form.nil? or url_for_image_column(@case.order_form, "file", :result_remarks).nil? %>
-         <%= link_to image_tag(url_for_image_column(@case.order_form, "file", :address), :size => "300x150"), url_for_image_column(@case.order_form, "file", :address) unless @case.order_form.nil? or url_for_image_column(@case.order_form, "file", :address).nil?%>
+         <%= link_to image_tag(url_for_image_column(@case.order_form, "file", :head), :size => "300x150"), url_for_image_column(@case.order_form, "file", :head) unless @case.order_form.nil? or url_for_image_column(@case.order_form, "file", :head).nil?%>
      </fieldset>
       <fieldset style="width: 98%">
         <legend>Klassifikation</legend>
