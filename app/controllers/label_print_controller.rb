@@ -53,4 +53,29 @@ class LabelPrintController < ApplicationController
     
     redirect_to :action => :case_label
   end
+
+  # P16 Labels
+  def case_label_p16
+    @cases = Case.all( :conditions => ["(needs_p16 = ? OR needs_hpv = ?) AND screened_at IS NULL", true, true])
+     
+     # Cleanup table
+    OtLabel.delete_all
+
+    # Create new records
+    for label in @cases
+      ot_label = OtLabel.new
+      ot_label.sys_id = label.id
+      ot_label.prax_nr = label.praxistar_eingangsnr
+      ot_label.doc_fname = label.doctor.family_name
+      ot_label.doc_gname = label.doctor.given_name
+      ot_label.pat_fname = label.patient.vcard.family_name
+      ot_label.pat_gname = label.patient.vcard.given_name
+      ot_label.pat_bday = label.patient.birth_date
+      ot_label.save
+    end
+
+    # Trigger printing
+    system("touch public/trigger/triger.txt")
+  end
+
 end
