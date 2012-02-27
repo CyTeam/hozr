@@ -2,80 +2,77 @@
 <table>
   <tr>
     <td style="vertical-align: top">
-      <h2><%= link_to "Anschreiben", :controller => 'cases', :action => 'unassigned_form' %></h2>
+      <h2>Anschreiben</h2>
       <p>
-          <%= link_to image_tag('assign.png'), :controller => 'cases', :action => 'unassigned_form' %>
+          <%= link_to image_tag('assign.png', :size => '45x45'), :controller => 'cases', :action => 'unassigned_form' %>
           <i style="font-size: 12pt"><b><%= @assign_count %></b> Auftragsformulare.</i>
       </p>
 
-      <h2><%= link_to "Ersteingabe", :controller => 'cases', :action => 'first_entry_queue' %></h2>
+      <h2>Ersteingabe</h2>
       <p>
-          <%= link_to image_tag('first_entry.png'), :controller => 'cases', :action => 'first_entry_queue' %>
+          <%= link_to image_tag('first_entry.png', :size => '45x45'), :controller => 'cases', :action => 'first_entry_queue' %>
           <i style="font-size: 12pt"><b><%= @first_entry_count %></b> Ersteingaben.</i>
       </p>
 
-      <h2><%= link_to "Zweiteingabe", :controller => 'cases', :action => 'second_entry_queue' %></h2>
+      <h2>Zweiteingabe</h2>
       <p>
-          <%= link_to image_tag('second_entry.png'), :controller => 'cases', :action => 'second_entry_queue' %>
+          <%= link_to image_tag('second_entry.png', :size => '45x45'), :controller => 'cases', :action => 'second_entry_queue' %>
           <i style="font-size: 12pt"><b><%= @second_entry_count %></b> Zweiteingaben.</i>
       </p>
 
-      <h2><%= link_to "HPV/p16", :controller => 'cases', :action => 'hpv_p16_queue' %></h2>
+      <h2>HPV P16</h2>
       <p>
-          <%= link_to image_tag('second_entry.png'), :controller => 'cases', :action => 'hpv_p16_queue' %>
+          <%= link_to image_tag('second_entry.png', :size => '45x45'), :controller => 'cases', :action => 'hpv_p16_queue' %>
           <i style="font-size: 12pt"><b><%= @p16_count %></b> p16 (<b><%= @p16_prepared_count %></b> herausgesucht) und <b><%= @hpv_count %></b> HPV</i>
       </p>
 
-      <h2><%= link_to "Review", :controller => 'cases', :action => 'review_queue' %></h2>
+      <h2>Review</h2>
       <p>
-          <%= link_to image_tag('second_entry.png'), :controller => 'cases', :action => 'review_queue' %>
+          <%= link_to image_tag('second_entry.png', :size => '45x45'), :controller => 'cases', :action => 'review_queue' %>
           <i style="font-size: 12pt"><b><%= @review_count %></b> Reviews.</i>
       </p>
 
     </td>
 
     <td style="vertical-align: top; padding-left: 5em">
-      <h2><%= link_to_cydoc("Rechnungswesen", "invoices") %></h2>
+      <h2>Rechnungswesen</h2>
       <p>
-          <%= link_to_cydoc image_tag('export_bill.png'), "invoices" %>
+          <%= link_to_cydoc image_tag('export_bill.png', :size => '45x45'), "invoices" %>
           <i style="font-size: 12pt">Rechnungsübersicht</i>
       </p>
 
-      <%- if can? :print, :order_form or can? :label_print, :label_print%>
       <h2>Drucken</h2>
-      <%- end %>
 
-      <%- if can? :print, :order_form %>
       <p>
-          <%= link_to image_tag('printer_64.png'), :controller => '/order_form', :action => :form %>
+          <%= link_to image_tag('printer_64.png', :size => '40x40'), :controller => '/order_form', :action => :form %>
 	  <i style="font-size: 12pt">Papzettel Drucken</i>
       </p>
-      <%- end %>
       
-      <%- if can? :label_print, :label_print %>
       <p>
-          <%= link_to image_tag('printer_64.png'), :controller => '/label_print', :action => :case_label %>
+          <%= link_to image_tag('printer_64.png', :size => '40x40'), :controller => '/label_print', :action => :case_label %>
           <i style="font-size: 12pt">Objektträger Etiketten drucken</i>
       </p>
 
       <p>
-          <%= link_to image_tag('printer_64.png'), :controller => '/label_print', :action => :post_label %>
+	  <%= link_to image_tag('printer_64.png', :size => '40x40'), :controller => 'label_print', :action => :case_label_p16 %>
+          <i style="font-size: 12pt">P16 Etiketten drucken</i>
+      </p>
+
+      <p>
+          <%= link_to image_tag('printer_64.png', :size => '40x40'), :controller => '/label_print', :action => :post_label %>
           <i style="font-size: 12pt">Packet Etiketten drucken</i>
       </p>
-      <%- end %>
 
-      <%- if can? :generate, Mailing %>
-      <h2><%= link_to("Resultate freigeben", {:controller => '/mailings', :action => 'generate'} ) %></h2>
+      <h2>Resultate freigeben</h2>
       <p>
-          <%= link_to (image_tag('print_result.png'), {:controller => '/mailings', :action => 'generate'} ) %>
+          <%= link_to (image_tag('print_result.png', :size => '45x45'), {:controller => '/mailings', :action => 'generate'} ) %>
           <i style="font-size: 12pt"><b><%= @result_for_delivery_count %></b> Neue Resultate</i>
           <pre id="print_result_reports_log"><%= loading_indicator_tag :id => 'print_result_reports' %></pre>
       </p>
-      <%- end %>
 
-      <h2><%= link_to "Digital Images", :controller => 'slidepath', :action => 'scanned_cases' %></h2>
+      <h2>Digital Images</h2>
       <p>
-          <%= link_to image_tag('second_entry.png'), :controller => 'slidepath', :action => 'scanned_cases' %>
+          <%= link_to image_tag('second_entry.png', :size => '45x45'), :controller => 'slidepath', :action => 'scanned_cases' %>
       </p>
 
     </td>
