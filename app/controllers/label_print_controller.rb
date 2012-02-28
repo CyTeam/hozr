@@ -76,6 +76,7 @@ class LabelPrintController < ApplicationController
 
     # Trigger printing
     system("touch public/trigger/triger.txt")
+    redirect_to :back
   end
 
 end
