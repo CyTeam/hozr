@@ -79,4 +79,28 @@ class LabelPrintController < ApplicationController
     redirect_to :back
   end
 
+  # Single label print 
+  def case_label_single
+    @cases = Case.find(params[:id])
+
+    label = @cases
+     # Cleanup table
+    OtLabel.delete_all
+
+    # Create new records
+    ot_label = OtLabel.new
+    ot_label.sys_id = label.id
+    ot_label.prax_nr = label.praxistar_eingangsnr
+    ot_label.doc_fname = label.doctor.family_name
+    ot_label.doc_gname = label.doctor.given_name
+    ot_label.pat_fname = label.patient.vcard.family_name
+    ot_label.pat_gname = label.patient.vcard.given_name
+    ot_label.pat_bday = label.patient.birth_date
+    ot_label.save
+
+    # Trigger printing
+    system("touch public/trigger/triger.txt")
+    redirect_to :back
+  end
+
 end
