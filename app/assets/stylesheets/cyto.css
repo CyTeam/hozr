@@ -26,9 +26,18 @@ input.PAP_3M-c1-2, input.PAP_3S-c2-3 {color: black; background-color: #7eafff }
   .no_print {display: none;}
 }
 
-input.Finding_a {color: black; background-color: #00CC00; }
-input.Finding_b {color: black; background-color: yellow; }
-input.Finding_c {color: black; background-color: red; }
+#quality_findings .finding_action, #top_findings .finding_action {
+  display: inline-block;
+  padding: 5px;
+  margin: 5px;
+  min-width: 16em;
+  border: 1px solid gray;
+  color: black;
+}
+
+#quality_findings a.Finding_a {background-color: #00CC00; }
+#quality_findings a.Finding_b {background-color: yellow; }
+#quality_findings a.Finding_c {background-color: red; }
 
 tr.bill_state_cancelled {
   color: grey;

@@ -16,6 +16,10 @@ module CasesHelper
     css_class += "finding_group_#{finding.finding_group.name}"
   end
 
+  def hpv_p16_prepared_text(a_case)
+    "#{a_case.hpv_p16_prepared_at.strftime('%d.%m.%Y')} #{a_case.hpv_p16_prepared_by.nil? ? "" : a_case.hpv_p16_prepared_by.code}"
+  end
+
   # From CyLab
   def patient_nr
     return nil if @case.patient.doctor_patient_nr.blank?

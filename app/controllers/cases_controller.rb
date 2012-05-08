@@ -8,15 +8,15 @@ class CasesController < ApplicationController
   helper :doctors
 
   # Tiny MCE
-  uses_tiny_mce(:options => {:theme => 'advanced',
-                           :theme_advanced_toolbar_location => "top",
-                           :theme_advanced_toolbar_align => "left",
-                           :theme_advanced_resizing => true,
-                           :theme_advanced_resize_horizontal => false,
-                           :theme_advanced_buttons1 => %w{bold italic underline separator indent outdent separator bullist forecolor backcolor separator undo redo},
-                           :theme_advanced_buttons2 => [],
-                           :theme_advanced_buttons3 => []},
-              :only => [:new, :edit, :show, :index, :result_report, :second_entry_form])
+#  uses_tiny_mce(:options => {:theme => 'advanced',
+#                           :theme_advanced_toolbar_location => "top",
+#                           :theme_advanced_toolbar_align => "left",
+#                           :theme_advanced_resizing => true,
+#                           :theme_advanced_resize_horizontal => false,
+#                           :theme_advanced_buttons1 => %w{bold italic underline separator indent outdent separator bullist forecolor backcolor separator undo redo},
+#                           :theme_advanced_buttons2 => [],
+#                           :theme_advanced_buttons3 => []},
+#              :only => [:new, :edit, :show, :index, :result_report, :second_entry_form])
 
   auto_complete_for :finding_class, :selection, :limit => 12
 
@@ -300,7 +300,7 @@ class CasesController < ApplicationController
 
     @case.save
 
-    render :partial => 'finding_classes/list_findings'
+    render 'finding_classes/list_findings'
   end
 
   def add_finding
@@ -331,7 +331,7 @@ class CasesController < ApplicationController
       flash.now[:error] = "Code bereits eingegeben"
     end
 
-    render :partial => 'finding_classes/list_findings'
+    render 'finding_classes/list_findings'
   end
 
   def update_finding_text
@@ -345,8 +345,6 @@ class CasesController < ApplicationController
 
   def edit_finding_text
     @case = Case.find(params[:id])
-
-    render :partial => 'edit_finding_text'
   end
 
   def sign
@@ -465,12 +463,10 @@ class CasesController < ApplicationController
   end
 
   def hpv_p16_prepared
-    a_case = Case.find(params[:id])
-    a_case.hpv_p16_prepared_at = DateTime.now
-    a_case.hpv_p16_prepared_by = current_user.object
-    a_case.save
-
-    render :text => "#{a_case.hpv_p16_prepared_at.strftime('%d.%m.%Y')} #{a_case.hpv_p16_prepared_by.nil? ? "" : a_case.hpv_p16_prepared_by.code}"
+    @case = Case.find(params[:id])
+    @case.hpv_p16_prepared_at = DateTime.now
+    @case.hpv_p16_prepared_by = current_user.object
+    @case.save
   end
 
   # Create a new HPV/P16 case after a case has been closed
@@ -523,12 +519,12 @@ class CasesController < ApplicationController
 
   def destroy
     Case.find(params[:id]).destroy
-    redirect_to :action => 'list'
+    redirect_to cases_path
   end
 
   def order_form
     @case = Case.find(params[:id])
 
-     send_file @case.order_form.file, :type => 'image/jpeg', :disposition => 'inline'
+    send_file @case.order_form.file, :type => 'image/jpeg', :disposition => 'inline'
   end
 end

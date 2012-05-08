@@ -1,11 +1,11 @@
 <table>
   <tr>
     <td id="head" style="min-width: 600px">
-      <%= (link_to image_tag(url_for_image_column(@case.order_form, "file", @header_image_type )), url_for_file_column(@case.order_form, "file")) unless @case.order_form.nil? %>
+      <%= order_form_head_image(@case.order_form, @header_image_type ) %>
     </td>
     <td>
-      <%= link_to_remote image_tag('zoom-in.png'), :update => 'head', :url => { :controller => 'order_forms', :action => 'head_big', :id => @case.order_form } %>
-      <%= link_to_remote image_tag('zoom-out.png'), :update => 'head', :url => { :controller => 'order_forms', :action => 'head_small', :id => @case.order_form } %>
+      <%= link_to image_tag('zoom-in.png'), head_big_order_form_path(@case.order_form), :remote => true %>
+      <%= link_to image_tag('zoom-out.png'), head_small_order_form_path(@case.order_form), :remote => true %>
       <%= link_to image_tag('zoom-full.png'), url_for_file_column(@case.order_form, "file") unless @case.order_form.nil? %>
       <br/><br/>
       <%= (link_to image_tag(url_for_image_column(@case.order_form, "file", :foot), :width => 450), url_for_file_column(@case.order_form, "file")) unless @case.order_form.nil? %>

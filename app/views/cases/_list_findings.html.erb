@@ -6,4 +6,4 @@
   <%= @case.finding_text.html_safe %>
 <% end %>
 
-<%= button_to_function 'Edit', remote_function( :update => 'finding_list', :url => { :action => 'edit_finding_text', :id => @case }) %>
+<%= button_to 'Edit', edit_finding_text_case_path(@case), :remote => true, :method => :get %>

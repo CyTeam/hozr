@@ -32,7 +32,11 @@
     <br/>
     <span class="slidepath_links" id="slidepath_links_<%= item.id %>"/>
     <script type="text/javascript">
-      <%= remote_function :url => slidepath_links_path(:case_id => item.id) %>
+$.ajax({
+    type: 'POST',
+    url: '<%= slidepath_links_url(:case_id => item.id) %>',
+    success: function(data){eval(data);}
+});
     </script>
   </td>
   <td><%= "X" if item.needs_p16? %></td>
@@ -45,9 +49,9 @@
     <% if item.needs_p16? or item.needs_hpv? %>
       <br/>
       <% if item.hpv_p16_prepared_at %>
-        HPV/P16:&nbsp;<%= item.hpv_p16_prepared_at.strftime('%d.%m.%Y') %> <%= item.hpv_p16_prepared_by.nil? ? "" : item.hpv_p16_prepared_by.code %>
+        HPV/P16:&nbsp;<%= hpv_p16_prepared_text(item) %>
       <% else %>
-        HPV/P16:&nbsp;<span id="prepare_hpv_p16_<%= item.id %>"><%= link_to_remote image_tag('prepare_p16.png'), :update => "prepare_hpv_p16_#{item.id}", :url => { :controller => 'cases', :action => 'hpv_p16_prepared', :id => item } %></span>
+        HPV/P16:&nbsp;<span id="prepare_hpv_p16_<%= item.id %>"><%= link_to image_tag('prepare_p16.png'), hpv_p16_prepared_case_path(item), :method => :post, :remote => true %></span>
       <% end %>
     <% end %>
   </td>

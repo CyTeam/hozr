@@ -112,6 +112,5 @@ class SearchController < ApplicationController
     end
     
     @include_bill = true
-    render :partial => 'cases/list'
   end
 end

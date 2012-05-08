@@ -48,8 +48,6 @@ class PatientsController < ApplicationController
       conditions = !keys.compact.empty? ? [  keys.compact.join(" AND "), *values ] : nil
       @patients = Patient.find :all, :conditions => conditions, :include => {:vcard => :address}, :order => 'vcards.family_name'
     end
-    
-    render :partial => 'list'
   end
   
   def search_by_eingangsnr

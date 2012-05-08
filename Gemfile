@@ -94,7 +94,7 @@ gem 'haml'
 gem 'formtastic'
 
 # Wysiwyg
-gem 'tiny_mce'
+gem 'tinymce-rails'
 
 # Files
 gem 'file-column', :path => '/root/src/file_column'
