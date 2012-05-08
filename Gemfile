@@ -4,12 +4,24 @@ source 'http://rubygems.org'
 
 # Rails
 # =====
-gem 'rails', '~> 3.0.0'
+gem 'rails'
 
 # Database
 gem 'sqlite3'
-gem 'mysql2', '~> 0.2.7'
+gem 'mysql2'
 gem 'activerecord-sqlserver-adapter'
+
+# Gems used only for assets and not required
+# in production environments by default.
+group :assets do
+  gem 'sass-rails'
+  gem 'sprockets'
+  gem 'coffee-rails'
+  gem 'therubyracer'
+  gem 'uglifier'
+end
+
+gem 'jquery-rails'
 
 # Development
 # ===========
@@ -39,6 +51,7 @@ group :test do
   # Autotest
   gem 'autotest'
   gem 'autotest-rails'
+  gem 'ZenTest', '< 4.6.0' # Keep it working with gems < 1.8
 end
 
 group :test, :development do
