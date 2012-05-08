@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111129135617) do
+ActiveRecord::Schema.define(:version => 20120221091102) do
 
   create_table "accounts", :force => true do |t|
     t.string   "number"
@@ -69,6 +69,19 @@ ActiveRecord::Schema.define(:version => 20111129135617) do
   add_index "appointments", ["recall_id"], :name => "index_appointments_on_recall_id"
   add_index "appointments", ["state"], :name => "index_appointments_on_state"
   add_index "appointments", ["treatment_id"], :name => "index_appointments_on_treatment_id"
+
+  create_table "attachments", :force => true do |t|
+    t.string   "title"
+    t.string   "file"
+    t.integer  "object_id"
+    t.string   "object_type"
+    t.string   "code"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "attachments", ["code"], :name => "index_attachments_on_code"
+  add_index "attachments", ["object_id", "object_type"], :name => "index_attachments_on_object_id_and_object_type"
 
   create_table "banks", :force => true do |t|
     t.integer  "vcard_id"
@@ -211,6 +224,8 @@ ActiveRecord::Schema.define(:version => 20111129135617) do
     t.string   "zsr",               :limit => 7
     t.text     "remarks"
     t.integer  "imported_id"
+    t.boolean  "use_vesr"
+    t.boolean  "print_payment_for"
   end
 
   add_index "doctors", ["active"], :name => "active"
@@ -427,13 +442,26 @@ ActiveRecord::Schema.define(:version => 20111129135617) do
   add_index "insurances", ["imported_id"], :name => "index_insurances_on_imported_id"
   add_index "insurances", ["role"], :name => "index_insurances_on_role"
 
+  create_table "invoice_batch_jobs", :force => true do |t|
+    t.date     "value_date"
+    t.integer  "count"
+    t.string   "tiers_name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.text     "failed_jobs"
+    t.string   "type"
+  end
+
+  create_table "invoice_batch_jobs_invoices", :id => false, :force => true do |t|
+    t.integer "invoice_batch_job_id"
+    t.integer "invoice_id"
+  end
+
   create_table "invoices", :force => true do |t|
     t.text     "remark"
     t.integer  "tiers_id"
     t.integer  "law_id"
     t.integer  "treatment_id"
-    t.text     "role_title"
-    t.text     "role_type"
     t.string   "place_type",               :default => "Praxis"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -447,13 +475,17 @@ ActiveRecord::Schema.define(:version => 20111129135617) do
     t.date     "reminder_due_date"
     t.date     "second_reminder_due_date"
     t.date     "third_reminder_due_date"
+    t.integer  "patient_vcard_id"
+    t.integer  "billing_vcard_id"
   end
 
+  add_index "invoices", ["imported_esr_reference"], :name => "index_invoices_on_imported_esr_reference"
   add_index "invoices", ["invoice_replaced_by"], :name => "index_invoices_on_invoice_replaced_by"
   add_index "invoices", ["law_id"], :name => "index_invoices_on_law_id"
   add_index "invoices", ["state"], :name => "index_invoices_on_state"
   add_index "invoices", ["tiers_id"], :name => "index_invoices_on_tiers_id"
   add_index "invoices", ["treatment_id"], :name => "index_invoices_on_treatment_id"
+  add_index "invoices", ["value_date"], :name => "index_invoices_on_value_date"
 
   create_table "invoices_service_records", :id => false, :force => true do |t|
     t.integer "invoice_id"
@@ -534,6 +566,7 @@ ActiveRecord::Schema.define(:version => 20111129135617) do
     t.text     "pat_bday"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "2dcode"
   end
 
   create_table "patients", :force => true do |t|
@@ -556,6 +589,7 @@ ActiveRecord::Schema.define(:version => 20111129135617) do
   add_index "patients", ["birth_date"], :name => "birth_date"
   add_index "patients", ["doctor_id"], :name => "patients_doctor_id_index"
   add_index "patients", ["doctor_patient_nr"], :name => "index_patients_on_doctor_patient_nr"
+  add_index "patients", ["dunning_stop"], :name => "index_patients_on_dunning_stop"
   add_index "patients", ["updated_at"], :name => "patients_updated_at_index"
 
   create_table "phone_numbers", :force => true do |t|
@@ -598,6 +632,17 @@ ActiveRecord::Schema.define(:version => 20111129135617) do
   add_index "recalls", ["appointment_id"], :name => "index_recalls_on_appointment_id"
   add_index "recalls", ["patient_id"], :name => "index_recalls_on_patient_id"
   add_index "recalls", ["state"], :name => "index_recalls_on_state"
+
+  create_table "returned_invoices", :force => true do |t|
+    t.string   "state",      :default => "ready"
+    t.integer  "invoice_id"
+    t.text     "remarks"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "doctor_id"
+  end
+
+  add_index "returned_invoices", ["doctor_id"], :name => "index_returned_invoices_on_doctor_id"
 
   create_table "roles", :force => true do |t|
     t.string   "name"
@@ -720,13 +765,13 @@ ActiveRecord::Schema.define(:version => 20111129135617) do
   end
 
   create_table "tariff_items", :force => true do |t|
-    t.decimal  "amount_mt",                   :precision => 8, :scale => 2
-    t.decimal  "amount_tt",                   :precision => 8, :scale => 2
+    t.decimal  "amount_mt",                  :precision => 8, :scale => 2
+    t.decimal  "amount_tt",                  :precision => 8, :scale => 2
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "code",          :limit => 10
+    t.string   "code"
     t.text     "remark"
-    t.boolean  "obligation",                                                :default => true
+    t.boolean  "obligation",                                               :default => true
     t.string   "type"
     t.string   "tariff_type",   :limit => 3
     t.integer  "vat_class_id"
@@ -779,11 +824,13 @@ ActiveRecord::Schema.define(:version => 20111129135617) do
     t.integer  "referrer_id"
     t.string   "place_type",  :default => "Praxis"
     t.integer  "imported_id"
+    t.string   "state",       :default => "open"
   end
 
   add_index "treatments", ["law_id"], :name => "index_treatments_on_law_id"
   add_index "treatments", ["patient_id"], :name => "index_treatments_on_patient_id"
   add_index "treatments", ["referrer_id"], :name => "index_treatments_on_referrer_id"
+  add_index "treatments", ["state"], :name => "index_treatments_on_state"
 
   create_table "users", :force => true do |t|
     t.string   "login",                     :limit => 40
