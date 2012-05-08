@@ -210,8 +210,7 @@ ActiveRecord::Schema.define(:version => 20120221091102) do
     t.integer "treatment_id"
   end
 
-  create_table "doctors", :id => false, :force => true do |t|
-    t.integer  "id",                                                :null => false
+  create_table "doctors", :force => true do |t|
     t.string   "code"
     t.string   "speciality"
     t.datetime "created_at"
