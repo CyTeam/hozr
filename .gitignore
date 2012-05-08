@@ -35,3 +35,8 @@ public/page
 
 # label printing
 public/trigger
+
+# Sphinx Freetext Search
+db/sphinx
+config/*.sphinx.conf
+config/sphinx/

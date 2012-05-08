@@ -5,6 +5,15 @@ GIT
     prototype_legacy_helper (0.0.0)
 
 GIT
+  remote: https://github.com/freelancing-god/thinking-sphinx.git
+  revision: 78b3481796ae0f75b144c4ac57d577af0c1b63d4
+  specs:
+    thinking-sphinx (2.0.11)
+      activerecord (>= 3.0.3)
+      builder (>= 2.1.2)
+      riddle (>= 1.5.0)
+
+GIT
   remote: https://github.com/huerlisi/lyb_devise_admin.git
   revision: 0c7d764de58468176366b067fd4ff36cc0efe55c
   specs:
@@ -131,6 +140,7 @@ GEM
     rake (0.9.2)
     rdoc (3.8)
     responders (0.6.4)
+    riddle (1.5.1)
     ruby_parser (2.0.6)
       sexp_processor (~> 3.0)
     rubyzip (0.9.4)
@@ -185,6 +195,7 @@ DEPENDENCIES
   ruby_parser
   shoulda
   sqlite3
+  thinking-sphinx!
   tiny_mce
   use_db
   will_paginate (~> 3.0.pre)

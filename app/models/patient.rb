@@ -68,6 +68,39 @@ class Patient < ActiveRecord::Base
     patients
   }
     
+  # Sphinx Search
+  # =============
+  define_index do
+    # Delta index
+#    set_property :delta => true
+
+    indexes birth_date
+
+    indexes vcard.full_name
+    indexes vcard.nickname
+    indexes vcard.family_name
+    indexes vcard.given_name
+    indexes vcard.additional_name
+    indexes vcard.address.street_address
+    indexes vcard.address.postal_code
+    indexes vcard.address.locality
+    indexes vcard.address.extended_address
+    indexes vcard.address.post_office_box
+
+    indexes billing_vcard.full_name
+    indexes billing_vcard.nickname
+    indexes billing_vcard.family_name
+    indexes billing_vcard.given_name
+    indexes billing_vcard.additional_name
+    indexes billing_vcard.address.street_address
+    indexes billing_vcard.address.postal_code
+    indexes billing_vcard.address.locality
+    indexes billing_vcard.address.extended_address
+    indexes billing_vcard.address.post_office_box
+
+    indexes doctor_patient_nr
+  end
+
   #TODO: differs from CyLab version as birth_date is overloaded
   def to_s(format = :default)
     case format
