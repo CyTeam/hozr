@@ -13,7 +13,7 @@
 <%= text_field 'case', 'praxistar_eingangsnr'  %></p>
 
 <p><label for="case_doctor_id">Arzt:</label><br/>
-<%= select :case, :doctor_id, Doctor.all.collect { |m| [ m.name, m.id ] } %></p>
+<%= select :case, :doctor_id, doctors_collection %></p>
 
 <p><label for="case_examination_method_id">Methode</label><br/>
 <%= select :case, :examination_method_id, ExaminationMethod.all.collect { |m| [ m.name, m.id ] } %></p>
