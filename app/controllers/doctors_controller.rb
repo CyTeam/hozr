@@ -8,7 +8,7 @@ class DoctorsController < ApplicationController
   def list
     params[:order] ||= 'vcards.family_name, vcards.given_name'
     
-    @doctors = Doctor.find :all,  :include => :praxis, :order => params[:order]
+    @doctors = Doctor.includes(:praxis).order(params[:order]).active.all
   end
 
   def show
