@@ -72,26 +72,21 @@ class PatientsController < ApplicationController
     patient = params[:patient]
     @patient = Patient.new(patient)
     @vcard = Vcard.new(params[:vcard])
+    @patient.billing_vcard = Vcard.new(params[:billing_vcard])
+    
     @vcard.honorific_prefix = 'Frau'
-
-    if params[:case_id]
-      @case = Case.find(params[:case_id])
-      @patient.doctor = @case.doctor
-    end
-
-    render :partial => 'new'
   end
 
   def create
     @patient = Patient.new(params[:patient])
-    @patient.vcard = Vcard.new(params[:vcard])
-    @patient.billing_vcard = Vcard.new(params[:billing_vcard])
+    @vcard = @patient.vcard = Vcard.new(params[:vcard])
+    @billing_vcard = @patient.billing_vcard = Vcard.new(params[:billing_vcard])
     
     @patient.sex = HonorificPrefix.find_by_name(@patient.vcard.honorific_prefix).sex
 
     if @patient.save
       flash[:notice] = 'Patient was successfully created.'
-      redirect_to :action => 'list'
+      redirect_to patients_path
     else
       render :action => 'new'
     end

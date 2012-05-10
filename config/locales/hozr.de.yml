@@ -2,6 +2,7 @@ de:
   activerecord:
     models:
       user: Benutzer
+      patient: Patient
 
     attributes:
       user:
@@ -10,6 +11,8 @@ de:
         login:     Benutzername
         locked_at: Gesperrt seit
         last_sign_in_at: Letzter Login
+      patient:
+        birth_date: Geburtsdatum
 
   roles:
     admin:    Administration

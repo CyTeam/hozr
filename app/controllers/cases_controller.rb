@@ -133,6 +133,20 @@ class CasesController < ApplicationController
     @header_image_type = session[:header_image_type] || :head
   end
 
+  def set_new_patient
+    @case = Case.find(params[:id])
+
+    patient = params[:patient]
+    @patient = Patient.new(patient)
+    @vcard = Vcard.new(params[:vcard])
+    @patient.billing_vcard = Vcard.new(params[:billing_vcard])
+    @vcard.honorific_prefix = 'Frau'
+
+    @patient.doctor = @case.doctor
+
+    render 'patients/edit_inline'
+  end
+
   def set_patient
     @case = Case.find(params[:id])
     # Set entry_date only when setting patient for first time

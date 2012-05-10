@@ -31,6 +31,7 @@ Hozr::Application.routes.draw do
 
     member do
       post :set_patient
+      get :set_new_patient
       post :hpv_p16_prepared
       post :add_finding
       delete :remove_finding

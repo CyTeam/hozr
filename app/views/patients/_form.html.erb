@@ -32,8 +32,10 @@ $('vcard_honorific_prefix').focus()
   <table>
     <%= fields_for :patient, @patient, :builder => Rubaidh::TabularForm::TabularFormBuilder do |patient| %>
       <%= patient.text_field :birth_date, :size => 15, :label => "Geburtsdatum" %>
-      <%= patient.select "insurance_id", insurances_collection, :include_blank => true, :label => "Versicherung" %>
-      <%= patient.text_field :insurance_nr, :size => 15, :label => "Versicherungsnr." %>
+      <%= patient.fields_for :insurance_policies do |i| %>
+        <%= i.select "insurance_id", insurances_collection, :include_blank => true, :label => "Versicherung" %>
+        <%= i.text_field :number, :size => 15, :label => "Versicherungsnr." %>
+      <% end %>
       <%= select_doctors :form => patient %>
       <%= patient.text_field :doctor_patient_nr, :size => 15, :label => "Patientennr." %>
       <%= patient.text_area :remarks, :label => "Bemerkungen", :cols => 30, :rows => 3 %>
