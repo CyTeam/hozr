@@ -6,7 +6,7 @@ class SendQueuesController < ApplicationController
 
   # Show list of mailings
   def list
-    @send_queues = SendQueue.sent.order('created_at DESC').limit(100).all
+    @send_queues = SendQueue.sent.order('created_at DESC').limit(200).all
   end
 
   # Show list of unprinted mailings
