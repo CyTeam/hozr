@@ -25,22 +25,6 @@ class CasesController < ApplicationController
     render :action => 'list'
   end
 
-  def search
-    conditions = {:sql => [], :params => []}
-    if params[:case_search][:doctor_id] > ""
-      conditions[:sql]<< "doctor_id = ?"
-      conditions[:params]<< params[:case_search][:doctor_id].to_i
-    end
-    if params[:case_search][:praxistar_eingangsnr] > ""
-      conditions[:sql]<< "id = ?"
-      conditions[:params]<< Case.find_by_praxistar_eingangsnr(CaseNr.new(params[:case_search][:praxistar_eingangsnr]).to_s).id || 0
-    end
-
-    @cases = Case.paginate(:page => params['page'], :per_page => 144, :conditions =>  [ conditions[:sql].join(" AND "), conditions[:params] ])
-
-    render :action => :list
-  end
-
   def history
     @case = Case.find(params[:id])
     redirect_to :controller => '/patients', :action => 'show', :id => @case.patient
