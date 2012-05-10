@@ -91,7 +91,7 @@ gem 'i18n_rails_helpers'
 gem 'haml'
 
 # Formtastic
-gem 'formtastic'
+gem 'formtastic', '~>2.1.0'
 
 # Wysiwyg
 gem 'tinymce-rails'
