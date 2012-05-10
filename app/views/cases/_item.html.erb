@@ -62,7 +62,7 @@ $.ajax({
   <% end %>
   <td>
     <%= link_to image_tag('editinput.png', :size => '20x20'), :controller => 'cases', :action => 'edit', :id => item %>
-    <%= link_to image_tag('remove.png', :size => '20x20'), { :controller => 'cases', :action => 'destroy', :id => item }, :confirm => 'Fall wirklich löschen?', :method => :post if can? :destroy, Case %>
+    <%= link_to image_tag('remove.png', :size => '20x20'), case_path(item), :method => :delete, :confirm => 'Fall wirklich löschen?' if can? :destroy, Case %>
     <%= link_to image_tag('fax.png', :size => '20x20', :title => 'Drucke Fax'), :controller => 'cases', :action => :print_result_report, :id => item, :page_size => 'A4' %>
     <%= link_to image_tag('print.png', :size => '20x20', :title => 'Drucke Resultat'), :controller => 'cases', :action => :print_result_report, :id => item %>
     <%= link_to image_tag('additional_case.png', :size => '20x20', :title => 'Nachträglicher HPV/P16'), :controller => 'cases', :action => :create_hpv_p16_for_case, :id => item %>
