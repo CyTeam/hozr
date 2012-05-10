@@ -7,17 +7,6 @@ class CasesController < ApplicationController
   # =======
   helper :doctors
 
-  # Tiny MCE
-#  uses_tiny_mce(:options => {:theme => 'advanced',
-#                           :theme_advanced_toolbar_location => "top",
-#                           :theme_advanced_toolbar_align => "left",
-#                           :theme_advanced_resizing => true,
-#                           :theme_advanced_resize_horizontal => false,
-#                           :theme_advanced_buttons1 => %w{bold italic underline separator indent outdent separator bullist forecolor backcolor separator undo redo},
-#                           :theme_advanced_buttons2 => [],
-#                           :theme_advanced_buttons3 => []},
-#              :only => [:new, :edit, :show, :index, :result_report, :second_entry_form])
-
   auto_complete_for :finding_class, :selection, :limit => 12
 
   # Auto Completion
