@@ -13,9 +13,9 @@
   <% end %>
 </div>
 
-<%= form_tag add_finding_case_path(@case), :id => "finding_classes", :after => "$('finding_class_selection').value = ''; $('finding_class_code').value = ''; $('finding_class_code').focus() "  do %>
+<%= form_tag add_finding_case_path(@case), :remote => true, :id => "finding_classes", :after => "$('finding_class_selection').value = ''; $('finding_class_code').value = ''; $('finding_class_code').focus() " do %>
   <label for="case_praxistar_eingangsnr">Text:</label>
-  <%= text_field_with_auto_complete :finding_class, :selection, {:tabindex => 1}, :frequency => 0.05 %>
+  <%= autocomplete_field_tag 'finding_class[selection]', '', autocomplete_finding_class_code_cases_path, :size => 12 %>
   <label for="case_praxistar_eingangsnr">Code:</label>
   <%= text_field :finding_class, :code, :size => 5, :tabindex => 2 %>
   <%= submit_tag "Los" %>

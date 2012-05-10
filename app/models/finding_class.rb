@@ -9,4 +9,9 @@ class FindingClass < ActiveRecord::Base
       includes(:finding_group).where('finding_groups.name = ?', group_name)
     end
   }
+
+  include ActionView::Helpers::SanitizeHelper
+  def to_s
+    "#{code} - #{strip_tags(name)}"
+  end
 end

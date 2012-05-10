@@ -19,6 +19,13 @@ GIT
   specs:
     lyb_devise_admin (0.2.1)
 
+GIT
+  remote: https://github.com/slash4/rails3-jquery-autocomplete.git
+  revision: 393786627734720f5cdae2265bc4a74609756452
+  specs:
+    rails3-jquery-autocomplete (1.0.4)
+      rails (~> 3.0)
+
 PATH
   remote: /root/src/file_column
   specs:
@@ -242,6 +249,7 @@ DEPENDENCIES
   prawnto
   prototype_legacy_helper (= 0.0.0)!
   rails
+  rails3-jquery-autocomplete!
   rdoc
   ruby_parser
   sass-rails

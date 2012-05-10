@@ -92,6 +92,9 @@ gem 'inherited_resources'
 gem 'i18n_rails_helpers'
 gem 'haml'
 
+# Autocomplete
+gem 'rails3-jquery-autocomplete', :git => 'https://github.com/slash4/rails3-jquery-autocomplete.git'
+
 # Formtastic
 gem 'formtastic', '~>2.1.0'
 

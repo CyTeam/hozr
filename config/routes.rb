@@ -28,6 +28,7 @@ Hozr::Application.routes.draw do
     collection do
       get :first_entry_queue, :second_entry_queue, :hpv_p16_queue, :review_queue
       get :unassigned_form
+      get :autocomplete_finding_class_code
     end
 
     member do
