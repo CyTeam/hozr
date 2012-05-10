@@ -22,7 +22,7 @@ Hozr::Application.routes.draw do
 
   resources :cases do
     collection do
-      get :second_entry_queue, :hpv_p16_queue
+      get :second_entry_queue, :hpv_p16_queue, :review_queue
       get :unassigned_form
     end
 
