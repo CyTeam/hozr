@@ -1,11 +1,6 @@
 class DoctorsController < ApplicationController
 
   def index
-    list
-    render :action => 'list'
-  end
-
-  def list
     params[:order] ||= 'vcards.family_name, vcards.given_name'
     
     @doctors = Doctor.includes(:praxis).order(params[:order]).active.all
@@ -26,7 +21,7 @@ class DoctorsController < ApplicationController
     
     if @doctor.save
       flash[:notice] = 'Doctor was successfully created.'
-      redirect_to :action => 'list'
+      redirect_to doctors_path
     else
       render :action => 'new'
     end
@@ -52,7 +47,7 @@ class DoctorsController < ApplicationController
 
   def destroy
     Doctor.find(params[:id]).destroy
-    redirect_to :action => 'list'
+    redirect_to doctors_path
   end
 
   # Customers Support

@@ -1,9 +1,9 @@
 <h1>Editing doctor</h1>
 
-<%= form_tag :action => 'update', :id => @doctor do %>
+<%= form_for @doctor do |f| %>
   <%= render :partial => 'form' %>
-  <%= submit_tag 'Edit' %>
+  <%= f.submit %>
 <% end %>
 
-<%= link_to 'Show', :action => 'show', :id => @doctor %> |
-<%= link_to 'Back', :action => 'list' %>
+<%= link_to 'Show', doctor_path(@doctor) %> |
+<%= link_to 'Back', doctors_path %>
