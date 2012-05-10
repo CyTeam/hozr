@@ -7,4 +7,5 @@
 //= require jquery
 //= require jquery_ujs
 //= require tinymce-jquery
+//= require jquery.ui.autocomplete
 //= require_tree .

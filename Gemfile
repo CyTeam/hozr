@@ -19,6 +19,8 @@ group :assets do
   gem 'coffee-rails'
   gem 'therubyracer'
   gem 'uglifier'
+
+  gem 'jquery-ui-rails'
 end
 
 gem 'jquery-rails'
