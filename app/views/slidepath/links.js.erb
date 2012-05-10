@@ -1,1 +1,1 @@
-$('slidepath_links_<%= @case.id %>').update('<%=escape_javascript link_to_slidepath_case(@case) %>');
+$(".slidepath_links[data-case-id='<%= @case.id %>']").html('<%= j link_to_slidepath_case(@case) %>');

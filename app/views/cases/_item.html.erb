@@ -30,14 +30,7 @@
       <%= link_to "Auftrag", url_for_file_column(item.order_form, "file") %> <%= link_to "Klinische Symptome", url_for_file_column(item.order_form, "file", "result_remarks") %> <%= link_to "Personalien", url_for_file_column(item.order_form, "file", "address") %>
     <% end %>
     <br/>
-    <span class="slidepath_links" id="slidepath_links_<%= item.id %>"/>
-    <script type="text/javascript">
-$.ajax({
-    type: 'POST',
-    url: '<%= slidepath_links_url(:case_id => item.id) %>',
-    success: function(data){eval(data);}
-});
-    </script>
+    <span class="slidepath_links" data-case-id="<%= item.id %>"/>
   </td>
   <td><%= "X" if item.needs_p16? %></td>
   <td><%= "X" if item.needs_hpv? %></td>

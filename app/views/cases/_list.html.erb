@@ -4,4 +4,6 @@
     <%= render 'cases/list_header' %>
     <%= render :partial => 'cases/item', :collection => @cases %>
   </table>
+
+  <%= javascript_tag "setupSlidepathLinks()" %>
 <% end %>
