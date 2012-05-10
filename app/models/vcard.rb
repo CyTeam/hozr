@@ -1,5 +1,17 @@
+module HasAddress
+  def self.included(base)
+    base.alias_method_chain :address, :autobuild
+  end
+
+  def address_with_autobuild
+    address_without_autobuild || build_address
+  end
+end
+
 class Vcard < ActiveRecord::Base
   has_one :address
+  include HasAddress
+
   has_many :phone_numbers, :as => :object
 
   has_one :patient
