@@ -130,7 +130,6 @@ class PatientsController < ApplicationController
 
   def edit_inline
     edit
-    render :partial => 'edit'
   end
 
   def update

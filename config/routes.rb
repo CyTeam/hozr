@@ -30,6 +30,7 @@ Hozr::Application.routes.draw do
     end
 
     member do
+      post :set_patient
       post :hpv_p16_prepared
       post :add_finding
       delete :remove_finding
