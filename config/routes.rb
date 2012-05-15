@@ -48,6 +48,9 @@ Hozr::Application.routes.draw do
     end
   end
 
+  get 'reports' => 'reports#index'
+  post 'reports/search' => 'reports#search'
+
   # Slidepath
   match 'slidepath/links' => 'slidepath#links'
   match 'slidepath/scanned_cases' => 'slidepath#scanned_cases'
