@@ -10,10 +10,7 @@ Hozr::Application.routes.draw do
     end
   end
 
-  match 'order_form/print' => 'order_form#print', :format => 'pdf'
-
-  post 'search/search' => 'search#search'
-
+  # Main resources
   resources :doctors
 
   resources :patients do
@@ -47,6 +44,13 @@ Hozr::Application.routes.draw do
     end
   end
 
+  # Form Printing
+  match 'order_form/print' => 'order_form#print', :format => 'pdf'
+
+  # Search
+  post 'search/search' => 'search#search'
+
+  # Reports
   get 'reports' => 'reports#index'
   post 'reports/search' => 'reports#search'
 
