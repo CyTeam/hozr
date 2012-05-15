@@ -22,9 +22,10 @@ function guessDoctorIdFromPreviousCase() {
 }
 
 function setupCaseAssignment() {
-  $("[name$='[intra_day_id]']").live('focus', guessIntraDayIdFromPreviousCase);
-  $("[name$='[examination_date]']").live('focus', guessExaminationDateFromPreviousCase);
-  $("[name$='[doctor_id]']").live('focus', guessDoctorIdFromPreviousCase);
+  var unassigned_sort_queue = $('#unassigned_sort_queue');
+  unassigned_sort_queue.find("[name$='[intra_day_id]']").live('focus', guessIntraDayIdFromPreviousCase);
+  unassigned_sort_queue.find("[name$='[examination_date]']").live('focus', guessExaminationDateFromPreviousCase);
+  unassigned_sort_queue.find("[name$='[doctor_id]']").live('focus', guessDoctorIdFromPreviousCase);
 }
 
 // SlidePath
