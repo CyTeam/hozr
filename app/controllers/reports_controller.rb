@@ -10,12 +10,6 @@ class ReportsController < ApplicationController
   def index
   end
   
-  def pap_groups
-    @records = ActiveRecord::Base.find_by_sql('SELECT substr(praxistar_eingangsnr, 1, 2) AS year, classifications.name AS pap, count(*) AS count FROM cases JOIN classifications ON cases.classification_id = classifications.id GROUP BY substr(praxistar_eingangsnr, 1, 2), classifications.code ORDER BY substr(praxistar_eingangsnr, 1, 2)')
-    
-    render :partial => 'statistics'
-  end
-  
   def search
     @columns = ['Pap', 'Anzahl', 'Prozent']
     
