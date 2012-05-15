@@ -46,7 +46,8 @@ Hozr::Application.routes.draw do
   end
 
   # Form Printing
-  match 'order_form/print' => 'order_form#print', :format => 'pdf'
+  match 'order_form' => 'order_form#index', :as => :order_form
+  match 'order_form/print' => 'order_form#print', :as => :print_order_form
 
   # Search
   post 'search/search' => 'search#search'
