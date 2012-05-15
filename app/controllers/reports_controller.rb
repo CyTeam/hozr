@@ -1,15 +1,6 @@
 class ReportsController < ApplicationController
   helper :doctors
   
-  # To make caching easier, add a line like this to config/routes.rb:
-  # map.graph "graph/:action/:id/image.png", :controller => "graph"
-  #
-  # Then reference it with the named route:
-  #   image_tag graph_url(:action => 'show', :id => 42)
-
-  def index
-  end
-  
   def search
     @columns = ['Pap', 'Anzahl', 'Prozent']
     
