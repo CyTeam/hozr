@@ -1,12 +1,5 @@
 # Methods added to this helper will be available to all templates in the application.
 module ApplicationHelper
-  # List helpers
-  def sort_header(column, label = nil)
-    label ||= column.humanize
-    links = label + ' ' + link_to(image_tag('up.png'), :order => column) + link_to(image_tag('down.png'), :order => column + ' DESC')
-    content_tag('th', links.html_safe)
-  end
-
   # AJAX helpers
   def loading_indicator_tag(options)
     image_tag "indicator.gif", :style => "display:none;", :id => loading_indicator_id(options), :alt => "loading indicator", :class => "loading-indicator"
