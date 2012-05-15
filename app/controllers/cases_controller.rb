@@ -70,8 +70,8 @@ class CasesController < ApplicationController
   end
 
   def destroy_from_assign
-   Case.find(params[:id]).destroy
-   render :text => 'gelöscht'
+   @case = Case.find(params[:id])
+   @case.destroy
   end
   
   # Show list of assignings from the last 7 days.

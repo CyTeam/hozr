@@ -28,6 +28,7 @@ Hozr::Application.routes.draw do
     end
 
     member do
+      delete :destroy_from_assign
       post :set_patient
       get :set_new_patient
       post :hpv_p16_prepared

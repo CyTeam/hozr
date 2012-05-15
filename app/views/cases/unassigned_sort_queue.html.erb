@@ -18,7 +18,7 @@
           @a_case.praxistar_eingangsnr ||= next_eingangs_nr.to_s
           next_eingangs_nr.inc!
         %>
-        <%= link_to_remote( 'Löschen', :update => "a_case_#{a_case.id}", :url => {:action => :destroy_from_assign, :id => a_case }) %><br/>
+        <%= link_to 'Löschen', destroy_from_assign_case_path(a_case), :remote => true, :method => :delete %><br/>
         <table id="a_case_<%= a_case.id %>">
           <tr>
             <td>Eingangsnr:</td><td><%= text_field "a_case[]", 'praxistar_eingangsnr', :size => 10, :tabindex => intra_day_id + 30000 %></td>
