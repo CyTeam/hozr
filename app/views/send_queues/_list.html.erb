@@ -25,7 +25,7 @@
           <%= link_to("E-Mail senden", send_by_mailing_path(mailing, :channel => 'email'), :remote => true, :method => :post) if mailing.doctor.wants_email %><br/>
           <%= link_to("HL7 senden", send_by_mailing_path(mailing, :channel => 'hl7'), :remote => true, :method => :post) if mailing.doctor.wants_hl7 %>
         <% else %>
-          <%= link_to("Resultate drucken", print_send_queue_path, :method => :post) if mailing.doctor.wants_prints %><br/>
+          <%= link_to("Resultate drucken", print_send_queue_path(send_queue), :remote => true, :method => :post) if mailing.doctor.wants_prints %><br/>
         <% end %>
       </td>
     </tr>

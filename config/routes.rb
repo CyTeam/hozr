@@ -39,9 +39,27 @@ Hozr::Application.routes.draw do
     end
   end
 
+  resources :send_queues do
+    collection do
+      get :list_open
+      get :print_all
+    end
+
+    member do
+      post :print
+    end
+  end
+
   resources :mailings do
     member do
       post :send_by
+    end
+
+    collection do
+      post :generate
+      post :send_all
+      post :print_all
+      get :list_open
     end
   end
 

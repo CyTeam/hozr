@@ -15,15 +15,13 @@ class SendQueuesController < ApplicationController
   end
 
   def print_all
-    print_queues = SendQueue.unsent.by_channel('print')
+    @print_queues = SendQueue.unsent.by_channel('print')
     
-    for print_queue in print_queues
+    for print_queue in @print_queues
       print_queue.print
       
 #      sleep(20)
     end
-
-    render :partial => 'send_queues/printed', :collection => print_queues
   end
 
   def print
@@ -31,6 +29,6 @@ class SendQueuesController < ApplicationController
     
     @print_queue.print
 
-    render :partial => 'send_queues/printed', :object => @print_queue
+    render 'print', :print_queue => @print_queue
   end
 end
