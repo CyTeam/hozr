@@ -494,6 +494,11 @@ class CasesController < ApplicationController
     redirect_to :controller => '/search'
   end
 
+  def resend
+    @case = Case.find(params[:id])
+    @case.delivered_at = nil
+    @case.save
+  end
 
   # General
   # =======
