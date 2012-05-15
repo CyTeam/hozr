@@ -17,15 +17,15 @@
       <td>
         <i><%=h send_queue.channel %>:</i>
         <%=h send_queue.sent_at.nil? ? "ready to send" : send_queue.sent_at.strftime('%d.%m.%Y') %>
-        <span id="<%= "send_queue_log_#{send_queue.id}" %>"></span>
+        <span id="<%= "mailing_log_#{mailing.id}" %>"></span>
       </td>
       <td>
         <% if send_queue.sent_at %>
-          <%= link_to_remote("Resultate drucken", :update => "send_queue_log_#{send_queue.id}", :url => {:controller => :mailings, :action => :send_by, :channel => 'print', :id => mailing }) if mailing.doctor.wants_prints %><br/>
-          <%= link_to_remote("E-Mail senden", :update => "send_queue_log_#{send_queue.id}", :url => {:controller => :mailings, :action => :send_by, :channel => 'email', :id => mailing }) if mailing.doctor.wants_email %><br/>
-          <%= link_to_remote("HL7 senden", :update => "send_queue_log_#{send_queue.id}", :url => {:controller => :mailings, :action => :send_by, :channel => 'hl7', :id => mailing }) if mailing.doctor.wants_hl7 %>
+          <%= link_to("Resultate drucken", send_by_mailing_path(mailing, :channel => 'print'), :remote => true, :method => :post) if mailing.doctor.wants_prints %><br/>
+          <%= link_to("E-Mail senden", send_by_mailing_path(mailing, :channel => 'email'), :remote => true, :method => :post) if mailing.doctor.wants_email %><br/>
+          <%= link_to("HL7 senden", send_by_mailing_path(mailing, :channel => 'hl7'), :remote => true, :method => :post) if mailing.doctor.wants_hl7 %>
         <% else %>
-          <%= link_to_remote("Resultate drucken", :update => "send_queue_log_#{send_queue.id}", :url => {:action => :print, :id => send_queue }) if mailing.doctor.wants_prints %><br/>
+          <%= link_to("Resultate drucken", print_send_queue_path, :method => :post) if mailing.doctor.wants_prints %><br/>
         <% end %>
       </td>
     </tr>

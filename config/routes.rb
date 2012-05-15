@@ -39,6 +39,12 @@ Hozr::Application.routes.draw do
     end
   end
 
+  resources :mailings do
+    member do
+      post :send_by
+    end
+  end
+
   resources :order_forms do
     member do
       get :head_big, :head_small

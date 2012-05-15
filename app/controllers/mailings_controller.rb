@@ -133,7 +133,7 @@ class MailingsController < ApplicationController
     @mailing = Mailing.find(params[:id])
     @state = @mailing.send_by(params[:channel])
     
-    render :partial => 'sent_by', :layout => false
+    flash.now[:notice] = @state ? "Zum Versand vorgemerkt." : "Bereits zum Versand vorgemerkt."
   end
 
   def send_by_all_channels
