@@ -14,8 +14,7 @@ Hozr::Application.routes.draw do
 
   post 'search/search' => 'search#search'
 
-  resources :doctors do
-  end
+  resources :doctors
 
   resources :patients do
     collection do
