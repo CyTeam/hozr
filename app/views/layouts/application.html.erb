@@ -150,8 +150,8 @@
     </div>
 
     <div class="container-fluid">
-      <% if notice %><p class="notice"><%= notice %></p><% end %>
-      <% if alert %><p class="alert"><%= alert %></p><% end %>
+      <% if notice %><%= boot_alert(notice, 'success') %><% end %>
+      <% if alert %><%= boot_alert(alert, 'error') %><% end %>
 
         <%= render :partial => 'navigation' if controller.controller_name == 'cases' and params[:id] %>
         <%= yield %>
