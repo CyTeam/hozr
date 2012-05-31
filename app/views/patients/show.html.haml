@@ -1,0 +1,5 @@
+= link_to_cydoc "Rechnungsübersicht", "patients/#{@patient.id}?tab=invoices"
+
+= render 'form'
+= render :partial => 'doctors/compact_frame', :object => @patient.doctor
+= render :partial => 'cases/compact_list', :object => @patient.cases
