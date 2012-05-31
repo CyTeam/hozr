@@ -79,6 +79,11 @@ Hozr::Application.routes.draw do
   match 'order_form' => 'order_form#index', :as => :order_form
   match 'order_form/print' => 'order_form#print', :as => :print_order_form
 
+  # Label Printing
+  get 'label_print/case_label' => 'label_print#case_label', :as => :case_label_label_print
+  get 'label_print/case_label_p16' => 'label_print#case_label_p16', :as => :case_label_p16_label_print
+  get 'label_print/post_label' => 'label_print#post_label', :as => :post_label_label_print
+
   # Search
   get 'search' => 'search#index', :as => :search
   post 'search/search' => 'search#search'
