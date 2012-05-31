@@ -44,16 +44,82 @@
           <div class="nav-collapse">
             <ul class="nav">
               <li><%= link_to "TODO", :controller => "/work_queue/admin" %></li>
-              <li><%= link_to "Zweiteingabe", :controller => "/cases", :action => :second_entry_queue %></li>
-              <li><%= link_to "HPV/P16 Liste", :controller => "/cases", :action => :hpv_p16_queue %></li>
-              <li><%= link_to "Suche", :controller => "/search" %></li>
-              <li><%= link_to "Patienten", :controller => "/patients" %></li>
-              <li><%= link_to "Ärzte", :controller => "/doctors" %></li>
-              <li><%= link_to "Statistiken", :controller => "/reports" %></li>
-              <li><%= link_to "Review Liste", :controller => "/cases", :action => :review_queue %></li>
-              <%- if can? :index, :admin %>
-                <li><%= link_to "Administration", :controller => "/admin" %></li>
-              <%- end %>
+              <li>
+                <ul class="nav">
+                  <li class="dropdown">
+                    <a href="#"
+                          class="dropdown-toggle"
+                          data-toggle="dropdown">
+                          Eingang
+                          <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                      <li><%= link_to "Auftragsformulare", unassigned_form_cases_path %></li>
+                      <li><%= link_to "Ersteingabe", first_entry_queue_cases_path %></li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <ul class="nav">
+                  <li class="dropdown">
+                    <a href="#"
+                          class="dropdown-toggle"
+                          data-toggle="dropdown">
+                          Bearbeitung
+                          <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                      <li><%= link_to "Zweiteingabe", second_entry_queue_cases_path %></li>
+                      <li><%= link_to "HPV/P16", hpv_p16_queue_cases_path %></li>
+                      <li><%= link_to "Review", review_queue_cases_path %></li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <ul class="nav">
+                  <li class="dropdown">
+                    <a href="#"
+                          class="dropdown-toggle"
+                          data-toggle="dropdown">
+                          Suche
+                          <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                      <li><%= link_to "Suche", search_path %></li>
+                      <li><%= link_to "Patienten", patients_path %></li>
+                      <li><%= link_to "Ärzte", doctors_path %></li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <ul class="nav">
+                  <li class="dropdown">
+                    <a href="#"
+                          class="dropdown-toggle"
+                          data-toggle="dropdown">
+                          Administration
+                          <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                      <li><%= link_to "Statistiken", reports_path %></li>
+                      <li class="divider"></li>
+                      <li><%= link_to "Letzte Anschreiblisten", assignings_list_cases_path %></li>
+                      <li><%= link_to "Letzte Resultatbriefe", send_queues_path %></li>
+                      <li class="divider"></li>
+                      <li><%= link_to "Patienten mit Mahnstopp", dunning_stopped_patients_path %></li>
+                      <li><%= link_to "Klassifikationen", classifications_path %></li>
+                      <li><%= link_to "Klassifikationsgruppen", classification_groups_path %></li>
+                      <li><%= link_to "Top Befunde pro Klassifikationen", top_finding_classes_path %></li>
+                      <li><%= link_to "Befunde", finding_classes_path %></li>
+                      <li><%= link_to "Mitarbeiter", employees_path %></li>
+                      <li><%= link_to t_model(User), users_path %></li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
             </ul>
           </div><!--/.nav-collapse -->
         </div>

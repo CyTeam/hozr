@@ -12,6 +12,7 @@ Hozr::Application.routes.draw do
 
   # Main resources
   resources :doctors
+  resources :employees
 
   resources :patients do
     collection do
@@ -23,7 +24,7 @@ Hozr::Application.routes.draw do
   resources :cases do
     collection do
       get :first_entry_queue, :second_entry_queue, :hpv_p16_queue, :review_queue
-      get :unassigned_form
+      get :unassigned_form, :assignings_list
       get :autocomplete_finding_class_code
     end
 
@@ -63,6 +64,11 @@ Hozr::Application.routes.draw do
     end
   end
 
+  resources :classifications
+  resources :classification_groups
+  resources :top_finding_classes
+  resources :finding_classes
+
   resources :order_forms do
     member do
       get :head_big, :head_small
@@ -74,6 +80,7 @@ Hozr::Application.routes.draw do
   match 'order_form/print' => 'order_form#print', :as => :print_order_form
 
   # Search
+  get 'search' => 'search#index', :as => :search
   post 'search/search' => 'search#search'
 
   # Reports
