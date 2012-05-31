@@ -1,4 +1,4 @@
-class PatientsController < ApplicationController
+class PatientsController < AuthorizedController
   helper :doctors
   
   auto_complete_for_vcard :vcard
@@ -14,33 +14,29 @@ class PatientsController < ApplicationController
   
   def show
     @patient = Patient.find(params[:id])
-    @vcard = @patient.vcard
-    @billing_vcard = @patient.billing_vcard
     @insurance = @patient.insurance
     @doctor = @patient.doctor
   end
 
   def new
-    patient = params[:patient]
-    @patient = Patient.new(patient)
-    @vcard = Vcard.new(params[:vcard])
-    @patient.billing_vcard = Vcard.new(params[:billing_vcard])
+    @patient = Patient.new(params[:patient])
+    @patient.build_vcard unless @patient.vcard
+    @patient.build_billing_vcard unless @patient.billing_vcard
     
-    @vcard.honorific_prefix = 'Frau'
+    @patient.vcard.honorific_prefix = 'Frau'
   end
 
   def create
     @patient = Patient.new(params[:patient])
-    @vcard = @patient.vcard = Vcard.new(params[:vcard])
-    @billing_vcard = @patient.billing_vcard = Vcard.new(params[:billing_vcard])
     
+    # Deduce sex from honorific_prefix
     @patient.sex = HonorificPrefix.find_by_name(@patient.vcard.honorific_prefix).sex
 
     if @patient.save
       flash[:notice] = 'Patient was successfully created.'
-      redirect_to patients_path
+      redirect_to @patient
     else
-      render :action => 'new'
+      render :action => :new
     end
   end
 
@@ -64,39 +60,24 @@ class PatientsController < ApplicationController
 
   def edit
     @patient = Patient.find(params[:id])
-    @vcard = @patient.vcard
-    @billing_vcard = @patient.billing_vcard
 
     if params[:case_id]
       @case = Case.find(params[:case_id])
       @patient.doctor = @case.doctor
     end
 
-    @vcard.honorific_prexif = HonorificPrefix.find_by_name('Frau') if @vcard.honorific_prefix.nil?
-  end
-
-  def edit_inline
-    edit
+    @vcard.honorific_prefix ||= HonorificPrefix.find_by_name('Frau')
   end
 
   def update
     @patient = Patient.find(params[:id])
-    @vcard = @patient.vcard
-    if @patient.billing_vcard.nil?
-      @patient.create_billing_vcard
-    end
-    @billing_vcard = @patient.billing_vcard
     
-    params[:patient][:sex] = HonorificPrefix.find_by_name(params[:vcard][:honorific_prefix]).sex
-
-    if @vcard.update_attributes(params[:vcard]) and @billing_vcard.update_attributes(params[:billing_vcard]) and @patient.update_attributes(params[:patient])
-      @vcard.save
-      @patient.touch
+    if @patient.update_attributes(params[:patient])
 
       flash[:notice] = 'Patientendaten mutiert'
       redirect_to @patient
     else
-      render :action => 'edit'
+      render :show
     end
   end
 
