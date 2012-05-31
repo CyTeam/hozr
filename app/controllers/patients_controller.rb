@@ -4,10 +4,8 @@ class PatientsController < ApplicationController
   auto_complete_for_vcard :vcard
   auto_complete_for_vcard :billing_vcard
   
-  # Lists
   def index
-    list
-    render :action => 'list'
+    @patients = Patient.search :per_page => 50
   end
 
   def dunning_stopped
@@ -56,10 +54,6 @@ class PatientsController < ApplicationController
     render :partial => 'list'
   end
   
-  def list
-     @patients = []
-  end
-
   def show
     @patient = Patient.find(params[:id])
     @vcard = @patient.vcard
@@ -104,7 +98,7 @@ class PatientsController < ApplicationController
       @patient.touch
 
       flash[:notice] = 'Patientendaten mutiert'
-      redirect_to :action => 'list'
+      redirect_to patients_path
     else
       render :action => 'form'
     end
@@ -142,7 +136,7 @@ class PatientsController < ApplicationController
       @patient.touch
 
       flash[:notice] = 'Patientendaten mutiert'
-      redirect_to :action => 'list'
+      redirect_to @patient
     else
       render :action => 'edit'
     end
@@ -150,6 +144,6 @@ class PatientsController < ApplicationController
 
   def destroy
     Patient.find(params[:id]).destroy
-    redirect_to :action => 'list'
+    redirect_to patients_path
   end
 end
