@@ -1,4 +1,8 @@
 de:
+  sex:
+    male:   Mann
+    female: Frau
+
   activerecord:
     models:
       user: Benutzer
