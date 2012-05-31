@@ -15,3 +15,8 @@
 #MainContent .slidepath_links a {
   color: #165BDB;
 }
+
+/* Forms */
+.form-horizontal .control-group {
+  margin-bottom: 8px;
+}
