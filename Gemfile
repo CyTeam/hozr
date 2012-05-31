@@ -95,6 +95,7 @@ gem 'haml'
 # Bootstrap
 gem 'twitter-bootstrap-rails'
 gem 'bootstrap-will_paginate'
+gem 'simple_form'
 
 # Autocomplete
 gem 'rails3-jquery-autocomplete', :git => 'https://github.com/slash4/rails3-jquery-autocomplete.git'
