@@ -17,16 +17,15 @@
     
   <% for patient in @patients %>
     <% @patient = patient %>
-    <% @vcard = patient.vcard %>
     <tr>
       <td>
         <%= link_to image_tag("select.png"), { :controller => 'patients', :action => 'edit_inline', :id => @patient, :case_id => @case }, :remote => true %>
       </td>
-      <td><%= @vcard.family_name %></td>
-      <td><%= @vcard.given_name %></td>
-      <td><%= @vcard.street_address %></td>
-      <td><%= @vcard.postal_code %></td>
-      <td><%= @vcard.locality %></td>
+      <td><%= patient.vcard.family_name %></td>
+      <td><%= patient.vcard.given_name %></td>
+      <td><%= patient.vcard.street_address %></td>
+      <td><%= patient.vcard.postal_code %></td>
+      <td><%= patient.vcard.locality %></td>
       <td><%= patient.birth_date %></td>
       <td><%= patient.doctor.name if patient.doctor %></td>
       <td><%= patient.doctor_patient_nr %></td>
