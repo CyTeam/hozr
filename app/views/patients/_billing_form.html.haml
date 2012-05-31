@@ -1,0 +1,31 @@
+%h3 Rechnungsdaten
+= f.fields_for :billing_vcard do |v|
+  .row-fluid
+    .span6
+      = f.input :use_billing_address
+    .span6
+      = f.input :dunning_stop
+  .row-fluid
+    .span6
+      .control-group
+        %label.control-label= "#{t_attr(:family_name)}, #{t_attr(:given_name)}"
+        .controls
+          = v.text_field :family_name
+          = v.text_field :given_name
+    .span6
+      = v.input :honorific_prefix, :collection => HonorificPrefix.find(:all, :order => 'sex DESC, position').collect { |prefix| prefix.name }
+  .row-fluid
+    .span6
+      = v.input :street_address
+  .row-fluid
+    .span6
+      = v.input :extended_address
+    .span6
+      = v.input :post_office_box
+  .row-fluid
+    .span6
+      .control-group
+        %label.control-label= "#{t_attr(:postal_code)}, #{t_attr(:locality)}"
+        .controls
+          = v.text_field :postal_code
+          = v.text_field :locality

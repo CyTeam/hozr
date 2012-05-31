@@ -42,7 +42,9 @@ class Patient < ActiveRecord::Base
   belongs_to :doctor
 
   has_one :vcard, :as => :object, :conditions => {:vcard_type => 'private'}
+  accepts_nested_attributes_for :vcard
   has_one :billing_vcard, :class_name => 'Vcard', :as => :object, :conditions => {:vcard_type => 'billing'}
+  accepts_nested_attributes_for :billing_vcard
 
   has_many :cases, :order => 'id DESC'
   has_many :finished_cases, :class_name => 'Case', :conditions => 'screened_at IS NOT NULL', :order => 'id DESC'

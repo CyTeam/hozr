@@ -1,0 +1,7 @@
+= simple_form_for @patient do |f|
+  = render 'patients/personal_form', :f => f
+  = render 'patients/billing_form', :f => f
+  .row-fluid.form-actions
+    = f.button :submit
+
+= render :partial => 'cases/compact_list', :object => @patient.cases
