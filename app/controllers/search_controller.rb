@@ -11,6 +11,13 @@ class SearchController < ApplicationController
 
   include Controller::Search
 
+  def patient
+    query = params[:query]
+    @patients = Patient.search(query, :star => true, :per_page => 30, :page => params[:page])
+
+    render 'patients/list'
+  end
+
   def search
     # Use key and value arrays to build contitions
     case_keys = []

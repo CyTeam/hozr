@@ -1,6 +1,6 @@
+<%= paginated_section @patients, :params => {:query => params[:query]} do %>
 <div id="search_result">
   <table class="table table-bordered table-striped table-condensed">
-    <%= loading_indicator_tag :id => 'search' %>
     <tr>
       <th />
       <th>Nachname</th>
@@ -39,3 +39,4 @@
   <% end %>
   </table>
 </div>
+<%- end %>

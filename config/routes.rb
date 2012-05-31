@@ -87,6 +87,7 @@ Hozr::Application.routes.draw do
   # Search
   get 'search' => 'search#index', :as => :search
   post 'search/search' => 'search#search'
+  post 'search/patient' => 'search#patient', :as => :patient_search
 
   # Reports
   get 'reports' => 'reports#index'
