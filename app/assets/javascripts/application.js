@@ -11,3 +11,18 @@
 //= require jquery.ui.autocomplete
 //= require autocomplete-rails
 //= require_tree .
+
+// Initialize behaviours
+function initializeBehaviours() {
+  // Init settings
+
+  // from cyt.js
+  addAutofocusBehaviour();
+  addDatePickerBehaviour();
+  addLinkifyContainersBehaviour();
+
+  // application
+}
+
+// Loads functions after DOM is ready
+$(document).ready(initializeBehaviours);
