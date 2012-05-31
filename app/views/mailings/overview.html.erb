@@ -20,7 +20,7 @@
   </div>
 
 <div id="text">
-<table class="listing" style="margin-top: 0px">
+<table class="table table-bordered table-striped table-condensed" style="margin-top: 0px">
   <% @case_counter = 17 %>
   <% for class_group in ClassificationGroup.find :all, :order => 'position DESC' %>
     <% group_cases = @mailing.cases.sort {|x,y| x.praxistar_eingangsnr <=> y.praxistar_eingangsnr}.select { |c| c.classification.classification_group == class_group and !(c.needs_p16? and c.screened_at.nil?) } %>

@@ -1,5 +1,5 @@
 <%= paginated_section @scans do %>
-  <table class="listing">
+  <table class="table table-bordered table-striped table-condensed">
     <%= render 'cases/list_header' %>
     <%= render :partial => 'cases/item', :collection => @cases %>
   </table>

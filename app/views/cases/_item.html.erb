@@ -16,7 +16,7 @@
       link_to h(case_nr), :controller => 'cases', :action => 'result_report', :id => item
     end
   %></td>
-  <td class="PAP_<%=h item.classification.code unless item.classification.nil? %>" style="border-style: solid; border-width: 4px"><%=h item.classification.name unless item.classification.nil? %></td>
+  <td class="PAP_<%=h item.classification.code unless item.classification.nil? %>"><%=h item.classification.name unless item.classification.nil? %></td>
   <td>
   <% for finding in item.finding_classes %>
     <div><%= finding.code %> - <%= finding.name.html_safe %></div>
