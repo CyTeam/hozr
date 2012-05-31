@@ -13,6 +13,20 @@ de:
         last_sign_in_at: Letzter Login
       patient:
         birth_date: Geburtsdatum
+        doctor_patient_nr: Patientennr.
+        sex: Geschlecht
+
+        insurance: "Versicherung"
+        insurance_number: "Nummer"
+        accident_insurance: 'Unfallversicherung'
+        accident_insurance_short_cut: 'UVG'
+        health_insurance: 'Krankenversicherung'
+        health_insurance_short_cut: 'KVG'
+        police_type: "Art"
+
+        remarks: Bemerkungen
+        dunning_stop: Mahnstopp
+        use_billing_address: Rechnungsadresse aktiv
 
   roles:
     admin:    Administration
