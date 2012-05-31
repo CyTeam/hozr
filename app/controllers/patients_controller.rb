@@ -12,48 +12,6 @@ class PatientsController < ApplicationController
     @patients = Patient.dunning_stopped.all
   end
   
-  # Search helpers
-  include Controller::Search
-  
-  def search
-    @case = Case.find(params[:case_id]) unless params[:case_id].nil?
-
-    # If entry_nr is given, take it as the only condition
-    eingangsnr = params[:search][:praxistar_eingangsnr]
-    if !eingangsnr.empty?
-      search_by_eingangsnr
-      return
-    end
-
-    keys = []
-    values = []
-
-    default_vcard_keys, *default_vcard_values = vcard_conditions
-    
-    unless default_vcard_keys.nil?
-      keys.push "( #{default_vcard_keys} )"
-      values.push *default_vcard_values
-    end
-
-    patient_keys, *patient_values = patient_conditions
-    keys.push patient_keys
-    values.push *patient_values
-    
-    # Build conditions array
-    if keys.compact.empty?
-      @patients = []
-    else
-      conditions = !keys.compact.empty? ? [  keys.compact.join(" AND "), *values ] : nil
-      @patients = Patient.find :all, :conditions => conditions, :include => {:vcard => :address}, :order => 'vcards.family_name'
-    end
-  end
-  
-  def search_by_eingangsnr
-    @patients = [ Patient.find(Case.find_by_praxistar_eingangsnr(CaseNr.new(params[:search][:praxistar_eingangsnr]).to_s).patient_id) ]
-  
-    render :partial => 'list'
-  end
-  
   def show
     @patient = Patient.find(params[:id])
     @vcard = @patient.vcard

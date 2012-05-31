@@ -16,7 +16,6 @@ Hozr::Application.routes.draw do
 
   resources :patients do
     collection do
-      post :search
       get :dunning_stopped
     end
   end
