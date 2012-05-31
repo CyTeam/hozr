@@ -92,6 +92,10 @@ gem 'inherited_resources'
 gem 'i18n_rails_helpers'
 gem 'haml'
 
+# Bootstrap
+gem 'twitter-bootstrap-rails'
+gem 'bootstrap-will_paginate'
+
 # Autocomplete
 gem 'rails3-jquery-autocomplete', :git => 'https://github.com/slash4/rails3-jquery-autocomplete.git'
 
