@@ -10,6 +10,3 @@
   %td= patient.doctor_patient_nr
   %td= patient.insurance.vcard.full_name if patient.insurance
   %td= patient.insurance_nr
-
-  %td= link_to image_tag("show.png"), :controller => 'patients', :action => 'show', :id => @patient
-</tr>
