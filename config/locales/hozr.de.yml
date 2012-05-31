@@ -3,6 +3,7 @@ de:
     models:
       user: Benutzer
       patient: Patient
+      doctor:  Arzt
 
     attributes:
       user:
