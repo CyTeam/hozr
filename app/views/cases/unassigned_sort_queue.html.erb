@@ -9,7 +9,7 @@
   <% a_case = @a_case %>
     <tr>
       <td>
-        <%= link_to(image_tag(url_for_image_column(@a_case.order_form, "file", :head)), url_for_file_column(@a_case.order_form, "file")) unless @a_case.order_form.nil? or @a_case.order_form.file.nil? %>
+        <%= link_to(image_tag(inline_order_form_url(@a_case.order_form, :type => :head)), inline_order_form_url(@a_case.order_form)) if @a_case.order_form %>
       </td>
       <td style="border-top: solid 2px; border-bottom: solid 2px; vertical-align: bottom">
         <% 

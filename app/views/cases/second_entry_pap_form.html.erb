@@ -3,8 +3,8 @@
     <td id="diagnoses" style="min-width: 800px">
       <fieldset style="width: 98%; text-align: center">
         <legend>Bemerkungen</legend>
-        <%= link_to image_tag(url_for_image_column(@case.order_form, "file", :result_remarks), :size => "470x211"), url_for_image_column(@case.order_form, "file", :result_remarks) unless @case.order_form.nil? or url_for_image_column(@case.order_form, "file", :result_remarks).nil? %>
-         <%= link_to image_tag(url_for_image_column(@case.order_form, "file", :head), :size => "300x150"), url_for_image_column(@case.order_form, "file", :head) unless @case.order_form.nil? or url_for_image_column(@case.order_form, "file", :head).nil?%>
+        <%= link_to image_tag(inline_order_form_url(@case.order_form, :type => :result_remarks), :size => "470x211"), inline_order_form_url(@case.order_form) if @case.order_form %>
+        <%= link_to image_tag(inline_order_form_url(@case.order_form, :type => :head), :size => "300x150"), inline_order_form_url(@case.order_form) if @case.order_form %>
      </fieldset>
       <fieldset style="width: 98%">
         <legend>Klassifikation</legend>

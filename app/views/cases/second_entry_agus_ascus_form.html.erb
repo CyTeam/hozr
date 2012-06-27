@@ -7,7 +7,7 @@ code = @case.classification.code
     <td id="diagnoses" style="min-width: 700px">
       <fieldset style="width: 95%; text-align: center">
         <legend>Bemerkungen</legend>
-        <%= link_to image_tag(url_for_image_column(@case.order_form, "file", :result_remarks), :size => "680x305"), url_for_image_column(@case.order_form, "file", :result_remarks) unless @case.order_form.nil? or url_for_image_column(@case.order_form, "file", :result_remarks).nil?%>
+        <%= link_to image_tag(inline_order_form_url(@case.order_form, :type => :result_remarks), :size => "680x305"), inline_order_form_url(@case.order_form) if @case.order_form %>
       </fieldset>
       <fieldset style="width: 95%">
         <legend>Klassifikation</legend>
