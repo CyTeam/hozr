@@ -7,13 +7,13 @@
   </td>
   <td><%= 
     if item.ready_for_first_entry
-      link_to h(case_nr), :controller => 'cases', :action => 'first_entry', :id => item
+      link_to h(case_nr), {:controller => 'cases', :action => 'first_entry', :id => item}, 'data-href-container' => 'tr'
     elsif item.ready_for_second_entry
-      link_to h(case_nr), :controller => 'cases', :action => 'second_entry_pap_form', :id => item
+      link_to h(case_nr), {:controller => 'cases', :action => 'second_entry_pap_form', :id => item}, 'data-href-container' => 'tr'
           elsif item.ready_for_p16
-      link_to h(case_nr), :controller => 'cases', :action => 'second_entry_pap_form', :id => item
+      link_to h(case_nr), {:controller => 'cases', :action => 'second_entry_pap_form', :id => item}, 'data-href-container' => 'tr'
     else
-      link_to h(case_nr), :controller => 'cases', :action => 'result_report', :id => item
+      link_to h(case_nr), {:controller => 'cases', :action => 'result_report', :id => item}, 'data-href-container' => 'tr'
     end
   %></td>
   <td class="PAP_<%=h item.classification.code unless item.classification.nil? %>"><%=h item.classification.name unless item.classification.nil? %></td>
