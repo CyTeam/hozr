@@ -53,13 +53,20 @@
       <%= link_to_cydoc "Rechnung", "sessions/#{item.session_id}" %>
     </td>
   <% end %>
-  <td>
-    <%= link_to image_tag('editinput.png', :size => '20x20'), :controller => 'cases', :action => 'edit', :id => item %>
-    <%= link_to image_tag('remove.png', :size => '20x20'), case_path(item), :method => :delete, :confirm => 'Fall wirklich löschen?' if can? :destroy, Case %>
-    <%= link_to image_tag('fax.png', :size => '20x20', :title => 'Drucke Fax'), :controller => 'cases', :action => :print_result_report, :id => item, :page_size => 'A4' %>
-    <%= link_to image_tag('print.png', :size => '20x20', :title => 'Drucke Resultat'), :controller => 'cases', :action => :print_result_report, :id => item %>
-    <%= link_to image_tag('additional_case.png', :size => '20x20', :title => 'Nachträglicher HPV/P16'), :controller => 'cases', :action => :create_hpv_p16_for_case, :id => item %>
-    <%= link_to image_tag('select_16.png', :size => '20x20', :title => '2. Eingabe bestätigen'), :controller => 'cases', :action => :review_done, :id => item if item.needs_review? -%>
-    <%= link_to image_tag('label.jpeg', :size => '25x25'), :controller => 'label_print', :action => 'case_label_single', :id => item %>
+  <td style="width: 8em">
+    <div class="btn-group">
+      <%= link_to t_action('edit'), edit_case_path(item), :class => 'btn btn-mini' %>
+      <button class="btn btn-mini dropdown-toggle" data-toggle="dropdown">
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu pull-right">
+        <%= link_to t_action('delete'), case_path(item), :method => :delete, :confirm => 'Fall wirklich löschen?' if can? :destroy, Case %>
+        <%= link_to t_action('print_fax'), print_result_report_case_path(item, :page_size => 'A4'), :method => :post %>
+        <%= link_to t_action('print'), print_result_report_case_path(item), :method => :post %>
+        <%= link_to t_action('create_hpv_p16'), create_hpv_p16_for_case_case_path(item), :method => :post %>
+        <%= link_to t_action('review_done'), review_done_case_path(item), :method => :post if item.needs_review? -%>
+        <%= link_to t_action('print_label'), case_label_single_label_print_path(:id => item.id), :method => :post %>
+      </ul>
+    </div>
   </td>
 </tr>

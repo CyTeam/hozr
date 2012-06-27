@@ -36,6 +36,9 @@ Hozr::Application.routes.draw do
       delete :remove_finding
       get :edit_finding_text
       post :update_finding_text
+      post :print_result_report
+      post :create_hpv_p16_for_case
+      post :review_done
     end
   end
 
@@ -80,6 +83,7 @@ Hozr::Application.routes.draw do
 
   # Label Printing
   get 'label_print/case_label' => 'label_print#case_label', :as => :case_label_label_print
+  get 'label_print/case_label_single' => 'label_print#case_label_single', :as => :case_label_single_label_print
   post 'label_print/case_label_p16' => 'label_print#case_label_p16', :as => :case_label_p16_label_print
   get 'label_print/post_label' => 'label_print#post_label', :as => :post_label_label_print
 

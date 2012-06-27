@@ -43,3 +43,8 @@ de:
       lock:   Sperren
       unlock: Entsperren
       invoice_overview: Rechnungen
+      print_fax:        Drucken für Fax
+      print:            Drucken
+      create_hpv_p16:   Nachträglicher HPV/P16
+      review_done:      2. Eingabe bestätigen
+      print_label:      Label Drucken
