@@ -2,8 +2,8 @@
 <% case_nr += " (#{item.intra_day_id})" unless item.intra_day_id.nil? %>
 <tr>
   <td>
-    <%=h item.entry_date unless item.entry_date.nil? %>
-    <%=h "(#{item.first_entry_by.code})" unless item.first_entry_by.nil? %>
+    <%= item.entry_date unless item.entry_date.nil? %>
+    <%= "(#{item.first_entry_by.code})" unless item.first_entry_by.nil? %>
   </td>
   <td><%= 
     if item.ready_for_first_entry
@@ -16,15 +16,15 @@
       link_to h(case_nr), {:controller => 'cases', :action => 'result_report', :id => item}, 'data-href-container' => 'tr'
     end
   %></td>
-  <td class="PAP_<%=h item.classification.code unless item.classification.nil? %>"><%=h item.classification.name unless item.classification.nil? %></td>
+  <td class="PAP_<%= item.classification.code unless item.classification.nil? %>"><%= item.classification.name unless item.classification.nil? %></td>
   <td>
   <% for finding in item.finding_classes %>
     <div><%= finding.code %> - <%= finding.name.html_safe %></div>
   <% end %>
   </td>
   <td><%= render :partial => '/patients/compact', :object => item.patient unless item.patient.nil? %></td>
-  <td><%=h item.doctor.name unless item.doctor.nil? %></td>
-  <td><%=h item.screener.code unless item.screener.nil? %></td>
+  <td><%= item.doctor.name unless item.doctor.nil? %></td>
+  <td><%= item.screener.code unless item.screener.nil? %></td>
   <td>
     <% if item.order_form %>
       <%= link_to "Auftrag", url_for_file_column(item.order_form, "file") %> <%= link_to "Klinische Symptome", url_for_file_column(item.order_form, "file", "result_remarks") %> <%= link_to "Personalien", url_for_file_column(item.order_form, "file", "address") %>
