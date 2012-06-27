@@ -13,4 +13,21 @@ class OrderFormsController < ApplicationController
     @header_image_type = :head
     render 'head_image'
   end
+
+  # Image
+  def download
+    order_form = OrderForm.find(params[:id])
+    type = params[:type]
+
+    path = order_form.file(type)
+    send_file path
+  end
+
+  def inline
+    order_form = OrderForm.find(params[:id])
+    type = params[:type]
+
+    path = order_form.file(type)
+    send_file path, :disposition => 'inline'
+  end
 end

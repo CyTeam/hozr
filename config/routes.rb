@@ -74,6 +74,7 @@ Hozr::Application.routes.draw do
   resources :order_forms do
     member do
       get :head_big, :head_small
+      get :download, :inline
     end
   end
 

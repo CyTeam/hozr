@@ -17,9 +17,9 @@
   <td><%= item.doctor.name unless item.doctor.nil? %></td>
   <td>
     <% if item.order_form %>
-      <%= link_to "Auftrag", url_for_file_column(item.order_form, "file") %>
-      <%= link_to "Klinische Symptome", url_for_file_column(item.order_form, "file", "result_remarks") %>
-      <%= link_to "Personalien", url_for_file_column(item.order_form, "file", "address") %>
+      <%= link_to "Auftrag", inline_order_form_url(item.order_form) %>
+      <%= link_to "Klinische Symptome", inline_order_form_url(item.order_form, :type => "result_remarks") %>
+      <%= link_to "Personalien", inline_order_form_url(item.order_form, :type => "address") %>
     <% end %>
     <br/>
     <span class="slidepath_links" data-case-id="<%= item.id %>"/>
