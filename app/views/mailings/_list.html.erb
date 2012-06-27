@@ -36,7 +36,7 @@
     <td style="text-align: right"><%= link_to mailing.cases.count, :action => 'overview', :id => mailing %></td>
     <td>
       <%=h mailing.doctor.nil? ? "Unbekannt" : "#{mailing.doctor.name} (#{mailing.doctor.channels.join(", ")})" %>
-      <pre id="mailing_log_<%=h mailing.id %>"><%= loading_indicator_tag :id => "mailing_#{mailing.id}" %></pre>
+      <pre id="mailing_log_<%=h mailing.id %>"></pre>
     </td>
     <td>
       <%- for send_queue in mailing.send_queues %>
@@ -46,7 +46,7 @@
       <%- end %>
     </td>
     <td>
-      <%= link_to_remote("Resultate freigeben", :update => "mailing_log_#{mailing.id}", :loading => "Element.show('#{loading_indicator_id({:id => "mailing_#{mailing.id}"})}')", :url => {:controller => :mailings, :action => :send_by_all_channels, :id => mailing }) %><br/>
+      <%= link_to_remote("Resultate freigeben", :update => "mailing_log_#{mailing.id}", :url => {:controller => :mailings, :action => :send_by_all_channels, :id => mailing }) %><br/>
     </td>
   </tr>
 

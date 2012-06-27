@@ -1,5 +1,4 @@
 <%= paginated_section @cases do %>
-  <%= loading_indicator_tag :id => 'search' %>
   <table class="table table-bordered table-striped table-condensed">
     <%= render 'cases/list_header' %>
     <%= render :partial => 'cases/item', :collection => @cases %>
