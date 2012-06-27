@@ -27,7 +27,9 @@
   <td><%= item.screener.code unless item.screener.nil? %></td>
   <td>
     <% if item.order_form %>
-      <%= link_to "Auftrag", url_for_file_column(item.order_form, "file") %> <%= link_to "Klinische Symptome", url_for_file_column(item.order_form, "file", "result_remarks") %> <%= link_to "Personalien", url_for_file_column(item.order_form, "file", "address") %>
+      <%= link_to "Auftrag", url_for_file_column(item.order_form, "file") %>
+      <%= link_to "Klinische Symptome", url_for_file_column(item.order_form, "file", "result_remarks") %>
+      <%= link_to "Personalien", url_for_file_column(item.order_form, "file", "address") %>
     <% end %>
     <br/>
     <span class="slidepath_links" data-case-id="<%= item.id %>"/>
