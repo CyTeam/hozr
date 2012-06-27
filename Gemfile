@@ -120,7 +120,7 @@ gem 'prawn'
 gem 'prawnto'
 
 # Search
-gem 'thinking-sphinx', :git => 'https://github.com/freelancing-god/thinking-sphinx.git'
+gem 'thinking-sphinx'
 
 # Barcode
 gem 'barby'
