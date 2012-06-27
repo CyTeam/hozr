@@ -32,9 +32,7 @@ class CasesController < ApplicationController
   end
 
   def list
-    params[:order] ||= 'praxistar_eingangsnr'
-
-    @cases = Case.paginate(:page => params['page'], :per_page => 144, :order => params[:order])
+    @cases = Case.paginate(:page => params['page'], :per_page => 144)
   end
 
   # Assigning
@@ -94,9 +92,7 @@ class CasesController < ApplicationController
   # First Entry
   # ===========
   def first_entry_queue
-    params[:order] ||= 'praxistar_eingangsnr'
-
-    @cases = Case.paginate(:page => params['page'], :per_page => 144, :order => params[:order], :conditions => 'entry_date IS NULL AND assigned_at IS NOT NULL')
+    @cases = Case.paginate(:page => params['page'], :per_page => 144, :conditions => 'entry_date IS NULL AND assigned_at IS NOT NULL')
     render :action => :list
   end
 
@@ -205,9 +201,7 @@ class CasesController < ApplicationController
   # Second Entry
   # ============
   def second_entry_queue
-    params[:order] ||= 'praxistar_eingangsnr'
-
-    @cases = Case.for_second_entry.paginate(:page => params['page'], :per_page => 144, :order => params[:order])
+    @cases = Case.for_second_entry.paginate(:page => params['page'], :per_page => 144)
     render :action => :list
   end
 
@@ -379,9 +373,7 @@ class CasesController < ApplicationController
   # Review Queue
   # ============
   def review_queue
-    params[:order] ||= 'praxistar_eingangsnr'
-    
-    @cases = Case.for_review.paginate(:page => params['page'], :per_page => 144, :order => params[:order])
+    @cases = Case.for_review.paginate(:page => params['page'], :per_page => 144)
     render :action => :list
   end
 
@@ -444,9 +436,7 @@ class CasesController < ApplicationController
   # P16/HPV
   # =======
   def hpv_p16_queue
-    params[:order] ||= 'praxistar_eingangsnr'
-
-    @cases = Case.paginate(:page => params['page'], :per_page => 144, :order => params[:order], :conditions => ["(needs_p16 = ? OR needs_hpv = ?) AND screened_at IS NULL", true, true])
+    @cases = Case.paginate(:page => params['page'], :per_page => 144, :conditions => ["(needs_p16 = ? OR needs_hpv = ?) AND screened_at IS NULL", true, true])
     render :action => :list
   end
 

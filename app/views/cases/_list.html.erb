@@ -1,4 +1,4 @@
-<%= paginated_section @cases, :params => {:query => params[:order]} do %>
+<%= paginated_section @cases do %>
   <%= loading_indicator_tag :id => 'search' %>
   <table class="table table-bordered table-striped table-condensed">
     <%= render 'cases/list_header' %>
