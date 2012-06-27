@@ -1,8 +1,9 @@
-= contextual_links
+.contextual
+  = contextual_link_to :delete
+  = contextual_link_to :index
+  = icon_link_to :invoice_overview, cydoc_url_for("patients/#{@patient.id}?tab=invoices"), :target => cydoc_hostname
 
 = boot_page_title
-
-= link_to_cydoc "Rechnungsübersicht", "patients/#{@patient.id}?tab=invoices"
 
 = render 'form'
 = render :partial => 'doctors/show', :object => @patient.doctor

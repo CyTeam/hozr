@@ -42,3 +42,4 @@ de:
     action:
       lock:   Sperren
       unlock: Entsperren
+      invoice_overview: Rechnungen
