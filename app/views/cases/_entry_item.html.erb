@@ -1,0 +1,38 @@
+<% item = entry_item %>
+<% case_nr = "#{item.praxistar_eingangsnr}" %>
+<% case_nr += " (#{item.intra_day_id})" unless item.intra_day_id.nil? %>
+<tr>
+  <td>
+    <%= item.entry_date unless item.entry_date.nil? %>
+    <%= "(#{item.first_entry_by.code})" unless item.first_entry_by.nil? %>
+  </td>
+  <td><%= 
+    if item.ready_for_first_entry
+      link_to case_nr, {:controller => 'cases', :action => 'first_entry', :id => item}
+    elsif item.ready_for_second_entry
+      link_to case_nr, {:controller => 'cases', :action => 'second_entry_pap_form', :id => item}
+    end
+  %></td>
+  <td><%= render :partial => '/patients/compact', :object => item.patient unless item.patient.nil? %></td>
+  <td><%= item.doctor.name unless item.doctor.nil? %></td>
+  <td>
+    <% if item.order_form %>
+      <%= link_to "Auftrag", url_for_file_column(item.order_form, "file") %> <%= link_to "Klinische Symptome", url_for_file_column(item.order_form, "file", "result_remarks") %> <%= link_to "Personalien", url_for_file_column(item.order_form, "file", "address") %>
+    <% end %>
+    <br/>
+    <span class="slidepath_links" data-case-id="<%= item.id %>"/>
+  </td>
+  <td style="width: 8em">
+    <div class="btn-group">
+      <%= link_to t_action('edit'), edit_case_path(item), :class => 'btn btn-mini' %>
+      <button class="btn btn-mini dropdown-toggle" data-toggle="dropdown">
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu pull-right">
+        <%= link_to t_action('delete'), case_path(item), :method => :delete, :confirm => 'Fall wirklich löschen?' if can? :destroy, Case %>
+        <%= link_to t_action('create_hpv_p16'), create_hpv_p16_for_case_case_path(item), :method => :post %>
+        <%= link_to t_action('print_label'), case_label_single_label_print_path(:id => item.id), :method => :post %>
+      </ul>
+    </div>
+  </td>
+</tr>

@@ -93,7 +93,7 @@ class CasesController < ApplicationController
   # ===========
   def first_entry_queue
     @cases = Case.paginate(:page => params['page'], :per_page => 144, :conditions => 'entry_date IS NULL AND assigned_at IS NOT NULL')
-    render :action => :list
+    render 'entry_list'
   end
 
   def first_entry
@@ -202,7 +202,7 @@ class CasesController < ApplicationController
   # ============
   def second_entry_queue
     @cases = Case.for_second_entry.paginate(:page => params['page'], :per_page => 144)
-    render :action => :list
+    render 'entry_list'
   end
 
   def second_entry_pap_form
