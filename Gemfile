@@ -89,7 +89,7 @@ gem 'lyb_devise_admin', :git => 'https://github.com/huerlisi/lyb_devise_admin.gi
 
 # Helpers
 gem 'inherited_resources'
-gem 'i18n_rails_helpers'
+gem 'i18n_rails_helpers', :path => '../i18n_rails_helpers'
 gem 'haml'
 
 # Bootstrap
