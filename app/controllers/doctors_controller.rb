@@ -1,4 +1,4 @@
-class DoctorsController < ApplicationController
+class DoctorsController < AuthorizedController
 
   def index
     params[:order] ||= 'vcards.family_name, vcards.given_name'

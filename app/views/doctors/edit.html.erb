@@ -1,9 +1,0 @@
-<h1>Editing doctor</h1>
-
-<%= form_for @doctor do |f| %>
-  <%= render :partial => 'form' %>
-  <%= f.submit %>
-<% end %>
-
-<%= link_to 'Show', doctor_path(@doctor) %> |
-<%= link_to 'Back', doctors_path %>
