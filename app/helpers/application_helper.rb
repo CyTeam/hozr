@@ -43,13 +43,19 @@ module ApplicationHelper
   end
 
   # CyDoc
-  def link_to_cydoc(title, path, options = {})
+  def cydoc_hostname
     if Rails.env.development?
       hostname = "cydoc-dev"
     else
       hostname = "cydoc"
     end
+  end
 
-    link_to title, "https://#{hostname}/" + path, options.merge(:target => hostname)
+  def cydoc_url_for(path)
+    "https://#{cydoc_hostname}/#{path}"
+  end
+
+  def link_to_cydoc(title, path, options = {})
+    link_to title, cydoc_url_for(path), options.merge(:target => cydoc_hostname)
   end
 end
