@@ -11,10 +11,15 @@ class InsurancePolicy < ActiveRecord::Base
   # Validations
 #  validates_presence_of :insurance
 
-  def to_s
-    s = "#{policy_type}: #{insurance.to_s}"
-    s += " ##{number}" unless number.blank?
+  def to_s(format = :default)
+    ident = insurance.to_s
+    ident += " ##{number}" unless number.blank?
 
-    return s
+    case format
+    when :long
+      return "#{policy_type}: #{ident}"
+    else
+      return ident
+    end
   end
 end
