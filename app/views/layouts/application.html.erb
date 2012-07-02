@@ -146,11 +146,15 @@
     </div>
 
     <div class="container-fluid">
-      <% if notice %><%= boot_alert(notice, 'success') %><% end %>
-      <% if alert %><%= boot_alert(alert, 'error') %><% end %>
-
-        <%= render :partial => 'navigation' if controller.controller_name == 'cases' and params[:id] %>
-        <%= yield %>
+      <div class="row-fluid">
+        <div class="span10">
+          <% if notice %><%= boot_alert(notice, 'success') %><% end %>
+          <% if alert %><%= boot_alert(alert, 'error') %><% end %>
+          <%= render :partial => 'navigation' if controller.controller_name == 'cases' and params[:id] %>
+          <%= yield %>
+        </div>
+        <div class="span2">
+        </div>
     </div>
   </body>
 </html>
