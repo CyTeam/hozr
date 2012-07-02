@@ -40,9 +40,20 @@ function setupSlidepathLinks() {
   });
 };
 
+// Contextual Update button
+function setupUpdateButton() {
+  var button = $('#update-button');
+  var form = button.parents('.row-fluid').find('form');
+
+  button.click(function() {
+    form.submit();
+  });
+}
+
 function initializeBehaviours() {
   setupSlidepathLinks();
   setupCaseAssignment();
+  setupUpdateButton();
 }
 
 $(document).ready(initializeBehaviours);
