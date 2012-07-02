@@ -7,7 +7,6 @@
 = boot_page_title
 
 = render 'form'
-= render :partial => 'doctors/show', :object => @patient.doctor
 
 - content_for :sidebar do
   = render :partial => 'cases/compact_list', :object => @patient.cases
