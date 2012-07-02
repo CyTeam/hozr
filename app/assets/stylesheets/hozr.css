@@ -4,6 +4,10 @@
 }
 
 /* Forms */
+label.input-important {
+  font-weight: bold;
+}
+
 .form-horizontal .control-group {
   margin-bottom: 8px;
 }
