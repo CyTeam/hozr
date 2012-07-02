@@ -49,3 +49,7 @@ de:
       review_done:      2. Eingabe bestätigen
       print_label:      Label Drucken
       update:           Speichern
+
+  flash:
+    action:
+      dunning_stop:     Mahnstopp gesetzt

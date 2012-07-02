@@ -4,7 +4,7 @@
     .span7
       = v.input :honorific_prefix, :collection => HonorificPrefix.find(:all, :order => 'sex DESC, position').collect { |prefix| prefix.name }
     .span5
-      = f.input :dunning_stop, :label_html => {:class => 'input-important'}
+      = f.input :dunning_stop
   .row-fluid
     .span7
       .control-group

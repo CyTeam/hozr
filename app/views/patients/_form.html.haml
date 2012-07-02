@@ -1,3 +1,5 @@
+= boot_alert(t('flash.action.dunning_stop'), 'error') if @patient.dunning_stop?
+
 = simple_form_for @patient do |f|
   = render 'patients/personal_form', :f => f
   = render 'patients/billing_form', :f => f
