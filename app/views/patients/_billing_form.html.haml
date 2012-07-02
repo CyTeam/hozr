@@ -1,29 +1,29 @@
 %h3 Rechnungsdaten
 = f.fields_for :billing_vcard do |v|
   .row-fluid
-    .span6
+    .span7
       = f.input :use_billing_address
-    .span6
+    .span5
       = f.input :dunning_stop
   .row-fluid
-    .span6
+    .span7
       .control-group
         %label.control-label= "#{t_attr(:family_name, Vcard)}, #{t_attr(:given_name, Vcard)}"
         .controls
           = v.text_field :family_name
           = v.text_field :given_name
-    .span6
+    .span5
       = v.input :honorific_prefix, :collection => HonorificPrefix.find(:all, :order => 'sex DESC, position').collect { |prefix| prefix.name }
   .row-fluid
-    .span6
+    .span7
       = v.input :street_address
   .row-fluid
-    .span6
+    .span7
       = v.input :extended_address
-    .span6
+    .span5
       = v.input :post_office_box
   .row-fluid
-    .span6
+    .span7
       .control-group
         %label.control-label= "#{t_attr(:postal_code, Vcard)}, #{t_attr(:locality, Vcard)}"
         .controls

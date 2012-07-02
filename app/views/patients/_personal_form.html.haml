@@ -1,31 +1,31 @@
 %h3 Personalien
 = f.fields_for :vcard do |v|
   .row-fluid
-    .span6
+    .span7
       = v.input :honorific_prefix, :collection => HonorificPrefix.find(:all, :order => 'sex DESC, position').collect { |prefix| prefix.name }
-    .span6
+    .span5
       = f.input :sex, :collection => {t('sex.female') => 'F', t('sex.male') => 'M'}, :include_blank => true
   .row-fluid
-    .span6
+    .span7
       .control-group
         %label.control-label= "#{t_attr(:family_name, Vcard)}, #{t_attr(:given_name, Vcard)}"
         .controls
           = v.text_field :family_name
           = v.text_field :given_name
-    .span6
+    .span5
       = f.input :birth_date, :as => :string
   .row-fluid
-    .span6
+    .span7
       = v.input :street_address
-    .span6
+    .span5
       = f.input :doctor_patient_nr
   .row-fluid
-    .span6
+    .span7
       = v.input :extended_address
-    .span6
+    .span5
       = v.input :post_office_box
   .row-fluid
-    .span6
+    .span7
       .control-group
         %label.control-label= "#{t_attr(:postal_code, Vcard)}, #{t_attr(:locality, Vcard)}"
         .controls
@@ -33,4 +33,4 @@
           = v.text_field :locality
   .row-fluid
     .span12
-      = f.input :remarks, :input_html => {:class => 'span12', :rows => 4}
+      = f.input :remarks, :input_html => {:class => 'span11', :rows => 4}
