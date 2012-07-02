@@ -28,6 +28,21 @@ function setupCaseAssignment() {
   unassigned_sort_queue.find("[name$='[doctor_id]']").live('focus', guessDoctorIdFromPreviousCase);
 }
 
+// Billing Address switch
+function updateBillingAddressUsage() {
+  var usage_toggle = $('#patient_use_billing_address');
+  use = (usage_toggle.attr('checked') != 'checked');
+
+  $('#billing_data').find(':input').not('#patient_use_billing_address').prop("disabled", use);
+}
+
+function setupBillingAddressToggle() {
+  var usage_toggle = $('#patient_use_billing_address');
+  usage_toggle.change(updateBillingAddressUsage);
+
+  updateBillingAddressUsage();
+}
+
 // SlidePath
 function setupSlidepathLinks() {
   $('.slidepath_links').each(function() {
@@ -60,6 +75,7 @@ function initializeBehaviours() {
   setupCaseAssignment();
   setupUpdateButton();
   setupPopOver();
+  setupBillingAddressToggle();
 }
 
 $(document).ready(initializeBehaviours);
