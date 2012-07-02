@@ -3,8 +3,6 @@
   .row-fluid
     .span7
       = v.input :honorific_prefix, :collection => HonorificPrefix.find(:all, :order => 'sex DESC, position').collect { |prefix| prefix.name }
-    .span5
-      = f.input :sex, :collection => {t('sex.female') => 'F', t('sex.male') => 'M'}, :include_blank => true
   .row-fluid
     .span7
       .control-group
