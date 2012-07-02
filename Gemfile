@@ -92,6 +92,9 @@ gem 'inherited_resources'
 gem 'i18n_rails_helpers', :path => '../i18n_rails_helpers'
 gem 'haml'
 
+# Layout
+gem 'lyb_sidebar'
+
 # Bootstrap
 gem 'twitter-bootstrap-rails'
 gem 'bootstrap-will_paginate'
