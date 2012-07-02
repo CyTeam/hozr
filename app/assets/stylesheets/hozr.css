@@ -3,6 +3,11 @@
   color: #165BDB;
 }
 
+/* Contextual */
+.contextual {
+  margin-top: 17px
+}
+
 /* Forms */
 label.input-important {
   font-weight: bold;
