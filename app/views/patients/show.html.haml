@@ -7,4 +7,6 @@
 
 = render 'form'
 = render :partial => 'doctors/show', :object => @patient.doctor
-= render :partial => 'cases/compact_list', :object => @patient.cases
+
+- content_for :sidebar do
+  = render :partial => 'cases/compact_list', :object => @patient.cases
