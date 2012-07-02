@@ -2,12 +2,12 @@
   %tr
     %th= t_attr(:full_name, Vcard)
     %th= t_attr(:street_address, Vcard)
-    %th= t_attr(:postal_code, Vcard)   
-    %th= t_attr(:locality, Vcard)     
-    %th= t_attr(:birth_date, Vcard) 
+    %th= t_attr(:postal_code, Vcard)
+    %th= t_attr(:locality, Vcard)
+    %th= t_attr(:birth_date, Vcard)
     %th= t_model(Doctor)
     %th= t_attr(:doctor_patient_nr, Patient)
     %th= t_attr(:insurance, Patient)
     %th= t_attr(:insurance_number, Patient)
-  
-  = render @patients     
+
+  = render @patients
