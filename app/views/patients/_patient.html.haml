@@ -5,5 +5,4 @@
   %td= patient.birth_date
   %td= patient.doctor.name if patient.doctor
   %td= patient.doctor_patient_nr
-  %td= patient.insurance.vcard.full_name if patient.insurance
-  %td= patient.insurance_nr
+  %td= patient.insurance_policies.first
