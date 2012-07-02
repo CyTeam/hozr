@@ -16,3 +16,9 @@ label.input-important {
 .form-horizontal .control-group {
   margin-bottom: 8px;
 }
+
+/* Case List */
+dd {
+  margin-bottom: 8px;
+  margin-top:    2px;
+}
