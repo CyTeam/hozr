@@ -2,9 +2,9 @@
 = f.fields_for :billing_vcard do |v|
   .row-fluid
     .span7
-      = f.input :use_billing_address
+      = v.input :honorific_prefix, :collection => HonorificPrefix.find(:all, :order => 'sex DESC, position').collect { |prefix| prefix.name }
     .span5
-      = f.input :dunning_stop
+      = f.input :use_billing_address
   .row-fluid
     .span7
       .control-group
@@ -12,8 +12,6 @@
         .controls
           = v.text_field :family_name
           = v.text_field :given_name
-    .span5
-      = v.input :honorific_prefix, :collection => HonorificPrefix.find(:all, :order => 'sex DESC, position').collect { |prefix| prefix.name }
   .row-fluid
     .span7
       = v.input :street_address
