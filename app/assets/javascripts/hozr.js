@@ -50,10 +50,16 @@ function setupUpdateButton() {
   });
 }
 
+// Twitter Bootstrap
+function setupPopOver() {
+  $("*[data-content]").popover();
+}
+
 function initializeBehaviours() {
   setupSlidepathLinks();
   setupCaseAssignment();
   setupUpdateButton();
+  setupPopOver();
 }
 
 $(document).ready(initializeBehaviours);
