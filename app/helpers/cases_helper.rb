@@ -20,6 +20,32 @@ module CasesHelper
     "#{a_case.hpv_p16_prepared_at.strftime('%d.%m.%Y')} #{a_case.hpv_p16_prepared_by.nil? ? "" : a_case.hpv_p16_prepared_by.code}"
   end
 
+  def findings_text(a_case)
+    a_case.finding_classes.collect{|finding| finding.name}.join("<br/>").html_safe
+  end
+
+  # Labels
+  def case_label_classes(a_case)
+    color = a_case.classification.try(:classification_group).try(:color)
+
+    return '' unless color
+
+    label = case color
+    when 'ffff00'
+      'warning'
+    when '0066ff'
+      'info'
+    when 'ff0000'
+      'important'
+    when '00cc00'
+      'success'
+    else
+      'default'
+    end
+
+    return "label label-#{label}"
+  end
+
   # From CyLab
   def patient_nr
     return nil if @case.patient.doctor_patient_nr.blank?
