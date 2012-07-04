@@ -11,8 +11,8 @@
         .control-group
           %label.control-label= "#{t_attr(:family_name, Vcard)}, #{t_attr(:given_name, Vcard)}"
           .controls
-            = v.text_field :family_name
-            = v.text_field :given_name
+            = v.input :family_name, :wrapper => :inline
+            = v.input :given_name, :wrapper => :inline
     .row-fluid
       .span7
         = v.input :street_address
@@ -26,5 +26,5 @@
         .control-group
           %label.control-label= "#{t_attr(:postal_code, Vcard)}, #{t_attr(:locality, Vcard)}"
           .controls
-            = v.text_field :postal_code
-            = v.text_field :locality
+            = v.input :postal_code, :wrapper => :inline
+            = v.input :locality, :wrapper => :inline
