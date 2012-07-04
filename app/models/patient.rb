@@ -1,4 +1,8 @@
 class Patient < ActiveRecord::Base
+  # Base data
+  validates_presence_of :birth_date
+  validates_presence_of :sex
+
   # Insurance
   has_many :insurance_policies, :autosave => true
   accepts_nested_attributes_for :insurance_policies, :reject_if => proc { |attrs| attrs['insurance_id'].blank? }
@@ -41,6 +45,7 @@ class Patient < ActiveRecord::Base
   # Doctor
   belongs_to :doctor
 
+  # Address
   has_one :vcard, :as => :object, :conditions => {:vcard_type => 'private'}
   accepts_nested_attributes_for :vcard
   has_one :billing_vcard, :class_name => 'Vcard', :as => :object, :conditions => {:vcard_type => 'billing'}
@@ -49,8 +54,7 @@ class Patient < ActiveRecord::Base
   has_many :cases, :order => 'id DESC'
   has_many :finished_cases, :class_name => 'Case', :conditions => 'screened_at IS NOT NULL', :order => 'id DESC'
   
-  validates_presence_of :birth_date
-  
+  # Invoices
   scope :dunning_stopped, where(:dunning_stop => true)
 
   # Sphinx Search
