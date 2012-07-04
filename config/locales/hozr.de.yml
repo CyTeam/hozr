@@ -20,6 +20,7 @@ de:
         birth_date: Geburtsdatum
         doctor_patient_nr: Patientennr.
         sex: Geschlecht
+        doctor: Zuweisender Arzt
 
         insurance: "Versicherung"
         insurance_number: "Nummer"
