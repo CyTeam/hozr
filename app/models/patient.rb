@@ -4,7 +4,7 @@ class Patient < ActiveRecord::Base
   validates_presence_of :sex
 
   # Insurance
-  has_many :insurance_policies, :autosave => true
+  has_many :insurance_policies, :autosave => true, :validate => true
   accepts_nested_attributes_for :insurance_policies, :reject_if => proc { |attrs| attrs['insurance_id'].blank? }
   has_many :insurances, :through => :insurance_policies
 
