@@ -51,6 +51,26 @@ class Patient < ActiveRecord::Base
   has_one :billing_vcard, :class_name => 'Vcard', :as => :object, :conditions => {:vcard_type => 'billing'}
   accepts_nested_attributes_for :billing_vcard
 
+  def invoice_vcard
+    if use_billing_address?
+      return billing_vcard
+    else
+      return vcard
+    end
+  end
+
+  validate :validate_address
+  def validate_address
+    vcard.validate_name
+    errors.add(:base, 'name invalid for vcard') if vcard.errors.present?
+
+    invoice_vcard.validate_name
+    errors.add(:base, 'name invalid for invoice_vcard') if invoice_vcard.errors.present?
+    invoice_vcard.address.validate_address
+    errors.add(:base, 'address invalid for invoice_vcard') if invoice_vcard.address.errors.present?
+  end
+
+  # Cases
   has_many :cases, :order => 'id DESC'
   has_many :finished_cases, :class_name => 'Case', :conditions => 'screened_at IS NOT NULL', :order => 'id DESC'
   

@@ -1,6 +1,5 @@
-#billing_data
-  %h3 Rechnungsdaten
-  = f.fields_for :billing_vcard do |v|
+= f.fields_for :billing_vcard do |v|
+  = v.fields_for :address do |a|
     .row-fluid
       .span7
         = v.input :honorific_prefix, :collection => HonorificPrefix.find(:all, :order => 'sex DESC, position').collect { |prefix| prefix.name }
@@ -8,22 +7,22 @@
         = f.input :use_billing_address, :label_html => {:class => 'input-important'}
     .row-fluid
       .span7
-        .control-group
+        .control-group{:class => "#{'error' if v.object.errors.include?(:family_name) or v.object.errors.include?(:given_name)}"}
           %label.control-label= "#{t_attr(:family_name, Vcard)}, #{t_attr(:given_name, Vcard)}"
           .controls
             = v.input :family_name, :wrapper => :inline
             = v.input :given_name, :wrapper => :inline
     .row-fluid
       .span7
-        = v.input :street_address
+        = a.input :street_address
     .row-fluid
       .span7
-        = v.input :extended_address
+        = a.input :extended_address
       .span5
-        = v.input :post_office_box
+        = a.input :post_office_box
     .row-fluid
       .span7
-        .control-group
+        .control-group{:class => "#{'error' if a.object.errors.include?(:postal_code) or a.object.errors.include?(:locality)}"}
           %label.control-label= "#{t_attr(:postal_code, Vcard)}, #{t_attr(:locality, Vcard)}"
           .controls
             = v.input :postal_code, :wrapper => :inline

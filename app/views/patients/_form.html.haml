@@ -2,7 +2,9 @@
 
 = simple_form_for @patient do |f|
   = render 'patients/personal_form', :f => f
-  = render 'patients/billing_form', :f => f
+  #billing_data
+    %h3 Rechnungsdaten
+    = render 'patients/billing_form', :f => f
   .row-fluid
     .span12
       = f.input :remarks, :input_html => {:class => 'span11', :rows => 4}

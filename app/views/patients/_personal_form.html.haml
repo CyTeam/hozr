@@ -1,35 +1,36 @@
 %h3 Personalien
 = f.fields_for :vcard do |v|
-  .row-fluid
-    .span7
-      = v.input :honorific_prefix, :collection => HonorificPrefix.find(:all, :order => 'sex DESC, position').collect { |prefix| prefix.name }
-    .span5
-      = f.input :dunning_stop
-  .row-fluid
-    .span7
-      .control-group
-        %label.control-label= "#{t_attr(:family_name, Vcard)}, #{t_attr(:given_name, Vcard)}"
-        .controls
-          = v.input :family_name, :wrapper => :inline
-          = v.input :given_name, :wrapper => :inline
-    .span5
-      = f.input :birth_date, :as => :string
-  .row-fluid
-    .span7
-      = v.input :street_address
-    .span5
-      = f.input :doctor_patient_nr
-  .row-fluid
-    .span7
-      = v.input :extended_address
-    .span5
-      = v.input :post_office_box
-  .row-fluid
-    .span7
-      .control-group
-        %label.control-label= "#{t_attr(:postal_code, Vcard)}, #{t_attr(:locality, Vcard)}"
-        .controls
-          = v.input :postal_code, :wrapper => :inline
-          = v.input :locality, :wrapper => :inline
-    .span5
-      = f.association :doctor, :as => :combobox, :collection => doctors_collection
+  = v.fields_for :address do |a|
+    .row-fluid
+      .span7
+        = v.input :honorific_prefix, :collection => HonorificPrefix.find(:all, :order => 'sex DESC, position').collect { |prefix| prefix.name }
+      .span5
+        = f.input :dunning_stop
+    .row-fluid
+      .span7
+        .control-group{:class => "#{'error' if v.object.errors.include?(:family_name) or v.object.errors.include?(:given_name)}"}
+          %label.control-label= "#{t_attr(:family_name, Vcard)}, #{t_attr(:given_name, Vcard)}"
+          .controls
+            = v.input :family_name, :wrapper => :inline
+            = v.input :given_name, :wrapper => :inline
+      .span5
+        = f.input :birth_date, :as => :string
+    .row-fluid
+      .span7
+        = a.input :street_address
+      .span5
+        = f.input :doctor_patient_nr
+    .row-fluid
+      .span7
+        = a.input :extended_address
+      .span5
+        = a.input :post_office_box
+    .row-fluid
+      .span7
+        .control-group{:class => "#{'error' if a.object.errors.include?(:postal_code) or a.object.errors.include?(:locality)}"}
+          %label.control-label= "#{t_attr(:postal_code, Vcard)}, #{t_attr(:locality, Vcard)}"
+          .controls
+            = a.input :postal_code, :wrapper => :inline
+            = a.input :locality, :wrapper => :inline
+      .span5
+        = f.association :doctor, :as => :combobox, :collection => doctors_collection
