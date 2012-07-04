@@ -75,7 +75,7 @@ function initializeBehaviours() {
   setupCaseAssignment();
   setupUpdateButton();
   setupPopOver();
-  setupBillingAddressToggle();
+//  setupBillingAddressToggle();
 }
 
 $(document).ready(initializeBehaviours);
