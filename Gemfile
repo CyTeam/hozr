@@ -102,6 +102,8 @@ gem 'simple_form'
 
 # Addresses
 gem 'has_vcards'
+gem 'autocompletion'
+gem 'swissmatch', :git => 'https://github.com/apeiros/swissmatch.git'
 
 # Autocomplete
 gem 'rails3-jquery-autocomplete', :git => 'https://github.com/slash4/rails3-jquery-autocomplete.git'
