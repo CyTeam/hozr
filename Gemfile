@@ -116,6 +116,7 @@ gem 'tinymce-rails'
 
 # Files
 gem 'file-column', :path => '/root/src/file_column'
+gem 'rmagick'
 
 # Multiple Databases
 gem 'use_db'

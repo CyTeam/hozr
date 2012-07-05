@@ -189,6 +189,7 @@ GEM
     responders (0.9.1)
       railties (~> 3.1)
     riddle (1.5.2)
+    rmagick (2.13.1)
     ruby-rc4 (0.1.5)
     ruby_parser (2.3.1)
       sexp_processor (~> 3.0)
@@ -284,6 +285,7 @@ DEPENDENCIES
   rails
   rails3-jquery-autocomplete!
   rdoc
+  rmagick
   ruby_parser
   sass-rails
   shoulda
