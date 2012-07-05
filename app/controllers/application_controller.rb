@@ -1,3 +1,5 @@
+# encoding: utf-8'
+
 class ActionController::Base
   def self.auto_complete_for_vcard_field(object, method, options = {})
     case method.to_s

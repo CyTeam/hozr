@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class Mailing < ActiveRecord::Base
   belongs_to :doctor
   has_and_belongs_to_many :cases, :include => {:classification => :classification_group}, :order => 'classification_groups.position DESC, praxistar_eingangsnr'

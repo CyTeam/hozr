@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 require 'prawn/measurement_extensions'
 
 class MailingOverview < Prawn::Document

@@ -1,3 +1,4 @@
+# encoding: utf-8'
 class ClassificationsController < ApplicationController
   def index
     list

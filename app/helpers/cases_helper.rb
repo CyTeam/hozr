@@ -1,3 +1,4 @@
+# encoding: utf-8'
 module CasesHelper
   def classification_button(code)
     classification = Classification.find_by_code_and_examination_method_id(code, @case.examination_method_id)

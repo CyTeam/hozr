@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class SendQueue < ActiveRecord::Base
   belongs_to :mailing
 

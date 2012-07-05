@@ -1,3 +1,4 @@
+# encoding: utf-8'
 class PatientsController < AuthorizedController
   helper :doctors
   

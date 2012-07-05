@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class Insurance < ActiveRecord::Base
   has_one :vcard, :as => :object
 

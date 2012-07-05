@@ -1,3 +1,4 @@
+# encoding: utf-8'
 class SendQueuesController < ApplicationController
   def index
     list

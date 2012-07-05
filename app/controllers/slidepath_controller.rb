@@ -1,3 +1,4 @@
+# encoding: utf-8'
 class SlidepathController < ApplicationController
   respond_to :js
   

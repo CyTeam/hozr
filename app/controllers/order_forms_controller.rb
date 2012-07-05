@@ -1,3 +1,4 @@
+# encoding: utf-8'
 class OrderFormsController < ApplicationController
   # AJAX functions
   def head_big

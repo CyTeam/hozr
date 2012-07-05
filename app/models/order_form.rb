@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 require 'rails_file_column'
 
 class OrderForm < ActiveRecord::Base

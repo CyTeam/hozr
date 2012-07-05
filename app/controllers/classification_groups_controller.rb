@@ -1,3 +1,4 @@
+# encoding: utf-8'
 class ClassificationGroupsController < ApplicationController
   def list
     @classification_groups = ClassificationGroup.order('position').all

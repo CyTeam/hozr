@@ -1,3 +1,4 @@
+# encoding: utf-8'
 class TopFindingClassesController < ApplicationController
   def index
     list

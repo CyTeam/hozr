@@ -1,3 +1,4 @@
+# encoding: utf-8'
 require 'cups/print_job/transient'
 
 class OrderFormController < ApplicationController

@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class InsurancePolicy < ActiveRecord::Base
   # Scopes
   scope :by_policy_type, lambda {|policy_type|

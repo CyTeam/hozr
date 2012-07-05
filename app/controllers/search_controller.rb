@@ -1,3 +1,4 @@
+# encoding: utf-8'
 class SearchController < ApplicationController
   helper :doctors
   auto_complete_for_vcard :vcard

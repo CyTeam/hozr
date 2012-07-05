@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class TopFindingClass < ActiveRecord::Base
         belongs_to :classification
         belongs_to :finding_class

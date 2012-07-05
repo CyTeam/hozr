@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class Patient < ActiveRecord::Base
   # Base data
   validates_presence_of :birth_date

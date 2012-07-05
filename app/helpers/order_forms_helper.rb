@@ -1,3 +1,4 @@
+# encoding: utf-8'
 module OrderFormsHelper
   def order_form_head_image(order_form, header_image_type)
     return unless order_form

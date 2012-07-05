@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class ResultReport < Prawn::Document
   include CasesHelper
   include ApplicationHelper

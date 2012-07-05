@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class Slidepath::LocationIndex < ActiveRecord::Base
   # Legacy specs
   use_db :prefix => 'slidepath_'
