@@ -50,7 +50,7 @@
       </p>
 
       <p>
-          <%= link_to (image_tag('print_result.png', :size => '45x45'), generate_mailings_path, :method => :post ) %>
+          <%= link_to image_tag('print_result.png', :size => '45x45'), generate_mailings_path, :method => :post %>
           <i style="font-size: 12pt"><b><%= @result_for_delivery_count %></b> Neue Resultate</i>
           <pre id="print_result_reports_log"></pre>
       </p>
