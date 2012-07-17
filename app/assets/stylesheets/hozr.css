@@ -21,6 +21,15 @@ label.input-important {
   margin-bottom: 8px;
 }
 
+/* Fake display: none without loosing functionality */
+.row-fluid.hide {
+  visibility: hidden;
+  height:     0;
+  margin:     0;
+  padding:    0;
+}
+
+
 /* Case List */
 dd {
   margin-bottom: 8px;
