@@ -40,3 +40,6 @@ public/trigger
 db/sphinx
 config/*.sphinx.conf
 config/sphinx/
+
+# SwissMatch
+config/swissmatch.yml

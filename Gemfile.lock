@@ -5,18 +5,40 @@ GIT
     prototype_legacy_helper (0.0.0)
 
 GIT
-  remote: https://github.com/apeiros/swissmatch.git
-  revision: 956aec23636e573b5f41d63ec83272a99a32059f
+  remote: https://github.com/apeiros/swissmatch-directories.git
+  revision: 4008491a5fcf160488ac7eeed5473f7e4da9be15
   specs:
-    swissmatch (0.0.1)
+    swissmatch-directories (0.0.1)
       autocompletion
       rubyzip
+
+GIT
+  remote: https://github.com/apeiros/swissmatch-rails.git
+  revision: 2d47ec2f574dc0c3e801bc339f659e4542a4951f
+  specs:
+    swissmatch-rails (0.0.1)
+      swissmatch
+
+GIT
+  remote: https://github.com/apeiros/swissmatch.git
+  revision: e69b1553068c4c9bd2e18a993a999f583ae2f544
+  specs:
+    swissmatch (0.0.1)
+      swissmatch-location
 
 GIT
   remote: https://github.com/huerlisi/lyb_devise_admin.git
   revision: caf367d593ac37a6779664ca0bf1ff270375f9e5
   specs:
     lyb_devise_admin (0.2.1)
+
+GIT
+  remote: https://github.com/huerlisi/swissmatch-location.git
+  revision: 82a67d42d6188ad748d48562ec676b3e69eeb712
+  specs:
+    swissmatch-location (0.0.1)
+      autocompletion
+      rubyzip
 
 GIT
   remote: https://github.com/slash4/rails3-jquery-autocomplete.git
@@ -289,6 +311,9 @@ DEPENDENCIES
   sprockets
   sqlite3
   swissmatch!
+  swissmatch-directories!
+  swissmatch-location!
+  swissmatch-rails!
   therubyracer
   thinking-sphinx
   tinymce-rails
