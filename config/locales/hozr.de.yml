@@ -50,6 +50,7 @@ de:
       review_done:      2. Eingabe bestätigen
       print_label:      Label Drucken
       update:           Speichern
+      directory_lookup: Telefonbuch
 
   flash:
     action:

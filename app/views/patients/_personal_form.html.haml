@@ -1,4 +1,9 @@
-%h3 Personalien
+%h3
+  Personalien
+  %span.pull-right.badge.badge-success= "Im Telefonbuch" if f.object.vcard.perfect_match?
+  %span.pull-right.badge.badge-info= "Ähnlicher Name im Telefonbuch" if f.object.vcard.great_match?
+  %span.pull-right.badge.badge-info= "Anderer Vorname im Telefonbuch" if f.object.vcard.family_name_match?
+
 = f.fields_for :vcard do |v|
   = v.fields_for :address do |a|
     .row-fluid

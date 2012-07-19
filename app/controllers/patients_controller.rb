@@ -86,4 +86,10 @@ class PatientsController < AuthorizedController
     Patient.find(params[:id]).destroy
     redirect_to patients_path
   end
+
+  def directory_lookup
+    @patient = Patient.find(params[:id])
+
+    @vcard = @patient.vcard
+  end
 end

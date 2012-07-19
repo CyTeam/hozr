@@ -15,6 +15,9 @@ Hozr::Application.routes.draw do
   resources :employees
 
   resources :patients do
+    member do
+      get :directory_lookup
+    end
     collection do
       get :dunning_stopped
     end
