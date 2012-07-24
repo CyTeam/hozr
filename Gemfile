@@ -105,7 +105,7 @@ gem 'unicode_utils'
 gem 'has_vcards'
 gem 'autocompletion'
 gem 'swissmatch', :git => 'https://github.com/apeiros/swissmatch.git'
-gem 'swissmatch-location', :git => 'https://github.com/huerlisi/swissmatch-location.git'
+gem 'swissmatch-location', :git => 'https://github.com/apeiros/swissmatch-location.git'
 gem 'swissmatch-directories', :git => 'https://github.com/huerlisi/swissmatch-directories.git'
 gem 'swissmatch-rails', :git => 'https://github.com/apeiros/swissmatch-rails.git'
 

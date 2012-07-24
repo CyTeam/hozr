@@ -5,6 +5,14 @@ GIT
     prototype_legacy_helper (0.0.0)
 
 GIT
+  remote: https://github.com/apeiros/swissmatch-location.git
+  revision: 745b29c1baabbc54eafac6ff6da96941d5218785
+  specs:
+    swissmatch-location (0.0.1)
+      autocompletion
+      rubyzip
+
+GIT
   remote: https://github.com/apeiros/swissmatch-rails.git
   revision: 2d47ec2f574dc0c3e801bc339f659e4542a4951f
   specs:
@@ -29,14 +37,6 @@ GIT
   revision: d2c5d0dfb79e750359ae56caed2e7a5941abf74c
   specs:
     swissmatch-directories (0.0.1)
-      autocompletion
-      rubyzip
-
-GIT
-  remote: https://github.com/huerlisi/swissmatch-location.git
-  revision: 82a67d42d6188ad748d48562ec676b3e69eeb712
-  specs:
-    swissmatch-location (0.0.1)
       autocompletion
       rubyzip
 
