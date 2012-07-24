@@ -2,14 +2,14 @@
 
 = simple_form_for @patient do |f|
   .contextual
-    = contextual_link_to :directory_lookup, @patient.vcard, :icon => 'search', :remote => true, :method => :get
+    = contextual_link_to :directory_lookup, @patient.vcard, :icon => 'search', :remote => true, :method => :get if @patient.vcard
   %h3
     Personalien
   = render 'patients/personal_form', :f => f
 
   #billing_data
     .contextual
-      = contextual_link_to :directory_lookup, @patient.billing_vcard, :icon => 'search', :remote => true, :method => :get
+      = contextual_link_to :directory_lookup, @patient.billing_vcard, :icon => 'search', :remote => true, :method => :get if @patient.billing_vcard
     %h3 Rechnungsdaten
     = render 'patients/billing_form', :f => f
 

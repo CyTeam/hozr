@@ -132,7 +132,7 @@ GEM
       actionpack (~> 3.0)
     haml (3.1.5)
     has_scope (0.5.1)
-    has_vcards (0.17.0)
+    has_vcards (0.17.1)
       inherited_resources
       rails (~> 3.0)
     hike (1.2.1)
