@@ -15,9 +15,6 @@ Hozr::Application.routes.draw do
   resources :employees
 
   resources :patients do
-    member do
-      get :directory_lookup
-    end
     collection do
       get :dunning_stopped
     end
@@ -104,5 +101,6 @@ Hozr::Application.routes.draw do
   match 'slidepath/links' => 'slidepath#links'
   match 'slidepath/scanned_cases' => 'slidepath#scanned_cases'
 
-  match '/:controller(/:action(/:id))'
+  # WorkQueue
+  match 'work_queue(/:action(/:id))', :controller => :work_queue
 end
