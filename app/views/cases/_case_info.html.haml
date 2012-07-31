@@ -13,7 +13,7 @@
       %dd.label= case_info.examination_date.strftime('%d.%m.%Y')
     - if case_info.entry_date
       %dt= t_attr(:entry_date, Case)
-      %dd= case_info.entry_date.strftime('%d.%m.%Y')
+      %dd.label= case_info.entry_date.strftime('%d.%m.%Y')
     %dt= t_attr(:examination_method)
     %dd.label= case_info.examination_method.name unless case_info.examination_method.nil?
 
