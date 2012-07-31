@@ -1,3 +1,8 @@
+.contextual
+  = contextual_link_to :delete, nil, :type => 'danger'
+  =# TODO: only show if next case exists
+  = contextual_link_to :skip_first_entry, @case, :icon => 'forward'
+
 = boot_page_title
 
 .row-fluid

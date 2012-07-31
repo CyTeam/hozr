@@ -51,6 +51,7 @@ de:
       print_label:      Label Drucken
       update:           Speichern
       directory_lookup: Telefonbuch
+      skip_first_entry: Überspringen
 
   # Titles
   cases:

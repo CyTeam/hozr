@@ -104,6 +104,13 @@ class CasesController < ApplicationController
     @header_image_type = session[:header_image_type] || :head
   end
 
+  def skip_first_entry
+    # TODO: test if next case exists
+    @case = Case.find(params[:id])
+
+    redirect_to first_entry_case_path(Case.find(@case.id + 1))
+  end
+
   def set_new_patient
     @case = Case.find(params[:id])
 
