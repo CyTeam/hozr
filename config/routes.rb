@@ -41,6 +41,8 @@ Hozr::Application.routes.draw do
       post :review_done
 
       get :first_entry, :second_entry_pap_form, :result_report
+
+      post :resend
     end
   end
 

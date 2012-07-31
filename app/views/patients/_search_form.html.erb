@@ -6,7 +6,7 @@ Event.observe(window, 'load', function() {$('patient_birth_date').focus()}, fals
 
       <fieldset style="width: 98%">
         <legend>Personalien</legend>
-        <%= form_tag search_patients_path(:case_id => params[:id]), :remote => true do %>
+        <%= form_tag patient_search_path(:case_id => params[:id]), :remote => true do %>
           <table>
             <%= fields_for 'patient', @patient, :builder => Rubaidh::TabularForm::TabularFormBuilder do |f| %>
               <tr>
@@ -27,7 +27,7 @@ Event.observe(window, 'load', function() {$('patient_birth_date').focus()}, fals
                 <td>Strasse:</td>
                 <td><%= text_field 'vcard', :street_address, :size => 15, :label => "Strasse" %></td>
                 <td>PLZ/Ort:</td>
-                <td><%= text_field_with_auto_complete 'vcard', :zip_locality, :label => "PLZ/Ort", :size => 23 %></td>
+                <td><%= text_field 'vcard', :zip_locality, :label => "PLZ/Ort", :size => 23 %></td>
               </tr>
             <% end %>
           </table>
