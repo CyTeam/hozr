@@ -1,4 +1,4 @@
-%table.table.table-bordered.table-striped.table-condensed           
+%table#patients.table.table-bordered.table-striped.table-condensed
   %tr
     %th= t_attr(:full_name, Vcard)
     %th= t_attr(:street_address, Vcard)
@@ -8,4 +8,4 @@
     %th= t_attr(:doctor_patient_nr, Patient)
     %th= t_attr(:insurance, Patient)
 
-  = render @patients
+  = render @patients.select{|patient| patient.vcard}

@@ -70,6 +70,11 @@ de:
     first_entry:
       title:           Ersteingabe
 
+  simple_form:
+    labels:
+      defaults:
+        query: Suche
+
   flash:
     action:
       dunning_stop:     Mahnstopp gesetzt
