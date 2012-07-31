@@ -65,6 +65,12 @@ function setupUpdateButton() {
   });
 }
 
+function setupPatientHistoryHover() {
+  $('.patient').live('hover', function(event) {
+    $(this).find('.case-history a').click();
+  });
+}
+
 // Twitter Bootstrap
 function setupPopOver() {
   $("*[data-content]").popover();
@@ -76,6 +82,8 @@ function initializeBehaviours() {
   setupUpdateButton();
   setupPopOver();
 //  setupBillingAddressToggle();
+
+  setupPatientHistoryHover();
 }
 
 $(document).ready(initializeBehaviours);

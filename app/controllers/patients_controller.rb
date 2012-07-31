@@ -19,6 +19,11 @@ class PatientsController < AuthorizedController
     @doctor = @patient.doctor
   end
 
+  def show_history
+    @patient = Patient.find(params[:id])
+    @cases = @patient.cases
+  end
+
   def new
     @patient = Patient.new(params[:patient])
     @patient.build_vcard unless @patient.vcard

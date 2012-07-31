@@ -18,6 +18,9 @@ Hozr::Application.routes.draw do
     collection do
       get :dunning_stopped
     end
+    member do
+      get :show_history
+    end
   end
 
   resources :cases do

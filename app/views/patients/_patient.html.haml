@@ -6,3 +6,5 @@
   %td= patient.doctor.name if patient.doctor
   %td= patient.doctor_patient_nr
   %td= patient.insurance_policies.first
+  %td.case-history.hidden
+    = link_to 's', show_history_patient_path(patient), :remote => true
