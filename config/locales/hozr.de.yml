@@ -8,6 +8,7 @@ de:
       user: Benutzer
       patient: Patient
       doctor:  Arzt
+      case:    Fall
 
     attributes:
       user:
