@@ -7,13 +7,13 @@
   </td>
   <td><%= 
     if item.ready_for_first_entry
-      link_to case_nr, first_entry_path(item)
+      link_to case_nr, first_entry_case_path(item)
     elsif item.ready_for_second_entry
-      link_to case_nr, second_entry_path(item)
+      link_to case_nr, second_entry_case_path(item)
     elsif item.ready_for_p16
-      link_to case_nr, second_entry_path(item)
+      link_to case_nr, second_entry_case_path(item)
     else
-      link_to case_nr, result_report(item)
+      link_to case_nr, result_report_case_path(item)
     end
   %></td>
   <td class="PAP_<%= item.classification.code unless item.classification.nil? %>"><%= item.classification.name unless item.classification.nil? %></td>
