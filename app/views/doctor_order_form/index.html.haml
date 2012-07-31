@@ -1,0 +1,10 @@
+%h1 PAP Zettel mit Arztadressen beschriften
+= form_tag(print_doctor_order_form_path) do
+  %table
+    %tr
+      %th Arzt
+      %td= select 'doctor_order_form', 'doctor_id', doctors_collection
+    %tr
+      %th Anzahl
+      %td= text_field 'doctor_order_form', 'count'
+  = submit_tag 'Drucken'

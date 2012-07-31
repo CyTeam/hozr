@@ -21,7 +21,7 @@ class Ability
     end
     if user.role? :admin
       can :label_print, :label_print
-      can :print, :order_form
+      can :print, :doctor_order_form
       can :manage, Mailing
       can :manage, Case
     end

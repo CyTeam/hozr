@@ -1,18 +1,18 @@
 # encoding: utf-8'
 require 'cups/print_job/transient'
 
-class OrderFormController < ApplicationController
+class DoctorOrderFormController < ApplicationController
   helper :doctors
   
   def print
-    authorize! :print, :order_form
+    authorize! :print, :doctor_order_form
 
-    @doctor = Doctor.find(params[:order_form][:doctor_id])
-    @count = params[:order_form][:count].to_i
+    @doctor = Doctor.find(params[:doctor_order_form][:doctor_id])
+    @count = params[:doctor_order_form][:count].to_i
     
     # Use A5
     prawnto :prawn => { :page_size => 'A5', :top_margin => 35, :left_margin => 12, :right_margin => 12, :bottom_margin => 23 }
-    page = render_to_string(:template => 'order_form/print', :formats => [:pdf])
+    page = render_to_string(:template => 'doctor_order_form/print', :formats => [:pdf])
 
     # Workaround TransientJob not yet accepting options
     file = Tempfile.new('')
@@ -30,6 +30,6 @@ class OrderFormController < ApplicationController
       paper_copy.print
     end
 
-    redirect_to order_form_path
+    redirect_to doctor_order_form_path
   end
 end
