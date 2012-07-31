@@ -8,11 +8,10 @@
 - if @case.order_form
   .row-fluid
     .span12.well
-      #head.span6
+      #head.span7
         = order_form_head_image(@case.order_form)
-      .span6
-        .row-fluid
-          = link_to image_tag(inline_order_form_url(@case.order_form, :type => :foot), :width => 450), order_form_path(@case.order_form), :remote => true
+      .span5
+        = link_to image_tag(inline_order_form_url(@case.order_form, :type => :foot), :width => 450), order_form_path(@case.order_form), :remote => true
 
 .row-fluid
   .span12

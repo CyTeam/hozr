@@ -1,7 +1,7 @@
 # encoding: utf-8'
 module OrderFormsHelper
   def order_form_head_image(order_form, image_type = nil)
-    image_type ||= session[:order_form_image_type]
+    image_type ||= session[:order_form_image_type] || :head
 
     new_image_type = nil
     case image_type.to_s
