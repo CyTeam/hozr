@@ -73,10 +73,14 @@ module CasesHelper
     "https://slidepath.zyto-labor.com/dih/webViewer.php?imageHash=#{location_index.image_hash}"
   end
 
+  def link_to_slidepath_scan(location_index)
+    link_to(t_attr(:scan, Case), slidepath_case_url(location_index), :target => 'slidepath')
+  end
+
   def link_to_slidepath_case(a_case)
     links = []
     for location_index in a_case.location_index
-      links << link_to(t_attr(:scan, Case), slidepath_case_url(location_index), :target => 'slidepath')
+      links << link_to_slidepath_scan(location_index)
     end
 
     links.join(", ").html_safe

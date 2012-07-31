@@ -20,4 +20,4 @@
     - if case_info.location_index.present?
       %dt= t_attr(:slidepath, Case)
       - for location_index in case_info.location_index
-        %dd= link_to(t_attr(:scan, Case), slidepath_case_url(location_index), :target => 'slidepath')
+        %dd= link_to_slidepath_scan(location_index)
