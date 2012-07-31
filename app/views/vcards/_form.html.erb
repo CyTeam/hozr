@@ -7,13 +7,8 @@ Event.observe(window, 'load', function() {$('vcard_honorific_prefix').focus()}, 
 <% auto_complete = true if auto_complete.nil? %>
 <%= fields_for vcard_name, vcard, :builder => Rubaidh::TabularForm::TabularFormBuilder do |vcard| %>
   <%= vcard.select 'honorific_prefix', HonorificPrefix.all.collect { |prefix| prefix.name }, :include_blank => true, :label => "Anrede"  %>
-  <%- if auto_complete %>
-    <%= vcard.text_field_with_auto_complete :family_name, :size => 23, :label => "Nachname" %>
-    <%= vcard.text_field_with_auto_complete :given_name, :size => 23, :label => "Vorname" %>
-  <%- else %>
-    <%= vcard.text_field :family_name, :size => 23, :label => "Nachname", :autocomplete => 'off' %>
-    <%= vcard.text_field :given_name, :size => 23, :label => "Vorname", :autocomplete => 'off' %>
-  <%- end %>
+  <%= vcard.text_field :family_name, :size => 23, :label => "Nachname", :autocomplete => 'off' %>
+  <%= vcard.text_field :given_name, :size => 23, :label => "Vorname", :autocomplete => 'off' %>
   <%= vcard.fields_for :address do |address| %>
     <%= address.text_field :street_address, :size => 23, :label => "Strasse" %>
     <%= address.text_field :extended_address, :size => 23, :label => "c/o" %>
