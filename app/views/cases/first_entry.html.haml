@@ -17,3 +17,6 @@
 .row-fluid
   .span12
     = render :partial => '/patients/search_form'
+
+- content_for :sidebar do
+  = render :partial => 'cases/case_info', :object => @case
