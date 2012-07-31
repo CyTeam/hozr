@@ -17,11 +17,7 @@
     %dt= t_attr(:examination_method)
     %dd.label= case_info.examination_method.name unless case_info.examination_method.nil?
 
-    %dt= t_attr(:slidepath, Case)
-    %dd.label{:id => "slidepath_links_#{case_info.id}"}/
-    :javascript
-      $.ajax({
-          type: 'POST',
-          url: '#{slidepath_links_url(:case_id => case_info.id)}',
-          success: function(data){eval(data);}
-      });
+    - if case_info.location_index.present?
+      %dt= t_attr(:slidepath, Case)
+      - for location_index in case_info.location_index
+        %dd= link_to(t_attr(:scan, Case), slidepath_case_url(location_index), :target => 'slidepath')

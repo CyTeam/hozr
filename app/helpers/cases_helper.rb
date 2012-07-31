@@ -76,7 +76,7 @@ module CasesHelper
   def link_to_slidepath_case(a_case)
     links = []
     for location_index in a_case.location_index
-      links << link_to("Scan", slidepath_case_url(location_index), :target => 'slidepath')
+      links << link_to(t_attr(:scan, Case), slidepath_case_url(location_index), :target => 'slidepath')
     end
 
     links.join(", ").html_safe
