@@ -52,6 +52,11 @@ de:
       update:           Speichern
       directory_lookup: Telefonbuch
 
+  # Titles
+  cases:
+    first_entry:
+      title:           Ersteingabe
+
   flash:
     action:
       dunning_stop:     Mahnstopp gesetzt
