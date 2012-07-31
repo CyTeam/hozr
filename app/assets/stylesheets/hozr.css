@@ -35,3 +35,15 @@ dd {
   margin-bottom: 8px;
   margin-top:    2px;
 }
+
+/* Order Form modal */
+#order_form {
+  width: 80%;
+  margin-left: -40%;
+  margin-top: 0;
+  top: 5px;
+}
+
+#order_form .modal-body {
+  min-height: 600px;
+}

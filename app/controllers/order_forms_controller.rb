@@ -15,6 +15,10 @@ class OrderFormsController < ApplicationController
     render 'head_image'
   end
 
+  def show
+    @order_form = OrderForm.find(params[:id])
+  end
+
   # Image
   def download
     order_form = OrderForm.find(params[:id])

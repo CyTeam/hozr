@@ -16,7 +16,7 @@
           = link_to image_tag('zoom-out.png'), head_small_order_form_path(@case.order_form), :remote => true
           = link_to image_tag('zoom-full.png'), inline_order_form_url(@case.order_form)
         .row-fluid
-          = (link_to image_tag(inline_order_form_url(@case.order_form, :type => :foot), :width => 450), inline_order_form_url(@case.order_form))
+          = link_to image_tag(inline_order_form_url(@case.order_form, :type => :foot), :width => 450), order_form_path(@case.order_form), :remote => true
 
 .row-fluid
   .span12

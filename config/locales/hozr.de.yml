@@ -9,6 +9,7 @@ de:
       patient: Patient
       doctor:  Arzt
       case:    Fall
+      order_form: Autragsformular
 
     attributes:
       user:
@@ -60,6 +61,9 @@ de:
       update:           Speichern
       directory_lookup: Telefonbuch
       skip_first_entry: Überspringen
+
+      cancel:           Abbrechen
+      close:            Schliessen
 
   # Titles
   cases:
