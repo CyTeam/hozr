@@ -6,13 +6,16 @@
 = boot_page_title
 
 .row-fluid
-  #head.span6
-    = order_form_head_image(@case.order_form, @header_image_type )
-  .span6
-    = link_to image_tag('zoom-in.png'), head_big_order_form_path(@case.order_form), :remote => true
-    = link_to image_tag('zoom-out.png'), head_small_order_form_path(@case.order_form), :remote => true
-    = link_to image_tag('zoom-full.png'), inline_order_form_url(@case.order_form) unless @case.order_form.nil?
-    = (link_to image_tag(inline_order_form_url(@case.order_form, :type => :foot), :width => 450), inline_order_form_url(@case.order_form)) unless @case.order_form.nil?
+  .span12.well
+    #head.span6
+      = order_form_head_image(@case.order_form, @header_image_type )
+    .span6
+      .row-fluid
+        = link_to image_tag('zoom-in.png'), head_big_order_form_path(@case.order_form), :remote => true
+        = link_to image_tag('zoom-out.png'), head_small_order_form_path(@case.order_form), :remote => true
+        = link_to image_tag('zoom-full.png'), inline_order_form_url(@case.order_form) unless @case.order_form.nil?
+      .row-fluid
+        = (link_to image_tag(inline_order_form_url(@case.order_form, :type => :foot), :width => 450), inline_order_form_url(@case.order_form)) unless @case.order_form.nil?
 
 .row-fluid
   .span12
