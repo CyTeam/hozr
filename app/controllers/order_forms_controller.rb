@@ -1,17 +1,12 @@
 # encoding: utf-8'
 class OrderFormsController < ApplicationController
   # AJAX functions
-  def head_big
+  def head_image
     @order_form = OrderForm.find(params[:id])
-    session[:header_image_type] = :head_big
-    @header_image_type = :head_big
-    render 'head_image'
-  end
+    @image_type = params[:type] || session[:order_form_image_type]
 
-  def head_small
-    @order_form = OrderForm.find(params[:id])
-    session[:header_image_type] = :head
-    @header_image_type = :head
+    session[:order_form_image_type] = @image_type
+
     render 'head_image'
   end
 
