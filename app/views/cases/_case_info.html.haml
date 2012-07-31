@@ -1,36 +1,41 @@
-%table{:style => "text-align: left; width: 100%"}
-  %tr
-    %th Eingangsnr.:
-    %td
-      = case_info.praxistar_eingangsnr unless case_info.praxistar_eingangsnr.nil?
-      (#{case_info.intra_day_id unless case_info.intra_day_id.nil?})
-  %tr
-    %th Entnahmedat.:
-    %td= case_info.examination_date.strftime('%d.%m.%Y') unless case_info.examination_date.nil?
-  %tr
-    %th Eingangsdat.:
-    %td= case_info.entry_date.strftime('%d.%m.%Y') unless case_info.entry_date.nil?
-  %tr
-    %th Methode:
-    %td= case_info.examination_method.name unless case_info.examination_method.nil?
-  %tr
-    %th Slidepath:
-    %td
-      %span{:id => "slidepath_links_#{case_info.id}"}/
-  :javascript
-    $.ajax({
-        type: 'POST',
-        url: '#{slidepath_links_url(:case_id => case_info.id)}',
-        success: function(data){eval(data);}
-    });
-        - photos_path = '/srv/zyto-labor.com/hozr/public/photos/'
-  - photos = Dir.glob( photos_path + case_info.praxistar_eingangsnr + '*.png') unless case_info.praxistar_eingangsnr.nil?
-  - unless photos.nil? or photos.empty?
+.page-header
+  %h1 Fallinfo
+
+.well
+  %table{:style => "text-align: left; width: 100%"}
     %tr
-      %th Fotos:
+      %th Eingangsnr.:
       %td
-        - i = 0
-        - for photo in photos
-          - i += 1
-          - photo_url = photo.gsub(photos_path, '')
-          = link_to "[#{i}]", "/photos/#{photo_url}"
+        = case_info.praxistar_eingangsnr unless case_info.praxistar_eingangsnr.nil?
+        (#{case_info.intra_day_id unless case_info.intra_day_id.nil?})
+    %tr
+      %th Entnahmedat.:
+      %td= case_info.examination_date.strftime('%d.%m.%Y') unless case_info.examination_date.nil?
+    %tr
+      %th Eingangsdat.:
+      %td= case_info.entry_date.strftime('%d.%m.%Y') unless case_info.entry_date.nil?
+    %tr
+      %th Methode:
+      %td= case_info.examination_method.name unless case_info.examination_method.nil?
+    %tr
+      %th Slidepath:
+      %td
+        %span{:id => "slidepath_links_#{case_info.id}"}/
+    :javascript
+      $.ajax({
+          type: 'POST',
+          url: '#{slidepath_links_url(:case_id => case_info.id)}',
+          success: function(data){eval(data);}
+      });
+
+    - photos_path = '/srv/zyto-labor.com/hozr/public/photos/'
+    - photos = Dir.glob( photos_path + case_info.praxistar_eingangsnr + '*.png') unless case_info.praxistar_eingangsnr.nil?
+    - unless photos.nil? or photos.empty?
+      %tr
+        %th Fotos:
+        %td
+          - i = 0
+          - for photo in photos
+            - i += 1
+            - photo_url = photo.gsub(photos_path, '')
+            = link_to "[#{i}]", "/photos/#{photo_url}"
