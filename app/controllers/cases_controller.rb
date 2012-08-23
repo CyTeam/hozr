@@ -93,7 +93,7 @@ class CasesController < ApplicationController
   # First Entry
   # ===========
   def first_entry_queue
-    @cases = Case.paginate(:page => params['page'], :per_page => 144, :conditions => 'entry_date IS NULL AND assigned_at IS NOT NULL')
+    @cases = Case.for_first_entry.paginate(:page => params['page'], :per_page => 144)
     render 'entry_list'
   end
 

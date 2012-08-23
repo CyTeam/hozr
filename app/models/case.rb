@@ -25,6 +25,7 @@ class Case < ActiveRecord::Base
   }
   scope :unassigned, where("assigned_at IS NULL")
   scope :first_entry_done, where("entry_date IS NOT NULL and screened_at IS NULL")
+  scope :for_first_entry, where("entry_date IS NULL and assigned_at IS NOT NULL")
   scope :for_second_entry, first_entry_done.where("needs_p16 = ? AND needs_hpv = ?", false, false)
   scope :for_hpv, first_entry_done.where("needs_hpv = ?", true)
   scope :for_p16, first_entry_done.where("needs_p16 = ?", true)
