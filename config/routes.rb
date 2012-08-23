@@ -112,5 +112,5 @@ Hozr::Application.routes.draw do
   match 'slidepath/scanned_cases' => 'slidepath#scanned_cases'
 
   # WorkQueue
-  match 'work_queue(/:action(/:id))', :controller => :work_queue
+  get 'work_queue/admin' => 'work_queue#admin', :as => :admin_work_queue
 end
