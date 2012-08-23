@@ -108,7 +108,11 @@ class CasesController < ApplicationController
     # TODO: test if next case exists
     @case = Case.find(params[:id])
 
-    redirect_to first_entry_case_path(Case.find(@case.id + 1))
+    if next_case = @case.next_case
+      redirect_to first_entry_case_path(next_case)
+    else
+      redirect_to admin_work_queue_path
+    end
   end
 
   def set_new_patient

@@ -99,7 +99,10 @@ class Case < ActiveRecord::Base
     screened_at.nil? && needs_p16
   end
   
-  
+  def next_case
+    self.class.where("id > ?", id).first
+  end
+
   def initialize(params = {})
     case params.class.name
     when 'String'
