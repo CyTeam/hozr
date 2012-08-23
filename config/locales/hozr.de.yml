@@ -60,7 +60,8 @@ de:
       print_label:      Label Drucken
       update:           Speichern
       directory_lookup: Telefonbuch
-      skip_first_entry: Überspringen
+      next_first_entry: Überspringen
+      set_patient:      Zuweisen
 
       cancel:           Abbrechen
       close:            Schliessen

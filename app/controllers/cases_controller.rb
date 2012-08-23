@@ -104,8 +104,7 @@ class CasesController < ApplicationController
     @header_image_type = session[:header_image_type] || :head
   end
 
-  def skip_first_entry
-    # TODO: test if next case exists
+  def next_first_entry
     @case = Case.find(params[:id])
 
     if next_case = @case.next_case
