@@ -1,9 +1,5 @@
 # encoding: utf-8'
 class WorkQueueController < ApplicationController
-
-  def overview
-  end
-
   def admin
     @assign_count = Case.count(:all, :conditions => 'assigned_at IS NULL' )
     @first_entry_count = Case.for_first_entry.count
