@@ -62,6 +62,7 @@ de:
       directory_lookup: Telefonbuch
       next_first_entry: Überspringen
       set_patient:      Zuweisen
+      new_patient:      Neuer Patient
 
       cancel:           Abbrechen
       close:            Schliessen

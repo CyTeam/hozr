@@ -33,6 +33,7 @@ Hozr::Application.routes.draw do
     member do
       delete :destroy_from_assign
       post :patient_search
+      get :new_patient
       get :edit_patient
       post :set_patient
       get :set_new_patient

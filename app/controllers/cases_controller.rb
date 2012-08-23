@@ -143,6 +143,16 @@ class CasesController < ApplicationController
     @patient = Patient.find(params[:patient_id])
   end
 
+  def new_patient
+    @case = Case.find(params[:id])
+
+    @patient = Patient.new(params[:patient])
+    @patient.build_vcard unless @patient.vcard
+    @patient.build_billing_vcard unless @patient.billing_vcard
+
+    @patient.vcard.honorific_prefix = 'Frau'
+  end
+
   def set_patient
     @case = Case.find(params[:id])
     @patient = Patient.find(params[:patient_id])
