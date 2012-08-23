@@ -13,6 +13,7 @@ class SearchController < ApplicationController
 
   def patient
     query = params[:query]
+
     @patients = Patient.search(query, :star => true, :per_page => 30, :page => params[:page])
 
     render 'patients/index'

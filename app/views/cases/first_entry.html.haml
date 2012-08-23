@@ -15,7 +15,8 @@
 
 .row-fluid
   .span12
-    = render '/patients/search_form'
+    #patient-search= render 'patient_search'
+    #patient-form
 
 - content_for :sidebar do
   = render :partial => 'cases/case_info', :object => @case

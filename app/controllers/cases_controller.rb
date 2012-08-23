@@ -114,6 +114,16 @@ class CasesController < ApplicationController
     end
   end
 
+  # Patients
+  def patient_search
+    query = params[:query]
+
+    @case = Case.find(params[:id])
+    @patients = Patient.search(query, :star => true, :per_page => 30, :page => params[:page])
+
+    render 'patients_list'
+  end
+
   def set_new_patient
     @case = Case.find(params[:id])
 
@@ -128,7 +138,38 @@ class CasesController < ApplicationController
     render 'patients/edit_inline'
   end
 
+  def edit_patient
+    @case = Case.find(params[:id])
+    @patient = Patient.find(params[:patient_id])
+  end
+
   def set_patient
+    @case = Case.find(params[:id])
+    @patient = Patient.find(params[:patient_id])
+
+    # Set entry_date only when setting patient for first time
+    @case.examination_method_id = @case.intra_day_id == 0 ? 0 : 1
+
+    @case.entry_date ||= Time.now
+    @case.first_entry_at ||= Time.now # TODO: kill
+    @case.first_entry_by = current_user.object
+
+    # TODO: dynamic lookup of doctor from latest case
+    @patient.doctor = @case.doctor
+    @case.insurance = @patient.insurance
+    @case.insurance_nr = @patient.insurance_nr
+
+    @case.patient = @patient
+    if @case.save
+      next_first_entry
+    else
+      raise "Fehler bei Patient zuweisen"
+    end
+  end
+
+
+
+  def set_patient_back
     @case = Case.find(params[:id])
     # Set entry_date only when setting patient for first time
     @case.entry_date = Time.now if @case.entry_date.nil?

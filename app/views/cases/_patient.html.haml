@@ -1,0 +1,18 @@
+%tr[patient]
+  %td= link_to patient.vcard.full_name, edit_patient_case_path(@case, :patient_id => patient.id), :remote => true, 'data-href-container' => 'tr'
+  %td= patient.vcard.street_address
+  %td= [patient.vcard.postal_code, patient.vcard.locality].join(" ")
+  %td= patient.birth_date
+  %td= patient.doctor.name if patient.doctor
+  %td= patient.doctor_patient_nr
+  %td= patient.insurance_policies.first
+  %td.case-history.hidden
+    = link_to 's', show_history_patient_path(patient), :remote => true
+  %td= patient.use_billing_address? ? "X" : ""
+  %td{:style => "width: 8em"}
+    .btn-group
+      = link_to t_action('set_patient'), set_patient_case_path(@case, :patient_id => patient.id), :method => :post, :class => 'btn btn-mini'
+      %button.btn.btn-mini.dropdown-toggle{'data-toggle' => 'dropdown'}
+        %span.caret
+      %ul.dropdown-menu.pull-right
+        = link_to t_action('edit'), edit_patient_case_path(@case, :patient_id => patient.id), :remote => true
