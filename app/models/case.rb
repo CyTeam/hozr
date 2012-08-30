@@ -99,8 +99,14 @@ class Case < ActiveRecord::Base
     screened_at.nil? && needs_p16
   end
   
-  def next_case
-    self.class.where("id > ?", id).first
+  def next_case(scope_name)
+    scope = nil
+    if scope_name
+      scope = self.class.send(scope_name)
+    else
+      scope = self.class
+    end
+    scope.where("id > ?", id).first
   end
 
   def initialize(params = {})
