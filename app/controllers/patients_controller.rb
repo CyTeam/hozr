@@ -6,7 +6,7 @@ class PatientsController < AuthorizedController
   auto_complete_for_vcard :billing_vcard
   
   def index
-    @patients = Patient.by_text :per_page => 50
+    @patients = Patient.by_text params[:query], :per_page => 50
   end
 
   def dunning_stopped
