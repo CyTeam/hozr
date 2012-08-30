@@ -3,4 +3,11 @@
     = icon_link_to :set_patient, case_patient_path(@case, @patient), :method => :put, :icon => 'ok'
     = icon_link_to :cancel, '#', :icon => 'remove', :onclick => "$('#patient-form').hide(); $('#patient-search').show();"
 
-= render 'patients/form'
+= boot_alert(t('flash.action.dunning_stop'), 'error') if @patient.dunning_stop?
+
+= simple_form_for [@case, @patient] do |f|
+  = render 'patients/form_fields', :f => f
+
+  .row-fluid
+    .form-actions
+      = f.button :submit
