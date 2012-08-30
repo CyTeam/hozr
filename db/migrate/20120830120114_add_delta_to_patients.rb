@@ -1,0 +1,5 @@
+class AddDeltaToPatients < ActiveRecord::Migration
+  def change
+    add_column :patients, :delta, :boolean, :default => true, :null => false
+  end
+end

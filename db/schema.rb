@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120508090954) do
+ActiveRecord::Schema.define(:version => 20120830120114) do
 
   create_table "accounts", :force => true do |t|
     t.string   "number"
@@ -584,6 +584,7 @@ ActiveRecord::Schema.define(:version => 20120508090954) do
     t.boolean  "active",                             :default => true,  :null => false
     t.string   "name"
     t.integer  "imported_id"
+    t.boolean  "delta",                              :default => true,  :null => false
   end
 
   add_index "patients", ["birth_date"], :name => "birth_date"
