@@ -1,6 +1,6 @@
 %div{:style => 'min-height: 20px; padding: 19px 0'}
   .pull-right
-    = icon_link_to :set_patient, set_patient_case_path(@case, :patient_id => @patient.id), :method => :post, :icon => 'ok'
+    = icon_link_to :set_patient, case_patient_path(@case, @patient), :method => :put, :icon => 'ok'
     = icon_link_to :cancel, '#', :icon => 'remove', :onclick => "$('#patient-form').hide(); $('#patient-search').show();"
 
 = render 'patients/form'
