@@ -1,5 +1,5 @@
 %tr[patient]
-  %td= link_to patient.vcard.full_name, edit_patient_case_path(@case, :patient_id => patient.id), :remote => true, 'data-href-container' => 'tr'
+  %td= link_to patient.vcard.full_name, edit_case_patient_path(@case, patient), :remote => true, 'data-href-container' => 'tr'
   %td= patient.vcard.street_address
   %td= [patient.vcard.postal_code, patient.vcard.locality].join(" ")
   %td= patient.birth_date
@@ -11,8 +11,8 @@
   %td= patient.use_billing_address? ? "X" : ""
   %td{:style => "width: 8em"}
     .btn-group
-      = link_to t_action('set_patient'), set_patient_case_path(@case, :patient_id => patient.id), :method => :post, :class => 'btn btn-mini'
+      = link_to t_action('set_patient'), case_patient_path(@case, patient), :method => :put, :class => 'btn btn-mini'
       %button.btn.btn-mini.dropdown-toggle{'data-toggle' => 'dropdown'}
         %span.caret
       %ul.dropdown-menu.pull-right
-        = link_to t_action('edit'), edit_patient_case_path(@case, :patient_id => patient.id), :remote => true
+        = link_to t_action('edit'), edit_case_patient_path(@case, patient), :remote => true

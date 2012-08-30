@@ -10,4 +10,4 @@
     %th RA
     %th Aktion
 
-  = render :partial => 'cases/patient', :collection => @patients.select{|patient| patient.vcard}
+  = render :partial => 'patient', :collection => @patients.select{|patient| patient.vcard}

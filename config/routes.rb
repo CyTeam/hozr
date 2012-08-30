@@ -24,6 +24,8 @@ Hozr::Application.routes.draw do
   end
 
   resources :cases do
+    resources :patients, :module => 'case'
+
     collection do
       get :first_entry_queue, :second_entry_queue, :hpv_p16_queue, :review_queue
       get :unassigned_sort_queue, :unassigned_form, :assignings_list
@@ -33,11 +35,6 @@ Hozr::Application.routes.draw do
 
     member do
       delete :destroy_from_assign
-      post :patient_search
-      get :new_patient
-      get :edit_patient
-      post :set_patient
-      get :set_new_patient
       post :hpv_p16_prepared
       post :add_finding
       delete :remove_finding

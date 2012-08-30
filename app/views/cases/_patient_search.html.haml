@@ -1,5 +1,5 @@
-= simple_form_for '', :url => patient_search_case_path(@case), :remote => true, :class => 'form-inline' do |f|
-  = icon_link_to :new_patient, new_patient_case_path(@case), :remote => true, :icon => 'plus', :style => 'float: right'
+= simple_form_for '', :url => case_patients_path(@case), :method => :get, :remote => true, :class => 'form-inline' do |f|
+  = icon_link_to :new_patient, new_case_patient_path(@case), :remote => true, :icon => 'plus', :style => 'float: right'
   = f.input 'query', :label => false, :placeholder => 'Name, Eingangsnummer, Geburtsdatum, Strasse...', :input_html => {:class => 'span10', 'data-autofocus' => true}
 
 #patients
