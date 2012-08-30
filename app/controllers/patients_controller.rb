@@ -64,17 +64,6 @@ class PatientsController < AuthorizedController
     end
   end
 
-  def edit
-    @patient = Patient.find(params[:id])
-
-    if params[:case_id]
-      @case = Case.find(params[:case_id])
-      @patient.doctor = @case.doctor
-    end
-
-    @vcard.honorific_prefix ||= HonorificPrefix.find_by_name('Frau')
-  end
-
   def update
     @patient = Patient.find(params[:id])
     
