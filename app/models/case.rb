@@ -215,6 +215,16 @@ class Case < ActiveRecord::Base
     "#{patient.to_s}: PAP Abstrich #{praxistar_eingangsnr}.pdf"
   end
 
+  # Sphinx Search
+  # =============
+  define_index do
+    indexes :praxistar_eingangsnr
+    indexes :remarks
+
+    has :entry_date
+    has :assigned_at
+  end
+
   # Email
   def deliver_report_by_email
     CaseMailer.deliver_report(self)
