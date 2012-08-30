@@ -7,7 +7,7 @@
 <% if @first_case %>
   <%= image_tag inline_order_form_url(@first_case.order_form, :type => :overview), :size => "500x156" if @first_case.order_form %>
 
-  <%= form_tag :action => 'unassigned_sort_queue'  do %>
+  <%= form_tag unassigned_sort_queue_cases_path, :method => :get do %>
     Starte mit Tagesnr: <%= text_field 'case', 'intra_day_id', :size => 4 %>
     <%= submit_tag 'Los' %>
   <% end %>

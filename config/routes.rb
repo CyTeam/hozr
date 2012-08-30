@@ -26,8 +26,9 @@ Hozr::Application.routes.draw do
   resources :cases do
     collection do
       get :first_entry_queue, :second_entry_queue, :hpv_p16_queue, :review_queue
-      get :unassigned_form, :assignings_list
+      get :unassigned_sort_queue, :unassigned_form, :assignings_list
       get :autocomplete_finding_class_code
+      post :assign
     end
 
     member do
