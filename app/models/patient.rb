@@ -110,6 +110,42 @@ class Patient < ActiveRecord::Base
     indexes billing_vcard.address.post_office_box
 
     indexes doctor_patient_nr
+
+    indexes cases.praxistar_eingangsnr
+  end
+
+  def self.by_text(query, options = {})
+    options.merge!({:match_mode => :extended})
+
+    search(build_query(query), options)
+  end
+
+  def self.quote_query(query)
+    "\"#{query}\""
+  end
+
+  def self.build_query_part(part)
+    case part
+    when /[0-9]{2}\/[0-9]{5}/
+      quote_query(part)
+    when /[0-9]{1,2}\.[0-9]{1,2}\.[0-9]{2,4}/
+      day, month, year = part.split('.').map(&:to_i)
+      if year < 100
+        year1900 = quote_query(Date.new(1900 + year, month, day).to_s(:db))
+        year2000 = quote_query(Date.new(2000 + year, month, day).to_s(:db))
+        return "(#{year1900} | #{year2000})"
+      else
+        return quote_query(Date.new(year, month, day).to_s(:db))
+      end
+    else
+      return part
+    end
+  end
+
+  def self.build_query(query)
+    parts = query.split(/ /)
+
+    parts.map{|part| build_query_part(part)}.join(' ')
   end
 
   #TODO: differs from CyLab version as birth_date is overloaded

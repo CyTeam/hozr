@@ -119,7 +119,7 @@ class CasesController < ApplicationController
     query = params[:query]
 
     @case = Case.find(params[:id])
-    @patients = Patient.search(query, :star => true, :per_page => 30, :page => params[:page])
+    @patients = Patient.by_text(query, :star => true, :per_page => 30, :page => params[:page])
 
     render 'patients_list'
   end
