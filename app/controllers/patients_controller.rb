@@ -46,24 +46,6 @@ class PatientsController < AuthorizedController
     end
   end
 
-  def form
-    @patient = Patient.find(params[:id])
-  end
-
-  def update_form
-    @patient = Patient.find(params[:id])
-    params[:patient][:sex] = HonorificPrefix.find_by_name(@patient.vcard.honorific_prefix).sex
-    
-    if @patient.update_attributes(params[:patient])
-      @patient.touch
-
-      flash[:notice] = 'Patientendaten mutiert'
-      redirect_to patients_path
-    else
-      render :action => 'form'
-    end
-  end
-
   def update
     @patient = Patient.find(params[:id])
     
