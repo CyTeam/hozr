@@ -47,10 +47,14 @@ class Case::PatientsController < ApplicationController
     @case = Case.find(params[:case_id])
     @patient = Patient.find(params[:id])
 
+    @case.patient = @patient
+
+    @patient.assign_attributes(params[:patient])
+
     # Set entry_date only when setting patient for first time
     @case.examination_method_id = @case.intra_day_id == 0 ? 0 : 1
 
-    @case.entry_date ||= Time.now
+    @case.entry_date ||= Time.now # TODO: kill
     @case.first_entry_at ||= Time.now # TODO: kill
     @case.first_entry_by = current_user.object
 
@@ -59,11 +63,37 @@ class Case::PatientsController < ApplicationController
     @case.insurance = @patient.insurance
     @case.insurance_nr = @patient.insurance_nr
 
-    @case.patient = @patient
     if @case.save
       redirect_to next_first_entry_case_path(@case)
     else
       raise "Fehler bei Patient zuweisen"
+    end
+  end
+
+  def create
+    @case = Case.find(params[:case_id])
+    @patient = @case.build_patient(params[:patient])
+
+    # Deduce sex from honorific_prefix
+    @patient.sex = HonorificPrefix.find_by_name(@patient.vcard.honorific_prefix).sex
+
+    # Set entry_date only when setting patient for first time
+    @case.examination_method_id = @case.intra_day_id == 0 ? 0 : 1
+
+    @case.entry_date ||= Time.now # TODO: kill
+    @case.first_entry_at ||= Time.now # TODO: kill
+    @case.first_entry_by = current_user.object
+
+    # TODO: dynamic lookup of doctor from latest case
+    @patient.doctor = @case.doctor
+    @case.insurance = @patient.insurance
+    @case.insurance_nr = @patient.insurance_nr
+
+    if @case.save
+      flash[:notice] = 'Patient was successfully created.'
+      redirect_to first_entry_case_path(@case.next_case(:for_first_entry))
+    else
+      render 'new'
     end
   end
 

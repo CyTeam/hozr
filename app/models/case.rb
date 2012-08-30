@@ -3,7 +3,7 @@
 class Case < ActiveRecord::Base
   belongs_to :examination_method
   belongs_to :classification
-  belongs_to :patient
+  belongs_to :patient, :autosave => true
   belongs_to :doctor
   belongs_to :first_entry_by, :class_name => 'Employee', :foreign_key => :first_entry_by
   belongs_to :screener, :class_name => 'Employee', :foreign_key => :screener_id

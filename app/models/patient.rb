@@ -143,6 +143,8 @@ class Patient < ActiveRecord::Base
   end
 
   def self.build_query(query)
+    return '' unless query.present?
+
     parts = query.split(/ /)
 
     parts.map{|part| build_query_part(part)}.join(' ')

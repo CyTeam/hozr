@@ -6,7 +6,7 @@ class PatientsController < AuthorizedController
   auto_complete_for_vcard :billing_vcard
   
   def index
-    @patients = Patient.by_text :per_page => 50
+    @patients = Patient.by_text params[:query], :per_page => 50
   end
 
   def dunning_stopped
@@ -44,35 +44,6 @@ class PatientsController < AuthorizedController
     else
       render :action => :new
     end
-  end
-
-  def form
-    @patient = Patient.find(params[:id])
-  end
-
-  def update_form
-    @patient = Patient.find(params[:id])
-    params[:patient][:sex] = HonorificPrefix.find_by_name(@patient.vcard.honorific_prefix).sex
-    
-    if @patient.update_attributes(params[:patient])
-      @patient.touch
-
-      flash[:notice] = 'Patientendaten mutiert'
-      redirect_to patients_path
-    else
-      render :action => 'form'
-    end
-  end
-
-  def edit
-    @patient = Patient.find(params[:id])
-
-    if params[:case_id]
-      @case = Case.find(params[:case_id])
-      @patient.doctor = @case.doctor
-    end
-
-    @vcard.honorific_prefix ||= HonorificPrefix.find_by_name('Frau')
   end
 
   def update
