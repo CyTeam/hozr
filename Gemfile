@@ -6,6 +6,10 @@ source 'http://rubygems.org'
 # =====
 gem 'rails'
 
+# UNICORN
+# =======
+gem 'unicorn'
+
 # Database
 gem 'sqlite3'
 gem 'mysql2'
