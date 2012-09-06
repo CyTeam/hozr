@@ -13,9 +13,7 @@ class Patient < ActiveRecord::Base
   def kvg_insurance_policy
     policy = insurance_policies.by_policy_type('KVG').first
 
-    if policy.nil?
-      policy = insurance_policies.build(:policy_type => 'KVG')
-    end
+    policy ||= insurance_policies.build(:policy_type => 'KVG')
 
     return policy
   end
