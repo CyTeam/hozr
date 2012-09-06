@@ -2,9 +2,6 @@
 class PatientsController < AuthorizedController
   helper :doctors
   
-  auto_complete_for_vcard :vcard
-  auto_complete_for_vcard :billing_vcard
-  
   def index
     @patients = Patient.by_text params[:query], :per_page => 50
   end

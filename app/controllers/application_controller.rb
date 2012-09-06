@@ -1,57 +1,11 @@
 # encoding: utf-8'
 
-class ActionController::Base
-  def self.auto_complete_for_vcard_field(object, method, options = {})
-    case method.to_s
-    when 'street_address', 'locality'
-      model = Address
-    else
-      model = Vcard
-    end
-    
-    define_method("auto_complete_for_#{object}_#{method}") do
-      @items = model.select("DISTINCT #{method}").where("LOWER(#{method}) LIKE ?", params[object][method].downcase + '%').order("#{method} ASC").limit(10).all
-
-      render :inline => "<%= auto_complete_result @items, '#{method}' %>"
-    end
-  end
-  
-  def self.auto_complete_for_zip_locality(object)
-    define_method("auto_complete_for_#{object}_zip_locality") do
-      @localities = PostalCode.where("zip = ?", params[object][:zip_locality]).order('zip').limit(30).all
-      render :partial => 'postal_codes/zip_localities'
-    end
-  end
-  
-  def self.auto_complete_for_vcard(object)
-      auto_complete_for_vcard_field object, :family_name, :limit => 12
-      auto_complete_for_vcard_field object, :given_name, :limit => 12
-      auto_complete_for_vcard_field object, :street_address, :limit => 12
-      auto_complete_for_vcard_field object, :locality, :limit => 12
-      auto_complete_for_zip_locality object
-  end
-end
-
-
-class ActionView::Helpers::FormBuilder
-  def text_field_with_auto_complete(method, tag_options = {}, completion_options = {})
-    @template.text_field_with_auto_complete(@object_name, method, tag_options, completion_options)
-  end
-end
-
-
 module Rubaidh
   module TabularForm
     class TabularFormBuilder
       def select(field, choices, options)
         field = field.to_s
         label_text, required = extract_tabular_options(field, options)
-        generic_field(field, super, label_text)
-      end
-      
-      def text_field_with_auto_complete(field, tag_options = {}, completion_options = {})
-        field = field.to_s
-        label_text, required = extract_tabular_options(field, completion_options)
         generic_field(field, super, label_text)
       end
     end

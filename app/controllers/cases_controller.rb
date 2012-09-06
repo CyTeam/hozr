@@ -7,11 +7,9 @@ class CasesController < ApplicationController
   # =======
   helper :doctors
 
+  # Auto Completion
   auto_complete_for :finding_class, :selection, :limit => 12
   autocomplete :finding_class, [:code, :name], :column => '', :extra_data => [:name], :display_value => :to_s, :full => true
-
-  # Auto Completion
-  auto_complete_for_vcard :vcard
 
   def auto_complete_for_finding_class_selection
     @finding_classes = FindingClass.select("*, CONCAT(code, ' - ', name) AS selection").

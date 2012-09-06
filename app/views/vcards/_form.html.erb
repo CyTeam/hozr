@@ -4,7 +4,6 @@ Event.observe(window, 'load', function() {$('vcard_honorific_prefix').focus()}, 
 //]]>
 </script>
 
-<% auto_complete = true if auto_complete.nil? %>
 <%= fields_for vcard_name, vcard, :builder => Rubaidh::TabularForm::TabularFormBuilder do |vcard| %>
   <%= vcard.select 'honorific_prefix', HonorificPrefix.all.collect { |prefix| prefix.name }, :include_blank => true, :label => "Anrede"  %>
   <%= vcard.text_field :family_name, :size => 23, :label => "Nachname", :autocomplete => 'off' %>
