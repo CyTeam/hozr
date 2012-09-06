@@ -18,7 +18,29 @@ class Patient < ActiveRecord::Base
     return policy
   end
 
-  delegate :insurance, :insurance=, :insurance_id, :insurance_id=, :insurance_nr, :insurance_nr=, :to => :kvg_insurance_policy
+  def insurance
+    kvg_insurance_policy.insurance
+  end
+  def insurance=(value)
+    kvg_insurance_policy.insurance = value
+    kvg_insurance_policy.save
+  end
+
+  def insurance_id
+    kvg_insurance_policy.insurance_id
+  end
+  def insurance_id=(value)
+    kvg_insurance_policy.insurance_id = value
+    kvg_insurance_policy.save
+  end
+
+  def insurance_nr
+    kvg_insurance_policy.number
+  end
+  def insurance_nr=(value)
+    kvg_insurance_policy.number = value
+    kvg_insurance_policy.save
+  end
 
   # Doctor
   belongs_to :doctor
