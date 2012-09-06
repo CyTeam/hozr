@@ -41,6 +41,9 @@ class Case::PatientsController < ApplicationController
     @patient.build_billing_vcard unless @patient.billing_vcard
 
     @patient.vcard.honorific_prefix = 'Frau'
+
+    # TODO: dynamic lookup of doctor from latest case
+    @patient.doctor = @case.doctor
   end
 
   def update
@@ -84,8 +87,6 @@ class Case::PatientsController < ApplicationController
     @case.first_entry_at ||= Time.now # TODO: kill
     @case.first_entry_by = current_user.object
 
-    # TODO: dynamic lookup of doctor from latest case
-    @patient.doctor = @case.doctor
     @case.insurance = @patient.insurance
     @case.insurance_nr = @patient.insurance_nr
 
