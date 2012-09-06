@@ -71,6 +71,37 @@ function setupPatientHistoryHover() {
   });
 }
 
+// Table selection
+function selectFirstRow() {
+  var table = $('table#patients');
+  table.find('tr').eq(1).addClass('selected');
+
+  in_table_selection = true;
+}
+
+in_table_selection = false;
+function setupPatientTableSelect() {
+  $(document).keydown(function(e) {
+    if (e.which == 9) {
+      selectFirstRow();
+      e.preventDefault();
+    }
+    if (in_table_selection) {
+      var selected_row = $('tr.selected');
+      var action;
+      if (e.which == 69) {
+        action = 'edit';
+      } else if (e.which == 90) {
+        action = 'set-patient';
+      }
+
+      if (!(action === undefined)) {
+        var action_link = selected_row.find('a.action-' + action).click();
+      };
+    }
+  });
+}
+
 // Twitter Bootstrap
 function setupPopOver() {
   $("*[data-content]").popover();

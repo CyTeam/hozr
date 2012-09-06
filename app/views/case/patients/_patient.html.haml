@@ -11,8 +11,8 @@
   %td= patient.use_billing_address? ? "X" : ""
   %td{:style => "width: 8em"}
     .btn-group
-      = link_to t_action('set_patient'), case_patient_path(@case, patient), :method => :put, :class => 'btn btn-mini'
+      = link_to t_action('set_patient'), case_patient_path(@case, patient), :method => :put, :class => 'btn btn-mini action-set-patient'
       %button.btn.btn-mini.dropdown-toggle{'data-toggle' => 'dropdown'}
         %span.caret
       %ul.dropdown-menu.pull-right
-        = link_to t_action('edit'), edit_case_patient_path(@case, patient), :remote => true
+        = link_to t_action('edit'), edit_case_patient_path(@case, patient), :remote => true, :class => 'action-edit'

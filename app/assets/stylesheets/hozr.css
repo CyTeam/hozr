@@ -21,6 +21,12 @@ label.input-important {
   margin-bottom: 8px;
 }
 
+/* Table selection */
+tr.selected {
+  background-color: #D9EDF7;
+  border-color: #BCE8F1;
+}
+
 /* Fake display: none without loosing functionality */
 .row-fluid.hide {
   visibility: hidden;
