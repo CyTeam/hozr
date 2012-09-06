@@ -73,7 +73,7 @@ class Case::PatientsController < ApplicationController
         redirect_to @redirect_path
       end
     else
-      raise "Fehler bei Patient zuweisen"
+      render 'edit'
     end
   end
 
