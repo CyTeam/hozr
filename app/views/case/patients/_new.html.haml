@@ -1,13 +1,13 @@
 %div{:style => 'min-height: 20px; padding: 19px 0'}
   .pull-right
-    =# icon_link_to :set_patient, case_patient_path(@case, @patient), :method => :post, :icon => 'ok'
+    = icon_link_to :set_patient, '#', :icon => 'ok', :onclick => "$('form.new_patient').submit()"
     = icon_link_to :cancel, '#', :icon => 'remove', :onclick => "$('#patient-form').hide(); $('#patient-search').show();"
 
 = boot_alert(t('flash.action.dunning_stop'), 'error') if @patient.dunning_stop?
 
-= simple_form_for [@case, @patient] do |f|
+= simple_form_for [@case, @patient], :remote => true do |f|
   = render 'patients/form_fields', :f => f
 
-  .row-fluid
+  .row-fluid.hide
     .form-actions
       = f.button :submit

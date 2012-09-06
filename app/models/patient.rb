@@ -83,7 +83,7 @@ class Patient < ActiveRecord::Base
   # =============
   define_index do
     # Delta index
-#    set_property :delta => true
+    set_property :delta => true
 
     indexes birth_date
 
