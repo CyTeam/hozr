@@ -1,5 +1,0 @@
-<%= form_tag set_patient_case_path(@case, :patient_id => @patient) do %>
-  <%= render :partial => '/patients/form' %>
-  <%= submit_tag 'Speichern & Übernehmen' %>
-  <%= button_to_function 'Schliessen', "$('#edit_form').remove()" %>
-<% end %>

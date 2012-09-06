@@ -1,6 +1,0 @@
-<%= form_for @patient, :case_id => @case.id do |f| %>
-  <%= render :partial => '/patients/form' %>
-  <%= submit_tag 'Anlegen' unless @case %>
-  <%= submit_tag 'Anlegen & Übernehmen' if @case %>
-  <%= button_to_function 'Schliessen', "$('#edit_form').remove()" %>
-<% end %>
