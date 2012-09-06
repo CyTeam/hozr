@@ -43,6 +43,10 @@ de:
         slidepath:            Slidepath
         scan:                 Scan
 
+      insurance_policy:
+        insurance:            Versicherung
+        number:               Versicherten Nr.
+
   roles:
     admin:    Administration
     sysadmin: System Administration
