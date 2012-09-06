@@ -1,5 +1,4 @@
 # encoding: utf-8'
-require "net/http"
 
 class CasesController < ApplicationController
   authorize_resource

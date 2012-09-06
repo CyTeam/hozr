@@ -1,5 +1,4 @@
 # encoding: utf-8'
-require "net/http"
 
 class Case::PatientsController < ApplicationController
   authorize_resource
