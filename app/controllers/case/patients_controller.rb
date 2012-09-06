@@ -66,7 +66,12 @@ class Case::PatientsController < ApplicationController
     @case.insurance_nr = @patient.insurance_nr
 
     if @case.save
-      redirect_to next_first_entry_case_path(@case)
+      @redirect_path = first_entry_case_path(@case.next_case(:for_first_entry))
+      if request.xhr?
+        render 'redirect'
+      else
+        redirect_to @redirect_path
+      end
     else
       raise "Fehler bei Patient zuweisen"
     end
@@ -91,7 +96,12 @@ class Case::PatientsController < ApplicationController
 
     if @case.save
       flash[:notice] = 'Patient was successfully created.'
-      redirect_to first_entry_case_path(@case.next_case(:for_first_entry))
+      @redirect_path = first_entry_case_path(@case.next_case(:for_first_entry))
+      if request.xhr?
+        render 'redirect'
+      else
+        redirect_to @redirect_path
+      end
     else
       render 'new'
     end
