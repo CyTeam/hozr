@@ -226,6 +226,7 @@ ActiveRecord::Schema.define(:version => 20120830120114) do
     t.integer  "imported_id"
     t.boolean  "use_vesr"
     t.boolean  "print_payment_for"
+    t.integer  "esr_account_id"
   end
 
   add_index "doctors", ["active"], :name => "active"
