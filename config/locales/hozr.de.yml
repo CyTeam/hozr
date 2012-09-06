@@ -68,6 +68,7 @@ de:
       set_patient:      Zuweisen
       new_patient:      Neuer Patient
 
+      create:           Speichern
       cancel:           Abbrechen
       close:            Schliessen
 
