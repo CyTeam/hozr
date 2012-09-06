@@ -95,7 +95,6 @@ class Case::PatientsController < ApplicationController
     @case.insurance_nr = @patient.insurance_nr
 
     if @case.save
-      flash[:notice] = 'Patient was successfully created.'
       @redirect_path = first_entry_case_path(@case.next_case(:for_first_entry))
       if request.xhr?
         render 'redirect'
