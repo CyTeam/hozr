@@ -1,5 +1,5 @@
 .contextual
-  = icon_link_to :update, '#', :type => 'primary', :icon => 'download-alt', :id => 'update-button'
+  = icon_link_to :update, '#', :type => 'primary', :icon => 'download-alt', :class => 'submit-button'
   = contextual_link_to :delete, nil, :type => 'danger'
   = contextual_link_to :index
   = icon_link_to :invoice_overview, cydoc_url_for("patients/#{@patient.id}?tab=invoices"), :icon => 'list', :target => cydoc_hostname

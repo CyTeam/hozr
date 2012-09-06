@@ -55,9 +55,9 @@ function setupSlidepathLinks() {
   });
 };
 
-// Contextual Update button
-function setupUpdateButton() {
-  var button = $('#update-button');
+// Contextual update and create buttons
+function setupSubmitButtons() {
+  var button = $('.submit-button');
   var form = button.parents('.row-fluid').find('form');
 
   button.click(function() {
@@ -79,7 +79,7 @@ function setupPopOver() {
 function initializeBehaviours() {
   setupSlidepathLinks();
   setupCaseAssignment();
-  setupUpdateButton();
+  setupSubmitButtons();
   setupPopOver();
 //  setupBillingAddressToggle();
 

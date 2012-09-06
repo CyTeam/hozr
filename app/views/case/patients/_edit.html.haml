@@ -1,6 +1,6 @@
 %div{:style => 'min-height: 20px; padding: 19px 0'}
   .pull-right
-    = icon_link_to :set_patient, '#', :icon => 'ok', :onclick => "$('form.edit_patient').submit()"
+    = icon_link_to :set_patient, '#', :icon => 'ok', :class => "submit-button"
     = icon_link_to :cancel, '#', :icon => 'remove', :onclick => "$('#patient-form').hide(); $('#patient-search').show();"
 
 = boot_alert(t('flash.action.dunning_stop'), 'error') if @patient.dunning_stop?
