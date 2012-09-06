@@ -3,6 +3,9 @@
 class Insurance < ActiveRecord::Base
   has_one :vcard, :as => :object
 
+  # Default sorting
+  scope :sorted, includes(:vcard).order('vcards.full_name')
+
   # Helper
   def to_s
     name
