@@ -110,77 +110,7 @@ class Case::PatientsController < ApplicationController
         redirect_to @redirect_path
       end
     else
-      render 'new'
-    end
-  end
-
-
-
-  def set_patient_back
-    @case = Case.find(params[:id])
-    # Set entry_date only when setting patient for first time
-    @case.entry_date = Time.now if @case.entry_date.nil?
-    @case.examination_method_id = @case.intra_day_id == 0 ? 0 : 1
-
-      if params[:patient_id]
-        @patient = Patient.find(params[:patient_id])
-        @patient.create_billing_vcard if @patient.billing_vcard.nil?
-      else
-        @patient = Patient.new(params[:patient])
-        @patient.build_vcard(params[:vcard])
-        @patient.build_billing_vcard(params[:billing_vcard])
-
-        @patient.save
-      end
-
-      @vcard = @patient.vcard
-      @billing_vcard = @patient.billing_vcard
-
-    # Copy&Paste from patients_controller
-
-    params[:patient][:sex] = HonorificPrefix.find_by_name(params[:vcard][:honorific_prefix]).sex
-
-    if @vcard.update_attributes(params[:vcard]) and @billing_vcard.update_attributes(params[:billing_vcard]) and @patient.update_attributes(params[:patient])
-      @vcard.save
-      @billing_vcard.save
-      @patient.save
-      flash[:notice] = 'Patient was successfully updated.'
-#      redirect_to :action => 'list'
-    else
-      flash[:error] = "Couldn't update Patient."
-#      render :action => 'edit'
-    end
-    # END Copy&Paste
-
-      patient = @patient
-      patient.doctor = @case.doctor
-      patient.doctor_patient_nr = params[:patient][:doctor_patient_nr] unless params[:patient][:doctor_patient_nr].nil?
-      patient.save
-
-      @case.patient = patient
-
-      @case.insurance = @case.patient.insurance
-      @case.insurance_nr = @case.patient.insurance_nr
-
-    @case.first_entry_at ||= Time.now
-    @case.first_entry_by = current_user.object
-                  
-    if @case.save
-      flash[:notice] = 'First entry ok.'
-
-      next_open = Case.where("entry_date IS NULL and id > ?", @case.id).first
-      if next_open.nil?
-        redirect_to :action => 'first_entry_queue'
-      elsif next_open.praxistar_eingangsnr.nil? or next_open.doctor.nil?
-        redirect_to :action => 'unassigned_form'
-      else
-        redirect_to :action => 'first_entry', :id => next_open
-      end
-    else
-      flash[:error] = 'Ersteingabe erzeugte Fehler.'
-      @header_image_type = session[:header_image_type] || :head
-
-      render :action => 'first_entry'
+      render 'edit'
     end
   end
 end
