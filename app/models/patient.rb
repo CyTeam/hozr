@@ -26,8 +26,17 @@ class Patient < ActiveRecord::Base
   # Address
   has_one :vcard, :as => :object, :conditions => {:vcard_type => 'private'}
   accepts_nested_attributes_for :vcard
+  def vcard_with_autobuild
+    vcard_without_autobuild || build_vcard
+  end
+  alias_method_chain :vcard, :autobuild
+
   has_one :billing_vcard, :class_name => 'Vcard', :as => :object, :conditions => {:vcard_type => 'billing'}
   accepts_nested_attributes_for :billing_vcard
+  def billing_vcard_with_autobuild
+    billing_vcard_without_autobuild || build_billing_vcard
+  end
+  alias_method_chain :billing_vcard, :autobuild
 
   def invoice_vcard
     if use_billing_address?

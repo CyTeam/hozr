@@ -22,8 +22,6 @@ class Case::PatientsController < ApplicationController
     @case = Case.find(params[:case_id])
 
     @patient = Patient.new(params[:patient])
-    @patient.build_vcard unless @patient.vcard
-    @patient.build_billing_vcard unless @patient.billing_vcard
 
     @patient.vcard.honorific_prefix = 'Frau'
 
