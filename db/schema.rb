@@ -229,7 +229,6 @@ ActiveRecord::Schema.define(:version => 20120830120114) do
   end
 
   add_index "doctors", ["active"], :name => "active"
-  add_index "doctors", ["id"], :name => "id"
 
   create_table "doctors_offices", :id => false, :force => true do |t|
     t.integer "office_id"
