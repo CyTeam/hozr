@@ -66,6 +66,10 @@ class Case::PatientsController < ApplicationController
     @case.insurance_nr = @patient.insurance_nr
 
     if @case.save
+      @patient.touch
+      @patient.delta = true
+      @patient.save
+
       @redirect_path = first_entry_case_path(@case.next_case(:for_first_entry))
       if request.xhr?
         render 'redirect'
@@ -95,6 +99,10 @@ class Case::PatientsController < ApplicationController
     @case.insurance_nr = @patient.insurance_nr
 
     if @case.save
+      @patient.touch
+      @patient.delta = true
+      @patient.save
+
       @redirect_path = first_entry_case_path(@case.next_case(:for_first_entry))
       if request.xhr?
         render 'redirect'
