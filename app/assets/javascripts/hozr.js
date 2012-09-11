@@ -181,8 +181,8 @@ function setupPatientTableSelect() {
       } else if (e.which == 69) {
         // 'e'
         action = 'edit';
-      } else if (e.which == 90) {
-        // 'z'
+      } else if (e.which == 13) {
+        // 'ENTER'
         action = 'set-patient';
       }
 
