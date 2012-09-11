@@ -79,11 +79,58 @@ function selectFirstRow() {
   in_table_selection = true;
 }
 
+function selectNextRow() {
+  var current_row = $('tr.selected');
+
+  if (current_row.length == 0) {
+    // Select first content row
+    selectFirstRow();
+  }
+
+  var new_row = current_row.next('tr');
+
+  if (new_row.length == 0) {
+    // Do nothing if there is no next row
+    return
+  }
+
+  current_row.removeClass('selected');
+  new_row.addClass('selected');
+}
+
+function selectPreviousRow() {
+  var current_row = $('tr.selected');
+
+  if (current_row.length == 0) {
+    // Select first content row
+    selectFirstRow();
+  }
+
+  if (current_row.index() == 1) {
+    // Do nothing if we're on the first content row
+    return
+  }
+
+  var new_row = current_row.prev('tr');
+
+  if (new_row.length == 0) {
+    // Do nothing if there is no previous row
+    return
+  }
+
+  current_row.removeClass('selected');
+  new_row.addClass('selected');
+}
+
 in_table_selection = false;
 function setupPatientTableSelect() {
   $(document).keydown(function(e) {
-    if (e.which == 9) {
-      selectFirstRow();
+    if (e.which == 9 || e.which == 40) {
+      selectNextRow();
+      e.preventDefault();
+    }
+    if (e.which == 38) {
+      selectPreviousRow();
       e.preventDefault();
     }
     if (in_table_selection) {
