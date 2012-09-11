@@ -195,6 +195,11 @@ function setupPatientTableSelect() {
   });
 }
 
+function autofocus(selector) {
+  $(selector).find('[data-autofocus=true]').first().focus();
+}
+
+
 // Twitter Bootstrap
 function setupPopOver() {
   $("*[data-content]").popover();
