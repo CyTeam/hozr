@@ -83,6 +83,10 @@ function startTableSelection() {
 
 function stopTableSelection() {
   in_table_selection = false;
+}
+
+function resetTableSelection() {
+  stopTableSelection();
 
   var input_field = $('input[data-table-selection]');
   input_field.focus();
@@ -148,6 +152,14 @@ function selectPreviousRow() {
 in_table_selection = false;
 function setupPatientTableSelect() {
   $(document).keydown(function(e) {
+    // Only activate if an input with the table-selection marker is focused
+    // or we're in table selection mode already
+    var input_field = $('input[data-table-selection]:focus');
+
+    if (input_field.length == 0 && !in_table_selection) {
+      return
+    }
+
     if (e.which == 9 || e.which == 40) {
       // Tab or Arrow Down
       selectNextRow();
@@ -163,7 +175,8 @@ function setupPatientTableSelect() {
       var action;
       if (e.which == 27) {
         // ESC
-        stopTableSelection();
+        resetTableSelection();
+        return
       } else if (e.which == 69) {
         // 'e'
         action = 'edit';
@@ -174,6 +187,7 @@ function setupPatientTableSelect() {
 
       if (!(action === undefined)) {
         e.preventDefault();
+        stopTableSelection();
         var action_link = selected_row.find('a.action-' + action).click();
       };
     }
