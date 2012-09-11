@@ -65,21 +65,44 @@ function setupSubmitButtons() {
   });
 }
 
+function showPatientHistory(element) {
+  $(element).find('.case-history a').click();
+}
+
 function setupPatientHistoryHover() {
   $('.patient').live('hover', function(event) {
-    $(this).find('.case-history a').click();
+    showPatientHistory(this);
   });
 }
 
 // Table selection
-function selectFirstRow() {
-  var table = $('table#patients');
-  table.find('tr').eq(1).addClass('selected');
-
+function startTableSelection() {
+  $(':focus').blur();
   in_table_selection = true;
 }
 
+function stopTableSelection() {
+  in_table_selection = false;
+
+  var input_field = $('input[data-table-selection]');
+  input_field.focus();
+}
+
+function selectRow(row) {
+  $('tr.selected').removeClass('selected');
+  $(row).addClass('selected');
+
+  $(row).mouseenter();
+}
+
+function selectFirstRow() {
+  var table = $('table#patients');
+  selectRow(table.find('tr').eq(1));
+}
+
 function selectNextRow() {
+  startTableSelection();
+
   var current_row = $('tr.selected');
 
   if (current_row.length == 0) {
@@ -94,11 +117,12 @@ function selectNextRow() {
     return
   }
 
-  current_row.removeClass('selected');
-  new_row.addClass('selected');
+  selectRow(new_row);
 }
 
 function selectPreviousRow() {
+  startTableSelection();
+
   var current_row = $('tr.selected');
 
   if (current_row.length == 0) {
@@ -118,31 +142,38 @@ function selectPreviousRow() {
     return
   }
 
-  current_row.removeClass('selected');
-  new_row.addClass('selected');
+  selectRow(new_row);
 }
 
 in_table_selection = false;
 function setupPatientTableSelect() {
   $(document).keydown(function(e) {
     if (e.which == 9 || e.which == 40) {
+      // Tab or Arrow Down
       selectNextRow();
       e.preventDefault();
     }
     if (e.which == 38) {
+      // Arrow Up
       selectPreviousRow();
       e.preventDefault();
     }
     if (in_table_selection) {
       var selected_row = $('tr.selected');
       var action;
-      if (e.which == 69) {
+      if (e.which == 27) {
+        // ESC
+        stopTableSelection();
+      } else if (e.which == 69) {
+        // 'e'
         action = 'edit';
       } else if (e.which == 90) {
+        // 'z'
         action = 'set-patient';
       }
 
       if (!(action === undefined)) {
+        e.preventDefault();
         var action_link = selected_row.find('a.action-' + action).click();
       };
     }
@@ -157,7 +188,10 @@ function setupPopOver() {
 function initializeBehaviours() {
   setupSlidepathLinks();
   setupCaseAssignment();
+
   setupSubmitButtons();
+  setupPatientTableSelect();
+
   setupPopOver();
 //  setupBillingAddressToggle();
 
