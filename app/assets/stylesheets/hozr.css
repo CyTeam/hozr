@@ -22,7 +22,7 @@ label.input-important {
 }
 
 /* Table selection */
-tr.selected {
+tbody tr.selected td, .table-striped tbody tr.selected td {
   background-color: #D9EDF7;
   border-color: #BCE8F1;
 }
