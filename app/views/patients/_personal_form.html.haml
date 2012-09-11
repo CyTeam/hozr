@@ -10,7 +10,7 @@
         .control-group{:class => "#{'error' if v.object.errors.include?(:family_name) or v.object.errors.include?(:given_name)}"}
           %label.control-label= "#{t_attr(:family_name, Vcard)}, #{t_attr(:given_name, Vcard)}"
           .controls
-            = v.input :family_name, :wrapper => :inline
+            = v.input :family_name, :wrapper => :inline, :input_html => {'data-autofocus' => true}
             = v.input :given_name, :wrapper => :inline
       .span5
         = f.input :birth_date, :as => :string
