@@ -100,7 +100,8 @@ function selectRow(row) {
 }
 
 function selectFirstRow() {
-  var table = $('table#patients');
+  var input_field = $('input[data-table-selection]');
+  var table = $(input_field.data('table-selection'));
   selectRow(table.find('tr').eq(1));
 }
 
