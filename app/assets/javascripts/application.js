@@ -21,6 +21,9 @@ function initializeBehaviours() {
   addDatePickerBehaviour();
   addLinkifyContainersBehaviour();
 
+  // from directory_lookup.js
+  addDirectoryLookupBehaviour();
+
   // application
 }
 
