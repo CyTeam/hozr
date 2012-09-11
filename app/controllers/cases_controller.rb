@@ -107,7 +107,7 @@ class CasesController < ApplicationController
     if next_case = @case.next_case(:for_first_entry)
       redirect_to first_entry_case_path(next_case)
     else
-      redirect_to admin_work_queue_path
+      redirect_to first_entry_queue_cases_path
     end
   end
 

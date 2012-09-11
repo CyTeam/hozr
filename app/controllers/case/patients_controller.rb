@@ -54,7 +54,12 @@ class Case::PatientsController < ApplicationController
       @patient.delta = true
       @patient.save
 
-      @redirect_path = first_entry_case_path(@case.next_case(:for_first_entry))
+      if next_case = @case.next_case(:for_first_entry)
+        @redirect_path = first_entry_case_path(next_case)
+      else
+        @redirect_path = first_entry_queue_cases_path
+      end
+
       if request.xhr?
         render 'redirect'
       else
@@ -87,7 +92,12 @@ class Case::PatientsController < ApplicationController
       @patient.delta = true
       @patient.save
 
-      @redirect_path = first_entry_case_path(@case.next_case(:for_first_entry))
+      if next_case = @case.next_case(:for_first_entry)
+        @redirect_path = first_entry_case_path(next_case)
+      else
+        @redirect_path = first_entry_queue_cases_path
+      end
+
       if request.xhr?
         render 'redirect'
       else
