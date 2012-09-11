@@ -150,6 +150,10 @@ function selectPreviousRow() {
 
 in_table_selection = false;
 function setupPatientTableSelect() {
+  // Stop table selection when creating a new patient
+  $('#new-patient-button').on('click', stopTableSelection);
+
+  // Key handler
   $(document).keydown(function(e) {
     // Only activate if an input with the table-selection marker is focused
     // or we're in table selection mode already
