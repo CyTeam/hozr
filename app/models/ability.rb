@@ -24,6 +24,7 @@ class Ability
       can :print, :doctor_order_form
       can :manage, Mailing
       can :manage, Case
+      can :manage, Patient
     end
     if user.role? :zyto
       can :manage, Case
