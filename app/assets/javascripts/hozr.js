@@ -180,6 +180,10 @@ function setupPatientTableSelect() {
         // ESC
         resetTableSelection();
         return
+      } else if (e.which == 78) {
+        // 'n'
+        $('#new-patient-button').click();
+        return
       } else if (e.which == 69) {
         // 'e'
         action = 'edit';
