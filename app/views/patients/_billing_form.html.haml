@@ -2,9 +2,15 @@
   = v.fields_for :address do |a|
     .row-fluid
       .span7
-        = v.input :honorific_prefix, :collection => HonorificPrefix.find(:all, :order => 'sex DESC, position').collect { |prefix| prefix.name }
-      .span5
         = f.input :use_billing_address, :label_html => {:class => 'input-important'}
+    .row-fluid
+      .span7
+        .control-group{:class => "#{'error' if v.object.errors.include?(:honorific_prefix)}"}
+          %label.control-label= "#{t_attr(:honorific_prefix, Vcard)}"
+          .controls
+            = v.input :honorific_prefix, :collection => HonorificPrefix.find(:all, :order => 'sex DESC, position').collect { |prefix| prefix.name }, :wrapper => :inline
+            = link_to '#', 'data-directory-lookup' => 'patient[billing_vcard_attributes]', :title => t_action(:directory_lookup) do
+              %i.icon-search
     .row-fluid
       .span7
         .control-group{:class => "#{'error' if v.object.errors.include?(:family_name) or v.object.errors.include?(:given_name)}"}

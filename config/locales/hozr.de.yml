@@ -34,7 +34,7 @@ de:
 
         remarks: Bemerkungen
         dunning_stop: Mahnstopp
-        use_billing_address: Rechnungsadresse aktiv
+        use_billing_address: Rechnungsadresse
       case:
         praxistar_eingangsnr: Eingangsnummer
         examination_date:     Entnahmedatum

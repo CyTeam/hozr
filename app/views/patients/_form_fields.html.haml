@@ -1,16 +1,9 @@
-.contextual
-  = icon_link_to :directory_lookup, '#', 'data-directory-lookup' => 'patient[vcard_attributes]', :icon => 'search'
-%h3
-  Personalien
 = render 'patients/personal_form', :f => f
 
 = f.fields_for :insurance_policies, @patient.kvg_insurance_policy do |insurance_policy|
   = render 'insurance_policies/form_fields', :f => insurance_policy
 
 #billing_data
-  .contextual
-    = icon_link_to :directory_lookup, '#', 'data-directory-lookup' => 'patient[billing_vcard_attributes]', :icon => 'search'
-  %h3 Rechnungsdaten
   = render 'patients/billing_form', :f => f
 
 .row-fluid
