@@ -17,9 +17,9 @@
         = a.input :street_address
     .row-fluid
       .span7
-        = a.input :extended_address
+        = a.input :extended_address, :input_html => {'tabindex' => 1002}
       .span5
-        = a.input :post_office_box
+        = a.input :post_office_box, :input_html => {'tabindex' => 1003}
     .row-fluid
       .span7
         .control-group{:class => "#{'error' if a.object.errors.include?(:postal_code) or a.object.errors.include?(:locality)}"}
