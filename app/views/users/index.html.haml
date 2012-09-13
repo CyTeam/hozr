@@ -4,7 +4,7 @@
 
 = paginated_section collection do
   - @attributes = ['login', 'email', 'role_texts', 'last_sign_in_at', 'locked_at']
-  %table.table table-bordered table-striped table-condensed{:class => "#{collection.first.class.to_s.downcase.pluralize} collection"}
+  %table.table.table-bordered.table-striped.table-condensed{:class => "#{collection.first.class.to_s.downcase.pluralize} collection"}
     %thead
       %tr
         - @attributes.each do |field|
