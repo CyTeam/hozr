@@ -3,19 +3,13 @@ class PatientsController < AuthorizedController
   helper :doctors
   
   def index
-    @patients = Patient.by_text params[:query], :per_page => 50
+    @patients = Patient.by_text params[:query], :retry_stale => true, :per_page => 50
   end
 
   def dunning_stopped
     @patients = Patient.dunning_stopped.all
   end
   
-  def show
-    @patient = Patient.find(params[:id])
-    @insurance = @patient.insurance
-    @doctor = @patient.doctor
-  end
-
   def show_history
     @patient = Patient.find(params[:id])
     @cases = @patient.cases
@@ -33,29 +27,16 @@ class PatientsController < AuthorizedController
     # Deduce sex from honorific_prefix
     @patient.sex = HonorificPrefix.find_by_name(@patient.vcard.honorific_prefix).sex
 
-    if @patient.save
-      flash[:notice] = 'Patient was successfully created.'
-      redirect_to @patient
-    else
-      render :action => :new
-    end
+    create!
   end
 
   def update
     @patient = Patient.find(params[:id])
     
-    if @patient.update_attributes(params[:patient])
+    # Deduce sex from honorific_prefix
+    @patient.sex = HonorificPrefix.find_by_name(@patient.vcard.honorific_prefix).sex
 
-      flash[:notice] = 'Patientendaten mutiert'
-      redirect_to @patient
-    else
-      render :show
-    end
-  end
-
-  def destroy
-    Patient.find(params[:id]).destroy
-    redirect_to patients_path
+    update!
   end
 
   def directory_lookup
