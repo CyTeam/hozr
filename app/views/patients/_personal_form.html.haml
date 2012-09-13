@@ -37,4 +37,4 @@
             = a.input :postal_code, :wrapper => :inline
             = a.input :locality, :wrapper => :inline
       .span5
-        = f.association :doctor, :as => :combobox, :collection => doctors_collection
+        = f.association :doctor, :as => :combobox, :collection => doctors_collection, :input_html => {'tabindex' => 2000}
