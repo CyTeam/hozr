@@ -89,6 +89,24 @@ function setupPatientHistoryHover() {
   });
 }
 
+// Rails Convention Helpers
+function getId(element) {
+  return $(element.attr('id').split('_')).last()[0];
+}
+
+// Patient merging
+function setupPatientMerging() {
+  $(document).on('click', '#merge-action', function() {
+    var marked_id = getId($('tr.marked'));
+    var selected_id = getId($('tr.selected'));
+    var params = $.param({
+      patient1_id: marked_id,
+      patient2_id: selected_id
+    });
+    $.getScript('/patients/propose_merge?' + params);
+  })
+}
+
 // Table selection
 function startTableSelection() {
   $(':focus').blur();
@@ -206,18 +224,29 @@ function setupPatientTableSelect() {
         // 'n'
         $('#new-patient-button').click();
         return
+      } else if (e.which == 32) {
+        // SPACE
+        $('tr.marked').removeClass('marked');
+        selected_row.addClass('marked');
+        return
       } else if (e.which == 69) {
         // 'e'
         action = 'edit';
+      } else if (e.which == '86') {
+        // 'v'
+        e.preventDefault();
+        stopTableSelection();
+
+        $('#merge-action').click();
       } else if (e.which == 13) {
-        // 'ENTER'
+        // ENTER
         action = 'set-patient';
       }
 
       if (!(action === undefined)) {
         e.preventDefault();
         stopTableSelection();
-        var action_link = selected_row.find('a.action-' + action).click();
+        selected_row.find('a.action-' + action).click();
       };
     }
   });

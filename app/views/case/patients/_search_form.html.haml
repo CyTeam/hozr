@@ -9,6 +9,7 @@
     %ul.dropdown-menu
       =# TODO: only show if next case exists
       = link_to t_action(:next_first_entry), next_first_entry_case_path(@case)
+      = link_to t_action('merge'), '#', :id => 'merge-action', :style => 'display: none' if can?(:merge, Patient)
       = link_to t_action('delete'), @case, :method => :delete if can?(:destroy, Case)
 
   = f.input 'query', :label => false, :placeholder => 'Name, Eingangsnummer, Geburtsdatum, Strasse...', :input_html => {:class => 'span10', 'data-autofocus' => true, 'data-table-selection' => '#patients'}

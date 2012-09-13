@@ -167,6 +167,11 @@ class Patient < ActiveRecord::Base
     end
   end
 
+  # Merging
+  def merge(drop_patient)
+    
+  end
+
   # Attributes
   def name
     vcard.full_name unless vcard.nil?

@@ -36,4 +36,17 @@ class PatientsController < AuthorizedController
 
     update!
   end
+
+  # Merging
+  def propose_merge
+    @patient1 = Patient.find(params[:patient1_id])
+    @patient2 = Patient.find(params[:patient2_id])
+  end
+
+  def merge
+    @target_patient = Patient.find(params[:target_patient_id])
+    @drop_patient = Patient.find(params[:drop_patient_id])
+
+    @target_patient.merge(@drop_patient)
+  end
 end

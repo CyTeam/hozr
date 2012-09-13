@@ -66,6 +66,8 @@ de:
       directory_lookup: Telefonbuch
       next_first_entry: Überspringen
       set_patient:      Zuweisen
+      merge:            Verknüpfen
+      choose_as_target: Auf diesen verknüpfen
       new_patient:      Neuer Patient
 
       create:           Speichern

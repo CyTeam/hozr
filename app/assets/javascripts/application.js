@@ -31,6 +31,7 @@ function initializeBehaviours() {
   setupSubmitButtons();
   setupCancelButtons();
   setupPatientTableSelect();
+  setupPatientMerging();
 
   setupPopOver();
 //  setupBillingAddressToggle();

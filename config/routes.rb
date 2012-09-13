@@ -17,6 +17,8 @@ Hozr::Application.routes.draw do
   resources :patients do
     collection do
       get :dunning_stopped
+      get :propose_merge
+      post :merge
     end
     member do
       get :show_history
