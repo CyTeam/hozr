@@ -8,11 +8,25 @@
   margin-top: 17px
 }
 
-/* Forms */
-.well h3 {
-  margin-bottom: 18px;
+/* Wells */
+.well > legend {
+  position: relative;
+  top: -10px;
+  left: -10px;
+  padding: 0px 7px;
+  font-size: 12px;
+  font-weight: bold;
+  background-color: white;
+  border: 1px solid #DDD;
+  color: #9DA0A4;
+  -webkit-border-radius: 4px 0 4px 0;
+  -moz-border-radius: 4px 0 4px 0;
+  border-radius: 4px 0 4px 0;
+  width: 50%;
+  margin-bottom: 0px;
 }
 
+/* Forms */
 label.input-important {
   font-weight: bold;
 }
