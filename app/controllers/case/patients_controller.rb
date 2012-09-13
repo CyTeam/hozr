@@ -10,7 +10,7 @@ class Case::PatientsController < ApplicationController
     query = params[:query]
 
     @case = Case.find(params[:case_id])
-    @patients = Patient.by_text(query, :star => true, :per_page => 30, :page => params[:page])
+    @patients = Patient.by_text(query, :star => true, :retry_stale => true, :per_page => 30, :page => params[:page])
   end
 
   def edit
