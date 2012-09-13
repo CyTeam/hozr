@@ -25,9 +25,11 @@ function directoryLookupHandler() {
 
 
 function addDirectoryLookupBehaviour() {
-  $('body').on('click', '[data-directory-lookup]', function(event) {
+  $('body').on('click', '[data-directory-lookup]', function(e) {
     var selector = $(this).data('directory-lookup');
     showDirectoryLookupDialog(selector);
+
+    e.preventDefault();
   })
 
   $('body').on('click', '[data-directory-lookup-attributes]', directoryLookupHandler);
