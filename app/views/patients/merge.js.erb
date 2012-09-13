@@ -1,5 +1,5 @@
 $('#propose_merge').modal('hide');
 $('tr.marked').removeClass('marked');
-$('#patient_<%= @drop_patient.id %>').slideUp('slow');
+$('#patient_<%= @drop_patient.id %>').fadeOut('slow');
 $('#patient_<%= @target_patient.id %>').addClass('selected');
 startTableSelection();
