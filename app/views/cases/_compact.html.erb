@@ -1,8 +1,0 @@
-<dt>
-  <%= compact.screened_at.strftime('%b. %g') unless compact.screened_at.nil? %>: <%= link_to "#" + compact.praxistar_eingangsnr, case_path(compact) unless compact.praxistar_eingangsnr.nil? %>
-</dt>
-<dd class="<%= case_label_classes(compact) %>">
-  <div data-title="<%= compact.classification.try(:name) %>" data-placement="left" data-content="<%= findings_text(compact) %>">
-    <%= compact.classification.try(:name) %>
-  </div>
-</dd>
