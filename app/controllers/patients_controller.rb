@@ -38,10 +38,4 @@ class PatientsController < AuthorizedController
 
     update!
   end
-
-  def directory_lookup
-    @patient = Patient.find(params[:id])
-
-    @vcard = @patient.vcard
-  end
 end
