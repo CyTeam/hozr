@@ -63,6 +63,22 @@ function setupSubmitButtons() {
   });
 }
 
+// Cancel button support
+function setupCancelButtons() {
+  // Key handler
+  $(document).keydown(function(e) {
+    var cancel_button = $('.cancel-button:visible')
+    // No action if no visible cancel button present
+    if (cancel_button.length == 0) {
+      return;
+    }
+
+    if (e.which == 27) {
+      cancel_button.click();
+    }
+  })
+}
+
 function showPatientHistory(element) {
   $(element).find('.case-history a').click();
 }
@@ -152,6 +168,12 @@ in_table_selection = false;
 function setupPatientTableSelect() {
   // Stop table selection when creating a new patient
   $('#new-patient-button').on('click', stopTableSelection);
+  $(document).on('click', '#patient-form .cancel-button', function() {
+    $('#patient-form').hide();
+    $('#patient-search').show();
+    resetTableSelection();
+  });
+
 
   // Key handler
   $(document).keydown(function(e) {
@@ -216,6 +238,7 @@ function initializeBehaviours() {
   setupCaseAssignment();
 
   setupSubmitButtons();
+  setupCancelButtons();
   setupPatientTableSelect();
 
   setupPopOver();
