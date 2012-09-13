@@ -186,12 +186,16 @@ in_table_selection = false;
 function setupPatientTableSelect() {
   // Stop table selection when creating a new patient
   $('#new-patient-button').on('click', stopTableSelection);
+
+  // Stop table selection when focusing anything
+  $(document).on('focus', ':input', stopTableSelection);
+
+  // Reactivate table selection and hide form when form is canceled
   $(document).on('click', '#patient-form .cancel-button', function() {
     $('#patient-form').hide();
     $('#patient-search').show();
     resetTableSelection();
   });
-
 
   // Key handler
   $(document).keydown(function(e) {
