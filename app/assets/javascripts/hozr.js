@@ -232,19 +232,3 @@ function autofocus(selector) {
 function setupPopOver() {
   $("*[data-content]").popover();
 }
-
-function initializeBehaviours() {
-  setupSlidepathLinks();
-  setupCaseAssignment();
-
-  setupSubmitButtons();
-  setupCancelButtons();
-  setupPatientTableSelect();
-
-  setupPopOver();
-//  setupBillingAddressToggle();
-
-  setupPatientHistoryHover();
-}
-
-$(document).ready(initializeBehaviours);

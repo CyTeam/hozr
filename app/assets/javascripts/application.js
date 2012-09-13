@@ -25,6 +25,17 @@ function initializeBehaviours() {
   addDirectoryLookupBehaviour();
 
   // application
+  setupSlidepathLinks();
+  setupCaseAssignment();
+
+  setupSubmitButtons();
+  setupCancelButtons();
+  setupPatientTableSelect();
+
+  setupPopOver();
+//  setupBillingAddressToggle();
+
+  setupPatientHistoryHover();
 }
 
 // Loads functions after DOM is ready
