@@ -86,6 +86,15 @@ class Patient < ActiveRecord::Base
   # Invoices
   scope :dunning_stopped, where(:dunning_stop => true)
 
+  # CyDoc associations
+  has_many :appointments
+  has_many :medical_cases
+  has_many :recalls
+  has_many :service_records
+  has_many :sessions
+  has_many :tiers
+  has_many :treatments
+
   # Sphinx Search
   # =============
   define_index do
@@ -169,7 +178,21 @@ class Patient < ActiveRecord::Base
 
   # Merging
   def merge(drop_patient)
-    
+    self.cases << drop_patient.cases
+    self.appointments << drop_patient.appointments
+    self.medical_cases << drop_patient.medical_cases
+    self.recalls << drop_patient.recalls
+    self.service_records << drop_patient.service_records
+    self.sessions << drop_patient.sessions
+    self.tiers << drop_patient.tiers
+    self.treatments << drop_patient.treatments
+
+    if drop_patient.remarks.present?
+      self.remarks += "\nVon verknüpftem Patienten:\n"
+      self.remarks += drop_patient.remarks
+    end
+
+    self
   end
 
   # Attributes

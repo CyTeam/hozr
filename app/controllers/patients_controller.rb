@@ -47,6 +47,16 @@ class PatientsController < AuthorizedController
     @target_patient = Patient.find(params[:target_patient_id])
     @drop_patient = Patient.find(params[:drop_patient_id])
 
-    @target_patient.merge(@drop_patient)
+    Patient.transaction do
+      @target_patient.merge(@drop_patient)
+      @target_patient.save!
+
+      logger.warn(@drop_patient.to_s)
+      logger.warn(@drop_patient.inspect)
+      logger.warn(@drop_patient.vcard.inspect)
+      logger.warn(@drop_patient.vcard.address.inspect)
+
+      @drop_patient.destroy
+    end
   end
 end
