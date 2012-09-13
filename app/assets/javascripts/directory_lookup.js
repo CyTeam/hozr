@@ -21,6 +21,8 @@ function directoryLookupHandler() {
   var params = $(this).data('directory-lookup-attributes');
 
   updateFromDirectoryLookup(selector, params);
+
+  $('#directory_lookup').modal('hide');
 }
 
 
