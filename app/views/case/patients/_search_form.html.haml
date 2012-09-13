@@ -1,5 +1,15 @@
 = simple_form_for '', :url => case_patients_path(@case), :method => :get, :remote => true, :class => 'form-inline' do |f|
-  = icon_link_to :new_patient, new_case_patient_path(@case), :remote => true, :icon => 'plus', :id => 'new-patient-button', :style => 'float: right'
-  = f.input 'query', :label => false, :placeholder => 'Name, Eingangsnummer, Geburtsdatum, Strasse...', :input_html => {:class => 'span10', 'data-autofocus' => true, 'data-table-selection' => '#patients'}
+  .hidden-actions
+    = f.button :submit
 
+  .btn-group.pull-right
+    = icon_link_to :new_patient, new_case_patient_path(@case), :remote => true, :icon => 'plus', :id => 'new-patient-button'
+    %button.btn.dropdown-toggle{'data-toggle' => 'dropdown'}
+      %span.caret
+    %ul.dropdown-menu
+      =# TODO: only show if next case exists
+      = link_to t_action(:next_first_entry), next_first_entry_case_path(@case)
+      = link_to t_action('delete'), @case, :method => :delete if can?(:destroy, Case)
+
+  = f.input 'query', :label => false, :placeholder => 'Name, Eingangsnummer, Geburtsdatum, Strasse...', :input_html => {:class => 'span10', 'data-autofocus' => true, 'data-table-selection' => '#patients'}
 #patients
