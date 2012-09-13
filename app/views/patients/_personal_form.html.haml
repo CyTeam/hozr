@@ -7,7 +7,7 @@
           .controls
             = v.input :honorific_prefix, :collection => HonorificPrefix.find(:all, :order => 'sex DESC, position').collect { |prefix| prefix.name }, :wrapper => :inline
             = link_to '#', 'data-directory-lookup' => 'patient[vcard_attributes]', :title => t_action(:directory_lookup) do
-              %i.icon-search
+              %i.icon-search.btn
       .span5
         = f.input :dunning_stop
     .row-fluid

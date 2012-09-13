@@ -10,7 +10,7 @@
           .controls
             = v.input :honorific_prefix, :collection => HonorificPrefix.find(:all, :order => 'sex DESC, position').collect { |prefix| prefix.name }, :wrapper => :inline
             = link_to '#', 'data-directory-lookup' => 'patient[billing_vcard_attributes]', :title => t_action(:directory_lookup) do
-              %i.icon-search
+              %i.icon-search.btn
     .row-fluid
       .span7
         .control-group{:class => "#{'error' if v.object.errors.include?(:family_name) or v.object.errors.include?(:given_name)}"}
