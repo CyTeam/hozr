@@ -16,3 +16,4 @@
         %span.caret
       %ul.dropdown-menu.pull-right
         = link_to t_action('edit'), edit_case_patient_path(@case, patient), :remote => true, :class => 'action-edit'
+        = link_to t_action('delete'), case_patient_path(@case, patient), :method => :delete, :remote => true, :class => 'action-destroy'

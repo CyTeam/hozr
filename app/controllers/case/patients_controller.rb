@@ -107,4 +107,9 @@ class Case::PatientsController < ApplicationController
       render 'edit'
     end
   end
+
+  def destroy
+    @patient = Patient.find(params[:id])
+    @patient.destroy
+  end
 end
