@@ -4,3 +4,5 @@
   %dl
     %dt= t_attr(:doctor, Patient)
     %dd= link_to patient.doctor, patient.doctor
+
+= render 'cases/compact_list', :cases => patient.cases
