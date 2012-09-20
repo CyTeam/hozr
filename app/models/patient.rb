@@ -79,6 +79,11 @@ class Patient < ActiveRecord::Base
     errors.add(:base, 'address invalid for invoice_vcard') if invoice_vcard.address.errors.present?
   end
 
+  before_save do
+    vcard.family_name = UnicodeUtils.upcase(vcard.family_name)
+    billing_vcard.family_name = UnicodeUtils.upcase(billing_vcard.family_name)
+  end
+
   # Cases
   has_many :cases, :order => 'id DESC'
   has_many :finished_cases, :class_name => 'Case', :conditions => 'screened_at IS NOT NULL', :order => 'id DESC'
