@@ -1,15 +1,11 @@
 - patient = compact
-- remarks = true if remarks.nil?
 .full_name
-  = link_to(h("#{patient.vcard.family_name} #{patient.vcard.given_name}"), :controller => '/patients', :action => 'show', :id => patient)
+  = link_to "#{patient.vcard.family_name} #{patient.vcard.given_name}", patient
   .address
-    - unless patient.birth_date.nil?
-      - if patient.birth_date.starts_with?("01.01.")
-        %span{:style => "background-color: red"}/
-      = h patient.birth_date
+    - if patient.birth_date
+      %span{:class => "#{patient.birth_date.starts_with?('01.01.') ? 'info-alert' : ''}"}= patient.birth_date
       %br/
-      - if patient.birth_date.starts_with?("01.01.")
   %div
-    - unless patient.remarks.nil? or (remarks == false)
-      %i= h "#{patient.remarks}"
+    - if patient.remarks.present?
+      %i= patient.remarks
       %br/

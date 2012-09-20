@@ -5,11 +5,12 @@
   %td
     = item.entry_date unless item.entry_date.nil?
     = "(#{item.first_entry_by.code})" unless item.first_entry_by.nil?
-  %td= if item.ready_for_first_entry                                                                |
-        link_to case_nr, {:controller => 'cases', :action => 'first_entry', :id => item}           |
-      elsif item.ready_for_second_entry                                                            |
-        link_to case_nr, {:controller => 'cases', :action => 'second_entry_pap_form', :id => item} |
-      end                                                                                          |
+  %td
+    - if item.ready_for_first_entry
+      = link_to case_nr, {:controller => 'cases', :action => 'first_entry', :id => item}
+    - elsif item.ready_for_second_entry
+      = link_to case_nr, {:controller => 'cases', :action => 'second_entry_pap_form', :id => item}
+
   %td= render :partial => '/patients/compact', :object => item.patient unless item.patient.nil?
   %td= item.doctor.name unless item.doctor.nil?
   %td
