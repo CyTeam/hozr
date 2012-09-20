@@ -6,6 +6,10 @@
       = case_info.praxistar_eingangsnr unless case_info.praxistar_eingangsnr.nil?
       = "(#{case_info.intra_day_id unless case_info.intra_day_id.nil?})"
 
+    - if case_info.doctor
+      %dt= t_attr(:doctor, Case)
+      %dd.label= case_info.doctor
+
     - if case_info.examination_date
       %dt= t_attr(:examination_date, Case)
       %dd.label= case_info.examination_date.strftime('%d.%m.%Y')
