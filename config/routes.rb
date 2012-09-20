@@ -101,10 +101,7 @@ Hozr::Application.routes.draw do
   get 'label_print/post_label' => 'label_print#post_label', :as => :post_label_label_print
 
   # Search
-  get 'search' => 'search#index', :as => :search
-  get 'search/search_form' => 'search#search_form'
-  post 'search/search' => 'search#search'
-  match 'search/patient' => 'search#patient', :as => :patient_search
+  match 'search' => 'search#index', :as => :search
 
   # Reports
   get 'reports' => 'reports#index'
