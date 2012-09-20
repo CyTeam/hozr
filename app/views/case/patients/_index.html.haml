@@ -1,13 +1,13 @@
 %table#patients.table.table-bordered.table-striped.table-condensed
   %tr
-    %th= t_attr(:full_name, Vcard)
-    %th= t_attr(:street_address, Vcard)
-    %th= t_attr(:postal_code, Vcard) + "/" + t_attr(:locality, Vcard)
-    %th= t_attr(:birth_date, Patient)
-    %th= t_model(Doctor)
-    %th= t_attr(:doctor_patient_nr, Patient)
-    %th= t_attr(:insurance, Patient)
-    %th RA
-    %th Aktion
+    %th.full_name= t_attr(:full_name, Vcard)
+    %th.street_address= t_attr(:street_address, Vcard)
+    %th.locality= t_attr(:postal_code, Vcard) + "/" + t_attr(:locality, Vcard)
+    %th.birth_date= t_attr(:birth_date, Patient)
+    %th.doctor= t_model(Doctor)
+    %th.doctor_patient_nr= t_attr(:doctor_patient_nr, Patient)
+    %th.insurance= t_attr(:insurance, Patient)
+    %th.billing_address RA
+    %th.actions Aktion
 
   = render :partial => 'patient', :collection => @patients.select{|patient| patient.vcard}

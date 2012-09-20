@@ -50,6 +50,21 @@ tbody tr.marked td, .table-striped tbody tr.marked td {
 tbody tr.selected td, .table-striped tbody tr.selected td {
   background-color: #D9EDF7;
   border-color: #BCE8F1;
+  font-weight:  bold;
+  font-size:    120%;
+}
+
+/* Patient list */
+#patients th {
+  &.full_name         { width: 19% }
+  &.street_address    { width: 20% }
+  &.locality          { width: 10% }
+  &.birth_date        { width: 8% }
+  &.doctor            { width: 10% }
+  &.doctor_patient_nr { width: 5% }
+  &.insurance         { width: 12% }
+  &.billing_address   { width: 4% }
+  &.actions           { width: 12% }
 }
 
 /* Fake display: none without loosing functionality */
