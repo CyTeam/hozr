@@ -21,8 +21,8 @@ class LabelPrintController < ApplicationController
     po_label.save
 
     # Trigger printing
-    system("touch public/trigger/post_triger.txt")
-    
+    trigger('post_triger.txt')
+
     redirect_to :action => :post_label
   end 
 
@@ -50,7 +50,7 @@ class LabelPrintController < ApplicationController
     end
 
     # Trigger printing
-    system("touch public/trigger/triger.txt")
+    trigger
     
     redirect_to :action => :case_label
   end
@@ -76,7 +76,8 @@ class LabelPrintController < ApplicationController
     end
 
     # Trigger printing
-    system("touch public/trigger/triger.txt")
+    trigger
+
     redirect_to :back
   end
 
@@ -100,8 +101,13 @@ class LabelPrintController < ApplicationController
     ot_label.save
 
     # Trigger printing
-    system("touch public/trigger/triger.txt")
+    trigger
+
     redirect_to :back
   end
 
+  private
+  def trigger(filename = 'trigger.txt')
+    FileUtils.touch(Rails.root.join('public', 'trigger', filename))
+  end
 end
