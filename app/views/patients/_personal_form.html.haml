@@ -32,7 +32,7 @@
     .row-fluid
       .span7
         .control-group{:class => "#{'error' if a.object.errors.include?(:postal_code) or a.object.errors.include?(:locality)}"}
-          %label.control-label= "#{t_attr(:postal_code, Vcard)}, #{t_attr(:locality, Vcard)}"
+          %label.control-label= "#{t_attr(:postal_code, Vcard)} #{t_attr(:locality, Vcard)}"
           .controls
             = a.input :zip_locality, :wrapper => :inline
       .span5
