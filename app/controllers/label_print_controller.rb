@@ -57,7 +57,7 @@ class LabelPrintController < ApplicationController
 
   # P16 Labels
   def case_label_p16
-    @cases = Case.all( :conditions => ["(needs_p16 = ? OR needs_hpv = ?) AND screened_at IS NULL", true, true])
+    @cases = Case.for_hpv_p16
      
      # Cleanup table
     OtLabel.delete_all

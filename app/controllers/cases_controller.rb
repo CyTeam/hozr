@@ -363,7 +363,7 @@ class CasesController < ApplicationController
   # P16/HPV
   # =======
   def hpv_p16_queue
-    @cases = Case.paginate(:page => params['page'], :per_page => 144, :conditions => ["(needs_p16 = ? OR needs_hpv = ?) AND screened_at IS NULL", true, true])
+    @cases = Case.for_hpv_p16.paginate(:page => params['page'], :per_page => 144)
     render :action => :list
   end
 
