@@ -1,6 +1,6 @@
 Hozr::Application.routes.draw do
   # Main page
-  root :to => 'search#index'
+  root :to => 'work_queue#admin'
 
   # Authentication
   devise_for :users
