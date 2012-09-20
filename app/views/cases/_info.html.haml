@@ -1,8 +1,5 @@
 %fieldset{:style => "width: 100%; margin-top: 10px"}
   = render :partial => 'cases/case_info', :object => @case
-  = render 'patients/compact_second_entry', :patient => @case.patient unless @case.patient.nil?
-  - unless @case.doctor.nil?
-    %strong
-      = link_to @case.doctor.praxis.full_name, :controller => '/doctors', :action => :show, :id => @case.doctor
-      , #{h @case.doctor.praxis.locality}
+  = render 'patients/info', :patient => @case.patient unless @case.patient.nil?
+
 = render 'cases/compact_list', :cases => @case.patient.cases unless @case.patient.nil?

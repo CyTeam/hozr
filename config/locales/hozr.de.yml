@@ -42,6 +42,7 @@ de:
         examination_method:   Methode
         slidepath:            Slidepath
         scan:                 Scan
+        doctor:               Zuweisender Arzt
 
       insurance_policy:
         insurance:            Versicherung
