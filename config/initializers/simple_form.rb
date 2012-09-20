@@ -160,7 +160,7 @@ SimpleForm.setup do |config|
   # Custom mappings for input types. This should be a hash containing a regexp
   # to match as key, and the input type that will be used when the field name
   # matches the regexp as value.
-  # config.input_mappings = { /count/ => :integer }
+  config.input_mappings = { /zip_locality/ => :zip_locality }
 
   # Default priority for time_zone inputs.
   # config.time_zone_priority = nil
