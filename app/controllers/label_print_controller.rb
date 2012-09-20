@@ -11,14 +11,14 @@ class LabelPrintController < ApplicationController
     Aetiketten.delete_all
     
     # Create new record
-    po_label = Aetiketten.new
-    po_label.hon_suffix = label.honorific_prefix
-    po_label.fam_name = label.family_name
-    po_label.giv_name = label.given_name
-    po_label.ext_address = label.address.street_address
-    po_label.loc = label.locality
-    po_label.postc = label.postal_code
-    po_label.save
+    Aetiketten.create(
+      :hon_suffix => label.honorific_prefix,
+      :fam_name => label.family_name,
+      :giv_name => label.given_name,
+      :ext_address => label.address.street_address,
+      :loc => label.locality,
+      :postc => label.postal_code
+    )
 
     # Trigger printing
     trigger('post_triger.txt')
@@ -38,15 +38,15 @@ class LabelPrintController < ApplicationController
 
     # Create new records
     for label in @cases
-      ot_label = OtLabel.new
-      ot_label.sys_id = label.id
-      ot_label.prax_nr = label.praxistar_eingangsnr
-      ot_label.doc_fname = label.doctor.family_name
-      ot_label.doc_gname = label.doctor.given_name
-      ot_label.pat_fname = label.patient.vcard.family_name
-      ot_label.pat_gname = label.patient.vcard.given_name
-      ot_label.pat_bday = label.patient.birth_date
-      ot_label.save
+      OtLabel.create(
+        :sys_id => label.id,
+        :prax_nr => label.praxistar_eingangsnr,
+        :doc_fname => label.doctor.family_name,
+        :doc_gname => label.doctor.given_name,
+        :pat_fname => label.patient.vcard.family_name,
+        :pat_gname => label.patient.vcard.given_name,
+        :pat_bday => label.patient.birth_date
+      )
     end
 
     # Trigger printing
@@ -64,15 +64,15 @@ class LabelPrintController < ApplicationController
 
     # Create new records
     for label in @cases
-      ot_label = OtLabel.new
-      ot_label.sys_id = label.id
-      ot_label.prax_nr = label.praxistar_eingangsnr
-      ot_label.doc_fname = label.doctor.family_name
-      ot_label.doc_gname = label.doctor.given_name
-      ot_label.pat_fname = label.patient.vcard.family_name
-      ot_label.pat_gname = label.patient.vcard.given_name
-      ot_label.pat_bday = label.patient.birth_date
-      ot_label.save
+      OtLabel.create(
+        :sys_id => label.id,
+        :prax_nr => label.praxistar_eingangsnr,
+        :doc_fname => label.doctor.family_name,
+        :doc_gname => label.doctor.given_name,
+        :pat_fname => label.patient.vcard.family_name,
+        :pat_gname => label.patient.vcard.given_name,
+        :pat_bday => label.patient.birth_date
+      )
     end
 
     # Trigger printing
@@ -90,15 +90,15 @@ class LabelPrintController < ApplicationController
     OtLabel.delete_all
 
     # Create new records
-    ot_label = OtLabel.new
-    ot_label.sys_id = label.id
-    ot_label.prax_nr = label.praxistar_eingangsnr
-    ot_label.doc_fname = label.doctor.family_name
-    ot_label.doc_gname = label.doctor.given_name
-    ot_label.pat_fname = label.patient.vcard.family_name
-    ot_label.pat_gname = label.patient.vcard.given_name
-    ot_label.pat_bday = label.patient.birth_date
-    ot_label.save
+    OtLabel.create(
+      :sys_id => label.id,
+      :prax_nr => label.praxistar_eingangsnr,
+      :doc_fname => label.doctor.family_name,
+      :doc_gname => label.doctor.given_name,
+      :pat_fname => label.patient.vcard.family_name,
+      :pat_gname => label.patient.vcard.given_name,
+      :pat_bday => label.patient.birth_date
+    )
 
     # Trigger printing
     trigger
