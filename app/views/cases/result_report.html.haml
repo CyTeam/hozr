@@ -1,0 +1,44 @@
+.sheet_a5
+  .report
+    #patient
+      - if !(@case.patient.doctor_patient_nr.nil? or @case.patient.doctor_patient_nr == '')
+        = h @case.patient.doctor_patient_nr
+        %br/
+      = render :partial => "/vcards/show", :locals => {:vcard => @case.patient.vcard}
+      %br/
+      = h @case.patient.birth_date unless @case.patient.birth_date.nil?
+      %br/
+    #insurance
+      - if !@case.insurance.nil?
+        = h @case.insurance.name
+        = h "##{@case.insurance_nr}" unless @case.insurance_nr.nil? or @case.insurance_nr.strip == "0" or @case.insurance_nr.strip == ""
+    #doctor
+      = h @case.doctor.praxis.honorific_prefix
+      %br/
+      = render :partial => "/vcards/show", :locals => {:vcard => @case.doctor.praxis}
+    #case
+      Entnahme vom: #{h @case.examination_date ? @case.examination_date.strftime("%d.%m.%Y") : "Noch nicht gesetzt"}
+      %br/
+      Eingang am: #{h @case.entry_date ? @case.entry_date.strftime("%d.%m.%Y") : "Noch nicht gesetzt"}
+    #subject.title
+      Ihr Auftrag Nr. #{h @case.praxistar_eingangsnr}
+    #remarks
+      = image_tag inline_order_form_url(@case.order_form, :type => :result_remarks), :size => '410x192' if @case.order_form
+    #finding_title.title
+      Befund
+    #classification{:class => "PAP_#{h @case.classification.try(:code)}"}
+      = h @case.classification.try(:name)
+    #findings
+      #finding_list
+        = render :partial => 'list_findings'
+    #special_findings
+      - for finding in @case.control_findings
+        %div{:class => finding_css_class(finding)}= h finding.name
+      %br/
+      - for finding in @case.quality_findings
+        %div{:class => finding_css_class(finding)}= h finding.name
+    #signature
+      = button_to "Visum: #{@case.screener.work_vcard.abbreviated_name unless @case.screener.nil?}, #{@case.screened_at.strftime("%d.%m.%Y") unless @case.screened_at.nil?}", :action => 'sign', :id => @case
+      - unless @case.review_by.nil?
+        = button_to "Visum: #{@case.review_by.work_vcard.abbreviated_name}, #{@case.review_at.strftime("%d.%m.%Y") unless @case.review_at.nil?}", :action => 'review_done', :id => @case
+    = render :partial => "cases/labels", :object => @case.patient

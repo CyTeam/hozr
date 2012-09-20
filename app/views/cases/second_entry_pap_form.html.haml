@@ -1,0 +1,36 @@
+%table{:style => "width: 100%; height: 100%"}
+  %tr{:style => "vertical-align: top"}
+    %td#diagnoses{:style => "min-width: 800px"}
+      %fieldset{:style => "width: 98%; text-align: center"}
+        %legend Bemerkungen
+        = link_to image_tag(inline_order_form_url(@case.order_form, :type => :result_remarks), :size => "470x211"), inline_order_form_url(@case.order_form) if @case.order_form
+        = link_to image_tag(inline_order_form_url(@case.order_form, :type => :head), :size => "300x150"), inline_order_form_url(@case.order_form) if @case.order_form
+      %fieldset{:style => "width: 98%"}
+        %legend Klassifikation
+        %table
+          %tr
+            %td= classification_button('1')
+            %td= classification_button('2')
+            %td= classification_button('vulva')
+            %td= classification_button('vagina')
+          %tr
+            %td= classification_button('2A')
+            %td= classification_button('2-3A')
+          %tr
+            %td= classification_button('3L')
+            %td= classification_button('3M-c1-2')
+            %td= classification_button('3M')
+          %tr
+            %td= classification_button('3S-c2-3')
+            %td= classification_button('3S')
+          %tr
+            %td= classification_button('4')
+            %td= classification_button('5')
+            %td= classification_button('az')
+          %tr
+            %td= classification_button('mam')
+            %td= classification_button('sput')
+            %td= classification_button('hpv')
+            %td= classification_button('extra')
+    %td#personal-information{:style => "min-width: 200px"}
+      = render :partial => 'info', :object => @case

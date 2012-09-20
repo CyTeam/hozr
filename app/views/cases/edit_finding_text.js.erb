@@ -1,3 +1,0 @@
-$('#finding_list').html('<%= j(render("edit_finding_text.html.erb")).gsub('<haml:newline/>', "\\n").html_safe %>');
-<%- configuration = TinyMCE::Rails.configuration %>
-<%= "tinyMCE.init(#{configuration.options_for_tinymce.to_json});".html_safe %>

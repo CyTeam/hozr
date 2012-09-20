@@ -1,0 +1,31 @@
+%h1 Tages Scans
+= form_tag({:action => 'assign'}, :name => "unassigned") do
+  %table#unassigned_sort_queue
+    - next_eingangs_nr = CaseNr.new
+    - intra_day_id = @intra_day_id
+    - for @a_case in @cases
+      - a_case = @a_case
+      %tr
+        %td
+          = link_to(image_tag(inline_order_form_url(@a_case.order_form, :type => :head)), inline_order_form_url(@a_case.order_form)) if @a_case.order_form
+        %td{:style => "border-top: solid 2px; border-bottom: solid 2px; vertical-align: bottom"}
+          - @a_case.intra_day_id = intra_day_id
+          - intra_day_id += 1
+          - @a_case.praxistar_eingangsnr ||= next_eingangs_nr.to_s
+          - next_eingangs_nr.inc!
+          = link_to 'Löschen', destroy_from_assign_case_path(a_case), :remote => true, :method => :delete
+          %br/
+          %table.case{"data-case-id" => a_case.id, :id => "a_case_#{a_case.id}"}
+            %tr
+              %td Eingangsnr:
+              %td= text_field "a_case[]", 'praxistar_eingangsnr', :size => 10, :tabindex => intra_day_id + 30000
+            %tr
+              %td Tagesnr.:
+              %td= text_field "a_case[]", 'intra_day_id', :size => 4, :tabindex => intra_day_id
+            %tr
+              %td Abstrichdatum.:
+              %td= text_field "a_case[]", 'examination_date', :size => 8, :tabindex => intra_day_id + 10000
+            %tr
+              %td Arzt:
+              %td= select 'a_case[]', 'doctor_id', doctors_collection, { :include_blank => true }, :tabindex => intra_day_id + 20000
+  = submit_tag 'Zuweisen'

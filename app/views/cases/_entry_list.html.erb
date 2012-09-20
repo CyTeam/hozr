@@ -1,8 +1,0 @@
-<%= paginated_section @cases do %>
-  <table class="table table-bordered table-striped table-condensed">
-    <%= render 'cases/entry_list_header' %>
-    <%= render :partial => 'cases/entry_item', :collection => @cases %>
-  </table>
-
-  <%= javascript_tag "setupSlidepathLinks()" %>
-<% end %>

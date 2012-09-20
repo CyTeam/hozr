@@ -1,9 +1,0 @@
-<% if @case.finding_text.nil? %>
-  <% for finding in @case.findings %>
-   <div><%=h finding.name %></div>
-  <% end %>
-<% else %>
-  <%= @case.finding_text.html_safe %>
-<% end %>
-
-<%= button_to 'Edit', edit_finding_text_case_path(@case), :remote => true, :method => :get %>

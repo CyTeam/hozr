@@ -1,0 +1,19 @@
+%h1 Anschreiblisten
+%table.table.table-bordered.table-striped.table-condensed
+  %th Zugewiesen
+  %th Anzahl
+  %th Tagesnummern
+  %th Eingangsnummern
+  %th
+    - for assigning in @assignings
+      %tr
+        %td= link_to(assigning.assigned_at.strftime('Am %d.%m.%Y um %H:%M'), :controller => 'cases', :action => 'assign_list', :assigned_at => assigning.assigned_at.strftime('%Y-%m-%d %H:%M:%S'))
+        %td= assigning.count
+        %td
+          = assigning.min_intra_day_id
+          \- #{assigning.max_intra_day_id}
+        %td
+          = assigning.min_praxistar_eingangsnr
+          \- #{assigning.max_praxistar_eingangsnr}
+        %td
+          = link_to image_tag('remove.png'), {:controller => 'cases', :action => 'delete_assigning', :assigned_at => assigning.assigned_at.strftime('%Y-%m-%d %H:%M:%S')}, :confirm => "#{assigning.count} Aufträge löschen?", :post => true
