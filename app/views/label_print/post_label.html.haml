@@ -1,4 +1,15 @@
-%h1 Post Etiketten Drucken
-= form_tag :action => 'post_label_print' do
-  = select 'post_label', 'doctor_id', doctors_collection
-  = submit_tag 'Drucken'
+.modal
+  = modal_header 'Post Etiketten Drucken'
+
+  .modal-body{:style => 'height: 150px'}
+    = simple_form_for 'post_label', :action => 'post_label_print' do |f|
+      .row-fluid
+        .span12
+          = f.select 'doctor_id', doctors_collection
+      .row-fluid.hidden-actions
+        .form-actions
+          = f.button :submit
+
+  .modal-footer
+    = link_to t_action(:print), '#', :class => 'btn submit-button'
+    = link_to t_action(:cancel), '#', :class => 'btn', 'data-dismiss' => 'modal'
