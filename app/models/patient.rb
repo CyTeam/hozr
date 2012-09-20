@@ -105,8 +105,8 @@ class Patient < ActiveRecord::Base
 
     indexes vcard.full_name
     indexes vcard.nickname
-    indexes vcard.family_name
-    indexes vcard.given_name
+    indexes vcard.family_name, :as => :family_name, :sortable => true
+    indexes vcard.given_name, :as => :given_name, :sortable => true
     indexes vcard.additional_name
     indexes vcard.address.street_address
     indexes vcard.address.postal_code
@@ -131,7 +131,7 @@ class Patient < ActiveRecord::Base
   end
 
   def self.by_text(query, options = {})
-    options.merge!({:match_mode => :extended})
+    options.merge!({:match_mode => :extended, :order => 'family_name ASC, given_name ASC'})
 
     search(build_query(query), options)
   end
