@@ -1,0 +1,28 @@
+%table.table.table-bordered.table-striped.table-condensed{:width => "100%"}
+  %thead
+    %tr
+      %th ID
+      %th Datum
+      %th PAP
+      %th Code
+      %th Diagnose
+      %th Arzt
+      %th Scan
+  %tbody
+    - for pap in @patient.paps
+      %tr.odd
+        %td= pap.in_EingangsNr
+        %td= pap.dt_Eingang
+        %td{:class => "PAP_#{pap.tx_PAP}", :style => "border-width: 4px"}= pap.tx_PAP
+        %td
+          = pap.tx_PAP
+          / {tx_ErfassungsCode}
+        %td{:style => "border-style: solid; border-top-width: >px; text-align: left"}
+          %b{:style => "color: black"}
+            / {tx_Diagnosentext}
+        %td{:style => "border-style: solid; border-top-width: px; text-align: left"}
+          %b{:style => "color: black"}= pap.arzt.tx_Name
+        %td{:style => "border-style: solid; border-top-width: px; text-align: left"}
+          %b{:style => "color: black"}
+            - for scan1 in Dir["/var/lib/histo/scans/pap/#{pap.in_EingangJahr}/scan1*-#{pap.in_EingangJahr}-#{sprintf('%05d', pap.in_EingangsNr)}.jpg"]
+              = link_to "Scan1", "/histo/pap/#{scan1}" if File.exists?(scan1)
