@@ -53,8 +53,8 @@
         %span.caret
       %ul.dropdown-menu.pull-right
         = link_to t_action('delete'), case_path(item), :method => :delete, :confirm => 'Fall wirklich löschen?' if can? :destroy, Case
-        = link_to t_action('print_fax'), print_result_report_case_path(item, :page_size => 'A4'), :method => :post
-        = link_to t_action('print'), print_result_report_case_path(item), :method => :post
+        = link_to t_action('print_fax'), print_result_report_case_path(item, :page_size => 'A4'), :method => :post, :remote => true
+        = link_to t_action('print'), print_result_report_case_path(item), :method => :post, :remote => true
         = link_to t_action('create_hpv_p16'), create_hpv_p16_for_case_case_path(item), :method => :post
         = link_to t_action('review_done'), review_done_case_path(item), :method => :post if item.needs_review?
         = link_to t_action('print_label'), case_label_single_label_print_path(:id => item.id), :method => :post
