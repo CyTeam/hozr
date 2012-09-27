@@ -84,10 +84,10 @@
                           <b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu">
-                      <li><%= link_to "Papzettel Drucken", doctor_order_form_path %></li>
-                      <li><%= link_to "Objektträger Etiketten", case_label_label_print_path %></li>
-                      <li><%= link_to "P16 Etiketten", case_label_p16_label_print_path, :method => :post %></li>
-                      <li><%= link_to "Packet Etiketten", post_label_label_print_path %></li>
+                      <li><%= link_to "Papzettel Drucken", doctor_order_form_path, :remote => true %></li>
+                      <li><%= link_to "Objektträger Etiketten", case_label_label_print_path, :remote => true %></li>
+                      <li><%= link_to "P16 Etiketten", case_label_p16_label_print_path, :method => :post, :remote => true %></li>
+                      <li><%= link_to "Packet Etiketten", post_label_label_print_path, :remote => true %></li>
                     </ul>
                   </li>
                 </ul>

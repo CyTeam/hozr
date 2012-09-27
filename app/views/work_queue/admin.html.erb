@@ -30,22 +30,22 @@
 
    <td style="vertical-align: top; padding-left: 5em">
       <p>
-          <%= link_to image_tag('printer_64.png', :size => '40x40'), doctor_order_form_path %>
+          <%= link_to image_tag('printer_64.png', :size => '40x40'), doctor_order_form_path, :remote => true %>
 	  <i style="font-size: 12pt">Papzettel Drucken</i>
       </p>
       
       <p>
-          <%= link_to image_tag('printer_64.png', :size => '40x40'), :controller => '/label_print', :action => :case_label %>
+          <%= link_to image_tag('printer_64.png', :size => '40x40'), case_label_label_print_path, :remote => true %>
           <i style="font-size: 12pt">Objektträger Etiketten drucken</i>
       </p>
 
       <p>
-	  <%= link_to image_tag('printer_64.png', :size => '40x40'), :controller => 'label_print', :action => :case_label_p16, :method => :post %>
+	  <%= link_to image_tag('printer_64.png', :size => '40x40'), case_label_p16_label_print_path, :method => :post, :remote => true %>
           <i style="font-size: 12pt">P16 Etiketten drucken</i>
       </p>
 
       <p>
-          <%= link_to image_tag('printer_64.png', :size => '40x40'), :controller => '/label_print', :action => :post_label %>
+          <%= link_to image_tag('printer_64.png', :size => '40x40'), post_label_label_print_path, :remote => true %>
           <i style="font-size: 12pt">Packet Etiketten drucken</i>
       </p>
 

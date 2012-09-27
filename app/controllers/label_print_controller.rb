@@ -22,8 +22,6 @@ class LabelPrintController < ApplicationController
 
     # Trigger printing
     trigger('post_triger.txt')
-
-    redirect_to :action => :post_label
   end 
 
   # Case labels
