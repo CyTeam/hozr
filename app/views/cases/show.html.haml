@@ -1,3 +1,7 @@
+.contextual
+  = icon_link_to :resend, resend_case_path(@case), :method => :post, :remote => true
+  = icon_link_to :show_invoice, cydoc_url_for("sessions/#{@case.session_id}"), :target => cydoc_hostname
+
 .row-fluid
   .span12
     = render 'result_report'

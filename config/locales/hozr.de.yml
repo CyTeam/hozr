@@ -70,6 +70,8 @@ de:
       merge:            Verknüpfen
       choose_as_target: Auf diesen verknüpfen
       new_patient:      Neuer Patient
+      resend:           Erneut senden
+      show_invoice:     Rechnung
 
       create:           Speichern
       cancel:           Abbrechen
