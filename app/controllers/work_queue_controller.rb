@@ -10,8 +10,4 @@ class WorkQueueController < ApplicationController
     @review_count = Case.for_review.count
     @result_for_delivery_count = Case.for_delivery.count
   end
-
-  def cyto
-    @second_entry_count = Case.count(:all, :conditions => 'entry_date IS NOT NULL AND screened_at IS NULL AND needs_p16 = 0')
-  end
 end
