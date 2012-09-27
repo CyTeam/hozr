@@ -21,6 +21,9 @@ function initializeBehaviours() {
   addDatePickerBehaviour();
   addLinkifyContainersBehaviour();
 
+  // from flash_message
+  addFlashMessageBehaviour();
+
   // from directory_lookup.js
   addDirectoryLookupBehaviour();
 

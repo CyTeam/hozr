@@ -357,6 +357,7 @@ class CasesController < ApplicationController
 
     @case.print(page_size, printer)
     flash.now[:notice] = "#{@case} an Drucker gesendet"
+    render 'show_flash'
   end
 
   # P16/HPV
