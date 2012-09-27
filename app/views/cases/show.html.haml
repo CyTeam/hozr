@@ -1,6 +1,20 @@
-.contextual
-  = icon_link_to :resend, resend_case_path(@case), :method => :post, :remote => true
-  = icon_link_to :show_invoice, cydoc_url_for("sessions/#{@case.session_id}"), :target => cydoc_hostname
+%div{:style => 'margin-bottom: 10px'}
+  .btn-group{:style => 'display: inline-block'}
+    = link_to t_action(:print), print_result_report_case_path(@case), :method => :post, :class => 'btn'
+    %button.btn.dropdown-toggle{'data-toggle' => 'dropdown'}
+      %span.caret
+    %ul.dropdown-menu
+      = link_to t_action(:print_fax), print_result_report_case_path(@case, :page_size => 'A4'), :method => :post
+      = link_to t_action(:resend), resend_case_path(@case), :method => :post, :remote => true
+
+  .btn-group{:style => 'display: inline-block'}
+    = link_to t_action(:edit), edit_case_path(@case), :class => 'btn' if can? :edit, @case
+    %button.btn.dropdown-toggle{'data-toggle' => 'dropdown'}
+      %span.caret
+    %ul.dropdown-menu
+      = link_to t_action(:delete), case_path(@case), :method => :delete, :confirm => 'Fall wirklich löschen?' if can? :destroy, @case
+
+  = icon_link_to :show_invoice, cydoc_url_for("sessions/#{@case.session_id}"), :target => cydoc_hostname, :style => 'margin-left: 5px'
 
 .row-fluid
   .span12
