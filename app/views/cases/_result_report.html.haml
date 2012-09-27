@@ -1,42 +1,42 @@
-.sheet_a5
+.sheet_a5.well
   .report
     #patient
-      - if !(@case.patient.doctor_patient_nr.nil? or @case.patient.doctor_patient_nr == '')
-        = h @case.patient.doctor_patient_nr
+      - unless @case.patient.doctor_patient_nr.blank?
+        = @case.patient.doctor_patient_nr
         %br/
-      = render :partial => "/vcards/show", :locals => {:vcard => @case.patient.vcard}
+      = render "/vcards/show", :vcard => @case.patient.vcard
       %br/
-      = h @case.patient.birth_date unless @case.patient.birth_date.nil?
+      = @case.patient.birth_date unless @case.patient.birth_date.nil?
       %br/
     #insurance
       - if !@case.insurance.nil?
-        = h @case.insurance.name
-        = h "##{@case.insurance_nr}" unless @case.insurance_nr.nil? or @case.insurance_nr.strip == "0" or @case.insurance_nr.strip == ""
+        = @case.insurance.name
+        = "##{@case.insurance_nr}" unless @case.insurance_nr.nil? or @case.insurance_nr.strip == "0" or @case.insurance_nr.strip == ""
     #doctor
-      = h @case.doctor.praxis.honorific_prefix
+      = @case.doctor.praxis.honorific_prefix
       %br/
-      = render :partial => "/vcards/show", :locals => {:vcard => @case.doctor.praxis}
+      = render "/vcards/show", :vcard => @case.doctor.praxis
     #case
-      Entnahme vom: #{h @case.examination_date ? @case.examination_date.strftime("%d.%m.%Y") : "Noch nicht gesetzt"}
+      Entnahme vom: #{@case.examination_date ? @case.examination_date.strftime("%d.%m.%Y") : "Noch nicht gesetzt"}
       %br/
-      Eingang am: #{h @case.entry_date ? @case.entry_date.strftime("%d.%m.%Y") : "Noch nicht gesetzt"}
+      Eingang am: #{@case.entry_date ? @case.entry_date.strftime("%d.%m.%Y") : "Noch nicht gesetzt"}
     #subject.title
-      Ihr Auftrag Nr. #{h @case.praxistar_eingangsnr}
+      Ihr Auftrag Nr. #{@case.praxistar_eingangsnr}
     #remarks
       = image_tag inline_order_form_url(@case.order_form, :type => :result_remarks), :size => '410x192' if @case.order_form
     #finding_title.title
       Befund
     #classification{:class => "PAP_#{h @case.classification.code unless @case.classification.nil?}"}
-      = h @case.classification.name unless @case.classification.nil?
+      = @case.classification.name unless @case.classification.nil?
     #findings
       #finding_list
-        = render :partial => 'list_findings'
+        = render 'list_findings'
     #special_findings
       - for finding in @case.control_findings
-        %div{:class => finding_css_class(finding)}= h finding.name
+        %div{:class => finding_css_class(finding)}= finding.name
       %br/
       - for finding in @case.quality_findings
-        %div{:class => finding_css_class(finding)}= h finding.name
+        %div{:class => finding_css_class(finding)}= finding.name
     #signature
       = button_to "Visum: #{@case.screener.work_vcard.abbreviated_name unless @case.screener.nil?}, #{@case.screened_at.strftime("%d.%m.%Y") unless @case.screened_at.nil?}", :action => 'sign', :id => @case
       - unless @case.review_by.nil?

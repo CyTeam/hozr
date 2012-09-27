@@ -4,53 +4,26 @@
   height: 21cm;
 }
 
-@media screen {
-  .sheet_a5 {
-    border: solid 1px black;
-  }
-  .report {
-    margin: 2em;
-    margin-left: 0px;
-  }
-
-  .address, .full_name{
-    line-height: 1.2em;
-  }
-}
-
-@media print {
-  body {
-    background: white;
-  }
-
-  input[type=submit] {
-    border: none;
-    background: white;
-  }
-  
-  .report #finding_list input[type=button] {
-    display: none;
-  }
+.report {
+  font-family: ChollaSansRegular,Arial;
+  font-size: 11pt;
+  position: relative;
+  margin: 2em;
 }
 
 .title {
   font-family: ChollaSansBold;
 }
 
-.sheet_a5 #subject {
+.address, .full_name{
+  line-height: 1.2em;
+}
+
+.report #subject {
   position: absolute;
   top: 3.4cm;
   left: 0cm;
   width: 10cm;
-}
-
-
-.report {
-  font-family: ChollaSansRegular,Arial;
-  font-size: 11pt;
-  position: absolute;
-  top: 2.2cm;
-  left: 2.2cm;
 }
 
 .report #patient {
