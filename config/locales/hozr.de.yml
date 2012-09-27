@@ -60,6 +60,7 @@ de:
       invoice_overview: Rechnungen
       print_fax:        Drucken für Fax
       print:            Drucken
+      pdf:              Als PDF
       create_hpv_p16:   Nachträglicher HPV/P16
       review_done:      2. Eingabe bestätigen
       print_label:      Label Drucken
