@@ -105,7 +105,7 @@ class LabelPrintController < ApplicationController
   end
 
   private
-  def trigger(filename = 'trigger.txt')
+  def trigger(filename = 'triger.txt')
     FileUtils.touch(Rails.root.join('public', 'trigger', filename))
   end
 end
