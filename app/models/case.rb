@@ -28,6 +28,7 @@ class Case < ActiveRecord::Base
   scope :for_first_entry, where("entry_date IS NULL and assigned_at IS NOT NULL")
   scope :for_second_entry, first_entry_done.where("needs_p16 = ? AND needs_hpv = ?", false, false)
   scope :for_p16, first_entry_done.where("needs_p16 = ?", true)
+  scope :for_hpv, first_entry_done.where("needs_hpv = ?", true)
   scope :for_hpv_p16, first_entry_done.where("needs_p16 = ? OR needs_hpv = ?", true, true)
   scope :for_review, where("needs_review = ?", true)
 
