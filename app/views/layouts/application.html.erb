@@ -147,7 +147,7 @@
 
     <div class="container-fluid">
       <div class="row-fluid">
-        <div class="span10">
+        <div id="main" class="span10">
           <% if notice %><%= boot_alert(notice, 'success') %><% end %>
           <% if alert %><%= boot_alert(alert, 'error') %><% end %>
           <%= yield %>

@@ -356,8 +356,7 @@ class CasesController < ApplicationController
     end
 
     @case.print(page_size, printer)
-
-    send_data "Gedruckt: #{@case}", :type => 'text/html; charset=utf-8', :disposition => 'inline'
+    flash.now[:notice] = "#{@case} an Drucker gesendet"
   end
 
   # P16/HPV

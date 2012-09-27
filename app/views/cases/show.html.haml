@@ -1,10 +1,10 @@
 %div{:style => 'margin-bottom: 10px'}
   .btn-group{:style => 'display: inline-block'}
-    = link_to t_action(:print), print_result_report_case_path(@case), :method => :post, :class => 'btn'
+    = link_to t_action(:print), print_result_report_case_path(@case), :method => :post, :remote => true, :class => 'btn'
     %button.btn.dropdown-toggle{'data-toggle' => 'dropdown'}
       %span.caret
     %ul.dropdown-menu
-      = link_to t_action(:print_fax), print_result_report_case_path(@case, :page_size => 'A4'), :method => :post
+      = link_to t_action(:print_fax), print_result_report_case_path(@case, :page_size => 'A4'), :remote => true, :method => :post
       = link_to t_action(:pdf), result_report_case_path(@case, :page_size => 'A4', :format => :pdf)
       = link_to t_action(:resend), resend_case_path(@case), :method => :post, :remote => true
 
