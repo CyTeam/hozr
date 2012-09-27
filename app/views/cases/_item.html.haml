@@ -4,15 +4,14 @@
   %td
     = item.entry_date unless item.entry_date.nil?
     = "(#{item.first_entry_by.code})" unless item.first_entry_by.nil?
-  %td= if item.ready_for_first_entry                            |
-        link_to case_nr, first_entry_case_path(item)           |
-      elsif item.ready_for_second_entry                        |
-        link_to case_nr, second_entry_pap_form_case_path(item) |
-      elsif item.ready_for_p16                                 |
-        link_to case_nr, second_entry_pap_form_case_path(item) |
-      else                                                     |
-        link_to case_nr, result_report_case_path(item)         |
-      end                                                      |
+  %td
+    - if item.ready_for_first_entry
+      = link_to case_nr, first_entry_case_path(item)
+    - elsif item.ready_for_second_entry or item.ready_for_p16
+      = link_to case_nr, second_entry_pap_form_case_path(item)
+    - else
+      = link_to case_nr, case_path(item)
+
   %td{:class => "PAP_#{item.classification.code unless item.classification.nil?}"}= item.classification.name unless item.classification.nil?
   %td
     - for finding in item.finding_classes
