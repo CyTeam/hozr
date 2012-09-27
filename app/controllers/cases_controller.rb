@@ -425,10 +425,4 @@ class CasesController < ApplicationController
     Case.find(params[:id]).destroy
     redirect_to cases_path
   end
-
-  def order_form
-    @case = Case.find(params[:id])
-
-    send_file @case.order_form.file, :type => 'image/jpeg', :disposition => 'inline'
-  end
 end
