@@ -17,7 +17,9 @@ class OrderFormsController < ApplicationController
   # Image
   def download
     order_form = OrderForm.find(params[:id])
-    type = params[:type]
+    if type = params[:type]
+      order_form.send(:file_state).create_magick_version_if_needed(type.to_sym)
+    end
 
     path = order_form.file(type)
     send_file path
@@ -25,7 +27,9 @@ class OrderFormsController < ApplicationController
 
   def inline
     order_form = OrderForm.find(params[:id])
-    type = params[:type]
+    if type = params[:type]
+      order_form.send(:file_state).create_magick_version_if_needed(type.to_sym)
+    end
 
     path = order_form.file(type)
     send_file path, :disposition => 'inline'
