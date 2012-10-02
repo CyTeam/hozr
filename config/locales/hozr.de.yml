@@ -73,6 +73,7 @@ de:
       new_patient:      Neuer Patient
       resend:           Erneut senden
       show_invoice:     Rechnung
+      change_patient:   Umschreiben
 
       create:           Speichern
       cancel:           Abbrechen

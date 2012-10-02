@@ -14,6 +14,7 @@
     %button.btn.dropdown-toggle{'data-toggle' => 'dropdown'}
       %span.caret
     %ul.dropdown-menu
+      = link_to t_action(:change_patient), first_entry_case_path(@case) if can? :change_patient, @case
       = link_to t_action(:delete), case_path(@case), :method => :delete, :confirm => 'Fall wirklich löschen?' if can? :destroy, @case
 
   = icon_link_to :show_invoice, cydoc_url_for("sessions/#{@case.session_id}"), :target => cydoc_hostname, :style => 'margin-left: 5px'
