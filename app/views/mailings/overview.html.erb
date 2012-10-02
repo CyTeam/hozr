@@ -1,6 +1,6 @@
 <span class="no_print">
-  <%= link_to("Übersicht drucken", :controller => :mailings, :action => :print_overview, :id => @mailing) %>
-  <%= link_to("Resultate drucken", :controller => :mailings, :action => :print_result_reports, :id => @mailing) %>
+  <%= link_to "Übersicht drucken", print_overview_mailing_path(@mailing), :method => :post %>
+  <%= link_to "Resultate drucken", print_result_reports_mailing_path(@mailing), :method => :post %>
 </span>
 
 <div class="sheet_a4">

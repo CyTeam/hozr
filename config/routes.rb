@@ -68,7 +68,10 @@ Hozr::Application.routes.draw do
 
   resources :mailings do
     member do
-      post :send_by
+      post :send_by, :send_by_all_channels
+      post :print_overview
+      post :print_result_reports
+      get :overview
     end
 
     collection do
