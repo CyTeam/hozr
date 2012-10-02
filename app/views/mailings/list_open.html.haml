@@ -1,10 +1,13 @@
-%h2 Resultat Versand
-= link_to "Alle Mailings freigeben", send_all_mailings_path, :method => :post
-%br/
-= link_to "Freigegebene Resultate drucken", print_all_mailings_path, :method => :post
-%br/
-= link_to "Freigegebene Mailings", :controller => :send_queues, :action => :list_open
-%br/
-= link_to "Ältere Mailings", :controller => :send_queues
-%br/
+= boot_page_title "Resultat Versand"
+
+%div{:style => 'margin-bottom: 10px'}
+  .btn-group{:style => 'display: inline-block'}
+    = link_to "Freigegebene Resultate drucken", print_all_mailings_path, :method => :post, :class => 'btn'
+    %button.btn.dropdown-toggle{'data-toggle' => 'dropdown'}
+      %span.caret
+    %ul.dropdown-menu
+      = link_to "Alle Mailings freigeben", send_all_mailings_path, :method => :post
+      = link_to "Freigegebene Mailings", :controller => :send_queues, :action => :list_open
+      = link_to "Ältere Mailings", :controller => :send_queues
+
 = render 'list'
