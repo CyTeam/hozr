@@ -30,26 +30,6 @@
 
    <td style="vertical-align: top; padding-left: 5em">
       <p>
-          <%= link_to image_tag('printer_64.png', :size => '40x40'), doctor_order_form_path, :remote => true %>
-	  <i style="font-size: 12pt">Papzettel Drucken</i>
-      </p>
-      
-      <p>
-          <%= link_to image_tag('printer_64.png', :size => '40x40'), case_label_print_path, :remote => true %>
-          <i style="font-size: 12pt">Objektträger Etiketten drucken</i>
-      </p>
-
-      <p>
-	  <%= link_to image_tag('printer_64.png', :size => '40x40'), p16_case_label_print_path, :method => :post, :remote => true %>
-          <i style="font-size: 12pt">P16 Etiketten drucken</i>
-      </p>
-
-      <p>
-          <%= link_to image_tag('printer_64.png', :size => '40x40'), post_label_print_path, :remote => true %>
-          <i style="font-size: 12pt">Packet Etiketten drucken</i>
-      </p>
-
-      <p>
           <%= link_to image_tag('print_result.png', :size => '45x45'), generate_mailings_path, :method => :post %>
           <i style="font-size: 12pt"><b><%= @result_for_delivery_count %></b> Neue Resultate</i>
       </p>
