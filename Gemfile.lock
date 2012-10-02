@@ -45,7 +45,7 @@ GIT
 
 GIT
   remote: https://github.com/huerlisi/file_column.git
-  revision: b762a8bbc948dfe775b851e10d2e38505d2731c2
+  revision: e8afe8be310e4f4dafcfa017fa3946890d35a4db
   specs:
     file-column (0.3.3)
 
