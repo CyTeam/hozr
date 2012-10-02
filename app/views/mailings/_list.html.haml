@@ -1,0 +1,44 @@
+%table.table.table-bordered.table-striped.table-condensed
+  - old_created_on = nil
+  - case_count = 0
+  - doctor_count = 0
+  - for mailing in @mailings
+    - # group header 'created_on'
+    - created_on = mailing.created_at.to_date
+    - is_header = !(created_on == old_created_on)
+    - is_first_header = old_created_on.nil?
+    - case_count += mailing.cases.count
+    - doctor_count += 1
+    - if is_header
+      - unless is_first_header
+        %tr.group_footer
+          %td Total
+          %td{:style => "text-align: right"}= case_count
+          %td
+            für #{doctor_count} &Auml;rzte
+          %td
+      %tr.group_header
+        %th{:style => "width: 12em", :title => mailing.created_at.strftime('am %d.%m.%Y um %H:%M')}
+          = h mailing.created_at.strftime('%a %d. %b')
+        %th{:style => "width: 5em; text-align: right"} Anzahl
+        %th Arzt
+        %th Gesendet am
+        %th
+    %tr.group_body
+      %td
+      %td{:style => "text-align: right"}= link_to mailing.cases.count, overview_mailing_path(mailing)
+      %td
+        = h mailing.doctor.nil? ? "Unbekannt" : "#{mailing.doctor.name} (#{mailing.doctor.channels.join(", ")})"
+      %td
+        - for send_queue in mailing.send_queues
+          %i
+            = h send_queue.channel
+            \:
+          = h send_queue.sent_at.nil? ? "ready to send" : send_queue.sent_at.strftime('%d.%m.%Y')
+          %br/
+      %td
+        = link_to "Resultate freigeben", send_by_all_channels_mailing_path(mailing), :method => :post, :remote => true
+        %br/
+    - old_created_on = created_on
+    - case_count = 0 if is_header
+    - doctor_count = 0 if is_header
