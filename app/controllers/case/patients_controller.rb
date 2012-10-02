@@ -50,10 +50,6 @@ class Case::PatientsController < ApplicationController
     @case.insurance_nr = @patient.insurance_nr
 
     if @case.save
-      @patient.touch
-      @patient.delta = true
-      @patient.save
-
       if next_case = @case.next_case(:for_first_entry)
         @redirect_path = first_entry_case_path(next_case)
       else
@@ -88,10 +84,6 @@ class Case::PatientsController < ApplicationController
     @case.insurance_nr = @patient.insurance_nr
 
     if @case.save
-      @patient.touch
-      @patient.delta = true
-      @patient.save
-
       if next_case = @case.next_case(:for_first_entry)
         @redirect_path = first_entry_case_path(next_case)
       else
