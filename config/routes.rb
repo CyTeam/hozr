@@ -99,7 +99,7 @@ Hozr::Application.routes.draw do
   get 'case_label_print' => 'case_label_print#form', :as => :case_label_print
   post 'case_label_print' => 'case_label_print#print', :as => :case_label_print
   post 'p16_case_label_print' => 'case_label_print#print_p16', :as => :p16_case_label_print
-  post 'case_label_print/:id' => 'case_label_print#print_case', :as => :case_label_print
+  post 'case_label_print/:id' => 'case_label_print#print_case', :as => :print_case_label
 
   get 'post_label_print' => 'post_label_print#form', :as => :post_label_print
   post 'post_label_print' => 'post_label_print#print', :as => :post_label_print
