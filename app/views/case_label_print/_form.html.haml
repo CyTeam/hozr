@@ -2,7 +2,7 @@
   = modal_header 'Objektträger Etiketten drucken'
 
   .modal-body{:style => 'height: 150px'}
-    = simple_form_for 'case_label', :url => case_label_print_path, :remote => true do |f|
+    = simple_form_for 'case_label', :remote => true do |f|
       .row-fluid
         .span12
           = f.input 'start_praxistar_eingangsnr', :collection => label_select

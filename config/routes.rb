@@ -92,8 +92,8 @@ Hozr::Application.routes.draw do
   end
 
   # Form Printing
-  match 'doctor_order_form' => 'doctor_order_form#index', :as => :doctor_order_form
-  match 'doctor_order_form/print' => 'doctor_order_form#print', :as => :print_doctor_order_form
+  get 'doctor_order_form' => 'doctor_order_form#form', :as => :doctor_order_form
+  post 'doctor_order_form' => 'doctor_order_form#print', :as => :doctor_order_form
 
   # Label Printing
   get 'case_label_print' => 'case_label_print#form', :as => :case_label_print
@@ -103,7 +103,6 @@ Hozr::Application.routes.draw do
 
   get 'post_label_print' => 'post_label_print#form', :as => :post_label_print
   post 'post_label_print' => 'post_label_print#print', :as => :post_label_print
-
 
 
   # Search

@@ -1,5 +1,5 @@
 # encoding: utf-8'
-class DoctorOrderFormController < ApplicationController
+class DoctorOrderFormController < LabelPrintController
   def print
     authorize! :print, :doctor_order_form
 
