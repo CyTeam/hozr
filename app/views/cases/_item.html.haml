@@ -57,4 +57,4 @@
         = link_to t_action('print'), print_result_report_case_path(item), :method => :post, :remote => true
         = link_to t_action('create_hpv_p16'), create_hpv_p16_for_case_case_path(item), :method => :post
         = link_to t_action('review_done'), review_done_case_path(item), :method => :post if item.needs_review?
-        = link_to t_action('print_label'), print_case_label_path(item), :method => :post
+        = link_to t_action('print_label'), print_case_label_path(item), :method => :post, :remote => true

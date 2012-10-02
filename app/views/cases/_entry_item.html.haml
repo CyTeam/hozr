@@ -28,4 +28,4 @@
       %ul.dropdown-menu.pull-right
         = link_to t_action('delete'), case_path(item), :method => :delete, :confirm => 'Fall wirklich löschen?' if can? :destroy, Case
         = link_to t_action('create_hpv_p16'), create_hpv_p16_for_case_case_path(item), :method => :post
-        = link_to t_action('print_label'), print_case_label_path(item), :method => :post
+        = link_to t_action('print_label'), print_case_label_path(item), :method => :post, :remote => true
