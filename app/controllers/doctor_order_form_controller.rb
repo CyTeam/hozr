@@ -1,9 +1,5 @@
 # encoding: utf-8'
-require 'cups/print_job/transient'
-
 class DoctorOrderFormController < ApplicationController
-  helper :doctors
-  
   def print
     authorize! :print, :doctor_order_form
 
