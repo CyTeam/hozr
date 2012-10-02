@@ -17,7 +17,7 @@ set :default_stage, 'staging'
 set :user, "www-data"                               # The server's user for deploys
 
 # Shared directories
-set :shared_children, shared_children + ['tmp/sockets', 'config/swissmatch.yml']
+set :shared_children, shared_children + ['tmp/sockets', 'config/swissmatch.yml', 'public/trigger', 'public/order_form']
 
 # Configuration
 set :scm, :git
