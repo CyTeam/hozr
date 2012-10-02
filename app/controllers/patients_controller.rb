@@ -49,7 +49,7 @@ class PatientsController < AuthorizedController
 
     Patient.transaction do
       @target_patient.merge(@drop_patient)
-      @target_patient.save!
+      @target_patient.save!(:validate => false)
 
       logger.warn(@drop_patient.to_s)
       logger.warn(@drop_patient.inspect)
