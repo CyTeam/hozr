@@ -87,6 +87,9 @@ de:
     labels:
       defaults:
         query: Suche
+      doctor_order_form:
+        doctor_id:    Arzt
+        count:        Anzahl
 
   flash:
     action:
