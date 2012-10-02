@@ -2,7 +2,7 @@
   = modal_header 'Post Etiketten Drucken'
 
   .modal-body{:style => 'height: 150px'}
-    = simple_form_for 'post_label', :action => 'post_label_print', :remote => true do |f|
+    = simple_form_for 'post_label', :remote => true do |f|
       .row-fluid
         .span12
           = f.input 'doctor_id', :as => :combobox, :collection => doctors_collection, :input_html => {'data-autofocus' => true}

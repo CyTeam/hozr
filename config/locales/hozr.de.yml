@@ -93,6 +93,8 @@ de:
       case_label:
         start_praxistar_eingangsnr: Von
         end_praxistar_eingangsnr:   Bis
+      post_label:
+        doctor_id:    Arzt
 
   flash:
     action:
