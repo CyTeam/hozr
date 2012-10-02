@@ -3,11 +3,22 @@ class CaseLabelPrintController < LabelPrintController
   # Case labels
   # ===========
   def print
-    @start_praxistar_eingangsnr = params[:start_praxistar_eingangsnr]
-    @end_praxistar_eingangsnr = params[:end_praxistar_eingangsnr]
-    @cases = Case.for_second_entry.where("praxistar_eingangsnr BETWEEN ? AND ?", @start_praxistar_eingangsnr, @end_praxistar_eingangsnr)
+    start_praxistar_eingangsnr = params[:start_praxistar_eingangsnr]
+    end_praxistar_eingangsnr = params[:end_praxistar_eingangsnr]
+    @cases = Case.for_second_entry.where("praxistar_eingangsnr BETWEEN ? AND ?", start_praxistar_eingangsnr, end_praxistar_eingangsnr)
 
-    # Cleanup table
+    do_print
+  end
+
+  def print_p16
+    @cases = Case.for_hpv_p16
+
+    do_print
+  end
+
+  private
+  def do_print
+     # Cleanup table
     OtLabel.delete_all
 
     # Create new records
@@ -25,5 +36,7 @@ class CaseLabelPrintController < LabelPrintController
 
     # Trigger printing
     trigger
+
+    render 'print'
   end
 end
