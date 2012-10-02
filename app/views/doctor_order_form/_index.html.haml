@@ -1,0 +1,18 @@
+.modal
+  = modal_header 'PAP Zettel mit Arztadressen beschriften'
+
+  .modal-body{:style => 'height: 150px'}
+    = simple_form_for 'doctor_order_form', :url => print_doctor_order_form_path, :remote => true do |f|
+      .row-fluid
+        .span12
+          = f.input 'doctor_id', :as => :combobox, :collection => doctors_collection, :input_html => {'data-autofocus' => true}
+      .row-fluid
+        .span12
+          = f.input 'count'
+      .row-fluid.hidden-actions
+        .form-actions
+          = f.button :submit
+
+  .modal-footer
+    = link_to t_action(:print), '#', :class => 'btn submit-button'
+    = link_to t_action(:cancel), '#', :class => 'btn', 'data-dismiss' => 'modal'
