@@ -37,6 +37,12 @@ GIT
       swissmatch-location
 
 GIT
+  remote: https://github.com/huerlisi/file_column.git
+  revision: b762a8bbc948dfe775b851e10d2e38505d2731c2
+  specs:
+    file-column (0.3.3)
+
+GIT
   remote: https://github.com/huerlisi/lyb_devise_admin.git
   revision: caf367d593ac37a6779664ca0bf1ff270375f9e5
   specs:
@@ -56,11 +62,6 @@ GIT
   specs:
     rails3-jquery-autocomplete (1.0.4)
       rails (~> 3.0)
-
-PATH
-  remote: /root/src/file_column
-  specs:
-    file-column (0.3.3)
 
 GEM
   remote: http://rubygems.org/

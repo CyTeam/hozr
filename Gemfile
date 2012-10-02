@@ -123,7 +123,7 @@ gem 'formtastic', '~>2.1.0'
 gem 'tinymce-rails'
 
 # Files
-gem 'file-column', :path => '/root/src/file_column'
+gem 'file-column', :git => 'https://github.com/huerlisi/file_column.git'
 gem 'rmagick'
 
 # Multiple Databases
