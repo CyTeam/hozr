@@ -7,6 +7,7 @@
       = link_to t_action(:print_fax), print_result_report_case_path(@case, :page_size => 'A4'), :remote => true, :method => :post
       = link_to t_action(:pdf), result_report_case_path(@case, :page_size => 'A4', :format => :pdf)
       = link_to t_action(:resend), resend_case_path(@case), :method => :post, :remote => true
+      = link_to t_action(:print_label), case_label_print_path(@case), :remote => true, :method => :post
 
   .btn-group{:style => 'display: inline-block'}
     = link_to t_action(:edit), edit_case_path(@case), :class => 'btn' if can? :edit, @case

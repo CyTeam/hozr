@@ -42,9 +42,10 @@ Hozr::Application.routes.draw do
       delete :remove_finding
       get :edit_finding_text
       post :update_finding_text
-      post :print_result_report
       post :create_hpv_p16_for_case
       post :review_done
+
+      post :print_result_report
 
       get :first_entry, :second_entry_pap_form, :second_entry_form, :result_report
       get :sign
@@ -98,12 +99,12 @@ Hozr::Application.routes.draw do
   get 'case_label_print' => 'case_label_print#form', :as => :case_label_print
   post 'case_label_print' => 'case_label_print#print', :as => :case_label_print
   post 'p16_case_label_print' => 'case_label_print#print_p16', :as => :p16_case_label_print
+  post 'case_label_print/:id' => 'case_label_print#print_case', :as => :case_label_print
 
   get 'post_label_print' => 'post_label_print#form', :as => :post_label_print
   post 'post_label_print' => 'post_label_print#print', :as => :post_label_print
 
 
-  get 'label_print/case_label_single' => 'label_print#case_label_single', :as => :case_label_single_label_print
 
   # Search
   match 'search' => 'search#index', :as => :search

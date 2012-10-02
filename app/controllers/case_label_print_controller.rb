@@ -10,6 +10,12 @@ class CaseLabelPrintController < LabelPrintController
     do_print
   end
 
+  def print_case
+    @cases = [Case.find(params[:id])]
+
+    do_print
+  end
+
   def print_p16
     @cases = Case.for_hpv_p16
 
