@@ -90,6 +90,9 @@ de:
       doctor_order_form:
         doctor_id:    Arzt
         count:        Anzahl
+      case_label:
+        start_praxistar_eingangsnr: Von
+        end_praxistar_eingangsnr:   Bis
 
   flash:
     action:

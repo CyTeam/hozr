@@ -1,0 +1,7 @@
+$('.modal').remove();
+$('body').append('<%=j render "form" %>');
+$('.modal').modal('show');
+
+addComboboxBehaviour();
+addAutofocusBehaviour();
+setupSubmitButtons();
