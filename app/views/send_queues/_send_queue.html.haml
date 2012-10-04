@@ -6,11 +6,8 @@
   %th{:style => "width: 12em", :title => mailing.created_at.strftime('am %d.%m.%Y um %H:%M')}
     = h mailing.created_at.strftime('%a %d. %b')
   %td
-    %i
-      = h send_queue.channel
-      \:
-    = h send_queue.sent_at.nil? ? "ready to send" : send_queue.sent_at.strftime('%d.%m.%Y')
-    %span{:id => "mailing_log_#{mailing.id}"}
+    = send_queue.sent_at.nil? ? "ready to send" : send_queue.sent_at.to_date
+    .pull-right= channel_label(send_queue.channel)
   %td
     - if send_queue.sent_at
       = link_to("Resultate drucken", send_by_mailing_path(mailing, :channel => 'print'), :remote => true, :method => :post) if mailing.doctor.wants_prints

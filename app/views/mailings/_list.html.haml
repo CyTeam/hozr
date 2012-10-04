@@ -28,13 +28,14 @@
       %td
       %td{:style => "text-align: right"}= link_to mailing.cases.count, overview_mailing_path(mailing)
       %td
-        = h mailing.doctor.nil? ? "Unbekannt" : "#{mailing.doctor.name} (#{mailing.doctor.channels.join(", ")})"
+        = mailing.doctor.nil? ? "Unbekannt" : "#{mailing.doctor.name}"
+        .pull-right= channel_labels(mailing.doctor.channels)
       %td
         - for send_queue in mailing.send_queues
           %i
-            = h send_queue.channel
+            = send_queue.channel
             \:
-          = h send_queue.sent_at.nil? ? "ready to send" : send_queue.sent_at.strftime('%d.%m.%Y')
+          = send_queue.sent_at.nil? ? "ready to send" : send_queue.sent_at.strftime('%d.%m.%Y')
           %br/
       %td
         = link_to "Resultate freigeben", send_by_all_channels_mailing_path(mailing), :method => :post, :remote => true
