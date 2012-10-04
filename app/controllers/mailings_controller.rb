@@ -2,18 +2,15 @@
 class MailingsController < ApplicationController
   authorize_resource
 
-  def index
-    @mailings = Mailing.order('mailings.created_at DESC').limit(100).all
-  end
+  has_scope :by_state
 
-  # Show list of unprinted mailings
-  def list_open
-    @mailings = Mailing.without_channel
+  def index
+    @mailings = apply_scopes(Mailing).order('mailings.created_at DESC').limit(100)
   end
 
   def generate
     Mailing.create_all
-    redirect_to :action => 'list_open'
+    redirect_to mailings_path(:by_state => :unsent)
   end
   
   # Overview for mailing
@@ -142,6 +139,6 @@ class MailingsController < ApplicationController
       mailing.send_by_all_channels
     end
     
-    redirect_to :action => 'list_open'
+    redirect_to mailings_path
   end
 end

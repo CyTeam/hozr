@@ -8,6 +8,14 @@ class Mailing < ActiveRecord::Base
   has_many :send_queues, :order => 'send_queues.sent_at'
   scope :with_unsent_channel, joins(:send_queues).where(:sent_at => nil).order('mailings.created_at')
   scope :without_channel, includes(:send_queues).where('send_queues.id IS NULL')
+  def self.by_state(state)
+    case state.to_s
+    when 'unsent'
+      without_channel
+    else
+      scoped
+    end
+  end
 
   def self.case_count_without_channel
     without_channel.inject(0) {|sum, mailing| sum += mailing.cases.count}

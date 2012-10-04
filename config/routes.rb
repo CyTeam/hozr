@@ -77,7 +77,6 @@ Hozr::Application.routes.draw do
       post :generate
       post :send_all
       post :print_all
-      get :list_open
     end
   end
 
