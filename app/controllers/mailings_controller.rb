@@ -2,8 +2,6 @@
 class MailingsController < ApplicationController
   authorize_resource
 
-  helper :cases
-  
   def index
     @mailings = Mailing.order('mailings.created_at DESC').limit(100).all
   end
