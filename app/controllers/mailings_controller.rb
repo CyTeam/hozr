@@ -5,12 +5,6 @@ class MailingsController < ApplicationController
   helper :cases
   
   def index
-    list
-    render :action => 'list'
-  end
-
-  # Show list of mailings
-  def list
     @mailings = Mailing.order('mailings.created_at DESC').limit(100).all
   end
 
