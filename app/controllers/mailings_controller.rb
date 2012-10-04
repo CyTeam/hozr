@@ -84,28 +84,6 @@ class MailingsController < ApplicationController
     redirect_to :action => :show, :id => @mailing.id
   end
 
-  def statistics
-    @doctor = Doctor.find(params[:doctor_id])
-    case_conditions = YAML.load(params[:case_conditions])
-    
-    count = Case.count(:conditions => case_conditions)
-    Case.send('with_scope', :find => {:conditions => case_conditions }) do
-      @records = Case.find( :all, :select => "classifications.name AS Pap, count(*) AS Anzahl, count(*)/#{count}*100.0 AS Prozent", :joins => 'LEFT JOIN classifications ON classification_id = classifications.id', :group => 'classifications.code', :conditions => case_conditions)
-      render :action => 'statistics'
-    end
-  end
-
-  def statistics_for_pdf
-    @doctor = Doctor.find(params[:doctor_id])
-    case_conditions = YAML.load(params[:case_conditions])
-    
-    count = Case.count(:conditions => case_conditions)
-    Case.send('with_scope', :find => {:conditions => case_conditions }) do
-      @records = Case.find( :all, :select => "classifications.name AS Pap, count(*) AS Anzahl, count(*)/#{count}*100.0 AS Prozent", :joins => 'LEFT JOIN classifications ON classification_id = classifications.id', :group => 'classifications.code', :conditions => case_conditions)
-      render :action => 'statistics', :layout => 'stats_letter_for_pdf'
-    end
-  end
-
   def print_all
     print_queue = SendQueue.unsent.by_channel('print')
     
