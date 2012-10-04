@@ -1,12 +1,6 @@
 # encoding: utf-8'
 class SendQueuesController < ApplicationController
   def index
-    list
-    render :action => 'list'
-  end
-
-  # Show list of mailings
-  def list
     @send_queues = SendQueue.sent.order('created_at DESC').limit(200).all
   end
 
