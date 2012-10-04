@@ -1,5 +1,5 @@
 .contextual
-  = link_to "Freigegebene Resultate drucken", print_all_mailings_path, :method => :post, :class => 'btn btn-primary'
+  = link_to "Freigegebene Resultate drucken", print_all_mailings_path, :method => :post, :remote => true, :class => 'btn btn-primary'
 
   .btn-group{:style => 'display: inline-block'}
     = link_to "Neue Mailings", mailings_path(:by_state => :unsent), :class => 'btn'
