@@ -147,8 +147,9 @@ class Patient < ActiveRecord::Base
 
   def self.build_query_part(part)
     case part
-    when /[0-9]{2}\/[0-9]{5}/
-      quote_query(part)
+    when /([0-9]{1,2})\/([0-9]{1,5})/
+      eingangs_nr = "%02i/%05i" % [$1, $2]
+      quote_query(eingangs_nr)
     when /[0-9]{1,2}\.[0-9]{1,2}\.[0-9]{2,4}/
       day, month, year = part.split('.').map(&:to_i)
       if year < 100
