@@ -57,7 +57,6 @@ Hozr::Application.routes.draw do
 
   resources :send_queues do
     collection do
-      get :list_open
       get :print_all
     end
 

@@ -7,7 +7,7 @@
       %span.caret
     %ul.dropdown-menu
       = link_to "Alle Mailings freigeben", send_all_mailings_path, :method => :post
-      = link_to "Freigegebene Mailings", :controller => :send_queues, :action => :list_open
-      = link_to "Ältere Mailings", :controller => :send_queues
+      = link_to "Freigegebene Mailings", send_queues_path(:by_state => :unsent)
+      = link_to "Ältere Mailings", send_queues_path
 
 = render 'list'
