@@ -3,8 +3,8 @@ class CaseLabelPrintController < LabelPrintController
   # Case labels
   # ===========
   def print
-    start_praxistar_eingangsnr = params[:start_praxistar_eingangsnr]
-    end_praxistar_eingangsnr = params[:end_praxistar_eingangsnr]
+    start_praxistar_eingangsnr = params[:case_label][:start_praxistar_eingangsnr]
+    end_praxistar_eingangsnr = params[:case_label][:end_praxistar_eingangsnr]
     @cases = Case.for_second_entry.where("praxistar_eingangsnr BETWEEN ? AND ?", start_praxistar_eingangsnr, end_praxistar_eingangsnr)
 
     do_print
