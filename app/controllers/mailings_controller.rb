@@ -93,7 +93,8 @@ class MailingsController < ApplicationController
       output += print_queue.mailing.to_s + "<br/>"
     end
 
-    send_data output, :type => 'text/html; charset=utf-8', :disposition => 'inline'
+    flash.now[:notice] = output.html_save
+    render 'show_flash'
   end
   
   # Multi Channel
