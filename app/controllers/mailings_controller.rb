@@ -135,7 +135,7 @@ class MailingsController < ApplicationController
     @mailing = Mailing.find(params[:id])
     @state = @mailing.send_by_all_channels
     
-    render :partial => 'sent_by', :layout => false
+    render 'send_by'
   end
   
   def send_all
