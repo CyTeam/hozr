@@ -93,7 +93,7 @@ class MailingsController < ApplicationController
       output += print_queue.mailing.to_s + "<br/>"
     end
 
-    flash.now[:notice] = output.html_save
+    flash.now[:notice] = output.html_safe
     render 'show_flash'
   end
   
