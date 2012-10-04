@@ -93,6 +93,7 @@ gem 'lyb_devise_admin', :git => 'https://github.com/huerlisi/lyb_devise_admin.gi
 
 # Helpers
 gem 'inherited_resources'
+gem 'has_scope'
 gem 'i18n_rails_helpers'
 gem 'haml'
 

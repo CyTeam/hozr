@@ -1,4 +1,17 @@
-%h2 Versand History
-= link_to "Freigegebene Mailings", list_open_send_queues_path
-%br/
-= render 'list'
+.contextual
+  .btn-group
+    = link_to "Freigegebene Mailings", send_queues_path(:by_state => :unsent), :class => 'btn'
+    = link_to "Alle Mailings", send_queues_path, :class => 'btn'
+    = link_to "Versandte Mailings", send_queues_path(:by_state => :sent), :class => 'btn'
+
+= boot_page_title
+
+%table.table.table-bordered.table-striped.table-condensed
+  %tr
+    %th Arzt
+    %th{:style => "width: 5em; text-align: right"} Anzahl
+    %th Mailing von
+    %th Gesendet am
+    %th
+
+  = render @send_queues

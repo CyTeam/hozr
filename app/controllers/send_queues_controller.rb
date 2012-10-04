@@ -1,12 +1,9 @@
 # encoding: utf-8'
 class SendQueuesController < ApplicationController
-  def index
-    @send_queues = SendQueue.sent.order('created_at DESC').limit(200).all
-  end
+  has_scope :by_state
 
-  # Show list of unprinted mailings
-  def list_open
-    @send_queues = SendQueue.unsent.order('created_at DESC').limit(100).all
+  def index
+    @send_queues = apply_scopes(SendQueue).order('created_at DESC').limit(200).all
   end
 
   def print_all

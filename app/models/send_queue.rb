@@ -7,6 +7,16 @@ class SendQueue < ActiveRecord::Base
   scope :sent, where("sent_at IS NOT NULL")
   scope :unsent, where(:sent_at => nil)
   scope :by_channel, lambda {|channel| where(:channel => channel) }
+  def self.by_state(state)
+    case state.to_s
+    when 'sent'
+      sent
+    when 'unsent'
+      unsent
+    else
+      scoped
+    end
+  end
 
   # Helpers
   def to_s

@@ -335,6 +335,7 @@ DEPENDENCIES
   file-column!
   formtastic (~> 2.1.0)
   haml
+  has_scope
   has_vcards
   hpricot
   i18n_rails_helpers

@@ -83,6 +83,9 @@ de:
   cases:
     first_entry:
       title:           Ersteingabe
+  send_queues:
+    index:
+      title:           Versand History
 
   simple_form:
     labels:
