@@ -21,6 +21,10 @@ demo:
   <<: *common
   pid_file: tmp/pids/searchd.demo.pid
 
+staging:
+  <<: *common
+  pid_file: tmp/pids/searchd.staging.pid
+
 production:
   <<: *common
   pid_file: tmp/pids/searchd.production.pid
