@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
   attr_accessible :object
   belongs_to :object, :polymorphic => true
 
-  validates_uniqueness_of   :login
+  validates_uniqueness_of :login
   
   attr_accessible :login
 
