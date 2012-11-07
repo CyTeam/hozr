@@ -350,9 +350,9 @@ class CasesController < ApplicationController
 
     case page_size
     when 'A5'
-      printer = 'hpT3'
+      printer = current_user.doctor.office.printers[:result_a5]
     when 'A4'
-      printer = 'HP2840'
+      printer = current_user.doctor.office.printers[:result_a4]
     end
 
     @case.print(page_size, printer)

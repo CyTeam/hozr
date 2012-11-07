@@ -48,10 +48,11 @@ de:
         insurance:            Versicherung
         number:               Versicherten Nr.
 
-  roles:
-    admin:    Administration
-    sysadmin: System Administration
-    zyto:     Zytologie
+  cancan:
+    roles:
+      admin:    Administration
+      sysadmin: System Administration
+      zyto:     Zytologie
 
   crud:
     action:

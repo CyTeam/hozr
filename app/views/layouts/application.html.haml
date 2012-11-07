@@ -25,15 +25,6 @@
             %span.icon-bar
             %span.icon-bar
             %span.icon-bar
-          .btn-group.pull-right
-            %a.btn.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
-              %i.icon-user
-              = current_user
-              %span.caret
-            %ul.dropdown-menu
-              %li= link_to "Profil", current_user
-              %li.divider
-              %li= link_to "Abmelden", destroy_user_session_path, :method => :delete
           .nav-collapse
             %ul.nav
               %li= link_to "TODO", admin_work_queue_path
@@ -99,7 +90,9 @@
               %li
                 = form_tag search_path, :class => "navbar-search pull-left" do
                   %input.search-query{:name => "query", :placeholder => "Suche", :type => "text"}/
-          / /.nav-collapse
+            .pull-right
+              %div= render :partial => 'users/user_bar'
+
     .container-fluid
       .row-fluid
         #main.span10
