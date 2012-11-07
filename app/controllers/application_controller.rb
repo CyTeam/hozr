@@ -1,17 +1,5 @@
 # encoding: utf-8'
 
-module Rubaidh
-  module TabularForm
-    class TabularFormBuilder
-      def select(field, choices, options)
-        field = field.to_s
-        label_text, required = extract_tabular_options(field, options)
-        generic_field(field, super, label_text)
-      end
-    end
-  end
-end
-
 class Date
   # Date helpers
   def self.parse_date(value, base_year = 2000)
@@ -23,23 +11,22 @@ class Date
       month ||= Date.today.month
       year ||= Date.today.year
       year = expand_year(year, base_year)
-      
+
       return sprintf("%4d-%02d-%02d", year, month, day)
     else
       return value
     end
   end
-  
+
   def self.date_only_year?(value)
     value.is_a?(String) and value.strip.match /^\d{2,4}$/
   end
-  
+
   def self.expand_year(value, base = 2000)
     year = value.to_i
     return year < 100 ? year + base : year
   end
 end
-
 
 # Filters added to this controller will be run for all controllers in the application.
 # Likewise, all the methods added will be available for all controllers.

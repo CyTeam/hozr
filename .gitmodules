@@ -1,6 +1,3 @@
-[submodule "vendor/plugins/form_builders"]
-	path = vendor/plugins/form_builders
-	url = git://github.com/rubaidh/form_builders.git
 [submodule "vendor/plugins/auto_complete"]
 	path = vendor/plugins/auto_complete
 	url = https://github.com/marklazz/auto_complete.git
