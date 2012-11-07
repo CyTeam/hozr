@@ -201,5 +201,3 @@ de-CH:
   activerecord:
     errors:
       <<: *errors
-    models:
-      classification_group: Klassifikationsgruppe

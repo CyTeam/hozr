@@ -12,7 +12,7 @@ de:
       order_form: Autragsformular
       classification_group: Klassifikationsgruppe
       classification: Klassifikation
-
+      employee: Mitarbeiter
     attributes:
       user:
         email:     E-Mail
@@ -95,6 +95,9 @@ de:
   classifications:
     index:
       title:            Klassifikationen
+  employees:
+    index:
+      title:            Mitarbeiter
 
   simple_form:
     labels:

@@ -8,4 +8,8 @@ class Employee < ActiveRecord::Base
   def name
     (work_vcard || private_vcard).try(:full_name)
   end
+
+  def to_s
+    self.name
+  end
 end
