@@ -10,6 +10,8 @@ de:
       doctor:  Arzt
       case:    Fall
       order_form: Autragsformular
+      classification_group: Klassifikationsgruppe
+      classification: Klassifikation
 
     attributes:
       user:
@@ -87,6 +89,12 @@ de:
   send_queues:
     index:
       title:           Versand History
+  classification_groups:
+    index:
+      title:            Klassifikationsgruppen
+  classifications:
+    index:
+      title:            Klassifikationen
 
   simple_form:
     labels:
