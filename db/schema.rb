@@ -187,7 +187,7 @@ ActiveRecord::Schema.define(:version => 20121107121528) do
   end
 
   create_table "classifications", :force => true do |t|
-    t.text    "name"
+    t.string  "name"
     t.string  "code",                    :limit => 10
     t.integer "examination_method_id"
     t.integer "classification_group_id"

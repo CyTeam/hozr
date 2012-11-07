@@ -1,19 +1,7 @@
-= error_messages_for 'classification'
-/ [form:classification]
-%p
-  %label{:for => "classification_name"} Name
-  %br/
-  = text_field 'classification', 'name'
-%p
-  %label{:for => "classification_code"} Code
-  %br/
-  = text_field 'classification', 'code', :size => 5
-%p
-  %label{:for => "classification_examination_method_id"} Methode
-  %br/
-  = select 'classification', 'examination_method_id', ExaminationMethod.all.collect { |m| [ m.name, m.id ] }
-%p
-  %label{:for => "classification_group_id"} Gruppe
-  %br/
-  = select 'classification', 'classification_group_id', ClassificationGroup.all.collect { |m| [ m.title, m.id ] }
-/ [eoform:classification]
+= simple_form_for @classification do |f|
+  = f.input :name
+  = f.input :code
+  = f.association :examination_method, :include_blank => false
+  = f.association :classification_group, :include_blank => false
+
+  = f.button :submit
