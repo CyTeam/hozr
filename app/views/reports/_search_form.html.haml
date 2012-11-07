@@ -3,7 +3,6 @@
     %tr
       %td{:style => "vertical-align: top"}
         %fieldset{:style => "width: 98%"}
-          %legend Statistik
           %table
             = fields_for 'doctor', @doctor, :builder => Rubaidh::TabularForm::TabularFormBuilder do |f|
               = select_doctors :form => f
