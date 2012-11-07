@@ -1,0 +1,15 @@
+%h1 Listing finding_classes
+%table
+  %tr
+    - for column in FindingClass.content_columns
+      %th= column.human_name
+  - for finding_class in @finding_classes
+    %tr
+      - for column in FindingClass.content_columns
+        %td= h finding_class.send(column.name)
+      %td= link_to 'Show', :action => 'show', :id => finding_class
+      %td= link_to 'Edit', :action => 'edit', :id => finding_class
+      %td= link_to 'Destroy', { :action => 'destroy', :id => finding_class }, :confirm => 'Are you sure?', :method => :post
+= will_paginate @finding_class
+%br/
+= link_to 'New finding_class', :action => 'new'

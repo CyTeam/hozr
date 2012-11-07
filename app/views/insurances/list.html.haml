@@ -1,0 +1,22 @@
+%h1 Listing insurances
+%table.table.table-bordered.table-striped.table-condensed
+  %tr
+    %th Name
+    %th Adresse
+    %th Zu Handen
+  - for insurance in @insurances
+    %tr{:onmouseout => "hideActions(#{insurance.id})", :onmouseover => "showActions(#{insurance.id})"}
+      %td
+        = link_to h(insurance.name), :action => 'show', :id => insurance
+      %td{:style => "height: 32px; width: 50%"}
+        %span{:style => "float: left"}
+          = h insurance.street_address
+          , #{h insurance.postal_code} #{h insurance.locality}; #{h "Tel: #{insurance.phone_number}" unless insurance.phone_number == ''}
+      %td
+        = h insurance.extended_address
+      %td
+        = link_to image_tag("edit.png"), :action => 'edit', :id => insurance
+        = link_to image_tag("remove.png"), { :action => 'destroy', :id => insurance }, :confirm => 'Wirklich löschen?', :method => :delete
+= will_paginate @insurances
+%br/
+= link_to 'New insurance', :action => 'new'

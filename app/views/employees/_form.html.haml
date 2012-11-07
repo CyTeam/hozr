@@ -1,0 +1,23 @@
+= error_messages_for 'employee'
+/ [form:employee]
+%fieldset
+  %legend
+    = link_to_function "Abeitsadresse", "$('vcard_private').hide(); $('vcard_work').show()"
+    = link_to_function "Privatadresse", "$('vcard_work').hide(); $('vcard_private').show()"
+  %table#vcard_work
+    = render :partial => 'vcards/form', :locals => { :vcard_name => 'work_vcard', :vcard => @employee.work_vcard, :auto_complete => false }
+  %table#vcard_private{:style => "display: none"}
+    = render :partial => 'vcards/form', :locals => { :vcard_name => 'private_vcard', :vcard => @employee.private_vcard, :auto_complete => false }
+%p
+  %label{:for => "employee_code"} Code
+  %br/
+  = text_field 'employee', 'code'
+%p
+  %label{:for => "employee_born_on"} Geburtstag
+  %br/
+  = text_field 'employee', 'born_on'
+%p
+  %label{:for => "employee_workload"} Pensum
+  %br/
+  = text_field 'employee', 'workload'
+/ [eoform:employee]

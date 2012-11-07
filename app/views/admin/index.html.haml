@@ -1,0 +1,13 @@
+%h1 Tools
+%ul
+  %li= link_to "Letzte Anschreiblisten", :controller => 'cases', :action => 'assignings_list'
+  %li= link_to "Letzte Resultatbriefe", :controller => 'send_queues'
+%h1 Datenpflege
+%ul
+  %li= link_to "Patienten mit Mahnstopp", :controller => 'patients', :action => 'dunning_stopped'
+  %li= link_to "Klassifikationen", :controller => 'classifications'
+  %li= link_to "Klassifikationsgruppen", :controller => 'classification_groups'
+  %li= link_to "Top Befunde pro Klassifikationen", :controller => 'top_finding_classes'
+  %li= link_to "Befunde", :controller => 'finding_classes'
+  %li= link_to "Mitarbeiter", :controller => 'employees'
+  %li= link_to t_model(User), users_path

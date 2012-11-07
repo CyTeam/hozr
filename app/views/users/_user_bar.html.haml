@@ -1,0 +1,7 @@
+- if user_signed_in?
+  #user-bar-greeting
+    Angemeldet als #{link_to current_user, current_user}
+  #user-bar-action
+    (#{link_to "Abmelden", destroy_user_session_path, :method => :delete})
+- else
+  #user-bar-action= link_to "Anmelden", new_user_session_path

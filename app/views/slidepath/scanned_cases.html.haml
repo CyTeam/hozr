@@ -1,0 +1,4 @@
+= paginated_section @scans do
+  %table.table.table-bordered.table-striped.table-condensed
+    = render 'cases/list_header'
+    = render :partial => 'cases/item', :collection => @cases

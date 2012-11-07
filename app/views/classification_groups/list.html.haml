@@ -1,0 +1,12 @@
+%h1 PAP Group Liste
+%table.table.table-bordered.table-striped.table-condensed
+  %tr
+    %th Name
+    %th Position
+    %th PAPs
+  - for group in @classification_groups
+    %tr
+      %td= link_to h(group.title), :action => 'edit', :id => group
+      %td= h group.position
+      %td= h group.classifications.map {|c| c.name }.uniq.join(', ')
+= link_to "Neue Gruppe erstellen", :action => 'new'

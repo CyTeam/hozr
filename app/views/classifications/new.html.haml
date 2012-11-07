@@ -1,0 +1,15 @@
+%h1 New classification
+= form_tag :action => 'create'  do
+  = error_messages_for 'classification'
+  / [form:classification]
+  %p
+    %label{:for => "classification_name"} Name
+    %br/
+    = text_field 'classification', 'name'
+  %p
+    %label{:for => "classification_code"} Code
+    %br/
+    = text_field 'classification', 'code', :size => 5
+  / [eoform:classification]
+  = submit_tag "Create"
+= link_to 'Back', :action => 'list'

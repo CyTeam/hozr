@@ -1,0 +1,15 @@
+%h1 Listing employees
+%table
+  %tr
+    - for column in Employee.content_columns
+      %th= column.human_name
+  - for employee in @employees
+    %tr
+      - for column in Employee.content_columns
+        %td= h employee.send(column.name)
+      %td= link_to 'Show', :action => 'show', :id => employee
+      %td= link_to 'Edit', :action => 'edit', :id => employee
+      %td= link_to 'Destroy', { :action => 'destroy', :id => employee }, :confirm => 'Are you sure?', :method => :post
+= will_paginate @employees
+%br/
+= link_to 'New employee', :action => 'new'

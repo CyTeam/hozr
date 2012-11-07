@@ -1,0 +1,112 @@
+!!!
+%html{:xmlns => "http://www.w3.org/1999/xhtml"}
+  %head
+    %meta{:content => "text/html; charset=utf-8", "http-equiv" => "content-type"}/
+    %meta{:content => "Simon Huerlimann &lt;info@cyt.ch&gt;", :name => "author"}/
+    %meta{:content => "Hozr", :name => "description"}/
+    %link{:href => "/favicon.ico", :rel => "shortcut icon"}/
+    = stylesheet_link_tag 'application', :media => 'screen, projection, print'
+    = javascript_include_tag 'application'
+    = csrf_meta_tag
+    %title
+      Hozr - #{controller.action_name}
+    :css
+      body {
+        padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+      }
+      img {
+        border: 0px
+      }
+      %body
+    .navbar.navbar-fixed-top
+      .navbar-inner
+        .container-fluid
+          %a.btn.btn-navbar{"data-target" => ".nav-collapse", "data-toggle" => "collapse"}
+            %span.icon-bar
+            %span.icon-bar
+            %span.icon-bar
+          .btn-group.pull-right
+            %a.btn.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+              %i.icon-user
+              = current_user
+              %span.caret
+            %ul.dropdown-menu
+              %li= link_to "Profil", current_user
+              %li.divider
+              %li= link_to "Abmelden", destroy_user_session_path, :method => :delete
+          .nav-collapse
+            %ul.nav
+              %li= link_to "TODO", admin_work_queue_path
+              %li
+                %ul.nav
+                  %li.dropdown
+                    %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+                      Eingang
+                      %b.caret
+                    %ul.dropdown-menu
+                      %li= link_to "Auftragsformulare", unassigned_form_cases_path
+                      %li= link_to "Ersteingabe", first_entry_queue_cases_path
+                      %li= link_to "Patient erfassen", new_patient_path
+              %li
+                %ul.nav
+                  %li.dropdown
+                    %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+                      Bearbeitung
+                      %b.caret
+                    %ul.dropdown-menu
+                      %li= link_to "Zweiteingabe", second_entry_queue_cases_path
+                      %li= link_to "HPV/P16", hpv_p16_queue_cases_path
+                      %li= link_to "Review", review_queue_cases_path
+              %li
+                %ul.nav
+                  %li.dropdown
+                    %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+                      Drucken
+                      %b.caret
+                    %ul.dropdown-menu
+                      %li= link_to "Papzettel Drucken", doctor_order_form_path, :remote => true
+                      %li= link_to "Objektträger Etiketten", case_label_print_path, :remote => true
+                      %li= link_to "P16 Etiketten", p16_case_label_print_path, :method => :post, :remote => true
+                      %li= link_to "Packet Etiketten", post_label_print_path, :remote => true
+              %li
+                %ul.nav
+                  %li.dropdown
+                    %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+                      Suche
+                      %b.caret
+                    %ul.dropdown-menu
+                      %li= link_to "Patienten", patients_path
+                      %li= link_to "Ärzte", doctors_path
+              %li
+                %ul.nav
+                  %li.dropdown
+                    %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+                      Administration
+                      %b.caret
+                    %ul.dropdown-menu
+                      %li= link_to "Statistiken", reports_path
+                      %li.divider
+                      %li= link_to "Letzte Anschreiblisten", assignings_list_cases_path
+                      %li= link_to "Resultat Queue", send_queues_path
+                      %li.divider
+                      %li= link_to "Patienten mit Mahnstopp", dunning_stopped_patients_path
+                      %li= link_to "Klassifikationen", classifications_path
+                      %li= link_to "Klassifikationsgruppen", classification_groups_path
+                      %li= link_to "Top Befunde pro Klassifikationen", top_finding_classes_path
+                      %li= link_to "Befunde", finding_classes_path
+                      %li= link_to "Mitarbeiter", employees_path
+                      %li= link_to t_model(User), users_path
+              %li
+                = form_tag search_path, :class => "navbar-search pull-left" do
+                  %input.search-query{:name => "query", :placeholder => "Suche", :type => "text"}/
+          / /.nav-collapse
+    .container-fluid
+      .row-fluid
+        #main.span10
+          - if notice
+            = boot_alert(notice, 'success')
+          - if alert
+            = boot_alert(alert, 'error')
+          = yield
+        .span2
+          = render_sidebars

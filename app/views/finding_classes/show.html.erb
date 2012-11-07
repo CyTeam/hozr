@@ -1,8 +1,0 @@
-<% for column in FindingClass.content_columns %>
-<p>
-  <b><%= column.human_name %>:</b> <%=h @finding_class.send(column.name) %>
-</p>
-<% end %>
-
-<%= link_to 'Edit', :action => 'edit', :id => @finding_class %> |
-<%= link_to 'Back', :action => 'list' %>
