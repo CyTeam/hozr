@@ -1,4 +1,5 @@
-# encoding: utf-8'
+# encoding: utf-8
+
 # Provides a user/account management interface.
 class UsersController < AuthorizedController
   def index
