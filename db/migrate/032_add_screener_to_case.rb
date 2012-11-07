@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class AddScreenerToCase < ActiveRecord::Migration
   def self.up
     add_column :cases, :screener, :string

@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class CreateOffices < ActiveRecord::Migration
   def self.up
     create_table :offices do |t|

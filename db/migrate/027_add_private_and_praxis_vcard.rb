@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class AddPrivateAndPraxisVcard < ActiveRecord::Migration
   def self.up
     add_column :doctors, :praxis_vcard, :integer

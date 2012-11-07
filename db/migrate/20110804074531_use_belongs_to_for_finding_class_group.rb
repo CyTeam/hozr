@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class UseBelongsToForFindingClassGroup < ActiveRecord::Migration
   def self.up
     add_column :finding_classes, :finding_group_id, :integer

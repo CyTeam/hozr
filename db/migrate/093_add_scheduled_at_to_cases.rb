@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class AddScheduledAtToCases < ActiveRecord::Migration
   def self.up
     add_column :cases, :scheduled_at, :datetime

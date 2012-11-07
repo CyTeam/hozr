@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class CreatePatients < ActiveRecord::Migration
   def self.up
     create_table :patients do |t|

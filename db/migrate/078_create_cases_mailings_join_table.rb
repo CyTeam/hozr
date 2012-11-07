@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class CreateCasesMailingsJoinTable < ActiveRecord::Migration
   def self.up
     create_table :cases_mailings do |t|

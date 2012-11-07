@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class PortPatientToVcard < ActiveRecord::Migration
   def self.up
     Patient.update_all("billing_vcard_id = NULL", "billing_vcard_id = vcard_id")

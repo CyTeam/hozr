@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class CreatePraxistarExports < ActiveRecord::Migration
   def self.up
     create_table :exports do |t|

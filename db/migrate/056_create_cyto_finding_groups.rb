@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class CreateCytoFindingGroups < ActiveRecord::Migration
   def self.up
     create_table :finding_groups do |t|

@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class AddIndicesToCasesMailingsJoinTable < ActiveRecord::Migration
   def self.up
     add_index :cases_mailings, :case_id

@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 module SendQueuesHelper
   def channel_label(channel)
     type = ''

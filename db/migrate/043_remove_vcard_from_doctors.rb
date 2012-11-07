@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class RemoveVcardFromDoctors < ActiveRecord::Migration
   def self.up
     remove_column :doctors, :vcard_id

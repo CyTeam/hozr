@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class AddInsuranceToCases < ActiveRecord::Migration
   def self.up
     add_column :cases, :insurance_id, :integer

@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class AddEntryDateToCase < ActiveRecord::Migration
   def self.up
     add_column :cases, :entry_date, :date

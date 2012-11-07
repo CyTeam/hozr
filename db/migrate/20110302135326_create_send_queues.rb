@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class CreateSendQueues < ActiveRecord::Migration
   def self.up
     create_table :send_queues do |t|

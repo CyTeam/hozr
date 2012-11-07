@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class CreateInsurancePolicies < ActiveRecord::Migration
   def self.up
     Patient.connection.execute(

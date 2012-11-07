@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class InsuranceNrIsNotGuaranteedToBeANumber < ActiveRecord::Migration
   def self.up
     change_column :patients, :insurance_nr, :string

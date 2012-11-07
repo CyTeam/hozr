@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class AddRemarksToPatients < ActiveRecord::Migration
   def self.up
     add_column :patients, :remarks, :text

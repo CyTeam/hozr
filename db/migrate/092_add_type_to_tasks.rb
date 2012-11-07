@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class AddTypeToTasks < ActiveRecord::Migration
   def self.up
     add_column :tasks, :type, :text

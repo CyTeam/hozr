@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class AddEmployeeIdToTasks < ActiveRecord::Migration
   def self.up
     add_column :tasks, :employee_id, :integer

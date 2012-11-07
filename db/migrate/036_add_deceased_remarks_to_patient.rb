@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class AddDeceasedRemarksToPatient < ActiveRecord::Migration
   def self.up
     add_column :patients, :deceased, :boolean

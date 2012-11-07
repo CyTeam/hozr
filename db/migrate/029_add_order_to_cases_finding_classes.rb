@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class AddOrderToCasesFindingClasses < ActiveRecord::Migration
   def self.up
     add_column :cases_finding_classes, :order, :integer

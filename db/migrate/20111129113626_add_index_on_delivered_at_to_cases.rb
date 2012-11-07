@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class AddIndexOnDeliveredAtToCases < ActiveRecord::Migration
   def self.up
     add_index :cases, :delivered_at

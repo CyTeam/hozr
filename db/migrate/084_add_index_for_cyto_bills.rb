@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class AddIndexForCytoBills < ActiveRecord::Migration
   def self.up
     add_index :bills, :case_id

@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class CreateClassificationGroups < ActiveRecord::Migration
   def self.up
     create_table :classification_groups do |t|

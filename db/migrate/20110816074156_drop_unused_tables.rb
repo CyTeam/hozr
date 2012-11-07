@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class DropUnusedTables < ActiveRecord::Migration
   def self.up
     # Unused tables

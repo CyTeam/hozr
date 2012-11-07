@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class AddP16PreparedAtAndByToCases < ActiveRecord::Migration
   def self.up
     add_column :cases, :p16_prepared_at, :datetime

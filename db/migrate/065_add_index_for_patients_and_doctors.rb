@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class AddIndexForPatientsAndDoctors < ActiveRecord::Migration
   def self.up
     add_index :patients, :vcard_id

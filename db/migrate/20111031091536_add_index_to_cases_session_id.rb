@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class AddIndexToCasesSessionId < ActiveRecord::Migration
   def self.up
     add_index :cases, :session_id

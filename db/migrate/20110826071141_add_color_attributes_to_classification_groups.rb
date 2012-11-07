@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class AddColorAttributesToClassificationGroups < ActiveRecord::Migration
   def self.up
     add_column :classification_groups, :color, :string

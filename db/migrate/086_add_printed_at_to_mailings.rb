@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class AddPrintedAtToMailings < ActiveRecord::Migration
   def self.up
     add_column :mailings, :printed_at, :datetime

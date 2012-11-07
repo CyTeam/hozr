@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class AddClosedAtToDelieveryReturns < ActiveRecord::Migration
   def self.up
     add_column :delievery_returns, :closed_at, :datetime

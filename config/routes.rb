@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 Hozr::Application.routes.draw do
   # Main page
   root :to => 'work_queue#admin'

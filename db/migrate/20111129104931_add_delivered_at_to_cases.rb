@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class AddDeliveredAtToCases < ActiveRecord::Migration
   def self.up
     add_column :cases, :delivered_at, :datetime

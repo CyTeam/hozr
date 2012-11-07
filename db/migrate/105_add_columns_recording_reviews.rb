@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class AddColumnsRecordingReviews < ActiveRecord::Migration
   def self.up
     add_column :cases, :review_by, :integer

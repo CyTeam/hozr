@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class AddIndexNeedsP16ForCases < ActiveRecord::Migration
   def self.up
     add_index :cases, :needs_p16

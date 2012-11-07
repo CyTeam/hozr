@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class AddOrderFormsCaseIdIndex < ActiveRecord::Migration
   def self.up
     add_index :order_forms, :case_id

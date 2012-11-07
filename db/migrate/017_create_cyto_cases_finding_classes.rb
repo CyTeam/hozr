@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class CreateCytoCasesFindingClasses < ActiveRecord::Migration
   def self.up
     create_table :cases_finding_classes do |t|

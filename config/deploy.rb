@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 # Application
 set :application, 'hozr'
 set :repository,  'git@github.com:huerlisi/hozr.git'

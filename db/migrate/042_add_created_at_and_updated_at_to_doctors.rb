@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class AddCreatedAtAndUpdatedAtToDoctors < ActiveRecord::Migration
   def self.up
     add_column :doctors, :created_at, :datetime

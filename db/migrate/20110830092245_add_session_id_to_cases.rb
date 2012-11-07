@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class AddSessionIdToCases < ActiveRecord::Migration
   def self.up
     add_column :cases, :session_id, :integer

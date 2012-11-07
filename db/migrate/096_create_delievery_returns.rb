@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class CreateDelieveryReturns < ActiveRecord::Migration
   def self.up
     create_table :delievery_returns do |t|

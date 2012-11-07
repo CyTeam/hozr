@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class AddColumnFirstEntryByToCases < ActiveRecord::Migration
   def self.up
     add_column :cases, :first_entry_by, :integer

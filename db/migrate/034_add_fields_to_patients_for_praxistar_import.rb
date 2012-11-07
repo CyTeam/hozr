@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class AddFieldsToPatientsForPraxistarImport < ActiveRecord::Migration
   def self.up
     add_column :patients, :created_at, :datetime

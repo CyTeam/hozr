@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class CreateCytoBills < ActiveRecord::Migration
   def self.up
     create_table :bills do |t|

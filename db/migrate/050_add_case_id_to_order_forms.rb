@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class AddCaseIdToOrderForms < ActiveRecord::Migration
   def self.up
     add_column :order_forms, :case_id, :integer

@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 Hozr::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
 
