@@ -236,8 +236,8 @@ ActiveRecord::Schema.define(:version => 20121107121528) do
     t.integer "doctor_id"
   end
 
-  add_index "doctors_offices", ["doctor_id"], :name => "doctor_id"
-  add_index "doctors_offices", ["office_id"], :name => "office_id"
+  add_index "doctors_offices", ["doctor_id"], :name => "doctors_offices_on_doctor_id"
+  add_index "doctors_offices", ["office_id"], :name => "doctors_offices_on_office_id"
 
   create_table "drug_articles", :force => true do |t|
     t.string   "code"
