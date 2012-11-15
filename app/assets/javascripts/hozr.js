@@ -127,6 +127,7 @@ function resetTableSelection() {
 function selectRow(row) {
   $('tr.selected').removeClass('selected');
   $(row).addClass('selected');
+  $(row).scrollintoview();
 
   $(row).mouseenter();
 }
