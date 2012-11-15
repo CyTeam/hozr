@@ -67,6 +67,11 @@ tbody tr.selected td, .table-striped tbody tr.selected td {
   &.actions           { width: 12% }
 }
 
+.patient-remarks {
+  white-space: normal;
+  font-size:   120%;
+}
+
 /* Fake display: none without loosing functionality */
 .hidden-actions {
   visibility: hidden;
