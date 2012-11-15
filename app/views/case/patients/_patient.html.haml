@@ -1,4 +1,4 @@
-%tr[patient]
+%tr[patient]{'data-content' => patient.remarks, 'data-placement' => 'top', 'data-trigger' => 'manual', 'data-title' => t_attr(:remarks, Patient)}
   %td= link_to patient.vcard.family_name, edit_case_patient_path(@case, patient), :remote => true, 'data-href-container' => 'tr'
   %td= patient.vcard.given_name
   %td= patient.vcard.street_address

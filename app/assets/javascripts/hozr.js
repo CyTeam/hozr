@@ -115,6 +115,7 @@ function startTableSelection() {
 
 function stopTableSelection() {
   in_table_selection = false;
+  $('tr.selected').popover('hide');
 }
 
 function resetTableSelection() {
@@ -125,9 +126,15 @@ function resetTableSelection() {
 }
 
 function selectRow(row) {
-  $('tr.selected').removeClass('selected');
+  var current_row = $('tr.selected');
+  current_row.removeClass('selected');
+  current_row.popover('hide');
+
   $(row).addClass('selected');
   $(row).scrollintoview();
+  if ($(row).data('content') > '') {
+    $(row).popover('show');
+  }
 
   $(row).mouseenter();
 }
