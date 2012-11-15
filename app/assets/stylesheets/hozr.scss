@@ -56,15 +56,16 @@ tbody tr.selected td, .table-striped tbody tr.selected td {
 
 /* Patient list */
 #patients th {
-  &.full_name         { width: 19% }
-  &.street_address    { width: 20% }
+  &.family_name       { width: 12% }
+  &.given_name        { width: 12% }
+  &.street_address    { width: 12% }
   &.locality          { width: 10% }
-  &.birth_date        { width: 8% }
+  &.birth_date        { width: 6% }
   &.doctor            { width: 10% }
   &.doctor_patient_nr { width: 5% }
   &.insurance         { width: 12% }
-  &.billing_address   { width: 4% }
-  &.actions           { width: 12% }
+  &.billing_address   { width: 3% }
+  &.actions           { width: 5% }
 }
 
 .patient-remarks {

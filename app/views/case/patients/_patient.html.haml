@@ -1,5 +1,6 @@
 %tr[patient]
-  %td= link_to patient.vcard.full_name, edit_case_patient_path(@case, patient), :remote => true, 'data-href-container' => 'tr'
+  %td= link_to patient.vcard.family_name, edit_case_patient_path(@case, patient), :remote => true, 'data-href-container' => 'tr'
+  %td= patient.vcard.given_name
   %td= patient.vcard.street_address
   %td= [patient.vcard.postal_code, patient.vcard.locality].join(" ")
   %td= patient.birth_date
