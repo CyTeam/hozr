@@ -138,6 +138,12 @@ function selectFirstRow() {
   selectRow(table.find('tr').eq(1));
 }
 
+function selectLastRow() {
+  var input_field = $('input[data-table-selection]');
+  var table = $(input_field.data('table-selection'));
+  selectRow(table.find('tr').last());
+}
+
 function selectNextRow() {
   startTableSelection();
 
@@ -170,7 +176,8 @@ function selectPreviousRow() {
   }
 
   if (current_row.index() == 1) {
-    // Do nothing if we're on the first content row
+    // Jump to last row
+    selectLastRow();
     return
   }
 
