@@ -1,4 +1,6 @@
 /*!
+ * Source: https://github.com/jaiew/jquery-scrollintoview/commit/d369c3a122b2255e005783a25e5b92afd860898a
+ *
  * jQuery scrollintoview() plugin and :scrollable selector filter
  *
  * Version 1.8 (14 Jul 2011)
@@ -21,7 +23,7 @@
 	var settings = {
 		duration: "fast",
 		direction: "both",
-		viewPadding: 0
+		viewPadding: 120
 	};
 
 	var rootrx = /^(?:html)$/i;
@@ -113,10 +115,10 @@
 				};
 
 				var rel = {
-					top: dim.e.rect.top - (dim.s.rect.top + dim.s.border.top) - options.viewPadding.y,
-					bottom: dim.s.rect.bottom - dim.s.border.bottom - dim.s.scrollbar.bottom - dim.e.rect.bottom + options.viewPadding.y,
+					top: dim.e.rect.top - (dim.s.rect.top + dim.s.border.top) - options.viewPadding.y - 600,
+					bottom: dim.s.rect.bottom - dim.s.border.bottom - dim.s.scrollbar.bottom - dim.e.rect.bottom - options.viewPadding.y,
 					left: dim.e.rect.left - (dim.s.rect.left + dim.s.border.left) - options.viewPadding.x,
-					right: dim.s.rect.right - dim.s.border.right - dim.s.scrollbar.right - dim.e.rect.right + options.viewPadding.x
+					right: dim.s.rect.right - dim.s.border.right - dim.s.scrollbar.right - dim.e.rect.right - options.viewPadding.x
 				};
 
 				var animOptions = {};
