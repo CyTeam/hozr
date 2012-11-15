@@ -1,4 +1,5 @@
 $('#patients').html('<%=j render 'index' %>');
 <%- if @patients.present? %>
-selectNextRow();
+startTableSelection();
+selectFirstRow();
 <%- end %>
