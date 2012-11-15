@@ -1,5 +1,10 @@
-/* Navbar */
+/* Sidebar */
+#sidebar {
+  position: fixed;
+  right:    20px;
+}
 
+/* Navbar */
 .navbar-search .search-query {
   padding: 6.5px 14px;
 }
