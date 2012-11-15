@@ -148,7 +148,8 @@ class Patient < ActiveRecord::Base
   def self.build_query_part(part)
     case part
     when /([0-9]{1,2})\/([0-9]{1,5})/
-      eingangs_nr = "%02i/%05i" % [$1, $2]
+      # Use .to_i as leading 0 let's them be interpreted as octal otherwise
+      eingangs_nr = "%02i/%05i" % [$1.to_i, $2.to_i]
       quote_query(eingangs_nr)
     when /[0-9]{1,2}\.[0-9]{1,2}\.[0-9]{2,4}/
       day, month, year = part.split('.').map(&:to_i)
