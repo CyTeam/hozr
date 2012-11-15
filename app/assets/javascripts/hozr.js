@@ -151,8 +151,9 @@ function selectNextRow() {
   var new_row = current_row.next('tr');
 
   if (new_row.length == 0) {
-    // Do nothing if there is no next row
-    return
+    // Jump to first row
+    selectFirstRow();
+    return;
   }
 
   selectRow(new_row);
