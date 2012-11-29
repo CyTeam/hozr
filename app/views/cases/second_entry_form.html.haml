@@ -11,7 +11,7 @@
           = render :partial => "finding_form"
       %fieldset{:style => "width: 95%; min-height: 160px"}
         %legend Resultat
-        = form_tag( :action => "second_entry_update", :id => @case )  do
+        = form_tag( second_entry_update_case_path(@case) )  do
           %table{:style => "width: 100%; height: 100%"}
             %tr
               %td{:style => "vertical-align: top; width: 100%"}
