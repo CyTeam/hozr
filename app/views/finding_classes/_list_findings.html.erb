@@ -1,6 +1,4 @@
-<% if flash[:error] %>
-  <div class="alert alert-error"><%= flash[:error] %></div>
-<% end %>
+<%= boot_alert(flash[:error], 'error') if flash[:error] %>
 
 <ul>
   <%= render :partial => 'finding_classes/list_item', :collection => @case.finding_classes %>

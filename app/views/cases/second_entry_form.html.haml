@@ -1,33 +1,26 @@
-:javascript
-  //
-  Event.observe(window, 'load', function() {$('finding_class_code').focus()}, false);
-  //
-%table{:style => "width: 100%; height: 100%"}
-  %tr{:style => "vertical-align: top"}
-    %td#diagnoses{:style => "min-width: 700px"}
-      %fieldset{:style => "width: 95%"}
-        %legend Befunde
-        %p
-          = render :partial => "finding_form"
-      %fieldset{:style => "width: 95%; min-height: 160px"}
-        %legend Resultat
-        = form_tag( second_entry_update_case_path(@case) )  do
-          %table{:style => "width: 100%; height: 100%"}
-            %tr
-              %td{:style => "vertical-align: top; width: 100%"}
-                #findings
-                  = render :partial => 'finding_classes/list_findings'
-              %td
-                %label{:for => "cases_remarks", :style => "display: block"} Bemerkungen zum Fall:
-                = text_area :case, :remarks, :cols => 40, :rows => 8
-            %tr
-              %td
-                = submit_tag "Erstellen"
-                = submit_tag "P16"
-                = submit_tag "P16+HPV"
-                = submit_tag "Review"
-      %fieldset{:style => "width: 95%; text-align: center"}
-        %legend Formular
-        = link_to image_tag(inline_order_form_url(@case.order_form, :type => :result_remarks), :size => "680x305"), inline_order_form_url(@case.order_form) if @case.order_form
-    %td#personal-information{:style => "min-width: 200px"}
-      = render 'info'
+.row-fluid
+  = render "finding_form"
+
+= simple_form_for @case, :url => second_entry_update_case_path(@case) do |f|
+  .row-fluid
+    #findings.span6
+      = render 'finding_classes/list_findings'
+    .span6
+      = f.input :remarks, :input_html => {:class => 'span12', :rows => 4}
+
+  .row-fluid
+    .span12
+      = f.button :submit, "Erstellen", :class => 'span2 btn-big btn-primary'
+      = f.button :submit, "P16", :class => 'span2 btn-big'
+      = f.button :submit, "P16+HPV", :class => 'span2 btn-big'
+      = f.button :submit, "Review", :class => 'span2 btn-big'
+
+.row-fluid
+  .row-fluid
+    .span12.well.well-small
+      .span7
+        = link_to image_tag(inline_order_form_url(@case.order_form, :type => :result_remarks), :size => "680x305"), order_form_path(@case.order_form), :remote => true
+
+- content_for :sidebar do
+  = render :partial => 'cases/case_info', :object => @case
+  = render 'patients/info', :patient => @case.patient
