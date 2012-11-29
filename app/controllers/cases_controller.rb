@@ -316,32 +316,6 @@ class CasesController < ApplicationController
     redirect_to :action => :review_queue
   end
   
-  # Results
-  # =======
-  def result_report
-    @case = Case.find(params[:id])
-    @case.screened_at ||= Date.today
-
-    respond_to do |format|
-      format.html {
-        case @case.classification.try(:code)
-        when 'mam', 'sput', 'extra'
-            render :action => :eg_result_report
-        else
-          render :action => :result_report
-        end
-      }
-      format.pdf {
-        page_size = params[:page_size] || 'A5'
-        document = @case.to_pdf(page_size)
-        
-        send_data document, :filename => "#{@case.id}.pdf", 
-                            :type => "application/pdf",
-                            :disposition => 'inline'
-      }
-    end
-  end
-
   # Printing
   # ========
   def print_result_report
@@ -404,6 +378,18 @@ class CasesController < ApplicationController
   # =======
   def show
     @case = Case.find(params[:id])
+
+    respond_to do |format|
+      format.html { }
+      format.pdf {
+        page_size = params[:page_size] || 'A5'
+        document = @case.to_pdf(page_size)
+
+        send_data document, :filename => "#{@case.id}.pdf",
+                            :type => "application/pdf",
+                            :disposition => 'inline'
+      }
+    end
   end
 
   def edit

@@ -47,7 +47,7 @@ Hozr::Application.routes.draw do
 
       post :print_result_report
 
-      get :first_entry, :second_entry_pap_form, :second_entry_form, :result_report
+      get :first_entry, :second_entry_pap_form, :second_entry_form
       get :sign
       get :next_first_entry
 
