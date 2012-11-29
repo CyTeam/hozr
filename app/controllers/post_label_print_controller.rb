@@ -2,7 +2,7 @@
 class PostLabelPrintController < LabelPrintController
   # Post address labels
   # ===================
-  def post_label_print
+  def print
     label = Doctor.find(params[:post_label][:doctor_id]).praxis
 
     # Cleanup table
