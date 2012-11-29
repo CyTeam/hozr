@@ -38,6 +38,8 @@ Hozr::Application.routes.draw do
     end
 
     member do
+      get :next_step
+
       delete :destroy_from_assign
       post :hpv_p16_prepared
       post :add_finding
@@ -49,9 +51,14 @@ Hozr::Application.routes.draw do
 
       post :print_result_report
 
-      get :first_entry, :second_entry_pap_form, :second_entry_form, :result_report
+      get :first_entry, :second_entry_pap_form, :second_entry_form
       get :sign
       get :next_first_entry
+
+      post :second_entry_form
+      put :second_entry_update
+      post :add_finding
+      post :sign
 
       post :resend
     end

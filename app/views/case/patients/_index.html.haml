@@ -1,6 +1,7 @@
 %table#patients.table.table-bordered.table-striped.table-condensed
   %tr
-    %th.full_name= t_attr(:full_name, Vcard)
+    %th.family_name= t_attr(:family_name, Vcard)
+    %th.given_name= t_attr(:given_name, Vcard)
     %th.street_address= t_attr(:street_address, Vcard)
     %th.locality= t_attr(:postal_code, Vcard) + "/" + t_attr(:locality, Vcard)
     %th.birth_date= t_attr(:birth_date, Patient)

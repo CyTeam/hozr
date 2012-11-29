@@ -115,6 +115,7 @@ function startTableSelection() {
 
 function stopTableSelection() {
   in_table_selection = false;
+  $('tr.selected').popover('hide');
 }
 
 function resetTableSelection() {
@@ -125,8 +126,15 @@ function resetTableSelection() {
 }
 
 function selectRow(row) {
-  $('tr.selected').removeClass('selected');
+  var current_row = $('tr.selected');
+  current_row.removeClass('selected');
+  current_row.popover('hide');
+
   $(row).addClass('selected');
+  $(row).scrollintoview();
+  if ($(row).data('content') > '') {
+    $(row).popover('show');
+  }
 
   $(row).mouseenter();
 }
@@ -135,6 +143,12 @@ function selectFirstRow() {
   var input_field = $('input[data-table-selection]');
   var table = $(input_field.data('table-selection'));
   selectRow(table.find('tr').eq(1));
+}
+
+function selectLastRow() {
+  var input_field = $('input[data-table-selection]');
+  var table = $(input_field.data('table-selection'));
+  selectRow(table.find('tr').last());
 }
 
 function selectNextRow() {
@@ -150,8 +164,9 @@ function selectNextRow() {
   var new_row = current_row.next('tr');
 
   if (new_row.length == 0) {
-    // Do nothing if there is no next row
-    return
+    // Jump to first row
+    selectFirstRow();
+    return;
   }
 
   selectRow(new_row);
@@ -168,7 +183,8 @@ function selectPreviousRow() {
   }
 
   if (current_row.index() == 1) {
-    // Do nothing if we're on the first content row
+    // Jump to last row
+    selectLastRow();
     return
   }
 

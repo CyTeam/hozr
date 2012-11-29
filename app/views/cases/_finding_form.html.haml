@@ -1,15 +1,15 @@
 - quality_findings = @case.classification.code == '1' ? ['a', 'b'] : ['a', 'b', 'c']
-#quality_findings
+#quality_findings.row-fluid
   - for finding_class_code in quality_findings
     - finding_class = FindingClass.find_by_code(finding_class_code)
-    = link_to_add_finding_class(@case, finding_class)
-  %div
-    #top_findings
-      - for finding_class in TopFindingClass.find_all_by_classification_id(@case.classification_id)
-        = link_to_add_finding_class(@case, finding_class.finding_class)
-    = form_tag add_finding_case_path(@case), :remote => true, :id => "finding_classes", :after => "$('finding_class_selection').value = ''; $('finding_class_code').value = ''; $('finding_class_code').focus() " do
-      %label{:for => "case_praxistar_eingangsnr"} Text:
-      = autocomplete_field_tag 'finding_class[selection]', '', autocomplete_finding_class_code_cases_path, :size => 12
-      %label{:for => "case_praxistar_eingangsnr"} Code:
-      = text_field :finding_class, :code, :size => 5, :tabindex => 2
-      = submit_tag "Los"
+    .span3= link_to_add_finding_class(@case, finding_class)
+
+#top_findings
+  - @case.classification.top_finding_classes.in_groups_of(4, false).each do |finding_classes|
+    .row-fluid
+      - finding_classes.each do |finding_class|
+        .span3= link_to_add_finding_class(@case, finding_class)
+
+= form_tag add_finding_case_path(@case), :remote => true, :id => "finding_classes", :after => "$('finding_class_selection').value = ''; $('finding_class_code').value = ''; $('finding_class_code').focus() " do
+  %label{:for => "case_praxistar_eingangsnr"} Text/Code:
+  = autocomplete_field_tag 'finding_class[selection]', '', autocomplete_finding_class_code_cases_path, :size => 12

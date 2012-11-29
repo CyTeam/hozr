@@ -33,6 +33,18 @@ class CasesController < ApplicationController
     @cases = Case.paginate(:page => params['page'], :per_page => 144)
   end
 
+  def next_step
+    @case = Case.find(params[:id])
+
+    if @case.ready_for_first_entry
+      redirect_to first_entry_case_path(@case)
+    elsif @case.ready_for_second_entry or @case.ready_for_p16
+      redirect_to second_entry_pap_form_case_path(@case)
+    else
+      redirect_to @case
+    end
+  end
+
   # Assigning
   # =========
   def unassigned_form
@@ -169,7 +181,7 @@ class CasesController < ApplicationController
     case params[:commit]
     when "Erstellen"
       @case.save
-      redirect_to :action => 'result_report', :id => @case
+      redirect_to @case
       # That's it if it's a normal PAP
       return
     when "P16+HPV"
@@ -249,7 +261,7 @@ class CasesController < ApplicationController
     @case.finding_text = params[:case][:finding_text]
     @case.save
 
-    render :partial => 'list_findings'
+    redirect_to @case
   end
 
   def edit_finding_text
@@ -316,32 +328,6 @@ class CasesController < ApplicationController
     redirect_to :action => :review_queue
   end
   
-  # Results
-  # =======
-  def result_report
-    @case = Case.find(params[:id])
-    @case.screened_at ||= Date.today
-
-    respond_to do |format|
-      format.html {
-        case @case.classification.try(:code)
-        when 'mam', 'sput', 'extra'
-            render :action => :eg_result_report
-        else
-          render :action => :result_report
-        end
-      }
-      format.pdf {
-        page_size = params[:page_size] || 'A5'
-        document = @case.to_pdf(page_size)
-        
-        send_data document, :filename => "#{@case.id}.pdf", 
-                            :type => "application/pdf",
-                            :disposition => 'inline'
-      }
-    end
-  end
-
   # Printing
   # ========
   def print_result_report
@@ -404,6 +390,18 @@ class CasesController < ApplicationController
   # =======
   def show
     @case = Case.find(params[:id])
+
+    respond_to do |format|
+      format.html { }
+      format.pdf {
+        page_size = params[:page_size] || 'A5'
+        document = @case.to_pdf(page_size)
+
+        send_data document, :filename => "#{@case.id}.pdf",
+                            :type => "application/pdf",
+                            :disposition => 'inline'
+      }
+    end
   end
 
   def edit
