@@ -36,6 +36,8 @@ Hozr::Application.routes.draw do
     end
 
     member do
+      get :next_step
+
       delete :destroy_from_assign
       post :hpv_p16_prepared
       post :add_finding

@@ -33,6 +33,18 @@ class CasesController < ApplicationController
     @cases = Case.paginate(:page => params['page'], :per_page => 144)
   end
 
+  def next_step
+    @case = Case.find(params[:id])
+
+    if @case.ready_for_first_entry
+      redirect_to first_entry_case_path(@case)
+    elsif @case.ready_for_second_entry or @case.ready_for_p16
+      redirect_to second_entry_pap_form_case_path(@case)
+    else
+      redirect_to @case
+    end
+  end
+
   # Assigning
   # =========
   def unassigned_form

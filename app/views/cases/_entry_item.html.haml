@@ -6,10 +6,7 @@
     = item.entry_date unless item.entry_date.nil?
     = "(#{item.first_entry_by.code})" unless item.first_entry_by.nil?
   %td
-    - if item.ready_for_first_entry
-      = link_to case_nr, first_entry_case_path(item)
-    - elsif item.ready_for_second_entry
-      = link_to case_nr, second_entry_pap_form_case_path(item)
+    = link_to case_nr, next_step_case_path(item)
 
   %td= render :partial => '/patients/compact', :object => item.patient unless item.patient.nil?
   %td= item.doctor.name unless item.doctor.nil?
