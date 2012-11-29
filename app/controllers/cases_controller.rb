@@ -261,7 +261,7 @@ class CasesController < ApplicationController
     @case.finding_text = params[:case][:finding_text]
     @case.save
 
-    render :partial => 'list_findings'
+    redirect_to @case
   end
 
   def edit_finding_text
