@@ -3,4 +3,5 @@
     %div= finding.name
 - else
   = @case.finding_text.html_safe
-= button_to 'Edit', edit_finding_text_case_path(@case), :remote => true, :method => :get
+
+= button_to 'Edit', edit_finding_text_case_path(@case), :remote => true, :method => :get, :class => 'btn btn-info'
