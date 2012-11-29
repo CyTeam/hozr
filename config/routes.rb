@@ -52,7 +52,7 @@ Hozr::Application.routes.draw do
       get :next_first_entry
 
       post :second_entry_form
-      post :second_entry_update
+      put :second_entry_update
       post :add_finding
       post :sign
 
