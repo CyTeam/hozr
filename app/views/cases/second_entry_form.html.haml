@@ -22,5 +22,4 @@
         = link_to image_tag(inline_order_form_url(@case.order_form, :type => :result_remarks), :size => "680x305"), order_form_path(@case.order_form), :remote => true
 
 - content_for :sidebar do
-  = render :partial => 'cases/case_info', :object => @case
-  = render 'patients/info', :patient => @case.patient
+  = render 'info'

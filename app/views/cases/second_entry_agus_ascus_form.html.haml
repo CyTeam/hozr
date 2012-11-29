@@ -13,5 +13,4 @@
   .span3= classification_button('2-3AS')
 
 - content_for :sidebar do
-  = render :partial => 'cases/case_info', :object => @case
-  = render 'patients/info', :patient => @case.patient
+  = render 'info'
