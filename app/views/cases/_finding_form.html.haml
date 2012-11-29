@@ -4,9 +4,11 @@
     - finding_class = FindingClass.find_by_code(finding_class_code)
     .span3= link_to_add_finding_class(@case, finding_class)
 
-#top_findings.row-fluid
-  - for finding_class in TopFindingClass.find_all_by_classification_id(@case.classification_id)
-    .span3= link_to_add_finding_class(@case, finding_class.finding_class)
+#top_findings
+  - @case.classification.top_finding_classes.in_groups_of(4, false).each do |finding_classes|
+    .row-fluid
+      - finding_classes.each do |finding_class|
+        .span3= link_to_add_finding_class(@case, finding_class)
 
 = form_tag add_finding_case_path(@case), :remote => true, :id => "finding_classes", :after => "$('finding_class_selection').value = ''; $('finding_class_code').value = ''; $('finding_class_code').focus() " do
   %label{:for => "case_praxistar_eingangsnr"} Text/Code:
