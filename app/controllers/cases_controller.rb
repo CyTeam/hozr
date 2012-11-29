@@ -169,7 +169,7 @@ class CasesController < ApplicationController
     case params[:commit]
     when "Erstellen"
       @case.save
-      redirect_to :action => 'result_report', :id => @case
+      redirect_to @case
       # That's it if it's a normal PAP
       return
     when "P16+HPV"
