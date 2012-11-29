@@ -8,8 +8,6 @@ class DoctorOrderFormController < LabelPrintController
     
     pdf = DoctorOrderForm.new(@doctor)
 
-    for i in 1..@count
-      pdf.print('hp')
-    end
+    pdf.print('hp', @count)
   end
 end

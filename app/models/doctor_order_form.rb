@@ -52,7 +52,7 @@ class DoctorOrderForm < Prawn::Document
     render
   end
 
-  def print(printer_name)
+  def print(printer_name, copies)
     # Workaround TransientJob not yet accepting options
     file = Tempfile.new('')
     file.binmode
@@ -61,6 +61,6 @@ class DoctorOrderForm < Prawn::Document
 
     printer = CupsPrinter.new(printer_name)
 
-    printer.print_file(file.path)
+    printer.print_file(file.path, {'copies' => copies})
   end
 end

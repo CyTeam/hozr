@@ -144,7 +144,7 @@ gem 'thinking-sphinx'
 gem 'barby'
 
 # Printing
-gem 'cupsffi'
+gem 'cupsffi', :git => 'git://github.com/huerlisi/cupsffi.git'
 
 # Postalcode
 gem 'fastercsv'
