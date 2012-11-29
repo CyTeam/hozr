@@ -3,10 +3,32 @@ module CasesHelper
   def classification_button(code)
     classification = Classification.find_by_code_and_examination_method_id(code, @case.examination_method_id)
     
-    button_to classification.name, second_entry_form_case_path(@case, "case[classification]" => classification.id), :class => "PAP_#{classification.code}"
+    boot_type = map_classification_to_boot_type(classification)
+    button_to classification.name, second_entry_form_case_path(@case, "case[classification]" => classification.id), :class => "btn btn-large btn-#{boot_type} span12"
   end
 
- def auto_complete_result_finding_class_selection(entries, field, phrase = nil)
+  def map_classification_to_boot_type(classification)
+    color = classification.try(:classification_group).try(:color)
+
+    return '' unless color
+
+    label = case color
+    when 'ff0000'
+      'danger'
+    when 'ffff00'
+      'warning'
+    when '0066ff'
+      'primary'
+    when 'ff0000'
+      'important'
+    when '00cc00'
+      'success'
+    else
+      'default'
+    end
+  end
+
+  def auto_complete_result_finding_class_selection(entries, field, phrase = nil)
     return unless entries
     items = entries.map { |entry| content_tag("li", phrase ? highlight(entry[field], phrase) : "<span id='#{field}'>#{h(entry[field])} - #{h(strip_tags(entry[:name]))}</span>".html_safe) }
     content_tag("ul", items.uniq.join.html_safe)
@@ -27,24 +49,9 @@ module CasesHelper
 
   # Labels
   def case_label_classes(a_case)
-    color = a_case.classification.try(:classification_group).try(:color)
+    boot_type = map_classification_to_boot_type(a_case.classification)
 
-    return '' unless color
-
-    label = case color
-    when 'ffff00'
-      'warning'
-    when '0066ff'
-      'info'
-    when 'ff0000'
-      'important'
-    when '00cc00'
-      'success'
-    else
-      'default'
-    end
-
-    return "label label-#{label}"
+    return "label label-#{boot_type}"
   end
 
   # From CyLab
