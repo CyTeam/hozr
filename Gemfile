@@ -144,7 +144,7 @@ gem 'thinking-sphinx'
 gem 'barby'
 
 # Printing
-gem 'cups'
+gem 'cupsffi'
 
 # Postalcode
 gem 'fastercsv'
