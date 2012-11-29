@@ -10,10 +10,12 @@
       = link_to t_action(:print_label), print_case_label_path(@case), :remote => true, :method => :post
 
   .btn-group{:style => 'display: inline-block'}
-    = link_to t_action(:edit), edit_case_path(@case), :class => 'btn' if can? :edit, @case
+    = link_to t_action(:edit), next_step_case_path(@case), :class => 'btn'
     %button.btn.dropdown-toggle{'data-toggle' => 'dropdown'}
       %span.caret
     %ul.dropdown-menu
+      = link_to t_action(:edit), edit_case_path(@case) if can? :edit, @case
+      = link_to t_action(:second_entry), second_entry_pap_form_case_path(@case)
       = link_to t_action(:change_patient), first_entry_case_path(@case) if can? :change_patient, @case
       = link_to t_action(:delete), case_path(@case), :method => :delete, :confirm => 'Fall wirklich löschen?' if can? :destroy, @case
 

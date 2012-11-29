@@ -74,6 +74,7 @@ de:
       resend:           Erneut senden
       show_invoice:     Rechnung
       change_patient:   Umschreiben
+      second_entry:     Befund
 
       create:           Speichern
       cancel:           Abbrechen
