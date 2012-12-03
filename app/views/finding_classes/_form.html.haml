@@ -1,11 +1,4 @@
-= error_messages_for 'finding_class'
-/ [form:finding_class]
-%p
-  %label{:for => "finding_class_name"} Name
-  %br/
-  = text_field 'finding_class', 'name'
-%p
-  %label{:for => "finding_class_code"} Code
-  %br/
-  = text_field 'finding_class', 'code', :size => 5
-/ [eoform:finding_class]
+= simple_form_for resource do |f|
+  = f.input :name
+  = f.input :code
+  = f.submit
