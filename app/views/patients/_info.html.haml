@@ -4,5 +4,7 @@
   %dl
     %dt= t_attr(:doctor, Patient)
     %dd= link_to patient.doctor, patient.doctor
+  - if patient.remarks.present?
+    .label.label-important.patient-remarks= patient.remarks
 
 = render 'cases/compact_list', :cases => patient.cases

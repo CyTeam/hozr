@@ -105,6 +105,9 @@ gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootst
 gem 'bootstrap-will_paginate'
 gem 'simple_form'
 
+# Validations
+gem 'validates_timeliness'
+
 # Addresses
 gem 'unicode_utils'
 gem 'has_vcards'
@@ -141,7 +144,7 @@ gem 'thinking-sphinx'
 gem 'barby'
 
 # Printing
-gem 'cups'
+gem 'cupsffi', :git => 'git://github.com/huerlisi/cupsffi.git'
 
 # Postalcode
 gem 'fastercsv'

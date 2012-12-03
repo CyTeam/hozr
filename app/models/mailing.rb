@@ -97,19 +97,16 @@ class Mailing < ActiveRecord::Base
     return pdf.to_pdf(cases)
   end
   
-  def print_result_reports(page_size, printer)
+  def print_result_reports(page_size, printer_name)
     # Workaround TransientJob not yet accepting options
     file = Tempfile.new('')
     file.binmode
     file.puts(result_reports_to_pdf(page_size))
     file.close
 
-    begin
-      paper_copy = Cups::PrintJob.new(file.path, printer)
-    rescue
-      paper_copy = Cups::PrintJob.new(file.path, printer)
-    end
-    paper_copy.print
+    printer = CupsPrinter.new(printer_name)
+
+    printer.print_file(file.path)
   end
   
   def overview_to_pdf
@@ -119,19 +116,16 @@ class Mailing < ActiveRecord::Base
     return pdf.to_pdf(self)
   end
   
-  def print_overview(printer)
+  def print_overview(printer_name)
     # Workaround TransientJob not yet accepting options
     file = Tempfile.new('')
     file.binmode
     file.puts(overview_to_pdf)
     file.close
 
-    begin
-      paper_copy = Cups::PrintJob.new(file.path, printer)
-    rescue
-      paper_copy = Cups::PrintJob.new(file.path, printer)
-    end
-    paper_copy.print
+    printer = CupsPrinter.new(printer_name)
+
+    printer.print_file(file.path)
   end
 
   def print(page_size, overview_printer, result_report_printer)
