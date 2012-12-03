@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121107121528) do
+ActiveRecord::Schema.define(:version => 20121203135308) do
 
   create_table "accounts", :force => true do |t|
     t.string   "number"
@@ -396,8 +396,8 @@ ActiveRecord::Schema.define(:version => 20121107121528) do
   end
 
   create_table "finding_classes", :force => true do |t|
-    t.text    "name"
-    t.text    "code"
+    t.string  "name"
+    t.string  "code"
     t.integer "finding_group_id"
   end
 
