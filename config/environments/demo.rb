@@ -1,1 +1,1 @@
-development.rb
+staging.rb
