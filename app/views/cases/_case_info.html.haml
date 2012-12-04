@@ -2,22 +2,22 @@
   %legend Fallinfo
   %dl
     %dt= t_attr(:praxistar_eingangsnr, Case)
-    %dd.label
+    %dd
       = case_info.praxistar_eingangsnr unless case_info.praxistar_eingangsnr.nil?
       = "(#{case_info.intra_day_id unless case_info.intra_day_id.nil?})"
 
     - if case_info.doctor
       %dt= t_attr(:doctor, Case)
-      %dd.label= case_info.doctor
+      %dd= case_info.doctor
 
     - if case_info.examination_date
       %dt= t_attr(:examination_date, Case)
-      %dd.label= case_info.examination_date.strftime('%d.%m.%Y')
+      %dd= case_info.examination_date.strftime('%d.%m.%Y')
     - if case_info.entry_date
       %dt= t_attr(:entry_date, Case)
-      %dd.label= case_info.entry_date.strftime('%d.%m.%Y')
+      %dd= case_info.entry_date.strftime('%d.%m.%Y')
     %dt= t_attr(:examination_method)
-    %dd.label= case_info.examination_method.name unless case_info.examination_method.nil?
+    %dd= case_info.examination_method.name unless case_info.examination_method.nil?
 
     - if case_info.location_index.present?
       %dt= t_attr(:slidepath, Case)
