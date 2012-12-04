@@ -9,10 +9,13 @@ class SendQueuesController < ApplicationController
   def print_all
     @print_queues = SendQueue.unsent.by_channel('print')
     
-    for print_queue in @print_queues
-      print_queue.print
-      
-#      sleep(20)
+    begin
+      for print_queue in @print_queues
+        print_queue.print
+      end
+    rescue RuntimeError => e
+      flash.now[:alert] = "Drucken fehlgeschlagen: #{e.message}"
+      render 'show_flash'
     end
   end
 
