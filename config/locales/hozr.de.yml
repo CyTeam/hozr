@@ -45,6 +45,7 @@ de:
         slidepath:            Slidepath
         scan:                 Scan
         doctor:               Zuweisender Arzt
+        remarks:              Bemerkungen
 
       insurance_policy:
         insurance:            Versicherung
