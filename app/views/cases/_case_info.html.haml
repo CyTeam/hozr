@@ -1,6 +1,10 @@
 .well.well-small
   %legend Fallinfo
   %dl
+    %dt= t_attr(:patient, Case)
+    %dd
+      = render 'vcards/show', :vcard => case_info.patient.vcard
+
     %dt= t_attr(:praxistar_eingangsnr, Case)
     %dd
       = case_info.praxistar_eingangsnr unless case_info.praxistar_eingangsnr.nil?

@@ -1,3 +1,2 @@
-%fieldset{:style => "width: 100%; margin-top: 10px"}
-  = render 'patients/info', :patient => @case.patient unless @case.patient.nil?
-  = render :partial => 'cases/case_info', :object => @case
+= render :partial => 'cases/case_info', :object => @case
+= render 'cases/compact_list', :cases => @case.patient.cases
