@@ -230,7 +230,7 @@ class Case < ActiveRecord::Base
 
   # Slidepath
   def location_index
-    #Slidepath::LocationIndex.where("fileName LIKE ?", "#{id}_%")
+    Slidepath::LocationIndex.where("fileName LIKE ?", "#{id}_%")
   end
 
   # CyDoc
