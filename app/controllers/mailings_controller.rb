@@ -43,7 +43,7 @@ class MailingsController < ApplicationController
   def print_overview
     @mailing = Mailing.find(params[:id])
 
-    printer = current_user.doctor.office.printers[:letter]
+    printer = 'hpT2'
     @mailing.print_overview(printer)
     redirect_to :action => :show, :id => @mailing.id
   end
@@ -53,12 +53,12 @@ class MailingsController < ApplicationController
     
     page_size = params[:page_size] || 'A5'
 
-    overview_printer = current_user.doctor.office.printers[:letter]
+    overview_printer = 'hpT2'
     case page_size
     when 'A5'
-      printer = current_user.doctor.office.printers[:result_a5]
+      printer = 'hpT3'
     when 'A4'
-      printer = current_user.doctor.office.printers[:result_a4]
+      printer = 'HP2840'
     end
 
     @mailing.print_result_reports(page_size, printer)
@@ -71,12 +71,12 @@ class MailingsController < ApplicationController
     
     page_size = params[:page_size] || 'A5'
 
-    overview_printer = current_user.doctor.office.printers[:letter]
+    overview_printer = 'hpT2'
     case page_size
     when 'A5'
-      printer = current_user.doctor.office.printers[:result_a5]
+      printer = 'hpT3'
     when 'A4'
-      printer = current_user.doctor.office.printers[:result_a4]
+      printer = 'HP2840'
     end
 
     @mailing.print(page_size, overview_printer, printer)
@@ -87,12 +87,9 @@ class MailingsController < ApplicationController
   def print_all
     print_queue = SendQueue.unsent.by_channel('print')
     
-    overview_printer = current_user.doctor.office.printers[:letter]
-    printer = current_user.doctor.office.printers[:result_a5]
-
     output = ""
     for print_queue in print_queue
-      print_queue.print('A5', overview_printer, printer)
+      print_queue.print
       output += print_queue.mailing.to_s + "<br/>"
     end
 
