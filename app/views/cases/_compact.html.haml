@@ -4,3 +4,5 @@
 %dd{:class => case_label_classes(compact), "data-content" => findings_text(compact), "data-placement" => "left", "data-title" => compact.classification.try(:name), 'data-trigger' => 'hover', :style => 'font-size: 100%'}
   %div
     = compact.classification.try(:name)
+  %div
+    = compact.finding_classes.pluck(:code).join(', ')
