@@ -97,6 +97,11 @@ function getId(element) {
 // Patient merging
 function setupPatientMerging() {
   $(document).on('click', '#merge-action', function() {
+    if ($('tr.marked').length == 0) {
+      // No row marked
+      return;
+    }
+
     var marked_id = getId($('tr.marked'));
     var selected_id = getId($('tr.selected'));
     var params = $.param({
@@ -248,12 +253,22 @@ function setupPatientTableSelect() {
         // SPACE
         $('tr.marked').removeClass('marked');
         selected_row.addClass('marked');
+        e.preventDefault();
         return
       } else if (e.which == 69) {
         // 'e'
         action = 'edit';
       } else if (e.which == '86') {
         // 'v'
+        if ($('tr.marked').length == 0) {
+          // No row marked
+          return;
+        }
+        if ($('tr.marked') == $('tr.selected')) {
+          // Only one patient selected
+          return
+        }
+
         e.preventDefault();
         stopTableSelection();
 
