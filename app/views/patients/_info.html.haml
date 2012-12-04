@@ -1,6 +1,7 @@
 .well.well-small
   %legend Patient
-  = link_to patient.vcard.full_name, patient
+  = link_to patient do
+    = render 'vcards/show', :vcard => @case.patient.vcard
   %dl
     %dt= t_attr(:doctor, Patient)
     %dd= link_to patient.doctor, patient.doctor
