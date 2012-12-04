@@ -1,1 +1,1 @@
-$('#mailing_<%= @mailing.id %>').fadeOut('slow');
+$('table.send_queues tr').after('<%=j render @send_queue %>');

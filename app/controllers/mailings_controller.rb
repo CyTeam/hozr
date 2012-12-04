@@ -87,29 +87,37 @@ class MailingsController < ApplicationController
   def print_all
     print_queue = SendQueue.unsent.by_channel('print')
     
-    output = ""
-    for print_queue in print_queue
-      print_queue.print
-      output += print_queue.mailing.to_s + "<br/>"
+    begin
+      output = ""
+      for print_queue in print_queue
+        print_queue.print
+        output += print_queue.mailing.to_s + "<br/>"
+      end
+
+      flash.now[:notice] = output.html_safe
+    rescue
+      flash.now[:alert] = "Drucken fehlgeschlagen."
     end
 
-    flash.now[:notice] = output.html_safe
     render 'show_flash'
   end
   
   # Multi Channel
   def send_by
     @mailing = Mailing.find(params[:id])
-    @state = @mailing.send_by(params[:channel])
+    @send_queue = @mailing.send_by(params[:channel])
     
-    flash.now[:notice] = @state ? "Zum Versand vorgemerkt." : "Bereits zum Versand vorgemerkt."
+    if @send_queue.nil?
+      flash.now[:alert] = "Bereits zum Versand vorgemerkt."
+      render 'show_flash'
+    end
   end
 
   def send_by_all_channels
     @mailing = Mailing.find(params[:id])
     @state = @mailing.send_by_all_channels
     
-    render 'send_by'
+    render 'send_by_all_channels'
   end
   
   def send_all

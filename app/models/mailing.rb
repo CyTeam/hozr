@@ -137,7 +137,7 @@ class Mailing < ActiveRecord::Base
   # ============
   def send_by(channel)
     # Only generate new queue if there's no unsent present, yet
-    return false unless send_queues.by_channel(channel).unsent.empty?
+    return nil unless send_queues.by_channel(channel).unsent.empty?
     
     SendQueue.create(:mailing => self, :channel => channel.to_s)
   end

@@ -1,5 +1,5 @@
 - mailing = send_queue.mailing
-%tr
+%tr[send_queue]
   %td
     = h mailing.doctor.nil? ? "Unbekannt" : mailing.doctor.name
   %td{:style => "text-align: right"}= link_to mailing.cases.count, :controller => 'mailings', :action => 'overview', :id => mailing

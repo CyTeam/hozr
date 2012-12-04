@@ -19,8 +19,12 @@ class SendQueuesController < ApplicationController
   def print
     @print_queue = SendQueue.find(params[:id])
     
-    @print_queue.print
+    begin
+      @print_queue.print
 
-    render 'print', :print_queue => @print_queue
+      render 'print', :print_queue => @print_queue
+    rescue
+      flash.now[:alert] = "Drucken fehlgeschlagen."
+    end
   end
 end
