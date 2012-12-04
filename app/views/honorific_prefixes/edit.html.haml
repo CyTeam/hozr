@@ -1,0 +1,7 @@
+%h1 Editing honorific_prefix
+= form_tag :action => 'update', :id => @honorific_prefix  do
+  = render :partial => 'form'
+  = submit_tag 'Edit'
+= link_to 'Show', :action => 'show', :id => @honorific_prefix
+|
+\#{link_to 'Back', :action => 'list'}

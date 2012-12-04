@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class PrepareCasesForMilkbooklet < ActiveRecord::Migration
   def self.up
     add_column :cases, :assigned_at, :datetime

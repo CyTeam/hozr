@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class AddPraxistarLeistungsblattIdAndScreeningDateToCases < ActiveRecord::Migration
   def self.up
     add_column :cases, :praxistar_leistungsblatt_id, :integer

@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class CreateHonorificPrefixes < ActiveRecord::Migration
   def self.up
     create_table :honorific_prefixes do |t|

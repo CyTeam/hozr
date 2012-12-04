@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class ScreenerIsForeignKey < ActiveRecord::Migration
   def self.up
     rename_column :cases, :screener, :screener_id

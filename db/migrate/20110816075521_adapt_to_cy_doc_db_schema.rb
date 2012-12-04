@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class AdaptToCyDocDbSchema < ActiveRecord::Migration
   def self.up
     # Add missing columns

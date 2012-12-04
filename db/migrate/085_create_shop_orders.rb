@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class CreateShopOrders < ActiveRecord::Migration
   def self.up
     create_table :shop_orders do |t|

@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class AddNeedsP16ToCases < ActiveRecord::Migration
   def self.up
     add_column :cases, :needs_p16, :boolean, :default => false

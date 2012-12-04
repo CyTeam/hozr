@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class CreateRolesUsers < ActiveRecord::Migration
   def self.up
     add_index "roles", ["name"]

@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class DropIdInDoctorsOffices < ActiveRecord::Migration
   def self.up
     remove_column :doctors_offices, :id

@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class AddWorkloadToEmployees < ActiveRecord::Migration
   def self.up
     add_column :employees, :workload, :float

@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class AddCreatedAndUpdatedAtToInsurances < ActiveRecord::Migration
   def self.up
     add_column :insurances, :created_at, :datetime

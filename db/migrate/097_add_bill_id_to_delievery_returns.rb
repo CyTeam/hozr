@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class AddBillIdToDelieveryReturns < ActiveRecord::Migration
   def self.up
     add_column :delievery_returns, :bill_id, :integer

@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class AddActiveFieldForDoctors < ActiveRecord::Migration
   def self.up
     add_column :doctors, :active, :boolean, :default => true

@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class RenameFieldToSpecialtyInDoctors < ActiveRecord::Migration
   def self.up
     rename_column :doctors, :field, :speciality

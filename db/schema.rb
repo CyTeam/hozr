@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120830120114) do
+ActiveRecord::Schema.define(:version => 20121203135308) do
 
   create_table "accounts", :force => true do |t|
     t.string   "number"
@@ -187,7 +187,7 @@ ActiveRecord::Schema.define(:version => 20120830120114) do
   end
 
   create_table "classifications", :force => true do |t|
-    t.text    "name"
+    t.string  "name"
     t.string  "code",                    :limit => 10
     t.integer "examination_method_id"
     t.integer "classification_group_id"
@@ -236,8 +236,8 @@ ActiveRecord::Schema.define(:version => 20120830120114) do
     t.integer "doctor_id"
   end
 
-  add_index "doctors_offices", ["doctor_id"], :name => "doctor_id"
-  add_index "doctors_offices", ["office_id"], :name => "office_id"
+  add_index "doctors_offices", ["doctor_id"], :name => "doctors_offices_on_doctor_id"
+  add_index "doctors_offices", ["office_id"], :name => "doctors_offices_on_office_id"
 
   create_table "drug_articles", :force => true do |t|
     t.string   "code"
@@ -396,8 +396,8 @@ ActiveRecord::Schema.define(:version => 20120830120114) do
   end
 
   create_table "finding_classes", :force => true do |t|
-    t.text    "name"
-    t.text    "code"
+    t.string  "name"
+    t.string  "code"
     t.integer "finding_group_id"
   end
 
@@ -604,20 +604,6 @@ ActiveRecord::Schema.define(:version => 20120830120114) do
   add_index "phone_numbers", ["object_id", "object_type"], :name => "index_phone_numbers_on_object_id_and_object_type"
   add_index "phone_numbers", ["phone_number_type"], :name => "index_phone_numbers_on_phone_number_type"
   add_index "phone_numbers", ["vcard_id"], :name => "phone_numbers_vcard_id_index"
-
-  create_table "postal_codes", :force => true do |t|
-    t.string   "zip_type"
-    t.string   "zip"
-    t.string   "zip_extension"
-    t.string   "locality"
-    t.string   "locality_long"
-    t.string   "canton"
-    t.integer  "imported_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "postal_codes", ["zip"], :name => "index_postal_codes_on_zip"
 
   create_table "recalls", :force => true do |t|
     t.integer  "patient_id"
@@ -843,8 +829,8 @@ ActiveRecord::Schema.define(:version => 20120830120114) do
     t.datetime "updated_at"
     t.string   "remember_token",            :limit => 40
     t.datetime "remember_token_expires_at"
-    t.string   "activation_code",           :limit => 40
-    t.datetime "activated_at"
+    t.string   "confirmation_token"
+    t.datetime "confirmed_at"
     t.string   "state",                                    :default => "passive"
     t.datetime "deleted_at"
     t.integer  "object_id"
@@ -862,6 +848,9 @@ ActiveRecord::Schema.define(:version => 20120830120114) do
     t.string   "unlock_token"
     t.datetime "locked_at"
     t.boolean  "wants_overview_email",                     :default => false
+    t.datetime "confirmation_sent_at"
+    t.string   "reset_password_token"
+    t.datetime "remember_created_at"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email"

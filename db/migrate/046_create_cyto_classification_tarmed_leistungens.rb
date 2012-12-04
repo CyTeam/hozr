@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class CreateCytoClassificationTarmedLeistungens < ActiveRecord::Migration
   def self.up
     create_table :classification_tarmed_leistungens do |t|

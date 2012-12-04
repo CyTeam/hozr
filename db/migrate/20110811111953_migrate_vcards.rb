@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class MigrateVcards < ActiveRecord::Migration
   def self.up
     # Vcards

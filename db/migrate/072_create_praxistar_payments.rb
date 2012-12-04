@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class CreatePraxistarPayments < ActiveRecord::Migration
   def self.up
     create_table :payments do |t|

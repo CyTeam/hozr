@@ -1,0 +1,6 @@
+%tr[employee]
+  %td= link_to employee.code, employee
+  %td= employee.work_vcard.full_name
+  %td= address(employee.work_vcard, ', ')
+  %td= employee.born_on
+

@@ -1,0 +1,7 @@
+= simple_form_for @classification do |f|
+  = f.input :name
+  = f.input :code
+  = f.association :examination_method, :include_blank => false
+  = f.association :classification_group, :include_blank => false
+
+  = f.button :submit

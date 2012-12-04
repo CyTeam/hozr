@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class AddFieldForForkedImExports < ActiveRecord::Migration
   def self.up
     add_column :exports, :pid, :integer

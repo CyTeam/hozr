@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class AddClassificationToCase < ActiveRecord::Migration
   def self.up
     add_column :cases, :classification_id, :integer

@@ -1,0 +1,7 @@
+%h1 Editing top_finding_class
+= form_tag :action => 'update_classification'  do
+  / [form:top_finding_class]
+  = select("top_finding_class", "classification_id", Classification.all.collect {|p| [ "#{p.code} - #{p.name} (#{p.examination_method.name})", p.id ] })
+  = text_field "top_finding_class", "finding_class_codes"
+  / [eoform:top_finding_class]
+  = submit_tag 'Edit'

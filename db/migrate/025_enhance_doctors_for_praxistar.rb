@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class EnhanceDoctorsForPraxistar < ActiveRecord::Migration
   def self.up
     add_column :doctors, :code, :string

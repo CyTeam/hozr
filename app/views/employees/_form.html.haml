@@ -1,0 +1,8 @@
+= simple_form_for @employee do |f|
+  = render "vcards/form", :f => f
+
+  = f.input :code
+  = f.input :born_on, :as => :string
+  = f.input :workload
+
+  = f.button :submit

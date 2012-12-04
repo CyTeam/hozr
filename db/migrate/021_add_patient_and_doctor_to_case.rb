@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class AddPatientAndDoctorToCase < ActiveRecord::Migration
   def self.up
     add_column :cases, :patient_id, :integer

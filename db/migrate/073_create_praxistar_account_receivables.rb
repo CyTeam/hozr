@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class CreatePraxistarAccountReceivables < ActiveRecord::Migration
   def self.up
     create_table :account_receivables do |t|

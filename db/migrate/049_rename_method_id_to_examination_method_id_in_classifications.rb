@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class RenameMethodIdToExaminationMethodIdInClassifications < ActiveRecord::Migration
   def self.up
     rename_column :classifications, :method_id, :examination_method_id

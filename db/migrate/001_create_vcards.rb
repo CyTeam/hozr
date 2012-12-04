@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class CreateVcards < ActiveRecord::Migration
   def self.up
     create_table :vcards do |t|

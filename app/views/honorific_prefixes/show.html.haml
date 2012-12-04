@@ -1,0 +1,9 @@
+- for column in HonorificPrefix.content_columns
+  %p
+    %b
+      = column.human_name
+      \:
+    = h @honorific_prefix.send(column.name)
+= link_to 'Edit', :action => 'edit', :id => @honorific_prefix
+|
+\#{link_to 'Back', :action => 'list'}

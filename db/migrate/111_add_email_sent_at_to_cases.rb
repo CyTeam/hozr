@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class AddEmailSentAtToCases < ActiveRecord::Migration
   def self.up
     add_column :cases, :email_sent_at, :datetime

@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class DisallowNullInCases < ActiveRecord::Migration
   def self.up
     change_column :cases, :doctor_id, :integer, :null => false

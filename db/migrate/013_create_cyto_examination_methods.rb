@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class CreateCytoExaminationMethods < ActiveRecord::Migration
   def self.up
     create_table :examination_methods do |t|

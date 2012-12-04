@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class CreateAetikettens < ActiveRecord::Migration
   def self.up
     create_table :aetikettens do |t|

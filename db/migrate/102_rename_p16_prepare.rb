@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class RenameP16Prepare < ActiveRecord::Migration
   def self.up
     rename_column :cases, :p16_prepared_at, :hpv_p16_prepared_at

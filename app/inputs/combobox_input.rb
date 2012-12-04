@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class ComboboxInput < SimpleForm::Inputs::CollectionSelectInput
   include ActionView::Helpers::UrlHelper
   include BootstrapHelper

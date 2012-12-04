@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class RenameParentToParentIdInClassificationTarmedLeistungen < ActiveRecord::Migration
   def self.up
     rename_column :classification_tarmed_leistungens, :parent, :parent_id

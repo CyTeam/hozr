@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class CreateInsurances < ActiveRecord::Migration
   def self.up
     create_table :insurances do |t|

@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class CreateCytoOrderForms < ActiveRecord::Migration
   def self.up
     create_table :order_forms do |t|

@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class CreatePraxistarBillJournals < ActiveRecord::Migration
   def self.up
     create_table :praxistar_bill_journals do |t|

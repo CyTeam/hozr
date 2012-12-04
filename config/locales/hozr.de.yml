@@ -10,7 +10,9 @@ de:
       doctor:  Arzt
       case:    Fall
       order_form: Autragsformular
-
+      classification_group: Klassifikationsgruppe
+      classification: Klassifikation
+      employee: Mitarbeiter
     attributes:
       user:
         email:     E-Mail
@@ -48,10 +50,11 @@ de:
         insurance:            Versicherung
         number:               Versicherten Nr.
 
-  roles:
-    admin:    Administration
-    sysadmin: System Administration
-    zyto:     Zytologie
+  cancan:
+    roles:
+      admin:    Administration
+      sysadmin: System Administration
+      zyto:     Zytologie
 
   crud:
     action:
@@ -87,6 +90,15 @@ de:
   send_queues:
     index:
       title:           Versand History
+  classification_groups:
+    index:
+      title:            Klassifikationsgruppen
+  classifications:
+    index:
+      title:            Klassifikationen
+  employees:
+    index:
+      title:            Mitarbeiter
 
   simple_form:
     labels:

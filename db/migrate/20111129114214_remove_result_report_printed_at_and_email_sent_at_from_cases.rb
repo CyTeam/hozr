@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class RemoveResultReportPrintedAtAndEmailSentAtFromCases < ActiveRecord::Migration
   def self.up
     remove_column :cases, :result_report_printed_at

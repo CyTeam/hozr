@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class AddColumnNeedsReviewToCases < ActiveRecord::Migration
   def self.up
     add_column :cases, :needs_review, :boolean, :default => false

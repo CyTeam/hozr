@@ -1,0 +1,8 @@
+= simple_form_for '', :url => {:action => "search"}, :remote => true do |f|
+  = f.input :doctor_id, :collection => Doctor.all, :required => false
+  = f.fields_for 'case' do |c|
+    = c.input :screener_id, :collection => Employee.all, :required => false
+    = c.input :praxistar_eingangsnr, :required => false
+    = c.input :entry_date, :required => false
+    = c.input :examination_date, :required => false
+  = f.submit

@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 # Be sure to restart your server when you modify this file.
 
 Hozr::Application.config.session_store :cookie_store, :key => '_hozr_session'

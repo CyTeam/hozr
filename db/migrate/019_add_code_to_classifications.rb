@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class AddCodeToClassifications < ActiveRecord::Migration
   def self.up
     add_column :classifications, :code, :string, :limit => 10

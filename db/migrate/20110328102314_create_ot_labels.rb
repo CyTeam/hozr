@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class CreateOtLabels < ActiveRecord::Migration
   def self.up
     create_table :ot_labels do |t|

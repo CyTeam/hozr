@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class AddIndexToCasesReviewAt < ActiveRecord::Migration
   def self.up
     add_index :cases, :review_at

@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class PortDoctorVcards < ActiveRecord::Migration
   def self.up
     Doctor.update_all("private_vcard = NULL", "private_vcard = praxis_vcard")

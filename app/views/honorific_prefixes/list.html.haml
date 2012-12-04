@@ -1,0 +1,15 @@
+%h1 Listing honorific_prefixes
+%table
+  %tr
+    - for column in HonorificPrefix.content_columns
+      %th= column.human_name
+  - for honorific_prefix in @honorific_prefixes
+    %tr
+      - for column in HonorificPrefix.content_columns
+        %td= h honorific_prefix.send(column.name)
+      %td= link_to 'Show', :action => 'show', :id => honorific_prefix
+      %td= link_to 'Edit', :action => 'edit', :id => honorific_prefix
+      %td= link_to 'Destroy', { :action => 'destroy', :id => honorific_prefix }, :confirm => 'Are you sure?', :method => :post
+= will_paginate @honorific_prefixes
+%br/
+= link_to 'New honorific_prefix', :action => 'new'

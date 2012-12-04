@@ -4,10 +4,10 @@
  * the top of the compiled file, but it's generally better to create a new file per style scope.
  *= require_self
  *= require bootstrap_and_overrides
+ *= require jquery-ui-1.8.16.cupertion
  *= require cyt
  *= require combobox
  *= require cyto
  *= require hozr
  *= require result_report
- *= require jquery.ui.autocomplete
 */

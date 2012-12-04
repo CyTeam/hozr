@@ -1,0 +1,15 @@
+%h1 Listing examination_methods
+%table
+  %tr
+    - for column in ExaminationMethod.content_columns
+      %th= column.human_name
+  - for examination_method in @examination_methods
+    %tr
+      - for column in ExaminationMethod.content_columns
+        %td= h examination_method.send(column.name)
+      %td= link_to 'Show', :action => 'show', :id => examination_method
+      %td= link_to 'Edit', :action => 'edit', :id => examination_method
+      %td= link_to 'Destroy', { :action => 'destroy', :id => examination_method }, :confirm => 'Are you sure?', :method => :post
+= will_paginate @examination_method
+%br/
+= link_to 'New examination_method', :action => 'new'

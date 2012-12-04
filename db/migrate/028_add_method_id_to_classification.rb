@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class AddMethodIdToClassification < ActiveRecord::Migration
   def self.up
     add_column :classifications, :method_id, :integer

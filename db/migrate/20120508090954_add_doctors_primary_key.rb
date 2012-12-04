@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class AddDoctorsPrimaryKey < ActiveRecord::Migration
   def up
     Doctor.connection.execute("ALTER TABLE doctors ADD PRIMARY KEY (id)")

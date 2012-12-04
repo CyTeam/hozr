@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class AddCentrifugedToCases < ActiveRecord::Migration
   def self.up
     add_column :cases, :centrifuged_at, :datetime

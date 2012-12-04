@@ -1,0 +1,23 @@
+= error_messages_for 'insurance'
+/ [form:insurance]
+%p
+  %label{:for => "vcard_full_name"}> Name
+  \:
+  \#{text_field 'vcard', 'full_name'}
+%p
+  %label{:for => "vcard_street_address"}> Strasse
+  \:
+  \#{text_field 'vcard', 'street_address'}
+%p
+  %label{:for => "vcard_locality"}> PLZ/Ort
+  \:
+  \#{text_field 'vcard', 'postal_code', :size => '7'} #{text_field 'vcard', 'locality'}
+%p
+  %label{:for => "vcard_phone_number"}> Telefon
+  \:
+  \#{text_field 'vcard', 'phone_number'}
+%p
+  %label{:for => "vcard_fax_number"}> Telefax
+  \:
+  \#{text_field 'vcard', 'fax_number'}
+/ [eoform:insurance]

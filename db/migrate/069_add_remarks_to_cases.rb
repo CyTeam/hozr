@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class AddRemarksToCases < ActiveRecord::Migration
   def self.up
     add_column :cases, :remarks, :text

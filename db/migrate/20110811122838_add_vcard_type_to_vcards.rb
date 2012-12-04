@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class AddVcardTypeToVcards < ActiveRecord::Migration
   def self.up
     add_column :vcards, :vcard_type, :string

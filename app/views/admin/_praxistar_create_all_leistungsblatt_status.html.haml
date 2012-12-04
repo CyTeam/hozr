@@ -1,0 +1,15 @@
+%table.table.table-bordered.table-striped.table-condensed
+  %tr
+    %th Gestartet um
+    %th Anzahl
+    %th Erledigt
+    %th Fehlerhaft
+  - for export in @exports
+    %tr
+      %td= h export.started_at
+      %td= h export.update_count
+      %td= h export.create_count
+      %td
+        - if export.error_ids.present?
+          - for c in Case.find(export.error_ids.delete(',').split(' '))
+            = link_to c.praxistar_eingangsnr, url_for(:controller => 'cases', :action => 'show', :id => c.id)

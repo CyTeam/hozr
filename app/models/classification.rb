@@ -6,4 +6,8 @@ class Classification < ActiveRecord::Base
 
   # Examination method
   belongs_to :examination_method
+
+  def to_s
+    self.name
+  end
 end
