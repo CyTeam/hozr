@@ -23,8 +23,9 @@ class SendQueuesController < ApplicationController
       @print_queue.print
 
       render 'print', :print_queue => @print_queue
-    rescue
-      flash.now[:alert] = "Drucken fehlgeschlagen."
+    rescue RuntimeError => e
+      flash.now[:alert] = "Drucken fehlgeschlagen: #{e.message}"
+      render 'show_flash'
     end
   end
 end

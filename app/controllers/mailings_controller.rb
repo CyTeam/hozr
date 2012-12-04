@@ -95,8 +95,8 @@ class MailingsController < ApplicationController
       end
 
       flash.now[:notice] = output.html_safe
-    rescue
-      flash.now[:alert] = "Drucken fehlgeschlagen."
+    rescue RuntimeError => e
+      flash.now[:alert] = "Drucken fehlgeschlagen: #{e.message}"
     end
 
     render 'show_flash'
