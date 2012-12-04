@@ -2,9 +2,9 @@
   .row-fluid
     .span12.well.well-small
       .span7
-        = link_to image_tag(inline_order_form_url(@case.order_form, :type => :result_remarks), :size => "470x211"), order_form_path(@case.order_form), :remote => true
+        = link_to image_tag(inline_order_form_url(@case.order_form, :type => :result_remarks)), order_form_path(@case.order_form), :remote => true
       .span5
-        = link_to image_tag(inline_order_form_url(@case.order_form, :type => :head), :width => "300x150"), order_form_path(@case.order_form), :remote => true
+        = link_to image_tag(inline_order_form_url(@case.order_form, :type => :head)), order_form_path(@case.order_form), :remote => true
 
 .row-fluid
 .row-fluid
