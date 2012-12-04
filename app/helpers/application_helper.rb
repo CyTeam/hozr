@@ -48,4 +48,8 @@ module ApplicationHelper
   def link_to_cydoc(title, path, options = {})
     link_to title, cydoc_url_for(path), options.merge(:target => cydoc_hostname)
   end
+
+  def link_to_cydoc_session(title, session, options = {})
+    link_to_cydoc title, "sessions/#{session.id}", options
+  end
 end
