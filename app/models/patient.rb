@@ -81,7 +81,7 @@ class Patient < ActiveRecord::Base
 
   before_save do
     vcard.family_name = UnicodeUtils.upcase(vcard.family_name)
-    billing_vcard.family_name = UnicodeUtils.upcase(billing_vcard.family_name)
+    billing_vcard.family_name = UnicodeUtils.upcase(billing_vcard.family_name || '')
   end
 
   # Cases
