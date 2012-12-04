@@ -3,7 +3,7 @@
   %dl
     %dt= t_attr(:patient, Case)
     %dd
-      = render 'vcards/show', :vcard => case_info.patient.vcard
+      = render 'vcards/show', :vcard => case_info.patient.vcard if case_info.patient
 
     %dt= t_attr(:praxistar_eingangsnr, Case)
     %dd
