@@ -232,4 +232,8 @@ class Case < ActiveRecord::Base
   def location_index
     Slidepath::LocationIndex.where("fileName LIKE ?", "#{id}_%")
   end
+
+  # CyDoc
+  # =====
+  belongs_to :session
 end
