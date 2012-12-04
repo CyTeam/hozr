@@ -11,4 +11,4 @@
 
 = form_tag add_finding_case_path(@case), :remote => true, :id => "finding_classes", :after => "$('finding_class_selection').value = ''; $('finding_class_code').value = ''; $('finding_class_code').focus() " do
   %label{:for => "case_praxistar_eingangsnr"} Text/Code:
-  = autocomplete_field_tag 'finding_class[selection]', '', autocomplete_finding_class_code_cases_path, :size => 12
+  = autocomplete_field_tag 'finding_class[selection]', '', autocomplete_finding_class_code_cases_path, :size => 12, 'data-autofocus' => true
