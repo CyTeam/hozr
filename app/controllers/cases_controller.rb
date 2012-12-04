@@ -168,7 +168,7 @@ class CasesController < ApplicationController
     when 'mam', 'sput', 'extra'
       @case.screened_at ||= Date.today
       @case.screener = current_user.object
-      render :action => 'eg_result_report'
+      render :action => 'show'
     end
   end
 
