@@ -83,6 +83,7 @@ de:
       create:           Speichern
       cancel:           Abbrechen
       close:            Schliessen
+      refresh:          Aktualisieren
 
   # Titles
   cases:
@@ -100,6 +101,10 @@ de:
   employees:
     index:
       title:            Mitarbeiter
+  reports:
+    index:
+      title:            Statistiken
+
 
   simple_form:
     labels:

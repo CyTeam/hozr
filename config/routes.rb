@@ -120,7 +120,7 @@ Hozr::Application.routes.draw do
 
   # Reports
   get 'reports' => 'reports#index'
-  post 'reports/search' => 'reports#search'
+  post 'reports/search' => 'reports#search', :as => :search_reports
 
   # Slidepath
   match 'slidepath/links' => 'slidepath#links'

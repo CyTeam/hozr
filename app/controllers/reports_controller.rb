@@ -1,17 +1,6 @@
 # encoding: utf-8'
 class ReportsController < ApplicationController
-  helper :doctors
-  
   def search
-    @columns = ['Pap', 'Anzahl', 'Prozent']
-    
-    # only accept known columns, to avoid SQL insertion attacks
-    if @columns.include? params[:order] or @columns.map {|col| "#{col} DESC"}.include? params[:order]
-      order = params[:order]
-    else
-      order = 'Pap'
-    end
-    
     # Use key and value arrays to build contitions
     case_keys = []
     case_values = []
@@ -19,7 +8,7 @@ class ReportsController < ApplicationController
     # Handle case params
     case_params = params[:case] || {}
     
-    unless case_params[:praxistar_eingangsnr].nil? or case_params[:praxistar_eingangsnr].empty?
+    unless case_params[:praxistar_eingangsnr].blank?
       if case_params[:praxistar_eingangsnr].match /bis/
         lower_bound, higher_bound = case_params[:praxistar_eingangsnr].split('bis')
         case_keys.push "praxistar_eingangsnr BETWEEN ? AND ?"
@@ -31,7 +20,7 @@ class ReportsController < ApplicationController
       end
     end
     
-    unless case_params[:entry_date].nil? or case_params[:entry_date].empty?
+    unless case_params[:entry_date].blank?
       if case_params[:entry_date].match /bis/
         lower_bound, higher_bound = case_params[:entry_date].split('bis')
         case_keys.push "entry_date BETWEEN ? AND ?"
@@ -43,7 +32,7 @@ class ReportsController < ApplicationController
       end
     end
     
-    unless case_params[:screened_at].nil? or case_params[:screened_at].empty?
+    unless case_params[:screened_at].blank?
       if case_params[:screened_at].match /bis/
         lower_bound, higher_bound = case_params[:screened_at].split('bis')
         case_keys.push "screened_at BETWEEN ? AND ?"
@@ -55,7 +44,7 @@ class ReportsController < ApplicationController
       end
     end
     
-    unless case_params[:examination_date].nil? or case_params[:examination_date].empty?
+    unless case_params[:examination_date].blank?
       if case_params[:examination_date].match /bis/
         lower_bound, higher_bound = case_params[:examination_date].split('bis')
         case_keys.push "examination_date BETWEEN ? AND ?"
@@ -67,27 +56,16 @@ class ReportsController < ApplicationController
       end
     end
     
-    unless case_params[:screener_id].nil? or case_params[:screener_id].empty?
+    unless case_params[:screener_id].blank?
       case_keys.push "screener_id = ?"
       case_values.push case_params[:screener_id]
     end
     
-    # Handle doctor params
-    doctor_params = params[:doctor] || {}
-    
-    unless doctor_params[:doctor_id].nil? or doctor_params[:doctor_id].empty?
+    unless case_params[:doctor_id].blank?
       case_keys.push "doctor_id = ?"
-      case_values.push doctor_params[:doctor_id]
+      case_values.push case_params[:doctor_id]
     end
     
-    
-    # Handle patient params
-    patient_params = params[:patient] || {}
-    
-    unless patient_params[:full_name].nil? or patient_params[:full_name].empty?
-      case_keys.push "patient_id = ?"
-      case_values.push patient_params[:full_name].split(' ')[0].strip
-    end
     
     # Only use cases with classifications
     case_keys.push "classification_id IS NOT NULL"
@@ -97,9 +75,8 @@ class ReportsController < ApplicationController
     # The following doesn't work 'cause of a known bug: :include overrides :select
     # @records = Case.find( :all, :select => "classifications.code AS Pap, count(*) AS Anzahl, count(*)/(SELECT count(*) FROM cases)*100.0 AS Prozent", :include => 'classification', :group => 'classifications.code',  :order => "#{order}")
     
-    case_conditions = [case_conditions, "classification_id IS NOT NULL"].compact.join(" AND ")
     @count = Case.count(:conditions => case_conditions)
-    
+
     @group_counts = Case.count(:conditions => case_conditions, :group => 'classification_group_id', :include => [{'classification' => 'classification_group'}], :order => 'classification_groups.position DESC')
   end
 end
