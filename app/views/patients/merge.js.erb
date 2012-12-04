@@ -1,6 +1,6 @@
 $('#propose_merge').modal('hide');
 $('tr.marked').removeClass('marked');
-$('#patient_<%= @drop_patient.id %>').fadeOut('slow');
+$('#patient_<%= @drop_patient.id %>').fadeOut('slow').remove();
 
 var target_patient = $('#patient_<%= @target_patient.id %>');
 target_patient.addClass('selected');
