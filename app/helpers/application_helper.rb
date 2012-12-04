@@ -37,7 +37,8 @@ module ApplicationHelper
     elsif Rails.env.demo?
       hostname = "cydoc-demo.cyt.ch"
     else
-      hostname = "cydoc"
+      # TODO: switch to settings variable
+      hostname = "cydoc.zyto-labor.com"
     end
   end
 
