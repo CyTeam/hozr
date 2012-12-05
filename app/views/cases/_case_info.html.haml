@@ -23,7 +23,8 @@
     %dt= t_attr(:examination_method)
     %dd= case_info.examination_method.name unless case_info.examination_method.nil?
 
-    - if case_info.location_index.present?
-      %dt= t_attr(:slidepath, Case)
-      - for location_index in case_info.location_index
-        %dd= link_to_slidepath_scan(location_index)
+    - if current_tenant.settings['modules.slidepath']
+      - if case_info.location_index.present?
+        %dt= t_attr(:slidepath, Case)
+        - for location_index in case_info.location_index
+          %dd= link_to_slidepath_scan(location_index)
