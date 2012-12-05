@@ -14,6 +14,9 @@ class User < ActiveRecord::Base
 
   attr_accessible :login
 
+  # Tenancy
+  belongs_to :tenant
+
   # Authorization roles
   has_and_belongs_to_many :roles, :autosave => true
   scope :by_role, lambda{|role| include(:roles).where(:name => role)}

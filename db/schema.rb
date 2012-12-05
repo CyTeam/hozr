@@ -771,6 +771,14 @@ ActiveRecord::Schema.define(:version => 20121203135308) do
   add_index "tariff_items", ["type"], :name => "index_tariff_items_on_type"
   add_index "tariff_items", ["vat_class_id"], :name => "index_tariff_items_on_vat_class_id"
 
+  create_table "tenants", :force => true do |t|
+    t.integer  "person_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "tenants", ["person_id"], :name => "index_tenants_on_person_id"
+
   create_table "tiers", :force => true do |t|
     t.integer  "biller_id"
     t.integer  "provider_id"

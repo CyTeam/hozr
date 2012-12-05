@@ -51,4 +51,9 @@ class ApplicationController < ActionController::Base
       redirect_to new_user_session_path
     end
   end
+
+  # Tenancy
+  def current_tenant
+    current_user.tenant
+  end
 end

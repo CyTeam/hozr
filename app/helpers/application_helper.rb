@@ -30,6 +30,11 @@ module ApplicationHelper
     Role.all.map{|role| [role.to_s, role.name.to_s]}
   end
 
+  # Tenancy
+  def current_tenant
+    current_user.tenant
+  end
+
   # CyDoc
   def cydoc_hostname
     if Rails.env.development?
