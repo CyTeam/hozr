@@ -108,6 +108,9 @@ gem 'simple_form'
 # Validations
 gem 'validates_timeliness'
 
+# Application Settings
+gem 'ledermann-rails-settings', :require => 'rails-settings'
+
 # Addresses
 gem 'unicode_utils'
 gem 'has_vcards'

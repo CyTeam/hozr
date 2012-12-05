@@ -186,6 +186,8 @@ GEM
     jruby-pageant (1.1.1)
     json (1.7.5)
     kgio (2.7.4)
+    ledermann-rails-settings (1.2.0)
+      activerecord (>= 2.3)
     less (2.2.2)
       commonjs (~> 0.2.6)
     less-rails (2.2.3)
@@ -346,6 +348,7 @@ DEPENDENCIES
   inherited_resources
   jquery-rails
   jquery-ui-rails
+  ledermann-rails-settings
   lyb_devise_admin
   lyb_sidebar
   mysql2
