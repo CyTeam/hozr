@@ -13,6 +13,8 @@ de:
       classification_group: Klassifikationsgruppe
       classification: Klassifikation
       employee: Mitarbeiter
+      finding_class: Befund
+
     attributes:
       user:
         email:     E-Mail
@@ -20,6 +22,11 @@ de:
         login:     Benutzername
         locked_at: Gesperrt seit
         last_sign_in_at: Letzter Login
+      classification:
+        name:                 Titel
+        code:                 Code
+        examination_method:   Methode
+        classification_group: Gruppe
       patient:
         birth_date: Geburtsdatum
         doctor_patient_nr: Patientennr.
