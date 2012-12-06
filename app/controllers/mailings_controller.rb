@@ -12,11 +12,11 @@ class MailingsController < ApplicationController
     Mailing.create_all
     redirect_to mailings_path(:by_state => :unsent)
   end
-  
+
   # Overview for mailing
   def overview
     @mailing = Mailing.find(params[:id])
-    
+
     @doctor = @mailing.doctor
     @cases = @mailing.cases
 
@@ -24,17 +24,17 @@ class MailingsController < ApplicationController
       format.html {}
       format.pdf {
         document = @mailing.overview_to_pdf
-        
-        send_data document, :filename => "#{@mailing.id}.pdf", 
+
+        send_data document, :filename => "#{@mailing.id}.pdf",
                             :type => "application/pdf",
                             :disposition => 'inline'
       }
     end
   end
-  
+
   def show
     overview
-    
+
     render 'overview'
   end
 
@@ -50,7 +50,7 @@ class MailingsController < ApplicationController
 
   def print_result_reports
     @mailing = Mailing.find(params[:id])
-    
+
     page_size = params[:page_size] || 'A5'
 
     overview_printer = 'hpT2'
@@ -68,7 +68,7 @@ class MailingsController < ApplicationController
 
   def print
     @mailing = Mailing.find(params[:id])
-    
+
     page_size = params[:page_size] || 'A5'
 
     overview_printer = 'hpT2'
@@ -86,7 +86,7 @@ class MailingsController < ApplicationController
 
   def print_all
     print_queue = SendQueue.unsent.by_channel('print')
-    
+
     begin
       output = ""
       for print_queue in print_queue
@@ -101,12 +101,12 @@ class MailingsController < ApplicationController
 
     render 'show_flash'
   end
-  
+
   # Multi Channel
   def send_by
     @mailing = Mailing.find(params[:id])
     @send_queue = @mailing.send_by(params[:channel])
-    
+
     if @send_queue.nil?
       flash.now[:alert] = "Bereits zum Versand vorgemerkt."
       render 'show_flash'
@@ -116,16 +116,16 @@ class MailingsController < ApplicationController
   def send_by_all_channels
     @mailing = Mailing.find(params[:id])
     @state = @mailing.send_by_all_channels
-    
+
     render 'send_by_all_channels'
   end
-  
+
   def send_all
     @mailings = Mailing.without_channel
     for mailing in @mailings
       mailing.send_by_all_channels
     end
-    
+
     redirect_to mailings_path
   end
 end

@@ -5,7 +5,7 @@ class DoctorOrderFormController < LabelPrintController
 
     @doctor = Doctor.find(params[:doctor_order_form][:doctor_id])
     @count = params[:doctor_order_form][:count].to_i
-    
+
     pdf = DoctorOrderForm.new(@doctor)
 
     pdf.print('hp', @count)

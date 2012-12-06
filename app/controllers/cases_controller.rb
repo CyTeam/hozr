@@ -73,7 +73,7 @@ class CasesController < ApplicationController
   def assign_list
     @cases = Case.where('assigned_at = ?', params[:assigned_at]).order('intra_day_id').all
     @assigned_at = params[:assigned_at]
-    
+
     render :action => 'assign'
   end
 
@@ -81,7 +81,7 @@ class CasesController < ApplicationController
    @case = Case.find(params[:id])
    @case.destroy
   end
-  
+
   # Show list of assignings from the last 7 days.
   def assignings_list
     @assignings = Case.find_by_sql('SELECT assigned_at, min(intra_day_id) AS min_intra_day_id, max(intra_day_id) AS max_intra_day_id, min(praxistar_eingangsnr) AS min_praxistar_eingangsnr, max(praxistar_eingangsnr) AS max_praxistar_eingangsnr, count(*) AS count FROM cases GROUP BY assigned_at HAVING assigned_at > now() - INTERVAL 7 DAY ORDER BY assigned_at DESC')
@@ -89,16 +89,16 @@ class CasesController < ApplicationController
 
   def delete_assigning
     Case.where('assigned_at = ?', params[:assigned_at]).destroy_all
-    
+
     redirect_to :action => 'assignings_list'
   end
-  
+
   def delete_rest_of_assigning
     Case.where('assigned_at = ?', params[:assigned_at]).where('intraday_id >= ?', params[:intra_day_id]).destroy_all
-    
+
     redirect_to :action => 'assignings_list'
   end
-  
+
   # First Entry
   # ===========
   def first_entry_queue
@@ -216,7 +216,7 @@ class CasesController < ApplicationController
     @case.finding_classes.delete(finding)
     name = finding.name
     quoted_name = name.gsub('ä', '&auml;').gsub('ö', '&ouml;').gsub('ü', '&uuml;').gsub('Ä', '&Auml;').gsub('Ö', '&Ouml;').gsub('Ü', '&Uuml;')
-    
+
     @case.finding_text = @case.finding_text.gsub(/<div>#{Regexp.escape(name)}<\/div>(\n)?/, '').gsub("<div>#{quoted_name}</div>", '')
 
     @case.save
@@ -284,7 +284,7 @@ class CasesController < ApplicationController
       low_to_high = (low_classifications.include?(previous_case.classification.code) and high_classifications.include?(@case.classification.code))
       high_to_low = (high_classifications.include?(previous_case.classification.code) and low_classifications.include?(@case.classification.code))
     end
-      
+
     # Higher than Cin I-II
     high = high_classifications.include?(@case.classification.code)
 
@@ -319,15 +319,15 @@ class CasesController < ApplicationController
   def review_done
     @case = Case.find(params[:id])
     @case.needs_review = false
-    
+
     @case.review_by = current_user.object
     @case.review_at = Time.now
-    
+
     @case.save!
-    
+
     redirect_to :action => :review_queue
   end
-  
+
   # Printing
   # ========
   def print_result_report
