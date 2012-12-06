@@ -1,4 +1,4 @@
 %tr[classification_group]
-  %td= link_to classification_group.title, classification_group
+  %td= link_to classification_group.title, classification_group, 'data-href-container' => 'tr'
   %td= classification_group.position
   %td= classification_group.classifications.map {|c| c.name }.uniq.join(', ')

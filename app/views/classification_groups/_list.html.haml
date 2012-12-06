@@ -1,7 +1,7 @@
 %table.table.table-striped.collection
   %tr
-    %th Name
-    %th Position
-    %th PAPs
+    %th= t_attr(:title)
+    %th= t_attr(:position)
+    %th= t_attr(:classifications)
 
   = render @classification_groups

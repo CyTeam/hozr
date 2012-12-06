@@ -27,6 +27,12 @@ de:
         code:                 Code
         examination_method:   Methode
         classification_group: Gruppe
+      classification_group:
+        title:                Titel
+        position:             Position
+        classifications:      Klassifikationen
+        color:                Farbe
+        print_color:          Druck-Farbe
       patient:
         birth_date: Geburtsdatum
         doctor_patient_nr: Patientennr.
