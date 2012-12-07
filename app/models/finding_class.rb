@@ -3,6 +3,7 @@
 class FindingClass < ActiveRecord::Base
   has_and_belongs_to_many :cases
   belongs_to :finding_group
+  has_and_belongs_to_many :classifications, :join_table => :top_finding_classes
 
   scope :by_finding_group, lambda {|group_name|
     if group_name.nil?

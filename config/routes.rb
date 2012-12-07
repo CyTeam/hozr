@@ -91,7 +91,6 @@ Hozr::Application.routes.draw do
 
   resources :classifications
   resources :classification_groups
-  resources :top_finding_classes
   resources :finding_classes
 
   resources :order_forms do

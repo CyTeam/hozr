@@ -1,4 +1,7 @@
 = simple_form_for resource do |f|
   = f.input :name
   = f.input :code
+
+  = f.association :classifications
+
   = f.submit
