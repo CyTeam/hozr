@@ -69,6 +69,7 @@ de:
       admin:    Administration
       sysadmin: System Administration
       zyto:     Zytologie
+      doctor:   Arzt
 
   crud:
     action:

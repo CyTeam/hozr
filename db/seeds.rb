@@ -18,7 +18,8 @@ HonorificPrefix.create!([
 Role.create!([
   {:name => 'sysadmin'},
   {:name => 'zyto'},
-  {:name => 'admin'}
+  {:name => 'admin'},
+  {:name => 'doctor'}
 ])
 
 # Examination Methods
