@@ -2,7 +2,10 @@
 
 class Slidepath::LocationIndex < ActiveRecord::Base
   # Legacy specs
-  use_db :prefix => 'slidepath_'
+  begin
+    use_db :prefix => 'slidepath_'
+  rescue
+  end
   self.table_name = 'location_index'
   self.primary_key = 'locationId'
 
