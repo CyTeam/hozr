@@ -37,9 +37,17 @@ class MailingsController < ApplicationController
   def print_overview
     @mailing = Mailing.find(params[:id])
 
-    printer = 'hpT2'
-    @mailing.print_overview(printer)
-    redirect_to :action => :show, :id => @mailing.id
+    begin
+      printer = current_tenant.printer_for(:mailing_overview)
+      @mailing.print_overview(printer)
+
+      flash.now[:notice] = "#{@mailing} an Drucker gesendet"
+
+    rescue RuntimeError => e
+      flash.now[:alert] = "Drucken fehlgeschlagen: #{e.message}"
+    end
+
+    render 'show_flash'
   end
 
   def print_result_reports
@@ -47,17 +55,23 @@ class MailingsController < ApplicationController
 
     page_size = params[:page_size] || 'A5'
 
-    overview_printer = 'hpT2'
-    case page_size
-    when 'A5'
-      printer = 'hpT3'
-    when 'A4'
-      printer = 'HP2840'
+
+    begin
+      case page_size
+      when 'A5'
+        printer = current_tenant.printer_for(:result_report_A5)
+      when 'A4'
+        printer = current_tenant.printer_for(:result_report_A4)
+      end
+
+      @mailing.print_result_reports(page_size, printer)
+      flash.now[:notice] = "#{@mailing} an Drucker gesendet"
+
+    rescue RuntimeError => e
+      flash.now[:alert] = "Drucken fehlgeschlagen: #{e.message}"
     end
 
-    @mailing.print_result_reports(page_size, printer)
-
-    redirect_to :action => :show, :id => @mailing.id
+    render 'show_flash'
   end
 
   def print
@@ -65,26 +79,42 @@ class MailingsController < ApplicationController
 
     page_size = params[:page_size] || 'A5'
 
-    overview_printer = 'hpT2'
-    case page_size
-    when 'A5'
-      printer = 'hpT3'
-    when 'A4'
-      printer = 'HP2840'
+    begin
+      overview_printer = current_tenant.printer_for(:mailing_overview)
+      case page_size
+      when 'A5'
+        printer = current_tenant.printer_for(:result_report_A5)
+      when 'A4'
+        printer = current_tenant.printer_for(:result_report_A4)
+      end
+
+      @mailing.print(page_size, overview_printer, printer)
+      flash.now[:notice] = "#{@mailing} an Drucker gesendet"
+
+    rescue RuntimeError => e
+      flash.now[:alert] = "Drucken fehlgeschlagen: #{e.message}"
     end
 
-    @mailing.print(page_size, overview_printer, printer)
-
-    redirect_to :action => :show, :id => @mailing.id
+    render 'show_flash'
   end
 
   def print_all
     print_queue = SendQueue.unsent.by_channel('print')
 
+    page_size = params[:page_size] || 'A5'
+
     begin
+      overview_printer = current_tenant.printer_for(:mailing_overview)
+      case page_size
+      when 'A5'
+        printer = current_tenant.printer_for(:result_report_A5)
+      when 'A4'
+        printer = current_tenant.printer_for(:result_report_A4)
+      end
+
       output = ""
       for print_queue in print_queue
-        print_queue.print
+        print_queue.print(overview_printer, printer)
         output += print_queue.mailing.to_s + "<br/>"
       end
 

@@ -334,15 +334,21 @@ class CasesController < ApplicationController
     @case = Case.find(params[:id])
     page_size = params[:page_size] || 'A5'
 
-    case page_size
-    when 'A5'
-      printer = 'hpT3'
-    when 'A4'
-      printer = 'HP2840'
+    begin
+      case page_size
+      when 'A5'
+        printer = current_tenant.printer_for(:result_report_A5)
+      when 'A4'
+        printer = current_tenant.printer_for(:result_report_A4)
+      end
+
+      @case.print(page_size, printer)
+      flash.now[:notice] = "#{@case} an Drucker gesendet"
+
+    rescue RuntimeError => e
+      flash.now[:alert] = "Drucken fehlgeschlagen: #{e.message}"
     end
 
-    @case.print(page_size, printer)
-    flash.now[:notice] = "#{@case} an Drucker gesendet"
     render 'show_flash'
   end
 

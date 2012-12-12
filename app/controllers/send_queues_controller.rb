@@ -7,28 +7,54 @@ class SendQueuesController < ApplicationController
   end
 
   def print_all
-    @print_queues = SendQueue.unsent.by_channel('print')
-    
+    print_queue = SendQueue.unsent.by_channel('print')
+
+    page_size = params[:page_size] || 'A5'
+
     begin
-      for print_queue in @print_queues
-        print_queue.print
+      overview_printer = current_tenant.printer_for(:mailing_overview)
+      case page_size
+      when 'A5'
+        printer = current_tenant.printer_for(:result_report_A5)
+      when 'A4'
+        printer = current_tenant.printer_for(:result_report_A4)
       end
+
+      output = ""
+      for print_queue in print_queue
+        print_queue.print(overview_printer, printer)
+        output += print_queue.mailing.to_s + "<br/>"
+      end
+
+      flash.now[:notice] = output.html_safe
     rescue RuntimeError => e
       flash.now[:alert] = "Drucken fehlgeschlagen: #{e.message}"
-      render 'show_flash'
     end
+
+    render 'show_flash'
   end
 
   def print
     @print_queue = SendQueue.find(params[:id])
-    
-    begin
-      @print_queue.print
 
-      render 'print', :print_queue => @print_queue
+    page_size = params[:page_size] || 'A5'
+
+    begin
+      overview_printer = current_tenant.printer_for(:mailing_overview)
+      case page_size
+      when 'A5'
+        printer = current_tenant.printer_for(:result_report_A5)
+      when 'A4'
+        printer = current_tenant.printer_for(:result_report_A4)
+      end
+
+      @print_queue.print(overview_printer, printer)
+      flash.now[:notice] = "#{@print_queue.mailing} an Drucker gesendet"
+
     rescue RuntimeError => e
       flash.now[:alert] = "Drucken fehlgeschlagen: #{e.message}"
-      render 'show_flash'
     end
+
+    render 'show_flash'
   end
 end

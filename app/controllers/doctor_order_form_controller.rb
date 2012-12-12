@@ -8,6 +8,6 @@ class DoctorOrderFormController < LabelPrintController
 
     pdf = DoctorOrderForm.new(@doctor)
 
-    pdf.print('hp', @count)
+    pdf.print(current_tenant.printer_for(:order_form), @count)
   end
 end

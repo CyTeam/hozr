@@ -14,4 +14,11 @@ class Tenant < ActiveRecord::Base
   # ===========
   has_many :attachments, :as => :object
   accepts_nested_attributes_for :attachments, :reject_if => proc { |attributes| attributes['file'].blank? }
+
+  # Printing
+  # ========
+  def printer_for(type)
+    type = type.to_s
+    CupsPrinter.new(settings['printing.' + type], :hostname => settings['printing.cups_hostname'])
+  end
 end

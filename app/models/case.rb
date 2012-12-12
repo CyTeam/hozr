@@ -193,18 +193,15 @@ class Case < ActiveRecord::Base
     end
 
     pdf = ResultReport.new(prawn_options)
-    
+
     return pdf.to_pdf(self)
   end
-  
-  def print(page_size, printer_name)
-    # Workaround TransientJob not yet accepting options
+
+  def print(page_size, printer)
     file = Tempfile.new('')
     file.binmode
     file.puts(to_pdf(page_size))
     file.close
-
-    printer = CupsPrinter.new(printer_name)
 
     printer.print_file(file.path)
   end
