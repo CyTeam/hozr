@@ -16,6 +16,19 @@ de:
       finding_class: Befund
 
     attributes:
+      tenant:
+        settings:
+          patients:
+            sex:   Geschlecht
+          printing:
+            cups:  Drucken per CUPS
+            cups_hostname: CUPS-Server
+            order_form:    Auftragsformulare
+            mailing_overview: Befundübersicht
+            result_report_a4: Resultate A4
+            result_report_a5: Resultate A5
+
+        users:     Benutzer
       user:
         email:     E-Mail
         password:  Passwort

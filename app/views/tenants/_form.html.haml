@@ -1,0 +1,16 @@
+= simple_form_for resource do |f|
+  = f.fields_for :settings do |s|
+    = s.input 'patients.sex', :label => t('activerecord.attributes.tenant.settings.patients.sex'), :as => :select, :collection => ['M', 'F'], :input_html => {:value => f.object.settings['patients.sex']}
+    = s.input 'printing.cups', :label => t('activerecord.attributes.tenant.settings.printing.cups'), :as => :boolean, :input_html => {:checked => f.object.settings['printing.cups'] ? true : false}
+
+    = s.input 'printing.cups_hostname', :label => t('activerecord.attributes.tenant.settings.printing.cups_hostname'), :input_html => {:value => f.object.settings['printing.cups_hostname']}
+
+    = s.input 'printing.order_form', :label => t('activerecord.attributes.tenant.settings.printing.order_form'), :input_html => {:value => f.object.settings['printing.order_form']}
+    = s.input 'printing.mailing_overview', :label => t('activerecord.attributes.tenant.settings.printing.mailing_overview'), :input_html => {:value => f.object.settings['printing.mailing_overview']}
+    = s.input 'printing.result_report_a4', :label => t('activerecord.attributes.tenant.settings.printing.result_report_a4'), :input_html => {:value => f.object.settings['printing.result_report_a4']}
+    = s.input 'printing.result_report_a5', :label => t('activerecord.attributes.tenant.settings.printing.result_report_a5'), :input_html => {:value => f.object.settings['printing.result_report_a5']}
+
+  = f.association :users, :label_method => :to_s
+
+  = f.submit
+

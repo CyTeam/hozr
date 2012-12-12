@@ -12,6 +12,13 @@ Hozr::Application.routes.draw do
     end
   end
 
+  # Tenant
+  resources :tenants do
+    collection do
+      get :current
+    end
+  end
+
   # Main resources
   resources :doctors
   resources :employees
