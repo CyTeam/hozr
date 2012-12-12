@@ -37,7 +37,7 @@ class User < ActiveRecord::Base
   # Helpers
   def to_s
     if object
-      return object.name
+      return object.to_s
     else
       return email
     end
