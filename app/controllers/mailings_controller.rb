@@ -14,7 +14,7 @@ class MailingsController < ApplicationController
   end
 
   # Overview for mailing
-  def overview
+  def show
     @mailing = Mailing.find(params[:id])
 
     @doctor = @mailing.doctor
@@ -30,12 +30,6 @@ class MailingsController < ApplicationController
                             :disposition => 'inline'
       }
     end
-  end
-
-  def show
-    overview
-
-    render 'overview'
   end
 
   # Printing

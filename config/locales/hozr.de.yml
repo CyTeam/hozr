@@ -91,6 +91,8 @@ de:
       invoice_overview: Rechnungen
       print_fax:        Drucken für Fax
       print:            Drucken
+      print_overview:   Übersicht drucken
+      print_results:    Resultate drucken
       pdf:              Als PDF
       create_hpv_p16:   Nachträglicher HPV/P16
       review_done:      2. Eingabe bestätigen
@@ -131,7 +133,9 @@ de:
   reports:
     index:
       title:            Statistiken
-
+  mailings:
+    show:
+      title:            Befundübersicht
 
   simple_form:
     labels:

@@ -2,7 +2,7 @@
 %tr[send_queue]
   %td
     = mailing.doctor.nil? ? "Unbekannt" : mailing.doctor.name
-  %td{:style => "text-align: right"}= link_to mailing.cases.count, :controller => 'mailings', :action => 'overview', :id => mailing
+  %td{:style => "text-align: right"}= link_to mailing.cases.count, mailing
   %td= mailing.created_at
   %td
     = send_queue.sent_at.nil? ? "ready to send" : send_queue.sent_at.to_date
