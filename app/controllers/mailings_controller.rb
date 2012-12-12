@@ -53,8 +53,7 @@ class MailingsController < ApplicationController
   def print_result_reports
     @mailing = Mailing.find(params[:id])
 
-    page_size = params[:page_size] || 'A5'
-
+    page_size = params[:page_size] || current_tenant.settings['format.result_report']
 
     begin
       case page_size
@@ -77,7 +76,7 @@ class MailingsController < ApplicationController
   def print
     @mailing = Mailing.find(params[:id])
 
-    page_size = params[:page_size] || 'A5'
+    page_size = params[:page_size] || current_tenant.settings['format.result_report']
 
     begin
       overview_printer = current_tenant.printer_for(:mailing_overview)
@@ -101,7 +100,7 @@ class MailingsController < ApplicationController
   def print_all
     print_queue = SendQueue.unsent.by_channel('print')
 
-    page_size = params[:page_size] || 'A5'
+    page_size = params[:page_size] || current_tenant.settings['format.result_report']
 
     begin
       overview_printer = current_tenant.printer_for(:mailing_overview)

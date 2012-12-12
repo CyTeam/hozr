@@ -25,8 +25,8 @@ class SendQueue < ActiveRecord::Base
   end
 
   # Actions
-  def print(overview_printer, printer)
-    mailing.print('A5', overview_printer, printer)
+  def print(format, overview_printer, printer)
+    mailing.print(format, overview_printer, printer)
 
     self.sent_at = DateTime.now
     save

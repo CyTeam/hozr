@@ -9,7 +9,7 @@ class SendQueuesController < ApplicationController
   def print_all
     print_queue = SendQueue.unsent.by_channel('print')
 
-    page_size = params[:page_size] || 'A5'
+    page_size = params[:page_size] || current_tenant.settings['format.result_report']
 
     begin
       overview_printer = current_tenant.printer_for(:mailing_overview)
@@ -22,7 +22,7 @@ class SendQueuesController < ApplicationController
 
       output = ""
       for print_queue in print_queue
-        print_queue.print(overview_printer, printer)
+        print_queue.print(page_size, overview_printer, printer)
         output += print_queue.mailing.to_s + "<br/>"
       end
 
@@ -37,7 +37,7 @@ class SendQueuesController < ApplicationController
   def print
     @print_queue = SendQueue.find(params[:id])
 
-    page_size = params[:page_size] || 'A5'
+    page_size = params[:page_size] || current_tenant.settings['format.result_report']
 
     begin
       overview_printer = current_tenant.printer_for(:mailing_overview)
@@ -48,7 +48,7 @@ class SendQueuesController < ApplicationController
         printer = current_tenant.printer_for(:result_report_A4)
       end
 
-      @print_queue.print(overview_printer, printer)
+      @print_queue.print(page_size, overview_printer, printer)
       flash.now[:notice] = "#{@print_queue.mailing} an Drucker gesendet"
 
     rescue RuntimeError => e
