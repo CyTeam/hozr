@@ -38,7 +38,7 @@ class Mailing < ActiveRecord::Base
   def self.create_all_for_doctor(doctor_id)
     d = Doctor.find(doctor_id)
     mailing = nil
-    
+
     # Check if there's an open mailing
     mailing = d.mailings.without_channel.first
 
@@ -49,9 +49,9 @@ class Mailing < ActiveRecord::Base
     mailing.cases.clear
     # And add all undelivered cases to mailing
     mailing.cases = d.cases.for_delivery.order(:praxistar_eingangsnr).all
-    
+
     return if mailing.cases.empty?
-    
+
     mailing.save!
     return mailing
   end
@@ -63,13 +63,13 @@ class Mailing < ActiveRecord::Base
       logger.info('Lock not available')
       return
     end
-    
+
     # Lock available
     begin
       # Acquire lock
       lock = File.new(lock_path, "w")
       lock.close
-      
+
       # TODO: Need to adapt for email
       doctor_ids = Case.select('DISTINCT doctor_id').for_delivery.all
 
@@ -93,7 +93,7 @@ class Mailing < ActiveRecord::Base
     end
 
     pdf = ResultReport.new(prawn_options)
-    
+
     return pdf.to_pdf(cases)
   end
 
@@ -106,11 +106,11 @@ class Mailing < ActiveRecord::Base
 
     printer.print_file(file.path)
   end
-  
+
   def overview_to_pdf
     prawn_options = { :page_size => 'A4', :top_margin => 140, :left_margin => 60, :right_margin => 60, :bottom_margin => 100 }
     pdf = MailingOverview.new(prawn_options)
-    
+
     return pdf.to_pdf(self)
   end
 
@@ -128,13 +128,13 @@ class Mailing < ActiveRecord::Base
     print_overview(overview_printer)
     print_result_reports(page_size, result_report_printer)
   end
-  
+
   # Multichannel
   # ============
   def send_by(channel)
     # Only generate new queue if there's no unsent present, yet
     return nil unless send_queues.by_channel(channel).unsent.empty?
-    
+
     SendQueue.create(:mailing => self, :channel => channel.to_s)
   end
 

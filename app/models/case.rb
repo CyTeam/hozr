@@ -11,12 +11,12 @@ class Case < ActiveRecord::Base
   belongs_to :review_by, :class_name => 'Employee', :foreign_key => :review_by
   belongs_to :insurance
   belongs_to :hpv_p16_prepared_by, :class_name => 'Employee', :foreign_key => :hpv_p16_prepared_by
-  
+
   has_and_belongs_to_many :finding_classes
   has_and_belongs_to_many :mailings
-  
+
   has_one :order_form
-  
+
   # Scopes
   scope :finished, where("screened_at IS NOT NULL AND needs_review = ?", false)
   scope :unfinished_p16, where("screened_at IS NULL AND needs_p16 = ?", true)
@@ -42,64 +42,64 @@ class Case < ActiveRecord::Base
   def control_findings
     finding_classes.control
   end
-  
+
   def quality_findings
     finding_classes.quality
   end
-  
+
   def findings
     finding_classes.by_finding_group(nil)
   end
-  
+
   def validate_first_entry
     valid = true
     if examination_date.nil?
       errors.add('examination_date', 'Abstrichdatum muss gesetzt sein')
       valid = false
     end
-    
+
     if patient_id.nil?
       errors.add('patient_id', 'Patient muss gesetzt sein')
       valid = false
     end
-    
+
     if doctor_id.nil?
       errors.add('doctor_id', 'Arzt muss gesetzt sein')
       valid = false
     end
-    
+
     if praxistar_eingangsnr.nil?
       errors.add('praxistar_eingangsnr', 'Eingangsnr muss gesetzt sein')
       valid = false
     end
-    
+
     return valid
   end
-  
+
   def validate_second_entry
   end
-  
+
   def validate
     valid = true
     if ready_for_second_entry
       valid &&= validate_first_entry
     end
-  
+
     return valid
   end
-  
+
   def ready_for_first_entry
     entry_date.nil? && !assigned_at.nil?
   end
-  
+
   def ready_for_second_entry
     !entry_date.nil? && screened_at.nil? && !needs_p16?
   end
-  
+
   def ready_for_p16
     screened_at.nil? && needs_p16
   end
-  
+
   def next_case(scope_name)
     scope = nil
     if scope_name
@@ -122,24 +122,24 @@ class Case < ActiveRecord::Base
       super(params)
     end
   end
-  
+
   def initialize_from_order_form_file_name(order_form_file_name)
     initialize_from_order_form_file(File.new(order_form_file_name))
   end
-  
+
   def initialize_from_order_form_file(order_form_file)
     initialize_from_order_form(OrderForm.new(:file => order_form_file))
   end
-  
+
   def initialize_from_order_form(order_form)
     initialize(:order_form => order_form)
   end
-  
+
   private
   def self.parse_eingangsnr(value)
     CaseNr.new(value).to_s
   end
-  
+
   public
   def praxistar_eingangsnr=(value)
     write_attribute(:praxistar_eingangsnr, Case.parse_eingangsnr(value))
@@ -148,31 +148,31 @@ class Case < ActiveRecord::Base
   def self.praxistar_eingangsnr_exists?(value)
     return !( find_by_praxistar_eingangsnr(parse_eingangsnr(value)).nil? )
   end
-  
+
   def examination_date=(value)
     if value.is_a?(String)
       day, month, year = value.split('.')
       month ||= Date.today.month
       year ||= Date.today.year
       year = 2000 + year.to_i if year.to_i < 100
-      
+
       write_attribute(:examination_date, "#{year}-#{month}-#{day}")
     else
       write_attribute(:examination_date, value)
     end
   end
-  
+
   def examination_date_before_type_cast
     read_attribute(:examination_date).strftime("%d.%m.%Y") unless read_attribute(:examination_date).nil?
   end
-  
+
   def entry_date=(value)
     if value.is_a?(String)
       day, month, year = value.split('.')
       month ||= Date.today.month
       year ||= Date.today.year
       year = 2000 + year.to_i if year.to_i < 100
-      
+
       write_attribute(:entry_date, "#{year}-#{month}-#{day}")
     else
       write_attribute(:entry_date, value)
@@ -182,7 +182,7 @@ class Case < ActiveRecord::Base
   def entry_date_before_type_cast
     read_attribute(:entry_date).strftime("%d.%m.%Y") unless read_attribute(:entry_date).nil?
   end
-  
+
   # PDF
   def to_pdf(page_size = 'A5')
     case page_size
