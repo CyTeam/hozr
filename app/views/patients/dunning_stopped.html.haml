@@ -3,11 +3,13 @@
     %th Patient
     %th Bemerkungen
     %th Arzt
-  - for patient in @patients
+  - collection.each do |resource|
     %tr
       %td
-        = h link_to patient.to_s, :action => 'show', :id => patient
+        = link_to resource, :action => 'show', :id => resource
       %td
-        = h patient.remarks
+        = resource.remarks
       %td
-        = h link_to patient.doctor, :controller => :doctors, :action => 'show', :id => patient.doctor_id
+        = link_to resource.doctor, :controller => :doctors, :action => 'show', :id => resource.doctor_id
+
+

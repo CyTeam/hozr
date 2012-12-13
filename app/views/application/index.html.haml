@@ -2,4 +2,8 @@
 
 = boot_page_title
 
-= render 'list'
+= paginate collection
+
+= render 'list', :collection => collection
+
+= paginate collection
