@@ -82,8 +82,7 @@ end
 # Standard helpers
 # ================
 # CRUD
-gem 'will_paginate', '~> 3.0.pre'
-
+gem 'kaminari'
 # Application
 # ===========
 # Authentication
@@ -102,7 +101,6 @@ gem 'lyb_sidebar'
 
 # Bootstrap
 gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
-gem 'bootstrap-will_paginate'
 gem 'simple_form'
 
 # Validations
