@@ -120,6 +120,9 @@ gem 'swissmatch-location', :git => 'https://github.com/apeiros/swissmatch-locati
 gem 'swissmatch-directories', :git => 'https://github.com/huerlisi/swissmatch-directories.git'
 gem 'swissmatch-rails', :git => 'https://github.com/apeiros/swissmatch-rails.git'
 
+# Uploads
+gem 'carrierwave'
+
 # Autocomplete
 gem 'rails3-jquery-autocomplete', :git => 'https://github.com/slash4/rails3-jquery-autocomplete.git'
 
