@@ -5,6 +5,7 @@ de:
 
   activerecord:
     models:
+      attachment: Anhang
       user:    Benutzer
       patient: Patient
       doctor:  Arzt
@@ -16,6 +17,16 @@ de:
       finding_class: Befund
 
     attributes:
+      attachment:
+        code: "Verwenden als"
+        code_enum:
+          DebitInvoiceDocument: Rechnungsvorlage
+          LetterDocument: Briefvorlage
+        encoding: Zeichensatz
+        encoding_enum:
+          ISO-8859-15: ISO-8859-15
+          UTF-8: UTF-8
+        file: Dateiname
       tenant:
         settings:
           patients:
