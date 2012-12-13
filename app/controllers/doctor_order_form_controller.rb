@@ -3,7 +3,7 @@ class DoctorOrderFormController < LabelPrintController
   def print
     authorize! :print, :doctor_order_form
 
-    @doctor = Doctor.find(params[:doctor_order_form][:doctor_id])
+    @doctor = Doctor.find(params[:doctor_order_form][:doctor_id]) if Doctor.exists?(params[:doctor_order_form][:doctor_id])
     @count = params[:doctor_order_form][:count].to_i
 
     pdf = DoctorOrderForm.new(@doctor)
