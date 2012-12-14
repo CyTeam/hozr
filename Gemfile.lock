@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/huerlisi/cupsffi.git
-  revision: de2b894f2845635ecda6e81e1d9c798cddaa4611
+  revision: fb92b21f855d2fb1cb931b07856156e1ce68939a
   specs:
     cupsffi (0.0.9)
       ffi
