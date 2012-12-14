@@ -13,16 +13,7 @@ class DoctorOrderForm < LetterDocument
   def initialize(doctor, opts = {})
     @doctor = doctor
 
-    # Default options
-    opts.reverse_merge!(default_options)
-
-    # Set the template
-    letter_template = Attachment.for_class(self.class)
-    opts.reverse_merge!(:template => letter_template.file.current_path) if letter_template
-
-    super(opts)
-
-    initialize_fonts
+    super opts
   end
 
   def to_pdf
