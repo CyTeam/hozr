@@ -17,23 +17,20 @@ class DoctorOrderForm < LetterDocument
   end
 
   def to_pdf
-    # define grid
-    define_grid(:columns => 11, :rows => 16, :gutter => 2) #.show_all('EEEEEE')
-
     if @doctor
-      grid([1,7], [2,9]).bounding_box do
-        text @doctor.praxis.honorific_prefix, :leading => 2.5
-        text @doctor.praxis.given_name + " " + @doctor.praxis.family_name, :leading => 2.5
-        text @doctor.praxis.street_address, :leading => 2.5
-        text @doctor.praxis.postal_code + " " + @doctor.praxis.locality, :leading => 2.5
+      bounding_box([310, 75], :width => 180) do
+        text @doctor.praxis.honorific_prefix
+        text @doctor.praxis.given_name + " " + @doctor.praxis.family_name
+        text @doctor.praxis.street_address
+        text @doctor.praxis.postal_code + " " + @doctor.praxis.locality
       end
 
-      grid([1,11], [2,11]).bounding_box do
-  #      barcode = Barby::Code39.new("%04d" % @doctor.id)
-  #      rotate(90, :origin => [0,0]) do
-  #        barcode.annotate_pdf(self, :height => 14, :xdim => 1, :ypos => 20)
-  #      end
-      end
+      #grid([1,11], [2,11]).bounding_box do
+        #barcode = Barby::Code39.new("%04d" % @doctor.id)
+        #rotate(90, :origin => [0,0]) do
+        #  barcode.annotate_pdf(self, :height => 14, :xdim => 1, :ypos => 20)
+        #end
+      #end
     end
 
     render
