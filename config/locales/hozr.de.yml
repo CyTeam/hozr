@@ -6,6 +6,7 @@ de:
   activerecord:
     models:
       attachment: Anhang
+      tenant:  Mandant
       user:    Benutzer
       patient: Patient
       doctor:  Arzt
@@ -20,7 +21,7 @@ de:
       attachment:
         code: "Verwenden als"
         code_enum:
-          DebitInvoiceDocument: Rechnungsvorlage
+          DoctorOrderForm: Auftragsformular
           LetterDocument: Briefvorlage
         encoding: Zeichensatz
         encoding_enum:
