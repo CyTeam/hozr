@@ -16,7 +16,7 @@ load 'deploy/assets'
 set :default_stage, 'staging'
 
 # Deployment
-set :user, "www-data"                               # The server's user for deploys
+set :user, "deployer"                               # The server's user for deploys
 
 # Shared directories
 set :shared_children, shared_children + ['tmp/sockets', 'config/swissmatch.yml', 'public/trigger', 'public/order_form']
