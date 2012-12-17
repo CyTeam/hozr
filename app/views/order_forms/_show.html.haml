@@ -1,7 +1,1 @@
-#order_form.modal.hide
-  = modal_header t_model(OrderForm)
-
-  .modal-body
-    = image_tag inline_order_form_path(@order_form)
-  .modal-footer
-    = link_to t_action(:close), '#', :class => 'btn', 'data-dismiss' => 'modal'
+= image_tag inline_order_form_path(@order_form)

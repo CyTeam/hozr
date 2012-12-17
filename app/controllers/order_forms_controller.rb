@@ -1,5 +1,5 @@
 # encoding: utf-8'
-class OrderFormsController < ApplicationController
+class OrderFormsController < AuthorizedController
   # AJAX functions
   def head_image
     @order_form = OrderForm.find(params[:id])

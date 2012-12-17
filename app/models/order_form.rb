@@ -3,6 +3,14 @@
 require 'rails_file_column'
 
 class OrderForm < ActiveRecord::Base
+  include I18nHelpers
+
+  def to_s
+    t_model(self.class)
+  end
+
+  default_scope order('created_at DESC')
+
   file_column :file, :magick => {
     :versions => {
       :address => {:transformation => Proc.new { |image| image.crop(::Magick::NorthWestGravity, image.rows, image.columns * 0.5, true) }, :size => "560"},
@@ -15,6 +23,7 @@ class OrderForm < ActiveRecord::Base
   }
 
   belongs_to :a_case, :class_name => 'Case', :foreign_key => 'case_id'
+  alias :case :a_case
 
   def extract_result_remarks(image)
     cropped = image.crop(::Magick::NorthWestGravity, 0, 600, image.rows, image.columns * 0.45, true)
@@ -29,7 +38,7 @@ class OrderForm < ActiveRecord::Base
 
   def self.import_order_forms(order_form_dir)
     order_form_files = Dir.glob("#{order_form_dir}/*.jpg").sort
-  
+
     p "Anzahl: #{order_form_files.size}"
 
     for order_form_file in order_form_files

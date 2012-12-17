@@ -85,6 +85,9 @@ de:
         doctor:               Zuweisender Arzt
         remarks:              Bemerkungen
 
+      order_form:
+        case:                 Fall
+        created_at:           Erstellt um
       insurance_policy:
         insurance:            Versicherung
         number:               Versicherten Nr.
@@ -130,6 +133,8 @@ de:
   cases:
     first_entry:
       title:           Ersteingabe
+    unassigned_form:
+      title:           Auftragsformulare
   send_queues:
     index:
       title:           Versand History

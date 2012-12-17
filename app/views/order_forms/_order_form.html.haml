@@ -1,0 +1,4 @@
+%tr[order_form]
+  %td= order_form.created_at
+  %td= link_to order_form.case, order_form.case if order_form.case
+  %td.action-links= list_link_for :delete, order_form, :remote => true
