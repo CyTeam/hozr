@@ -510,7 +510,7 @@ ActiveRecord::Schema.define(:version => 20121203135308) do
     t.datetime "case_date"
     t.string   "ssn"
     t.string   "nif"
-    t.string   "type"
+    t.string   "code"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
