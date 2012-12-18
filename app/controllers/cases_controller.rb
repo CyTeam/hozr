@@ -60,20 +60,6 @@ class CasesController < AuthorizedController
     end
   end
 
-
-  def create
-    params[:case][:patient_id] = params[:patient][:full_name].split(' ')[0].to_i
-    @case = Case.new(params[:case])
-
-    if @case.save
-      flash[:notice] = 'Case was successfully created.'
-      redirect_to :action => 'list'
-    else
-      render :action => 'new'
-    end
-  end
-
-
   # Second Entry
   # ============
   def second_entry_queue
