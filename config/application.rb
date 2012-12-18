@@ -39,6 +39,17 @@ module Hozr
     # JavaScript files you want as :defaults (application.js is always included).
     # config.action_view.javascript_expansions[:defaults] = %w(jquery rails)
 
+    # Configure for default stylesheet engine
+    config.sass.preferred_syntax = :sass
+
+    # Configure generators values. Many other options are available, be sure to check the documentation.
+    config.generators do |g|
+      g.stylesheets false
+      g.test_framework :rspec
+      g.template_engine :haml
+      g.fixture_replacement :factory_girl
+    end
+
     # Configure the default encoding used in templates for Ruby 1.9.
     config.encoding = "utf-8"
 
