@@ -8,4 +8,4 @@
     %th= t_attr(:doctor_patient_nr, Patient)
     %th= t_attr(:insurance, Patient)
 
-  = render @patients.select{|patient| patient.vcard}
+  = render collection

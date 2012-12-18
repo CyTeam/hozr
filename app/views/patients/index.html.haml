@@ -2,5 +2,8 @@
 
 = boot_page_title(number_with_delimiter(@patients.total_entries) + " Patienten")
 
-= paginated_section @patients, :params => {:query => params[:query]} do
-  = render :partial => 'patients/list'
+= paginate collection
+
+= render 'list', :collection => collection
+
+= paginate collection

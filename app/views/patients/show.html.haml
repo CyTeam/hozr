@@ -2,11 +2,11 @@
   = icon_link_to :update, '#', :type => 'primary', :icon => 'download-alt', :class => 'submit-button'
   = contextual_link_to :delete, nil, :type => 'danger'
   = contextual_link_to :index
-  = icon_link_to :invoice_overview, cydoc_url_for("patients/#{@patient.id}?tab=invoices"), :icon => 'list', :target => cydoc_hostname
+  = icon_link_to :invoice_overview, cydoc_url_for("patients/#{resource.id}?tab=invoices"), :icon => 'list', :target => cydoc_hostname
 
 = boot_page_title
 
 = render 'form'
 
 - content_for :sidebar do
-  = render 'cases/compact_list', :cases => @patient.cases
+  = render 'cases/compact_list', :cases => resource.cases

@@ -1,12 +1,52 @@
 # encoding: utf-8
 
 class Doctor < ActiveRecord::Base
+  # Access restrictions
+  attr_accessible :vcard, :ean_party, :zsr, :print_payment_for
+
   scope :active, where(:active => true)
 
-  has_one :praxis, :class_name => 'Vcard', :as => :object, :conditions => {:vcard_type => 'praxis'}, :autosave => true
-  has_one :private, :class_name => 'Vcard', :as => :object, :conditions => {:vcard_type => 'private'}, :autosave => true
+  has_one :praxis, :class_name => 'Vcard', :as => :object, :conditions => {:vcard_type => 'praxis'}
+
+  # TODO support multiple vcards
+  has_vcards
+  has_one :vcard, :as => :object
+  accepts_nested_attributes_for :vcard
+  attr_accessible :vcard_attributes
+
+  has_one :private, :class_name => 'Vcard', :as => :object, :conditions => {:vcard_type => 'private'}
   belongs_to :billing_doctor, :class_name => 'Doctor'
-  
+
+  def billing_doctor_id
+    read_attribute(:billing_doctor_id) || id
+  end
+
+  # Proxy accessors
+  def name
+    if vcard.nil?
+      login
+    else
+      vcard.full_name
+    end
+  end
+
+  # ZSR sanitation
+  def zsr=(value)
+    value.delete!(' .') unless value.nil?
+
+    write_attribute(:zsr, value)
+  end
+
+
+  # Settings
+  # ========
+  has_settings
+  def self.settings
+    doctor = Doctor.find(Thread.current["doctor_id"]) if Doctor.exists?(Thread.current["doctor_id"])
+
+    doctor.present? ? doctor.settings : Settings
+  end
+
   has_many :cases
   has_many :patients
   has_many :mailings
@@ -37,10 +77,10 @@ class Doctor < ActiveRecord::Base
     channel << 'email' if wants_email
     channel << 'print' if wants_prints
     channel << 'overview_email' if wants_overview_email
-    
+
     channel
   end
-  
+
   # HL7
   scope :wanting_hl7, includes(:user).where("users.wants_hl7 = ?", true)
   delegate :wants_hl7, :wants_hl7=, :to => :user
@@ -54,48 +94,10 @@ class Doctor < ActiveRecord::Base
   # Printing
   scope :wanting_prints, includes(:user).where("users.wants_prints = ?", true)
   delegate :wants_prints, :wants_prints=, :to => :user
-    
+
   # Helpers
+  # =======
   def to_s
-    name
-  end
-  
-  # Hozr
-  def family_name
-    praxis.family_name || ""
-  end
-
-  def family_name=(name)
-    praxis.family_name = name
-  end
-
-  def given_name
-    praxis.given_name || ""
-  end
-
-  def given_name=(name)
-    praxis.given_name = name
-  end
-
-  def name
-    praxis.full_name || ""
-  end
-
-  def billing_doctor_id
-    read_attribute(:billing_doctor_id) || id
-  end
-
-  # Customers support
-  def uid
-    name.tr(' -', '_').underscore
-  end
-
-  def uidNumber
-    sprintf("%03.0f", id)
-  end
-
-  # Password
-  def password=(value)
-    write_attribute(:password, Digest::SHA256.hexdigest(value))
+    [vcard.honorific_prefix, vcard.given_name, vcard.family_name].compact.select{|f| not f.empty?}.join(" ")
   end
 end

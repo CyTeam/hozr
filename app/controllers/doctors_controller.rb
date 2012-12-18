@@ -1,55 +1,16 @@
 # encoding: utf-8'
 class DoctorsController < AuthorizedController
-
-  def index
-    params[:order] ||= 'vcards.family_name, vcards.given_name'
-    
-    @doctors = Doctor.includes(:praxis).order(params[:order]).active.all
-  end
-
-  def show
-    @doctor = Doctor.find(params[:id])
-  end
-
-  def new
-    @doctor = Doctor.new
-  end
-
-  def create
-    @doctor = Doctor.new(params[:doctor])
-    @doctor.praxis = Vcard.new(params[:praxis_vcard])
-    @doctor.private = Vcard.new(params[:private_vcard])
-    
-    if @doctor.save
-      flash[:notice] = 'Doctor was successfully created.'
-      redirect_to doctors_path
+  # has_many :phone_numbers
+  def new_phone_number
+    if resource_id = params[:id]
+      @doctor = Doctor.find(resource_id)
     else
-      render :action => 'new'
+      @doctor = resource_class.new
     end
-  end
 
-  def edit
-    @doctor = Doctor.find(params[:id])
-    @praxis_vcard = @doctor.praxis
-    @private_vcard = @doctor.private
-  end
+    @vcard = @doctor.vcard
+    @item = @vcard.contacts.build
 
-  def update
-    @doctor = Doctor.find(params[:id])
-    praxis  = @doctor.praxis || @doctor.build_praxis
-    private = @doctor.private || @doctor.build_private
-    if praxis.update_attributes(params[:praxis_vcard]) and private.update_attributes(params[:private_vcard]) and @doctor.update_attributes(params[:doctor])
-      @doctor.touch
-      
-      flash[:notice] = 'Doctor was successfully updated.'
-      redirect_to :action => 'show', :id => @doctor
-    else
-      render :action => 'edit'
-    end
-  end
-
-  def destroy
-    Doctor.find(params[:id]).destroy
-    redirect_to doctors_path
+    respond_with @item
   end
 end
