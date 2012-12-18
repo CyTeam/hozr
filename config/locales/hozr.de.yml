@@ -16,6 +16,7 @@ de:
       classification: Klassifikation
       employee: Mitarbeiter
       finding_class: Befund
+      assignment: Auftragsdaten
 
     attributes:
       attachment:

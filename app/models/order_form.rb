@@ -22,8 +22,10 @@ class OrderForm < ActiveRecord::Base
     }
   }
 
+  # Case
   belongs_to :a_case, :class_name => 'Case', :foreign_key => 'case_id'
   alias :case :a_case
+  scope :unassigned, where(:case_id => nil)
 
   def extract_result_remarks(image)
     cropped = image.crop(::Magick::NorthWestGravity, 0, 600, image.rows, image.columns * 0.45, true)

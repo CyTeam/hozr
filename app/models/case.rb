@@ -15,7 +15,14 @@ class Case < ActiveRecord::Base
   has_and_belongs_to_many :finding_classes
   has_and_belongs_to_many :mailings
 
-  has_one :order_form
+  has_one :order_form, :autosave => true
+  def order_form_id
+    self.order_form.try(:id)
+  end
+
+  def order_form_id=(value)
+    self.order_form = OrderForm.find(value)
+  end
 
   # Scopes
   scope :finished, where("screened_at IS NOT NULL AND needs_review = ?", false)
@@ -108,31 +115,6 @@ class Case < ActiveRecord::Base
       scope = self.class
     end
     scope.where("id > ?", id).first
-  end
-
-  def initialize(params = {})
-    case params.class.name
-    when 'String'
-      initialize_from_order_form_file_name(params)
-    when 'File'
-      initialize_from_order_form_file(params)
-    when 'OrderForm'
-      initialize_from_order_form(params)
-    else
-      super(params)
-    end
-  end
-
-  def initialize_from_order_form_file_name(order_form_file_name)
-    initialize_from_order_form_file(File.new(order_form_file_name))
-  end
-
-  def initialize_from_order_form_file(order_form_file)
-    initialize_from_order_form(OrderForm.new(:file => order_form_file))
-  end
-
-  def initialize_from_order_form(order_form)
-    initialize(:order_form => order_form)
   end
 
   private

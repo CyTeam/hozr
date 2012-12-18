@@ -41,6 +41,10 @@ Hozr::Application.routes.draw do
     end
   end
 
+  namespace :case do
+    resource :assignments
+  end
+
   resources :cases do
     resources :patients, :module => 'case'
 

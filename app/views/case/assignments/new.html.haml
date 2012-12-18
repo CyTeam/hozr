@@ -1,19 +1,24 @@
-%h1 Tages Scans
-= form_tag({:action => 'assign'}, :name => "unassigned") do
+.contextual
+  = contextual_link_to :new, OrderForm
+
+= boot_page_title
+
+= simple_form_for '', :url => case_assignments_path, :method => :post do |f|
   %table#unassigned_sort_queue
     - next_eingangs_nr = CaseNr.new
     - intra_day_id = @intra_day_id
-    - for @a_case in @cases
-      - a_case = @a_case
-      %tr
+    - @cases.each do |a_case|
+      - @a_case = a_case
+      %tr[a_case.order_form]
         %td
           = link_to(image_tag(inline_order_form_url(@a_case.order_form, :type => :head)), inline_order_form_url(@a_case.order_form)) if @a_case.order_form
+          = hidden_field "a_case[]", 'order_form_id'
         %td{:style => "border-top: solid 2px; border-bottom: solid 2px; vertical-align: bottom"}
           - @a_case.intra_day_id = intra_day_id
           - intra_day_id += 1
           - @a_case.praxistar_eingangsnr ||= next_eingangs_nr.to_s
           - next_eingangs_nr.inc!
-          = link_to 'Löschen', destroy_from_assign_case_path(a_case), :remote => true, :method => :delete
+          = link_to 'Löschen', order_form_path(a_case.order_form), :remote => true, :method => :delete
           %br/
           %table.case{"data-case-id" => a_case.id, :id => "a_case_#{a_case.id}"}
             %tr
@@ -28,4 +33,5 @@
             %tr
               %td Arzt:
               %td= select 'a_case[]', 'doctor_id', doctors_collection, { :include_blank => true }, :tabindex => intra_day_id + 20000
-  = submit_tag 'Zuweisen'
+
+  = f.button :submit

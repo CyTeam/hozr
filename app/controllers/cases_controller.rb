@@ -45,60 +45,6 @@ class CasesController < ApplicationController
     end
   end
 
-  # Assigning
-  # =========
-  def unassigned_form
-    @first_case = Case.unassigned.first
-    @case_count = Case.unassigned.count
-  end
-
-  def unassigned_sort_queue
-    @cases = Case.unassigned
-    @intra_day_id = params[:case][:intra_day_id].to_i
-  end
-
-  def assign
-    assigned_at = DateTime.now
-
-    case_ids = params[:a_case].keys
-    @cases = Case.order('intra_day_id').find(case_ids)
-
-    for a_case in @cases
-      a_case.assigned_at = assigned_at
-      a_case.update_attributes(params[:a_case][a_case.id.to_s])
-      a_case.save!
-    end
-  end
-
-  def assign_list
-    @cases = Case.where('assigned_at = ?', params[:assigned_at]).order('intra_day_id').all
-    @assigned_at = params[:assigned_at]
-
-    render :action => 'assign'
-  end
-
-  def destroy_from_assign
-   @case = Case.find(params[:id])
-   @case.destroy
-  end
-
-  # Show list of assignings from the last 7 days.
-  def assignings_list
-    @assignings = Case.find_by_sql('SELECT assigned_at, min(intra_day_id) AS min_intra_day_id, max(intra_day_id) AS max_intra_day_id, min(praxistar_eingangsnr) AS min_praxistar_eingangsnr, max(praxistar_eingangsnr) AS max_praxistar_eingangsnr, count(*) AS count FROM cases GROUP BY assigned_at HAVING assigned_at > now() - INTERVAL 7 DAY ORDER BY assigned_at DESC')
-  end
-
-  def delete_assigning
-    Case.where('assigned_at = ?', params[:assigned_at]).destroy_all
-
-    redirect_to :action => 'assignings_list'
-  end
-
-  def delete_rest_of_assigning
-    Case.where('assigned_at = ?', params[:assigned_at]).where('intraday_id >= ?', params[:intra_day_id]).destroy_all
-
-    redirect_to :action => 'assignings_list'
-  end
-
   # First Entry
   # ===========
   def first_entry_queue

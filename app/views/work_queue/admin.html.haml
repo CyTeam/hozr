@@ -3,7 +3,7 @@
     %tr
       %td{:style => "vertical-align: top"}
         %p
-          = link_to image_tag('assign.png', :size => '45x45'), :controller => 'cases', :action => 'unassigned_form'
+          = link_to image_tag('assign.png', :size => '45x45'), new_case_assignment_path
           %i{:style => "font-size: 12pt"}
             %b= @assign_count
             Auftragsformulare.

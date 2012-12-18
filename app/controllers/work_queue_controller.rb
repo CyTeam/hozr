@@ -1,7 +1,7 @@
 # encoding: utf-8'
 class WorkQueueController < ApplicationController
   def admin
-    @assign_count = Case.unassigned.count
+    @assign_count = OrderForm.unassigned.count
     @first_entry_count = Case.for_first_entry.count
     @second_entry_count = Case.for_second_entry.count
     @p16_count = Case.for_p16.count
