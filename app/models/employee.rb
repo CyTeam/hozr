@@ -7,7 +7,7 @@ class Employee < ActiveRecord::Base
   # Proxies
   has_one :vcard, :as => :object
   accepts_nested_attributes_for :vcard
-  attr_accessible :vcard_attributes
+  attr_accessible :vcard, :vcard_attributes
 
   def name
     (work_vcard || private_vcard).try(:full_name)
