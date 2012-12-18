@@ -117,18 +117,8 @@ class Case < ActiveRecord::Base
     scope.where("id > ?", id).first
   end
 
-  private
-  def self.parse_eingangsnr(value)
-    CaseNr.new(value).to_s
-  end
-
-  public
   def praxistar_eingangsnr=(value)
-    write_attribute(:praxistar_eingangsnr, Case.parse_eingangsnr(value))
-  end
-
-  def self.praxistar_eingangsnr_exists?(value)
-    return !( find_by_praxistar_eingangsnr(parse_eingangsnr(value)).nil? )
+    write_attribute(:praxistar_eingangsnr, CaseNr.new(value).to_s)
   end
 
   def examination_date=(value)
