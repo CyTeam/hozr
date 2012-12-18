@@ -132,6 +132,9 @@ de:
       refresh:          Aktualisieren
 
   # Titles
+  attachments:
+    index:
+      title:         Dokumente
   cases:
     first_entry:
       title:           Ersteingabe
