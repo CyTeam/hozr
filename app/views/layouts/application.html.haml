@@ -84,7 +84,9 @@
                       %li= link_to "Klassifikationen", classifications_path
                       %li= link_to "Klassifikationsgruppen", classification_groups_path
                       %li= link_to "Befunde", finding_classes_path
+                      %li.divider
                       %li= link_to "Mitarbeiter", employees_path
+                      %li= link_to t_model(Tenant), current_tenants_path
                       %li= link_to t_model(User), users_path
               %li
                 = form_tag search_path, :class => "navbar-search pull-left" do
