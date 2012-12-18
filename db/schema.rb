@@ -876,6 +876,7 @@ ActiveRecord::Schema.define(:version => 20121203135308) do
     t.datetime "confirmation_sent_at"
     t.string   "reset_password_token"
     t.datetime "remember_created_at"
+    t.integer  "tenant_id"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email"
