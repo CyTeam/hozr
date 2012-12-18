@@ -13,12 +13,12 @@ class OrderForm < ActiveRecord::Base
 
   file_column :file, :magick => {
     :versions => {
-      :address => {:transformation => Proc.new { |image| image.crop(::Magick::NorthWestGravity, image.rows, image.columns * 0.5, true) }, :size => "560"},
+      :address => {:transformation => :extract_address, :size => "560"},
       :result_remarks => {:transformation => :extract_result_remarks, :size => "620"},
-      :overview => {:transformation => Proc.new { |image| image.crop(::Magick::NorthWestGravity, 0, 75, 1155, 360, true) } },
-      :head => {:transformation => Proc.new { |image| image.crop(::Magick::NorthWestGravity, 0, 0, 1172, 586, true) }, :size => "500" },
-      :head_big => {:transformation => Proc.new { |image| image.crop(::Magick::NorthWestGravity, 0, 0, 1172, 586, true) }, :size => "750" },
-      :foot => {:transformation => Proc.new { |image| image.crop(::Magick::NorthWestGravity, 0, 1137, 1172, 469, true) }, :size => "500" }
+      :overview => {:transformation => :extract_overview },
+      :head => {:transformation => :extract_head, :size => "500" },
+      :head_big => {:transformation => :extract_head_big, :size => "750" },
+      :foot => {:transformation => :extract_foot, :size => "500" }
     }
   }
 
@@ -36,6 +36,26 @@ class OrderForm < ActiveRecord::Base
     despeckled.fuzz = 1500
     whited = despeckled.opaque('#EAEAF6', 'white')
     return whited
+  end
+
+  def extract_address(image)
+    image.crop(::Magick::NorthWestGravity, image.rows, image.columns * 0.5, true)
+  end
+
+  def extract_overview(image)
+    image.crop(::Magick::NorthWestGravity, 0, 75, 1155, 360, true)
+  end
+
+  def extract_head(image)
+    image.crop(::Magick::NorthWestGravity, 0, 0, 1172, 586, true)
+  end
+
+  def extract_head_big(image)
+    image.crop(::Magick::NorthWestGravity, 0, 0, 1172, 586, true)
+  end
+
+  def extract_foot(image)
+    image.crop(::Magick::NorthWestGravity, 0, 1137, 1172, 469, true)
   end
 
   def self.import_order_forms(order_form_dir)
