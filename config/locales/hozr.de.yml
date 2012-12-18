@@ -85,6 +85,7 @@ de:
         scan:                 Scan
         doctor:               Zuweisender Arzt
         remarks:              Bemerkungen
+        intra_day_id:         Tagesnr.
 
       order_form:
         case:                 Fall

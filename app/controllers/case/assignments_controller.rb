@@ -14,7 +14,7 @@ class Case::AssignmentsController < ApplicationController
   def create
     assigned_at = DateTime.now
 
-    for case_param in params[:a_case]
+    for case_param in params[:case]
       Case.create(case_param.merge(:assigned_at => assigned_at))
     end
 

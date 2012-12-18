@@ -3,35 +3,24 @@
 
 = boot_page_title
 
-= simple_form_for '', :url => case_assignments_path, :method => :post do |f|
-  %table#unassigned_sort_queue
-    - next_eingangs_nr = CaseNr.new
-    - intra_day_id = @intra_day_id
-    - @cases.each do |a_case|
-      - @a_case = a_case
-      %tr[a_case.order_form]
-        %td
-          = link_to(image_tag(inline_order_form_url(@a_case.order_form, :type => :head)), inline_order_form_url(@a_case.order_form)) if @a_case.order_form
-          = hidden_field "a_case[]", 'order_form_id'
-        %td{:style => "border-top: solid 2px; border-bottom: solid 2px; vertical-align: bottom"}
-          - @a_case.intra_day_id = intra_day_id
+= simple_form_for '', :url => case_assignments_path, :method => :post, :html => {:class => 'no-well'} do |f|
+  - next_eingangs_nr = CaseNr.new
+  - intra_day_id = @intra_day_id
+  - @cases.each do |a_case|
+    = f.fields_for 'case[]', a_case do |c|
+      .row-fluid.well[a_case.order_form]
+        .span6
+          = link_to(image_tag(inline_order_form_url(a_case.order_form, :type => :head)), inline_order_form_url(a_case.order_form)) if a_case.order_form
+          = c.input :order_form_id, :as => :hidden
+        .span6
+          - a_case.intra_day_id = intra_day_id
           - intra_day_id += 1
-          - @a_case.praxistar_eingangsnr ||= next_eingangs_nr.to_s
+          - a_case.praxistar_eingangsnr ||= next_eingangs_nr.to_s
           - next_eingangs_nr.inc!
-          = link_to 'Löschen', order_form_path(a_case.order_form), :remote => true, :method => :delete
-          %br/
-          %table.case{"data-case-id" => a_case.id, :id => "a_case_#{a_case.id}"}
-            %tr
-              %td Eingangsnr:
-              %td= text_field "a_case[]", 'praxistar_eingangsnr', :size => 10, :tabindex => intra_day_id + 30000
-            %tr
-              %td Tagesnr.:
-              %td= text_field "a_case[]", 'intra_day_id', :size => 4, :tabindex => intra_day_id
-            %tr
-              %td Abstrichdatum.:
-              %td= text_field "a_case[]", 'examination_date', :size => 8, :tabindex => intra_day_id + 10000
-            %tr
-              %td Arzt:
-              %td= select 'a_case[]', 'doctor_id', doctors_collection, { :include_blank => true }, :tabindex => intra_day_id + 20000
+          = c.input :praxistar_eingangsnr, :input_html => {:tabindex => intra_day_id + 30000}
+          = c.input :intra_day_id, :input_html => {:tabindex => intra_day_id}
+          = c.input :examination_date, :as => :string, :input_html => {:tabindex => intra_day_id + 10000}
+          = c.association :doctor, :input_html => {:tabindex => intra_day_id + 20000}
+          .form-actions= link_to 'Löschen', order_form_path(a_case.order_form), :remote => true, :method => :delete, :class => 'btn'
 
   = f.button :submit
