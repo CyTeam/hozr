@@ -5,6 +5,10 @@ class Employee < ActiveRecord::Base
   belongs_to :private_vcard, :class_name => 'Vcard', :foreign_key => :private_vcard_id
 
   # Proxies
+  has_one :vcard, :as => :object
+  accepts_nested_attributes_for :vcard
+  attr_accessible :vcard_attributes
+
   def name
     (work_vcard || private_vcard).try(:full_name)
   end
