@@ -6,35 +6,10 @@
       .span5
         = link_to image_tag(inline_order_form_url(@case.order_form, :type => :head)), order_form_path(@case.order_form), :remote => true
 
-.row-fluid
-  .span3= classification_button('1')
-  .span3= classification_button('2')
-  .span3= classification_button('vulva')
-  .span3= classification_button('vagina')
-
-.row-fluid
-  .span3= classification_button('2A')
-  .span3= classification_button('2-3A')
-
-.row-fluid
-  .span3= classification_button('3L')
-  .span3= classification_button('3M-c1-2')
-  .span3= classification_button('3M')
-
-.row-fluid
-  .span3= classification_button('3S-c2-3')
-  .span3= classification_button('3S')
-
-.row-fluid
-  .span3= classification_button('4')
-  .span3= classification_button('5')
-  .span3= classification_button('az')
-
-.row-fluid
-  .span3= classification_button('mam')
-  .span3= classification_button('sput')
-  .span3= classification_button('hpv')
-  .span3= classification_button('extra')
+- ClassificationGroup.all.each do |classification_group|
+  .row-fluid
+    - classification_group.classifications.pluck(:code).uniq.each do |code|
+      .span3= classification_button(code)
 
 - content_for :sidebar do
   = render 'info'
