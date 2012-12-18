@@ -37,6 +37,15 @@
   margin-bottom: 0px;
 }
 
+.no-well {
+  background-color: inherit;
+  border: inherit;
+  box-shadow: inherit;
+  padding: inherit;
+  margin: inherit;
+  border-radius: inherit;
+}
+
 /* Forms */
 label.input-important {
   font-weight: bold;
