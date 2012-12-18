@@ -1,5 +1,10 @@
 # encoding: utf-8'
 class OrderFormsController < AuthorizedController
+  # CRUD
+  def create
+    create! {new_order_form_path}
+  end
+
   # AJAX functions
   def head_image
     @order_form = OrderForm.find(params[:id])
