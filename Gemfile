@@ -18,7 +18,6 @@ gem 'activerecord-sqlserver-adapter'
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  gem 'sass-rails'
   gem 'sprockets'
   gem 'coffee-rails'
   gem 'therubyracer'
@@ -96,6 +95,7 @@ gem 'inherited_resources'
 gem 'has_scope'
 gem 'i18n_rails_helpers'
 gem 'haml'
+gem 'sass-rails'
 
 # Layout
 gem 'lyb_sidebar'
