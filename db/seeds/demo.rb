@@ -3,9 +3,7 @@
 # Demo Seed
 # =========
 # Tenant
-tenant = Doctor.create!(
-  :praxis => Vcard.new(:family_name => "Labori", :given_name => "Andre", :street_address => "Hauptstr. 99", :postal_code => "6300", :locality => "Zug", :vcard_type => "praxis")
-)
+tenant = Tenant.create!
 
 # Employees
 zyto = Employee.create!(
@@ -17,7 +15,8 @@ user = User.create!(
   :password => 'zyto1234',
   :password_confirmation => 'zyto1234',
   :object => zyto,
-  :role_texts => ['zyto']
+  :role_texts => ['zyto'],
+  :tenant => tenant
 )
 
 sysadmin = Employee.create!(
