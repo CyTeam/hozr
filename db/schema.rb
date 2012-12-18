@@ -618,9 +618,11 @@ ActiveRecord::Schema.define(:version => 20121203135308) do
     t.string   "state"
     t.integer  "appointment_id"
     t.datetime "sent_at"
+    t.integer  "doctor_id"
   end
 
   add_index "recalls", ["appointment_id"], :name => "index_recalls_on_appointment_id"
+  add_index "recalls", ["doctor_id"], :name => "index_recalls_on_doctor_id"
   add_index "recalls", ["patient_id"], :name => "index_recalls_on_patient_id"
   add_index "recalls", ["state"], :name => "index_recalls_on_state"
 
