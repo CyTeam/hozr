@@ -575,14 +575,14 @@ ActiveRecord::Schema.define(:version => 20121203135308) do
     t.integer  "sex"
     t.integer  "only_year_of_birth"
     t.integer  "doctor_id"
-    t.text     "remarks",             :limit => 255
+    t.text     "remarks"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "dunning_stop",                       :default => false
-    t.boolean  "use_billing_address",                :default => false
-    t.boolean  "deceased",                           :default => false
+    t.boolean  "dunning_stop",        :default => false
+    t.boolean  "use_billing_address", :default => false
+    t.boolean  "deceased",            :default => false
     t.string   "doctor_patient_nr"
-    t.boolean  "active",                             :default => true,  :null => false
+    t.boolean  "active",              :default => true,  :null => false
     t.string   "name"
     t.integer  "imported_id"
     t.boolean  "delta",                              :default => true,  :null => false
