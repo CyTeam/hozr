@@ -4,8 +4,6 @@
 = boot_page_title
 
 = simple_form_for '', :url => case_assignments_path, :method => :post, :html => {:class => 'no-well'} do |f|
-  - next_eingangs_nr = CaseNr.new
-  - intra_day_id = @intra_day_id
   - @cases.each do |a_case|
     = f.fields_for 'case[]', a_case do |c|
       .row-fluid.well[a_case.order_form]
@@ -13,14 +11,10 @@
           = link_to(image_tag(inline_order_form_url(a_case.order_form, :type => :head)), inline_order_form_url(a_case.order_form)) if a_case.order_form
           = c.input :order_form_id, :as => :hidden
         .span6
-          - a_case.intra_day_id = intra_day_id
-          - intra_day_id += 1
-          - a_case.praxistar_eingangsnr ||= next_eingangs_nr.to_s
-          - next_eingangs_nr.inc!
-          = c.input :praxistar_eingangsnr, :input_html => {:tabindex => intra_day_id + 30000}
-          = c.input :intra_day_id, :input_html => {:tabindex => intra_day_id}
-          = c.input :examination_date, :as => :string, :input_html => {:tabindex => intra_day_id + 10000}
-          = c.association :doctor, :input_html => {:tabindex => intra_day_id + 20000}
+          = c.input :praxistar_eingangsnr, :input_html => {:tabindex => c.object.intra_day_id + 30000}
+          = c.input :intra_day_id, :input_html => {:tabindex => c.object.intra_day_id}
+          = c.input :examination_date, :as => :string, :input_html => {:tabindex => c.object.intra_day_id + 10000, 'data-autofocus' => true}
+          = c.association :doctor, :input_html => {:tabindex => c.object.intra_day_id + 20000}
           .form-actions= link_to 'Löschen', order_form_path(a_case.order_form), :remote => true, :method => :delete, :class => 'btn'
 
   = f.button :submit

@@ -4,11 +4,19 @@ class Case::AssignmentsController < ApplicationController
   # Assigning
   # =========
   def new
+    case_code = CaseNr.new
+    intra_day_id = 1
     @cases = OrderForm.unassigned.reorder(:created_at).map do |order_form|
-      Case.new(:order_form => order_form)
-    end
+      a_case = Case.new(
+        :order_form => order_form,
+        :intra_day_id => intra_day_id,
+        :praxistar_eingangsnr => case_code.to_s
+      )
+      intra_day_id += 1
+      case_code = case_code.inc!
 
-    @intra_day_id = 1
+      a_case
+    end
   end
 
   def create
