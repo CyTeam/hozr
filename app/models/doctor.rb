@@ -6,15 +6,12 @@ class Doctor < ActiveRecord::Base
 
   scope :active, where(:active => true)
 
-  has_one :praxis, :class_name => 'Vcard', :as => :object, :conditions => {:vcard_type => 'praxis'}
-
   # TODO support multiple vcards
   has_vcards
   has_one :vcard, :as => :object
   accepts_nested_attributes_for :vcard
   attr_accessible :vcard_attributes
 
-  has_one :private, :class_name => 'Vcard', :as => :object, :conditions => {:vcard_type => 'private'}
   belongs_to :billing_doctor, :class_name => 'Doctor'
 
   def billing_doctor_id
@@ -98,6 +95,6 @@ class Doctor < ActiveRecord::Base
   # Helpers
   # =======
   def to_s
-    [vcard.honorific_prefix, vcard.given_name, vcard.family_name].compact.select{|f| not f.empty?}.join(" ")
+    [vcard.honorific_prefix, vcard.full_name].map(&:presence).compact.join(" ")
   end
 end

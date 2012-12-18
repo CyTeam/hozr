@@ -111,7 +111,7 @@ gem 'ledermann-rails-settings', :require => 'rails-settings'
 
 # Addresses
 gem 'unicode_utils'
-gem 'has_vcards'
+gem 'has_vcards', :git => 'https://github.com/huerlisi/has_vcards.git'
 gem 'autocompletion'
 gem 'swissmatch', :git => 'https://github.com/apeiros/swissmatch.git'
 gem 'swissmatch-location', :git => 'https://github.com/apeiros/swissmatch-location.git'

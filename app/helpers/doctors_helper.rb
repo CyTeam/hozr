@@ -1,13 +1,13 @@
 # encoding: utf-8'
 module DoctorsHelper
   def doctors_collection
-    Doctor.active.includes(:praxis => :address).order('vcards.family_name, vcards.given_name').collect { |m| [ [ m.family_name, m.given_name ].join(", ") + " (#{m.praxis.locality})", m.id ] }
+    Doctor.active.includes(:vcards => :address).order('vcards.family_name, vcards.given_name').collect { |m| [ m.to_s, m.id ] }
   end
-  
+
   def select_doctors(params = {})
     method = params[:method] ? params[:method] : :doctor_id
     collection = doctors_collection
-    
+
     if params[:form]
       params[:form].select method, collection, :label => 'Arzt', :include_blank => true
     elsif params[:object]
