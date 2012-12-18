@@ -15,7 +15,7 @@ class ResultReport < Prawn::Document
                          :normal      => font_path.join("ChollSanReg.ttf").to_s,
                          :italic      => font_path.join("ChollSanIta.ttf").to_s,
                          :thin        => font_path.join("ChollSanThi.ttf").to_s,
-                         :thin_italic => font_path.join("ChollSanThiIta.tff").to_s 
+                         :thin_italic => font_path.join("ChollSanThiIta.tff").to_s
     })
 
     # support page sizes
