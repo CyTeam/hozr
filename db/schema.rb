@@ -742,6 +742,7 @@ ActiveRecord::Schema.define(:version => 20121203135308) do
     t.integer  "imported_id"
   end
 
+  add_index "sessions", ["duration_from"], :name => "index_sessions_on_duration_from"
   add_index "sessions", ["patient_id"], :name => "index_sessions_on_patient_id"
   add_index "sessions", ["state"], :name => "index_sessions_on_state"
   add_index "sessions", ["treatment_id"], :name => "index_sessions_on_treatment_id"
