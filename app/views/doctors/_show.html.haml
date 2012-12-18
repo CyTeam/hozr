@@ -1,2 +1,5 @@
-- doctor = @doctor
-= render :partial => "doctors/compact", :object => doctor if doctor
+%ul.nav.nav-tabs
+  %li.active= link_to t('.tab.show'), '#tab-show', {:data => {:toggle => 'tab'}}
+
+.tab-content
+  #tab-show.tab-pane.active= render 'form'

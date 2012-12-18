@@ -27,7 +27,17 @@ Hozr::Application.routes.draw do
   end
 
   # Main resources
-  resources :doctors
+
+  resources :doctors do
+    resources :phone_numbers
+    member do
+      get :new_phone_number
+    end
+    collection do
+      get :new_phone_number
+    end
+  end
+
   resources :employees
 
   resources :patients do
