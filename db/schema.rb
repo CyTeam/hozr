@@ -585,7 +585,8 @@ ActiveRecord::Schema.define(:version => 20121203135308) do
     t.boolean  "active",              :default => true,  :null => false
     t.string   "name"
     t.integer  "imported_id"
-    t.boolean  "delta",                              :default => true,  :null => false
+    t.string   "covercard_code"
+    t.boolean  "delta",               :default => true,  :null => false
   end
 
   add_index "patients", ["birth_date"], :name => "index_patients_on_birth_date"
