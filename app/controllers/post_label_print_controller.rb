@@ -3,11 +3,11 @@ class PostLabelPrintController < LabelPrintController
   # Post address labels
   # ===================
   def print
-    label = Doctor.find(params[:post_label][:doctor_id]).praxis
+    label = Doctor.find(params[:post_label][:doctor_id]).vcard
 
     # Cleanup table
     Aetiketten.delete_all
-    
+
     # Create new record
     Aetiketten.create(
       :hon_suffix => label.honorific_prefix,
@@ -20,5 +20,5 @@ class PostLabelPrintController < LabelPrintController
 
     # Trigger printing
     trigger('post_triger.txt')
-  end 
+  end
 end

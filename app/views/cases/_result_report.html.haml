@@ -13,9 +13,9 @@
         = @case.insurance.name
         = "##{@case.insurance_nr}" unless @case.insurance_nr.nil? or @case.insurance_nr.strip == "0" or @case.insurance_nr.strip == ""
     #doctor
-      = @case.doctor.praxis.honorific_prefix
+      = @case.doctor.vcard.honorific_prefix
       %br/
-      = render "/vcards/show", :vcard => @case.doctor.praxis
+      = render "/vcards/show", :vcard => @case.doctor.vcard
     #case
       Entnahme vom: #{@case.examination_date ? @case.examination_date.strftime("%d.%m.%Y") : "Noch nicht gesetzt"}
       %br/

@@ -5,9 +5,9 @@
 = boot_page_title
 
 #doctor
-  = h @doctor.praxis.honorific_prefix
+  = h @doctor.vcard.honorific_prefix
   %br/
-  = render :partial => "/vcards/show", :locals => {:vcard => @doctor.praxis}
+  = render :partial => "/vcards/show", :locals => {:vcard => @doctor.vcard}
 #date
   Zürich, #{Date.today.strftime("%d.%m.%Y")}
 #subject.title

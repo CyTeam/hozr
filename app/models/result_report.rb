@@ -3,11 +3,11 @@
 class ResultReport < Prawn::Document
   include CasesHelper
   include ApplicationHelper
-  
+
   def to_pdf(cases)
     # We accept both a single case or an array
     @cases = cases.is_a?(Array) ? cases : [cases]
-  
+
     font_path = Rails.root.join('data', 'fonts', 'cholla')
     font_families.update(
       "Cholla Sans" => { :bold        => font_path.join("ChollSanBol.ttf").to_s,
@@ -42,10 +42,10 @@ class ResultReport < Prawn::Document
     end
 
     grid([0,7], [1,9]).bounding_box do
-      text @case.doctor.praxis.honorific_prefix if @case.doctor.praxis.honorific_prefix
-      text @case.doctor.praxis.full_name
-      text @case.doctor.praxis.street_address
-      text @case.doctor.praxis.postal_code + " " + @case.doctor.praxis.locality
+      text @case.doctor.vcard.honorific_prefix if @case.doctor.vcard.honorific_prefix
+      text @case.doctor.vcard.full_name
+      text @case.doctor.vcard.street_address
+      text @case.doctor.vcard.postal_code + " " + @case.doctor.vcard.locality
     end
 
     font "Cholla Sans", :style => :thin do
@@ -173,7 +173,7 @@ class ResultReport < Prawn::Document
 
     start_new_page unless @case == @cases.last
     end
-    
+
     render
   end
 end

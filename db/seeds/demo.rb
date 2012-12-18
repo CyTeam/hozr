@@ -29,19 +29,18 @@ user = User.create!(
   :password => 'admin1234',
   :password_confirmation => 'admin1234',
   :object => sysadmin,
-  :role_texts => ['sysadmin', 'zyto']
+  :role_texts => ['sysadmin', 'zyto'],
+  :tenant => tenant
 )
 
 
 # Doctors
 referer = Doctor.create!(
-  :praxis => Vcard.new(:family_name => "Zuweiser", :given_name => "Peter", :street_address => "Spitalweg 1", :postal_code => "8000", :locality => "Zürich", :vcard_type => "praxis"),
-  :private => Vcard.new(:family_name => "Zuweiser", :given_name => "Peter", :street_address => "Heimweg 9", :postal_code => "8000", :locality => "Zürich", :vcard_type => "private")
+  :vcard => Vcard.new(:family_name => "Zuweiser", :given_name => "Peter", :street_address => "Spitalweg 1", :postal_code => "8000", :locality => "Zürich", :vcard_type => "vcard")
 )
 
 doctor = Doctor.create!(
-  :praxis => Vcard.new(:family_name => "Klientes", :given_name => "Melanie", :street_address => "Zentralgasse 99", :postal_code => "6300", :locality => "Zug", :vcard_type => "praxis"),
-  :private => Vcard.new(:family_name => "Klientes", :given_name => "Melanie", :street_address => "Heimweg 16", :postal_code => "8000", :locality => "Zürich", :vcard_type => "private"),
+  :vcard => Vcard.new(:family_name => "Klientes", :given_name => "Melanie", :street_address => "Zentralgasse 99", :postal_code => "6300", :locality => "Zug", :vcard_type => "vcard")
   :user => User.new(
   :login => 'doctor',
   :email => 'doctor@example.com',

@@ -5,7 +5,7 @@ require 'prawn/measurement_extensions'
 class MailingOverview < Prawn::Document
   include CasesHelper
   include ApplicationHelper
-  
+
   def to_pdf(mailing)
     @mailing = mailing
 
@@ -34,10 +34,10 @@ class MailingOverview < Prawn::Document
 
     # Address
     grid([0,7], [1,9]).bounding_box do
-      text @mailing.doctor.praxis.honorific_prefix
-      text @mailing.doctor.praxis.full_name
-      text @mailing.doctor.praxis.street_address
-      text @mailing.doctor.praxis.postal_code + " " + @mailing.doctor.praxis.locality
+      text @mailing.doctor.vcard.honorific_prefix
+      text @mailing.doctor.vcard.full_name
+      text @mailing.doctor.vcard.street_address
+      text @mailing.doctor.vcard.postal_code + " " + @mailing.doctor.vcard.locality
     end
 
     # Place'n'Date
@@ -130,12 +130,12 @@ class MailingOverview < Prawn::Document
 
       move_down 10
     end
-    
+
     group_cases = @mailing.doctor.cases.unfinished_p16.order('praxistar_eingangsnr').all
 
     unless group_cases.empty?
       move_down 10
-      
+
       # TODO: massiv copy/paste!
       # Table content creation.
       items = group_cases.map do |item|
