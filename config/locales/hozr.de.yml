@@ -134,8 +134,18 @@ de:
   cases:
     first_entry:
       title:           Ersteingabe
+    first_entry_queue:
+      title:           Ersteingabe
+    second_entry_queue:
+      title:           Zweiteingabe
+    second_entry:
+      title:           Zweiteingabe
     unassigned_form:
       title:           Auftragsformulare
+    review_queue:
+      title:           Reviews
+    hpv_p16_queue:
+      title:           HPV/P16 Liste
   send_queues:
     index:
       title:           Versand History

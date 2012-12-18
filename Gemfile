@@ -83,6 +83,7 @@ end
 # ================
 # CRUD
 gem 'kaminari'
+
 # Application
 # ===========
 # Authentication

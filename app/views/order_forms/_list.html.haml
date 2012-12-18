@@ -1,7 +1,6 @@
-= paginated_section collection.paginate(:page => params[:page]) do
-  %table.table.zebra-striped
-    %tr
-      %th= t_attr :created_at
-      %th= t_attr :case
+%table.table.zebra-striped
+  %tr
+    %th= t_attr :created_at
+    %th= t_attr :case
 
-    = render collection
+  = render collection

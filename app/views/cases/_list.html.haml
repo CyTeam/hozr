@@ -1,5 +1,4 @@
-= paginated_section @cases do
-  %table.table.table-bordered.table-striped.table-condensed
-    = render 'cases/list_header'
-    = render :partial => 'cases/item', :collection => @cases
-  = javascript_tag "setupSlidepathLinks()"
+%table.table.table-bordered.table-striped.table-condensed
+  = render 'cases/list_header'
+  = render :partial => 'cases/item', :collection => collection
+= javascript_tag "setupSlidepathLinks()"

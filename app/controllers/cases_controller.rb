@@ -1,6 +1,6 @@
 # encoding: utf-8'
 
-class CasesController < ApplicationController
+class CasesController < AuthorizedController
   authorize_resource
 
   # Helpers
@@ -19,18 +19,9 @@ class CasesController < ApplicationController
 
   # Navigation
   # ==========
-  def index
-    list
-    render :action => 'list'
-  end
-
   def history
     @case = Case.find(params[:id])
     redirect_to :controller => '/patients', :action => 'show', :id => @case.patient
-  end
-
-  def list
-    @cases = Case.paginate(:page => params['page'], :per_page => 144)
   end
 
   def next_step
@@ -48,7 +39,7 @@ class CasesController < ApplicationController
   # First Entry
   # ===========
   def first_entry_queue
-    @cases = Case.for_first_entry.paginate(:page => params['page'], :per_page => 144)
+    @cases = apply_scopes(Case).for_first_entry
     render 'entry_list'
   end
 
@@ -86,7 +77,7 @@ class CasesController < ApplicationController
   # Second Entry
   # ============
   def second_entry_queue
-    @cases = Case.for_second_entry.paginate(:page => params['page'], :per_page => 144)
+    @cases = apply_scopes(Case).for_second_entry
     render 'entry_list'
   end
 
@@ -258,8 +249,8 @@ class CasesController < ApplicationController
   # Review Queue
   # ============
   def review_queue
-    @cases = Case.for_review.paginate(:page => params['page'], :per_page => 144)
-    render :action => :list
+    @cases = apply_scopes(Case).for_review
+    render 'index'
   end
 
   def review_done
@@ -301,8 +292,8 @@ class CasesController < ApplicationController
   # P16/HPV
   # =======
   def hpv_p16_queue
-    @cases = Case.for_hpv_p16.paginate(:page => params['page'], :per_page => 144)
-    render :action => :list
+    @cases = apply_scopes(Case).for_hpv_p16
+    render 'index'
   end
 
   def hpv_p16_prepared

@@ -1,5 +1,8 @@
 # encoding: utf-8'
 class AuthorizedController < InheritedResources::Base
+  # Set scope for pagination
+  has_scope :page, :default => 1
+
   # Authorization
   load_and_authorize_resource
 
