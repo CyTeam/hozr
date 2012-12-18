@@ -1,8 +1,8 @@
-= render 'personal_form', :f => f
+= render 'patients/personal_form', :f => f
 
 = f.fields_for :insurance_policies, resource.kvg_insurance_policy do |insurance_policy|
   = render 'insurance_policies/form_fields', :f => insurance_policy
-  = render 'billing_form', :f => f
+  = render 'patients/billing_form', :f => f
 
 .row-fluid
   .span12
