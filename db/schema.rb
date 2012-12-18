@@ -346,12 +346,10 @@ ActiveRecord::Schema.define(:version => 20121203135308) do
   end
 
   create_table "esr_files", :force => true do |t|
-    t.integer  "size"
-    t.string   "content_type"
-    t.string   "filename"
+    t.string   "file"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "remarks",      :default => ""
+    t.string   "remarks",    :default => ""
   end
 
   create_table "esr_records", :force => true do |t|
