@@ -568,7 +568,6 @@ ActiveRecord::Schema.define(:version => 20121203135308) do
     t.text     "pat_bday"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.text     "2dcode"
   end
 
   create_table "patients", :force => true do |t|
