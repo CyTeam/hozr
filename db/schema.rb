@@ -436,6 +436,7 @@ ActiveRecord::Schema.define(:version => 20121203135308) do
     t.string   "role"
     t.string   "group_ean_party", :limit => 13
     t.integer  "imported_id"
+    t.integer  "bsv_code"
   end
 
   add_index "insurances", ["ean_party"], :name => "index_insurances_on_ean_party"
