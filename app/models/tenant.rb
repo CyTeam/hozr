@@ -19,6 +19,10 @@ class Tenant < ActiveRecord::Base
   # ========
   def printer_for(type)
     type = type.to_s
-    CupsPrinter.new(settings['printing.' + type], :hostname => settings['printing.cups_hostname'])
+    if settings['printing.cups_hostname'].present?
+      CupsPrinter.new(settings['printing.' + type], :hostname => settings['printing.cups_hostname'])
+    else
+      CupsPrinter.new(settings['printing.' + type])
+    end
   end
 end
