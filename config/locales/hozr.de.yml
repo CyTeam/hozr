@@ -19,6 +19,10 @@ de:
       assignment: Auftragsdaten
 
     attributes:
+      finding_class:
+        name:            Text
+        code:            Code
+        classifications: Schnellwahl für
       attachment:
         code: "Verwenden als"
         code_enum:
@@ -132,6 +136,9 @@ de:
       refresh:          Aktualisieren
 
   # Titles
+  attachments:
+    index:
+      title:         Dokumente
   cases:
     first_entry:
       title:           Ersteingabe

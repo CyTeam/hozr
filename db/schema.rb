@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121203135308) do
+ActiveRecord::Schema.define(:version => 20121219120838) do
 
   create_table "accounts", :force => true do |t|
     t.string   "number"
@@ -28,19 +28,21 @@ ActiveRecord::Schema.define(:version => 20121203135308) do
   end
 
   create_table "addresses", :force => true do |t|
-    t.string  "post_office_box",  :limit => 50
-    t.string  "extended_address", :limit => 50
-    t.string  "street_address",   :limit => 50
-    t.string  "locality",         :limit => 50
-    t.string  "region",           :limit => 50
-    t.string  "postal_code",      :limit => 50
-    t.string  "country_name",     :limit => 50
-    t.integer "vcard_id"
-    t.string  "address_type"
+    t.string   "post_office_box",  :limit => 50
+    t.string   "extended_address", :limit => 50
+    t.string   "street_address",   :limit => 50
+    t.string   "locality",         :limit => 50
+    t.string   "region",           :limit => 50
+    t.string   "postal_code",      :limit => 50
+    t.string   "country_name",     :limit => 50
+    t.integer  "vcard_id"
+    t.string   "address_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
-  add_index "addresses", ["locality"], :name => "locality"
-  add_index "addresses", ["vcard_id"], :name => "addresses_vcard_id_index"
+  add_index "addresses", ["locality"], :name => "index_addresses_on_locality"
+  add_index "addresses", ["vcard_id"], :name => "index_addresses_on_vcard_id"
 
   create_table "aetikettens", :force => true do |t|
     t.string   "hon_suffix"
@@ -140,20 +142,20 @@ ActiveRecord::Schema.define(:version => 20121203135308) do
     t.datetime "delivered_at"
   end
 
-  add_index "cases", ["assigned_at"], :name => "assigned_at"
+  add_index "cases", ["assigned_at"], :name => "index_cases_on_assigned_at"
   add_index "cases", ["delivered_at"], :name => "index_cases_on_delivered_at"
-  add_index "cases", ["doctor_id"], :name => "doctor_id"
-  add_index "cases", ["entry_date"], :name => "entry_date"
-  add_index "cases", ["insurance_id"], :name => "cases_insurance_id_index"
-  add_index "cases", ["insurance_nr"], :name => "insurance_nr"
-  add_index "cases", ["needs_hpv"], :name => "needs_hpv"
-  add_index "cases", ["needs_p16"], :name => "needs_p16"
-  add_index "cases", ["needs_review"], :name => "needs_review"
-  add_index "cases", ["patient_id"], :name => "patient_id"
-  add_index "cases", ["praxistar_eingangsnr"], :name => "praxistar_eingangsnr"
-  add_index "cases", ["praxistar_leistungsblatt_id"], :name => "praxistar_leistungsblatt_id"
+  add_index "cases", ["doctor_id"], :name => "index_cases_on_doctor_id"
+  add_index "cases", ["entry_date"], :name => "index_cases_on_entry_date"
+  add_index "cases", ["insurance_id"], :name => "index_cases_on_insurance_id"
+  add_index "cases", ["insurance_nr"], :name => "index_cases_on_insurance_nr"
+  add_index "cases", ["needs_hpv"], :name => "index_cases_on_needs_hpv"
+  add_index "cases", ["needs_p16"], :name => "index_cases_on_needs_p16"
+  add_index "cases", ["needs_review"], :name => "index_cases_on_needs_review"
+  add_index "cases", ["patient_id"], :name => "index_cases_on_patient_id"
+  add_index "cases", ["praxistar_eingangsnr"], :name => "index_cases_on_praxistar_eingangsnr"
+  add_index "cases", ["praxistar_leistungsblatt_id"], :name => "index_cases_on_praxistar_leistungsblatt_id"
   add_index "cases", ["review_at"], :name => "index_cases_on_review_at"
-  add_index "cases", ["screened_at"], :name => "screened_at"
+  add_index "cases", ["screened_at"], :name => "index_cases_on_screened_at"
   add_index "cases", ["session_id"], :name => "index_cases_on_session_id"
 
   create_table "cases_finding_classes", :id => false, :force => true do |t|
@@ -162,7 +164,7 @@ ActiveRecord::Schema.define(:version => 20121203135308) do
     t.integer "position"
   end
 
-  add_index "cases_finding_classes", ["case_id", "finding_class_id"], :name => "cases_finding_classes_case_id_index", :unique => true
+  add_index "cases_finding_classes", ["case_id", "finding_class_id"], :name => "index_cases_finding_classes_on_case_id_and_finding_class_id"
 
   create_table "cases_mailings", :id => false, :force => true do |t|
     t.integer "case_id"
@@ -229,15 +231,15 @@ ActiveRecord::Schema.define(:version => 20121203135308) do
     t.integer  "esr_account_id"
   end
 
-  add_index "doctors", ["active"], :name => "active"
+  add_index "doctors", ["active"], :name => "index_doctors_on_active"
 
   create_table "doctors_offices", :id => false, :force => true do |t|
     t.integer "office_id"
     t.integer "doctor_id"
   end
 
-  add_index "doctors_offices", ["doctor_id"], :name => "doctors_offices_on_doctor_id"
-  add_index "doctors_offices", ["office_id"], :name => "doctors_offices_on_office_id"
+  add_index "doctors_offices", ["doctor_id"], :name => "index_doctors_offices_on_doctor_id"
+  add_index "doctors_offices", ["office_id"], :name => "index_doctors_offices_on_office_id"
 
   create_table "drug_articles", :force => true do |t|
     t.string   "code"
@@ -328,8 +330,7 @@ ActiveRecord::Schema.define(:version => 20121203135308) do
     t.datetime "updated_at"
   end
 
-  create_table "drug_substances", :id => false, :force => true do |t|
-    t.string   "id"
+  create_table "drug_substances", :force => true do |t|
     t.string   "name"
     t.string   "description"
     t.datetime "created_at"
@@ -345,12 +346,10 @@ ActiveRecord::Schema.define(:version => 20121203135308) do
   end
 
   create_table "esr_files", :force => true do |t|
-    t.integer  "size"
-    t.string   "content_type"
-    t.string   "filename"
+    t.string   "file"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "remarks",      :default => ""
+    t.string   "remarks",    :default => ""
   end
 
   create_table "esr_records", :force => true do |t|
@@ -396,7 +395,7 @@ ActiveRecord::Schema.define(:version => 20121203135308) do
   end
 
   create_table "finding_classes", :force => true do |t|
-    t.string  "name"
+    t.text    "name"
     t.string  "code"
     t.integer "finding_group_id"
   end
@@ -435,6 +434,7 @@ ActiveRecord::Schema.define(:version => 20121203135308) do
     t.string   "role"
     t.string   "group_ean_party", :limit => 13
     t.integer  "imported_id"
+    t.integer  "bsv_code"
   end
 
   add_index "insurances", ["ean_party"], :name => "index_insurances_on_ean_party"
@@ -501,6 +501,8 @@ ActiveRecord::Schema.define(:version => 20121203135308) do
   end
 
   add_index "invoices_sessions", ["invoice_id", "session_id"], :name => "index_invoices_sessions_on_invoice_id_and_session_id"
+  add_index "invoices_sessions", ["invoice_id"], :name => "index_invoices_sessions_on_invoice_id"
+  add_index "invoices_sessions", ["session_id"], :name => "index_invoices_sessions_on_session_id"
 
   create_table "laws", :force => true do |t|
     t.string   "insured_id"
@@ -508,7 +510,7 @@ ActiveRecord::Schema.define(:version => 20121203135308) do
     t.datetime "case_date"
     t.string   "ssn"
     t.string   "nif"
-    t.string   "type"
+    t.string   "code"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -518,7 +520,7 @@ ActiveRecord::Schema.define(:version => 20121203135308) do
     t.integer  "doctor_id"
   end
 
-  add_index "mailings", ["created_at"], :name => "i1"
+  add_index "mailings", ["created_at"], :name => "index_mailings_on_created_at"
   add_index "mailings", ["doctor_id"], :name => "index_mailings_on_doctor_id"
 
   create_table "medical_cases", :force => true do |t|
@@ -566,7 +568,6 @@ ActiveRecord::Schema.define(:version => 20121203135308) do
     t.text     "pat_bday"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.text     "2dcode"
   end
 
   create_table "patients", :force => true do |t|
@@ -574,36 +575,39 @@ ActiveRecord::Schema.define(:version => 20121203135308) do
     t.integer  "sex"
     t.integer  "only_year_of_birth"
     t.integer  "doctor_id"
-    t.text     "remarks",             :limit => 255
+    t.text     "remarks"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "dunning_stop",                       :default => false
-    t.boolean  "use_billing_address",                :default => false
-    t.boolean  "deceased",                           :default => false
+    t.boolean  "dunning_stop",        :default => false
+    t.boolean  "use_billing_address", :default => false
+    t.boolean  "deceased",            :default => false
     t.string   "doctor_patient_nr"
-    t.boolean  "active",                             :default => true,  :null => false
+    t.boolean  "active",              :default => true,  :null => false
     t.string   "name"
     t.integer  "imported_id"
-    t.boolean  "delta",                              :default => true,  :null => false
+    t.string   "covercard_code"
+    t.boolean  "delta",               :default => true,  :null => false
   end
 
-  add_index "patients", ["birth_date"], :name => "birth_date"
-  add_index "patients", ["doctor_id"], :name => "patients_doctor_id_index"
+  add_index "patients", ["birth_date"], :name => "index_patients_on_birth_date"
+  add_index "patients", ["doctor_id"], :name => "index_patients_on_doctor_id"
   add_index "patients", ["doctor_patient_nr"], :name => "index_patients_on_doctor_patient_nr"
   add_index "patients", ["dunning_stop"], :name => "index_patients_on_dunning_stop"
-  add_index "patients", ["updated_at"], :name => "patients_updated_at_index"
+  add_index "patients", ["updated_at"], :name => "index_patients_on_updated_at"
 
   create_table "phone_numbers", :force => true do |t|
-    t.string  "number",            :limit => 50
-    t.string  "phone_number_type", :limit => 50
-    t.string  "object_type"
-    t.integer "object_id"
-    t.integer "vcard_id"
+    t.string   "number",            :limit => 50
+    t.string   "phone_number_type", :limit => 50
+    t.string   "object_type"
+    t.integer  "object_id"
+    t.integer  "vcard_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "phone_numbers", ["object_id", "object_type"], :name => "index_phone_numbers_on_object_id_and_object_type"
   add_index "phone_numbers", ["phone_number_type"], :name => "index_phone_numbers_on_phone_number_type"
-  add_index "phone_numbers", ["vcard_id"], :name => "phone_numbers_vcard_id_index"
+  add_index "phone_numbers", ["vcard_id"], :name => "index_phone_numbers_on_vcard_id"
 
   create_table "recalls", :force => true do |t|
     t.integer  "patient_id"
@@ -614,9 +618,11 @@ ActiveRecord::Schema.define(:version => 20121203135308) do
     t.string   "state"
     t.integer  "appointment_id"
     t.datetime "sent_at"
+    t.integer  "doctor_id"
   end
 
   add_index "recalls", ["appointment_id"], :name => "index_recalls_on_appointment_id"
+  add_index "recalls", ["doctor_id"], :name => "index_recalls_on_doctor_id"
   add_index "recalls", ["patient_id"], :name => "index_recalls_on_patient_id"
   add_index "recalls", ["state"], :name => "index_recalls_on_state"
 
@@ -736,6 +742,7 @@ ActiveRecord::Schema.define(:version => 20121203135308) do
     t.integer  "imported_id"
   end
 
+  add_index "sessions", ["duration_from"], :name => "index_sessions_on_duration_from"
   add_index "sessions", ["patient_id"], :name => "index_sessions_on_patient_id"
   add_index "sessions", ["state"], :name => "index_sessions_on_state"
   add_index "sessions", ["treatment_id"], :name => "index_sessions_on_treatment_id"
@@ -870,13 +877,14 @@ ActiveRecord::Schema.define(:version => 20121203135308) do
     t.datetime "confirmation_sent_at"
     t.string   "reset_password_token"
     t.datetime "remember_created_at"
+    t.integer  "tenant_id"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email"
-  add_index "users", ["login"], :name => "index_users_on_login", :unique => true
-  add_index "users", ["object_id"], :name => "object_id"
-  add_index "users", ["unlock_token"], :name => "index_users_on_unlock_token", :unique => true
-  add_index "users", ["wants_email"], :name => "wants_email"
+  add_index "users", ["login"], :name => "index_users_on_login"
+  add_index "users", ["object_id"], :name => "index_users_on_object_id"
+  add_index "users", ["unlock_token"], :name => "index_users_on_unlock_token"
+  add_index "users", ["wants_email"], :name => "index_users_on_wants_email"
 
   create_table "vat_classes", :force => true do |t|
     t.date     "valid_from"
@@ -890,22 +898,24 @@ ActiveRecord::Schema.define(:version => 20121203135308) do
   add_index "vat_classes", ["valid_from"], :name => "index_vat_classes_on_valid_from"
 
   create_table "vcards", :force => true do |t|
-    t.string  "full_name",        :limit => 50
-    t.string  "nickname",         :limit => 50
-    t.string  "family_name",      :limit => 50
-    t.string  "given_name",       :limit => 50
-    t.string  "additional_name",  :limit => 50
-    t.string  "honorific_prefix", :limit => 50
-    t.string  "honorific_suffix", :limit => 50
-    t.boolean "active",                         :default => true
-    t.integer "object_id"
-    t.string  "object_type"
-    t.string  "vcard_type"
+    t.string   "full_name",        :limit => 50
+    t.string   "nickname",         :limit => 50
+    t.string   "family_name",      :limit => 50
+    t.string   "given_name",       :limit => 50
+    t.string   "additional_name",  :limit => 50
+    t.string   "honorific_prefix", :limit => 50
+    t.string   "honorific_suffix", :limit => 50
+    t.boolean  "active",                         :default => true
+    t.integer  "object_id"
+    t.string   "object_type"
+    t.string   "vcard_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
-  add_index "vcards", ["family_name"], :name => "family_name"
-  add_index "vcards", ["full_name"], :name => "full_name"
-  add_index "vcards", ["given_name"], :name => "given_name"
+  add_index "vcards", ["family_name"], :name => "index_vcards_on_family_name"
+  add_index "vcards", ["full_name"], :name => "index_vcards_on_full_name"
+  add_index "vcards", ["given_name"], :name => "index_vcards_on_given_name"
   add_index "vcards", ["object_id", "object_type"], :name => "index_vcards_on_object_id_and_object_type"
 
 end

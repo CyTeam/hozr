@@ -1,7 +1,7 @@
 = boot_alert(t('flash.action.dunning_stop'), 'error') if @patient.dunning_stop?
 
 = simple_form_for [@case, @patient], :remote => true do |f|
-  = render 'patients/form_fields', :f => f
+  = render 'patients/form_fields', :f => f, :resource => @patient
 
   .row-fluid.hidden-actions
     .form-actions

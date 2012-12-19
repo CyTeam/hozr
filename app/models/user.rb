@@ -16,6 +16,7 @@ class User < ActiveRecord::Base
 
   # Tenancy
   belongs_to :tenant
+  attr_accessible :tenant
 
   # Authorization roles
   has_and_belongs_to_many :roles, :autosave => true

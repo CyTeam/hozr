@@ -52,6 +52,7 @@ class Doctor < ActiveRecord::Base
   # CyLab
   # =====
   has_one :user, :as => :object, :autosave => true
+  attr_accessible :user
   delegate :email, :email=, :to => :user
 
   # Office

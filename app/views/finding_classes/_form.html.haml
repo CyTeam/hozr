@@ -1,7 +1,10 @@
 = simple_form_for resource do |f|
-  = f.input :name
-  = f.input :code
+  .row-fluid
+    .span6= f.input :code
+  .row-fluid
+    .span12= f.input :name, :input_html => {:class => 'span12', :rows => 5}
+  .row-fluid
+    .span12= f.association :classifications, :input_html => {:class => 'span12'}
 
-  = f.association :classifications
-
-  = f.submit
+  .form-actions
+    = f.button :submit

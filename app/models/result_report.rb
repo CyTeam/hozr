@@ -128,8 +128,8 @@ class ResultReport < Prawn::Document
       end
 
       grid([12,7], [12,9]).bounding_box do
-        text @case.screened_by.work_vcard.abbreviated_name + ", " + @case.screened_at.strftime("%d.%m.%Y")
-        text @case.review_by.work_vcard.abbreviated_name + ", " + @case.review_at.strftime("%d.%m.%Y") if @case.review_by and @case.review_at
+        text @case.screened_by.vcard.abbreviated_name + ", " + @case.screened_at.strftime("%d.%m.%Y")
+        text @case.review_by.vcard.abbreviated_name + ", " + @case.review_at.strftime("%d.%m.%Y") if @case.review_by and @case.review_at
       end
     end
 
