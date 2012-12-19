@@ -16,7 +16,8 @@ class FindingClass < ActiveRecord::Base
   scope :control, by_finding_group('Kontrolle')
 
   include ActionView::Helpers::SanitizeHelper
+  include ActionView::Helpers::TextHelper
   def to_s
-    "#{code} - #{strip_tags(name)}"
+    [code, truncate(strip_tags(name), :length => 40)].map(&:presence).compact.join(" - ")
   end
 end
