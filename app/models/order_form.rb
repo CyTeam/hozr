@@ -18,7 +18,8 @@ class OrderForm < ActiveRecord::Base
       :overview => {:transformation => :extract_overview },
       :head => {:transformation => :extract_head, :size => "500" },
       :head_big => {:transformation => :extract_head_big, :size => "750" },
-      :foot => {:transformation => :extract_foot, :size => "500" }
+      :foot => {:transformation => :extract_foot, :size => "500" },
+      :assignment => {:transformation => :extract_assignment, :size => "500" }
     }
   }
 
@@ -27,15 +28,16 @@ class OrderForm < ActiveRecord::Base
   alias :case :a_case
   scope :unassigned, where(:case_id => nil)
 
+  WIDTH = 1200
+  def prepare(image)
+    image.change_geometry!("#{WIDTH}") {|cols, rows, img|
+      img.resize!(cols, rows)
+    }
+  end
+
   def extract_result_remarks(image)
-    cropped = image.crop(::Magick::NorthWestGravity, 0, 600, image.rows, image.columns * 0.45, true)
-    bordered = cropped.border(20, 20, '#AEBCDF')
-    bordered.fuzz = 0.15
-    trimmed = bordered.trim
-    despeckled = trimmed.despeckle
-    despeckled.fuzz = 1500
-    whited = despeckled.opaque('#EAEAF6', 'white')
-    return whited
+    prepare(image)
+    image.crop(::Magick::NorthWestGravity, 0, 605, WIDTH, 860, true)
   end
 
   def extract_address(image)
@@ -47,15 +49,22 @@ class OrderForm < ActiveRecord::Base
   end
 
   def extract_head(image)
-    image.crop(::Magick::NorthWestGravity, 0, 0, 1172, 586, true)
+    prepare(image)
+    image.crop(::Magick::NorthWestGravity, 0, 180, WIDTH, 450, true)
   end
 
   def extract_head_big(image)
-    image.crop(::Magick::NorthWestGravity, 0, 0, 1172, 586, true)
+    prepare(image)
+    image.crop(::Magick::NorthWestGravity, 0, 180, WIDTH, 450, true)
   end
 
   def extract_foot(image)
     image.crop(::Magick::NorthWestGravity, 0, 1137, 1172, 469, true)
+  end
+
+  def extract_assignment(image)
+    prepare(image)
+    image.crop(::Magick::NorthWestGravity, 0, 1460, WIDTH, image.rows - 1460, true)
   end
 
   def self.import_order_forms(order_form_dir)
