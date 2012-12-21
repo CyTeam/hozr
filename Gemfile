@@ -145,6 +145,8 @@ gem 'prawnto'
 # Search
 gem 'thinking-sphinx'
 
+gem 'jcrop-rails'
+
 # Barcode
 gem 'barby'
 

@@ -10,6 +10,7 @@
 //= require twitter/bootstrap
 //= require tinymce-jquery
 //= require autocomplete-rails
+//= require jcrop
 //= require_tree .
 
 // Initialize behaviours

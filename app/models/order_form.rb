@@ -45,7 +45,7 @@ class OrderForm < ActiveRecord::Base
   end
 
   def extract_overview(image)
-    image.crop(::Magick::NorthWestGravity, 0, 75, 1155, 360, true)
+    prepare(image)
   end
 
   def extract_head(image)
