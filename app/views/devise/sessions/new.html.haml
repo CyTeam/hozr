@@ -1,12 +1,12 @@
-%h2= t('devise.sign_in')
-= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
-  %p
-    = f.label :login, t('activerecord.attributes.user.login')
-    %br/
-    = f.text_field :login
-  %p
-    = f.label :email, t('activerecord.attributes.user.password')
-    %br/
-    = f.password_field :password
-  %p= f.submit t('devise.sign_in')
-= render :partial => "devise/shared/links"
+= boot_page_title t('devise.sign_in')
+
+= render 'users/demo' if Rails.env.demo?
+
+= simple_form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
+  = f.input :login, :input_html => {'data-autofocus' => true}
+  = f.input :password, :hint => false
+
+  .form-actions
+    = f.button :submit, t('devise.sign_in')
+
+= render "devise/shared/links"
