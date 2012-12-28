@@ -9,6 +9,8 @@ class User < ActiveRecord::Base
 
   attr_accessible :object
   belongs_to :object, :polymorphic => true
+  accepts_nested_attributes_for :object
+  attr_accessible :object_attributes
 
   validates_uniqueness_of :login
 

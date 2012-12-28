@@ -10,6 +10,13 @@ Hozr::Application.routes.draw do
     member do
       post :lock, :unlock
     end
+    resources :phone_numbers
+    member do
+      get :new_phone_number
+    end
+    collection do
+      get :new_phone_number
+    end
   end
 
   # Attachments
