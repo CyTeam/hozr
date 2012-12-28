@@ -22,6 +22,10 @@ set :user, "deployer"                               # The server's user for depl
 # Shared directories
 set :shared_children, shared_children + ['tmp/sockets', 'config/swissmatch.yml', 'public/trigger', 'public/order_form']
 
+# Sync directories
+set :sync_directories, ['uploads']
+set :sync_backups, 3
+
 # Configuration
 set :scm, :git
 #ssh_options[:forward_agent] = true
