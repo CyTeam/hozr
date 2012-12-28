@@ -1,9 +1,12 @@
 = image_tag inline_order_form_path(@order_form, :type => :overview), 'data-crop' => true
 
 :javascript
+  function updateCropCoords(e) {
+  }
+
   $(document).ready(function() {
-    $('img[data-crop]').Jcrop(
+    $('img[data-crop]').Jcrop({
       onSelect: updateCropCoords
-    );
+    });
   })
 
