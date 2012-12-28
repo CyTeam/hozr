@@ -5,12 +5,12 @@ class Case < ActiveRecord::Base
   belongs_to :classification
   belongs_to :patient, :autosave => true, :touch => true
   belongs_to :doctor
-  belongs_to :first_entry_by, :class_name => 'Employee', :foreign_key => :first_entry_by
-  belongs_to :screener, :class_name => 'Employee', :foreign_key => :screener_id
-  belongs_to :screened_by, :class_name => 'Employee', :foreign_key => :screener_id
-  belongs_to :review_by, :class_name => 'Employee', :foreign_key => :review_by
+  belongs_to :first_entry_by, :class_name => 'Person', :foreign_key => :first_entry_by
+  belongs_to :screener, :class_name => 'Person', :foreign_key => :screener_id
+  belongs_to :screened_by, :class_name => 'Person', :foreign_key => :screener_id
+  belongs_to :review_by, :class_name => 'Person', :foreign_key => :review_by
   belongs_to :insurance
-  belongs_to :hpv_p16_prepared_by, :class_name => 'Employee', :foreign_key => :hpv_p16_prepared_by
+  belongs_to :hpv_p16_prepared_by, :class_name => 'Person', :foreign_key => :hpv_p16_prepared_by
 
   has_and_belongs_to_many :finding_classes
   has_and_belongs_to_many :mailings
