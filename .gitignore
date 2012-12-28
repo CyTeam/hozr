@@ -44,6 +44,9 @@ config/sphinx/
 # SwissMatch
 config/swissmatch.yml
 
+# Shared data
+system/
+
 # Carrierwave
 uploads/
 

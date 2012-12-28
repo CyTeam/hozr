@@ -21,7 +21,8 @@ class OrderForm < ActiveRecord::Base
       :foot => {:transformation => :extract_foot, :size => "500" },
       :assignment => {:transformation => :extract_assignment, :size => "500" }
     }
-  }
+  },
+  :root_path => Rails.root.join('system')
 
   # Case
   belongs_to :a_case, :class_name => 'Case', :foreign_key => 'case_id'
