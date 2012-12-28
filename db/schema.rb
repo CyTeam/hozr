@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121219120838) do
+ActiveRecord::Schema.define(:version => 20121228224209) do
 
   create_table "accounts", :force => true do |t|
     t.string   "number"
@@ -594,6 +594,27 @@ ActiveRecord::Schema.define(:version => 20121219120838) do
   add_index "patients", ["doctor_patient_nr"], :name => "index_patients_on_doctor_patient_nr"
   add_index "patients", ["dunning_stop"], :name => "index_patients_on_dunning_stop"
   add_index "patients", ["updated_at"], :name => "index_patients_on_updated_at"
+
+  create_table "people", :force => true do |t|
+    t.datetime "created_at",                              :null => false
+    t.datetime "updated_at"
+    t.string   "type"
+    t.date     "date_of_birth"
+    t.date     "date_of_death"
+    t.integer  "sex"
+    t.string   "social_security_nr"
+    t.string   "social_security_nr_12"
+    t.integer  "civil_status_id"
+    t.integer  "religion_id"
+    t.boolean  "delta",                 :default => true, :null => false
+    t.string   "nationality"
+    t.string   "swift"
+    t.string   "clearing"
+  end
+
+  add_index "people", ["civil_status_id"], :name => "index_people_on_civil_status_id"
+  add_index "people", ["religion_id"], :name => "index_people_on_religion_id"
+  add_index "people", ["type"], :name => "index_people_on_type"
 
   create_table "phone_numbers", :force => true do |t|
     t.string   "number",            :limit => 50
