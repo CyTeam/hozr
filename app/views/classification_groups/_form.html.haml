@@ -1,7 +1,12 @@
 = simple_form_for @classification_group do |f|
-  = f.input :title
-  = f.input :position
-  = f.input :color
-  = f.input :print_color
+  .row-fluid
+    .span6= f.input :title
+    .span6= f.input :position
+  .row-fluid
+    .span6= f.input :color
+    .span6= f.input :print_color
+  .row-fluid
+    .span12= f.association :classifications, :input_html => {:class => 'span12'}
 
-  = f.button :submit
+  .form-actions
+    = f.button :submit

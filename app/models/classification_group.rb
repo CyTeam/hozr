@@ -5,6 +5,7 @@ class ClassificationGroup < ActiveRecord::Base
   attr_accessible :title, :position, :color, :print_color
 
   has_many :classifications
+  attr_accessible :classification_ids
 
   default_scope order(:position)
 
