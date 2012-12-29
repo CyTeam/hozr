@@ -57,14 +57,6 @@ GIT
     file-column (0.3.3)
 
 GIT
-  remote: https://github.com/huerlisi/has_vcards.git
-  revision: c0fe12d1b07d8d6231595a2994e691825fe290a6
-  specs:
-    has_vcards (0.19.0)
-      inherited_resources
-      rails (~> 3.0)
-
-GIT
   remote: https://github.com/huerlisi/lyb_devise_admin.git
   revision: ffa5bfd32cd61f4619e29547a173ab5bd28346e6
   specs:
@@ -180,6 +172,9 @@ GEM
       actionpack (~> 3.0)
     haml (3.1.7)
     has_scope (0.5.1)
+    has_vcards (0.19.0)
+      inherited_resources
+      rails (~> 3.0)
     highline (1.6.15)
     hike (1.2.1)
     hpricot (0.8.6)
@@ -358,7 +353,7 @@ DEPENDENCIES
   formtastic (~> 2.1.0)
   haml
   has_scope
-  has_vcards!
+  has_vcards
   hpricot
   i18n_rails_helpers
   inherited_resources
