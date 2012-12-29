@@ -11,7 +11,9 @@
         .span6= f.association :doctor
       .row-fluid
         .span6= f.association :examination_method
+
     .span6
-      = image_tag inline_order_form_url(@case.order_form, :type => :address) if @case.order_form
+      = link_to image_tag(inline_order_form_url(@case.order_form, :type => :overview)), resource.order_form if resource.order_form
+
   .form-actions
     = f.button :submit
