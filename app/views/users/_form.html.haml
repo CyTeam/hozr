@@ -1,4 +1,5 @@
 = simple_form_for @user do |f|
+  %h3= t('users.form.credentials')
   .row-fluid
     .span6= f.input :login if @user.respond_to? :login
     .span6= f.input :email

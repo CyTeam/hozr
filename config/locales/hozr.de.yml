@@ -172,6 +172,9 @@ de:
   mailings:
     show:
       title:            Befundübersicht
+  users:
+    form:
+      credentials:      Kontodaten
 
   simple_form:
     labels:
