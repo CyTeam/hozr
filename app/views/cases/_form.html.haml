@@ -1,23 +1,17 @@
-= simple_form_for @case do |f|
-  = image_tag inline_order_form_url(@case.order_form, :type => :address) if @case.order_form
-  %p
-    %label{:for => "case_examination_date"} Abstrichdatum
-    %br/
-    = text_field 'case', 'examination_date'
-  %p
-    %label{:for => "case_entry_date"} Eingangsdatum
-    %br/
-    = text_field 'case', 'entry_date'
-  %p
-    %label{:for => "case_praxistar_eingangsnr"} Eingangsnr
-    %br/
-    = text_field 'case', 'praxistar_eingangsnr'
-  %p
-    %label{:for => "case_doctor_id"} Arzt:
-    %br/
-    = select :case, :doctor_id, doctors_collection
-  %p
-    %label{:for => "case_examination_method_id"} Methode
-    %br/
-    = select :case, :examination_method_id, ExaminationMethod.all.collect { |m| [ m.name, m.id ] }
-  = f.submit
+= simple_form_for resource do |f|
+  .row-fluid
+    .span6
+      .row-fluid
+        = f.input :examination_date, :as => :date_field
+      .row-fluid
+        .span6= f.input :entry_date, :as => :date_field
+      .row-fluid
+        .span6= f.input :praxistar_eingangsnr
+      .row-fluid
+        .span6= f.association :doctor
+      .row-fluid
+        .span6= f.association :examination_method
+    .span6
+      = image_tag inline_order_form_url(@case.order_form, :type => :address) if @case.order_form
+  .form-actions
+    = f.button :submit
