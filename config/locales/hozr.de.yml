@@ -175,6 +175,9 @@ de:
   users:
     form:
       credentials:      Kontodaten
+  patients:
+    index:
+      title:            Patienten
 
   simple_form:
     labels:

@@ -1,9 +1,0 @@
-= contextual_links :index, Patient
-
-= boot_page_title(number_with_delimiter(@patients.total_entries) + " Patienten")
-
-= paginate collection
-
-= render 'list', :collection => collection
-
-= paginate collection
