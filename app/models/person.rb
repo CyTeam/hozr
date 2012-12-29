@@ -50,11 +50,17 @@ class Person < ActiveRecord::Base
     vcard.build_address unless vcard.address
   end
 
+  # Attributes
+  # ==========
+  def code
+    vcard.abbreviated_name
+  end
+
   # Invoices
   # ========
   has_many :credit_invoices, :class_name => 'Invoice', :foreign_key => :customer_id, :order => 'value_date DESC'
   has_many :debit_invoices, :class_name => 'Invoice', :foreign_key => :company_id, :order => 'value_date DESC'
-  
+
   def invoices
     Invoice.order('value_date DESC').where("invoices.customer_id = :id OR invoices.company_id = :id", :id => self.id)
   end
