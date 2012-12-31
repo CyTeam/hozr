@@ -5,18 +5,12 @@
 = boot_page_title
 
 #doctor
-  = h @doctor.vcard.honorific_prefix
+  = @doctor.vcard.honorific_prefix
   %br/
   = render :partial => "/vcards/show", :locals => {:vcard => @doctor.vcard}
-#date
-  Zürich, #{Date.today.strftime("%d.%m.%Y")}
-#subject.title
-  Befund&uuml;bersicht
-#text
-  %table.table.table-bordered.table-striped.table-condensed{:style => "margin-top: 0px"}
-    - @case_counter = 17
-    - for class_group in ClassificationGroup.find :all, :order => 'position DESC'
-      - group_cases = @mailing.cases.sort {|x,y| x.praxistar_eingangsnr <=> y.praxistar_eingangsnr}.select { |c| c.classification.classification_group == class_group and !(c.needs_p16? and c.screened_at.nil?) }
-      = render :partial => 'cases/overview_group', :object => group_cases  unless group_cases.size == 0
-    - p16_cases = @mailing.doctor.cases.sort {|x,y| x.praxistar_eingangsnr <=> y.praxistar_eingangsnr}.select { |c| c.needs_p16? and c.screened_at.nil? }
-    = render :partial => 'cases/overview_p16_group', :object => p16_cases unless p16_cases.size == 0
+
+- for class_group in ClassificationGroup.find :all, :order => 'position DESC'
+  - group_cases = @mailing.cases.sort {|x,y| x.praxistar_eingangsnr <=> y.praxistar_eingangsnr}.select { |c| c.classification.classification_group == class_group and !(c.needs_p16? and c.screened_at.nil?) }
+  = render :partial => 'cases/overview_group', :object => group_cases  unless group_cases.size == 0
+- p16_cases = @mailing.doctor.cases.sort {|x,y| x.praxistar_eingangsnr <=> y.praxistar_eingangsnr}.select { |c| c.needs_p16? and c.screened_at.nil? }
+= render :partial => 'cases/overview_p16_group', :object => p16_cases unless p16_cases.size == 0

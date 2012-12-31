@@ -1,12 +1,12 @@
 - a_case = overview_item
-%tr{:style => "font-size: 0.8em; vertical-align: top; padding-bottom: 0.2em"}
-  %td{:style => "width: 30%; border-right: 0px; vertical-align: top"}
+%tr
+  %td{:style => "width: 30%"}
     %b= link_to a_case.patient.name, patient_path(a_case.patient)
-  %td{:style => "width: 10%; text-align: right; padding: 0.1em 1em;"}
-    = h a_case.patient.birth_date
+  %td{:style => "width: 10%; text-align: right"}
+    = a_case.patient.birth_date
   %td{:style => "width: 40%; vertical-align: top"}
     %b= a_case.control_findings.map {|f| h(f.name)}.join('<br/>')
-  %td{:style => "width: 10%; text-align: right; padding: 0.1em 1em;"}
-    = h a_case.examination_date.strftime('%d.%m.%Y') unless a_case.examination_date.nil?
+  %td{:style => "width: 10%; text-align: right"}
+    = a_case.examination_date
   %td{:style => "width: 10%; text-align: right"}
     = link_to a_case.praxistar_eingangsnr, case_path(a_case)
