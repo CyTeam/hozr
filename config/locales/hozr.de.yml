@@ -128,8 +128,9 @@ de:
       resend:           Erneut senden
       show_invoice:     Rechnung
       change_patient:   Umschreiben
+      assign:           Anschreiben
+      first_entry:      Ersteingabe
       second_entry:     Befund
-
       create:           Speichern
       cancel:           Abbrechen
       close:            Schliessen

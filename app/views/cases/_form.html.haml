@@ -1,16 +1,25 @@
 = simple_form_for resource do |f|
   .row-fluid
     .span6
-      .row-fluid
-        = f.input :examination_date, :as => :date_field
-      .row-fluid
-        .span6= f.input :entry_date, :as => :date_field
+      %h3= t_action(:assign)
       .row-fluid
         .span6= f.input :praxistar_eingangsnr
+      .row-fluid
+        .span6= f.input :examination_date, :as => :string
+      .row-fluid
+        .span6= f.input :entry_date, :as => :string
       .row-fluid
         .span6= f.association :doctor
       .row-fluid
         .span6= f.association :examination_method
+
+      %h3= t_action(:first_entry)
+      .row-fluid
+        .span6= f.association :patient
+
+      %h3= t_action(:second_entry)
+      .row-fluid
+        .span12= f.input :finding_text, :input_html => {:class => 'span12'}
 
     .span6
       = link_to image_tag(inline_order_form_url(@case.order_form, :type => :overview)), resource.order_form if resource.order_form
