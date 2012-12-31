@@ -17,9 +17,9 @@
       %br/
       = render "/vcards/show", :vcard => @case.doctor.vcar if @case.doctor
     #case
-      Entnahme vom: #{@case.examination_date ? @case.examination_date.strftime("%d.%m.%Y") : "Noch nicht gesetzt"}
+      Entnahme vom: #{@case.examination_date}
       %br/
-      Eingang am: #{@case.entry_date ? @case.entry_date.strftime("%d.%m.%Y") : "Noch nicht gesetzt"}
+      Eingang am: #{@case.entry_date}
     #subject.title
       Ihr Auftrag Nr. #{@case.praxistar_eingangsnr}
     #remarks
