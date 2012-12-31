@@ -10,6 +10,8 @@
 //= require twitter/bootstrap
 //= require tinymce-jquery
 //= require autocomplete-rails
+//= require jquery.a-tools
+//= require jquery.asuggest
 //= require jcrop
 //= require_tree .
 

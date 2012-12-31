@@ -26,3 +26,6 @@
 
   .form-actions
     = f.button :submit
+
+:javascript
+  $('#case_finding_text').asuggest(#{FindingClass.pluck(:name).inspect});
