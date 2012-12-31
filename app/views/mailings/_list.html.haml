@@ -2,7 +2,7 @@
   - old_created_on = nil
   - case_count = 0
   - doctor_count = 0
-  - for mailing in @mailings
+  - for mailing in collection
     - # group header 'created_on'
     - created_on = mailing.created_at.to_date
     - is_header = !(created_on == old_created_on)

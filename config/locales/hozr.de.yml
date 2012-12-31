@@ -17,6 +17,7 @@ de:
       employee: Mitarbeiter
       finding_class: Befund
       assignment: Auftragsdaten
+      mailing: Versand
 
     attributes:
       finding_class:

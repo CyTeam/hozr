@@ -1,7 +1,5 @@
 # encoding: utf-8'
-class MailingsController < ApplicationController
-  authorize_resource
-
+class MailingsController < AuthorizedController
   has_scope :by_state
 
   def index
