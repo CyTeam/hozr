@@ -15,7 +15,7 @@
     #doctor
       = @case.doctor.vcard.honorific_prefix if @case.doctor
       %br/
-      = render "/vcards/show", :vcard => @case.doctor.vcar if @case.doctor
+      = render "/vcards/show", :vcard => @case.doctor.vcard if @case.doctor
     #case
       Entnahme vom: #{@case.examination_date}
       %br/
