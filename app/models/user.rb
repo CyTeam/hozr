@@ -11,6 +11,15 @@ class User < ActiveRecord::Base
   belongs_to :object, :polymorphic => true
   accepts_nested_attributes_for :object
   attr_accessible :object_attributes
+  attr_accessible :object_id, :object_type
+
+  def object_reference
+    "#{object_type}:#{object_id}"
+  end
+  def object_reference=(value)
+    self.object_type, self.object_id = value.split(':')
+  end
+  attr_accessible :object_reference
 
   validates_uniqueness_of :login
 
