@@ -1,8 +1,8 @@
-= simple_form_for @employee do |f|
-  = render "vcards/form", :f => f
+= simple_form_for resource do |f|
+  = render 'people/address_form', :f => f
 
-  = f.input :code
-  = f.input :born_on, :as => :string
-  = f.input :workload
+  .row-fluid
+    .span6= f.input :born_on, :as => :string
 
-  = f.button :submit
+  .form-actions
+    = f.button :submit

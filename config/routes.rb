@@ -45,7 +45,15 @@ Hozr::Application.routes.draw do
     end
   end
 
-  resources :employees
+  resources :employees do
+    resources :phone_numbers
+    member do
+      get :new_phone_number
+    end
+    collection do
+      get :new_phone_number
+    end
+  end
 
   resources :patients do
     collection do
