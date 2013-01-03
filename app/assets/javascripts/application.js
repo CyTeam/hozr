@@ -12,6 +12,7 @@
 //= require autocomplete-rails
 //= require jquery.a-tools
 //= require jquery.asuggest
+//= require select2
 //= require jcrop
 //= require_tree .
 
@@ -29,6 +30,9 @@ function initializeBehaviours() {
 
   // from directory_lookup.js
   addDirectoryLookupBehaviour();
+
+  // select2
+  $('.select2').select2();
 
   // application
   setupSlidepathLinks();
