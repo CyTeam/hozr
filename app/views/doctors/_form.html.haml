@@ -6,5 +6,9 @@
     .span6= f.input :ean_party
     .span6= f.input :zsr
 
+  %h3= t_model Mailing
+  .row-fluid
+    .span6= f.input :channels, :as => :select, :collection => doctor_channels_collection, :input_html => {:multiple => true}
+
   .form-actions
     = f.button :submit

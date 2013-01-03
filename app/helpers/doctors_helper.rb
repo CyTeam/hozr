@@ -4,6 +4,10 @@ module DoctorsHelper
     Doctor.active.includes(:vcards => :address).order('vcards.family_name, vcards.given_name').collect { |m| [ m.to_s, m.id ] }
   end
 
+  def doctor_channels_collection
+    t('activerecord.attributes.doctor.channels_enum').invert
+  end
+
   def select_doctors(params = {})
     method = params[:method] ? params[:method] : :doctor_id
     collection = doctors_collection

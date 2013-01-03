@@ -99,6 +99,13 @@ de:
       insurance_policy:
         insurance:            Versicherung
         number:               Versicherten Nr.
+      doctor:
+        channels:             Versand als
+        channels_enum:
+          print:              Druck
+          email:              E-Mail
+          overview-email:     Übersichts E-Mail
+          hl7:                HL7
 
   cancan:
     roles:

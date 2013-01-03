@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130103115455) do
+ActiveRecord::Schema.define(:version => 20130103145904) do
 
   create_table "accounts", :force => true do |t|
     t.string   "number"
@@ -229,6 +229,7 @@ ActiveRecord::Schema.define(:version => 20130103115455) do
     t.boolean  "use_vesr"
     t.boolean  "print_payment_for"
     t.integer  "esr_account_id"
+    t.text     "channels"
   end
 
   add_index "doctors", ["active"], :name => "index_doctors_on_active"

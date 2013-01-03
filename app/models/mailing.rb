@@ -143,7 +143,7 @@ class Mailing < ActiveRecord::Base
     # Mark cases as delivered
     cases.map{|a_case| a_case.update_attribute(:delivered_at, DateTime.now) }
 
-    for channel in doctor.channels
+    for channel in doctor.channels || []
       send_by(channel)
     end
   end
