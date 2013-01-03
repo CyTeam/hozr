@@ -13,3 +13,7 @@
  *= require result_report
  *= require jcrop.vendor
 */
+
+.select2-container {
+  width: 220px;
+}
