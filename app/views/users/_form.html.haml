@@ -15,8 +15,5 @@
   .row-fluid
     .span12= f.input :object_reference, :as => :grouped_select, :group_method => :last, :include_blank => false, :collection => user_object_collection, :input_html => {:class => 'span12 select2'}
 
-  = f.fields_for :object do |o|
-    = render 'people/address_form', :f => o
-
   .form-actions
     = f.button :submit
