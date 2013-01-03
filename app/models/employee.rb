@@ -20,4 +20,8 @@ class Employee < Person
     date_of_birth = value
   end
 
+  # User
+  # =====
+  has_one :user, :as => :object, :autosave => true
+  attr_accessible :user
 end
