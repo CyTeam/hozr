@@ -56,12 +56,6 @@ class Person < ActiveRecord::Base
     vcard.build_address unless vcard.address
   end
 
-  # Attributes
-  # ==========
-  def code
-    vcard.abbreviated_name
-  end
-
   # Invoices
   # ========
   has_many :credit_invoices, :class_name => 'Invoice', :foreign_key => :customer_id, :order => 'value_date DESC'
