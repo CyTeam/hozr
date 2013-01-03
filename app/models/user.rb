@@ -21,7 +21,7 @@ class User < ActiveRecord::Base
   end
   attr_accessible :object_reference
 
-  validates_uniqueness_of :login
+  validates :login, :presence => true, :uniqueness => true
 
   attr_accessible :login
 
