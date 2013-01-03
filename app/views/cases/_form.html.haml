@@ -9,13 +9,13 @@
       .row-fluid
         .span6= f.input :entry_date, :as => :string
       .row-fluid
-        .span6= f.association :doctor
+        .span6= f.association :doctor, :input_html => {:class => 'select2'}
       .row-fluid
         .span6= f.association :examination_method
 
       %h3= t_action(:first_entry)
       .row-fluid
-        .span6= f.association :patient
+        .span6= f.association :patient, :input_html => {:class => 'select2'}
 
       %h3= t_action(:second_entry)
       .row-fluid
