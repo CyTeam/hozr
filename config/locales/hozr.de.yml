@@ -53,6 +53,7 @@ de:
         login:     Benutzername
         locked_at: Gesperrt seit
         last_sign_in_at: Letzter Login
+        object_reference:     Verknüpfte Person
       classification:
         name:                 Titel
         code:                 Code
