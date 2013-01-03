@@ -1,7 +1,7 @@
-= simple_form_for @user do |f|
+= simple_form_for resource do |f|
   %h3= t('users.form.credentials')
   .row-fluid
-    .span6= f.input :login if @user.respond_to? :login
+    .span6= f.input :login if resource.respond_to? :login
     .span6= f.input :email
   .row-fluid
     .span6= f.input :password, :hint => !f.object.new_record?, :input_html => {:autocomplete => "off"}
