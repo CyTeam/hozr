@@ -34,7 +34,12 @@ class Person < ActiveRecord::Base
   has_many :vcards, :as => :object
   has_one :vcard, :as => :object
   accepts_nested_attributes_for :vcard
-  attr_accessible :vcard_attributes
+  attr_accessible :vcard, :vcard_attributes
+
+  def vcard_with_autobuild
+    vcard_without_autobuild || build_vcard
+  end
+  alias_method_chain :vcard, :autobuild
 
   # Search
   default_scope includes(:vcard).order('IFNULL(vcards.full_name, vcards.family_name + ' ' + vcards.given_name)')
