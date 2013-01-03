@@ -5,7 +5,7 @@
     = simple_form_for 'doctor_order_form', :remote => true do |f|
       .row-fluid
         .span12
-          = f.input 'doctor_id', :as => :combobox, :collection => doctors_collection, :input_html => {'data-autofocus' => true}
+          = f.input 'doctor_id', :as => :select, :collection => doctors_collection, :input_html => {'data-autofocus' => true, :class => 'select2 span12'}
       .row-fluid
         .span12
           = f.input 'count'
