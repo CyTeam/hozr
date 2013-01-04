@@ -34,7 +34,7 @@ class MailingOverview < Prawn::Document
 
     # Address
     grid([0,7], [1,9]).bounding_box do
-      text @mailing.doctor.vcard.honorific_prefix
+      text @mailing.doctor.vcard.honorific_prefix || ""
       text @mailing.doctor.vcard.full_name
       text @mailing.doctor.vcard.street_address
       text @mailing.doctor.vcard.postal_code + " " + @mailing.doctor.vcard.locality
