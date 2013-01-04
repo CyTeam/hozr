@@ -3,6 +3,10 @@
 
 = simple_form_for @case, :url => second_entry_update_case_path(@case) do |f|
   .row-fluid
+    .span12
+      = f.input :finding_text, :wrapper => :inline, :input_html => {:rows =>5, :class => "span12 tinymce"}
+
+  .row-fluid
     #findings.span6
       = render 'finding_classes/list_findings'
 
@@ -21,3 +25,9 @@
 
 - content_for :sidebar do
   = render 'info'
+
+- configuration = TinyMCE::Rails.configuration
+:javascript
+  $(document).ready(function() {
+    tinyMCE.init(#{configuration.options_for_tinymce.to_json});
+  })
