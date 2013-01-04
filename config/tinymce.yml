@@ -1,7 +1,6 @@
 width: 100%
 theme_advanced_toolbar_location: top
 theme_advanced_toolbar_align: left
-theme_advanced_statusbar_location: bottom
-theme_advanced_buttons1_add:
-  - bold
-  - italic
+theme_advanced_buttons1: "bold, italic, separator, bullist, numlist, separator, outdent, indent, separator, undo"
+theme_advanced_buttons2: ""
+theme_advanced_buttons3: ""
