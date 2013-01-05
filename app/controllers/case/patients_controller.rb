@@ -37,10 +37,11 @@ class Case::PatientsController < ApplicationController
 
     @patient.assign_attributes(params[:patient])
 
-    # Set entry_date only when setting patient for first time
     @case.examination_method_id = @case.intra_day_id == 0 ? 0 : 1
 
-    @case.first_entry_by = current_user.object
+    # Set entry_date only when setting patient for first time
+    @case.entry_date ||= Time.now
+    @case.first_entry_by ||= current_user.object
 
     # TODO: dynamic lookup of doctor from latest case
     @patient.doctor ||= @case.doctor
