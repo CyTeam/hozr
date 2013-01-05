@@ -21,9 +21,16 @@
     return '<span style="display: inline-block; width: 5em">' + item.id + '</span> ' + item.name
   }
 
-  $('#finding_class_selection').select2({
-    placeholder: "Code/Text",
-    formatSelection: formatSelection,
-    formatResult: format,
-    data: #{finding_class_collection.to_json}
-  })
+  $('#finding_class_selection')
+    .select2({
+      placeholder: "Code/Text",
+      allowClear: true,
+      openOnEnter: false,
+      formatSelection: formatSelection,
+      formatResult: format,
+      data: #{finding_class_collection.to_json}
+    })
+    .on('close', function(e) {
+      var text = $(this).select2("data").name
+      $('#case_finding_text').tinymce().execCommand('mceInsertContent', false, text)
+    })
