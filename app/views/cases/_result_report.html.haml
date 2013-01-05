@@ -45,7 +45,5 @@
 
     #actions.row-fluid
       .span6
-        = button_to 'Edit', edit_finding_text_case_path(@case), :remote => true, :method => :get, :class => 'btn span12'
-      .span6
         = button_to "Visum: #{current_user.object.vcard.abbreviated_name}", sign_case_path(@case), :class => 'btn btn-primary span12'
         = button_to "2. Visum: #{current_user.object.vcard.abbreviated_name}", review_done_case_path(@case), :class => 'btn btn-primary span12' if @case.needs_review or @case.review_by

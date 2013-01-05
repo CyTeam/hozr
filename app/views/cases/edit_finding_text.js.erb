@@ -1,6 +1,0 @@
-$('.modal').remove();
-$('body').append('<%=j render "edit_finding_text" %>');
-$('.modal').modal('show');
-
-<%- configuration = TinyMCE::Rails.configuration %>
-<%= "tinyMCE.init(#{configuration.options_for_tinymce.to_json});".html_safe %>

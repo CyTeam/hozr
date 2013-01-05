@@ -112,19 +112,6 @@ class CasesController < AuthorizedController
     end
   end
 
-  def update_finding_text
-    @case = Case.find(params[:id])
-
-    @case.finding_text = params[:case][:finding_text]
-    @case.save
-
-    redirect_to @case
-  end
-
-  def edit_finding_text
-    @case = Case.find(params[:id])
-  end
-
   def sign
     @case = Case.find(params[:id])
     @case.screened_at = Time.now

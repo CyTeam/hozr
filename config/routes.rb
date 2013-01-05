@@ -76,7 +76,6 @@ Hozr::Application.routes.draw do
     collection do
       get :first_entry_queue, :second_entry_queue, :hpv_p16_queue, :review_queue
       get :unassigned_sort_queue, :unassigned_form, :assignings_list
-      get :autocomplete_finding_class_code
       post :assign
     end
 
@@ -85,10 +84,6 @@ Hozr::Application.routes.draw do
 
       delete :destroy_from_assign
       post :hpv_p16_prepared
-      post :add_finding
-      delete :remove_finding
-      get :edit_finding_text
-      post :update_finding_text
       post :create_hpv_p16_for_case
       post :review_done
 
@@ -100,7 +95,6 @@ Hozr::Application.routes.draw do
 
       post :second_entry_form
       put :second_entry_update
-      post :add_finding
       post :sign
 
       post :resend
