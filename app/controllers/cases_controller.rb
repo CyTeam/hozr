@@ -58,11 +58,6 @@ class CasesController < AuthorizedController
   def second_entry_form
     @case = Case.find(params[:id])
 
-    if @case.finding_text.nil?
-      @case.finding_text = @case.findings.map {|finding| "<div>#{finding.name}</div>"}.join("\n")
-      @case.save
-    end
-
     if params[:case] && params[:case][:classification]
       classification = Classification.find(params[:case][:classification])
       @case.classification = classification
@@ -115,52 +110,6 @@ class CasesController < AuthorizedController
     else
       redirect_to :action => 'second_entry_pap_form', :id => next_open
     end
-  end
-
-  def remove_finding
-    @case = Case.find(params[:id])
-
-    finding = FindingClass.find(params[:finding_id])
-    @case.finding_classes.delete(finding)
-    name = finding.name
-    quoted_name = name.gsub('ä', '&auml;').gsub('ö', '&ouml;').gsub('ü', '&uuml;').gsub('Ä', '&Auml;').gsub('Ö', '&Ouml;').gsub('Ü', '&Uuml;')
-
-    @case.finding_text = @case.finding_text.gsub(/<div>#{Regexp.escape(name)}<\/div>(\n)?/, '').gsub("<div>#{quoted_name}</div>", '')
-
-    @case.save
-
-    render 'finding_classes/list_findings'
-  end
-
-  def add_finding
-    @case = Case.find(params[:id])
-
-    begin
-      if params[:finding_id]
-        finding_class_id = params[:finding_id]
-        finding_class = FindingClass.find(finding_class_id)
-      elsif params[:finding_class][:selection] > ''
-        finding_class_code = params[:finding_class][:selection].split(' - ')[0]
-        finding_class = FindingClass.find_by_code(finding_class_code)
-      elsif params[:finding_class][:code]
-        finding_class_code = params[:finding_class][:code]
-        finding_class = FindingClass.find_by_code(finding_class_code)
-      end
-
-      @case.finding_classes << finding_class
-      finding_text = @case.finding_text.nil? ? '' : @case.finding_text
-      @case.finding_text = finding_text + "<div>#{finding_class.name}</div>\n" if finding_class.finding_group.nil?
-
-      @case.save
-
-    rescue ActiveRecord::AssociationTypeMismatch
-      flash.now[:error] = "Unbekannter Code: #{finding_class_code}"
-
-    rescue ActiveRecord::StatementInvalid
-      flash.now[:error] = "Code bereits eingegeben"
-    end
-
-    render 'finding_classes/list_findings'
   end
 
   def update_finding_text

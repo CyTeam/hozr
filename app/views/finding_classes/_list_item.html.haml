@@ -1,3 +1,0 @@
-%li{:style => "list-style-type: none"}
-  = link_to image_tag("remove.png"), remove_finding_case_path(@case, :finding_id => list_item.id), :remote => true, :method => :delete, :after => "$('finding_class_selection').value = ''; $('finding_class_code').value = ''; $('finding_class_code').focus() "
-  = list_item.name.html_safe
