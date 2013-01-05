@@ -6,10 +6,6 @@
     .span12
       = f.input :finding_text, :wrapper => :inline, :input_html => {:rows =>5, :class => "span12 tinymce"}
 
-  .row-fluid
-    #findings.span6
-      = render 'finding_classes/list_findings'
-
   .form-actions
     = f.button :submit, "Erstellen", :class => 'span2 btn-big btn-primary'
     = f.button :submit, "P16", :class => 'span2 btn-big'
