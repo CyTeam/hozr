@@ -12,4 +12,14 @@ module FindingClassesHelper
 
     button_to finding_class.name, add_finding_case_path(a_case, :finding_id => finding_class.id), :method => :post, :remote => true, :class => "btn btn-large #{btn_type} span12"
   end
+
+  def finding_class_collection
+    FindingClass.limit(2).all.map do |finding_class|
+      {
+        :id => finding_class.code,
+        :text => finding_class.code + ' - ' + finding_class.name,
+        :name => finding_class.name
+      }
+    end
+  end
 end

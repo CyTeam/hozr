@@ -9,6 +9,21 @@
       - finding_classes.each do |finding_class|
         .span3= link_to_add_finding_class(@case, finding_class)
 
-= form_tag add_finding_case_path(@case), :remote => true, :id => "finding_classes", :after => "$('finding_class_selection').value = ''; $('finding_class_code').value = ''; $('finding_class_code').focus() " do
-  %label{:for => "case_praxistar_eingangsnr"} Text/Code:
-  = autocomplete_field_tag 'finding_class[selection]', '', autocomplete_finding_class_code_cases_path, :size => 12, 'data-autofocus' => true
+= simple_form_for 'finding_class', :url => add_finding_case_path(@case), :remote => true, :id => "finding_classes" do |f|
+  .row-fluid
+    .span12= f.input :selection, :as => :string, :input_html => {:class => 'span12'}
+
+:javascript
+  function formatSelection(item) {
+    return item.name
+  }
+  function format(item) {
+    return '<span style="display: inline-block; width: 5em">' + item.id + '</span> ' + item.name
+  }
+
+  $('#finding_class_selection').select2({
+    placeholder: "Code/Text",
+    formatSelection: formatSelection,
+    formatResult: format,
+    data: #{finding_class_collection.to_json}
+  })
