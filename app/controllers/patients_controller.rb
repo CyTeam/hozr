@@ -1,7 +1,7 @@
 # encoding: utf-8'
 class PatientsController < AuthorizedController
   def index
-    @patients = Patient.by_text params[:query], :retry_stale => true, :per_page => 50
+    @patients = Patient.by_text params[:query], :star => true, :retry_stale => true, :per_page => 50
   end
 
   def dunning_stopped
