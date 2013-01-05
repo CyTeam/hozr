@@ -165,6 +165,11 @@ de:
       title:           Reviews
     hpv_p16_queue:
       title:           HPV/P16 Liste
+  case:
+    assignments:
+      new:
+        choose_doctor: Arzt wählen
+
   send_queues:
     index:
       title:           Versand History
