@@ -32,5 +32,5 @@
     })
     .on('close', function(e) {
       var text = $(this).select2("data").name
-      $('#case_finding_text').tinymce().execCommand('mceInsertContent', false, text)
+      $('#case_finding_text').tinymce().execCommand('mceInsertContent', false, text + ' ')
     })
