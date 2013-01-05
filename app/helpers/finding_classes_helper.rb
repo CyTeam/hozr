@@ -14,7 +14,7 @@ module FindingClassesHelper
   end
 
   def finding_class_collection
-    FindingClass.limit(2).all.map do |finding_class|
+    FindingClass.all.map do |finding_class|
       {
         :id => finding_class.code,
         :text => finding_class.code + ' - ' + finding_class.name,
