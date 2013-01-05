@@ -3,10 +3,6 @@
 class CasesController < AuthorizedController
   authorize_resource
 
-  # Helpers
-  # =======
-  helper :doctors
-
   # Auto Completion
   auto_complete_for :finding_class, :selection, :limit => 12
   autocomplete :finding_class, [:code, :name], :column => '', :extra_data => [:name], :display_value => :to_s, :full => true
