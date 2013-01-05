@@ -1,8 +1,9 @@
 %table.table.table-striped.collection
   %tr
-    %th Code
-    %th Name
-    %th Methode
-    %th Gruppe
+    %th= t_attr(:code)
+    %th= t_attr(:title)
+    %th= t_attr(:default)
+    %th= t_attr(:examination_method)
+    %th= t_attr(:classification_group)
 
   = render collection

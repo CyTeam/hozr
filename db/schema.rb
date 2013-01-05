@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130103145904) do
+ActiveRecord::Schema.define(:version => 20130105210133) do
 
   create_table "accounts", :force => true do |t|
     t.string   "number"
@@ -193,6 +193,7 @@ ActiveRecord::Schema.define(:version => 20130103145904) do
     t.string  "code",                    :limit => 10
     t.integer "examination_method_id"
     t.integer "classification_group_id"
+    t.boolean "default",                               :default => false
   end
 
   create_table "diagnoses", :force => true do |t|

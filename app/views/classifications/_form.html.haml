@@ -1,7 +1,14 @@
 = simple_form_for @classification do |f|
-  = f.input :name
-  = f.input :code
-  = f.association :examination_method, :include_blank => false
-  = f.association :classification_group, :include_blank => false
+  .row-fluid
+    .span6= f.input :name
+  .row-fluid
+    .span6= f.input :code
+  .row-fluid
+    .span6= f.input :default
+  .row-fluid
+    .span6= f.association :examination_method, :include_blank => false
+  .row-fluid
+    .span6= f.association :classification_group, :include_blank => false
 
-  = f.button :submit
+  .form-actions
+    = f.button :submit

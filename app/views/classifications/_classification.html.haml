@@ -1,5 +1,6 @@
 %tr[classification]
   %td= link_to classification.code, classification, 'data-href-container' => 'tr'
   %td= classification.name
+  %td= classification.default
   %td= classification.examination_method.try(:name)
   %td= classification.classification_group.try(:title)

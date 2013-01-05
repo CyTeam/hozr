@@ -60,6 +60,7 @@ de:
         code:                 Code
         examination_method:   Methode
         classification_group: Gruppe
+        default:              Default
       classification_group:
         title:                Titel
         position:             Position
