@@ -135,6 +135,7 @@ Hozr::Application.routes.draw do
   resources :classifications
   resources :classification_groups
   resources :finding_classes
+  resources :examination_methods
 
   resources :order_forms do
     member do

@@ -18,6 +18,7 @@ de:
       finding_class: Befund
       assignment: Auftragsdaten
       mailing: Versand
+      examination_method: Methode
 
     attributes:
       finding_class:
