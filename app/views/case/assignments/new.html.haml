@@ -14,7 +14,7 @@
           = c.input :praxistar_eingangsnr, :input_html => {:tabindex => c.object.intra_day_id + 30000}
           = c.input :intra_day_id, :input_html => {:tabindex => c.object.intra_day_id}
           = c.input :examination_date, :as => :string, :input_html => {:tabindex => c.object.intra_day_id + 10000, 'data-autofocus' => true}
-          = c.association :doctor, :input_html => {:tabindex => c.object.intra_day_id + 20000}
+          = c.association :doctor, :input_html => {:class => 'select2', :tabindex => c.object.intra_day_id + 20000}
           .form-actions= link_to 'Löschen', order_form_path(a_case.order_form), :remote => true, :method => :delete, :class => 'btn'
 
   = f.button :submit
