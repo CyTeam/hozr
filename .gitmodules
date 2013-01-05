@@ -1,3 +1,0 @@
-[submodule "vendor/plugins/auto_complete"]
-	path = vendor/plugins/auto_complete
-	url = https://github.com/marklazz/auto_complete.git
