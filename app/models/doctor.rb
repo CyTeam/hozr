@@ -53,7 +53,9 @@ class Doctor < ActiveRecord::Base
   # =====
   has_one :user, :as => :object, :autosave => true
   attr_accessible :user
-  delegate :email, :email=, :to => :user
+  def email
+    vcard.contacts.where(:phone_number_type => 'E-Mail').first
+  end
 
   # Office
   # ======
