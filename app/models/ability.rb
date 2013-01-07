@@ -44,6 +44,5 @@ class Ability
     can [:show, :update], User, :id => user.id
 
     cannot :destroy, Case unless user.role? :sysadmin
-    cannot :sign, Case unless user.role? :zyto
   end
 end
