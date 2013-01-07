@@ -71,10 +71,10 @@ class Mailing < ActiveRecord::Base
       lock.close
 
       # TODO: Need to adapt for email
-      doctor_ids = Case.select('DISTINCT doctor_id').for_delivery.all
+      doctor_ids = Case.for_delivery.uniq.pluck(:doctor_id).compact
 
       for doctor_id in doctor_ids
-        self.create_all_for_doctor(doctor_id.doctor_id)
+        self.create_all_for_doctor(doctor_id)
       end
 
     ensure
