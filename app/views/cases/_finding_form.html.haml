@@ -9,7 +9,7 @@
       - finding_classes.each do |finding_class|
         .span3= link_to_add_finding_class(@case, finding_class)
 
-= simple_form_for 'finding_class', :url => add_finding_case_path(@case), :remote => true, :id => "finding_classes" do |f|
+= simple_form_for 'finding_class', :url => '#', :remote => true, :id => "finding_classes" do |f|
   .row-fluid
     .span12= f.input :selection, :as => :string, :input_html => {:class => 'span12'}
 
