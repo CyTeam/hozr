@@ -25,7 +25,7 @@ class Ability
     alias_action [:case_label, :case_label_print, :post_label, :post_label_print], :to => :label_print
 
     return unless user
-    
+
     if user.role? :sysadmin
       can :manage, :all
     end
