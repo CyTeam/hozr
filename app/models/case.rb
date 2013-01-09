@@ -120,10 +120,6 @@ class Case < ActiveRecord::Base
     scope.where("id > ?", id).first
   end
 
-  def praxistar_eingangsnr=(value)
-    write_attribute(:praxistar_eingangsnr, CaseNr.new(value).to_s)
-  end
-
   def examination_date=(value)
     if value.is_a?(String)
       day, month, year = value.split('.')
