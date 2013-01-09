@@ -291,6 +291,8 @@ GEM
       shoulda-matchers (~> 1.0.0)
     shoulda-context (1.0.0)
     shoulda-matchers (1.0.0)
+    simple-navigation (3.9.0)
+      activesupport (>= 2.3.2)
     simple_form (2.0.2)
       actionpack (~> 3.0)
       activemodel (~> 3.0)
@@ -379,6 +381,7 @@ DEPENDENCIES
   sass-rails
   select2-rails
   shoulda
+  simple-navigation
   simple_form
   sprockets
   sqlite3

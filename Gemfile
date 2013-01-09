@@ -104,7 +104,7 @@ gem 'lyb_sidebar'
 gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
 gem 'simple_form'
 gem 'select2-rails'
-
+gem 'simple-navigation'
 # Validations
 gem 'validates_timeliness'
 
