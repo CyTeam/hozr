@@ -46,6 +46,9 @@ de:
             mailing_overview: Befundübersicht
             result_report_a4: Resultate A4
             result_report_a5: Resultate A5
+          format:
+            order_form:       Format Auftragsformular
+            result_report:    Format Resultat
 
         users:     Benutzer
       user:

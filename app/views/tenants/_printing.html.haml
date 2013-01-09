@@ -1,24 +1,25 @@
 = simple_form_for resource do |f|
-  = f.fields_for :settings do |s|
-    .row-fluid
-      .span6= s.input 'printing.cups_hostname', :label => t('activerecord.attributes.tenant.settings.printing.cups_hostname'), :input_html => {:value => f.object.settings['printing.cups_hostname']}
+  .row-fluid
+    .span6= f.input 'printing.cups_hostname', :as => :setting_string
 
-    .row-fluid
-      .span6= s.input 'format.order_form', :label => t('activerecord.attributes.tenant.settings.format.order_form'), :as => :select, :collection => ['A4', 'A5'], :selected => f.object.settings['format.order_form']
+  .row-fluid
+    .span6= f.input 'format.order_form', :as => :setting_select, :collection => ['A4', 'A5']
 
-    .row-fluid
-      .span6= s.input 'printing.order_form', :label => t('activerecord.attributes.tenant.settings.printing.order_form'), :input_html => {:value => f.object.settings['printing.order_form']}
+  .row-fluid
+    .span6= f.input 'printing.order_form', :as => :setting_string
 
-    .row-fluid
-      .span6= s.input 'printing.mailing_overview', :label => t('activerecord.attributes.tenant.settings.printing.mailing_overview'), :input_html => {:value => f.object.settings['printing.mailing_overview']}
+  .row-fluid
+    .span6= f.input 'printing.mailing_overview', :as => :setting_string
 
-    .row-fluid
-      .span6= s.input 'format.result_report', :label => t('activerecord.attributes.tenant.settings.format.result_report'), :as => :select, :collection => ['A4', 'A5'], :selected => f.object.settings['format.result_report']
+  .row-fluid
+    .span6= f.input 'format.result_report', :as => :setting_select, :collection => ['A4', 'A5']
 
-    .row-fluid
-      .span6= s.input 'printing.result_report_a4', :label => t('activerecord.attributes.tenant.settings.printing.result_report_a4'), :input_html => {:value => f.object.settings['printing.result_report_a4']}
-    .row-fluid
-      .span6= s.input 'printing.result_report_a5', :label => t('activerecord.attributes.tenant.settings.printing.result_report_a5'), :input_html => {:value => f.object.settings['printing.result_report_a5']}
+  .row-fluid
+    .span6= f.input 'printing.result_report_a4', :as => :setting_string
+  .row-fluid
+    .span6= f.input 'printing.result_report_a5', :as => :setting_string
+  .row-fluid
+    .span6= f.input 'printing.result_report_a5', :as => :setting_string
 
   .form-actions
     = f.button :submit
