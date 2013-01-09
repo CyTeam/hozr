@@ -6,6 +6,8 @@
       .row-fluid
         .span12
           = f.input 'doctor_id', :as => :select, :collection => doctors_collection, :input_html => {'data-autofocus' => true, 'data-placeholder' => 'Leer / Arzt auswählen', :class => 'select2 span12'}
+        :javascript
+          $('#doctor_order_form_doctor_id').select2({allowClear: true})
       .row-fluid
         .span12
           = f.input 'count'
