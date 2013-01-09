@@ -17,85 +17,21 @@
       img {
         border: 0px
       }
-      %body
+  %body
     .navbar.navbar-fixed-top
       .navbar-inner
         .container-fluid
-          %a.btn.btn-navbar{"data-target" => ".nav-collapse", "data-toggle" => "collapse"}
+          %a.btn.btn-navbar{"data-toggle" => "collapse", "data-target" => ".nav-collapse"}
             %span.icon-bar
             %span.icon-bar
             %span.icon-bar
+          = link_to root_path, :class => 'brand' do
+            <span id="logo-yt">hozr</span>
           .nav-collapse
-            %ul.nav
-              %li= link_to "TODO", admin_work_queue_path
-              %li
-                %ul.nav
-                  %li.dropdown
-                    %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
-                      Eingang
-                      %b.caret
-                    %ul.dropdown-menu
-                      %li= link_to "Auftragsformulare", unassigned_form_cases_path
-                      %li= link_to "Ersteingabe", first_entry_queue_cases_path
-                      %li= link_to "Patient erfassen", new_patient_path
-              %li
-                %ul.nav
-                  %li.dropdown
-                    %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
-                      Bearbeitung
-                      %b.caret
-                    %ul.dropdown-menu
-                      %li= link_to "Zweiteingabe", second_entry_queue_cases_path
-                      %li= link_to "HPV/P16", hpv_p16_queue_cases_path
-                      %li= link_to "Review", review_queue_cases_path
-              %li
-                %ul.nav
-                  %li.dropdown
-                    %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
-                      Drucken
-                      %b.caret
-                    %ul.dropdown-menu
-                      %li= link_to "Auftragsformular Drucken", doctor_order_form_path, :remote => true
-                      %li= link_to "Objektträger Etiketten", case_label_print_path, :remote => true
-                      %li= link_to "P16 Etiketten", p16_case_label_print_path, :method => :post, :remote => true
-                      %li= link_to "Packet Etiketten", post_label_print_path, :remote => true
-              %li
-                %ul.nav
-                  %li.dropdown
-                    %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
-                      Suche
-                      %b.caret
-                    %ul.dropdown-menu
-                      %li= link_to "Patienten", patients_path
-                      %li= link_to "Ärzte", doctors_path
-              %li
-                %ul.nav
-                  %li.dropdown
-                    %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
-                      Administration
-                      %b.caret
-                    %ul.dropdown-menu
-                      %li= link_to "Statistiken", reports_path
-                      %li.divider
-                      %li= link_to "Auftragsformulare", order_forms_path
-                      %li= link_to "Resultat Queue", send_queues_path
-                      %li.divider
-                      %li= link_to "Patienten mit Mahnstopp", dunning_stopped_patients_path
-                      %li= link_to "Klassifikationen", classifications_path
-                      %li= link_to "Klassifikationsgruppen", classification_groups_path
-                      %li= link_to "Befunde", finding_classes_path
-                      %li= link_to "Methoden", examination_methods_path
-                      %li.divider
-                      %li= link_to t_title(:index, Attachment), attachments_path
-                      %li= link_to "Mitarbeiter", employees_path
-                      %li= link_to t_model(Tenant), current_tenants_path
-                      %li= link_to t_model(User), users_path
-              %li
-                = form_tag search_path, :class => "navbar-search pull-left" do
-                  %input.search-query{:name => "query", :placeholder => "Suche", :type => "text"}/
-            .pull-right
-              %div= render :partial => 'users/user_bar'
-
+            = render_navigation(:level => 1..2, :renderer => BootstrapTopbarList, :expand_all => true)
+            = form_tag search_path, :class => "navbar-search pull-left" do
+              %input.search-query{:name => "query", :placeholder => "Suche", :type => "text"}/
+            %div= render :partial => 'users/user_bar'
     .container-fluid
       .row-fluid
         #main.span10
