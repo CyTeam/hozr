@@ -52,7 +52,7 @@ class LabelDocument < Prawn::Document
       start_new_page unless i == part_count
     end
 
-    start_new_page :size => [12.mm, 28.mm]
+    start_new_page :size => [12.mm, 30.mm]
     form_label
 
     render
