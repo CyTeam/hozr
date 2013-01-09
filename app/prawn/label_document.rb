@@ -16,10 +16,9 @@ class LabelDocument < Prawn::Document
     }
   end
 
-  def label(date, day_nr, part_nr)
-    enc_date = date.strftime('%y%j')
-    code = '%s%03i%02i' % [enc_date, day_nr, part_nr]
-    text_code = '%s %03i/%02i' % [date.strftime('%d.%m.%y'), day_nr, part_nr]
+  def part_label(part_nr)
+    code = '%s%03i%02i' % [@date.strftime('%y%j'), @day_nr, part_nr]
+    text_code = '%s %03i/%02i' % [@date.strftime('%d.%m.%y'), @day_nr, part_nr]
 
     barcode = Barby::Code128C.new(code)
     rotate(90, :origin => [0,0]) do
@@ -30,11 +29,31 @@ class LabelDocument < Prawn::Document
     end
   end
 
+  def form_label
+    code = '%s%03i' % [@date.strftime('%y%j'), @day_nr]
+    text_code = '%s %03i/%02i-%02i' % [@date.strftime('%d.%m.%y'), @day_nr, 1, @part_count]
+
+    barcode = Barby::Code128C.new(code)
+    rotate(90, :origin => [0,0]) do
+      barcode.annotate_pdf(self, :unbleed => 0.1, :height => 35, :xdim => 1, :y => -20, :x => 4)
+
+      font_size 6
+      draw_text text_code, :at => [10, -26]
+    end
+  end
+
   def to_pdf(date, day_nr, part_count)
+    @date = date
+    @day_nr = day_nr
+    @part_count = part_count
+
     (1..part_count).each do |i|
-      label(date, day_nr, i)
+      part_label(i)
       start_new_page unless i == part_count
     end
+
+    start_new_page :size => [12.mm, 28.mm]
+    form_label
 
     render
   end
