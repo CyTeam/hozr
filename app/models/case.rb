@@ -45,6 +45,13 @@ class Case < ActiveRecord::Base
   scope :undelivered, where("delivered_at IS NULL")
   scope :for_delivery, finished.undelivered
 
+  def code
+    praxistar_eingangsnr
+  end
+  def code=(value)
+    self.praxistar_eingangsnr = value
+  end
+
   def to_s
     "#{patient.to_s}: PAP Abstrich #{praxistar_eingangsnr}"
   end

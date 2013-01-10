@@ -90,6 +90,7 @@ de:
         use_billing_address: Rechnungsadresse
       case:
         praxistar_eingangsnr: Eingangsnummer
+        code:                 Eingangsnummer
         examination_date:     Entnahmedatum
         entry_date:           Eingangsdatum
         examination_method:   Methode
@@ -150,6 +151,7 @@ de:
       cancel:           Abbrechen
       close:            Schliessen
       refresh:          Aktualisieren
+      scan:             Scannen
 
   # Titles
   attachments:
