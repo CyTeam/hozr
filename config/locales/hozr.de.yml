@@ -50,6 +50,8 @@ de:
           format:
             order_form:       Format Auftragsformular
             result_report:    Format Resultat
+          scanning:
+            order_form:       Scanner
 
         users:     Benutzer
       user:
