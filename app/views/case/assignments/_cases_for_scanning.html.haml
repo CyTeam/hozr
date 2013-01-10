@@ -1,4 +1,8 @@
-%ul
-  - Case.for_scanning.find_each do |a_case|
-    %li= a_case.praxistar_eingangsnr
-
+%table.table.table-striped.table-condensed
+  %tr
+    %th= t_attr :code, Case
+    %th= t_attr :entry_date, Case
+  = render :partial => 'case/assignments/case_for_scanning', :collection => Case.for_scanning, :as => :a_case
+  %tr
+    %th= "Total #{Case.for_scanning.count}"
+    %th
