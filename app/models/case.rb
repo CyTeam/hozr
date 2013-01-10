@@ -34,7 +34,7 @@ class Case < ActiveRecord::Base
   scope :first_entry_done, where("first_entry_at IS NOT NULL and screened_at IS NULL")
 
   scope :for_assignment, where("examination_date IS NULL")
-  scope :for_scanning, unassigned.where("cases.id NOT IN (SELECT case_id FROM order_forms)")
+  scope :for_scanning, unassigned.where("cases.id NOT IN (SELECT case_id FROM order_forms WHERE case_id IS NOT NULL)")
   scope :for_first_entry, where("first_entry_at IS NULL and assigned_at IS NOT NULL")
   scope :for_second_entry, first_entry_done.where("needs_p16 = ? AND needs_hpv = ?", false, false)
   scope :for_p16, first_entry_done.where("needs_p16 = ?", true)
