@@ -93,8 +93,6 @@ class OrderForm < ActiveRecord::Base
   def self.import_order_forms(order_form_dir)
     order_form_files = Dir.glob("#{order_form_dir}/*.jpg").sort
 
-    p "Anzahl: #{order_form_files.size}"
-
     for order_form_file in order_form_files
       a_case = Case.new(order_form_file)
       a_case.save
