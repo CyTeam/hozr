@@ -19,6 +19,16 @@ class OrderFormsController < AuthorizedController
     @order_form = OrderForm.find(params[:id])
   end
 
+  # Scan
+  def scan
+    scanner = current_tenant.settings['scanning.order_form']
+    Dir.chdir(OrderForm::SCANNER_SPOOL_PATH) do
+      system('scanimage', '--device', scanner, '--scan-area', 'A4', '--mode', 'Gray', '--batch', '--resolution', '200')
+    end
+
+    OrderForm.post_scanning_processing
+  end
+
   # Image
   def download
     order_form = OrderForm.find(params[:id])

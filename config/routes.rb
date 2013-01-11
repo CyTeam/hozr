@@ -137,6 +137,9 @@ Hozr::Application.routes.draw do
   resources :examination_methods
 
   resources :order_forms do
+    collection do
+      post :scan
+    end
     member do
       get :head_image
       get :download, :inline

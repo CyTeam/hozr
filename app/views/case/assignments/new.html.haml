@@ -12,6 +12,8 @@
 #cases-for-scanning
   = render 'cases_for_scanning', :collection => Case.for_scanning
 
+= link_to t_action(:scan), scan_order_forms_path, :method => :post, :class => 'btn'
+
 = simple_form_for '', :url => case_assignments_path, :method => :post, :html => {:class => 'no-well'} do |f|
   - @cases.each do |a_case|
     = f.fields_for 'case[]', a_case do |c|
