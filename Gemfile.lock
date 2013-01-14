@@ -1,4 +1,14 @@
 GIT
+  remote: git://github.com/huerlisi/actionmailer-instyle
+  revision: c249fc883476fef2217a10f1e9a484d455e56aaf
+  specs:
+    actionmailer-instyle (0.5.3)
+      actionmailer (~> 3.1)
+      activesupport (~> 3.1)
+      premailer (~> 1.7)
+      sprockets (~> 2.0)
+
+GIT
   remote: git://github.com/huerlisi/cupsffi.git
   revision: fb92b21f855d2fb1cb931b07856156e1ce68939a
   specs:
@@ -157,6 +167,9 @@ GEM
       execjs
     coffee-script-source (1.3.1)
     commonjs (0.2.6)
+    css_parser (1.2.6)
+      addressable
+      rdoc
     devise (2.0.4)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.0.3)
@@ -178,6 +191,7 @@ GEM
     highline (1.6.15)
     hike (1.2.1)
     hpricot (0.8.6)
+    htmlentities (4.3.1)
     i18n (0.6.1)
     i18n_rails_helpers (1.0.7)
     inherited_resources (1.3.1)
@@ -238,6 +252,9 @@ GEM
     prawnto (0.1.1)
       prawn
       rails (>= 2.1)
+    premailer (1.7.3)
+      css_parser (>= 1.1.9)
+      htmlentities (>= 4.0.0)
     rack (1.4.1)
     rack-cache (1.2)
       rack (>= 0.4)
@@ -337,6 +354,7 @@ PLATFORMS
 
 DEPENDENCIES
   ZenTest (< 4.6.0)
+  actionmailer-instyle!
   activerecord-sqlserver-adapter
   autocompletion
   autotest
