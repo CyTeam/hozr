@@ -1,0 +1,18 @@
+!!! XML
+!!! Basic 1.0
+%html{:xmlns => "http://www.w3.org/1999/xhtml"}
+  %head
+    = stylesheet_link_tag 'application', :media => 'screen, projection, print'
+    %meta{:content => "text/html; charset=utf-8", "http-equiv" => "content-type"}/
+    %meta{:content => "Simon Huerlimann &lt;simon.huerlimann@zyto-labor.com&gt;", :name => "author"}/
+    %meta{:content => "zytologie labor limmatplatz zürich arzt zelle", :name => "keywords"}/
+    %meta{:content => "Online Resultate - Zytolabor Limmatplatz", :name => "description"}/
+    %link{:href => "/favicon.ico", :rel => "shortcut icon"}/
+    %title ZytoLabor Limmatplatz - CyLab Online Resultate
+  %body
+    #wrapper
+      #content
+        %h2 CyLab
+        = link_to "Online Resultat", :controller => :cases, :action => :show, :id => @case, :host => "lab.zytolabor.ch", :protocol => 'https'
+        %h2 Resultat
+        = render 'cases/result_report'

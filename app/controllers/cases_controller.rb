@@ -1,6 +1,11 @@
 # encoding: utf-8'
 
 class CasesController < AuthorizedController
+  def report
+    @case = Case.find(params[:id])
+    render 'report', :layout => false
+  end
+
   # Navigation
   # ==========
   def history

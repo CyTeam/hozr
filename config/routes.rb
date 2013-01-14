@@ -80,6 +80,7 @@ Hozr::Application.routes.draw do
     end
 
     member do
+      get :report
       get :next_step
 
       delete :destroy_from_assign
