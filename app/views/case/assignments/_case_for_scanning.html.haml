@@ -1,4 +1,4 @@
 %tr[a_case]
   %td= a_case.code
   %td= a_case.entry_date
-
+  %td.action-links= link_to t_action(:delete), a_case, :method => :delete, :remote => true

@@ -2,7 +2,10 @@
   %tr
     %th= t_attr :code, Case
     %th= t_attr :entry_date, Case
+    %th.action-links
+
   = render :partial => 'case/assignments/case_for_scanning', :collection => Case.for_scanning, :as => :a_case
   %tr
     %th= "Total #{Case.for_scanning.count}"
     %th
+    %th.action-links
