@@ -17,4 +17,8 @@ module SendQueuesHelper
   def channel_labels(channels)
     channels.map{|channel| channel_label(channel)}.join(' ').html_safe
   end
+
+  def t_send_by(channel)
+    t_action("send_by.#{channel}")
+  end
 end

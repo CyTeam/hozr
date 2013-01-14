@@ -31,4 +31,13 @@ class SendQueue < ActiveRecord::Base
     self.sent_at = DateTime.now
     save
   end
+
+  def email
+    mailing.cases.find_each do |a_case|
+      CaseMailer.report(a_case).deliver
+    end
+
+    self.sent_at = DateTime.now
+    save
+  end
 end

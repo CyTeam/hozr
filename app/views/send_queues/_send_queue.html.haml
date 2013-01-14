@@ -16,5 +16,5 @@
         %br/
         = link_to("HL7 erneut senden", send_by_mailing_path(mailing, :channel => 'hl7'), :remote => true, :method => :post) if mailing.doctor.wants?(:hl7)
       - else
-        = link_to("Resultate drucken", print_send_queue_path(send_queue), :remote => true, :method => :post) if mailing.doctor.wants?(:print)
+        = link_to t_send_by(send_queue.channel), [:perform, send_queue], :remote => true, :method => :post
         %br/

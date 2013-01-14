@@ -114,6 +114,7 @@ Hozr::Application.routes.draw do
 
     member do
       post :print
+      post :perform
     end
   end
 

@@ -154,6 +154,17 @@ de:
       close:            Schliessen
       refresh:          Aktualisieren
       scan:             Scannen
+      resend_by:
+        print:          Resultate erneut drucken
+        email:          Resultate erneut mailen
+        hl7:            HL7 Resultate erneut senden
+        overview_email: Resultatübersicht erneut senden
+      send_by:
+        print:          Resultate drucken
+        email:          Resultate mailen
+        hl7:            HL7 Resultate senden
+        overview_email: Resultatübersicht senden
+
 
   # Titles
   attachments:
