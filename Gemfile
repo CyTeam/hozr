@@ -11,19 +11,15 @@ gem 'rails'
 gem 'unicorn'
 
 # Database
-gem 'sqlite3'
 gem 'mysql2'
 gem 'activerecord-sqlserver-adapter'
 
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  gem 'sprockets'
   gem 'coffee-rails'
   gem 'therubyracer'
   gem 'uglifier'
-
-  gem 'jquery-ui-rails'
 end
 
 gem 'jquery-rails'
@@ -31,11 +27,7 @@ gem 'jquery-rails'
 # Development
 # ===========
 group :development do
-  # Haml generators
-  gem 'hpricot'
-  gem 'ruby_parser'
 
-  # Capistrano
   # Capistrano
   gem 'capones_recipes'
   gem 'capistrano-unicorn', :git => 'git://github.com/sosedoff/capistrano-unicorn.git', :require => false
@@ -104,6 +96,7 @@ gem 'lyb_sidebar'
 gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
 gem 'simple_form'
 gem 'select2-rails'
+gem 'simple-navigation'
 
 # Validations
 gem 'validates_timeliness'
@@ -125,9 +118,6 @@ gem 'carrierwave'
 
 # Autocomplete
 gem 'rails3-jquery-autocomplete', :git => 'https://github.com/slash4/rails3-jquery-autocomplete.git'
-
-# Formtastic
-gem 'formtastic', '~>2.1.0'
 
 # Wysiwyg
 gem 'tinymce-rails'

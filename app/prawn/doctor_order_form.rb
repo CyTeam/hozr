@@ -19,8 +19,8 @@ class DoctorOrderForm < LetterDocument
   def to_pdf
     if @doctor
       bounding_box([310, 75], :width => 180) do
-        text @doctor.vcard.honorific_prefix
-        text @doctor.vcard.given_name + " " + @doctor.vcard.family_name
+        text @doctor.vcard.honorific_prefix || ''
+        text @doctor.vcard.full_name
         text @doctor.vcard.street_address
         text @doctor.vcard.postal_code + " " + @doctor.vcard.locality
       end

@@ -1,0 +1,6 @@
+<%= render :template => 'application/show_flash' %>
+
+$('#cases-for-scanning').html('<%=j render('case/assignments/cases_for_scanning', :collection => Case.for_scanning) %>')
+
+$('#label-button').show()
+$('#label-form').empty()

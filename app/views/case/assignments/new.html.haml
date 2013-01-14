@@ -3,6 +3,17 @@
 
 = boot_page_title
 
+%h3 Barcodes
+#label-button
+  = link_to 'Formular anzeigen', case_label_new_path, :remote => true, :class => 'btn'
+#label-form
+
+%h3 Formulare zum Scannen
+#cases-for-scanning
+  = render 'cases_for_scanning', :collection => Case.for_scanning
+
+= link_to t_action(:scan), scan_order_forms_path, :method => :post, :class => 'btn'
+
 = simple_form_for '', :url => case_assignments_path, :method => :post, :html => {:class => 'no-well'} do |f|
   - @cases.each do |a_case|
     = f.fields_for 'case[]', a_case do |c|
@@ -17,4 +28,5 @@
           = c.association :doctor, :input_html => {:class => 'select2', 'data-placeholder' => t('.choose_doctor'), :tabindex => c.object.intra_day_id + 20000}
           .form-actions= link_to 'Löschen', order_form_path(a_case.order_form), :remote => true, :method => :delete, :class => 'btn'
 
-  = f.button :submit
+  .form-actions
+    = f.button :submit

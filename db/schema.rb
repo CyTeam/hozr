@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130105210133) do
+ActiveRecord::Schema.define(:version => 20130110150315) do
 
   create_table "accounts", :force => true do |t|
     t.string   "number"
@@ -556,6 +556,7 @@ ActiveRecord::Schema.define(:version => 20130105210133) do
     t.text     "file"
     t.datetime "created_at"
     t.integer  "case_id"
+    t.string   "code"
   end
 
   add_index "order_forms", ["case_id"], :name => "index_order_forms_on_case_id"

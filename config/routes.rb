@@ -68,6 +68,11 @@ Hozr::Application.routes.draw do
 
   namespace :case do
     resource :assignments
+
+    namespace :label do
+      get :new
+      post :print
+    end
   end
 
   resources :cases do
@@ -133,6 +138,9 @@ Hozr::Application.routes.draw do
   resources :examination_methods
 
   resources :order_forms do
+    collection do
+      post :scan
+    end
     member do
       get :head_image
       get :download, :inline
@@ -144,8 +152,8 @@ Hozr::Application.routes.draw do
   post 'doctor_order_form' => 'doctor_order_form#print', :as => :doctor_order_form
 
   # Label Printing
-  get 'case_label_print' => 'case_label_print#form', :as => :case_label_print
-  post 'case_label_print' => 'case_label_print#print', :as => :case_label_print
+  # get 'case_label_print' => 'case_label_print#form', :as => :case_label_print
+  # post 'case_label_print' => 'case_label_print#print', :as => :case_label_print
   post 'p16_case_label_print' => 'case_label_print#print_p16', :as => :p16_case_label_print
   post 'case_label_print/:id' => 'case_label_print#print_case', :as => :print_case_label
 

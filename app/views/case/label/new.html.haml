@@ -1,0 +1,51 @@
+= simple_form_for 'case_label', :url => case_label_print_path do |f|
+  .case_label_row.row-fluid
+    .span4
+      .control-group
+        %label.control-label
+          = t_attr(:entry_date, Case)
+        .controls
+          = text_field_tag 'case_label[][date]', Date.today, :class => 'span12'
+    .span4
+      .control-group
+        %label.control-label
+          = t_attr(:intra_day_id, Case)
+        .controls
+          = text_field_tag 'case_label[][day_nr]', 1, :class => 'span12'
+    .span4
+      .control-group
+        %label.control-label
+          Anzahl
+        .controls
+          = text_field_tag 'case_label[][part_count]', 1, :class => 'span12'
+
+  .case_label_empty.row-fluid
+    .span4
+      .control-group
+        %label.control-label
+          = t_attr(:entry_date, Case)
+        .controls
+          = text_field_tag 'case_label[][date]', nil, :class => 'span12'
+    .span4
+      .control-group
+        %label.control-label
+          = t_attr(:intra_day_id, Case)
+        .controls
+          = text_field_tag 'case_label[][day_nr]', nil, :class => 'span12'
+    .span4
+      .control-group
+        %label.control-label
+          Anzahl
+        .controls
+          = text_field_tag 'case_label[][part_count]', nil, :class => 'span12'
+
+  .form-actions
+    = f.button :submit
+
+:javascript
+  $('form').on('focus', '.case_label_empty', function() {
+    var empty = $('.case_label_empty');
+    empty.clone().insertAfter('.case_label_empty');
+    empty.removeClass('case_label_empty');
+  })
+

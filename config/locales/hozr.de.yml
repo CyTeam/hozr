@@ -46,6 +46,12 @@ de:
             mailing_overview: Befundübersicht
             result_report_a4: Resultate A4
             result_report_a5: Resultate A5
+            barcode_label:    Barcodes
+          format:
+            order_form:       Format Auftragsformular
+            result_report:    Format Resultat
+          scanning:
+            order_form:       Scanner
 
         users:     Benutzer
       user:
@@ -86,6 +92,7 @@ de:
         use_billing_address: Rechnungsadresse
       case:
         praxistar_eingangsnr: Eingangsnummer
+        code:                 Eingangsnummer
         examination_date:     Entnahmedatum
         entry_date:           Eingangsdatum
         examination_method:   Methode
@@ -146,6 +153,7 @@ de:
       cancel:           Abbrechen
       close:            Schliessen
       refresh:          Aktualisieren
+      scan:             Scannen
 
   # Titles
   attachments:

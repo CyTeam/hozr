@@ -68,10 +68,30 @@ class OrderForm < ActiveRecord::Base
     image.crop(::Magick::NorthWestGravity, 0, 1460, WIDTH, image.rows - 1460, true)
   end
 
+  # Scanning
+  # ========
+  SCANNER_SPOOL_PATH = Rails.root.join('tmp')
+
+  def self.post_scanning_processing
+    Dir.glob(SCANNER_SPOOL_PATH.join('*.pnm')).sort.each do |scan_name|
+      png_name = scan_name.gsub(/\.pnm$/, '.png')
+      system 'convert', scan_name, png_name
+
+      text = IO.popen(['gocr', png_name]).gets(nil)
+      code = nil
+      if text.match(/<barcode type="128" chars="8" code="([0-9]*)"/)
+        code = $1
+      end
+
+      self.create(
+        :file => File.new(png_name),
+        :code => code
+      )
+    end
+  end
+
   def self.import_order_forms(order_form_dir)
     order_form_files = Dir.glob("#{order_form_dir}/*.jpg").sort
-
-    p "Anzahl: #{order_form_files.size}"
 
     for order_form_file in order_form_files
       a_case = Case.new(order_form_file)
