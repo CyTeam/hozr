@@ -19,6 +19,7 @@ class Case::LabelController < ApplicationController
 
     rescue RuntimeError => e
       flash.now[:alert] = "Drucken fehlgeschlagen: #{e.message}.<br/>Keine Fälle erzeugt.".html_safe
+      return
     end
 
     case_labels.each do |case_label|
