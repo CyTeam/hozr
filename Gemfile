@@ -134,7 +134,9 @@ gem 'prawn'
 gem 'prawnto'
 
 # Mail
-gem 'actionmailer-instyle', :require => 'action_mailer/in_style', :git => 'git://github.com/huerlisi/actionmailer-instyle'
+gem 'premailer', :git => "git://github.com/alexdunae/premailer.git"
+gem "premailer-rails3", :git => "git://github.com/tdgs/premailer-rails3.git"
+#gem 'actionmailer-instyle', :require => 'action_mailer/in_style', :path => '../actionmailer-instyle'
 
 # Search
 gem 'thinking-sphinx'
