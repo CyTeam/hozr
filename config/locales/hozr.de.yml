@@ -199,7 +199,7 @@ de:
       title:            Befundübersicht
   users:
     form:
-      credentials:      Kontodaten
+      credentials:      Benutzerkonto
   patients:
     index:
       title:            Patienten
