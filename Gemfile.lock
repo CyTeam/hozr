@@ -30,13 +30,6 @@ GIT
       therubyracer (>= 0.10.2)
 
 GIT
-  remote: git://github.com/sosedoff/capistrano-unicorn.git
-  revision: de60659012d8058eaa176133d2657e0ea08ed6f3
-  specs:
-    capistrano-unicorn (0.1.6)
-      capistrano
-
-GIT
   remote: git://github.com/tdgs/premailer-rails3.git
   revision: 4b8234369168fdfeaa590e28a52e73cf4223ccd7
   specs:
@@ -355,7 +348,6 @@ DEPENDENCIES
   autotest-rails
   barby
   cancan
-  capistrano-unicorn!
   capones_recipes
   capybara
   carrierwave

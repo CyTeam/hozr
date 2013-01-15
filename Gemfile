@@ -30,7 +30,6 @@ group :development do
 
   # Capistrano
   gem 'capones_recipes'
-  gem 'capistrano-unicorn', :git => 'git://github.com/sosedoff/capistrano-unicorn.git', :require => false
 end
 
 # Test
