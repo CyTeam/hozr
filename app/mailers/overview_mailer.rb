@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 require 'core_ext/string'
 
 class OverviewMailer < ActionMailer::Base
