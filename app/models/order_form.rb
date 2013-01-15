@@ -87,6 +87,8 @@ class OrderForm < ActiveRecord::Base
         :file => File.new(png_name),
         :code => code
       )
+
+      File.delete(scan_name, png_name)
     end
   end
 
