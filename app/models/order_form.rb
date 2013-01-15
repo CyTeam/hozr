@@ -77,7 +77,7 @@ class OrderForm < ActiveRecord::Base
       png_name = scan_name.gsub(/\.pnm$/, '.png')
       system 'convert', scan_name, png_name
 
-      text = IO.popen(['gocr', png_name]).gets(nil)
+      text = IO.popen(['gocr', scan_name]).gets(nil)
       code = nil
       if text.match(/<barcode type="128" chars="8" code="([0-9]*)"/)
         code = $1
