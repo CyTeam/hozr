@@ -1,4 +1,7 @@
 de:
+  application:
+    title: Hozr
+
   sex:
     male:   Mann
     female: Frau
