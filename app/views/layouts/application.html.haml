@@ -21,7 +21,8 @@
             %span.icon-bar
             %span.icon-bar
           = link_to root_path, :class => 'brand' do
-            <span id="logo-yt">hozr</span>
+            = t('application.title')
+
           .nav-collapse
             = render_navigation(:level => 1..2, :renderer => BootstrapTopbarList, :expand_all => true)
             = form_tag search_path, :class => "navbar-search pull-left" do
