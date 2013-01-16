@@ -11,14 +11,8 @@
     = csrf_meta_tag
     %title
       = "#{content_for :page_title} - #{t('application.title')}"
-    :css
-      body {
-        padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
-      }
-      img {
-        border: 0px
-      }
-  %body
+
+  %body{:style => 'margin-top: 60px'}
     .navbar.navbar-fixed-top
       .navbar-inner
         .container-fluid
