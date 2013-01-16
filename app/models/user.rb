@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :login, :remember_me
 
+  # Person
   attr_accessible :object
   belongs_to :object, :polymorphic => true
   accepts_nested_attributes_for :object
