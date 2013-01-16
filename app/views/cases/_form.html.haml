@@ -22,10 +22,13 @@
 
       %h3= t_action(:second_entry)
       .row-fluid
-        .span12= f.input :finding_text, :input_html => {:class => 'span12'}
+        .span12= f.input :finding_text, :input_html => {:class => 'span12 tinymce'}
 
   .form-actions
     = f.button :submit
 
+- configuration = TinyMCE::Rails.configuration
 :javascript
-  $('#case_finding_text').asuggest(#{FindingClass.pluck(:name).inspect});
+  $(document).ready(function() {
+    tinyMCE.init(#{configuration.options_for_tinymce.to_json});
+  })
