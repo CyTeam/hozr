@@ -129,8 +129,6 @@ de:
 
   crud:
     action:
-      lock:   Sperren
-      unlock: Entsperren
       invoice_overview: Rechnungen
       print_fax:        Drucken für Fax
       print:            Drucken

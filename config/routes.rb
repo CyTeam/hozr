@@ -7,9 +7,6 @@ Hozr::Application.routes.draw do
   # Authentication
   devise_for :users
   resources :users do
-    member do
-      post :lock, :unlock
-    end
     resources :phone_numbers
     member do
       get :new_phone_number

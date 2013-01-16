@@ -79,7 +79,7 @@ gem 'kaminari'
 # Authentication
 gem 'devise'
 gem 'cancan'
-gem 'lyb_devise_admin', :git => 'https://github.com/huerlisi/lyb_devise_admin.git'
+gem 'lyb_devise_admin'
 
 # Helpers
 gem 'inherited_resources'
