@@ -92,7 +92,8 @@ gem 'sass-rails'
 gem 'lyb_sidebar'
 
 # Bootstrap
-gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
+gem 'less-rails'
+gem 'twitter-bootstrap-rails'
 gem 'simple_form'
 gem 'select2-rails'
 gem 'simple-navigation'
