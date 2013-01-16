@@ -12,13 +12,13 @@
       .row-fluid
         .span6= f.input :entry_date, :as => :string
       .row-fluid
-        .span6= f.association :doctor, :as => :select, :collection => doctors_collection, :input_html => {'data-autofocus' => true, 'data-placeholder' => 'Arzt auswählen', :class => 'select2'}
+        .span6= f.association :doctor, :as => :select, :collection => doctors_collection, :input_html => {'data-placeholder' => 'Arzt auswählen', :class => 'select2'}
       .row-fluid
         .span6= f.association :examination_method
 
       %h3= t_action(:first_entry)
       .row-fluid
-        .span6= f.association :patient, :input_html => {:class => 'select2'}
+        .span6= f.association :patient, :input_html => {'data-placeholder' => 'Patient auswählen', :class => 'select2'}
 
       %h3= t_action(:second_entry)
       .row-fluid
