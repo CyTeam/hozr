@@ -1,6 +1,9 @@
 = simple_form_for resource do |f|
   .row-fluid
     .span6
+      = link_to image_tag(inline_order_form_url(@case.order_form, :type => :overview)), resource.order_form if resource.order_form
+
+    .span6
       %h3= t_action(:assign)
       .row-fluid
         .span6= f.input :praxistar_eingangsnr
@@ -20,9 +23,6 @@
       %h3= t_action(:second_entry)
       .row-fluid
         .span12= f.input :finding_text, :input_html => {:class => 'span12'}
-
-    .span6
-      = link_to image_tag(inline_order_form_url(@case.order_form, :type => :overview)), resource.order_form if resource.order_form
 
   .form-actions
     = f.button :submit
