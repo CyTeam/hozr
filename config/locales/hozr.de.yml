@@ -101,6 +101,7 @@ de:
         doctor:               Zuweisender Arzt
         remarks:              Bemerkungen
         intra_day_id:         Tagesnr.
+        finding_text:         Befund
 
       order_form:
         case:                 Fall
