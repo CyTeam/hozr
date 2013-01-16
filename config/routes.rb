@@ -19,17 +19,16 @@ Hozr::Application.routes.draw do
     end
   end
 
-  # Attachments
-  resources :attachments do
-    member do
-      get :download
-    end
-  end
-
   # Tenant
   resources :tenants do
     collection do
       get :current
+    end
+  end
+
+  resources :attachments do
+    member do
+      get :download
     end
   end
 
