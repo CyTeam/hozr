@@ -6,7 +6,7 @@ source 'http://rubygems.org'
 # =====
 gem 'rails'
 
-# UNICORN
+# Unicorn
 # =======
 gem 'unicorn'
 
