@@ -361,6 +361,7 @@ DEPENDENCIES
   lyb_devise_admin
   lyb_sidebar
   mysql2
+  nokogiri
   prawn
   prawnto
   premailer!
