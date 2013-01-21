@@ -15,8 +15,13 @@ class FindingClass < ActiveRecord::Base
   scope :quality, by_finding_group('Zustand')
   scope :control, by_finding_group('Kontrolle')
 
+  # Attributes
   include ActionView::Helpers::SanitizeHelper
   include ActionView::Helpers::TextHelper
+  def name=(value)
+    self[:name] = sanitize(value)
+  end
+
   def to_s
     [code, truncate(strip_tags(name), :length => 40)].map(&:presence).compact.join(" - ")
   end
