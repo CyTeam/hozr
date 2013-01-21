@@ -31,7 +31,7 @@
       = @case.classification.name unless @case.classification.nil?
     #findings
       #finding_list
-        = @case.finding_text.html_safe
+        = @case.finding_text.try(:html_safe)
     #special_findings
       - for finding in @case.control_findings
         %div{:class => finding_css_class(finding)}= finding.name
