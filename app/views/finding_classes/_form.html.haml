@@ -2,9 +2,15 @@
   .row-fluid
     .span6= f.input :code
   .row-fluid
-    .span12= f.input :name, :input_html => {:class => 'span12', :rows => 5}
+    .span12= f.input :name, :input_html => {:class => 'span12 tinymce', :rows => 5}
   .row-fluid
     .span12= f.association :classifications, :input_html => {:class => 'span12'}
 
   .form-actions
     = f.button :submit
+
+- configuration = TinyMCE::Rails.configuration
+:javascript
+  $(document).ready(function() {
+    tinyMCE.init(#{configuration.options_for_tinymce.to_json});
+  })
