@@ -17,7 +17,6 @@ module FindingClassesHelper
     FindingClass.all.map do |finding_class|
       {
         :id => finding_class.code,
-        :text => finding_class.code + ' - ' + finding_class.name,
         :name => finding_class.name
       }
     end
