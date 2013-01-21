@@ -1,13 +1,14 @@
 .sheet_a5.well
   .report
     #patient
-      - unless @case.patient.doctor_patient_nr.blank?
-        = @case.patient.doctor_patient_nr
+      - if @case.patient
+        - unless @case.patient.doctor_patient_nr.blank?
+          = @case.patient.doctor_patient_nr
+          %br/
+        = render "/vcards/show", :vcard => @case.patient.vcard
         %br/
-      = render "/vcards/show", :vcard => @case.patient.vcard
-      %br/
-      = @case.patient.birth_date unless @case.patient.birth_date.nil?
-      %br/
+        = @case.patient.birth_date unless @case.patient.birth_date.nil?
+        %br/
     #insurance
       - if !@case.insurance.nil?
         = @case.insurance.name

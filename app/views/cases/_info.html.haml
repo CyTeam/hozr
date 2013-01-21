@@ -1,2 +1,2 @@
 = render :partial => 'cases/case_info', :object => @case
-= render 'cases/compact_list', :cases => @case.patient.cases
+= render 'cases/compact_list', :cases => @case.patient.cases if @case.patient
