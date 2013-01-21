@@ -75,6 +75,8 @@ class Doctor < ActiveRecord::Base
   attr_accessible :channels
 
   def channels
+    return [] if self[:channels].nil?
+
     self[:channels].map(&:presence).compact
   end
 
