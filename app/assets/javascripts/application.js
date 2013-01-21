@@ -30,7 +30,9 @@ function initializeBehaviours() {
   addDirectoryLookupBehaviour();
 
   // select2
-  $('.select2').select2();
+  $('.select2').select2({
+      allowClear: true
+  });
 
   // application
   setupSlidepathLinks();
