@@ -27,6 +27,8 @@ class OrderFormsController < AuthorizedController
     end
 
     OrderForm.post_scanning_processing
+
+    redirect_to new_case_assignments_path
   end
 
   # Image
