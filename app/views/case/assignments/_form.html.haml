@@ -1,14 +1,16 @@
 = simple_form_for 'order_forms', :url => case_assignments_path, :method => :post, :html => {:class => 'no-well'} do |f|
   - @order_forms.each do |order_form|
     = f.fields_for '', order_form do |c|
-      .row-fluid.well[order_form]
+      .row-fluid[order_form]
         .span6
           = link_to(image_tag(inline_order_form_url(order_form, :type => :head)), inline_order_form_url(order_form)) if order_form
         .span6
+          %div{:style => 'float: right'}
+            = link_to order_form_path(order_form), :remote => true, :method => :delete do
+              %i.icon-trash
           = c.association :case, :collection => cases_for_assignment_collection, :input_html => {:class => 'select2', 'data-placeholder' => t('.choose_unmatched_case'), 'data-autofocus' => true}
           = c.input :examination_date, :as => :string
           = c.input :doctor_id, :as => :select, :collection => Doctor.all, :input_html => {:class => 'select2', 'data-placeholder' => t('.choose_doctor')}
-          .form-actions= link_to 'Löschen', order_form_path(order_form), :remote => true, :method => :delete, :class => 'btn'
 
   .form-actions
     = f.button :submit
