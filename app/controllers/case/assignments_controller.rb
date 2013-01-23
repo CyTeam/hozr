@@ -20,6 +20,8 @@ class Case::AssignmentsController < ApplicationController
       order_form = OrderForm.find(id)
       order_form.case_id = values["case_id"]
       order_form.examination_date = values["examination_date"]
+      order_form.doctor_id = values["doctor_id"]
+      order_form.case.assigned_at = DateTime.now
       order_form.save
     end
 

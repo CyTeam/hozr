@@ -13,7 +13,7 @@ class OrderForm < ActiveRecord::Base
 
   # Case
   # ====
-  belongs_to :case
+  belongs_to :case, :autosave => true
   def a_case
     self.case
   end
