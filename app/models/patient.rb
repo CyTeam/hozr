@@ -2,8 +2,8 @@
 
 class Patient < ActiveRecord::Base
   # Base data
-  validates_presence_of :birth_date
-  validates_presence_of :sex
+  validates :birth_date, :presence => true
+  validates :sex, :presence => true
 
   # Insurance
   has_many :insurance_policies, :autosave => true, :validate => true
@@ -87,7 +87,7 @@ class Patient < ActiveRecord::Base
   # Cases
   has_many :cases, :order => 'id DESC'
   has_many :finished_cases, :class_name => 'Case', :conditions => 'screened_at IS NOT NULL', :order => 'id DESC'
-  
+
   # Invoices
   scope :dunning_stopped, where(:dunning_stop => true)
 
@@ -213,7 +213,7 @@ class Patient < ActiveRecord::Base
       month ||= Date.today.month
       year ||= Date.today.year
       year = 1900 + year.to_i if year.to_i < 100
-      
+
       write_attribute(:birth_date, "#{year}-#{month}-#{day}")
     else
       write_attribute(:birth_date, value)
