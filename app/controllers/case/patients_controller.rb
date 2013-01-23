@@ -40,7 +40,7 @@ class Case::PatientsController < ApplicationController
     @case.examination_method_id = @case.intra_day_id == 0 ? 0 : 1
 
     # Set entry_date only when setting patient for first time
-    @case.entry_date ||= Time.now
+    @case.first_entry_at ||= Time.now
     @case.first_entry_by ||= current_user.object
 
     # TODO: dynamic lookup of doctor from latest case
@@ -82,8 +82,7 @@ class Case::PatientsController < ApplicationController
     # Set entry_date only when setting patient for first time
     @case.examination_method_id = @case.intra_day_id == 0 ? 0 : 1
 
-    @case.entry_date ||= Time.now # TODO: kill
-    @case.first_entry_at ||= Time.now # TODO: kill
+    @case.first_entry_at ||= Time.now
     @case.first_entry_by = current_user.object
 
     # TODO: dynamic lookup of doctor from latest case

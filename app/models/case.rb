@@ -106,11 +106,11 @@ class Case < ActiveRecord::Base
   end
 
   def ready_for_first_entry
-    entry_date.nil? && !assigned_at.nil?
+    first_entry_at.nil? && !assigned_at.nil?
   end
 
   def ready_for_second_entry
-    !entry_date.nil? && screened_at.nil? && !needs_p16?
+    !first_entry_at.nil? && screened_at.nil? && !needs_p16?
   end
 
   def ready_for_p16
