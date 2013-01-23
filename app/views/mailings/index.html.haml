@@ -8,3 +8,7 @@
 = boot_page_title "Resultat Versand"
 
 = render 'list'
+
+= boot_page_title "Zum Versand bereit"
+
+= render 'send_queues/list', :collection => SendQueue.order('created_at DESC').by_state(:unsent)
