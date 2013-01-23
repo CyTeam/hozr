@@ -179,7 +179,9 @@ class Patient < ActiveRecord::Base
       when :short
         name
       else
-        "#{name} ##{doctor_patient_nr}, #{birth_date}"
+        s = name
+        s += "##{doctor_patient_nr}" unless doctor_patient_nr.blank?
+        s += ", #{birth_date}" unless birth_date.blank?
     end
   end
 
