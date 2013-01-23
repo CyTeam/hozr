@@ -9,7 +9,7 @@ require 'capones_recipes/tasks/database/setup'
 require 'capones_recipes/tasks/thinking_sphinx'
 require 'capones_recipes/tasks/carrier_wave'
 require 'capones_recipes/tasks/sync'
-load 'lib/recipes/bluepill'
+require 'capones_recipes/tasks/bluepill'
 
 load 'deploy/assets'
 
