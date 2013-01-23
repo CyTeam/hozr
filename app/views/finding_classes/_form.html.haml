@@ -1,6 +1,6 @@
 = simple_form_for resource do |f|
   .row-fluid
-    .span6= f.input :code
+    .span6= f.input :code, :input_html => {'autofocus' => true}
   .row-fluid
     .span12= f.input :name, :input_html => {:class => 'span12 tinymce', :rows => 5}
   .row-fluid
