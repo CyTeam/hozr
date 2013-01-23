@@ -5,9 +5,8 @@
         .span6
           = link_to(image_tag(inline_order_form_url(order_form, :type => :head)), inline_order_form_url(order_form)) if order_form
         .span6
-          = c.association :case, :collection => cases_for_assignment_collection, :input_html => {:class => 'select2', 'data-placeholder' => t('.choose_unmatched_case')}
-          =# c.input :intra_day_id, :input_html => {:tabindex => c.object.intra_day_id}
-          = c.input :examination_date, :as => :string, :input_html => {'data-autofocus' => true}
+          = c.association :case, :collection => cases_for_assignment_collection, :input_html => {:class => 'select2', 'data-placeholder' => t('.choose_unmatched_case'), 'data-autofocus' => true}
+          = c.input :examination_date, :as => :string
           = c.input :doctor_id, :as => :select, :collection => Doctor.all, :input_html => {:class => 'select2', 'data-placeholder' => t('.choose_doctor')}
           .form-actions= link_to 'Löschen', order_form_path(order_form), :remote => true, :method => :delete, :class => 'btn'
 

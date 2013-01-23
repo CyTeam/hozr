@@ -110,6 +110,8 @@ de:
 
       order_form:
         case:                 Fall
+        doctor_id:            Zuweisender Arzt
+        examination_date:     Entnahmedatum
         created_at:           Erstellt um
       insurance_policy:
         insurance:            Versicherung
