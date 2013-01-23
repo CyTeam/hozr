@@ -53,7 +53,8 @@ class Case < ActiveRecord::Base
   end
 
   def to_s
-    "#{patient.to_s}: PAP Abstrich #{praxistar_eingangsnr}"
+    # TODO: generalize as Case-Code prefix
+    "#{patient.to_s}: B#{praxistar_eingangsnr}"
   end
 
   def control_findings
