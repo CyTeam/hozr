@@ -4,20 +4,20 @@
     %button.btn.dropdown-toggle{'data-toggle' => 'dropdown'}
       %span.caret
     %ul.dropdown-menu
-      = link_to t_action(:print_fax), print_result_report_case_path(@case, :page_size => 'A4'), :remote => true, :method => :post
-      = link_to t_action(:pdf), case_path(@case, :page_size => 'A4', :format => :pdf)
-      = link_to t_action(:resend), resend_case_path(@case), :method => :post, :remote => true
-      = link_to t_action(:print_label), print_case_label_path(@case), :remote => true, :method => :post
+      %li= link_to t_action(:print_fax), print_result_report_case_path(@case, :page_size => 'A4'), :remote => true, :method => :post
+      %li= link_to t_action(:pdf), case_path(@case, :page_size => 'A4', :format => :pdf)
+      %li= link_to t_action(:resend), resend_case_path(@case), :method => :post, :remote => true
+      %li= link_to t_action(:print_label), print_case_label_path(@case), :remote => true, :method => :post
 
   .btn-group{:style => 'display: inline-block'}
     = link_to t_action(:edit), next_step_case_path(@case), :class => 'btn'
     %button.btn.dropdown-toggle{'data-toggle' => 'dropdown'}
       %span.caret
     %ul.dropdown-menu
-      = link_to t_action(:edit), edit_case_path(@case) if can? :edit, @case
-      = link_to t_action(:second_entry), second_entry_pap_form_case_path(@case)
-      = link_to t_action(:change_patient), first_entry_case_path(@case) if can? :change_patient, @case
-      = link_to t_action(:delete), case_path(@case), :method => :delete, :confirm => 'Fall wirklich löschen?' if can? :destroy, @case
+      %li= link_to t_action(:edit), edit_case_path(@case) if can? :edit, @case
+      %li= link_to t_action(:second_entry), second_entry_pap_form_case_path(@case)
+      %li= link_to t_action(:change_patient), first_entry_case_path(@case) if can? :change_patient, @case
+      %li= link_to t_action(:delete), case_path(@case), :method => :delete, :confirm => 'Fall wirklich löschen?' if can? :destroy, @case
 
   = icon_link_to :show_invoice, cydoc_url_for("sessions/#{@case.session_id}"), :target => cydoc_hostname, :style => 'margin-left: 5px'
 
