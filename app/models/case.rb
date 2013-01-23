@@ -186,7 +186,7 @@ class Case < ActiveRecord::Base
   end
 
   def pdf_name
-    "#{patient.to_s}: PAP Abstrich #{praxistar_eingangsnr}.pdf"
+    "#{to_s}.pdf"
   end
 
   # Sphinx Search
