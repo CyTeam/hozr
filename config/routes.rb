@@ -108,7 +108,8 @@ Hozr::Application.routes.draw do
 
   resources :send_queues do
     collection do
-      get :print_all
+      post :print_all
+      post :send_all
     end
 
     member do
@@ -128,7 +129,6 @@ Hozr::Application.routes.draw do
     collection do
       post :generate
       post :send_all
-      post :print_all
     end
   end
 

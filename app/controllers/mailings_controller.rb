@@ -95,34 +95,6 @@ class MailingsController < AuthorizedController
     render 'show_flash'
   end
 
-  def print_all
-    print_queue = SendQueue.unsent.by_channel('print')
-
-    page_size = params[:page_size] || current_tenant.settings['format.result_report']
-
-    begin
-      overview_printer = current_tenant.printer_for(:mailing_overview)
-      case page_size
-      when 'A5'
-        printer = current_tenant.printer_for(:result_report_A5)
-      when 'A4'
-        printer = current_tenant.printer_for(:result_report_A4)
-      end
-
-      output = ""
-      for print_queue in print_queue
-        print_queue.print(overview_printer, printer)
-        output += print_queue.mailing.to_s + "<br/>"
-      end
-
-      flash.now[:notice] = output.html_safe
-    rescue RuntimeError => e
-      flash.now[:alert] = "Drucken fehlgeschlagen: #{e.message}"
-    end
-
-    render 'show_flash'
-  end
-
   # Multi Channel
   def send_by
     @mailing = Mailing.find(params[:id])

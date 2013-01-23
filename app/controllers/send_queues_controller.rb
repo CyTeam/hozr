@@ -20,7 +20,6 @@ class SendQueuesController < ApplicationController
         printer = current_tenant.printer_for(:result_report_A4)
       end
 
-
       output = ""
       for print_queue in print_queue
         print_queue.print(page_size, overview_printer, printer)
@@ -32,7 +31,7 @@ class SendQueuesController < ApplicationController
       flash.now[:alert] = "Drucken fehlgeschlagen: #{e.message}"
     end
 
-    render 'show_flash'
+    render 'send_all'
   end
 
   # Actions
@@ -49,6 +48,18 @@ class SendQueuesController < ApplicationController
     end
 
     send(@send_queue.channel)
+  end
+
+  def send_all
+    send_queues = SendQueue.unsent.where("NOT(channel = 'print')")
+
+    count = send_queues.count
+
+    send_queues.find_each do |send_queue|
+      send_queue.send(send_queue.channel)
+    end
+
+    flash.now[:notice] = "#{count} Versand per E-Mail versandt."
   end
 
   def email

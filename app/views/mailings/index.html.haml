@@ -1,6 +1,4 @@
 .contextual
-  = link_to "Freigegebene Resultate drucken", print_all_mailings_path, :method => :post, :remote => true, :class => 'btn btn-primary'
-
   .btn-group{:style => 'display: inline-block'}
     = link_to "Neue Mailings", mailings_path(:by_state => :unsent), :class => 'btn'
     = link_to "Alle Mailings", mailings_path, :class => 'btn'
@@ -8,6 +6,10 @@
 = boot_page_title "Resultat Versand"
 
 = render 'list'
+
+.contextual
+  = link_to "Resultate drucken", print_all_send_queues_path, :method => :post, :remote => true, :class => 'btn btn-primary'
+  = link_to "Resultate mailen", send_all_send_queues_path, :method => :post, :remote => true, :class => 'btn btn-primary'
 
 = boot_page_title "Zum Versand bereit"
 

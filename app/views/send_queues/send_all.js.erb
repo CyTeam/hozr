@@ -1,2 +1,3 @@
-$('#mailing_<%= @mailing.id %>').fadeOut('slow').remove();
 $('.send_queues').html('<%=j render 'send_queues/list', :collection => SendQueue.order('created_at DESC').by_state(:unsent) %>')
+<%= render :template => 'application/show_flash' %>
+
