@@ -53,13 +53,25 @@ class SendQueuesController < ApplicationController
   def send_all
     send_queues = SendQueue.unsent.where("NOT(channel = 'print')")
 
-    count = send_queues.count
+    success_count = 0
+    error_count   = 0
 
     send_queues.find_each do |send_queue|
-      send_queue.send(send_queue.channel)
+      begin
+        send_queue.send(send_queue.channel)
+        success_count += 1
+      rescue
+        error_count += 1
+      end
     end
 
-    flash.now[:notice] = "#{count} Versand per E-Mail versandt."
+    if success_count > 0
+      flash.now[:notice] = "#{success_count} Versand per E-Mail versandt."
+    end
+
+    if error_count > 0
+      flash.now[:alert] = "#{error_count} Versand per E-Mail gescheitert."
+    end
   end
 
   def email
