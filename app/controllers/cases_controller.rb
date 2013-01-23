@@ -130,7 +130,9 @@ class CasesController < AuthorizedController
     @case.screener = current_user.object
     @case.finding_text = params[:case][:finding_text] unless params[:case].nil? or params[:case][:finding_text].nil?
 
+    # TODO: generalize
     # Check if case needs review
+    if false
     low_classifications = ['1', '2']
     high_classifications = ['3L', '3M', '3S', '3M-c1-2', '3S-c2-3', '4', '5']
 
@@ -145,6 +147,8 @@ class CasesController < AuthorizedController
     high = high_classifications.include?(@case.classification.code)
 
     @case.needs_review = (low_to_high or high_to_low or high)
+    end
+    # END TODO
 
     if @case.needs_p16? or @case.needs_hpv?
       @case.delivered_at = nil
