@@ -67,7 +67,7 @@ class MailingOverview < Prawn::Document
           make_cell(:content => item.patient.name),
           make_cell(:content => item.patient.birth_date),
           make_cell(:content => item.control_findings.map {|f| html_unescape(f.name)}.join("\n")),
-          make_cell(:content => item.examination_date.strftime('%d.%m.%Y')),
+          make_cell(:content => item.examination_date || ''),
           make_cell(:content => item.praxistar_eingangsnr)
         ]
       end
