@@ -20,7 +20,7 @@ set :default_stage, 'staging'
 set :user, "deployer"                               # The server's user for deploys
 
 # Shared directories
-set :shared_children, shared_children + ['tmp/sockets', 'config/swissmatch.yml', 'public/trigger', 'public/order_form']
+set :shared_children, shared_children + ['tmp/sockets', 'public/trigger', 'public/order_form']
 
 # Sync directories
 set :sync_directories, ['uploads', 'system']
