@@ -78,7 +78,7 @@ class SendQueuesController < ApplicationController
     flash.now[:notice] = "E-Mail versandt."
     @send_queue.email
 
-    render 'show_flash'
+    render 'send_all'
   end
 
   def print
@@ -102,6 +102,6 @@ class SendQueuesController < ApplicationController
       flash.now[:alert] = "Drucken fehlgeschlagen: #{e.message}"
     end
 
-    render 'show_flash'
+    render 'send_all'
   end
 end
