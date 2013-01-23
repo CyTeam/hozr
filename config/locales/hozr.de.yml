@@ -152,6 +152,7 @@ de:
       resend:           Erneut senden
       show_invoice:     Rechnung
       change_patient:   Umschreiben
+      change_classification: Klassifikation ändern
       assign:           Anschreiben
       first_entry:      Ersteingabe
       second_entry:     Befund

@@ -8,7 +8,7 @@ module CasesHelper
     classification = Classification.find_by_code_and_examination_method_id(code, @case.examination_method_id)
 
     boot_type = map_classification_to_boot_type(classification)
-    button_to classification.name, second_entry_form_case_path(@case, "case[classification]" => classification.id), :class => "btn btn-large btn-#{boot_type} span12"
+    button_to classification.name, classification_update_case_path(@case, "case[classification]" => classification.id), :class => "btn btn-large btn-#{boot_type} span12"
   end
 
   def map_classification_to_boot_type(classification)

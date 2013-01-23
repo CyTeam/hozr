@@ -15,7 +15,8 @@
       %span.caret
     %ul.dropdown-menu
       %li= link_to t_action(:edit), edit_case_path(@case) if can? :edit, @case
-      %li= link_to t_action(:second_entry), second_entry_pap_form_case_path(@case)
+      %li= link_to t_action(:second_entry), second_entry_form_case_path(@case)
+      %li= link_to t_action(:change_classification), classification_form_case_path(@case)
       %li= link_to t_action(:change_patient), first_entry_case_path(@case) if can? :change_patient, @case
       %li= link_to t_action(:delete), case_path(@case), :method => :delete, :confirm => 'Fall wirklich löschen?' if can? :destroy, @case
 

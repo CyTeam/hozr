@@ -91,9 +91,12 @@ Hozr::Application.routes.draw do
 
       post :print_result_report
 
-      get :first_entry, :second_entry_pap_form, :second_entry_form
+      get :first_entry, :second_entry_form
       get :sign
       get :next_first_entry
+
+      get :classification_form
+      post :classification_update
 
       post :second_entry_form
       put :second_entry_update

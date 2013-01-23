@@ -14,12 +14,12 @@ class CasesController < AuthorizedController
   end
 
   def next_step
-    @case = Case.find(params[:id])
+    @case ||= Case.find(params[:id])
 
     if @case.ready_for_first_entry
       redirect_to first_entry_case_path(@case)
     elsif @case.ready_for_second_entry or @case.ready_for_p16
-      redirect_to second_entry_pap_form_case_path(@case)
+      redirect_to second_entry_form_case_path(@case)
     else
       redirect_to @case
     end
@@ -49,6 +49,22 @@ class CasesController < AuthorizedController
     end
   end
 
+  # Classification Entry
+  # ====================
+  def classification_form
+    @case = Case.find(params[:id])
+  end
+
+  def classification_update
+    @case = Case.find(params[:id])
+
+    classification = Classification.find(params[:case][:classification])
+    @case.classification = classification
+    @case.save
+
+    next_step
+  end
+
   # Second Entry
   # ============
   def second_entry_queue
@@ -56,26 +72,18 @@ class CasesController < AuthorizedController
     render 'entry_list'
   end
 
-  def second_entry_pap_form
-    @case = Case.find(params[:id])
-  end
-
   def second_entry_form
     @case = Case.find(params[:id])
 
-    if params[:case] && params[:case][:classification]
-      classification = Classification.find(params[:case][:classification])
-      @case.classification = classification
-      @case.save
-    end
-
-    case @case.classification.code
-    when '2A', '2-3A'
-      render :action => 'second_entry_agus_ascus_form'
-    when 'mam', 'sput', 'extra'
-      @case.screened_at ||= Date.today
-      @case.screener = current_user.object
-      render :action => 'show'
+    if @case.classification
+      case @case.classification.code
+      when '2A', '2-3A'
+        render :action => 'second_entry_agus_ascus_form'
+      when 'mam', 'sput', 'extra'
+        @case.screened_at ||= Date.today
+        @case.screener = current_user.object
+        render :action => 'show'
+      end
     end
   end
 
@@ -111,9 +119,9 @@ class CasesController < AuthorizedController
 
     next_open = Case.first_entry_done.where("praxistar_eingangsnr > ?", @case.praxistar_eingangsnr).first
     if next_open.nil?
-      redirect_to :action => 'second_entry_queue'
+      redirect_to second_entry_queue_cases_path
     else
-      redirect_to :action => 'second_entry_pap_form', :id => next_open
+      redirect_to second_entry_form_case_path(next_open)
     end
   end
 
@@ -151,9 +159,9 @@ class CasesController < AuthorizedController
       next_open = Case.for_second_entry.where("praxistar_eingangsnr > ?", @case.praxistar_eingangsnr).first
 
       if next_open.nil?
-        redirect_to :action => 'second_entry_queue'
+        redirect_to second_entry_queue_cases_path
       else
-        redirect_to :action => 'second_entry_pap_form', :id => next_open
+        redirect_to second_entry_form_case_path(next_open)
       end
     end
   end
