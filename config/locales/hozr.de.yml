@@ -107,6 +107,7 @@ de:
         remarks:              Bemerkungen
         intra_day_id:         Tagesnr.
         finding_text:         Befund
+        classification:       Klassifikation
 
       order_form:
         case:                 Fall

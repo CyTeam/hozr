@@ -17,7 +17,10 @@
       .span6
         = link_to image_tag(inline_order_form_url(@case.order_form, :type => :result_remarks), :size => "680x305"), order_form_path(@case.order_form), :remote => true
       .span6
-        = f.input :remarks, :input_html => {:class => 'span12', :rows => 4}
+        .row-fluid
+          .span12= f.association :classification, :input_html => {'data-placeholder' => 'Klassifikation auswählen', :class => 'select2'}
+        .row-fluid
+          .span12= f.input :remarks, :input_html => {:class => 'span12', :rows => 4}
 
 - content_for :sidebar do
   = render 'info'

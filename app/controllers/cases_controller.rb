@@ -91,8 +91,7 @@ class CasesController < AuthorizedController
     @case = Case.find(params[:id])
 
     @case.screener = current_user.object
-    @case.remarks = params[:case][:remarks]
-    @case.finding_text = params[:case][:finding_text]
+    @case.update_attributes(params[:case])
 
     case params[:commit]
     when "Erstellen"
