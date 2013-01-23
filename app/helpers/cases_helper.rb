@@ -1,5 +1,9 @@
 # encoding: utf-8'
 module CasesHelper
+  def cases_for_assignment_collection
+    Case.for_scanning.collect {|a_case| [a_case.code, a_case.id]}
+  end
+
   def classification_button(code)
     classification = Classification.find_by_code_and_examination_method_id(code, @case.examination_method_id)
 

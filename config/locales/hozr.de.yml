@@ -191,8 +191,9 @@ de:
       title:           HPV/P16 Liste
   case:
     assignments:
-      new:
+      form:
         choose_doctor: Arzt wählen
+        choose_unmatched_case: Barcode nicht erkannt
 
   send_queues:
     index:
