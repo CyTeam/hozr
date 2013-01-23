@@ -42,6 +42,8 @@ de:
         settings:
           patients:
             sex:   Geschlecht
+          cydoc:
+            hostname:       CyDoc Host
           printing:
             cups:  Drucken per CUPS
             cups_hostname: CUPS-Server

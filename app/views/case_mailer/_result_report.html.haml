@@ -1,14 +1,13 @@
 .sheet_a5.well
   .report
     #patient
-      - if @case.patient
-        - unless @case.patient.doctor_patient_nr.blank?
-          = @case.patient.doctor_patient_nr
-          %br/
-        = render "/vcards/show", :vcard => @case.patient.vcard
+      - unless @case.patient.doctor_patient_nr.blank?
+        = @case.patient.doctor_patient_nr
         %br/
-        = @case.patient.birth_date unless @case.patient.birth_date.nil?
-        %br/
+      = render "/vcards/show", :vcard => @case.patient.vcard
+      %br/
+      = @case.patient.birth_date unless @case.patient.birth_date.nil?
+      %br/
     #insurance
       - if !@case.insurance.nil?
         = @case.insurance.name
@@ -24,14 +23,14 @@
     #subject.title
       Ihr Auftrag Nr. #{@case.praxistar_eingangsnr}
     #remarks
-      = image_tag inline_order_form_url(@case.order_form, :type => :result_remarks), :size => '410x192' if @case.order_form
+      =# image_tag inline_order_form_url(@case.order_form, :type => :result_remarks), :size => '410x192' if @case.order_form
     #finding_title.title
       Befund
     #classification{:class => "PAP_#{h @case.classification.code unless @case.classification.nil?}"}
       = @case.classification.name unless @case.classification.nil?
     #findings
       #finding_list
-        = @case.finding_text.try(:html_safe)
+        = @case.finding_text.html_safe
     #special_findings
       - for finding in @case.control_findings
         %div{:class => finding_css_class(finding)}= finding.name
@@ -46,5 +45,5 @@
 
     #actions.row-fluid
       .span6
-        = button_to "Visum: #{current_user.object.vcard.abbreviated_name}", sign_case_path(@case), :class => 'btn btn-primary span12'
-        = button_to "2. Visum: #{current_user.object.vcard.abbreviated_name}", review_done_case_path(@case), :class => 'btn btn-primary span12' if @case.needs_review or @case.review_by
+        =# button_to "Visum: #{current_user.object.vcard.abbreviated_name}", sign_case_path(@case), :class => 'btn btn-primary span12'
+        =# button_to "2. Visum: #{current_user.object.vcard.abbreviated_name}", review_done_case_path(@case), :class => 'btn btn-primary span12' if @case.needs_review or @case.review_by

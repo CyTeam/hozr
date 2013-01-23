@@ -37,14 +37,7 @@ module ApplicationHelper
 
   # CyDoc
   def cydoc_hostname
-    if Rails.env.development?
-      hostname = "cydoc-dev"
-    elsif Rails.env.demo?
-      hostname = "cydoc-demo.cyt.ch"
-    else
-      # TODO: switch to settings variable
-      hostname = "cydoc.zyto-labor.com"
-    end
+    current_tenant.settings['cydoc.hostname']
   end
 
   def cydoc_url_for(path)

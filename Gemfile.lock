@@ -116,7 +116,7 @@ GEM
     builder (3.0.4)
     cancan (1.6.7)
     cap-recipes (0.3.39)
-    capistrano (2.13.4)
+    capistrano (2.14.1)
       highline
       net-scp (>= 1.0.0)
       net-sftp (>= 2.0.0)
@@ -125,7 +125,7 @@ GEM
     capistrano-ext (1.2.1)
       capistrano (>= 1.0.0)
     capistrano_colors (0.5.5)
-    capones_recipes (1.15.5)
+    capones_recipes (1.16.0)
       cap-recipes
       capistrano
       capistrano-ext
@@ -184,7 +184,6 @@ GEM
     jquery-rails (2.0.2)
       railties (>= 3.2.0, < 5.0)
       thor (~> 0.14)
-    jruby-pageant (1.1.1)
     json (1.7.6)
     kaminari (0.14.1)
       actionpack (>= 3.0.0)
@@ -214,8 +213,7 @@ GEM
       net-ssh (>= 1.99.1)
     net-sftp (2.0.5)
       net-ssh (>= 2.0.9)
-    net-ssh (2.6.0)
-      jruby-pageant (>= 1.1.1)
+    net-ssh (2.6.3)
     net-ssh-gateway (1.1.0)
       net-ssh (>= 1.99.1)
     nokogiri (1.5.5)
@@ -361,6 +359,7 @@ DEPENDENCIES
   lyb_devise_admin
   lyb_sidebar
   mysql2
+  nokogiri
   prawn
   prawnto
   premailer!

@@ -74,6 +74,12 @@ class Doctor < ActiveRecord::Base
   serialize :channels
   attr_accessible :channels
 
+  def channels
+    return [] if self[:channels].nil?
+
+    self[:channels].map(&:presence).compact
+  end
+
   def wants?(channel)
     channels.include?(channel.to_s)
   end

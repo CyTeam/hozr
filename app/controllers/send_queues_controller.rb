@@ -52,7 +52,7 @@ class SendQueuesController < ApplicationController
   end
 
   def email
-    flash.now[:notice] = "DONE?"
+    flash.now[:notice] = "E-Mail versandt."
     @send_queue.email
 
     render 'show_flash'

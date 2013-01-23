@@ -9,7 +9,7 @@ require 'capones_recipes/tasks/database/setup'
 require 'capones_recipes/tasks/thinking_sphinx'
 require 'capones_recipes/tasks/carrier_wave'
 require 'capones_recipes/tasks/sync'
-load 'lib/recipes/bluepill'
+require 'capones_recipes/tasks/bluepill'
 
 load 'deploy/assets'
 
@@ -20,7 +20,7 @@ set :default_stage, 'staging'
 set :user, "deployer"                               # The server's user for deploys
 
 # Shared directories
-set :shared_children, shared_children + ['tmp/sockets', 'config/swissmatch.yml', 'public/trigger', 'public/order_form']
+set :shared_children, shared_children + ['tmp/sockets', 'public/trigger', 'public/order_form']
 
 # Sync directories
 set :sync_directories, ['uploads', 'system']
@@ -36,6 +36,7 @@ set :copy_exclude, [".git", "spec"]
 
 # Dependencies
 depend :remote, :gem, 'bundler', '> 0'
+depend :remote, :gem, 'bluepill', ''
 
 # Headers for gem compilation
 depend :remote, :deb, "build-essential", ''

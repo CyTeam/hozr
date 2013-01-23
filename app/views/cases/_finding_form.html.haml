@@ -1,9 +1,5 @@
-- quality_findings = @case.classification.code == '1' ? ['a', 'b'] : ['a', 'b', 'c']
-#quality_findings.row-fluid
-  - FindingClass.find_all_by_code(quality_findings).each do |finding_class|
-    .span3= link_to_add_finding_class(@case, finding_class)
-
 #top_findings
+- if false # TODO re-enable
   - @case.classification.top_finding_classes.in_groups_of(4, false).each do |finding_classes|
     .row-fluid
       - finding_classes.each do |finding_class|
@@ -18,7 +14,7 @@
     return item.name
   }
   function format(item) {
-    return '<span style="display: inline-block; width: 5em">' + item.id + '</span> ' + item.name
+    return '<span style="display: inline-block; width: 5em">' + item.id + '</span> ' + item.strip_text
   }
 
   $('#finding_class_selection')
@@ -32,5 +28,5 @@
     })
     .on('close', function(e) {
       var text = $(this).select2("data").name
-      $('#case_finding_text').tinymce().execCommand('mceInsertContent', false, text + ' ')
+      $('#case_finding_text').tinymce().execCommand('mceInsertContent', false, ' ' + text)
     })

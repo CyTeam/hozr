@@ -2,6 +2,7 @@
 # Configures your navigation
 SimpleNavigation::Configuration.run do |navigation|
   navigation.selected_class = 'active'
+  navigation.autogenerate_item_ids = false
 
   navigation.items do |primary|
     primary.item :admin_work_queue, 'TODO', admin_work_queue_path
