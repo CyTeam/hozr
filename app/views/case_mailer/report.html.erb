@@ -11,10 +11,7 @@
   <body>
     <div id="wrapper">
       <div id="content">
-        <h2>CyLab</h2>
-        <%= link_to "Online Resultat", :controller => :cases, :action => :show, :id => @case, :host => "cyt.ch", :protocol => 'https' %>
-
-        <h2>Hünner Resultat</h2>
+        <h2>Resultat</h2>
         <%= render 'result_report' %>
       </div>
     </div>
