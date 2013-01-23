@@ -11,6 +11,18 @@ class OrderForm < ActiveRecord::Base
 
   default_scope order('created_at DESC')
 
+  # Case
+  # ====
+  belongs_to :case
+  def a_case
+    self.case
+  end
+  scope :unassigned, where(:case_id => nil)
+
+  delegate :doctor_id, :doctor_id=, :examination_date, :examination_date=, :to => :a_case, :allow_nil => true
+
+  # Image
+  # =====
   file_column :file, :magick => {
     :versions => {
       :address => {:transformation => :extract_address, :size => "560"},
@@ -23,11 +35,6 @@ class OrderForm < ActiveRecord::Base
     }
   },
   :root_path => Rails.root.join('system')
-
-  # Case
-  belongs_to :a_case, :class_name => 'Case', :foreign_key => 'case_id'
-  alias :case :a_case
-  scope :unassigned, where(:case_id => nil)
 
   WIDTH = 1200
   def prepare(image)
