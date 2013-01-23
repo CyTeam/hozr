@@ -16,15 +16,17 @@ class Case::AssignmentsController < ApplicationController
   def create
     assigned_at = DateTime.now
 
-    params[:order_forms].each do |id, values|
-      order_form = OrderForm.find(id)
-      order_form.case_id = values["case_id"]
-      order_form.examination_date = values["examination_date"]
-      order_form.doctor_id = values["doctor_id"]
-      order_form.case.assigned_at = DateTime.now
-      order_form.save
+    if params[:order_form]
+      params[:order_forms].each do |id, values|
+        order_form = OrderForm.find(id)
+        order_form.case_id = values["case_id"]
+        order_form.examination_date = values["examination_date"]
+        order_form.doctor_id = values["doctor_id"]
+        order_form.case.assigned_at = assigned_at
+        order_form.save
+      end
     end
 
-    redirect_to admin_work_queue_path
+    redirect_to new_case_assignments_path
   end
 end
