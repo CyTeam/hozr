@@ -36,6 +36,7 @@ set :copy_exclude, [".git", "spec"]
 
 # Dependencies
 depend :remote, :gem, 'bundler', '> 0'
+depend :remote, :gem, 'bluepill', ''
 
 # Headers for gem compilation
 depend :remote, :deb, "build-essential", ''
