@@ -156,6 +156,7 @@ de:
       change_patient:   Umschreiben
       change_classification: Klassifikation ändern
       assign:           Anschreiben
+      sign:             Signieren
       first_entry:      Ersteingabe
       second_entry:     Befund
       create:           Speichern

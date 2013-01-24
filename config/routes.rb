@@ -100,7 +100,7 @@ Hozr::Application.routes.draw do
       post :print_result_report
 
       get :first_entry, :second_entry_form
-      get :sign
+      post :sign
       get :next_first_entry
 
       get :classification_form

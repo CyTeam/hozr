@@ -21,10 +21,13 @@
       %li= link_to t_action(:delete), case_path(@case), :method => :delete, :confirm => 'Fall wirklich löschen?' if can? :destroy, @case
 
   = icon_link_to :show_invoice, cydoc_url_for("sessions/#{@case.session_id}"), :target => cydoc_hostname, :style => 'margin-left: 5px'
+  = icon_link_to :sign, sign_case_path(@case), :method => :post, :class => 'btn btn-primary' if can? :sign, @case
 
 .row-fluid
-  .span12
+  .span6.well{:style => 'background-color: inherit'}
     = render 'result_report'
+  .span6
+    = image_tag inline_order_form_url(@case.order_form, :type => :overview) if @case.order_form
 
 = content_for :sidebar do
   = render 'info'
