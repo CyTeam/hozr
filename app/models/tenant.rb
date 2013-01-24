@@ -1,15 +1,21 @@
 class Tenant < ActiveRecord::Base
   # Associations
-  belongs_to :doctor, :foreign_key => :person_id
+  #belongs_to :doctor, :foreign_key => :person_id
   has_many :users
   attr_accessible :user_ids
+
+  # Person
+  # ======
+  belongs_to :person
+  accepts_nested_attributes_for :person
+  attr_accessible :person_attributes
 
   # Settings
   has_settings
   attr_accessible :settings
 
   def to_s
-    doctor.to_s
+    person.to_s
   end
 
   # Attachments

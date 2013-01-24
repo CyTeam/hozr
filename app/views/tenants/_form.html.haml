@@ -1,4 +1,8 @@
 = simple_form_for resource do |f|
+  = f.fields_for :person do |p|
+    = render 'people/address_form', :f => p
+
+  %h3 Einstellungen
   .row-fluid
     .span6= f.input 'cydoc.hostname', :as => :setting_string
 
