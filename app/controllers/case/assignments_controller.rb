@@ -20,10 +20,12 @@ class Case::AssignmentsController < ApplicationController
       params[:order_forms].each do |id, values|
         order_form = OrderForm.find(id)
         order_form.case_id = values["case_id"]
-        order_form.examination_date = values["examination_date"]
-        order_form.doctor_id = values["doctor_id"]
-        order_form.case.assigned_at = assigned_at
-        order_form.save!
+        if order_form.case
+          order_form.case.examination_date = values["examination_date"]
+          order_form.case.doctor_id = values["doctor_id"]
+          order_form.case.assigned_at = assigned_at
+          order_form.save!
+        end
       end
     end
 
