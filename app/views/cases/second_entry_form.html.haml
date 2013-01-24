@@ -7,10 +7,12 @@
       = f.input :finding_text, :wrapper => :inline, :input_html => {:rows =>20, :class => "span12 tinymce"}
 
   .form-actions
-    = f.button :submit, "Erstellen", :class => 'span2 btn-big btn-primary'
+    = button_tag :submit, :value => :save, :class => 'span2 btn btn-big' do
+      = t_action(:save)
+    = button_tag :submit, :value => :queue_for_review, :class => 'span2 btn btn-big btn-primary' do
+      = t_action(:queue_for_review)
     = f.button :submit, "P16", :class => 'span2 btn-big' if current_tenant.settings['modules.p16']
     = f.button :submit, "P16+HPV", :class => 'span2 btn-big' if current_tenant.settings['modules.p16']
-    = f.button :submit, "Review", :class => 'span2 btn-big'
 
   .row-fluid
     .span12

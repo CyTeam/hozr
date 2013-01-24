@@ -93,8 +93,8 @@ class CasesController < AuthorizedController
     @case.screener = current_user.object
     @case.update_attributes(params[:case])
 
-    case params[:commit]
-    when "Erstellen"
+    case params[:button]
+    when "save"
       @case.save
       redirect_to @case
       # That's it if it's a normal PAP
@@ -106,7 +106,7 @@ class CasesController < AuthorizedController
     when "P16"
       @case.needs_p16 = true
       @case.screened_at = nil
-    when "Review"
+    when "queue_for_review"
       @case = Case.find(params[:id])
       @case.screened_at = Time.now
       @case.screener = current_user.object
