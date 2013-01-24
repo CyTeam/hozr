@@ -18,6 +18,22 @@ class Ability
     self.roles.map{|role| [I18n.translate(role, :scope => 'cancan.roles'), role]}
   end
 
+  def admin_abilities
+    can :label_print, :label_print
+    can :print, :doctor_order_form
+    can :manage, Mailing
+    can :manage, Case
+    can :manage, Patient
+    can :manage, OrderForm
+  end
+
+  def zyto_abilities
+  end
+
+  def doctor_abilities
+    can :sign, Case
+  end
+
   # Main role/ability definitions.
   def initialize(user)
     alias_action :index, :to => :list
@@ -26,23 +42,27 @@ class Ability
 
     return unless user
 
-    if user.role? :sysadmin
-      can :manage, :all
-    end
     if user.role? :admin
-      can :label_print, :label_print
-      can :print, :doctor_order_form
-      can :manage, Mailing
-      can :manage, Case
-      can :manage, Patient
+      admin_abilities
     end
     if user.role? :zyto
-      can :manage, Case
+      admin_abilities
+      zyto_abilities
+    end
+    cannot :sign, Case
+    if user.role? :doctor
+      admin_abilities
+      zyto_abilities
+      doctor_abilities
+    end
+
+    cannot :destroy, Case
+    if user.role? :sysadmin
+      can :manage, :all
     end
 
     # Allow setting password
     can [:show, :update], User, :id => user.id
 
-    cannot :destroy, Case unless user.role? :sysadmin
   end
 end
