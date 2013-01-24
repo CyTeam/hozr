@@ -108,7 +108,6 @@ Hozr::Application.routes.draw do
 
       post :second_entry_form
       put :second_entry_update
-      post :sign
 
       post :resend
     end

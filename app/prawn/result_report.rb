@@ -57,17 +57,17 @@ class ResultReport < LetterDocument
 
     for @case in @cases
 
-    letter_header @case.screener.try(:tenant).try(:person), @case.doctor, @case.to_s, @case.screened_at
+    letter_header @case.review_by.try(:tenant).try(:person), @case.doctor, @case.to_s, @case.review_at
 
     free_text(@case.finding_text)
 
-    if @case.screener && @case.screened_at
+    if @case.review_by && @case.review_at
       spacer
 
       indent address_indent do
-        text [@case.screener.vcard.honorific_prefix, @case.screener.vcard.full_name].compact.join(' ')
-        text @case.screener.vcard.extended_address if @case.screener.vcard.extended_address.present?
-        text "Visum #{@case.screened_at}"
+        text [@case.review_by.vcard.honorific_prefix, @case.review_by.vcard.full_name].compact.join(' ')
+        text @case.review_by.vcard.extended_address if @case.review_by.vcard.extended_address.present?
+        text "Visum #{@case.review_at}"
       end
     end
 

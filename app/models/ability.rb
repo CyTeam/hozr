@@ -31,7 +31,7 @@ class Ability
   end
 
   def doctor_abilities
-    can :sign, Case
+    can [:sign, :review_done], Case
   end
 
   # Main role/ability definitions.
@@ -49,7 +49,7 @@ class Ability
       admin_abilities
       zyto_abilities
     end
-    cannot :sign, Case
+    cannot [:sign, :review_done], Case
     if user.role? :doctor
       admin_abilities
       zyto_abilities

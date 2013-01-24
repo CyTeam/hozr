@@ -185,7 +185,7 @@ class CasesController < AuthorizedController
 
     @case.save!
 
-    redirect_to :action => :review_queue
+    redirect_to @case
   end
 
   # Printing
