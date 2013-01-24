@@ -16,14 +16,14 @@ class Case::AssignmentsController < ApplicationController
   def create
     assigned_at = DateTime.now
 
-    if params[:order_form]
+    if params[:order_forms]
       params[:order_forms].each do |id, values|
         order_form = OrderForm.find(id)
         order_form.case_id = values["case_id"]
         order_form.examination_date = values["examination_date"]
         order_form.doctor_id = values["doctor_id"]
         order_form.case.assigned_at = assigned_at
-        order_form.save
+        order_form.save!
       end
     end
 
