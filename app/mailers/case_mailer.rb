@@ -1,5 +1,5 @@
 class CaseMailer < ActionMailer::Base
-  helper :cases, :application
+  helper :cases, :application, :has_vcards
 
   def report(a_case)
     @case = a_case
@@ -9,7 +9,7 @@ class CaseMailer < ActionMailer::Base
 
     mail(
       :to => a_case.doctor.email,
-      :from => 'lab@zytolabor.ch',
+      :from => @case.screener.tenant.person.vcard.contacts.by_type('E-Mail').first,
       :subject => "Resultat #{a_case.to_s}"
     )
   end
