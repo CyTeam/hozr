@@ -40,3 +40,7 @@
     Einsender:
   .span10
     = full_address(@case.doctor.vcard, ', ') if @case.doctor
+
+.row-fluid
+  .span2
+    = @case.classification.code if @case.classification

@@ -76,6 +76,10 @@ class ResultReport < LetterDocument
       text full_address(@case.doctor.vcard, ', ')
     end
 
+    if @case.classification
+      small_text @case.classification.code
+    end
+
     if @case.order_form
       start_new_page
       image @case.order_form.file('overview'), :width => bounds.width
