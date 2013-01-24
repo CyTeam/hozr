@@ -16,7 +16,8 @@
       = link_to "Klinische Symptome", inline_order_form_url(item.order_form, :type => "result_remarks")
       = link_to "Personalien", inline_order_form_url(item.order_form, :type => "address")
     %br/
-    %span.slidepath_links{"data-case-id" => item.id}
+    - if current_tenant.settings['modules.slidepath']
+      %span.slidepath_links{"data-case-id" => item.id}
   %td{:style => "width: 8em"}
     .btn-group
       = link_to t_action('edit'), edit_case_path(item), :class => 'btn btn-mini'

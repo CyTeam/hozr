@@ -22,7 +22,8 @@
       = link_to "Klinische Symptome", inline_order_form_url(item.order_form, :type => "result_remarks")
       = link_to "Personalien", inline_order_form_url(item.order_form, :type => "address")
     %br/
-    %span.slidepath_links{"data-case-id" => item.id}
+    - if current_tenant.settings['modules.slidepath']
+      %span.slidepath_links{"data-case-id" => item.id}
   %td= "X" if item.needs_p16?
   %td= "X" if item.needs_hpv?
   %td
