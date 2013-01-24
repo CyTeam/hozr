@@ -16,17 +16,32 @@
   function format(item) {
     return '<span style="display: inline-block; width: 5em">' + item.id + '</span> ' + item.strip_text
   }
+  function initSelection(element, callback) {
+    callback([{id: null, text: null}])
+  }
+  function createSearchChoice(term) {
+    var data = #{finding_class_collection.to_json}
+
+    for(var i = 0; i < data.length; i++) {
+      if (term == data[i].id) { return }
+    }
+
+    return {id: '', strip_text: term, name: term}
+  }
+
 
   $('#finding_class_selection')
     .select2({
       placeholder: "Code/Text",
       allowClear: true,
-      openOnEnter: false,
       formatSelection: formatSelection,
       formatResult: format,
+      initSelection: initSelection,
+      createSearchChoice: createSearchChoice,
       data: #{finding_class_collection.to_json}
     })
     .on('close', function(e) {
       var text = $(this).select2("data").name
       $('#case_finding_text').tinymce().execCommand('mceInsertContent', false, ' ' + text)
+      $(this).select2("val", null)
     })

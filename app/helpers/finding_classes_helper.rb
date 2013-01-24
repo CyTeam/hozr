@@ -14,7 +14,7 @@ module FindingClassesHelper
   end
 
   def finding_class_collection
-    FindingClass.all.map do |finding_class|
+    finding_classes = FindingClass.all.map do |finding_class|
       {
         :id => finding_class.code,
         :text => finding_class.code + ' - ' + finding_class.name,
@@ -22,5 +22,6 @@ module FindingClassesHelper
         :name => finding_class.name
       }
     end
+    [{:id => '', :strip_text => '[enter]', :name => '<br/> '}] + finding_classes
   end
 end

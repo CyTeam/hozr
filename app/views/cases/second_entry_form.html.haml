@@ -4,7 +4,7 @@
 = simple_form_for @case, :url => second_entry_update_case_path(@case) do |f|
   .row-fluid
     .span12
-      = f.input :finding_text, :wrapper => :inline, :input_html => {:rows =>5, :class => "span12 tinymce"}
+      = f.input :finding_text, :wrapper => :inline, :input_html => {:rows =>20, :class => "span12 tinymce"}
 
   .form-actions
     = f.button :submit, "Erstellen", :class => 'span2 btn-big btn-primary'
@@ -30,3 +30,4 @@
   $(document).ready(function() {
     tinyMCE.init(#{configuration.options_for_tinymce.to_json});
   })
+
