@@ -24,6 +24,7 @@ SimpleNavigation::Configuration.run do |navigation|
     end
     primary.item :search, 'Suche', '#' do |search|
       search.item :patients, 'Patienten', patients_path
+      search.item :cases, 'Fälle', cases_path
       search.item :doctors, 'Ärzte', doctors_path
     end
     primary.item :administration, 'Administration', '#' do |administration|
