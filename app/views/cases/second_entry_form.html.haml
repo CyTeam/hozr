@@ -8,8 +8,8 @@
 
   .form-actions
     = f.button :submit, "Erstellen", :class => 'span2 btn-big btn-primary'
-    = f.button :submit, "P16", :class => 'span2 btn-big'
-    = f.button :submit, "P16+HPV", :class => 'span2 btn-big'
+    = f.button :submit, "P16", :class => 'span2 btn-big' if current_tenant.settings['modules.p16']
+    = f.button :submit, "P16+HPV", :class => 'span2 btn-big' if current_tenant.settings['modules.p16']
     = f.button :submit, "Review", :class => 'span2 btn-big'
 
   .row-fluid

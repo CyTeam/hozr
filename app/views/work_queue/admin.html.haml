@@ -17,15 +17,16 @@
           %i{:style => "font-size: 12pt"}
             %b= @second_entry_count
             Zweiteingaben.
-        %p
-          = link_to image_tag('second_entry.png', :size => '45x45'), :controller => 'cases', :action => 'hpv_p16_queue'
-          %i{:style => "font-size: 12pt"}
-            %b= @p16_count
-            p16 (
-            %b= @p16_prepared_count
-            herausgesucht) und
-            %b= @hpv_count
-            HPV
+        - if current_tenant.settings['modules.p16']
+          %p
+            = link_to image_tag('second_entry.png', :size => '45x45'), :controller => 'cases', :action => 'hpv_p16_queue'
+            %i{:style => "font-size: 12pt"}
+              %b= @p16_count
+              p16 (
+              %b= @p16_prepared_count
+              herausgesucht) und
+              %b= @hpv_count
+              HPV
         %p
           = link_to image_tag('second_entry.png', :size => '45x45'), :controller => 'cases', :action => 'review_queue'
           %i{:style => "font-size: 12pt"}

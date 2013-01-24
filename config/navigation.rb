@@ -19,7 +19,7 @@ SimpleNavigation::Configuration.run do |navigation|
     primary.item :print, 'Drucken', '#' do |print|
       print.item :doctor_order_form, 'Auftragsformular Drucken', doctor_order_form_path, :link => {:remote => true}
       print.item :case_label_print, 'Objektträger Etiketten', case_label_print_path, :link => {:remote => true}
-      print.item :p16_case_label_print, 'P16 Etiketten', p16_case_label_print_path, :method => :post, :link => {:remote => true}
+      print.item :p16_case_label_print, 'P16 Etiketten', p16_case_label_print_path, :method => :post, :link => {:remote => true} if current_tenant.settings['modules.p16']
       print.item :post_label_print, 'Packet Etiketten', post_label_print_path, :link => {:remote => true}
     end
     primary.item :search, 'Suche', '#' do |search|

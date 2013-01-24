@@ -6,4 +6,5 @@ Tenant.settings.defaults = {
   'format.order_form'                    => 'A4',
 
   'modules.slidepath'                    => false,
+  'modules.p16'                          => false
 }
