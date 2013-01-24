@@ -31,7 +31,8 @@ class OrderForm < ActiveRecord::Base
       :head => {:transformation => :extract_head, :size => "500" },
       :head_big => {:transformation => :extract_head_big, :size => "750" },
       :foot => {:transformation => :extract_foot, :size => "500" },
-      :assignment => {:transformation => :extract_assignment, :size => "500" }
+      :barcode => {:transformation => :extract_barcode, :size => "500" },
+      :doctor => {:transformation => :extract_doctor, :size => "500" }
     }
   },
   :root_path => Rails.root.join('system')
@@ -46,6 +47,10 @@ class OrderForm < ActiveRecord::Base
   def extract_result_remarks(image)
     prepare(image)
     image.crop(::Magick::NorthWestGravity, 0, 605, WIDTH, 860, true)
+  end
+
+  def extract_barcode(image)
+    image.crop(::Magick::NorthWestGravity, image.columns * 0.6, image.rows * 0.22, image.columns * 0.4, image.rows * 0.08, true)
   end
 
   def extract_address(image)
@@ -70,7 +75,7 @@ class OrderForm < ActiveRecord::Base
     image.crop(::Magick::NorthWestGravity, 0, 1137, 1172, 469, true)
   end
 
-  def extract_assignment(image)
+  def extract_doctor(image)
     prepare(image)
     image.crop(::Magick::NorthWestGravity, 0, 1460, WIDTH, image.rows - 1460, true)
   end

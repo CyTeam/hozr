@@ -3,7 +3,8 @@
     = f.fields_for '', order_form do |c|
       .row-fluid[order_form]
         .span6
-          = link_to(image_tag(inline_order_form_url(order_form, :type => :head)), inline_order_form_url(order_form)) if order_form
+          .well= link_to(image_tag(inline_order_form_url(order_form, :type => :barcode)), inline_order_form_url(order_form)) if order_form
+          .well= link_to(image_tag(inline_order_form_url(order_form, :type => :doctor)), inline_order_form_url(order_form)) if order_form
         .span6
           %div{:style => 'float: right'}
             = link_to order_form_path(order_form), :remote => true, :method => :delete do
