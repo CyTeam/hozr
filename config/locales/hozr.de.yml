@@ -108,6 +108,7 @@ de:
         intra_day_id:         Tagesnr.
         finding_text:         Befund
         classification:       Klassifikation
+        screener:             Unterzeichner
 
       order_form:
         case:                 Fall

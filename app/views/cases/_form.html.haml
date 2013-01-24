@@ -22,6 +22,8 @@
 
       %h3= t_action(:second_entry)
       .row-fluid
+        .span12= f.association :screener, :input_html => {'data-placeholder' => 'Unterzeichner auswählen', :class => 'select2'}
+      .row-fluid
         .span12= f.association :classification, :input_html => {'data-placeholder' => 'Klassifikation auswählen', :class => 'select2'}
       .row-fluid
         .span12= f.input :finding_text, :input_html => {:class => 'span12 tinymce'}
