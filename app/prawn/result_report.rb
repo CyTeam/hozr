@@ -21,18 +21,19 @@ class ResultReport < LetterDocument
           font_size 5.5 do
             text full_address(sender.vcard, ', ') if sender
           end
+          text " "
           draw_address(receiver.vcard, true) if receiver
         end
       end
     end
 
-    move_down 8.cm
+    move_down 7.cm
 
     # Place'n'Date
-    text [sender.vcard.try(:locality), I18n.l(date, :format => :long)].compact.join(', ') if sender && date
+    text [sender.vcard.try(:locality), I18n.l(date, :format => '%d. %B %Y, %H:%M Uhr')].compact.join(', ') if sender && date
 
     # Subject
-    move_down 35
+    text " "
     text subject, :style => :bold
   end
 
@@ -46,7 +47,7 @@ class ResultReport < LetterDocument
     end
   end
 
-  def spacer(count = 3)
+  def spacer(count = 2)
     count.times {text " "}
   end
 
