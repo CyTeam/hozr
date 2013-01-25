@@ -1,5 +1,10 @@
 # encoding: utf-8
 
+# Barcode
+require 'barby'
+require 'barby/barcode/code_128'
+require 'barby/outputter/prawn_outputter'
+
 class ResultReport < LetterDocument
   include CasesHelper
   include ApplicationHelper
@@ -52,11 +57,25 @@ class ResultReport < LetterDocument
     count.times {text " "}
   end
 
+  def form_label(a_case)
+    barcode = Barby::Code128C.new(a_case.code)
+    barcode.annotate_pdf(self, :unbleed => 0.1, :height => 0.6.cm, :xdim => 1)
+
+    move_down 0.1.cm
+    small_text a_case.code
+  end
+
   def to_pdf(cases)
     # We accept both a single case or an array
     @cases = cases.is_a?(Array) ? cases : [cases]
 
     for @case in @cases
+
+    float do
+      bounding_box [10.cm, bounds.top - 2.5.cm], :width => 10.cm do
+        form_label(@case)
+      end
+    end
 
     letter_header @case.review_by.try(:tenant).try(:person), @case.doctor, @case.to_s, @case.review_at
 
