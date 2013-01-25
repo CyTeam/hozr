@@ -1,5 +1,5 @@
 function addFlashMessageBehaviour() {
-  $('.alert-success').delay(2500).slideUp();
+  $('.alert-success').delay(4000).slideUp();
 }
 
 function showFlashMessage(message) {
