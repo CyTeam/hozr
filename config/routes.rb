@@ -80,6 +80,8 @@ Hozr::Application.routes.draw do
   end
 
   resources :cases do
+    resources :attachments
+
     resources :patients, :module => 'case'
 
     collection do
