@@ -185,6 +185,9 @@ class CasesController < AuthorizedController
       return
     end
 
+    # Persist as PDF
+    @case.persist_pdf
+
     # Jump to next case
     flash[:notice] = "#{@case.to_s} signiert. Sie wurden zum nächsten zu signierenden Fall weitergeleitet."
     next_open = Case.for_review.where("praxistar_eingangsnr > ?", @case.praxistar_eingangsnr).first
