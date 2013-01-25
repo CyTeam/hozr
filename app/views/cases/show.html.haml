@@ -20,7 +20,7 @@
       %li= link_to t_action(:delete), case_path(@case), :method => :delete, :confirm => 'Fall wirklich löschen?' if can? :destroy, @case
 
   = icon_link_to :show_invoice, cydoc_url_for("sessions/#{@case.session_id}"), :target => cydoc_hostname, :style => 'margin-left: 5px'
-  = icon_link_to :sign, review_done_case_path(@case), :method => :post, :class => 'btn btn-primary' if can? :review_done, @case
+  = link_to 'Signieren', review_done_case_path(@case), :method => :post, :class => 'btn btn-primary' if can? :review_done, @case
 
 .row-fluid
   .span6

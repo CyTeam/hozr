@@ -94,28 +94,18 @@ class CasesController < AuthorizedController
     @case.update_attributes(params[:case])
 
     case params[:button]
-    when "save"
-      @case.save
-      redirect_to @case
-      # That's it if it's a normal PAP
-      return
-    when "P16+HPV"
-      @case.needs_hpv = true
-      @case.needs_p16 = true
-      @case.screened_at = nil
-    when "P16"
-      @case.needs_p16 = true
-      @case.screened_at = nil
     when "queue_for_review"
-      @case = Case.find(params[:id])
-      @case.screened_at = Time.now
-      @case.screener = current_user.object
-      @case.needs_review = true
+      sign
+      return
+    when "review_done"
+      redirect_to @case
+      return
     end
 
-    # Common code for hpv, p16 and review.
     @case.save
 
+    # Jump to next case
+    flash[:notice] = "#{@case.to_s} gespeichert. Sie wurden zum nächsten Fall weitergeleitet."
     next_open = Case.first_entry_done.where("praxistar_eingangsnr > ?", @case.praxistar_eingangsnr).first
     if next_open.nil?
       redirect_to second_entry_queue_cases_path
@@ -128,7 +118,8 @@ class CasesController < AuthorizedController
     @case = Case.find(params[:id])
     @case.screened_at = Time.now
     @case.screener = current_user.object
-    @case.finding_text = params[:case][:finding_text] unless params[:case].nil? or params[:case][:finding_text].nil?
+    @case.needs_review = true
+    @case.update_attributes(params[:case])
 
     # TODO: generalize
     # Check if case needs review
@@ -156,9 +147,14 @@ class CasesController < AuthorizedController
 
       redirect_to :action => 'hpv_p16_queue'
     else
-      @case.save
+      if !@case.save(:context => :sign)
+        flash.now[:alert] = "Bitte Pflichtfelder ausfüllen."
+        render 'second_entry_form'
+        return
+      end
 
       # Jump to next case
+      flash[:notice] = "#{@case.to_s} zum signiert vorgemerkt. Sie wurden zum nächsten Fall weitergeleitet."
       next_open = Case.for_second_entry.where("praxistar_eingangsnr > ?", @case.praxistar_eingangsnr).first
 
       if next_open.nil?
@@ -183,9 +179,21 @@ class CasesController < AuthorizedController
     @case.review_by = current_user.object
     @case.review_at = Time.now
 
-    @case.save!
+    if !@case.save(:context => :review_done)
+      flash.now[:alert] = "Bitte Pflichtfelder ausfüllen."
+      render 'second_entry_form'
+      return
+    end
 
-    redirect_to @case
+    # Jump to next case
+    flash[:notice] = "#{@case.to_s} signiert. Sie wurden zum nächsten zu signierenden Fall weitergeleitet."
+    next_open = Case.for_review.where("praxistar_eingangsnr > ?", @case.praxistar_eingangsnr).first
+
+    if next_open.nil?
+      redirect_to review_queue_cases_path
+    else
+      redirect_to next_open
+    end
   end
 
   # Printing

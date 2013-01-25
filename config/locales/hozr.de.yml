@@ -156,7 +156,7 @@ de:
       change_patient:   Umschreiben
       change_classification: Klassifikation ändern
       assign:           Anschreiben
-      sign:             Signieren
+      sign:             Bereit zum Signieren
       first_entry:      Ersteingabe
       second_entry:     Befund
       create:           Speichern
@@ -174,7 +174,8 @@ de:
         email:          Resultate mailen
         hl7:            HL7 Resultate senden
         overview_email: Resultatübersicht senden
-      queue_for_review: Bereit zum Signieren
+      queue_for_review: Später Signieren
+      review_done:      Jetzt Signieren
       save:             Speichern
 
 

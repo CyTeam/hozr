@@ -97,14 +97,12 @@ class Case < ActiveRecord::Base
   def validate_second_entry
   end
 
-  def validate
-    valid = true
-    if ready_for_second_entry
-      valid &&= validate_first_entry
-    end
+  validates :patient, :presence => true, :on => :sign
+  validates :doctor, :presence => true, :on => :sign
 
-    return valid
-  end
+  validates :patient, :presence => true, :on => :review_done
+  validates :doctor, :presence => true, :on => :review_done
+  validates :classification, :presence => true, :on => :review_done
 
   def ready_for_first_entry
     first_entry_at.nil? && !assigned_at.nil?
