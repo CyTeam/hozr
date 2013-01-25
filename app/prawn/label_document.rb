@@ -17,8 +17,8 @@ class LabelDocument < Prawn::Document
   end
 
   def part_label(part_nr)
-    code = '%s%03i%02i' % [@date.strftime('%y%j'), @day_nr, part_nr]
-    text_code = '%s %03i/%02i' % [@date.strftime('%d.%m.%y'), @day_nr, part_nr]
+    code = '%s%03i' % [@date.strftime('%y%j'), @day_nr]
+    text_code = 'B%s/%02i' % [code, part_nr]
 
     barcode = Barby::Code128C.new(code)
     rotate(90, :origin => [0,0]) do
@@ -31,7 +31,7 @@ class LabelDocument < Prawn::Document
 
   def form_label
     code = '%s%03i' % [@date.strftime('%y%j'), @day_nr]
-    text_code = '%s %03i/%02i-%02i' % [@date.strftime('%d.%m.%y'), @day_nr, 1, @part_count]
+    text_code = 'B%s' % [code]
 
     barcode = Barby::Code128C.new(code)
     rotate(90, :origin => [0,0]) do
