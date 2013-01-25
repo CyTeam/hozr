@@ -5,6 +5,8 @@ class ResultReport < LetterDocument
   include ApplicationHelper
   include HasVcardsHelper
 
+  # Adapt for result_report
+
   def default_options
     super.merge({
       :left_margin   => 2.cm,
@@ -12,7 +14,6 @@ class ResultReport < LetterDocument
     })
   end
 
-  # Adapt for result_report
   def letter_header(sender, receiver, subject, date = Date.today)
     # Address
     float do
