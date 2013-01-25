@@ -25,5 +25,5 @@
         %span.caret
       %ul.dropdown-menu.pull-right
         %li= link_to t_action('delete'), case_path(item), :method => :delete, :confirm => 'Fall wirklich löschen?' if can? :destroy, Case
-        %li= link_to t_action('create_hpv_p16'), create_hpv_p16_for_case_case_path(item), :method => :post
+        %li= link_to t_action('create_hpv_p16'), create_hpv_p16_for_case_case_path(item), :method => :post if current_tenant.settings['modules.p16']
         %li= link_to t_action('print_label'), print_case_label_path(item), :method => :post, :remote => true
