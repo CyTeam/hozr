@@ -43,7 +43,7 @@ class Case < ActiveRecord::Base
   scope :for_review, where("needs_review = ?", true)
 
   scope :undelivered, where("delivered_at IS NULL")
-  scope :for_delivery, finished.undelivered
+  scope :for_delivery, finished.undelivered.where("doctor_id IS NOT NULL")
 
   def code
     praxistar_eingangsnr
