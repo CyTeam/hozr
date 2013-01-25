@@ -9,4 +9,4 @@
   %td{:style => "width: 10%; text-align: right"}
     = a_case.examination_date
   %td{:style => "width: 10%; text-align: right"}
-    = link_to a_case.praxistar_eingangsnr, case_path(a_case)
+    = link_to a_case.code_to_s, case_path(a_case)

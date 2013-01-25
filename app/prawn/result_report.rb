@@ -62,7 +62,7 @@ class ResultReport < LetterDocument
     barcode.annotate_pdf(self, :unbleed => 0.1, :height => 0.6.cm, :xdim => 1)
 
     move_down 0.1.cm
-    small_text a_case.code
+    small_text a_case.code_to_s
   end
 
   def to_pdf(cases)

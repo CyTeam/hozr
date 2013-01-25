@@ -7,7 +7,7 @@
 
     %dt= t_attr(:praxistar_eingangsnr, Case)
     %dd
-      = case_info.praxistar_eingangsnr unless case_info.praxistar_eingangsnr.nil?
+      = case_info.code_to_s unless case_info.code.nil?
       = "(#{case_info.intra_day_id unless case_info.intra_day_id.nil?})"
 
     - if case_info.doctor

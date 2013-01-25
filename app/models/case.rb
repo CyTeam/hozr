@@ -52,9 +52,13 @@ class Case < ActiveRecord::Base
     self.praxistar_eingangsnr = value
   end
 
+  def code_to_s
+    "B%s" % [code]
+  end
+
   def to_s
     # TODO: generalize as Case-Code prefix
-    "#{patient.to_s}: B#{praxistar_eingangsnr}"
+    "#{patient.to_s}: #{code_to_s}"
   end
 
   def control_findings
