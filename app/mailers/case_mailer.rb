@@ -4,7 +4,7 @@ class CaseMailer < ActionMailer::Base
   def report(a_case)
     @case = a_case
 
-    prawn_options = { :page_size => 'A4', :top_margin => 90, :left_margin => 40, :right_margin => 40, :bottom_margin => 40 }
+    prawn_options = { :page_size => 'A4' }
     attachments[a_case.pdf_name] = ResultReport.new(prawn_options).to_pdf(a_case)
 
     mail(
