@@ -191,6 +191,24 @@ class Case < ActiveRecord::Base
     "#{to_s}.pdf"
   end
 
+  # Attachments
+  # ===========
+  has_many :attachments, :as => :object
+  accepts_nested_attributes_for :attachments, :reject_if => proc { |attributes| attributes['file'].blank? }
+
+  def persist_pdf
+    temp = Tempfile.open('hozr')
+    temp.binmode
+    temp.write to_pdf
+    temp.close
+    title = "Bericht %i" % [attachments.count + 1]
+
+    attachment = attachments.create(
+      :file => temp,
+      :title => title
+    )
+  end
+
   # Sphinx Search
   # =============
   define_index do
