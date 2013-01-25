@@ -23,7 +23,7 @@ class ResultReport < LetterDocument
     # Address
     float do
       canvas do
-        bounding_box [12.cm, bounds.top - 6.cm], :width => 10.cm do
+        bounding_box [12.cm, bounds.top - 5.cm], :width => 10.cm do
           font_size 5.5 do
             text full_address(sender.vcard, ', ') if sender
           end
