@@ -9,12 +9,4 @@
     .pull-right= channel_label(send_queue.channel)
   %td
     - if mailing.doctor
-      - if send_queue.sent_at
-        = link_to("Resultate erneut drucken", send_by_mailing_path(mailing, :channel => 'print'), :remote => true, :method => :post) if mailing.doctor.wants?(:print)
-        %br/
-        = link_to("E-Mail erneut senden", send_by_mailing_path(mailing, :channel => 'email'), :remote => true, :method => :post) if mailing.doctor.wants?(:email)
-        %br/
-        = link_to("HL7 erneut senden", send_by_mailing_path(mailing, :channel => 'hl7'), :remote => true, :method => :post) if mailing.doctor.wants?(:hl7)
-      - else
-        = link_to t_send_by(send_queue.channel), [:perform, send_queue], :remote => true, :method => :post
-        %br/
+      = link_to t_send_by(send_queue.channel), [:perform, send_queue], :remote => true, :method => :post
