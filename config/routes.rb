@@ -98,6 +98,7 @@ Hozr::Application.routes.draw do
       post :hpv_p16_prepared
       post :create_hpv_p16_for_case
       post :review_done
+      post :reactivate
 
       post :print_result_report
 

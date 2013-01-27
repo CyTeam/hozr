@@ -199,6 +199,14 @@ class CasesController < AuthorizedController
     end
   end
 
+  def reactivate
+    @case = Case.find(params[:id])
+    @case.review_at = nil
+    @case.save
+
+    redirect_to @case
+  end
+
   # Printing
   # ========
   def print_result_report

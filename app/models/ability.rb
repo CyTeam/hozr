@@ -32,7 +32,10 @@ class Ability
   end
 
   def doctor_abilities
-    can :review_done, Case
+    can :review_done, Case, :review_at => nil
+    can :reactivate, Case do |a_case|
+      a_case.review_at
+    end
   end
 
   # Main role/ability definitions.
@@ -52,6 +55,7 @@ class Ability
       zyto_abilities
     end
     cannot :review_done, Case
+    cannot :reactivate, Case
     if user.role? :doctor
       admin_abilities
       zyto_abilities
@@ -61,6 +65,13 @@ class Ability
     cannot :destroy, Case
     if user.role? :sysadmin
       can :manage, :all
+    end
+
+    cannot :review_done, Case do |a_case|
+      a_case.review_at
+    end
+    cannot :reactivate, Case do |a_case|
+      a_case.review_at.nil?
     end
 
     # Allow setting password
