@@ -20,8 +20,9 @@
     - if case_info.entry_date
       %dt= t_attr(:entry_date, Case)
       %dd= case_info.entry_date.strftime('%d.%m.%Y')
-    %dt= t_attr(:examination_method)
-    %dd= case_info.examination_method.name unless case_info.examination_method.nil?
+    - if case_info.examination_method
+      %dt= t_attr(:examination_method)
+      %dd= case_info.examination_method.name
 
     - if current_tenant.settings['modules.slidepath']
       - if case_info.location_index.present?
