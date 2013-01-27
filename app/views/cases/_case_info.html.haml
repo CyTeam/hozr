@@ -20,6 +20,10 @@
     - if case_info.entry_date
       %dt= t_attr(:entry_date, Case)
       %dd= case_info.entry_date.strftime('%d.%m.%Y')
+    - if case_info.attachments.present?
+      %dt= t_attr(:attachments)
+      - for attachment in case_info.attachments
+        %dd= link_to attachment, [:download, attachment]
     - if case_info.examination_method
       %dt= t_attr(:examination_method)
       %dd= case_info.examination_method.name
