@@ -8,7 +8,7 @@ de:
 
   activerecord:
     models:
-      attachment: Anhang
+      attachment: Dokument
       tenant:  Mandant
       user:    Benutzer
       patient: Patient
@@ -109,7 +109,7 @@ de:
         finding_text:         Befund
         classification:       Klassifikation
         screener:             Unterzeichner
-
+        attachments:          Dokumente
       order_form:
         case:                 Fall
         doctor_id:            Zuweisender Arzt
