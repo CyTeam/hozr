@@ -28,16 +28,6 @@ class Doctor < ActiveRecord::Base
     write_attribute(:zsr, value)
   end
 
-
-  # Settings
-  # ========
-  has_settings
-  def self.settings
-    doctor = Doctor.find(Thread.current["doctor_id"]) if Doctor.exists?(Thread.current["doctor_id"])
-
-    doctor.present? ? doctor.settings : Settings
-  end
-
   has_many :cases
   has_many :patients
   has_many :mailings
