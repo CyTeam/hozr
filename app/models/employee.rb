@@ -2,15 +2,7 @@
 
 class Employee < Person
   # Access restrictions
-  attr_accessible :code, :born_on, :workload
-
-  def code
-    vcard.nickname || vcard.abbreviated_name
-  end
-
-  def code=(value)
-    vcard.nickname = value
-  end
+  attr_accessible :born_on, :workload
 
   def born_on
     date_of_birth

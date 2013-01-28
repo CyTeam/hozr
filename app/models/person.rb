@@ -41,6 +41,15 @@ class Person < ActiveRecord::Base
   end
   alias_method_chain :vcard, :autobuild
 
+  attr_accessible :code
+  def code
+    vcard.nickname || vcard.abbreviated_name
+  end
+
+  def code=(value)
+    vcard.nickname = value
+  end
+
   # Search
   default_scope includes(:vcard).order('IFNULL(vcards.full_name, vcards.family_name + ' ' + vcards.given_name)')
 
