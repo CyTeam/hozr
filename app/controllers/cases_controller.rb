@@ -201,7 +201,9 @@ class CasesController < AuthorizedController
 
   def reactivate
     @case = Case.find(params[:id])
+    @case.needs_review = true
     @case.review_at = nil
+    @case.delivered_at = nil
     @case.save
 
     redirect_to @case
