@@ -44,10 +44,6 @@ class Person < ActiveRecord::Base
   # Search
   default_scope includes(:vcard).order('IFNULL(vcards.full_name, vcards.family_name + ' ' + vcards.given_name)')
 
-  scope :by_name, lambda {|value|
-    includes(:vcard).where("(vcards.given_name LIKE :query) OR (vcards.family_name LIKE :query) OR (vcards.full_name LIKE :query)", :query => "%#{value}%")
-  }
-
   # Attachments
   # ===========
   has_many :attachments, :as => :object
