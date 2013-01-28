@@ -253,7 +253,7 @@ class CasesController < AuthorizedController
 
     # Clone the case and set columns
     hpv = @case.clone
-    hpv.praxistar_eingangsnr = CaseNr.new.to_s
+    hpv.praxistar_eingangsnr = CaseCode.new.to_s
     hpv.screened_at = nil
     hpv.delivered_at = nil
     hpv.finding_classes = []

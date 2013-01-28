@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-class CaseNr
+class CaseCode
   attr_accessor :year, :nr
 
   def initialize(*params)
