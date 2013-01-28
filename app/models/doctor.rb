@@ -12,12 +12,6 @@ class Doctor < ActiveRecord::Base
   accepts_nested_attributes_for :vcard
   attr_accessible :vcard_attributes
 
-  belongs_to :billing_doctor, :class_name => 'Doctor'
-
-  def billing_doctor_id
-    read_attribute(:billing_doctor_id) || id
-  end
-
   # Proxy accessors
   def name
     if vcard.nil?
