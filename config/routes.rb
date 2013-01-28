@@ -22,6 +22,7 @@ Hozr::Application.routes.draw do
       get :current
     end
 
+    resources :attachments
     resources :phone_numbers
     member do
       get :new_phone_number

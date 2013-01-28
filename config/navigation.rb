@@ -40,7 +40,7 @@ SimpleNavigation::Configuration.run do |navigation|
         administration.item :finding_classes, 'Befunde', finding_classes_path
         administration.item :examinations_methods, 'Methoden', examination_methods_path
         administration.item :divider, "", :class => 'divider'
-        administration.item :attachments, t_title(:index, Attachment), attachments_path
+        administration.item :attachments, t_title(:index, Attachment), tenant_attachments_path(current_tenant)
         administration.item :employees, 'Mitarbeiter', employees_path
         administration.item :current_tenant, t_model(Tenant), current_tenants_path
         administration.item :users, t_model(User), users_path
