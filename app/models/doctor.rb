@@ -41,7 +41,6 @@ class Doctor < ActiveRecord::Base
   has_many :cases
   has_many :patients
   has_many :mailings
-  has_and_belongs_to_many :offices
 
   # CyLab
   # =====
@@ -50,18 +49,6 @@ class Doctor < ActiveRecord::Base
   def email
     vcard.contacts.where(:phone_number_type => 'E-Mail').first
   end
-
-  # Office
-  # ======
-  has_and_belongs_to_many :offices
-  # TODO:
-  # This is kind of a primary office providing printers etc.
-  # But it undermines the assumption that a doctor may belong/
-  # own more than one office.
-  def office
-    offices.first
-  end
-
 
   # Multichannel
   # ============
