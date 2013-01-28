@@ -48,14 +48,6 @@ class Person < ActiveRecord::Base
     includes(:vcard).where("(vcards.given_name LIKE :query) OR (vcards.family_name LIKE :query) OR (vcards.full_name LIKE :query)", :query => "%#{value}%")
   }
 
-  # Constructor
-  def initialize(attributes = nil, options = {})
-    super
-
-    build_vcard unless vcard
-    vcard.build_address unless vcard.address
-  end
-
   # Attachments
   # ===========
   has_many :attachments, :as => :object
