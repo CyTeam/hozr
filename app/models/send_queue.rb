@@ -26,7 +26,9 @@ class SendQueue < ActiveRecord::Base
 
   # Actions
   def print(format, overview_printer, printer)
-    mailing.print(format, overview_printer, printer)
+    mailing.cases.find_each do |a_case|
+      a_case.print(format, printer)
+    end
 
     self.sent_at = DateTime.now
     save
