@@ -5,6 +5,7 @@ class LetterDocument < Prawn::Document
   include ApplicationHelper
   include I18nRailsHelpers
   include Prawn::Measurements
+  include ActionView::Helpers::SanitizeHelper
 
   def h(s)
     return s
@@ -73,6 +74,7 @@ class LetterDocument < Prawn::Document
   def free_text(text = "")
     return unless text.present?
 
+    text = sanitize text, :tags => %w(p strong br), :attributes => []
     text " "
     text html_unescape(text), :inline_format => true
   end
