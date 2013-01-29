@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130110150315) do
+ActiveRecord::Schema.define(:version => 20130128130342) do
 
   create_table "accounts", :force => true do |t|
     t.string   "number"
@@ -215,21 +215,11 @@ ActiveRecord::Schema.define(:version => 20130110150315) do
   end
 
   create_table "doctors", :force => true do |t|
-    t.string   "code"
-    t.string   "speciality"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "active",                          :default => true
-    t.integer  "billing_doctor_id"
-    t.string   "login"
-    t.string   "password"
-    t.string   "ean_party",         :limit => 13
-    t.string   "zsr",               :limit => 7
-    t.text     "remarks"
-    t.integer  "imported_id"
-    t.boolean  "use_vesr"
-    t.boolean  "print_payment_for"
-    t.integer  "esr_account_id"
+    t.boolean  "active",                   :default => true
+    t.string   "ean_party",  :limit => 13
+    t.string   "zsr",        :limit => 7
     t.text     "channels"
   end
 

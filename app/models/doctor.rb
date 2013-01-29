@@ -2,7 +2,7 @@
 
 class Doctor < ActiveRecord::Base
   # Access restrictions
-  attr_accessible :vcard, :ean_party, :zsr, :print_payment_for
+  attr_accessible :vcard, :ean_party, :zsr
 
   scope :active, where(:active => true)
 
@@ -14,11 +14,7 @@ class Doctor < ActiveRecord::Base
 
   # Proxy accessors
   def name
-    if vcard.nil?
-      login
-    else
-      vcard.full_name
-    end
+    vcard.try(:full_name)
   end
 
   # ZSR sanitation
