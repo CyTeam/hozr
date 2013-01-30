@@ -603,6 +603,7 @@ ActiveRecord::Schema.define(:version => 20130128130342) do
     t.string   "nationality"
     t.string   "swift"
     t.string   "clearing"
+    t.boolean  "active",                              :default => true
   end
 
   add_index "people", ["civil_status_id"], :name => "index_people_on_civil_status_id"
