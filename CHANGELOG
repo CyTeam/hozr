@@ -1,0 +1,12 @@
+1.0.1
+=====
+Features:
+* Sanitize finding_text in result_report view.
+* Add PDF action link to cases in lists.
+* Use Case#pdf_name as filename for cases#show.pdf.
+* Send BCC to sender for email results.
+* Sanitize finding_text in result_report view.
+
+1.0.0
+=====
+This is the first major release!
