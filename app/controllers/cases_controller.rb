@@ -284,7 +284,7 @@ class CasesController < AuthorizedController
         page_size = params[:page_size] || 'A5'
         document = @case.to_pdf(page_size)
 
-        send_data document, :filename => "#{@case.id}.pdf",
+        send_data document, :filename => @case.pdf_name,
                             :type => "application/pdf",
                             :disposition => 'inline'
       }
