@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130128130342) do
+ActiveRecord::Schema.define(:version => 20130130091537) do
 
   create_table "accounts", :force => true do |t|
     t.string   "number"
@@ -563,7 +563,7 @@ ActiveRecord::Schema.define(:version => 20130128130342) do
   add_index "patients", ["updated_at"], :name => "index_patients_on_updated_at"
 
   create_table "people", :force => true do |t|
-    t.datetime "created_at",                              :null => false
+    t.datetime "created_at",                                            :null => false
     t.datetime "updated_at"
     t.string   "type"
     t.date     "date_of_birth"
@@ -573,11 +573,14 @@ ActiveRecord::Schema.define(:version => 20130128130342) do
     t.string   "social_security_nr_12"
     t.integer  "civil_status_id"
     t.integer  "religion_id"
-    t.boolean  "delta",                 :default => true, :null => false
+    t.boolean  "delta",                               :default => true, :null => false
     t.string   "nationality"
     t.string   "swift"
     t.string   "clearing"
     t.boolean  "active",                              :default => true
+    t.string   "ean_party",             :limit => 13
+    t.string   "zsr",                   :limit => 7
+    t.text     "channels"
   end
 
   add_index "people", ["civil_status_id"], :name => "index_people_on_civil_status_id"

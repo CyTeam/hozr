@@ -1,16 +1,10 @@
 # encoding: utf-8
 
-class Doctor < ActiveRecord::Base
+class Doctor < Person
   # Access restrictions
   attr_accessible :vcard, :ean_party, :zsr
 
   scope :active, where(:active => true)
-
-  # TODO support multiple vcards
-  has_vcards
-  has_one :vcard, :as => :object
-  accepts_nested_attributes_for :vcard
-  attr_accessible :vcard_attributes
 
   # Proxy accessors
   def name
