@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130130091537) do
+ActiveRecord::Schema.define(:version => 20130130094028) do
 
   create_table "accounts", :force => true do |t|
     t.string   "number"
@@ -109,6 +109,17 @@ ActiveRecord::Schema.define(:version => 20130130091537) do
   add_index "bookings", ["credit_account_id"], :name => "index_bookings_on_credit_account_id"
   add_index "bookings", ["debit_account_id"], :name => "index_bookings_on_debit_account_id"
   add_index "bookings", ["reference_id", "reference_type"], :name => "index_bookings_on_reference_id_and_reference_type"
+
+  create_table "case_copy_tos", :force => true do |t|
+    t.integer  "case_id"
+    t.integer  "person_id"
+    t.text     "channels"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "case_copy_tos", ["case_id"], :name => "index_case_copy_tos_on_case_id"
+  add_index "case_copy_tos", ["person_id"], :name => "index_case_copy_tos_on_person_id"
 
   create_table "cases", :force => true do |t|
     t.integer  "examination_method_id"

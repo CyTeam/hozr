@@ -15,6 +15,10 @@ class Case < ActiveRecord::Base
   has_and_belongs_to_many :finding_classes
   has_and_belongs_to_many :mailings
 
+  # CaseCopyTo
+  has_many :case_copy_tos
+  accepts_nested_attributes_for :case_copy_tos
+
   has_one :order_form, :autosave => true
   def order_form_id
     self.order_form.try(:id)
