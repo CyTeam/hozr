@@ -1,6 +1,6 @@
 .row-fluid
   .span6
-    = [@case.review_by.tenant.person.vcard.try(:locality), l(@case.review_at.to_date, :format => :long)].compact.join(', ') if @case.review_by && @case.review_at
+    = [@case.review_by.tenant.person.vcard.try(:locality), l(@case.review_at.to_date, :format => '%d. %B %Y')].compact.join(', ') if @case.review_by && @case.review_at
   .span6
     = @case.doctor.vcard.honorific_prefix if @case.doctor
     = render "/vcards/show", :vcard => @case.doctor.vcard if @case.doctor

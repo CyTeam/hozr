@@ -36,7 +36,7 @@ class ResultReport < LetterDocument
     move_down 7.cm
 
     # Place'n'Date
-    text [sender.vcard.try(:locality), I18n.l(date, :format => '%d. %B %Y, %H:%M Uhr')].compact.join(', ') if sender && date
+    text [sender.vcard.try(:locality), I18n.l(date, :format => '%d. %B %Y')].compact.join(', ') if sender && date
 
     # Subject
     text " "
