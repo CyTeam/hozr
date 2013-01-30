@@ -214,25 +214,6 @@ ActiveRecord::Schema.define(:version => 20130128130342) do
     t.integer "treatment_id"
   end
 
-  create_table "doctors", :force => true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.boolean  "active",                   :default => true
-    t.string   "ean_party",  :limit => 13
-    t.string   "zsr",        :limit => 7
-    t.text     "channels"
-  end
-
-  add_index "doctors", ["active"], :name => "index_doctors_on_active"
-
-  create_table "doctors_offices", :id => false, :force => true do |t|
-    t.integer "office_id"
-    t.integer "doctor_id"
-  end
-
-  add_index "doctors_offices", ["doctor_id"], :name => "index_doctors_offices_on_doctor_id"
-  add_index "doctors_offices", ["office_id"], :name => "index_doctors_offices_on_office_id"
-
   create_table "drug_articles", :force => true do |t|
     t.string   "code"
     t.string   "group_code"
@@ -534,13 +515,6 @@ ActiveRecord::Schema.define(:version => 20130128130342) do
   add_index "medical_cases", ["patient_id"], :name => "index_medical_cases_on_patient_id"
   add_index "medical_cases", ["treatment_id"], :name => "index_medical_cases_on_treatment_id"
   add_index "medical_cases", ["type"], :name => "index_medical_cases_on_type"
-
-  create_table "offices", :force => true do |t|
-    t.string "name"
-    t.string "login"
-    t.string "password"
-    t.string "printers"
-  end
 
   create_table "order_forms", :force => true do |t|
     t.text     "file"
