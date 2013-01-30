@@ -13,7 +13,7 @@
     %h4= @case.to_s
 .row-fluid
   .span12
-    = @case.finding_text.try(:html_safe)
+    = sanitize(@case.finding_text, :tags => %w(p strong br), :attributes => [])
 %br
 %br
 %br
