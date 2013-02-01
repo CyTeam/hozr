@@ -24,15 +24,16 @@
     %br/
     - if current_tenant.settings['modules.slidepath']
       %span.slidepath_links{"data-case-id" => item.id}
-  %td= "X" if item.needs_p16?
-  %td= "X" if item.needs_hpv?
+  - if current_tenant.settings['modules.p16']
+    %td= "X" if item.needs_p16?
+    %td= "X" if item.needs_hpv?
   %td
     sign:&nbsp;#{item.screened_at.try(:to_date)}
     %br/
     vers:&nbsp;
     - for mailing in item.mailings
       = link_to mailing.created_at.to_date, :controller => 'mailings', :action => :show, :id => mailing.id
-    - if item.needs_p16? or item.needs_hpv?
+    - if current_tenant.settings['modules.p16'] and (item.needs_p16? or item.needs_hpv?)
       %br/
       - if item.hpv_p16_prepared_at
         HPV/P16:&nbsp;#{hpv_p16_prepared_text(item)}

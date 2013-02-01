@@ -7,8 +7,9 @@
   %th Arzt
   %th Zytologin
   %th Scan
-  %th P16
-  %th HPV
+  - if current_tenant.settings['modules.p16']
+    %th P16
+    %th HPV
   %th Status
   - if @include_bill
     %th Rechnung
