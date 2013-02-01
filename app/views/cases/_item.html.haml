@@ -7,7 +7,7 @@
   %td
     = link_to case_nr, next_step_case_path(item)
 
-  %td{:class => "PAP_#{item.classification.code unless item.classification.nil?}"}= item.classification.name unless item.classification.nil?
+  %td
   %td
     - for finding in item.finding_classes
       %div
