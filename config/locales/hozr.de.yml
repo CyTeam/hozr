@@ -10,6 +10,7 @@ de:
     models:
       attachment: Dokument
       tenant:  Mandant
+      person:  Kontakt
       user:    Benutzer
       patient: Patient
       doctor:  Arzt
