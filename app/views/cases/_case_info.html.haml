@@ -13,6 +13,12 @@
     - if case_info.doctor
       %dt= t_attr(:doctor, Case)
       %dd= case_info.doctor
+    - if case_info.case_copy_tos.present?
+      %dt= t_attr(:case_copy_tos, Case)
+      - case_info.case_copy_tos.each do |case_copy_to|
+        %dd
+          %i.icon-envelope
+          = case_copy_to.person.to_s
 
     - if case_info.examination_date
       %dt= t_attr(:examination_date, Case)
