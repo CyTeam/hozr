@@ -9,7 +9,12 @@
 
   %td
   %td= render :partial => '/patients/compact', :object => item.patient unless item.patient.nil?
-  %td= item.doctor.try(:name)
+  %td
+    = item.doctor.try(:name)
+    - item.case_copy_tos.each do |case_copy_to|
+      %p
+        %i.icon-envelope
+        = case_copy_to.person.to_s
   %td= item.screener.try(:code)
   - if current_tenant.settings['modules.p16']
     %td= "X" if item.needs_p16?
