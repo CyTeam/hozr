@@ -29,6 +29,9 @@ function initializeBehaviours() {
   // from directory_lookup.js
   addDirectoryLookupBehaviour();
 
+  // from nested_form.js
+  addNestedFormBehaviour();
+
   // select2
   $('.select2').select2({
       allowClear: true
