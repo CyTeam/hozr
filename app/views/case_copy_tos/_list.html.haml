@@ -1,0 +1,11 @@
+.span10.case_copy_tos
+  - collection.each do |case_copy_to|
+    %p[case_copy_to]
+      %span.pull-right
+        = link_to [a_case, case_copy_to], :method => :delete, :remote => true do
+          %i.icon-trash
+      %i.icon-envelope
+      = case_copy_to.person.to_s
+  %p
+    = link_to t_action(:new, CaseCopyTo), new_case_case_copy_to_path(a_case), :remote => true, :class => 'btn'
+

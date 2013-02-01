@@ -23,6 +23,7 @@ de:
       assignment: Auftragsdaten
       mailing: Versand
       examination_method: Methode
+      case_copy_to:      Kopienempfänger
 
     attributes:
       finding_class:
@@ -111,6 +112,7 @@ de:
         classification:       Klassifikation
         screener:             Unterzeichner
         attachments:          Dokumente
+        case_copy_tos:        Kopienempfänger
       order_form:
         case:                 Fall
         doctor_id:            Zuweisender Arzt

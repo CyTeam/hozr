@@ -1,0 +1,16 @@
+.modal
+  = modal_header t_title(:new, CaseCopyTo)
+
+  .modal-body
+    = simple_form_for [parent, resource], :remote => true do |f|
+      .row-fluid
+        .span6= f.association :person, :input_html => {:class => 'select2'}
+      .row-fluid
+        .span6= f.input :channels, :as => :select, :collection => doctor_channels_collection, :input_html => {:multiple => true}
+
+      .form-actions.hidden-actions
+        = f.button :submit
+
+  .modal-footer
+    = link_to t_action(:new), '#', :class => 'btn submit-button'
+    = link_to t_action(:cancel), '#', :class => 'btn', 'data-dismiss' => 'modal'

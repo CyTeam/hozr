@@ -13,10 +13,11 @@
         .span6= f.input :entry_date, :as => :string
       .row-fluid
         .span6= f.association :doctor, :as => :select, :collection => doctors_collection, :input_html => {'data-placeholder' => 'Arzt auswählen', :class => 'select2'}
-      = f.fields_for :case_copy_tos do |c|
-        .row-fluid
-          .span6= c.association :person, :input_html => {:class => 'select2'}
-          .span6= c.input :channels, :as => :select, :collection => doctor_channels_collection, :input_html => {:multiple => true}
+
+      .control-group
+        %label.control-label= t_attr(:case_copy_tos)
+        .controls
+          = render 'case_copy_tos/list', :a_case => resource, :collection => resource.case_copy_tos
       .row-fluid
         .span6= f.association :examination_method
 
