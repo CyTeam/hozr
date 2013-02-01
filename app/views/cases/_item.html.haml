@@ -16,14 +16,6 @@
   %td= render :partial => '/patients/compact', :object => item.patient unless item.patient.nil?
   %td= item.doctor.try(:name)
   %td= item.screener.try(:code)
-  %td
-    - if item.order_form
-      = link_to "Auftrag", inline_order_form_url(item.order_form)
-      = link_to "Klinische Symptome", inline_order_form_url(item.order_form, :type => "result_remarks")
-      = link_to "Personalien", inline_order_form_url(item.order_form, :type => "address")
-    %br/
-    - if current_tenant.settings['modules.slidepath']
-      %span.slidepath_links{"data-case-id" => item.id}
   - if current_tenant.settings['modules.p16']
     %td= "X" if item.needs_p16?
     %td= "X" if item.needs_hpv?
