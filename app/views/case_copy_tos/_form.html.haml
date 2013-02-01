@@ -1,12 +1,21 @@
-.modal
+.modal{:style => 'width: 80%; left: 10%; margin-left: 0'}
   = modal_header t_title(:new, CaseCopyTo)
 
-  .modal-body
-    = simple_form_for [parent, resource], :remote => true do |f|
-      .row-fluid
-        .span6= f.association :person, :input_html => {:class => 'select2'}
+  .modal-body{:style => 'min-height: 30em'}
+    = simple_form_for [parent, resource], :remote => true, :html => {:class => 'no-well'} do |f|
       .row-fluid
         .span6= f.input :channels, :as => :select, :collection => doctor_channels_collection, :input_html => {:multiple => true}
+
+      .pull-right
+        = link_to '#', :onclick => "$('.input-alt-person').toggle()", :class => 'btn' do
+          %i.icon-plus
+      %h3= Person
+      .row-fluid.input-alt-person
+        .span6
+          = f.association :person, :input_html => {:class => 'select2'}
+      .input-alt-person{:style => 'display: none'}
+        = f.fields_for :person, Person.new do |p|
+          = render 'people/address_form', :f => p, :resource => p.object, :controller_name => 'people'
 
       .form-actions.hidden-actions
         = f.button :submit
