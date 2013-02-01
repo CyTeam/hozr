@@ -96,6 +96,12 @@ class ResultReport < LetterDocument
       small_text "Einsender:"
       text full_address(@case.doctor.vcard, ', ')
     end
+    if @case.case_copy_tos.present?
+      small_text "Kopie an:"
+      @case.case_copy_tos.each do |case_copy_to|
+        text full_address(case_copy_to.person.vcard, ', ')
+      end
+    end
 
     if @case.classification
       small_text @case.classification.code

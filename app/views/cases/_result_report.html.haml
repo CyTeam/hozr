@@ -41,6 +41,14 @@
   .span10
     = full_address(@case.doctor.vcard, ', ') if @case.doctor
 
+- if @case.case_copy_tos.present?
+  .row-fluid
+    .span2
+      Kopie an:
+    .span10
+      - @case.case_copy_tos.each do |case_copy_to|
+        %p= full_address(case_copy_to.person.vcard, ', ')
+
 .row-fluid
   .span2
     = @case.classification.code if @case.classification
