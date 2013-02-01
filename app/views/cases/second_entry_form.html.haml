@@ -30,6 +30,11 @@
         .row-fluid
           .span6= f.association :doctor, :as => :select, :collection => doctors_collection, :required => true, :input_html => {'data-placeholder' => 'Arzt auswählen', :class => 'select2'}
         .row-fluid
+          .control-group
+            %label.control-label= t_attr(:case_copy_tos)
+            .controls
+              = render 'case_copy_tos/list', :a_case => resource, :collection => resource.case_copy_tos
+        .row-fluid
           .span12= f.association :classification, :required => true, :input_html => {'data-placeholder' => 'Klassifikation auswählen', :class => 'select2'}
         .row-fluid
           .span12= f.input :remarks, :input_html => {:class => 'span12', :rows => 4}
