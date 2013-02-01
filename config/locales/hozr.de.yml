@@ -136,6 +136,7 @@ de:
 
   crud:
     action:
+      more:             Hinzufügen
       invoice_overview: Rechnungen
       print_fax:        Drucken für Fax
       print:            Drucken
