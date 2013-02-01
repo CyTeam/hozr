@@ -32,9 +32,6 @@
       - else
         HPV/P16:&nbsp;
         %span{:id => "prepare_hpv_p16_#{item.id}"}= link_to image_tag('prepare_p16.png'), hpv_p16_prepared_case_path(item), :method => :post, :remote => true
-  - if @include_bill
-    %td
-      = link_to_cydoc_session "Rechnung", item.session
   %td{:style => "width: 8em"}
     .btn-group
       = link_to t_action('edit'), edit_case_path(item), :class => 'btn btn-mini'
