@@ -8,11 +8,6 @@
     = link_to case_nr, next_step_case_path(item)
 
   %td
-  %td
-    - for finding in item.finding_classes
-      %div
-        = finding.code
-        \- #{finding.name.html_safe}
   %td= render :partial => '/patients/compact', :object => item.patient unless item.patient.nil?
   %td= item.doctor.try(:name)
   %td= item.screener.try(:code)
