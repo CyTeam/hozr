@@ -2,7 +2,6 @@
 
 class Case < ActiveRecord::Base
   belongs_to :examination_method
-  belongs_to :classification
   belongs_to :patient, :autosave => true, :touch => true
   belongs_to :doctor
   belongs_to :first_entry_by, :class_name => 'Person', :foreign_key => :first_entry_by
@@ -14,6 +13,13 @@ class Case < ActiveRecord::Base
 
   has_and_belongs_to_many :finding_classes
   has_and_belongs_to_many :mailings
+
+  # Classification
+  belongs_to :classification
+  scope :by_classification_group, lambda {|group|
+    includes('classification').where('classifications.classification_group_id' => group.id)
+  }
+  validates :classification, :presence => true, :on => :review_done
 
   # CaseCopyTo
   has_many :case_copy_tos
@@ -31,9 +37,6 @@ class Case < ActiveRecord::Base
   # Scopes
   scope :finished, where("screened_at IS NOT NULL AND needs_review = ?", false)
   scope :unfinished_p16, where("screened_at IS NULL AND needs_p16 = ?", true)
-  scope :by_classification_group, lambda {|group|
-    includes('classification').where('classifications.classification_group_id' => group.id)
-  }
   scope :unassigned, where("assigned_at IS NULL")
   scope :first_entry_done, where("first_entry_at IS NOT NULL and screened_at IS NULL")
 
@@ -110,7 +113,6 @@ class Case < ActiveRecord::Base
 
   validates :patient, :presence => true, :on => :review_done
   validates :doctor, :presence => true, :on => :review_done
-  validates :classification, :presence => true, :on => :review_done
 
   def ready_for_first_entry
     first_entry_at.nil? && !assigned_at.nil?
