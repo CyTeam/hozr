@@ -25,6 +25,7 @@ class Ability
     can :manage, Case
     can :manage, Patient
     can :manage, OrderForm
+    can :manage, Doctor
   end
 
   def zyto_abilities
