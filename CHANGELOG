@@ -1,3 +1,16 @@
+1.1.0 (unreleased)
+=====
+Features:
+* Implement default classification.
+* Result report copies
+* Port Doctor model to be subclass of Person.
+* Drop time part in date section of result_reports.
+* Security update for devise gem.
+* Drop P16/HPV info from case lists if module is not enabled.
+* Add translation for crud.action.more.
+* Drop links to scans in case lists.
+* Drop finding_class column in cases list.
+
 1.0.1
 =====
 Features:

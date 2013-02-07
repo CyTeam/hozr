@@ -20,6 +20,12 @@ class Case < ActiveRecord::Base
     includes('classification').where('classifications.classification_group_id' => group.id)
   }
   validates :classification, :presence => true, :on => :review_done
+  def classification
+    super || Classification.default
+  end
+  def classification_id
+    self[:classification_id] || Classification.default.id
+  end
 
   # CaseCopyTo
   has_many :case_copy_tos
