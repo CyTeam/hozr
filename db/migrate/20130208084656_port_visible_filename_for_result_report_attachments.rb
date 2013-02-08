@@ -1,7 +1,7 @@
 class PortVisibleFilenameForResultReportAttachments < ActiveRecord::Migration
   def up
     Attachment.where(:object_type => 'Case').find_each do |a|
-      a.update_column(:visible_filename, a.object.to_s)
+      a.update_column(:visible_filename, a.object.to_s + '.pdf')
     end
   end
 end
