@@ -21,7 +21,7 @@ class SendQueue < ActiveRecord::Base
   # Helpers
   def to_s
     # 13.2.2011: 5 Resultate für Muster per e-mail
-    "%s: %i Resultate für %s per %s" % [created_at, mailing.cases.count, channel.to_s, mailing.doctor.to_s]
+    "%s: %i Resultate für %s per %s" % [created_at, mailing.cases.count, mailing.doctor.to_s, channel.to_s]
   end
 
   # Actions
