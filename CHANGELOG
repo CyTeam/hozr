@@ -3,6 +3,7 @@
 Features:
 * Implement default classification.
 * Allow zyto and admin roles to manage Doctors.
+* Use proper filename and extension for archived result reports.
 
 Upgrade:
 Run in the Rails console:

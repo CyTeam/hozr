@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130130094028) do
+ActiveRecord::Schema.define(:version => 20130208084656) do
 
   create_table "accounts", :force => true do |t|
     t.string   "number"
@@ -81,6 +81,7 @@ ActiveRecord::Schema.define(:version => 20130130094028) do
     t.string   "code"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "visible_filename"
   end
 
   add_index "attachments", ["code"], :name => "index_attachments_on_code"

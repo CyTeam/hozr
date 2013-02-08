@@ -16,6 +16,10 @@ class AttachmentsController < AuthorizedController
     @attachment = Attachment.find(params[:id])
 
     path = @attachment.file.current_path
-    send_file path
+    if @attachment.visible_filename
+      send_file path, :filename => @attachment.visible_filename
+    else
+      send_file path
+    end
   end
 end
