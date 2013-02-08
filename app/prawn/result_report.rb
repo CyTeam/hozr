@@ -109,7 +109,9 @@ class ResultReport < LetterDocument
 
     if @case.order_form
       start_new_page
-      image @case.order_form.file('overview'), :width => bounds.width
+
+      @case.order_form.send(:file_state).create_magick_version_if_needed(:mail)
+      image @case.order_form.file('mail'), :width => bounds.width
     end
 
     start_new_page unless @case == @cases.last

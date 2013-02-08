@@ -32,7 +32,8 @@ class OrderForm < ActiveRecord::Base
       :head_big => {:transformation => :extract_head_big, :size => "750" },
       :foot => {:transformation => :extract_foot, :size => "500" },
       :barcode => {:transformation => :extract_barcode, :size => "500" },
-      :doctor => {:transformation => :extract_doctor, :size => "500" }
+      :doctor => {:transformation => :extract_doctor, :size => "500" },
+      :mail => { :attributes => { :quality => 30 }, :size => "1000" }
     }
   },
   :root_path => Rails.root.join('system')
@@ -80,14 +81,22 @@ class OrderForm < ActiveRecord::Base
     image.crop(::Magick::NorthWestGravity, 0, 1460, WIDTH, image.rows - 1460, true)
   end
 
+  def mail_file
+    img = Magick::Image::read(file('overview')).first
+    t = Tempfile.new ['', '.jpg']
+    img.write(t) {self.quality = 50}
+
+    t
+  end
+
   # Scanning
   # ========
   SCANNER_SPOOL_PATH = Rails.root.join('tmp')
 
   def self.post_scanning_processing
     Dir.glob(SCANNER_SPOOL_PATH.join('*.pnm')).sort.each do |scan_name|
-      png_name = scan_name.gsub(/\.pnm$/, '.png')
-      system 'convert', scan_name, png_name
+      jpg_name = scan_name.gsub(/\.pnm$/, '.jpg')
+      system 'convert', scan_name, jpg_name
 
       text = IO.popen(['gocr', scan_name]).gets(nil)
       code = nil
@@ -96,11 +105,11 @@ class OrderForm < ActiveRecord::Base
       end
 
       self.create(
-        :file => File.new(png_name),
+        :file => File.new(jpg_name),
         :code => code
       )
 
-      File.delete(scan_name, png_name)
+      File.delete(scan_name, jpg_name)
     end
   end
 

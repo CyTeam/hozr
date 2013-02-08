@@ -4,6 +4,15 @@ Features:
 * Implement default classification.
 * Allow zyto and admin roles to manage Doctors.
 
+Upgrade:
+Run in the Rails console:
+  OrderForm.update_all("file = REPLACE(file, '.png', '.jpg')")
+
+Run in the application root:
+  find system/order_form/file/ -type d -regex 'system/order_form/file/[0-9]*/.*' -exec rm -rf {} \;
+  find system/order_form/file/ -name '*.png' | while read png; do convert $png ${png%.png}.jpg ; done
+  find system/order_form/file/ -name '*.png' -delete
+
 1.0.2
 =====
 Features:
