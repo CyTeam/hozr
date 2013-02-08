@@ -29,7 +29,7 @@ class CasesController < AuthorizedController
   # ===========
   def first_entry_queue
     @cases = apply_scopes(Case).for_first_entry
-    render 'entry_list'
+    render 'index'
   end
 
   def first_entry
@@ -69,7 +69,7 @@ class CasesController < AuthorizedController
   # ============
   def second_entry_queue
     @cases = apply_scopes(Case).for_second_entry
-    render 'entry_list'
+    render 'index'
   end
 
   def second_entry_form
