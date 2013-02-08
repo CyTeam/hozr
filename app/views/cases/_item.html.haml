@@ -7,7 +7,7 @@
   %td
     = link_to case_nr, next_step_case_path(item)
 
-  %td
+  %td= item.classification
   %td= render :partial => '/patients/compact', :object => item.patient unless item.patient.nil?
   %td
     = item.doctor.try(:name)
