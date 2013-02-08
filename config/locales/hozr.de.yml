@@ -111,6 +111,7 @@ de:
         finding_text:         Befund
         classification:       Klassifikation
         screener:             Unterzeichner
+        review:               Signatur
         attachments:          Dokumente
         case_copy_tos:        Kopienempfänger
       order_form:
