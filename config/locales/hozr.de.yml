@@ -110,8 +110,9 @@ de:
         intra_day_id:         Tagesnr.
         finding_text:         Befund
         classification:       Klassifikation
-        screener:             Unterzeichner
+        screener:             Befunderfassung
         review:               Signatur
+        review_by:            Unterzeichner
         attachments:          Dokumente
         case_copy_tos:        Kopienempfänger
       order_form:
