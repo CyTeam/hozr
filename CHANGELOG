@@ -1,4 +1,4 @@
-1.0.3 (unreleased)
+1.0.3
 =====
 Features:
 * Implement default classification.
@@ -7,6 +7,7 @@ Features:
 * Proper usage of screener vs. reviewer language.
 * Unify all case lists.
 * Better structured information in case lists.
+* Restrict options for screener and reviewer in case form.
 
 Upgrade:
 Run in the Rails console:
