@@ -16,6 +16,10 @@ class Employee < Person
   # =====
   has_one :user, :as => :object, :autosave => true
   attr_accessible :user
+  has_many :roles, :through => :user
+  scope :by_role, lambda {|role|
+    includes(:roles).where('roles.name' => role)
+  }
 
   # Tenant
   # ======
