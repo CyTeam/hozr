@@ -15,13 +15,12 @@
       %p
         %i.icon-envelope
         = case_copy_to.person.to_s
-  %td= item.screener.try(:code)
+  %td= "%s (%s)" % [item.screened_at.to_date, item.screener.code] if item.screened_at && item.screener
+  %td= "%s (%s)" % [item.review_at.to_date, item.review_by.code] if item.review_at && item.review_by
   - if current_tenant.settings['modules.p16']
     %td= "X" if item.needs_p16?
     %td= "X" if item.needs_hpv?
   %td
-    sign:&nbsp;#{item.screened_at.try(:to_date)}
-    %br/
     vers:&nbsp;
     - for mailing in item.mailings
       = link_to mailing.created_at.to_date, :controller => 'mailings', :action => :show, :id => mailing.id

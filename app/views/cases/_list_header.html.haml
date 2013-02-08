@@ -4,9 +4,10 @@
   %th= t_attr(:classification, Case)
   %th= t_attr(:patient, Case)
   %th= t_attr(:doctor, Case)
-  %th Zytologin
+  %th= t_action(:second_entry)
+  %th= t_attr(:review, Case)
   - if current_tenant.settings['modules.p16']
     %th P16
     %th HPV
-  %th Status
+  %th= t_model(Mailing)
   %th
