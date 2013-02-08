@@ -6,6 +6,12 @@ class Doctor < Person
 
   scope :active, where(:active => true)
 
+  # Helpers
+  # =======
+  def to_s
+    [vcard.honorific_prefix, vcard.full_name].map(&:presence).compact.join(" ")
+  end
+
   # Proxy accessors
   def name
     vcard.try(:full_name)
@@ -18,20 +24,21 @@ class Doctor < Person
     write_attribute(:zsr, value)
   end
 
-  has_many :cases
   has_many :patients
-  has_many :mailings
 
-  # CyLab
-  # =====
+  # User
   has_one :user, :as => :object, :autosave => true
   attr_accessible :user
   def email
     vcard.contacts.where(:phone_number_type => 'E-Mail').first
   end
 
+  # Hozr
+  # ====
+  has_many :cases
+  has_many :mailings
+
   # Multichannel
-  # ============
   serialize :channels
   attr_accessible :channels
 
@@ -43,11 +50,5 @@ class Doctor < Person
 
   def wants?(channel)
     channels.include?(channel.to_s)
-  end
-
-  # Helpers
-  # =======
-  def to_s
-    [vcard.honorific_prefix, vcard.full_name].map(&:presence).compact.join(" ")
   end
 end
