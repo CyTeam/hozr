@@ -4,6 +4,9 @@ Features:
 * Implement default classification.
 * Allow zyto and admin roles to manage Doctors.
 * Use proper filename and extension for archived result reports.
+* Proper usage of screener vs. reviewer language.
+* Unify all case lists.
+* Better structured information in case lists.
 
 Upgrade:
 Run in the Rails console:
