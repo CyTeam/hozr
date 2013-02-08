@@ -12,7 +12,9 @@ class Case < ActiveRecord::Base
   belongs_to :hpv_p16_prepared_by, :class_name => 'Person', :foreign_key => :hpv_p16_prepared_by
 
   has_and_belongs_to_many :finding_classes
+  # Mailings
   has_and_belongs_to_many :mailings
+  has_many :send_queues, :through => :mailings
 
   # Classification
   belongs_to :classification
