@@ -14,7 +14,15 @@ class PatientsController < AuthorizedController
   end
 
   def new
-    @patient = Patient.new(params[:patient])
+    # Use default sex from doctor settings
+    case current_tenant.settings['patients.sex']
+      when 'M'
+        resource.sex = 'M'
+        resource.vcard.honorific_prefix = 'Herr'
+      when 'F'
+        resource.sex = 'F'
+        resource.vcard.honorific_prefix = 'Frau'
+    end
 
     @patient.vcard.honorific_prefix = 'Frau'
   end
