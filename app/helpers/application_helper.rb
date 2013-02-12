@@ -48,6 +48,10 @@ module ApplicationHelper
     link_to title, cydoc_url_for(path), options.merge(:target => cydoc_hostname)
   end
 
+  def cydoc_new_treatment_url(a_case)
+    cydoc_url_for("patients/#{a_case.patient.id}/treatments/new?" + {:treatment => { :date_begin => a_case.review_at, :date_end => a_case.review_at, :referrer_id => a_case.doctor.id }}.to_param)
+  end
+
   def link_to_cydoc_session(title, session, options = {})
     link_to_cydoc title, "sessions/#{session.id}", options
   end
