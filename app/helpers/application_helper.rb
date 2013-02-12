@@ -41,7 +41,7 @@ module ApplicationHelper
   end
 
   def cydoc_url_for(path)
-    "https://#{cydoc_hostname}/#{path}"
+    "//#{cydoc_hostname}/#{path}"
   end
 
   def link_to_cydoc(title, path, options = {})
