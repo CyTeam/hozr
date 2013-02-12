@@ -60,16 +60,6 @@ class Case < ActiveRecord::Base
   scope :undelivered, where("delivered_at IS NULL")
   scope :for_delivery, finished.undelivered.where("doctor_id IS NOT NULL")
 
-  # CyDoc
-  scope :no_treatment, :conditions => ["session_id IS NULL"]
-  scope :finished, :conditions => ["screened_at IS NOT NULL AND (needs_review = ? OR review_at IS NOT NULL)", false]
-  scope :finished_at, proc {|date|
-    {
-      :conditions => ["screened_at < :date AND (needs_review = :false OR review_at < :date)", {:date => date, :false => false}]
-    }
-  }
-
-
   def code
     praxistar_eingangsnr
   end
