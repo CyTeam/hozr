@@ -9,5 +9,6 @@ class WorkQueueController < ApplicationController
     @p16_prepared_count = Case.count(:all, :conditions => ["needs_p16 = ? AND screened_at IS NULL AND hpv_p16_prepared_at is not NULL", true])
     @review_count = Case.for_review.count
     @result_for_delivery_count = Case.for_delivery.count
+    @result_for_billing_count = Case.finished.no_treatment.count
   end
 end
