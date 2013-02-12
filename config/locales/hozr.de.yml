@@ -40,6 +40,9 @@ de:
           ISO-8859-15: ISO-8859-15
           UTF-8: UTF-8
         file: Dateiname
+      employee:
+        ean_party:         EAN-Nr.
+        zsr:               ZSR-Nr.
       tenant:
         settings:
           patients:
@@ -124,6 +127,8 @@ de:
         insurance:            Versicherung
         number:               Versicherten Nr.
       doctor:
+        ean_party:         EAN-Nr.
+        zsr:               ZSR-Nr.
         channels:             Versand als
         channels_enum:
           print:              Druck
