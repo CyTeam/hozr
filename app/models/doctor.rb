@@ -2,7 +2,7 @@
 
 class Doctor < Person
   # Access restrictions
-  attr_accessible :vcard, :ean_party, :zsr
+  attr_accessible :vcard
 
   scope :active, where(:active => true)
 
@@ -17,6 +17,8 @@ class Doctor < Person
     vcard.try(:full_name)
   end
 
+  # ZSR and EAN
+  attr_accessible :ean_party, :zsr
   # ZSR sanitation
   def zsr=(value)
     value.delete!(' .') unless value.nil?

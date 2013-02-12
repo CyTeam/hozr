@@ -12,6 +12,15 @@ class Employee < Person
     date_of_birth = value
   end
 
+  # ZSR and EAN
+  attr_accessible :ean_party, :zsr
+  # ZSR sanitation
+  def zsr=(value)
+    value.delete!(' .') unless value.nil?
+
+    write_attribute(:zsr, value)
+  end
+
   # User
   # =====
   has_one :user, :as => :object, :autosave => true
