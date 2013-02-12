@@ -19,8 +19,10 @@
       %li= link_to t_action(:change_patient), first_entry_case_path(@case) if can? :change_patient, @case
       %li= link_to t_action(:delete), case_path(@case), :method => :delete, :confirm => 'Fall wirklich löschen?' if can? :destroy, @case
 
-  = icon_link_to :show_invoice, cydoc_url_for("sessions/#{@case.session_id}"), :target => cydoc_hostname, :style => 'margin-left: 5px'
-  = icon_link_to "Rechnung erfassen", cydoc_new_treatment_url(@case), :target => cydoc_hostname, :style => 'margin-left: 5px'
+  - if @case.session_id
+    = icon_link_to :show_invoice, cydoc_url_for("sessions/#{@case.session_id}"), :target => cydoc_hostname, :style => 'margin-left: 5px'
+  - else
+    = icon_link_to :build_invoice, cydoc_new_treatment_url(@case), :target => cydoc_hostname, :style => 'margin-left: 5px'
   = link_to 'Signieren', review_done_case_path(@case), :method => :post, :class => 'btn btn-primary' if can? :review_done, @case
   = link_to 'Überarbeiten', reactivate_case_path(@case), :method => :post, :class => 'btn btn-primary' if can? :reactivate, @case
 

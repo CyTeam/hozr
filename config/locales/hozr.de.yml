@@ -162,7 +162,8 @@ de:
       choose_as_target: Auf diesen verknüpfen
       new_patient:      Neuer Patient
       resend:           Erneut senden
-      show_invoice:     Rechnung
+      show_invoice:     Rechnung anzeigen
+      build_invoice:    Rechnung erfassen
       change_patient:   Umschreiben
       change_classification: Klassifikation ändern
       assign:           Anschreiben
