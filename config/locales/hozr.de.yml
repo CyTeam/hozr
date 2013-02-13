@@ -35,6 +35,7 @@ de:
         code_enum:
           DoctorOrderForm: Auftragsformular
           LetterDocument: Briefvorlage
+          PatientLetter:   Rechnungsformular
         encoding: Zeichensatz
         encoding_enum:
           ISO-8859-15: ISO-8859-15
