@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130208084656) do
+ActiveRecord::Schema.define(:version => 20130212143929) do
 
   create_table "account_types", :force => true do |t|
     t.string   "name",       :limit => 100
@@ -772,7 +772,7 @@ ActiveRecord::Schema.define(:version => 20130208084656) do
     t.text     "remarks"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "state",         :default => "open"
+    t.string   "state",         :default => "active"
     t.integer  "treatment_id"
     t.integer  "imported_id"
   end
@@ -872,7 +872,7 @@ ActiveRecord::Schema.define(:version => 20130208084656) do
     t.integer  "referrer_id"
     t.string   "place_type",  :default => "Praxis"
     t.integer  "imported_id"
-    t.string   "state",       :default => "open"
+    t.string   "state",       :default => "active"
   end
 
   add_index "treatments", ["law_id"], :name => "index_treatments_on_law_id"
