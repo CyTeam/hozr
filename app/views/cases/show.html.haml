@@ -21,7 +21,7 @@
 
   - if @case.session_id
     = icon_link_to :show_invoice, cydoc_url_for("sessions/#{@case.session_id}"), :target => cydoc_hostname, :style => 'margin-left: 5px'
-  - else
+  - elsif @case.patient
     = icon_link_to :build_invoice, cydoc_new_treatment_url(@case), :target => cydoc_hostname, :style => 'margin-left: 5px'
   = link_to 'Signieren', review_done_case_path(@case), :method => :post, :class => 'btn btn-primary' if can? :review_done, @case
   = link_to 'Überarbeiten', reactivate_case_path(@case), :method => :post, :class => 'btn btn-primary' if can? :reactivate, @case
