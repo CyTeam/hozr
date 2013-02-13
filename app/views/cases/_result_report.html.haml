@@ -1,6 +1,6 @@
 .row-fluid
   .span6
-    = [@case.review_by.tenant.person.vcard.try(:locality), l(@case.review_at.to_date, :format => '%d. %B %Y')].compact.join(', ') if @case.review_by && @case.review_at
+    = [@case.reviewer.tenant.person.vcard.try(:locality), l(@case.review_at.to_date, :format => '%d. %B %Y')].compact.join(', ') if @case.reviewer && @case.review_at
   .span6
     = @case.doctor.vcard.honorific_prefix if @case.doctor
     = render "/vcards/show", :vcard => @case.doctor.vcard if @case.doctor
@@ -18,15 +18,15 @@
 %br
 %br
 
-- if @case.review_by && @case.review_at
+- if @case.reviewer && @case.review_at
   .row-fluid
     .span6
     .span6
-      = @case.review_by.vcard.honorific_prefix
-      = @case.review_by.vcard.full_name
-      - if @case.review_by.vcard.extended_address.present?
+      = @case.reviewer.vcard.honorific_prefix
+      = @case.reviewer.vcard.full_name
+      - if @case.reviewer.vcard.extended_address.present?
         %br
-        = @case.review_by.vcard.extended_address
+        = @case.reviewer.vcard.extended_address
       %br
       = "Visum: #{@case.review_at}"
   %br

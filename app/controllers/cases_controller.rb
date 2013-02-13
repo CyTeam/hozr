@@ -176,7 +176,7 @@ class CasesController < AuthorizedController
     @case = Case.find(params[:id])
     @case.needs_review = false
 
-    @case.review_by = current_user.object
+    @case.reviewer = current_user.object
     @case.review_at = Time.now
 
     if !@case.save(:context => :review_done)

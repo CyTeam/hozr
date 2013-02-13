@@ -126,7 +126,7 @@ de:
         classification:       Klassifikation
         screener:             Befunderfassung
         review:               Signatur
-        review_by:            Unterzeichner
+        reviewer:             Unterzeichner
         attachments:          Dokumente
         case_copy_tos:        Kopienempfänger
       order_form:
