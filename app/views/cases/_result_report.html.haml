@@ -22,13 +22,11 @@
   .row-fluid
     .span6
     .span6
-      %strong
-        = @case.review_by.vcard.honorific_prefix
-        = @case.review_by.vcard.full_name
+      = @case.review_by.vcard.honorific_prefix
+      = @case.review_by.vcard.full_name
       - if @case.review_by.vcard.extended_address.present?
         %br
-        %strong
-          = @case.review_by.vcard.extended_address
+        = @case.review_by.vcard.extended_address
       %br
       = "Visum: #{@case.review_at}"
   %br
