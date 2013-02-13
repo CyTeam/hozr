@@ -1,3 +1,23 @@
+1.0.4
+=====
+* Rails security update.
+
+Features:
+* Fixup migration port_visible_filename_for_result_report_attachments to add .pdf extension.
+* Unify look of patients list with other lists and CyDoc.
+* Use same logic for new patients as CyDoc.
+* Add ean_party and zsr fields to employee view.
+* Add translations for .ean_party and .zsr.
+* Use protocol relative link to cydoc.
+* Add link to create new treatment from case.
+* Use different links in case view if invoice exists.
+* New Attachment code type PatientLetter.
+* No link to CyDoc patient in case view if case is not set, yet.
+* Use normal font-weight for review signature in result_report partial.
+* Use transliteration for Case.pdf_name.
+* Fix case update by using different association name than foreign_key for Case.review_by.
+
+
 1.0.3
 =====
 Features:
