@@ -202,7 +202,7 @@ class Case < ActiveRecord::Base
   end
 
   def pdf_name
-    "#{to_s}.pdf"
+    "#{I18n.transliterate(to_s)}.pdf"
   end
 
   # Attachments
