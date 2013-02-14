@@ -201,8 +201,10 @@ class Case < ActiveRecord::Base
     printer.print_file(file.path)
   end
 
-  def pdf_name
-    "#{I18n.transliterate(to_s)}.pdf"
+  def pdf_name(name = '')
+    name = name.strip
+    name = ' ' + name if name.present?
+    I18n.transliterate(to_s + name) + '.pdf'
   end
 
   # Attachments
@@ -219,7 +221,8 @@ class Case < ActiveRecord::Base
 
     attachment = attachments.create(
       :file => temp,
-      :title => title
+      :title => title,
+      :visible_filename => pdf_name(title)
     )
   end
 
