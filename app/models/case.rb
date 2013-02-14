@@ -204,7 +204,7 @@ class Case < ActiveRecord::Base
   def pdf_name(name = '')
     name = name.strip
     name = ' ' + name if name.present?
-    I18n.transliterate(to_s) + name + '.pdf'
+    I18n.transliterate(to_s + name) + '.pdf'
   end
 
   # Attachments
