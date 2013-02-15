@@ -240,6 +240,8 @@ de:
     form:
       credentials:      Benutzerkonto
   patients:
+    dunning_stopped:
+      title:              Patienten mit Mahnstopp
     index:
       title:            Patienten
 
