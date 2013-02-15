@@ -249,6 +249,11 @@ class CasesController < AuthorizedController
     @case.save
   end
 
+  def billing_queue
+    @cases = apply_scopes(Case).for_billing
+    render 'index'
+  end
+
   # General
   # =======
   def show

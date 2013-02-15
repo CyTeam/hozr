@@ -248,5 +248,6 @@ class Case < ActiveRecord::Base
 
   # CyDoc
   # =====
-  belongs_to :session
+  has_one :treatment, :foreign_key => :imported_id
+  scope :for_billing, lambda { finished.includes(:treatment).where('treatments.id IS NULL')}
 end

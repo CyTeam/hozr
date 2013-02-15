@@ -210,6 +210,8 @@ de:
       title:           Reviews
     hpv_p16_queue:
       title:           HPV/P16 Liste
+    billing_queue:
+      title:           Fälle zum abrechnen
   case:
     assignments:
       form:
