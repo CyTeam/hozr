@@ -209,30 +209,6 @@ class CasesController < AuthorizedController
     redirect_to @case
   end
 
-  # Printing
-  # ========
-  def print_result_report
-    @case = Case.find(params[:id])
-    page_size = params[:page_size] || 'A5'
-
-    begin
-      case page_size
-      when 'A5'
-        printer = current_tenant.printer_for(:result_report_A5)
-      when 'A4'
-        printer = current_tenant.printer_for(:result_report_A4)
-      end
-
-      @case.print(page_size, printer)
-      flash.now[:notice] = "#{@case} an Drucker gesendet"
-
-    rescue RuntimeError => e
-      flash.now[:alert] = "Drucken fehlgeschlagen: #{e.message}"
-    end
-
-    render 'show_flash'
-  end
-
   # P16/HPV
   # =======
   def hpv_p16_queue
@@ -289,5 +265,29 @@ class CasesController < AuthorizedController
                             :disposition => 'inline'
       }
     end
+  end
+
+  # Printing
+  # ========
+  def print_result_report
+    @case = Case.find(params[:id])
+    page_size = params[:page_size] || 'A5'
+
+    begin
+      case page_size
+      when 'A5'
+        printer = current_tenant.printer_for(:result_report_A5)
+      when 'A4'
+        printer = current_tenant.printer_for(:result_report_A4)
+      end
+
+      @case.print(page_size, printer)
+      flash.now[:notice] = "#{@case} an Drucker gesendet"
+
+    rescue RuntimeError => e
+      flash.now[:alert] = "Drucken fehlgeschlagen: #{e.message}"
+    end
+
+    render 'show_flash'
   end
 end
