@@ -49,7 +49,7 @@ module ApplicationHelper
   end
 
   def cydoc_new_treatment_url(a_case)
-    cydoc_url_for("patients/#{a_case.patient.id}/treatments/new?" + {:treatment => { :date_begin => a_case.review_at, :date_end => a_case.review_at, :referrer_id => a_case.doctor.id }}.to_param)
+    cydoc_url_for("patients/#{a_case.patient.id}/treatments/new?" + {:treatment => { :date_begin => a_case.review_at.to_date, :date_end => a_case.review_at.to_date, :referrer_id => a_case.doctor.id }}.to_param)
   end
 
   def link_to_cydoc_session(title, session, options = {})
