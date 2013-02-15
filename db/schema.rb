@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130212143929) do
+ActiveRecord::Schema.define(:version => 20130215230913) do
 
   create_table "account_types", :force => true do |t|
     t.string   "name",       :limit => 100
@@ -722,7 +722,7 @@ ActiveRecord::Schema.define(:version => 20130212143929) do
     t.string   "ref_code",           :limit => 10
     t.integer  "session",                                                         :default => 1
     t.decimal  "quantity",                          :precision => 8, :scale => 2, :default => 1.0
-    t.datetime "date",                                                                                         :null => false
+    t.date     "date",                                                                                         :null => false
     t.integer  "provider_id"
     t.integer  "responsible_id"
     t.integer  "location_id"
