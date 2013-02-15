@@ -1,3 +1,18 @@
+1.0.5
+=====
+Features:
+
+* Update cupsffi to run on multiarch enabled Ubuntus/Debians.
+* Use a proper filename for persisted reports.
+* Also transliterate name part in pdf_name.
+* Use last case.doctor for patient.doctor as fallback.
+
+Upgrade:
+Run in the Rails console:
+  Attachment.where(:object_type => 'Case').find_each do |a|
+    a.update_column(:visible_filename, a.object.try(:pdf_name))
+  end
+
 1.0.4
 =====
 * Rails security update.
