@@ -44,6 +44,14 @@ class Patient < ActiveRecord::Base
 
   # Doctor
   belongs_to :doctor
+  def doctor_id
+    self[:doctor_id] || cases.last.try(:doctor_id)
+  end
+
+  def doctor_with_history_fallback
+    doctor_without_history_fallback || cases.last.try(:doctor)
+  end
+  alias_method_chain :doctor, :history_fallback
 
   # Address
   has_one :vcard, :as => :object, :conditions => {:vcard_type => 'private'}
