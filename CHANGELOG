@@ -1,3 +1,13 @@
+1.0.6
+=====
+* Restructure cases controller print action.
+* Only pass dates to cydoc treatment creations, not times.
+* Implement Case.for_billing.
+* Fixup dunning_stoped for patients.
+* More grace time in bluepill monitoring.
+* New migration change_date_to_date_in_service_records.
+* Only link to cydoc treatment creation if case is ready for billing.
+
 1.0.5
 =====
 Features:
