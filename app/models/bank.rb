@@ -1,0 +1,2 @@
+class Bank < Person
+end
