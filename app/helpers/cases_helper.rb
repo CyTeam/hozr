@@ -75,7 +75,7 @@ module CasesHelper
 
   # SlidePath
   def slidepath_case_url(location_index)
-    "https://slidepath.zyto-labor.com/dih/webViewer.php?imageHash=#{location_index.image_hash}"
+    "http://slidepath.zyto-labor.com/dih/webViewer.php?imageHash=#{location_index.image_hash}"
   end
 
   def link_to_slidepath_scan(location_index)
