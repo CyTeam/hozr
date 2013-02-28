@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121203135308) do
+ActiveRecord::Schema.define(:version => 20130228103033) do
 
   create_table "accounts", :force => true do |t|
     t.string   "number"
@@ -604,6 +604,20 @@ ActiveRecord::Schema.define(:version => 20121203135308) do
   add_index "phone_numbers", ["object_id", "object_type"], :name => "index_phone_numbers_on_object_id_and_object_type"
   add_index "phone_numbers", ["phone_number_type"], :name => "index_phone_numbers_on_phone_number_type"
   add_index "phone_numbers", ["vcard_id"], :name => "phone_numbers_vcard_id_index"
+
+  create_table "postal_codes", :force => true do |t|
+    t.string   "zip_type"
+    t.string   "zip"
+    t.string   "zip_extension"
+    t.string   "locality"
+    t.string   "locality_long"
+    t.string   "canton"
+    t.integer  "imported_id"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
+  add_index "postal_codes", ["zip"], :name => "index_postal_codes_on_zip"
 
   create_table "recalls", :force => true do |t|
     t.integer  "patient_id"
