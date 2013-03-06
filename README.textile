@@ -1,0 +1,38 @@
+h1. Hozr
+
+Hozr is a webbased Laboratory Information System. It provides workflows and business logic to handle the needs of medical labors.
+
+h2. Usage
+
+Hozr is available as Software as a Service. This means that all the maintenance task to run Hozr are outsourced. You only need web access using a modern web-browser. All traffic is encrypted and your valuable data is backed up routinely.
+
+We try stick with the slogan 'Keep it simple, stupid'. The interface follows modern industrial design rules. All pages try to give you just enough information to do the task while being simple. Dynamic elements such as inline editing are used sparsely, but are there where appreciated.
+
+h2. Feedback
+
+Hozr is not the average Laboratory Informatino System. It is built using the same technologies and principles as well known internet services like Facebook, tel.search.ch or GMX. This allows very fast development and roll-out times. Every feedback, both positive and negative is very much appreciated. 
+
+h2. Contributing
+
+Code is available at "github":http://github.com/CyTeam/hozr.
+
+h2. License
+
+Copyright 2006-2013 Simon Hürlimann <simon.huerlimann@cyt.ch>
+Copyright 2006-2011 Ramon Egloff <ramon.egloff@cyt.ch>
+Copyright 2010-2012 Roman Simecek <roman.simecek@cyt.ch>
+Copyright 2007-2013 CyT <info@cyt.ch>
+Copyright 2006-2013 ZytoLabor <info@zyto-labor.com>
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as
+published by the Free Software Foundation, either version 3 of the
+License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Affero General Public License for more details.
+
+You should have received a copy of the GNU Affero General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
