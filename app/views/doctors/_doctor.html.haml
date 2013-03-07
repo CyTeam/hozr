@@ -1,5 +1,1 @@
-%tr[doctor]
-  %td= link_to doctor.vcard.full_name, doctor, 'data-href-container' => 'tr'
-  %td= address(doctor.vcard, ', ')
-  %td= doctor.zsr
-  %td= doctor.ean_party
+= render 'people/person', :person => doctor.becomes(Person)

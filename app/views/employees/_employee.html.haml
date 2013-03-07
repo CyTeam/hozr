@@ -1,6 +1,1 @@
-%tr[employee]
-  %td= link_to employee.code, employee, 'data-href-container' => 'tr'
-  %td= employee.vcard.full_name
-  %td= address(employee.vcard, ', ')
-  %td= employee.born_on
-
+= render 'people/person', :person => employee.becomes(Person)

@@ -24,9 +24,11 @@ SimpleNavigation::Configuration.run do |navigation|
         print.item :post_label_print, 'Packet Etiketten', post_label_print_path, :link => {:remote => true}
       end
       primary.item :search, 'Suche', '#' do |search|
-        search.item :patients, 'Patienten', patients_path
         search.item :cases, 'Fälle', cases_path
+        search.item :divider, "", :class => 'divider'
+        search.item :patients, 'Patienten', patients_path
         search.item :doctors, 'Ärzte', doctors_path
+        search.item :people, 'Alle Personen', people_path
       end
       primary.item :administration, 'Administration', '#' do |administration|
         administration.item :reports, 'Statistiken', reports_path
