@@ -44,6 +44,8 @@ class Doctor < Person
   serialize :channels
   attr_accessible :channels
 
+  # TODO
+  # does not allow .channels << :print
   def channels
     return [] if self[:channels].nil?
 
