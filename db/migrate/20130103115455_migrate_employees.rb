@@ -8,7 +8,7 @@ end
 class MigrateEmployees < ActiveRecord::Migration
   def up
     LegacyEmployee.find_each do |employee|
-      Employee.create(:vcard => employee.work_vcard, :code => employee.code)
+      Employee.create(:vcard_id => employee.work_vcard_id, :code => employee.code)
     end
   end
 end
