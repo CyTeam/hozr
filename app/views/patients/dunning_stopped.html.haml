@@ -6,10 +6,10 @@
   - collection.each do |resource|
     %tr
       %td
-        = link_to resource, :action => 'show', :id => resource
+        = link_to resource, resource
       %td
         = resource.remarks
       %td
-        = link_to resource.doctor, :controller => :doctors, :action => 'show', :id => resource.doctor_id
+        = link_to resource.doctor, resource.doctor
 
 
