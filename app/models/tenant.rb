@@ -9,6 +9,10 @@ class Tenant < ActiveRecord::Base
   belongs_to :person
   accepts_nested_attributes_for :person
   attr_accessible :person_attributes
+  def person_with_autobuild
+    person_without_autobuild || build_person
+  end
+  alias_method_chain :person, :autobuild
 
   # Settings
   has_settings
