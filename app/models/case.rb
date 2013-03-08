@@ -236,11 +236,6 @@ class Case < ActiveRecord::Base
     has :assigned_at
   end
 
-  # Email
-  def deliver_report_by_email
-    CaseMailer.deliver_report(self)
-  end
-
   # Slidepath
   def location_index
     Slidepath::LocationIndex.where("fileName LIKE ?", "#{id}_%")
