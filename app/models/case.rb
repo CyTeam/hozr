@@ -219,7 +219,7 @@ class Case < ActiveRecord::Base
     temp.close
     title = "Bericht %i" % [attachments.count + 1]
 
-    attachment = attachments.create(
+    attachments.create(
       :file => temp,
       :title => title,
       :visible_filename => pdf_name(title)
