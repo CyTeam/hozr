@@ -1,3 +1,20 @@
+1.0.7
+=====
+* Add dummy class for Bank.
+* Add README and agpl license.
+* Unify person lists.
+* Port CyDoc migration 20130215230913_change_date_to_date_in_service_records.
+* Change vcard porting logic in 20130103115455_migrate_employees migration.
+* Add CaseCode.matcher and .matches? methods.
+* Use common table styling for patients/dunning_stopped list.
+* Fix migration 20130103115455_migrate_employees to update all cases, users...
+* Fix double setting for printing.result_report_a5 in tenant printing form.
+* Do now create new persion in case_copy_to dialog if no full_name is given.
+* Allow editing case copy tos.
+* Use common list style for mailing and send_queue lists.
+* Send CC for copy tos.
+* Print result report for copy_tos.
+
 1.0.6
 =====
 * Restructure cases controller print action.
