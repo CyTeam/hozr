@@ -8,4 +8,6 @@ class CaseCopyTo < ActiveRecord::Base
 
   serialize :channels
   attr_accessible :channels
+
+  scope :by_channel, lambda {|channel| select{ |record| record.channels.include?(channel.to_s)} }
 end
