@@ -179,7 +179,7 @@ class Case < ActiveRecord::Base
   end
 
   # PDF
-  def to_pdf(page_size = 'A5')
+  def to_pdf(page_size = 'A5', to = nil)
     case page_size
     when 'A5'
       prawn_options = { :page_size => page_size }
@@ -189,13 +189,13 @@ class Case < ActiveRecord::Base
 
     pdf = ResultReport.new(prawn_options)
 
-    return pdf.to_pdf(self)
+    return pdf.to_pdf(self, to)
   end
 
-  def print(page_size, printer)
+  def print(page_size, printer, to = nil)
     file = Tempfile.new('')
     file.binmode
-    file.puts(to_pdf(page_size))
+    file.puts(to_pdf(page_size, to))
     file.close
 
     printer.print_file(file.path)

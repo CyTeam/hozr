@@ -28,6 +28,9 @@ class SendQueue < ActiveRecord::Base
   def print(format, overview_printer, printer)
     mailing.cases.find_each do |a_case|
       a_case.print(format, printer)
+      a_case.case_copy_tos.by_channel('email').each do |copy_to|
+        a_case.print(format, printer, copy_to.person)
+      end
     end
 
     self.sent_at = DateTime.now
