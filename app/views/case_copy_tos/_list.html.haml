@@ -5,7 +5,7 @@
         = link_to [a_case, case_copy_to], :method => :delete, :remote => true do
           %i.icon-trash
       %i.icon-envelope
-      = case_copy_to.person.to_s
+      = link_to case_copy_to.person.to_s, [:edit, a_case, case_copy_to], :remote => true
   %p
     = link_to t_action(:new, CaseCopyTo), new_case_case_copy_to_path(a_case), :remote => true, :class => 'btn'
 
