@@ -1,14 +1,4 @@
 de:
-  i18n:
-    transliterate:
-      rule:
-        ü: "ue"
-        ö: "oe"
-        ä: "ae"
-        Ü: "UE"
-        Ö: "OE"
-        Ä: "AE"
-
   application:
     title: Hozr
 
@@ -220,6 +210,8 @@ de:
       title:           Reviews
     hpv_p16_queue:
       title:           HPV/P16 Liste
+    billing_queue:
+      title:           Fälle zum abrechnen
   case:
     assignments:
       form:
@@ -248,6 +240,8 @@ de:
     form:
       credentials:      Benutzerkonto
   patients:
+    dunning_stopped:
+      title:              Patienten mit Mahnstopp
     index:
       title:            Patienten
 

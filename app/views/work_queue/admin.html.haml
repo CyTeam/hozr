@@ -38,3 +38,8 @@
           %i{:style => "font-size: 12pt"}
             %b= @result_for_delivery_count
             Neue Resultate
+        %p
+          = link_to image_tag('print_result.png', :size => '45x45'), billing_queue_cases_path
+          %i{:style => "font-size: 12pt"}
+            %b= @result_for_billing_count
+            = t_title(:billing_queue, Case)
