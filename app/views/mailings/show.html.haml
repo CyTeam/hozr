@@ -7,7 +7,7 @@
 #doctor
   = @doctor.vcard.honorific_prefix
   %br/
-  = render :partial => "/vcards/show", :locals => {:vcard => @doctor.vcard}
+  = render "vcards/show", :vcard => @doctor.vcard
 
 - for class_group in ClassificationGroup.find :all, :order => 'position DESC'
   - group_cases = @mailing.cases.sort {|x,y| x.praxistar_eingangsnr <=> y.praxistar_eingangsnr}.select { |c| c.classification.classification_group == class_group and !(c.needs_p16? and c.screened_at.nil?) }
