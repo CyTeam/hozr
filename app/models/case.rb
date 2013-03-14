@@ -178,6 +178,28 @@ class Case < ActiveRecord::Base
     read_attribute(:entry_date).strftime("%d.%m.%Y") unless read_attribute(:entry_date).nil?
   end
 
+  def initialize(params = {})
+    case params.class.name
+    when 'String'
+      initialize_from_order_form_file_name(params)
+    else
+      super(params)
+    end
+  end
+
+  def initialize_from_order_form_file_name(order_form_file_name)
+    initialize_from_order_form_file(File.new(order_form_file_name))
+  end
+
+  def initialize_from_order_form_file(order_form_file)
+    initialize_from_order_form(OrderForm.new(:file => order_form_file))
+  end
+
+  def initialize_from_order_form(order_form)
+    initialize(:order_form => order_form)
+  end
+
+
   # PDF
   def to_pdf(page_size = 'A5', to = nil)
     case page_size
