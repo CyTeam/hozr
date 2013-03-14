@@ -16,6 +16,8 @@
 * Shorter, better searchable select fields for doctors.
 * Fix case building for scanned order forms using e-mail drop in.
 * Allow users with admin or zyto roles to edit, update 'copy to' persons.
+* Show list of cases where a person got a copy of the result report in it's
+  view.
 
 1.0.6
 =====
