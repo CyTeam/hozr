@@ -15,6 +15,7 @@
 * Speed up todo page to handle tons of cases.
 * Shorter, better searchable select fields for doctors.
 * Fix case building for scanned order forms using e-mail drop in.
+* Allow users with admin or zyto roles to edit, update 'copy to' persons.
 
 1.0.6
 =====
