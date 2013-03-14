@@ -23,6 +23,7 @@ class Ability
     can :print, :doctor_order_form
     can :manage, Mailing
     can :manage, Case
+    can :manage, CaseCopyTo
     can :manage, Patient
     can :manage, OrderForm
     can :manage, Doctor
