@@ -8,8 +8,13 @@ class Doctor < Person
 
   # Helpers
   # =======
-  def to_s
-    [vcard.honorific_prefix, vcard.full_name].map(&:presence).compact.join(" ")
+  def to_s(format = :default)
+    case format
+    when :select
+      [vcard.full_name].join(", ") + " (#{vcard.locality})"
+    else
+      [vcard.honorific_prefix, vcard.full_name].map(&:presence).compact.join(" ")
+    end
   end
 
   # Proxy accessors
