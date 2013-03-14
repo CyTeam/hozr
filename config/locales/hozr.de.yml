@@ -119,6 +119,10 @@ de:
         reviewer:             Unterzeichner
         attachments:          Dokumente
         case_copy_tos:        Kopienempfänger
+      case_copy_to:
+        person:               Empfänger
+        channels:             Versand als
+
       order_form:
         case:                 Fall
         doctor_id:            Zuweisender Arzt

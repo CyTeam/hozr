@@ -18,6 +18,8 @@
 * Allow users with admin or zyto roles to edit, update 'copy to' persons.
 * Show list of cases where a person got a copy of the result report in it's
   view.
+* Better structured form for result report copy recipients.
+* Translations for report copy recipients form.
 
 1.0.6
 =====
