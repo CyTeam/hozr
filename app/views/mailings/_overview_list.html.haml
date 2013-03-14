@@ -4,4 +4,4 @@
   - @old_classification = overview_list.classification
   %tr{:class => "PAP_#{h overview_list.classification.code unless overview_list.classification.nil?}", :style => "font-weight: bold; border: 0px"}
     %th{:colspan => "5", :style => "font-size: 0.9em; font-weight: bold; padding: 0.1em 0.5em; border: 0px"}= h @old_classification.name
-= render :partial => 'cases/overview_item', :object => overview_list
+= render :partial => 'overview_item', :object => overview_list
