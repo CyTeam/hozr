@@ -65,4 +65,8 @@ class Person < ActiveRecord::Base
   # ======
   belongs_to :civil_status
   belongs_to :religion
+
+  # Hozr
+  # ====
+  has_many :case_copy_tos
 end

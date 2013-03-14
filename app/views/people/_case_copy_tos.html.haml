@@ -1,0 +1,11 @@
+%table.table.table-striped
+  %tr
+    %th= t_attr :date
+    %th= t_model Case
+    %th= t_model Doctor
+
+  - collection.each do |case_copy_to|
+    %tr[case_copy_to]
+      %td= case_copy_to.case.entry_date
+      %td= link_to case_copy_to.case, case_copy_to.case
+      %td= link_to case_copy_to.case.doctor, case_copy_to.case.doctor
