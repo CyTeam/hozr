@@ -1,19 +1,20 @@
 1.0.7
 =====
-* Add dummy class for Bank.
+* Fix CopyTo list, broken by incompatible CyDoc.
 * Add README and agpl license.
-* Unify person lists.
-* Port CyDoc migration 20130215230913_change_date_to_date_in_service_records.
-* Change vcard porting logic in 20130103115455_migrate_employees migration.
-* Add CaseCode.matcher and .matches? methods.
-* Use common table styling for patients/dunning_stopped list.
-* Fix migration 20130103115455_migrate_employees to update all cases, users...
-* Fix double setting for printing.result_report_a5 in tenant printing form.
-* Do now create new persion in case_copy_to dialog if no full_name is given.
+* Unify columns and information for people lists like doctor and employee.
+* Fix update logic for employee records.
+* Use common table styling for patients dunning_stopped list.
+* Fix double setting for Result Report A5 in tenant printing form.
+* Do now create new persion in case copy to dialog if no full name is given.
 * Allow editing case copy tos.
 * Use common list style for mailing and send_queue lists.
-* Send CC for copy tos.
-* Print result report for copy_tos.
+* Send CC for copy tos on channel e-mail.
+* Print result report for copy tos.
+* Fix pagination in patient index.
+* Speed up todo page to handle tons of cases.
+* Shorter, better searchable select fields for doctors.
+* Fix case building for scanned order forms using e-mail drop in.
 
 1.0.6
 =====
