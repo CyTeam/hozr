@@ -11,7 +11,8 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130228103033) do
+ActiveRecord::Schema.define(:version => 20130314092736) do
+
   create_table "account_types", :force => true do |t|
     t.string   "name",       :limit => 100
     t.string   "title",      :limit => 100
@@ -888,6 +889,7 @@ ActiveRecord::Schema.define(:version => 20130228103033) do
     t.string   "state",       :default => "active"
   end
 
+  add_index "treatments", ["imported_id"], :name => "index_treatments_on_imported_id"
   add_index "treatments", ["law_id"], :name => "index_treatments_on_law_id"
   add_index "treatments", ["patient_id"], :name => "index_treatments_on_patient_id"
   add_index "treatments", ["referrer_id"], :name => "index_treatments_on_referrer_id"
