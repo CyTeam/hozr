@@ -1,0 +1,9 @@
+.modal{:style => 'width: 80%; left: 10%; margin-left: 0'}
+  = modal_header t_title(:new, CaseCopyTo)
+
+  .modal-body{:style => 'min-height: 30em'}
+    = render 'form'
+
+  .modal-footer
+    = link_to t_action(:new), '#', :class => 'btn submit-button'
+    = link_to t_action(:cancel), '#', :class => 'btn', 'data-dismiss' => 'modal'
