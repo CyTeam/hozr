@@ -1,16 +1,5 @@
-1.0.7
+1.0.8
 =====
-* Fix CopyTo list, broken by incompatible CyDoc.
-* Add README and agpl license.
-* Unify columns and information for people lists like doctor and employee.
-* Fix update logic for employee records.
-* Use common table styling for patients dunning_stopped list.
-* Fix double setting for Result Report A5 in tenant printing form.
-* Do now create new persion in case copy to dialog if no full name is given.
-* Allow editing case copy tos.
-* Use common list style for mailing and send_queue lists.
-* Send CC for copy tos on channel e-mail.
-* Print result report for copy tos.
 * Fix pagination in patient index.
 * Speed up todo page to handle tons of cases.
 * Shorter, better searchable select fields for doctors.
@@ -20,6 +9,20 @@
   view.
 * Better structured form for result report copy recipients.
 * Translations for report copy recipients form.
+
+1.0.7
+=====
+* Fix CopyTo list, broken by incompatible CyDoc.
+* Add README and agpl license.
+* Unify columns and information for people lists like doctor and employee.
+* Fix update logic for employee records.
+* Use common table styling for patients dunning_stopped list.
+* Fix double setting for Result Report A5 in tenant printing form.
+* Do not create new persion in case copy to dialog if no full name is given.
+* Allow editing case copy tos.
+* Use common list style for mailing and send_queue lists.
+* Send CC for copy tos on channel e-mail.
+* Print result report for copy tos.
 
 1.0.6
 =====
