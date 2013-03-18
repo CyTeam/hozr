@@ -61,6 +61,10 @@ class Person < ActiveRecord::Base
   has_many :attachments, :as => :object
   accepts_nested_attributes_for :attachments, :reject_if => proc { |attributes| attributes['file'].blank? }
 
+  # Settings
+  # ========
+  has_settings
+
   # Others
   # ======
   belongs_to :civil_status
