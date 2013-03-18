@@ -1,3 +1,7 @@
+= simple_form_for resource do |f|
+  .row-fluid
+    .span6= f.input :case_copy_channels, :as => :select, :collection => doctor_channels_collection, :input_html => {:multiple => true, :class => 'select2'}
+
 %table.table.table-striped
   %tr
     %th= t_attr :date

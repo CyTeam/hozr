@@ -23,7 +23,7 @@ de:
       assignment: Auftragsdaten
       mailing: Versand
       examination_method: Methode
-      case_copy_to:      Kopienempfänger
+      case_copy_to:      Befund Kopien
 
     attributes:
       finding_class:
@@ -122,6 +122,8 @@ de:
       case_copy_to:
         person:               Empfänger
         channels:             Versand als
+      person:
+        case_copy_channels:   Kopieversand als
 
       order_form:
         case:                 Fall
