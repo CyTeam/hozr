@@ -73,4 +73,10 @@ class Person < ActiveRecord::Base
   # Hozr
   # ====
   has_many :case_copy_tos
+  def case_copy_channels
+    channels = settings[:case_copy_channels]
+    channels ||= settings[:result_report_channels]
+    channels ||= case_copy_tos.last.try(:channels)
+    channels ||= []
+  end
 end
