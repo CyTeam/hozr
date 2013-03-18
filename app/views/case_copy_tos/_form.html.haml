@@ -4,13 +4,24 @@
       %i.icon-plus
   .row-fluid.input-alt-person
     .span6
-      = f.association :person, :input_html => {:class => 'select2'}
+      = f.input :person_id
   .input-alt-person{:style => 'display: none'}
     = f.fields_for :person, Person.new do |p|
       = render 'people/address_form', :f => p, :resource => p.object, :controller_name => 'people'
   .row-fluid
-    .span6= f.input :channels, :as => :select, :collection => doctor_channels_collection, :input_html => {:multiple => true}
+    .span6= f.input :channels, :as => :select, :collection => doctor_channels_collection, :input_html => {:multiple => true, :class => 'select2'}
 
 
   .form-actions
     = f.button :submit
+
+- people_data = Person.all.collect{|p| {:id => p.id, :text => p.to_s, :channels => p.case_copy_channels}}
+:javascript
+  var people_data = #{people_data.to_json}
+  $('#case_copy_to_person_id').select2({
+    data: people_data
+  })
+  $('#case_copy_to_person_id').on('change', function(e) {
+    var channels = $('#case_copy_to_person_id').select2('data').channels
+    $('#case_copy_to_channels').select2('val', channels)
+  })

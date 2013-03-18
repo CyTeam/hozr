@@ -46,13 +46,16 @@ class Doctor < Person
   has_many :mailings
 
   # Multichannel
-  serialize :channels
   attr_accessible :channels
 
   def channels
-    return [] if self[:channels].nil?
+    return [] if settings[:result_report_channels].blank?
 
-    self[:channels].map(&:presence).compact
+    YAML.load(settings[:result_report_channels]).map(&:presence).compact
+  end
+
+  def channels=(value)
+    settings[:result_report_channels] = value.map(&:presence).compact
   end
 
   def wants?(channel)
