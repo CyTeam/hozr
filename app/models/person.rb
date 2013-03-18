@@ -73,10 +73,16 @@ class Person < ActiveRecord::Base
   # Hozr
   # ====
   has_many :case_copy_tos
+  attr_accessible :case_copy_channels
+
   def case_copy_channels
     channels = settings[:case_copy_channels]
     channels ||= settings[:result_report_channels]
     channels ||= case_copy_tos.last.try(:channels)
     channels ||= []
+  end
+
+  def case_copy_channels=(value)
+    settings[:case_copy_channels] = value.map(&:presence).compact
   end
 end
