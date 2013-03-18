@@ -15,6 +15,7 @@ class Tenant < ActiveRecord::Base
   alias_method_chain :person, :autobuild
 
   # Settings
+  # ========
   has_settings
   attr_accessible :settings
 
