@@ -1,9 +1,11 @@
 %ul.nav.nav-tabs
   %li.active= link_to t('.tab.show'), '#tab-show', {:data => {:toggle => 'tab'}}
   %li= link_to t_title(:index, Mailing), '#tab-send_queues', {:data => {:toggle => 'tab'}}
+  %li= link_to t_model(CaseCopyTo), '#tab-case_copy_tos', {:data => {:toggle => 'tab'}}
   %li= link_to t('users.form.credentials'), '#tab-user', {:data => {:toggle => 'tab'}}
 
 .tab-content
   #tab-show.tab-pane.active= render 'form'
   #tab-send_queues.tab-pane= render 'mailings/list', :collection => resource.mailings
+  #tab-case_copy_tos.tab-pane= render 'case_copy_tos', :collection => resource.case_copy_tos
   #tab-user.tab-pane= render 'users/form', :resource => resource.user || resource.build_user
