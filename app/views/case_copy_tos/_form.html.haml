@@ -19,7 +19,11 @@
 :javascript
   var people_data = #{people_data.to_json}
   $('#case_copy_to_person_id').select2({
-    data: people_data
+    data: people_data,
+    initSelection: function(element, callback) {
+      var data = {id: element.val(), text: '#{resource.person.to_s}'};
+      callback(data);
+    }
   })
   $('#case_copy_to_person_id').on('change', function(e) {
     var channels = $('#case_copy_to_person_id').select2('data').channels
