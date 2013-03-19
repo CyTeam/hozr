@@ -77,8 +77,8 @@ class Person < ActiveRecord::Base
 
   def case_copy_channels
     channels = settings[:case_copy_channels]
-    channels ||= settings[:result_report_channels]
     channels ||= case_copy_tos.last.try(:channels)
+    channels ||= settings[:result_report_channels]
     channels ||= []
   end
 
