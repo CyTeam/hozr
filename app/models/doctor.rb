@@ -57,7 +57,7 @@ class Doctor < Person
   end
 
   def channels=(value)
-    settings[:result_report_channels] = value.map(&:presence).compact
+    settings[:result_report_channels] = value.map(&:presence).compact.to_yaml
   end
 
   def wants?(channel)
