@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130215230913) do
+ActiveRecord::Schema.define(:version => 20130318073323) do
 
   create_table "account_types", :force => true do |t|
     t.string   "name",       :limit => 100
@@ -644,6 +644,20 @@ ActiveRecord::Schema.define(:version => 20130215230913) do
   add_index "phone_numbers", ["phone_number_type"], :name => "index_phone_numbers_on_phone_number_type"
   add_index "phone_numbers", ["vcard_id"], :name => "index_phone_numbers_on_vcard_id"
 
+  create_table "postal_codes", :force => true do |t|
+    t.string   "zip_type"
+    t.string   "zip"
+    t.string   "zip_extension"
+    t.string   "locality"
+    t.string   "locality_long"
+    t.string   "canton"
+    t.integer  "imported_id"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
+  add_index "postal_codes", ["zip"], :name => "index_postal_codes_on_zip"
+
   create_table "recalls", :force => true do |t|
     t.integer  "patient_id"
     t.date     "due_date"
@@ -722,7 +736,7 @@ ActiveRecord::Schema.define(:version => 20130215230913) do
     t.string   "ref_code",           :limit => 10
     t.integer  "session",                                                         :default => 1
     t.decimal  "quantity",                          :precision => 8, :scale => 2, :default => 1.0
-    t.datetime "date",                                                                                         :null => false
+    t.date     "date",                                                                                         :null => false
     t.integer  "provider_id"
     t.integer  "responsible_id"
     t.integer  "location_id"
@@ -875,6 +889,7 @@ ActiveRecord::Schema.define(:version => 20130215230913) do
     t.string   "state",       :default => "active"
   end
 
+  add_index "treatments", ["imported_id"], :name => "index_treatments_on_imported_id"
   add_index "treatments", ["law_id"], :name => "index_treatments_on_law_id"
   add_index "treatments", ["patient_id"], :name => "index_treatments_on_patient_id"
   add_index "treatments", ["referrer_id"], :name => "index_treatments_on_referrer_id"

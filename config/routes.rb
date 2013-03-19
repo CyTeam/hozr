@@ -98,6 +98,7 @@ Hozr::Application.routes.draw do
     collection do
       get :first_entry_queue, :second_entry_queue, :hpv_p16_queue, :review_queue
       get :unassigned_sort_queue, :unassigned_form, :assignings_list
+      get :billing_queue
       post :assign
     end
 

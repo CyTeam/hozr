@@ -61,8 +61,28 @@ class Person < ActiveRecord::Base
   has_many :attachments, :as => :object
   accepts_nested_attributes_for :attachments, :reject_if => proc { |attributes| attributes['file'].blank? }
 
+  # Settings
+  # ========
+  has_settings
+
   # Others
   # ======
   belongs_to :civil_status
   belongs_to :religion
+
+  # Hozr
+  # ====
+  has_many :case_copy_tos
+  attr_accessible :case_copy_channels
+
+  def case_copy_channels
+    channels = settings[:case_copy_channels]
+    channels ||= settings[:result_report_channels]
+    channels ||= case_copy_tos.last.try(:channels)
+    channels ||= []
+  end
+
+  def case_copy_channels=(value)
+    settings[:case_copy_channels] = value.map(&:presence).compact
+  end
 end

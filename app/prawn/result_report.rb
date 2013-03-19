@@ -65,11 +65,12 @@ class ResultReport < LetterDocument
     small_text a_case.code_to_s
   end
 
-  def to_pdf(cases)
+  def to_pdf(cases, send_to = nil)
     # We accept both a single case or an array
     @cases = cases.is_a?(Array) ? cases : [cases]
 
     for @case in @cases
+    to = send_to || @case.doctor
 
     float do
       bounding_box [10.cm, bounds.top - 2.5.cm], :width => 10.cm do
@@ -77,7 +78,7 @@ class ResultReport < LetterDocument
       end
     end
 
-    letter_header @case.reviewer.try(:tenant).try(:person), @case.doctor, @case.to_s, @case.review_at
+    letter_header @case.reviewer.try(:tenant).try(:person), to, @case.to_s, @case.review_at
 
     free_text(@case.finding_text)
 

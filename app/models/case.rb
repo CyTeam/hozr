@@ -178,8 +178,30 @@ class Case < ActiveRecord::Base
     read_attribute(:entry_date).strftime("%d.%m.%Y") unless read_attribute(:entry_date).nil?
   end
 
+  def initialize(params = {})
+    case params.class.name
+    when 'String'
+      initialize_from_order_form_file_name(params)
+    else
+      super(params)
+    end
+  end
+
+  def initialize_from_order_form_file_name(order_form_file_name)
+    initialize_from_order_form_file(File.new(order_form_file_name))
+  end
+
+  def initialize_from_order_form_file(order_form_file)
+    initialize_from_order_form(OrderForm.new(:file => order_form_file))
+  end
+
+  def initialize_from_order_form(order_form)
+    initialize(:order_form => order_form)
+  end
+
+
   # PDF
-  def to_pdf(page_size = 'A5')
+  def to_pdf(page_size = 'A5', to = nil)
     case page_size
     when 'A5'
       prawn_options = { :page_size => page_size }
@@ -189,13 +211,13 @@ class Case < ActiveRecord::Base
 
     pdf = ResultReport.new(prawn_options)
 
-    return pdf.to_pdf(self)
+    return pdf.to_pdf(self, to)
   end
 
-  def print(page_size, printer)
+  def print(page_size, printer, to = nil)
     file = Tempfile.new('')
     file.binmode
-    file.puts(to_pdf(page_size))
+    file.puts(to_pdf(page_size, to))
     file.close
 
     printer.print_file(file.path)
@@ -219,7 +241,7 @@ class Case < ActiveRecord::Base
     temp.close
     title = "Bericht %i" % [attachments.count + 1]
 
-    attachment = attachments.create(
+    attachments.create(
       :file => temp,
       :title => title,
       :visible_filename => pdf_name(title)
@@ -236,11 +258,6 @@ class Case < ActiveRecord::Base
     has :assigned_at
   end
 
-  # Email
-  def deliver_report_by_email
-    CaseMailer.deliver_report(self)
-  end
-
   # Slidepath
   def location_index
     Slidepath::LocationIndex.where("fileName LIKE ?", "#{id}_%")
@@ -248,5 +265,9 @@ class Case < ActiveRecord::Base
 
   # CyDoc
   # =====
-  belongs_to :session
+  has_one :treatment, :foreign_key => :imported_id
+  scope :for_billing, lambda { finished.includes(:treatment).where('treatments.id IS NULL')}
+  def for_billing?
+    Case.for_billing.exists?(self.id)
+  end
 end

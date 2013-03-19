@@ -24,6 +24,14 @@ class CaseCode
     end
   end
 
+  def self.matcher
+    /[0-9]{1,2}\/[0-9]{1,5}/
+  end
+
+  def self.matches?(value)
+    !!(value.match self.matcher)
+  end
+
   def parse(value)
     left, right = value.to_s.split(/[\/-]/)
     if right.nil?

@@ -8,8 +8,13 @@ class Doctor < Person
 
   # Helpers
   # =======
-  def to_s
-    [vcard.honorific_prefix, vcard.full_name].map(&:presence).compact.join(" ")
+  def to_s(format = :default)
+    case format
+    when :select
+      [vcard.full_name].join(", ") + " (#{vcard.locality})"
+    else
+      [vcard.honorific_prefix, vcard.full_name].map(&:presence).compact.join(" ")
+    end
   end
 
   # Proxy accessors
@@ -41,15 +46,18 @@ class Doctor < Person
   has_many :mailings
 
   # Multichannel
-  serialize :channels
   attr_accessible :channels
 
   # TODO
   # does not allow .channels << :print
   def channels
-    return [] if self[:channels].nil?
+    return [] if settings[:result_report_channels].blank?
 
-    self[:channels].map(&:presence).compact
+    YAML.load(settings[:result_report_channels]).map(&:presence).compact
+  end
+
+  def channels=(value)
+    settings[:result_report_channels] = value.map(&:presence).compact
   end
 
   def wants?(channel)

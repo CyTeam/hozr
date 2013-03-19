@@ -4,5 +4,8 @@ class CaseCopyTosController < AuthorizedController
   def new
     render 'show_modal'
   end
-end
 
+  def edit
+    render 'show_modal'
+  end
+end

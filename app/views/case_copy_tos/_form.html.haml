@@ -1,25 +1,27 @@
-.modal{:style => 'width: 80%; left: 10%; margin-left: 0'}
-  = modal_header t_title(:new, CaseCopyTo)
+= simple_form_for [parent, resource], :remote => true, :html => {:class => 'no-well'} do |f|
+  .pull-right
+    = link_to '#', :onclick => "$('.input-alt-person').toggle()", :class => 'btn' do
+      %i.icon-plus
+  .row-fluid.input-alt-person
+    .span6
+      = f.input :person_id
+  .input-alt-person{:style => 'display: none'}
+    = f.fields_for :person, Person.new do |p|
+      = render 'people/address_form', :f => p, :resource => p.object, :controller_name => 'people'
+  .row-fluid
+    .span6= f.input :channels, :as => :select, :collection => doctor_channels_collection, :input_html => {:multiple => true, :class => 'select2'}
 
-  .modal-body{:style => 'min-height: 30em'}
-    = simple_form_for [parent, resource], :remote => true, :html => {:class => 'no-well'} do |f|
-      .row-fluid
-        .span6= f.input :channels, :as => :select, :collection => doctor_channels_collection, :input_html => {:multiple => true}
 
-      .pull-right
-        = link_to '#', :onclick => "$('.input-alt-person').toggle()", :class => 'btn' do
-          %i.icon-plus
-      %h3= Person
-      .row-fluid.input-alt-person
-        .span6
-          = f.association :person, :input_html => {:class => 'select2'}
-      .input-alt-person{:style => 'display: none'}
-        = f.fields_for :person, Person.new do |p|
-          = render 'people/address_form', :f => p, :resource => p.object, :controller_name => 'people'
+  .form-actions
+    = f.button :submit
 
-      .form-actions.hidden-actions
-        = f.button :submit
-
-  .modal-footer
-    = link_to t_action(:new), '#', :class => 'btn submit-button'
-    = link_to t_action(:cancel), '#', :class => 'btn', 'data-dismiss' => 'modal'
+- people_data = Person.all.collect{|p| {:id => p.id, :text => p.to_s, :channels => p.case_copy_channels}}
+:javascript
+  var people_data = #{people_data.to_json}
+  $('#case_copy_to_person_id').select2({
+    data: people_data
+  })
+  $('#case_copy_to_person_id').on('change', function(e) {
+    var channels = $('#case_copy_to_person_id').select2('data').channels
+    $('#case_copy_to_channels').select2('val', channels)
+  })

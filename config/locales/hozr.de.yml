@@ -1,14 +1,4 @@
 de:
-  i18n:
-    transliterate:
-      rule:
-        ü: "ue"
-        ö: "oe"
-        ä: "ae"
-        Ü: "UE"
-        Ö: "OE"
-        Ä: "AE"
-
   application:
     title: Hozr
 
@@ -33,7 +23,7 @@ de:
       assignment: Auftragsdaten
       mailing: Versand
       examination_method: Methode
-      case_copy_to:      Kopienempfänger
+      case_copy_to:      Befund Kopien
 
     attributes:
       finding_class:
@@ -129,6 +119,12 @@ de:
         reviewer:             Unterzeichner
         attachments:          Dokumente
         case_copy_tos:        Kopienempfänger
+      case_copy_to:
+        person:               Empfänger
+        channels:             Versand als
+      person:
+        case_copy_channels:   Kopieversand als
+
       order_form:
         case:                 Fall
         doctor_id:            Zuweisender Arzt
@@ -220,6 +216,8 @@ de:
       title:           Reviews
     hpv_p16_queue:
       title:           HPV/P16 Liste
+    billing_queue:
+      title:           Fälle zum abrechnen
   case:
     assignments:
       form:
@@ -248,6 +246,8 @@ de:
     form:
       credentials:      Benutzerkonto
   patients:
+    dunning_stopped:
+      title:              Patienten mit Mahnstopp
     index:
       title:            Patienten
 

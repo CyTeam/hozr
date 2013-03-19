@@ -1,3 +1,39 @@
+1.0.8
+=====
+* Fix pagination in patient index.
+* Speed up todo page to handle tons of cases.
+* Shorter, better searchable select fields for doctors.
+* Fix case building for scanned order forms using e-mail drop in.
+* Allow users with admin or zyto roles to edit, update 'copy to' persons.
+* Show list of cases where a person got a copy of the result report in it's
+  view.
+* Better structured form for result report copy recipients.
+* Translations for report copy recipients form.
+
+1.0.7
+=====
+* Fix CopyTo list, broken by incompatible CyDoc.
+* Add README and agpl license.
+* Unify columns and information for people lists like doctor and employee.
+* Fix update logic for employee records.
+* Use common table styling for patients dunning_stopped list.
+* Fix double setting for Result Report A5 in tenant printing form.
+* Do not create new persion in case copy to dialog if no full name is given.
+* Allow editing case copy tos.
+* Use common list style for mailing and send_queue lists.
+* Send CC for copy tos on channel e-mail.
+* Print result report for copy tos.
+
+1.0.6
+=====
+* Restructure cases controller print action.
+* Only pass dates to cydoc treatment creations, not times.
+* Implement Case.for_billing.
+* Fixup dunning_stoped for patients.
+* More grace time in bluepill monitoring.
+* New migration change_date_to_date_in_service_records.
+* Only link to cydoc treatment creation if case is ready for billing.
+
 1.0.5
 =====
 Features:

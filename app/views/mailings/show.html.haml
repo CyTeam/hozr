@@ -7,10 +7,10 @@
 #doctor
   = @doctor.vcard.honorific_prefix
   %br/
-  = render :partial => "/vcards/show", :locals => {:vcard => @doctor.vcard}
+  = render "vcards/show", :vcard => @doctor.vcard
 
 - for class_group in ClassificationGroup.find :all, :order => 'position DESC'
   - group_cases = @mailing.cases.sort {|x,y| x.praxistar_eingangsnr <=> y.praxistar_eingangsnr}.select { |c| c.classification.classification_group == class_group and !(c.needs_p16? and c.screened_at.nil?) }
-  = render :partial => 'cases/overview_group', :object => group_cases  unless group_cases.size == 0
+  = render :partial => 'overview_group', :object => group_cases  unless group_cases.size == 0
 - p16_cases = @mailing.doctor.cases.sort {|x,y| x.praxistar_eingangsnr <=> y.praxistar_eingangsnr}.select { |c| c.needs_p16? and c.screened_at.nil? }
-= render :partial => 'cases/overview_p16_group', :object => p16_cases unless p16_cases.size == 0
+= render :partial => 'overview_p16_group', :object => p16_cases unless p16_cases.size == 0
