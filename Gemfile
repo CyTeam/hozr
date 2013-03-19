@@ -37,31 +37,27 @@ end
 group :test do
   # Matchers/Helpers
   gem 'shoulda'
-
-  # Mocking
-  # gem 'mocha'
+  gem 'accept_values_for'
 
   # Browser
   gem 'capybara'
 
-  # Autotest
-  gem 'autotest'
-  gem 'autotest-rails'
-  gem 'ZenTest', '< 4.6.0' # Keep it working with gems < 1.8
+  # Spork
+  gem 'spork-rails'
 end
 
 group :test, :development do
   # Framework
-  # gem "rspec"
-  # gem 'rspec-rails'
+  gem 'rspec-rails'
 
   # Fixtures
-  # gem "factory_girl_rails", "~> 1.1.rc1"
-  # gem "factory_girl", "~> 2.0.0.rc1"
+  gem "factory_girl_rails", :require => false # To make Spork happy
+end
 
-  # Integration
-  # gem 'cucumber-rails'
-  # gem 'cucumber'
+group :tools do
+  gem 'guard-spork'
+  gem 'guard-rspec'
+  gem 'rb-inotify'
 end
 
 group :development do
