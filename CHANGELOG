@@ -1,4 +1,4 @@
-1.0.8
+1.0.7
 =====
 * Fix pagination in patient index.
 * Speed up todo page to handle tons of cases.
@@ -9,9 +9,6 @@
   view.
 * Better structured form for result report copy recipients.
 * Translations for report copy recipients form.
-
-1.0.7
-=====
 * Fix CopyTo list, broken by incompatible CyDoc.
 * Add README and agpl license.
 * Unify columns and information for people lists like doctor and employee.
