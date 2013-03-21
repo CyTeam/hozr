@@ -45,6 +45,7 @@
       Kopie an:
     .span10
       - @case.case_copy_tos.each do |case_copy_to|
+        - next unless case_copy_to.person
         %p= full_address(case_copy_to.person.vcard, ', ')
 
 .row-fluid

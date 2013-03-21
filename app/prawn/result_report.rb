@@ -100,6 +100,9 @@ class ResultReport < LetterDocument
     if @case.case_copy_tos.present?
       small_text "Kopie an:"
       @case.case_copy_tos.each do |case_copy_to|
+        # Guard
+        next unless case_copy_to.person
+
         text full_address(case_copy_to.person.vcard, ', ')
       end
     end
