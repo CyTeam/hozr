@@ -4,7 +4,7 @@ class CaseCopyTo < ActiveRecord::Base
 
   belongs_to :person
   accepts_nested_attributes_for :person, :reject_if => proc { |attributes| attributes['vcard_attributes']['full_name'].blank? }
-  attr_accessible :person_id, :person_attributes
+  attr_accessible :person, :person_id, :person_attributes
 
   serialize :channels
   attr_accessible :channels
