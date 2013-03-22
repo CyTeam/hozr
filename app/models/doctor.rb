@@ -44,6 +44,7 @@ class Doctor < Person
   # ====
   has_many :cases
   has_many :mailings
+  has_many :send_queues, :through => :mailings, :order => 'sent_at DESC'
 
   # Multichannel
   attr_accessible :channels

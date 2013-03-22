@@ -6,6 +6,6 @@
 
 .tab-content
   #tab-show.tab-pane.active= render 'form'
-  #tab-send_queues.tab-pane= render 'mailings/list', :collection => resource.mailings
+  #tab-send_queues.tab-pane= render 'send_queues/list', :collection => resource.send_queues
   #tab-case_copy_tos.tab-pane= render 'case_copy_tos', :collection => resource.case_copy_tos
   #tab-user.tab-pane= render 'users/form', :resource => resource.user || resource.build_user
