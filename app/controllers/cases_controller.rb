@@ -254,6 +254,9 @@ class CasesController < AuthorizedController
     @case = Case.find(params[:id])
     @case.delivered_at = nil
     @case.save
+
+    flash.now[:notice] = 'Fall wurde zum versenden vorgemerkt.'
+    render 'show_flash'
   end
 
   def billing_queue
