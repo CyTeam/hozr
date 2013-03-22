@@ -15,6 +15,6 @@ function rails_run() {
 local command="$1"
 
         pushd $RAILS_DIR >/dev/null
-                echo "$command" | RAILS_ENV=$ENVIRONMENT /var/lib/gems/1.8/bin/bundle exec rails console
+                echo "$command" | RAILS_ENV=$ENVIRONMENT bundle exec rails console
         popd >/dev/null
 }
