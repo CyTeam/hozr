@@ -26,7 +26,7 @@ class Case < ActiveRecord::Base
     super || Classification.default
   end
   def classification_id
-    self[:classification_id] || Classification.default.id
+    self[:classification_id] || Classification.default.try(:id)
   end
 
   # CaseCopyTo
