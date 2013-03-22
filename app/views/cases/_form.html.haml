@@ -23,7 +23,7 @@
 
       %h3= t_action(:first_entry)
       .row-fluid
-        .span6= f.association :patient, :input_html => {'data-placeholder' => 'Patient auswählen', :class => 'select2'}
+        .span6= f.input :patient_id, :input_html => {'data-placeholder' => 'Patient auswählen', :class => 'patient-select2'}
 
       %h3= t_action(:second_entry)
       .row-fluid
@@ -42,4 +42,29 @@
 :javascript
   $(document).ready(function() {
     tinyMCE.init(#{configuration.options_for_tinymce.to_json});
+  })
+
+:javascript
+  $('.patient-select2').select2({
+    placeholder: 'Patient auswählen',
+    minimumLength: 3,
+    ajax: {
+      url: '#{patients_url(:format => 'json')}',
+      quietMillis: 500,
+      data: function(term, page) {
+        return {
+          query: term,
+          page:   page
+        }
+      },
+      results: function(data, page) {
+        return {results: data}
+      }
+    },
+    initSelection: function(element, callback) {
+      callback({
+        id: '#{resource.patient.try(:id)}',
+        text: '#{resource.patient.try(:to_s)}'
+      });
+    }
   })
