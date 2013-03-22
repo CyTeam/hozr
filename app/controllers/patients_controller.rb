@@ -2,6 +2,20 @@
 class PatientsController < AuthorizedController
   def index
     @patients = Patient.by_text params[:query], :star => true, :retry_stale => true, :per_page => 50, :page => (params[:page] || 1)
+
+    respond_to do |format|
+      format.html
+      format.json do
+        patients = @patients.collect do |patient|
+          {
+            :id => patient.id,
+            :text => patient.to_s
+          }
+        end.to_json
+
+        render :json => patients
+      end
+    end
   end
 
   def dunning_stopped
