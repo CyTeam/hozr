@@ -1,7 +1,7 @@
 %dt
   = compact.screened_at.strftime('%b. %g') unless compact.screened_at.nil?
   \: #{link_to compact.code_to_s, case_path(compact) unless compact.praxistar_eingangsnr.nil?}
-%dd{:class => case_label_classes(compact), "data-content" => findings_text(compact), "data-placement" => "left", "data-title" => compact.classification.try(:name), 'data-trigger' => 'hover', :style => 'font-size: 100%; width: 90%'}
+%dd{:class => case_label_classes(compact), "data-content" => findings_text(compact), "data-placement" => "left", "data-html" => "true", "data-title" => compact.classification.try(:name), 'data-trigger' => 'hover', :style => 'font-size: 100%; width: 90%'}
   %div
     = compact.classification.try(:name)
   %div
