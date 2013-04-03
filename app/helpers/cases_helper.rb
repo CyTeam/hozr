@@ -20,7 +20,7 @@ module CasesHelper
     when 'ff0000', 'red'
       'danger'
     when 'ffff00', 'yellow'
-      'warning'
+      'yellow'
     when '0066ff', 'blue'
       'primary'
     when 'ff0000', 'red'

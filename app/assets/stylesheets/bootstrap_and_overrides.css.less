@@ -34,3 +34,28 @@
 
 @baseFontSize: 12px;
 @baseLineHeight: 15px;
+
+
+// Button
+@btnYellowBackground:              lighten(#eeee00, 15%);
+@btnYellowBackgroundHighlight:     #eeee00;
+
+.btn-yellow {
+  .buttonBackground(@btnYellowBackground, @btnYellowBackgroundHighlight);
+  color: @grayDark;
+
+  &:hover {
+    color: @grayDark;
+  }
+}
+
+
+.label,
+.badge {
+  // yellow
+  &-yellow {
+    background-color: @btnYellowBackground;
+    color: @grayDark;
+  }
+  &-yellow[href]   { background-color: darken(@btnYellowBackground, 10%); }
+}
