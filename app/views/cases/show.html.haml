@@ -28,7 +28,7 @@
 
 .row-fluid
   .span6
-    = image_tag inline_order_form_url(@case.order_form, :type => :overview) if @case.order_form
+    = image_tag inline_order_form_url(@case.order_form) if @case.order_form
   .span6.well{:style => 'background-color: inherit'}
     = render 'result_report'
 
