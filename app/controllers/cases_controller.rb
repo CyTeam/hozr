@@ -282,6 +282,10 @@ class CasesController < AuthorizedController
     end
   end
 
+  def destroy
+    destroy! { root_path }
+  end
+
   # Printing
   # ========
   def print_result_report
