@@ -140,7 +140,7 @@ de:
         channels_enum:
           print:              Druck
           email:              E-Mail
-          overview-email:     Übersichts E-Mail
+          overview_email:     Übersichts E-Mail
           hl7:                HL7
 
   cancan:
