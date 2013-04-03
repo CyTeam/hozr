@@ -50,11 +50,12 @@ class Case::PatientsController < ApplicationController
 
     if @case.save
       # CyDoc Support
-      if session = @case.session
+      # TODO: check and fix
+      # if session = @case.session
         # Break relation if there's a CyDoc case
-        @case.update_attribute(:session_id, nil)
-        flash.alert = render_to_string(:partial => 'flash_cydoc_session', :locals => {:session => session}).html_safe
-      end
+        # @case.update_attribute(:session_id, nil)
+        # flash.alert = render_to_string(:partial => 'flash_cydoc_session', :locals => {:session => session}).html_safe
+      # end
 
       if next_case = @case.next_case(:for_first_entry)
         @redirect_path = first_entry_case_path(next_case)
