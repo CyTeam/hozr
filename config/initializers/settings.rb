@@ -6,6 +6,7 @@ Tenant.settings.defaults = {
   'format.order_form'                    => 'A4',
 
   'mail.result_report.bcc'               => true,
+  'mail.use_cylab'                       => false,
 
   'modules.slidepath'                    => false,
   'modules.p16'                          => false

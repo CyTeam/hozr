@@ -9,7 +9,7 @@
 
 .contextual
   = link_to "Resultate drucken", print_all_send_queues_path, :method => :post, :remote => true, :class => 'btn btn-primary'
-  = link_to "Resultate mailen", send_all_send_queues_path, :method => :post, :remote => true, :class => 'btn btn-primary'
+  = link_to "Resultate mailen", send_all_send_queues_path, :method => :post, :remote => true, :class => 'btn btn-primary' unless current_tenant.settings['mail.use_cylab']
 
 = boot_page_title "Zum Versand bereit"
 
