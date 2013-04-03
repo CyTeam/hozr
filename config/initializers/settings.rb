@@ -9,5 +9,6 @@ Tenant.settings.defaults = {
   'mail.use_cylab'                       => false,
 
   'modules.slidepath'                    => false,
-  'modules.p16'                          => false
+  'modules.p16'                          => false,
+  'modules.billing_queue'                => true
 }
