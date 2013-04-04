@@ -19,7 +19,6 @@ describe 'cases/_result_report.html.haml' do
       assign(:case, a_case)
 
       render
-
     end
   end
 end
