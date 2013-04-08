@@ -1,6 +1,7 @@
 1.0.8
 =====
 * Do not fail in result_reports if case_copy_to has no valid person.
+* Fix patient assignment in first entry.
 
 1.0.7
 =====
