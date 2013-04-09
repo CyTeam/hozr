@@ -5,8 +5,8 @@
     = simple_form_for 'case_label', :remote => true do |f|
       .row-fluid
         .span12
-          = f.input 'start_praxistar_eingangsnr', :collection => label_select
-          = f.input 'end_praxistar_eingangsnr', :collection => label_select
+          = f.input 'start_praxistar_eingangsnr', :collection => label_select, :input_html => {:class => 'select2'}
+          = f.input 'end_praxistar_eingangsnr', :collection => label_select, :input_html => {:class => 'select2'}
       .row-fluid.hidden-actions
         .form-actions
           = f.button :submit
