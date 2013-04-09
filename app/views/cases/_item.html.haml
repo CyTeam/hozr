@@ -3,7 +3,7 @@
 %tr[item]
   %td
     = item.entry_date unless item.entry_date.nil?
-    = "(#{item.first_entry_by.code})" unless item.first_entry_by.nil?
+    = "(#{item.first_entry_submitter.code})" unless item.first_entry_submitter.nil?
   %td
     = link_to case_nr, next_step_case_path(item)
 

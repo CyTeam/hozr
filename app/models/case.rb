@@ -7,7 +7,7 @@ class Case < ActiveRecord::Base
   accepts_nested_attributes_for :patient
 
   belongs_to :doctor
-  belongs_to :first_entry_by, :class_name => 'Person', :foreign_key => :first_entry_by
+  belongs_to :first_entry_submitter, :class_name => 'Person', :foreign_key => :first_entry_by
   belongs_to :screener, :class_name => 'Person', :foreign_key => :screener_id
   belongs_to :screened_by, :class_name => 'Person', :foreign_key => :screener_id
   belongs_to :reviewer, :class_name => 'Person', :foreign_key => :review_by

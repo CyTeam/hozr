@@ -59,4 +59,3 @@
         %dd.remarks.label.label-info{:data => {:content => case_info.remarks, :placement => 'bottom', :trigger => 'hover'}}
           = link_to '#', :class => 'show-remarks-modal', 'data-focus' => 'case[remarks]' do
             = case_info.remarks.truncate 80, :separator => ' '
-
