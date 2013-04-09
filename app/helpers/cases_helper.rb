@@ -27,8 +27,10 @@ module CasesHelper
       'important'
     when '00cc00', 'green'
       'success'
-    else
+    when 'lightgray'
       'default'
+    else
+      'white'
     end
   end
 

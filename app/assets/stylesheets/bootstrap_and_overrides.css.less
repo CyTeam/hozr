@@ -49,6 +49,16 @@
   }
 }
 
+.btn-white {
+  .buttonBackground(white, white);
+  color: @grayDark;
+
+  &:hover {
+    color: @grayDark;
+  }
+}
+
+
 
 .label,
 .badge {
@@ -63,4 +73,12 @@
     background-color: #06f;
   }
   &-primary[href]   { background-color: darken(#06f, 10%); }
+
+  &-default {
+    color: black;
+  }
+  &-white {
+    background-color: transparent;
+    color: @grayDark;
+  }
 }
