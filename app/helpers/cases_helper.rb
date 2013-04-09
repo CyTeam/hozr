@@ -81,7 +81,7 @@ module CasesHelper
   end
 
   def link_to_slidepath_scan(location_index)
-    link_to(t_attr(:scan, Case), slidepath_case_url(location_index), :target => 'slidepath')
+    link_to('Leica Scan', slidepath_case_url(location_index), :target => 'slidepath', :class => 'label label-important')
   end
 
   def link_to_slidepath_case(a_case)
