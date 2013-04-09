@@ -106,6 +106,7 @@ de:
         code:                 Eingangsnummer
         examination_date:     Entnahmedatum
         entry_date:           Eingangsdatum
+        first_entry_submitter: Ersteingabe durch
         examination_method:   Methode
         slidepath:            Slidepath
         scan:                 Scan

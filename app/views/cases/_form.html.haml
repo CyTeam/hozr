@@ -26,6 +26,8 @@
       %h3= t_action(:first_entry)
       .row-fluid
         .span6= f.input :patient_id, :input_html => {'data-placeholder' => 'Patient auswählen', :class => 'patient-select2'}
+      .row-fluid
+        .span12= f.association :first_entry_submitter, :collection => Employee.all, :input_html => {'data-placeholder' => 'Ersteingabe erfasst von?', :class => 'select2'}
 
       %h3= t_action(:second_entry)
       .row-fluid
