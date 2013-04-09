@@ -2,12 +2,21 @@
 class CaseLabelPrintController < LabelPrintController
   # Case labels
   # ===========
+  def form
+    latest_code = current_tenant.settings['cache.case_label_print.last_case_code'] || ''
+    next_case = Case.for_second_entry.where('praxistar_eingangsnr > ?', latest_code).first
+    @first_case_code = next_case.code
+    @last_case_code = Case.for_second_entry.last.code
+  end
+
   def print
     start_praxistar_eingangsnr = params[:case_label][:start_praxistar_eingangsnr]
     end_praxistar_eingangsnr = params[:case_label][:end_praxistar_eingangsnr]
     @cases = Case.for_second_entry.where("praxistar_eingangsnr BETWEEN ? AND ?", start_praxistar_eingangsnr, end_praxistar_eingangsnr)
 
     do_print
+
+    current_tenant.settings['cache.case_label_print.last_case_code'] = end_praxistar_eingangsnr
   end
 
   def print_case
