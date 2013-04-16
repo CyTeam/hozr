@@ -10,5 +10,6 @@ Tenant.settings.defaults = {
 
   'modules.slidepath'                    => false,
   'modules.p16'                          => false,
-  'modules.billing_queue'                => true
+  'modules.billing_queue'                => true,
+  'modules.result_report_archive'        => false
 }

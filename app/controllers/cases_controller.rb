@@ -188,7 +188,7 @@ class CasesController < AuthorizedController
     end
 
     # Persist as PDF
-    @case.persist_pdf
+    @case.persist_pdf if current_tenant.settings['modules.result_report_archive']
 
     respond_to do |format|
       format.html do
