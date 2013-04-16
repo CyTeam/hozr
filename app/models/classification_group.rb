@@ -7,7 +7,7 @@ class ClassificationGroup < ActiveRecord::Base
   has_many :classifications
   attr_accessible :classification_ids
 
-  default_scope order(:position)
+  default_scope order('position DESC')
 
   def to_s
     self.title
