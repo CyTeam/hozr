@@ -2,6 +2,8 @@
   %td= link_to person.to_s, person, {'data-href-container' => 'tr'}
   %td= address(person.vcard, ', ')
   %td
-    - person.vcard.contacts.each do |contact|
-      %p= contact.to_s(': ', :label)
+    - person.vcard.contacts.select{|contact| contact.phone_number_type.present? && contact.number.present?}.each do |contact|
+      %p
+        %i.icon{:class => contact_icon(contact)}
+        = contact.number
   %td
