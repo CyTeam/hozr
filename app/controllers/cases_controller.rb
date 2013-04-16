@@ -190,12 +190,20 @@ class CasesController < AuthorizedController
 
     # Jump to next case
     flash[:notice] = "#{@case.to_s} signiert. Sie wurden zum nächsten zu signierenden Fall weitergeleitet."
-    next_open = Case.for_review.where("praxistar_eingangsnr > ?", @case.praxistar_eingangsnr).first
 
-    if next_open.nil?
-      redirect_to review_queue_cases_path
-    else
-      redirect_to next_open
+    respond_to do |format|
+      format.html do
+        # Jump to next case when called from case view
+        next_open = Case.for_review.where("praxistar_eingangsnr > ?", @case.praxistar_eingangsnr).first
+
+        if next_open.nil?
+          redirect_to root_path
+        else
+          redirect_to case_path(next_open)
+        end
+      end
+
+      format.js {}
     end
   end
 

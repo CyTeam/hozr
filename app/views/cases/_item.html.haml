@@ -1,6 +1,6 @@
 - case_nr = "#{item.code_to_s}"
 - case_nr += " (#{item.intra_day_id})" unless item.intra_day_id.nil?
-%tr
+%tr[item]
   %td
     = item.entry_date unless item.entry_date.nil?
     = "(#{item.first_entry_by.code})" unless item.first_entry_by.nil?
@@ -33,7 +33,7 @@
         HPV/P16:&nbsp;
         %span{:id => "prepare_hpv_p16_#{item.id}"}= link_to image_tag('prepare_p16.png'), hpv_p16_prepared_case_path(item), :method => :post, :remote => true
   %td{:style => "width: 8em"}
-    = link_to t_action('review_done'), review_done_case_path(item), :method => :post, :class => 'btn btn-success' if item.needs_review?
+    = link_to t_action('review_done'), review_done_case_path(item), :method => :post, :class => 'btn btn-success', :remote => true if item.needs_review?
     .btn-group
       = link_to t_action('edit'), edit_case_path(item), :class => 'btn'
       %button.btn.dropdown-toggle{"data-toggle" => "dropdown"}
