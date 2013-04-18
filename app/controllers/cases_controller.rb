@@ -154,13 +154,12 @@ class CasesController < AuthorizedController
       end
 
       # Jump to next case
-      flash[:notice] = "#{@case.to_s} zum signiert vorgemerkt. Sie wurden zum nächsten Fall weitergeleitet."
       next_open = Case.for_second_entry.where("praxistar_eingangsnr > ?", @case.praxistar_eingangsnr).first
 
       if next_open.nil?
-        redirect_to second_entry_queue_cases_path
+        redirect_to root_path, :notice => "#{@case.to_s} zum Signieren vorgemerkt. Es gibt keine weiteren Fälle zum signieren."
       else
-        redirect_to second_entry_form_case_path(next_open)
+        redirect_to second_entry_form_case_path(next_open), :notice => "#{@case.to_s} zum Signieren vorgemerkt. Sie wurden zum nächsten Fall weitergeleitet."
       end
     end
   end
