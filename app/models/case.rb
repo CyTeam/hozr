@@ -178,6 +178,13 @@ class Case < ActiveRecord::Base
     read_attribute(:entry_date).strftime("%d.%m.%Y") unless read_attribute(:entry_date).nil?
   end
 
+  # Actions
+  def review_done(reviewer)
+    self.needs_review = false
+    self.reviewer = reviewer
+    self.review_at = Time.now
+  end
+
   # PDF
   def to_pdf(page_size = 'A5', to = nil)
     case page_size

@@ -173,10 +173,7 @@ class CasesController < AuthorizedController
 
   def review_done
     @case = Case.find(params[:id])
-    @case.needs_review = false
-
-    @case.reviewer = current_user.object
-    @case.review_at = Time.now
+    @case.review_done(current_user.object)
 
     if !@case.save(:context => :review_done)
       flash.now[:alert] = "Bitte Pflichtfelder ausfüllen."
