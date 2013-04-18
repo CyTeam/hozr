@@ -90,19 +90,28 @@ class CasesController < AuthorizedController
   def second_entry_update
     @case = Case.find(params[:id])
 
-    @case.screener = current_user.object
     @case.update_attributes(params[:case])
 
+    context = :save
     case params[:button]
     when "queue_for_review"
-      sign
-      return
+      context = :sign
+      if @case.valid?(context)
+        @case.sign(current_user.object)
+      end
     when "review_done"
-      redirect_to @case
-      return
+      context = :review_done
+      if @case.valid?(context)
+        @case.sign(current_user.object)
+        @case.review_done(current_user.object)
+      end
     end
 
-    @case.save
+    if !@case.save(:context => context)
+      flash.now[:alert] = "Bitte Pflichtfelder ausfüllen."
+      render 'second_entry_form'
+      return
+    end
 
     # Jump to next case
     next_open = Case.first_entry_done.where("praxistar_eingangsnr > ?", @case.praxistar_eingangsnr).first
