@@ -179,6 +179,12 @@ class Case < ActiveRecord::Base
   end
 
   # Actions
+  def sign(screener)
+    self.needs_review = true # TODO: use setting
+    self.screener = screener
+    self.screened_at = Time.now
+  end
+
   def review_done(reviewer)
     self.needs_review = false
     self.reviewer = reviewer

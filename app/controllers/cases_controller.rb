@@ -115,9 +115,7 @@ class CasesController < AuthorizedController
 
   def sign
     @case = Case.find(params[:id])
-    @case.screened_at = Time.now
-    @case.screener = current_user.object
-    @case.needs_review = true
+    @case.sign(cuurent_user.object)
     @case.update_attributes(params[:case])
 
     # TODO: generalize
