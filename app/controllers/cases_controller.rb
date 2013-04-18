@@ -156,7 +156,7 @@ class CasesController < AuthorizedController
       next_open = Case.for_second_entry.where("praxistar_eingangsnr > ?", @case.praxistar_eingangsnr).first
 
       if next_open.nil?
-        redirect_to root_path, :notice => "#{@case.to_s} zum Signieren vorgemerkt. Es gibt keine weiteren Fälle zum signieren."
+        redirect_to root_path, :notice => "#{@case.to_s} zum Signieren vorgemerkt."
       else
         redirect_to second_entry_form_case_path(next_open), :notice => "#{@case.to_s} zum Signieren vorgemerkt. Sie wurden zum nächsten Fall weitergeleitet."
       end
@@ -189,7 +189,7 @@ class CasesController < AuthorizedController
         next_open = Case.for_review.where("praxistar_eingangsnr > ?", @case.praxistar_eingangsnr).first
 
         if next_open.nil?
-          redirect_to root_path, :notice => "#{@case.to_s} signiert. Es gibt keine weiteren Fälle zum signieren."
+          redirect_to root_path, :notice => "#{@case.to_s} signiert."
         else
           redirect_to next_open, :notice => "#{@case.to_s} signiert. Sie wurden zum nächsten zu signierenden Fall weitergeleitet."
         end
