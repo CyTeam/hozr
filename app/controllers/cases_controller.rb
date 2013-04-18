@@ -105,12 +105,11 @@ class CasesController < AuthorizedController
     @case.save
 
     # Jump to next case
-    flash[:notice] = "#{@case.to_s} gespeichert. Sie wurden zum nächsten Fall weitergeleitet."
     next_open = Case.first_entry_done.where("praxistar_eingangsnr > ?", @case.praxistar_eingangsnr).first
     if next_open.nil?
-      redirect_to second_entry_queue_cases_path
+      redirect_to root_path, :notice => "#{@case.to_s} gespeichert."
     else
-      redirect_to second_entry_form_case_path(next_open)
+      redirect_to second_entry_form_case_path(next_open), :notice => "#{@case.to_s} gespeichert. Sie wurden zum nächsten Fall weitergeleitet."
     end
   end
 
