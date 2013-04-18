@@ -199,7 +199,7 @@ class CasesController < AuthorizedController
         if next_open.nil?
           redirect_to root_path
         else
-          redirect_to case_path(next_open)
+          redirect_to next_open
         end
       end
 
