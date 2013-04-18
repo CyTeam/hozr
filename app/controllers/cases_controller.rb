@@ -188,18 +188,15 @@ class CasesController < AuthorizedController
     # Persist as PDF
     @case.persist_pdf
 
-    # Jump to next case
-    flash[:notice] = "#{@case.to_s} signiert. Sie wurden zum nächsten zu signierenden Fall weitergeleitet."
-
     respond_to do |format|
       format.html do
         # Jump to next case when called from case view
         next_open = Case.for_review.where("praxistar_eingangsnr > ?", @case.praxistar_eingangsnr).first
 
         if next_open.nil?
-          redirect_to root_path
+          redirect_to root_path, :notice => "#{@case.to_s} signiert. Es gibt keine weiteren Fälle zum signieren."
         else
-          redirect_to next_open
+          redirect_to next_open, :notice => "#{@case.to_s} signiert. Sie wurden zum nächsten zu signierenden Fall weitergeleitet."
         end
       end
 
