@@ -1,3 +1,14 @@
+1.0.9
+=====
+Bug fixes:
+* Fix direct signing in second_entry.
+
+Enhancements:
+* Move review_done action button out of dropdown menu in case lists if available.
+* Redirect to next case to review after signing.
+* Unify behaviour and flash messages for sign, review done and second entry.
+* Reverse ordering of classification groups.
+
 1.0.8
 =====
 * Do not fail in result_reports if case_copy_to has no valid person.
