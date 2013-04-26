@@ -50,7 +50,7 @@ class CaseLabelPrintController < LabelPrintController
     end
 
     # Trigger printing
-    trigger unless Rail.env.development?
+    trigger unless Rails.env.development?
 
     render 'print'
   end
