@@ -7,7 +7,7 @@
     %dd
       = render 'vcards/show', :vcard => case_info.patient.vcard if case_info.patient
       = case_info.patient.birth_date if case_info.patient
-    - if case_info.patient.remarks.present?
+    - if case_info.patient.try(:remarks).present?
       %dd.remarks.label.label-info{:data => {:content => case_info.patient.remarks, :placement => 'bottom', :trigger => 'hover'}}
         = case_info.patient.remarks.truncate 80, :separator => ' '
 
