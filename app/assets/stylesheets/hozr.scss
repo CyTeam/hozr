@@ -104,6 +104,13 @@ dd {
   margin-top:    2px;
 }
 
+/* Case Info Box */
+dd.remarks {
+  display: block;
+  white-space: normal;
+}
+
+
 /* Order Form modal */
 #order_form {
   width: 80%;

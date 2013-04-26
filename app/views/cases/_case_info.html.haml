@@ -1,9 +1,19 @@
 .well.well-small
   %dl
+    .pull-right
+      = link_to case_info.patient, :title => t_title(:edit, Patient) do
+        %i.icon-edit
     %dt= t_attr(:patient, Case)
     %dd
       = render 'vcards/show', :vcard => case_info.patient.vcard if case_info.patient
       = case_info.patient.birth_date if case_info.patient
+    - if case_info.patient.remarks.present?
+      %dd.remarks.label.label-info{:data => {:content => case_info.patient.remarks, :placement => 'bottom', :trigger => 'hover'}}
+        = case_info.patient.remarks.truncate 80, :separator => ' '
+
+    .pull-right
+      = link_to case_info, :title => t_title(:edit, Case) do
+        %i.icon-edit
     %dt= t_attr(:praxistar_eingangsnr, Case)
     %dd
       = case_info.code_to_s unless case_info.code.nil?
@@ -38,3 +48,8 @@
         %dt= t_attr(:slidepath, Case)
         - for location_index in case_info.location_index
           %dd= link_to_slidepath_scan(location_index)
+
+    - if case_info.remarks.present?
+      %dd.remarks.label.label-info{:data => {:content => case_info.remarks, :placement => 'bottom', :trigger => 'hover'}}
+        = case_info.remarks.truncate 80, :separator => ' '
+
