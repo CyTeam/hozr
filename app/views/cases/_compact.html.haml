@@ -1,8 +1,15 @@
-%dt
-  = compact.screened_at.strftime('%b. %g') unless compact.screened_at.nil?
-  \: #{link_to compact.code_to_s, case_path(compact) unless compact.praxistar_eingangsnr.nil?}
-%dd{:class => case_label_classes(compact), "data-content" => findings_text(compact), "data-placement" => "top", "data-html" => "true", "data-title" => compact.classification.try(:name), 'data-trigger' => 'hover', :style => 'font-size: 100%; width: 90%'}
-  %div
-    = compact.classification.try(:name)
-  %div
-    = compact.finding_classes.pluck(:code).join(', ')
+- popover_text = findings_text(compact)
+- popover_text += "<br/><p>" + compact.remarks + "</p>" if compact.remarks.present?
+
+%div{"data-content" => popover_text, "data-placement" => "top", "data-html" => "true", "data-title" => compact.classification.try(:name), 'data-trigger' => 'hover'}
+  %dt
+    - if compact.remarks.present?
+      .pull-right
+        %i.icon-info-sign
+    = compact.screened_at.strftime('%b. %g') unless compact.screened_at.nil?
+    \: #{link_to compact.code_to_s, case_path(compact) unless compact.praxistar_eingangsnr.nil?}
+  %dd{:class => case_label_classes(compact),  :style => 'font-size: 100%; width: 90%'}
+    %div
+      = compact.classification.try(:name)
+    %div
+      = compact.finding_classes.pluck(:code).join(', ')
