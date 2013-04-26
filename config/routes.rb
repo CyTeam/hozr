@@ -182,6 +182,8 @@ Hozr::Application.routes.draw do
   get 'post_label_print' => 'post_label_print#form', :as => :post_label_print
   post 'post_label_print' => 'post_label_print#print', :as => :post_label_print
 
+  # Case list Printing
+  post 'case_list_print' => 'case_list_print#print', :as => :case_list_print
 
   # Search
   match 'search' => 'search#index', :as => :search
