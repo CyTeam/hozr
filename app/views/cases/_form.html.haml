@@ -40,6 +40,8 @@
         .span12= f.association :classification, :input_html => {'data-placeholder' => 'Klassifikation auswählen', :class => 'select2'}
       .row-fluid
         .span12= f.input :finding_text, :input_html => {:class => 'span12 tinymce'}
+      .row-cluid
+        .span12= f.input :remarks, :input_html => {:class => 'span'}
 
   .form-actions
     = f.button :submit
