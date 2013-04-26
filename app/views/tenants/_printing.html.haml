@@ -3,6 +3,9 @@
     .span6= f.input 'printing.cups_hostname', :as => :setting_string
 
   .row-fluid
+    .span6= f.input 'printing.plain', :as => :setting_string
+
+  .row-fluid
     .span6= f.input 'format.order_form', :as => :setting_select, :collection => ['A4', 'A5']
 
   .row-fluid

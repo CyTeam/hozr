@@ -53,6 +53,7 @@ de:
           printing:
             cups:  Drucken per CUPS
             cups_hostname: CUPS-Server
+            plain:         Allgemein
             order_form:    Auftragsformulare
             mailing_overview: Befundübersicht
             result_report_a4: Resultate A4
