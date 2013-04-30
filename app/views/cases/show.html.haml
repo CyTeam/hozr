@@ -1,3 +1,5 @@
+= render 'cases/remarks_modal'
+
 %div{:style => 'margin-bottom: 10px'}
   .btn-group{:style => 'display: inline-block'}
     = link_to t_action(:print), print_result_report_case_path(@case), :method => :post, :remote => true, :class => 'btn'

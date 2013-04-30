@@ -1,0 +1,20 @@
+#remarks_form.modal.hide(data-backdrop='false')
+  = modal_header t_attr(:remarks, Case)
+
+  = simple_form_for resource do |f|
+    .modal-body
+      = f.fields_for :patient do |p|
+        .row-fluid
+          .span12
+            = p.input 'remarks', :label => t_model(Patient), :input_html => {:rows => 5, :class => 'span'}
+      .row-fluid
+        .span12
+          = f.input 'remarks', :label => t_model(Case), :input_html => {:rows => 5, :class => 'span'}
+      .row-fluid.hidden-actions
+        .form-actions
+          = f.button :submit
+
+    .modal-footer
+      = link_to t_action(:save), '#', :class => 'btn submit-button'
+      = link_to t_action(:close), '#', :class => 'btn', 'data-dismiss' => 'modal'
+

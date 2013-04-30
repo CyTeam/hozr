@@ -9,7 +9,8 @@
       = case_info.patient.birth_date if case_info.patient
     - if case_info.patient.try(:remarks).present?
       %dd.remarks.label.label-info{:data => {:content => case_info.patient.remarks, :placement => 'bottom', :trigger => 'hover'}}
-        = case_info.patient.remarks.truncate 80, :separator => ' '
+        = link_to '#', :class => 'show-remarks-modal' do
+          = case_info.patient.remarks.truncate 80, :separator => ' '
 
     .pull-right
       = link_to case_info, :title => t_title(:edit, Case) do
@@ -51,5 +52,6 @@
 
     - if case_info.remarks.present?
       %dd.remarks.label.label-info{:data => {:content => case_info.remarks, :placement => 'bottom', :trigger => 'hover'}}
-        = case_info.remarks.truncate 80, :separator => ' '
+        = link_to '#', :class => 'show-remarks-modal' do
+          = case_info.remarks.truncate 80, :separator => ' '
 

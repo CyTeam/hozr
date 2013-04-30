@@ -292,6 +292,14 @@ function autofocus(selector) {
 }
 
 
+// Case Remark Popup
+function setupRemarksModal() {
+  $('.show-remarks-modal').on('click', function() {
+    $('#remarks_form').modal('show');
+  });
+}
+
+
 // Twitter Bootstrap
 function setupPopOver() {
   $("*[data-content]").popover();

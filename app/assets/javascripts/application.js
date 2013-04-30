@@ -40,6 +40,7 @@ function initializeBehaviours() {
   // application
   setupSlidepathLinks();
   setupCaseAssignment();
+  setupRemarksModal();
 
   setupSubmitButtons();
   setupCancelButtons();

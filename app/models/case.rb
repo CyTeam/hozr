@@ -2,7 +2,10 @@
 
 class Case < ActiveRecord::Base
   belongs_to :examination_method
+
   belongs_to :patient, :autosave => true, :touch => true
+  accepts_nested_attributes_for :patient
+
   belongs_to :doctor
   belongs_to :first_entry_by, :class_name => 'Person', :foreign_key => :first_entry_by
   belongs_to :screener, :class_name => 'Person', :foreign_key => :screener_id
