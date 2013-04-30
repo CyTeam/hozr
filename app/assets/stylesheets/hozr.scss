@@ -48,11 +48,20 @@
   border-radius: inherit;
 }
 
-/* Forms */
+/* Labels */
 label.input-important {
   font-weight: bold;
 }
 
+.label, .badge {
+  a {
+    color: white;
+    text-decoration: none;
+  }
+}
+
+
+/* Forms */
 .form-horizontal .control-group {
   margin-bottom: 8px;
 }
