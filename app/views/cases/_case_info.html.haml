@@ -1,59 +1,62 @@
-= render 'cases/remarks_modal'
+#case_info
+  = render 'cases/remarks_modal'
 
-.well.well-small
-  %dl
-    .pull-right
-      = link_to case_info.patient, :title => t_title(:edit, Patient) do
-        %i.icon-edit
-    %dt= t_attr(:patient, Case)
-    %dd
-      = render 'vcards/show', :vcard => case_info.patient.vcard if case_info.patient
-      = case_info.patient.birth_date if case_info.patient
-    - if case_info.patient.try(:remarks).present?
-      %dd.remarks.label.label-info{:data => {:content => case_info.patient.remarks, :placement => 'bottom', :trigger => 'hover'}}
-        = link_to '#', :class => 'show-remarks-modal' do
-          = case_info.patient.remarks.truncate 80, :separator => ' '
+  .well.well-small
+    %dl
+      .pull-right
+        = link_to case_info.patient, :title => t_title(:edit, Patient) do
+          %i.icon-edit
+      %dt= t_attr(:patient, Case)
+      %dd
+        = render 'vcards/show', :vcard => case_info.patient.vcard if case_info.patient
+        = case_info.patient.birth_date if case_info.patient
+      - if case_info.patient.try(:remarks).present?
+        %dd.remarks.label.label-info{:data => {:content => case_info.patient.remarks, :placement => 'bottom', :trigger => 'hover'}}
+          = link_to '#', :class => 'show-remarks-modal' do
+            = case_info.patient.remarks.truncate 80, :separator => ' '
 
-    .pull-right
-      = link_to case_info, :title => t_title(:edit, Case) do
-        %i.icon-edit
-    %dt= t_attr(:praxistar_eingangsnr, Case)
-    %dd
-      = case_info.code_to_s unless case_info.code.nil?
-      = "(#{case_info.intra_day_id unless case_info.intra_day_id.nil?})"
+      .pull-right
+        = link_to case_info, :title => t_title(:edit, Case) do
+          %i.icon-edit
+      %dt= t_attr(:praxistar_eingangsnr, Case)
+      %dd
+        = case_info.code_to_s unless case_info.code.nil?
+        = "(#{case_info.intra_day_id unless case_info.intra_day_id.nil?})"
 
-    - if case_info.doctor
-      %dt= t_attr(:doctor, Case)
-      %dd= case_info.doctor
-    - if case_info.case_copy_tos.present?
-      %dt= t_attr(:case_copy_tos, Case)
-      - case_info.case_copy_tos.each do |case_copy_to|
+      - if case_info.doctor
+        %dt= t_attr(:doctor, Case)
+        %dd= case_info.doctor
+      - if case_info.case_copy_tos.present?
+        %dt= t_attr(:case_copy_tos, Case)
+        - case_info.case_copy_tos.each do |case_copy_to|
+          %dd
+            %i.icon-envelope
+            = case_copy_to.person.to_s
+
+      - if case_info.examination_date
+        %dt= t_attr(:examination_date, Case)
+        %dd= case_info.examination_date.strftime('%d.%m.%Y')
+      - if case_info.entry_date
+        %dt= t_attr(:entry_date, Case)
         %dd
-          %i.icon-envelope
-          = case_copy_to.person.to_s
+          = case_info.entry_date.strftime('%d.%m.%Y')
+          = "(%s)" % case_info.first_entry_submitter.code if case_info.first_entry_submitter
+      - if case_info.attachments.present?
+        %dt= t_attr(:attachments)
+        - for attachment in case_info.attachments
+          %dd= link_to attachment, [:download, attachment]
+      - if case_info.examination_method
+        %dt= t_attr(:examination_method)
+        %dd= case_info.examination_method.name
 
-    - if case_info.examination_date
-      %dt= t_attr(:examination_date, Case)
-      %dd= case_info.examination_date.strftime('%d.%m.%Y')
-    - if case_info.entry_date
-      %dt= t_attr(:entry_date, Case)
-      %dd= case_info.entry_date.strftime('%d.%m.%Y')
-    - if case_info.attachments.present?
-      %dt= t_attr(:attachments)
-      - for attachment in case_info.attachments
-        %dd= link_to attachment, [:download, attachment]
-    - if case_info.examination_method
-      %dt= t_attr(:examination_method)
-      %dd= case_info.examination_method.name
+      - if current_tenant.settings['modules.slidepath']
+        - if case_info.location_index.present?
+          %dt= t_attr(:slidepath, Case)
+          - for location_index in case_info.location_index
+            %dd= link_to_slidepath_scan(location_index)
 
-    - if current_tenant.settings['modules.slidepath']
-      - if case_info.location_index.present?
-        %dt= t_attr(:slidepath, Case)
-        - for location_index in case_info.location_index
-          %dd= link_to_slidepath_scan(location_index)
-
-    - if case_info.remarks.present?
-      %dd.remarks.label.label-info{:data => {:content => case_info.remarks, :placement => 'bottom', :trigger => 'hover'}}
-        = link_to '#', :class => 'show-remarks-modal' do
-          = case_info.remarks.truncate 80, :separator => ' '
+      - if case_info.remarks.present?
+        %dd.remarks.label.label-info{:data => {:content => case_info.remarks, :placement => 'bottom', :trigger => 'hover'}}
+          = link_to '#', :class => 'show-remarks-modal' do
+            = case_info.remarks.truncate 80, :separator => ' '
 

@@ -1,7 +1,7 @@
 #remarks_form.modal.hide(data-backdrop='false')
   = modal_header t_attr(:remarks, Case)
 
-  = simple_form_for resource do |f|
+  = simple_form_for [:update_remarks, resource], :remote => true do |f|
     .modal-body
       = f.fields_for :patient do |p|
         .row-fluid

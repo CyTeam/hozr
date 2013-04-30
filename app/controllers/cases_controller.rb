@@ -264,6 +264,11 @@ class CasesController < AuthorizedController
     render 'index'
   end
 
+  def update_remarks
+    @case = Case.find(params[:id])
+    @case.update_attributes(params[:case])
+  end
+
   # General
   # =======
   def show
