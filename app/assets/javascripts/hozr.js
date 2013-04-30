@@ -294,7 +294,7 @@ function autofocus(selector) {
 
 // Case Remark Popup
 function setupRemarksModal() {
-  $('.show-remarks-modal').on('click', function() {
+  $('body').on('click', '.show-remarks-modal',  function() {
     $('#remarks_form').modal('show');
     var fieldname = $(this).data('focus');
     $("#remarks_form :input[name='" + fieldname + "']").focus()
