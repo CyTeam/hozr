@@ -296,6 +296,8 @@ function autofocus(selector) {
 function setupRemarksModal() {
   $('.show-remarks-modal').on('click', function() {
     $('#remarks_form').modal('show');
+    var fieldname = $(this).data('focus');
+    $("#remarks_form :input[name='" + fieldname + "']").focus()
   });
 }
 
