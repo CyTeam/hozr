@@ -135,4 +135,8 @@ dd.remarks {
 /* Case Remarks modal */
 #remarks_form.modal {
   left: 60%;
+
+  .modal-body {
+    min-height: 250px;
+  }
 }
