@@ -58,7 +58,7 @@ function setupSlidepathLinks() {
 // Contextual update and create buttons
 function setupSubmitButtons() {
   $("body").on('click', '.submit-button', function() {
-    var form = $(this).parents('.row-fluid, .modal:visible').find('form');
+    var form = $(this).closest('.row-fluid, .modal:visible').find('form');
     form.submit();
   });
 }
