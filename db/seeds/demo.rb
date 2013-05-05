@@ -44,7 +44,8 @@ doctor = Doctor.create!(
     :login => 'doctor',
     :email => 'doctor@example.com',
     :password => 'doctor1234',
-    :password_confirmation => 'doctor1234'
+    :password_confirmation => 'doctor1234',
+    :tenant => tenant
   )
 )
 
