@@ -22,7 +22,7 @@ class PortDoctorToPerson < ActiveRecord::Migration
         :user => doctor.user,
         :ean_party => doctor.ean_party,
         :zsr => doctor.zsr,
-        :channels => doctor.channels
+        :channels => doctor.channels || []
       )
 
       Mailing.where(:doctor_id => doctor.id).update_all(:doctor_id => new_doctor.id)
