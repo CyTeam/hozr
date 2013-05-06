@@ -22,6 +22,12 @@ class OrderFormsController < AuthorizedController
   # Scan
   def scan
     scanner = current_tenant.settings['scanning.order_form']
+    # Guard
+    if scanner.blank?
+      flash[:alert] = 'Kein Scanner konfiguriert'
+      redirect_to new_case_assignments_path and return
+    end
+
     Dir.chdir(OrderForm::SCANNER_SPOOL_PATH) do
       system('scanimage', '--device', scanner, '--scan-area', 'A4', '--mode', 'Gray', '--batch', '--resolution', '200')
     end
