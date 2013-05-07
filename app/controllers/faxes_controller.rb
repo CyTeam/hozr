@@ -9,11 +9,13 @@ class FaxesController < AuthorizedController
 
   def create
     resource.sender = current_user.object
-    resource.save
+    if resource.save
+      resource.send_fax
 
-    resource.send_fax
-
-    flash.notice = 'An fax gesendet...'
-    render 'show_flash'
+      flash.notice = 'An fax gesendet...'
+      render 'show_flash'
+    else
+      render 'replace_form'
+    end
   end
 end

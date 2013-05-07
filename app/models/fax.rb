@@ -1,5 +1,12 @@
 class Fax < ActiveRecord::Base
-  attr_accessible :number, :receiver_id, :receiver_type
+  attr_accessible :receiver_id, :receiver_type
+
+  # Number
+  attr_accessible :number
+  validates :number, :presence => true, :format => /[0-9 \/]/
+  def number=(value)
+    self[:number] = value.delete(' /').strip
+  end
 
   # Sender
   belongs_to :sender, :class_name => 'Person', :foreign_key => :sender_id

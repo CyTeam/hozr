@@ -1,0 +1,9 @@
+= simple_form_for [parent, resource], :remote => true do |f|
+  = f.input :case_id, :as => :hidden
+  .row-fluid
+    .span12
+      = f.input :number
+  .row-fluid.hidden-actions
+    .form-actions
+      = f.button :submit
+
