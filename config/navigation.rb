@@ -36,6 +36,7 @@ SimpleNavigation::Configuration.run do |navigation|
         administration.item :divider, "", :class => 'divider'
         administration.item :order_forms, 'Auftragsformulare', order_forms_path
         administration.item :send_queues, 'Resultat Queue', send_queues_path
+        administration.item :fax_queue, t_title(:index, Fax), faxes_path
         administration.item :divider, "", :class => 'divider'
         administration.item :dunning_stopped_patients, 'Patienten mit Mahnstopp', dunning_stopped_patients_path
         administration.item :classifications, 'Klassifikationen', classifications_path

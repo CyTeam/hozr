@@ -1,7 +1,7 @@
 # encoding: UTF-8
 
 class FaxesController < AuthorizedController
-  belongs_to :case
+  belongs_to :case, :optional => true
 
   def new
     render 'show_modal'

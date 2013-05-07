@@ -142,6 +142,7 @@ Hozr::Application.routes.draw do
       post :perform
     end
   end
+  resources :faxes
 
   resources :mailings do
     member do

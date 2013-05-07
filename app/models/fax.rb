@@ -1,5 +1,7 @@
 class Fax < ActiveRecord::Base
-  attr_accessible :receiver_id, :receiver_type
+  # Receiver
+  belongs_to :receiver
+  attr_accessible :receiver_id, :receiver_type, :receiver
 
   # Number
   attr_accessible :number
@@ -16,7 +18,16 @@ class Fax < ActiveRecord::Base
   belongs_to :case
   attr_accessible :case_id
 
+  def to_s
+    if receiver
+      "%s (%s)" % [receiver.to_s, number]
+    else
+      number
+    end
+  end
+
   # Actions
+  # =======
   def send_fax
     filename = Rails.root.join('system', 'fax_queue', "#{number}_#{id}.pdf")
     File.open(filename, 'w') do |file|

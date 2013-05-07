@@ -146,6 +146,8 @@ de:
           hl7:                HL7
       fax:
         number:               Fax-Nummer
+        receiver:             Empfänger
+        sent_at:              Versandt
 
   cancan:
     roles:
@@ -241,6 +243,9 @@ de:
   employees:
     index:
       title:            Mitarbeiter
+  faxes:
+    index:
+      title:            Fax Versand
   reports:
     index:
       title:            Statistiken
