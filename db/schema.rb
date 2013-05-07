@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130318073323) do
+ActiveRecord::Schema.define(:version => 20130507081556) do
 
   create_table "account_types", :force => true do |t|
     t.string   "name",       :limit => 100
@@ -409,6 +409,20 @@ ActiveRecord::Schema.define(:version => 20130318073323) do
     t.integer  "pid"
     t.integer  "record_count"
   end
+
+  create_table "faxes", :force => true do |t|
+    t.string   "number"
+    t.integer  "case_id"
+    t.integer  "sender_id"
+    t.datetime "sent_at"
+    t.string   "receiver_type"
+    t.integer  "receiver_id"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
+  add_index "faxes", ["case_id"], :name => "index_faxes_on_case_id"
+  add_index "faxes", ["sender_id"], :name => "index_faxes_on_sender_id"
 
   create_table "finding_classes", :force => true do |t|
     t.text    "name"

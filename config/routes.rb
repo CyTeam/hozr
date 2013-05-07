@@ -93,6 +93,8 @@ Hozr::Application.routes.draw do
   resources :cases do
     resources :attachments
     resources :case_copy_tos
+    resources :faxes
+
     resources :patients, :module => 'case'
 
     collection do

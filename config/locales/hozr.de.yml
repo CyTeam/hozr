@@ -144,6 +144,8 @@ de:
           email:              E-Mail
           overview_email:     Übersichts E-Mail
           hl7:                HL7
+      fax:
+        number:               Fax-Nummer
 
   cancan:
     roles:
@@ -157,6 +159,7 @@ de:
       more:             Hinzufügen
       invoice_overview: Rechnungen
       print_fax:        Drucken für Fax
+      send_fax:         Fax senden
       print:            Drucken
       print_overview:   Übersicht drucken
       print_results:    Resultate drucken

@@ -19,6 +19,9 @@ class Case < ActiveRecord::Base
   has_and_belongs_to_many :mailings
   has_many :send_queues, :through => :mailings
 
+  # Fax
+  has_many :faxes
+
   # Classification
   belongs_to :classification
   scope :by_classification_group, lambda {|group|

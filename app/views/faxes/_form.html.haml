@@ -1,0 +1,16 @@
+.modal
+  = modal_header t_action(:send_fax)
+
+  .modal-body{:style => 'height: 150px'}
+    = simple_form_for [parent, resource], :remote => true do |f|
+      = f.input :case_id, :as => :hidden
+      .row-fluid
+        .span12
+          = f.input :number
+      .row-fluid.hidden-actions
+        .form-actions
+          = f.button :submit
+
+  .modal-footer
+    = link_to t_action(:send_fax), '#', :class => 'btn submit-button'
+    = link_to t_action(:cancel), '#', :class => 'btn', 'data-dismiss' => 'modal'

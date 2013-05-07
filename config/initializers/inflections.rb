@@ -13,4 +13,5 @@
 
 ActiveSupport::Inflector.inflections do |inflect|
   inflect.uncountable 'tiers'
+  inflect.irregular 'fax', 'faxes'
 end

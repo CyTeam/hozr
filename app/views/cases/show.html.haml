@@ -5,6 +5,7 @@
       %span.caret
     %ul.dropdown-menu
       %li= link_to t_action(:print_fax), print_result_report_case_path(@case, :page_size => 'A4'), :remote => true, :method => :post
+      %li= link_to t_action(:send_fax), new_case_fax_path(@case), :remote => true
       %li= link_to t_action(:pdf), case_path(@case, :page_size => 'A4', :format => :pdf)
       %li= link_to t_action(:resend), resend_case_path(@case), :method => :post, :remote => true
       %li= link_to t_action(:print_label), print_case_label_path(@case), :remote => true, :method => :post
