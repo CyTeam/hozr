@@ -18,8 +18,11 @@ class Case::LabelController < ApplicationController
       flash.now[:notice] = "Barcodes für #{case_labels.count} Fälle an Drucker gesendet"
 
     rescue RuntimeError => e
-      flash.now[:alert] = "Drucken fehlgeschlagen: #{e.message}.<br/>Keine Fälle erzeugt.".html_safe
-      return
+      # Allow failing printer in demo env
+      if !Rails.env.demo?
+        flash.now[:alert] = "Drucken fehlgeschlagen: #{e.message}.<br/>Keine Fälle erzeugt.".html_safe
+        return
+      end
     end
 
     case_labels.each do |case_label|
