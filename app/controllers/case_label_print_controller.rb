@@ -5,7 +5,7 @@ class CaseLabelPrintController < LabelPrintController
   def form
     latest_code = current_tenant.settings['cache.case_label_print.last_case_code'] || ''
     next_case = Case.for_second_entry.where('praxistar_eingangsnr > ?', latest_code).first
-    @first_case_code = next_case.code
+    @first_case_code = next_case.try(:code)
     @last_case_code = Case.for_second_entry.last.code
   end
 
