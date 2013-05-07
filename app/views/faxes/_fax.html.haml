@@ -1,3 +1,6 @@
 %tr[fax]
   %td= fax.to_s
+  %td= link_to fax.case, fax.case
+  %td= "%s (%s)" % [fax.created_at, fax.sender.try(:code)]
   %td= fax.sent_at
+  %td= fax_state_label(fax)

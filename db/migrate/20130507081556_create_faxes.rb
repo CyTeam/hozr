@@ -7,6 +7,7 @@ class CreateFaxes < ActiveRecord::Migration
       t.string :receiver_type
       t.integer :receiver_id
       t.datetime :sent_at
+      t.string :state, :default => 'pending'
 
       t.timestamps
     end

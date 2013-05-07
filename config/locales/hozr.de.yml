@@ -147,7 +147,11 @@ de:
       fax:
         number:               Fax-Nummer
         receiver:             Empfänger
+        receiver_id:          Empfänger
         sent_at:              Versandt
+        created_at:           Fax-Auftrag von
+        case:                 Fall
+        status:               Status
 
   cancan:
     roles:

@@ -7,4 +7,15 @@ module FaxesHelper
       {:id => person.id, :text => person.to_s, :number => number}
     end
   end
+
+  def fax_state_label(fax)
+    case fax.state.to_s
+    when 'pending'
+      boot_label('in arbeit...', :warning)
+    when 'sent'
+      boot_label('versandt', :success)
+    when 'failed'
+      boot_label('fehlgeschlagen', :important)
+    end
+  end
 end

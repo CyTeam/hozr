@@ -1,6 +1,9 @@
 %table.table.table-striped
   %tr
     %th= t_attr(:receiver)
+    %th= t_attr(:case)
+    %th= t_attr(:created_at)
     %th= t_attr(:sent_at)
+    %th= t_attr(:status)
 
   = render collection
