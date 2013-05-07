@@ -40,7 +40,7 @@ class Fax < ActiveRecord::Base
   # Actions
   # =======
   def send_fax
-    filename = Rails.root.join('system', 'fax_queue', "#{number}_hozr-case-#{id}.pdf")
+    filename = Rails.root.join('system', 'fax_queue', "#{number}_hozr-case_#{id}.pdf")
     File.open(filename, 'w') do |file|
       file.binmode
       file.write self.case.to_pdf
