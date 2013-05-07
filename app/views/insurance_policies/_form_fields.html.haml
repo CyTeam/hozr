@@ -1,5 +1,5 @@
 .row-fluid
   .span7
-    = f.association :insurance, :collection => Insurance.sorted
+    = f.association :insurance, :collection => Insurance.sorted, :input_html => {:class => 'select2'}
   .span5
     = f.input :number, :autocomplete => 'off'
