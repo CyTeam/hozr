@@ -33,9 +33,7 @@ function initializeBehaviours() {
   addNestedFormBehaviour();
 
   // select2
-  $('.select2').select2({
-      allowClear: true
-  });
+  setupSelect2();
 
   // application
   setupSlidepathLinks();

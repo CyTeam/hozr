@@ -85,3 +85,9 @@ function addIconTooltipBehaviour() {
 function addTimeCheckBehaviour() {
   $('*[data-check-hours=true]').setMask();
 }
+
+function setupSelect2() {
+  $('.select2').select2({
+      allowClear: true
+  });
+}
