@@ -1,6 +1,8 @@
 class Fax < ActiveRecord::Base
+  default_scope order('created_at DESC')
+
   # State
-  scope :by_state, lambda {|value| value == 'all' ? scoped : where(:state => value)}
+  scope :by_state, lambda {|value| where(:state => value) }
 
   # Receiver
   belongs_to :receiver, :class_name => 'Doctor', :foreign_key => :receiver_id
