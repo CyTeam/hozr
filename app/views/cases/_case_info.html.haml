@@ -16,7 +16,7 @@
             = case_info.patient.remarks.truncate 80, :separator => ' '
 
       .pull-right
-        = link_to case_info, :title => t_title(:edit, Case) do
+        = link_to [:edit, case_info], :title => t_title(:edit, Case) do
           %i.icon-edit
       %dt= t_attr(:praxistar_eingangsnr, Case)
       %dd
