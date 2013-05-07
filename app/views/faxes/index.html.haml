@@ -1,0 +1,10 @@
+.contextual
+  .btn-group
+    = link_to "In Arbeit", faxes_path(:by_state => :pending), :class => 'btn'
+    = link_to "Alle", faxes_path(:by_state => :all), :class => 'btn'
+
+= boot_page_title
+
+= paginate collection
+= render 'list', :collection => collection
+= paginate collection

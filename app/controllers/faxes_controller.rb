@@ -2,6 +2,8 @@
 
 class FaxesController < AuthorizedController
   belongs_to :case, :optional => true
+  has_scope :by_state, :default => 'pending'
+  has_scope :per, :default => 50
 
   def new
     render 'show_modal'

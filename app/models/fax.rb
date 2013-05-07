@@ -1,4 +1,7 @@
 class Fax < ActiveRecord::Base
+  # State
+  scope :by_state, lambda {|value| value == 'all' ? scoped : where(:state => value)}
+
   # Receiver
   belongs_to :receiver, :class_name => 'Doctor', :foreign_key => :receiver_id
   attr_accessible :receiver_id, :receiver_type, :receiver
