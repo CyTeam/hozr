@@ -2,8 +2,23 @@
   = f.input :case_id, :as => :hidden
   .row-fluid
     .span12
+      = f.input :receiver_id
+    .span12
       = f.input :number
   .row-fluid.hidden-actions
     .form-actions
       = f.button :submit
+:javascript
+  var people_data = #{fax_collection.to_json}
+  $('#fax_receiver_id').select2({
+    data: people_data,
+    initSelection: function(element, callback) {
+      var data = {id: element.val(), text: '#{resource.receiver.to_s}'};
+      callback(data);
+    }
+  })
+  $('#fax_receiver_id').on('change', function(e) {
+    var number = $('#fax_receiver_id').select2('data').number
+    $('#fax_number').val(number)
+  })
 

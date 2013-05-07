@@ -1,7 +1,13 @@
 class Fax < ActiveRecord::Base
   # Receiver
-  belongs_to :receiver
+  belongs_to :receiver, :class_name => 'Doctor', :foreign_key => :receiver_id
   attr_accessible :receiver_id, :receiver_type, :receiver
+  before_save do
+    if number.blank? && receiver.present?
+      fax_contact = receiver.vcard.contact.where(:phone_number_type => ['Fax', 'fax']).first
+      number = fax_contact.try(:number)
+    end
+  end
 
   # Number
   attr_accessible :number
