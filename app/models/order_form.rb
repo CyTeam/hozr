@@ -37,6 +37,7 @@ class OrderForm < ActiveRecord::Base
     }
   },
   :root_path => Rails.root.join('system')
+  validates :file, :presence => true
 
   WIDTH = 1200
   def prepare(image)
