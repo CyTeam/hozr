@@ -414,11 +414,12 @@ ActiveRecord::Schema.define(:version => 20130507081556) do
     t.string   "number"
     t.integer  "case_id"
     t.integer  "sender_id"
-    t.datetime "sent_at"
     t.string   "receiver_type"
     t.integer  "receiver_id"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.datetime "sent_at"
+    t.string   "state",         :default => "pending"
+    t.datetime "created_at",                           :null => false
+    t.datetime "updated_at",                           :null => false
   end
 
   add_index "faxes", ["case_id"], :name => "index_faxes_on_case_id"
