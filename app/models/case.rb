@@ -36,7 +36,7 @@ class Case < ActiveRecord::Base
   end
 
   # CaseCopyTo
-  has_many :case_copy_tos
+  has_many :case_copy_tos, :dependent => :destroy
   accepts_nested_attributes_for :case_copy_tos
 
   has_one :order_form, :autosave => true
