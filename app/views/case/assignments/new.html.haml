@@ -14,5 +14,6 @@
 
 = link_to t_action(:scan), scan_order_forms_path, :method => :post, :class => 'btn'
 
-%h3 Scans
-= render 'form'
+- unless @order_forms.empty?
+  %h3 Scans
+  = render 'form'
