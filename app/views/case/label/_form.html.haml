@@ -40,7 +40,7 @@
           = text_field_tag 'case_label[][part_count]', nil, :class => 'span12'
 
   .form-actions
-    = f.button :submit, t_action(:print)
+    = f.button :submit, t_action(:print), :class => 'btn-primary'
     = link_to t_action(:cancel), '#', :onclick => "$('#label-form').empty(); $('#label-button').show()", :class => 'btn'
 
 :javascript

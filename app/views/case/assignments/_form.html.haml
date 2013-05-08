@@ -14,4 +14,4 @@
           = c.input :doctor_id, :as => :select, :collection => Doctor.all, :input_html => {:class => 'select2', 'data-placeholder' => t('.choose_doctor')}
 
   .form-actions
-    = f.button :submit, t_action(:save)
+    = f.button :submit, 'Zuweisen', :class => 'btn btn-primary'
