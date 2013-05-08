@@ -182,9 +182,16 @@ class CasesController < AuthorizedController
     @case.review_done(current_user.object)
 
     if !@case.save(:context => :review_done)
-      flash.now[:alert] = "Bitte Pflichtfelder ausfüllen."
-      render 'second_entry_form'
-      return
+      respond_to do |format|
+        format.html do
+          flash.now[:alert] = "Bitte Pflichtfelder ausfüllen."
+          render 'second_entry_form' and return
+        end
+        format.js do
+          flash.now[:alert] = "Fall nicht signiert, bitte alle Pflichtfelder ausfüllen."
+          render 'show_flash' and return
+        end
+      end
     end
 
     # Persist as PDF
