@@ -1,6 +1,3 @@
-.contextual
-  = contextual_link_to :new, OrderForm
-
 = boot_page_title
 
 %h3 Barcodes drucken
@@ -12,7 +9,9 @@
 #cases-for-scanning
   = render 'cases_for_scanning', :collection => Case.for_scanning
 
-= link_to t_action(:scan), scan_order_forms_path, :method => :post, :class => 'btn'
+.form-actions
+  = link_to t_action(:scan), scan_order_forms_path, :method => :post, :class => 'btn btn-primary'
+  = link_to 'Manuell erfassen', new_order_form_path, :class => 'btn'
 
 - unless @order_forms.empty?
   %h3 Formulare zum Zuweisen
