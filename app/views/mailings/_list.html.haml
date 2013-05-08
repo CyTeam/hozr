@@ -27,8 +27,8 @@
         %th
     %tr.group_body[mailing]
       %td
-      %td{:style => "text-align: right"}= link_to mailing.cases.count, mailing
-      %td= mailing.doctor.nil? ? "Unbekannt" : "#{mailing.doctor.name}"
+      %td{:style => "text-align: right"}= link_to mailing.cases.count, mailing, 'data-href-container' => 'tr'
+      %td= mailing.doctor.nil? ? "Unbekannt" : link_to(mailing.doctor.name, mailing.doctor)
       %td
         - for send_queue in mailing.send_queues
           %p
