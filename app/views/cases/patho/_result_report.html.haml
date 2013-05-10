@@ -1,0 +1,53 @@
+.row-fluid
+  .span6
+    = [@case.reviewer.tenant.person.vcard.try(:locality), l(@case.review_at.to_date, :format => '%d. %B %Y')].compact.join(', ') if @case.reviewer && @case.review_at
+  .span6
+    = @case.doctor.vcard.honorific_prefix if @case.doctor
+    = render "/vcards/show", :vcard => @case.doctor.vcard if @case.doctor
+%br
+%br
+%br
+
+.row-fluid
+  .span12
+    %h4= @case.to_s
+.row-fluid
+  .span12
+    = sanitize(@case.finding_text, :tags => %w(p strong br), :attributes => [])
+%br
+%br
+%br
+
+- if @case.reviewer && @case.review_at
+  .row-fluid
+    .span6
+    .span6
+      = @case.reviewer.vcard.honorific_prefix
+      = @case.reviewer.vcard.full_name
+      - if @case.reviewer.vcard.extended_address.present?
+        %br
+        = @case.reviewer.vcard.extended_address
+      %br
+      = "Visum: #{@case.review_at}"
+  %br
+  %br
+  %br
+
+.row-fluid
+  .span2
+    Einsender:
+  .span10
+    = full_address(@case.doctor.vcard, ', ') if @case.doctor
+
+- if @case.case_copy_tos.present?
+  .row-fluid
+    .span2
+      Kopie an:
+    .span10
+      - @case.case_copy_tos.each do |case_copy_to|
+        - next unless case_copy_to.person
+        %p= full_address(case_copy_to.person.vcard, ', ')
+
+.row-fluid
+  .span2
+    = @case.classification.code if @case.classification

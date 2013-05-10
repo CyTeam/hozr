@@ -1,0 +1,45 @@
+.sheet_a5
+  .report
+    #patient
+      - if @case.patient
+        - unless @case.patient.doctor_patient_nr.blank?
+          = @case.patient.doctor_patient_nr
+          %br/
+        = render "/vcards/show", :vcard => @case.patient.vcard
+        %br/
+        = @case.patient.birth_date unless @case.patient.birth_date.nil?
+        %br/
+    #insurance
+      - if !@case.insurance.nil?
+        = @case.insurance.name
+        = "##{@case.insurance_nr}" unless @case.insurance_nr.nil? or @case.insurance_nr.strip == "0" or @case.insurance_nr.strip == ""
+    #doctor
+      = @case.doctor.vcard.honorific_prefix if @case.doctor
+      %br/
+      = render "/vcards/show", :vcard => @case.doctor.vcard if @case.doctor
+    #case
+      Entnahme vom: #{@case.examination_date}
+      %br/
+      Eingang am: #{@case.entry_date}
+    #subject.title
+      Ihr Auftrag Nr. #{@case.praxistar_eingangsnr}
+    #remarks
+      = image_tag inline_order_form_url(@case.order_form, :type => :result_remarks), :style => 'width: 410px; height: 192px' if @case.order_form
+    #finding_title.title
+      Befund
+    #classification{:class => "PAP_#{h @case.classification.code unless @case.classification.nil?}"}
+      = @case.classification.name unless @case.classification.nil?
+    #findings
+      #finding_list
+        = render 'cases/zyto/list_findings'
+    #special_findings
+      - for finding in @case.control_findings
+        %div{:class => finding_css_class(finding)}= finding.name
+      %br/
+      - for finding in @case.quality_findings
+        %div{:class => finding_css_class(finding)}= finding.name
+    #signature
+      = "Visum: #{@case.screener.vcard.abbreviated_name}, #{@case.screened_at.to_date}" if @case.screener && @case.screened_at
+      - unless @case.reviewer.nil?
+        %br/
+        = "Visum: #{@case.reviewer.vcard.abbreviated_name}, #{@case.review_at.to_date}" if @case.reviewer && @case.review_at
