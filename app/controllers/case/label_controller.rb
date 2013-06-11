@@ -19,7 +19,7 @@ class Case::LabelController < ApplicationController
 
     rescue RuntimeError => e
       # Allow failing printer in demo env
-      if !Rails.env.demo?
+      if !(Rails.env.demo? || Rails.env.development?)
         flash.now[:alert] = "Drucken fehlgeschlagen: #{e.message}.<br/>Keine Fälle erzeugt.".html_safe
         return
       end
