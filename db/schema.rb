@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130507081556) do
+ActiveRecord::Schema.define(:version => 20130611131809) do
 
   create_table "account_types", :force => true do |t|
     t.string   "name",       :limit => 100
@@ -481,6 +481,7 @@ ActiveRecord::Schema.define(:version => 20130507081556) do
     t.datetime "updated_at"
     t.text     "failed_jobs"
     t.string   "type"
+    t.boolean  "print_insurance_recipe"
   end
 
   create_table "invoice_batch_jobs_invoices", :id => false, :force => true do |t|
