@@ -1,3 +1,71 @@
+1.1.0 (unreleased)
+=====
+This release contains lots of usability fixes based on feedback by ZytoLabor.
+
+We also implemented the basic framework for Fax result sending.
+
+There's also a bunch of small usability fixes and enhancements:
+* Use common table styling for patients/dunning_stopped list.
+* Use AJAX select2 field for patient in case form.
+* Set full width for label markup for cases in sidebar.
+* Do not escape html for popover in case history sidebar.
+* Show flash message if case is queued for resend.
+* Add link to doctor in send_queue list.
+* Show send_queues, not mailings in doctor view.
+* Use select2 for channel selection in doctors form.
+* Fix translation for overview_email.
+* Add setting mail.use_cylab to suppress email sending button in mailing index.
+* Redirect to root page after case deletion.
+* Use yellow instead of orange for agus/ascus classifications.
+* Fix color in case info sidebar for "blue".
+* Use setting for billing_queue in todo.
+* Add intra_day_id to cases#form.
+* Add field for first_entry_submitter to cases form.
+* Support both white and lightgray colors for classification marks.
+* Drop legends in cases side-list.
+* Use bigger font-size for sidebar content.
+* Add patient date of birth to case info in sidebar.
+* More prominent leica scan links in case lists.
+* Add input field for first_entry_at to cases form.
+* Use select2 for case label print form.
+* Use clever case code assumptions for start and end range of case label print form.
+* New setting modules.result_report_archive with default false.
+* Nicer contact view in people lists.
+* Implement p16 case list printing.
+* Show case and patient remarks in case info box.
+* Add field for remarks to case form.
+* Show case popovers above case compact item to fix hover issues.
+* Add case remarks hint and popover to compact cases.
+* Add modal dialog to directly edit case and patient remarks from sidebar.
+* Use white color for link text in label and badges.
+* Give remarks modal form some height.
+* Move remarks modal dialog setup from cases/show to cases/case_info.
+* Add guard alerting about un-configured scanner in order_forms#scan.
+* Link to case edit action from sidebar.
+* Fix exceptino in case label print if all labels have been printed.
+* Use select2 for insurance selection in patients.
+* Proper translation for order form assignment saving.
+* Do not show section for scanned forms in new case assignment if empty.
+* Better titles in case assignment form.
+* Better usability for case assignment.
+* Unify form action appearance in case assignment/label printing.
+* Better icons for work queue overview.
+* Mailings list usability fixes.
+* Add presence validation to OrderForm.file.
+
+Bugfixes
+* Do not use https for slidepath link.
+* Do not fails in Case#classification_id if no default classification is set.
+* Use body as popover container for patient remarks to fix keyboard navigation in first entry.
+* Fix cases in early stages.
+* Fix submit button handler to only submit closest form.
+* Make migration port_doctor_to_person robust against doctors with no channels.
+* Rename Case.first_entry_by association to .first_entry_submitter to fix updates.
+* Destroy case copies if case is destroyed.
+* Handle invalid cases in direct review_done actions from review queue.
+
+* Sow full vcard for in doctor view.
+
 1.0.9
 =====
 Bug fixes:
