@@ -82,8 +82,8 @@ ActiveRecord::Schema.define(:version => 20130611131809) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.date     "date"
-    t.time     "from"
-    t.time     "to"
+    t.datetime "duration_from"
+    t.datetime "duration_to"
   end
 
   add_index "appointments", ["patient_id"], :name => "index_appointments_on_patient_id"
