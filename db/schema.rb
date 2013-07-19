@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130611131809) do
+ActiveRecord::Schema.define(:version => 20130709081712) do
 
   create_table "account_types", :force => true do |t|
     t.string   "name",       :limit => 100
@@ -105,15 +105,22 @@ ActiveRecord::Schema.define(:version => 20130611131809) do
   add_index "attachments", ["code"], :name => "index_attachments_on_code"
   add_index "attachments", ["object_id", "object_type"], :name => "index_attachments_on_object_id_and_object_type"
 
-  create_table "banks", :force => true do |t|
-    t.integer  "vcard_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "swift"
-    t.string   "clearing"
+  create_table "booking_templates", :force => true do |t|
+    t.string   "title"
+    t.string   "amount"
+    t.integer  "credit_account_id"
+    t.integer  "debit_account_id"
+    t.text     "comments"
+    t.datetime "created_at",              :null => false
+    t.datetime "updated_at",              :null => false
+    t.string   "code"
+    t.string   "matcher"
+    t.string   "amount_relates_to"
+    t.string   "type"
+    t.string   "charge_rate_code"
+    t.string   "salary_declaration_code"
+    t.integer  "position"
   end
-
-  add_index "banks", ["vcard_id"], :name => "index_banks_on_vcard_id"
 
   create_table "bookings", :force => true do |t|
     t.string   "title",             :limit => 100
@@ -822,6 +829,23 @@ ActiveRecord::Schema.define(:version => 20130611131809) do
   end
 
   add_index "settings", ["target_type", "target_id", "var"], :name => "index_settings_on_target_type_and_target_id_and_var", :unique => true
+
+  create_table "taggings", :force => true do |t|
+    t.integer  "tag_id"
+    t.integer  "taggable_id"
+    t.string   "taggable_type"
+    t.integer  "tagger_id"
+    t.string   "tagger_type"
+    t.string   "context",       :limit => 128
+    t.datetime "created_at"
+  end
+
+  add_index "taggings", ["tag_id"], :name => "index_taggings_on_tag_id"
+  add_index "taggings", ["taggable_id", "taggable_type", "context"], :name => "index_taggings_on_taggable_id_and_taggable_type_and_context"
+
+  create_table "tags", :force => true do |t|
+    t.string "name"
+  end
 
   create_table "tariff_codes", :force => true do |t|
     t.string   "tariff_code"
