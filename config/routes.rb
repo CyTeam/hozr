@@ -38,6 +38,8 @@ Hozr::Application.routes.draw do
     end
   end
 
+  get 'result_report_index' => 'clients#result_report_index'
+
   # Main resources
 
   resources :people do
