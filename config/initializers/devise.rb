@@ -60,6 +60,13 @@ Devise.setup do |config|
   # Does not affect registerable.
   # config.paranoid = true
 
+  # By default Devise will store the user in session. You can skip storage for
+  # :http_auth and :token_auth by adding those symbols to the array below.
+  # Notice that if you are skipping storage for all authentication paths, you
+  # may want to disable generating routes to Devise's sessions controller by
+  # passing :skip => :sessions to `devise_for` in your config/routes.rb
+  config.skip_session_storage = [:token_auth]
+
   # ==> Configuration for :database_authenticatable
   # For bcrypt, this is the cost for hashing the password and defaults to 10. If
   # using other encryptors, it sets how many times you want the password re-encrypted.
@@ -149,11 +156,7 @@ Devise.setup do |config|
 
   # ==> Configuration for :token_authenticatable
   # Defines name of the authentication token params key
-  # config.token_authentication_key = :auth_token
-
-  # If true, authentication through token does not store user in session and needs
-  # to be supplied on each request. Useful if you are using the token as API token.
-  # config.stateless_token = false
+  config.token_authentication_key = :auth_token
 
   # ==> Scopes configuration
   # Turn scoped views on. Before rendering "sessions/new", it will first check for

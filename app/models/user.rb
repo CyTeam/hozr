@@ -4,6 +4,10 @@ class User < ActiveRecord::Base
   # Strategies
   devise :database_authenticatable, :recoverable, :trackable, :timeoutable, :lockable, :rememberable, :validatable
 
+  # API
+  devise :token_authenticatable
+  before_save :ensure_authentication_token
+
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :login, :remember_me
 
