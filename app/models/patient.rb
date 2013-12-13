@@ -188,7 +188,7 @@ class Patient < ActiveRecord::Base
         name
       else
         s = name
-        s += "##{doctor_patient_nr}" unless doctor_patient_nr.blank?
+        s += " ##{doctor_patient_nr}" unless doctor_patient_nr.blank?
         s += ", #{birth_date}" unless birth_date.blank?
     end
   end
