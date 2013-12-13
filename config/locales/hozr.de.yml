@@ -149,6 +149,7 @@ de:
       sysadmin: System Administration
       zyto:     Zytologie
       doctor:   Arzt
+      client:   Zuweisender Arzt
 
   crud:
     action:
