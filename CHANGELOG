@@ -1,3 +1,12 @@
+1.0.10
+======
+* Update therubyracer gem to work on Ubuntu 13.10 Saucy.
+* Update haml and sass gems.
+* Add token authentication.
+* New user role "client".
+* Add space before #PATIENT_NR in Patient.to_s.
+* New clients controller to allow fetching URL list of not yet downloaded result reports.
+
 1.0.9
 =====
 Bug fixes:
