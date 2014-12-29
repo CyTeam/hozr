@@ -1,3 +1,11 @@
+# Gemfile
+# =======
+# Policies:
+# * We do not add versioned dependencies unless needed
+# * If we add versioned dependencies, we document the reason
+# * We use single quotes
+# * We use titles to group related gems
+
 # Settings
 # ========
 source 'http://rubygems.org'
