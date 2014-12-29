@@ -41,9 +41,6 @@ group :test do
 
   # Browser
   gem 'capybara'
-
-  # Spork
-  gem 'spork-rails'
 end
 
 group :test, :development do
@@ -51,7 +48,7 @@ group :test, :development do
   gem 'rspec-rails'
 
   # Fixtures
-  gem "factory_girl_rails", :require => false # To make Spork happy
+  gem "factory_girl_rails"
 end
 
 group :development do
