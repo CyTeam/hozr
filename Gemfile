@@ -71,9 +71,6 @@ gem 'swissmatch'
 # Uploads
 gem 'carrierwave'
 
-# Autocomplete
-gem 'rails3-jquery-autocomplete', :git => 'https://github.com/slash4/rails3-jquery-autocomplete.git', :ref => '393786627734720f5cdae2265bc4a74609756452'
-
 # Wysiwyg
 gem 'tinymce-rails'
 
