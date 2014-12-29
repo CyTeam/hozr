@@ -14,12 +14,6 @@ GIT
       ffi
 
 GIT
-  remote: git://github.com/rails/prototype_legacy_helper.git
-  revision: a2cd95c3e3c1a4f7a9566efdab5ce59c886cb05f
-  specs:
-    prototype_legacy_helper (0.0.0)
-
-GIT
   remote: git://github.com/tdgs/premailer-rails3.git
   revision: 4b8234369168fdfeaa590e28a52e73cf4223ccd7
   specs:
@@ -416,7 +410,6 @@ DEPENDENCIES
   prawnto
   premailer!
   premailer-rails3!
-  prototype_legacy_helper (= 0.0.0)!
   rails
   rails3-jquery-autocomplete!
   rb-inotify

@@ -150,5 +150,4 @@ gem 'cupsffi', :git => 'git://github.com/huerlisi/cupsffi.git'
 gem 'fastercsv'
 
 # Rails 3 Migration
-gem 'prototype_legacy_helper', '0.0.0', :git => 'git://github.com/rails/prototype_legacy_helper.git'
 gem 'dynamic_form'
