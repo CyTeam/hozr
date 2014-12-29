@@ -182,7 +182,8 @@ GEM
       childprocess (>= 0.2.3)
       guard (>= 1.1)
       spork (>= 0.8.4)
-    haml (3.1.7)
+    haml (4.0.4)
+      tilt
     has_scope (0.5.1)
     has_vcards (0.20.1)
       inherited_resources

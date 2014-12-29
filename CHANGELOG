@@ -52,6 +52,7 @@ There's also a bunch of small usability fixes and enhancements:
 * Better icons for work queue overview.
 * Mailings list usability fixes.
 * Add presence validation to OrderForm.file.
+* Sow full vcard for in doctor view.
 
 Bugfixes
 * Do not use https for slidepath link.
@@ -64,7 +65,14 @@ Bugfixes
 * Destroy case copies if case is destroyed.
 * Handle invalid cases in direct review_done actions from review queue.
 
-* Sow full vcard for in doctor view.
+1.0.10
+======
+* Update therubyracer gem to work on Ubuntu 13.10 Saucy.
+* Update haml and sass gems.
+* Add token authentication.
+* New user role "client".
+* Add space before #PATIENT_NR in Patient.to_s.
+* New clients controller to allow fetching URL list of not yet downloaded result reports.
 
 1.0.9
 =====

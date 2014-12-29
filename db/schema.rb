@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130709081712) do
+ActiveRecord::Schema.define(:version => 20131213002502) do
 
   create_table "account_types", :force => true do |t|
     t.string   "name",       :limit => 100
@@ -968,6 +968,7 @@ ActiveRecord::Schema.define(:version => 20130709081712) do
     t.string   "reset_password_token"
     t.datetime "remember_created_at"
     t.integer  "tenant_id"
+    t.string   "authentication_token"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email"

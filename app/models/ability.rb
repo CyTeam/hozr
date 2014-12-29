@@ -40,6 +40,13 @@ class Ability
     end
   end
 
+  def client_abilities(user)
+    can :read, Case, :doctor_id => user.object.id
+    can :download, Attachment do |attachment|
+      attachment.object.doctor_id == user.object.id
+    end
+  end
+
   # Main role/ability definitions.
   def initialize(user)
     alias_action :index, :to => :list
@@ -47,6 +54,10 @@ class Ability
     alias_action [:case_label, :case_label_print, :post_label, :post_label_print], :to => :label_print
 
     return unless user
+
+    if user.role? :client
+      client_abilities(user)
+    end
 
     if user.role? :admin
       admin_abilities
