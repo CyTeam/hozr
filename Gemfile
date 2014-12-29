@@ -38,7 +38,7 @@ gem 'kaminari'
 
 # UI
 # ==
-gem 'jquery-rails'
+gem 'jquery-rails', '~> 2.0'
 gem 'haml'
 gem 'simple_form'
 gem 'twitter-bootstrap-rails'
@@ -52,19 +52,19 @@ gem 'i18n_rails_helpers'
 
 # Access Control
 # ==============
-gem 'devise'
-gem 'cancan'
+gem 'devise', '~> 2.2' # Changed API
+gem 'cancan', '1.6.7'
 gem 'lyb_devise_admin'
 
 # Validations
 gem 'validates_timeliness'
 
 # Application Settings
-gem 'ledermann-rails-settings', :require => 'rails-settings'
+gem 'ledermann-rails-settings', '~> 1.2', :require => 'rails-settings' # Changed API
 
 # Addresses
 gem 'unicode_utils'
-gem 'has_vcards'
+gem 'has_vcards', '~> 0.20'
 gem 'autocompletion'
 gem 'swissmatch'
 
@@ -72,7 +72,7 @@ gem 'swissmatch'
 gem 'carrierwave'
 
 # Autocomplete
-gem 'rails3-jquery-autocomplete', :git => 'https://github.com/slash4/rails3-jquery-autocomplete.git'
+gem 'rails3-jquery-autocomplete', :git => 'https://github.com/slash4/rails3-jquery-autocomplete.git', :ref => '393786627734720f5cdae2265bc4a74609756452'
 
 # Wysiwyg
 gem 'tinymce-rails'
@@ -90,12 +90,12 @@ gem 'prawnto'
 
 # Mail
 gem 'nokogiri'
-gem 'premailer', :git => "git://github.com/alexdunae/premailer.git"
+gem 'premailer', :git => "git://github.com/alexdunae/premailer.git", :ref => '023af276c8106294980eb9007e7ca4901fd568fd'
 gem "premailer-rails3", :git => "git://github.com/tdgs/premailer-rails3.git"
 #gem 'actionmailer-instyle', :require => 'action_mailer/in_style', :path => '../actionmailer-instyle'
 
 # Search
-gem 'thinking-sphinx', '~> 2.1'
+gem 'thinking-sphinx', '~> 2.1' # Incompatible API
 
 gem 'jcrop-rails'
 
@@ -124,7 +124,7 @@ end
 # ============
 group :development, :test do
   # Testing Framework
-  gem 'rspec-rails'
+  gem 'rspec-rails', '~> 2.12'
 
   # Browser
   gem 'capybara'
@@ -133,7 +133,7 @@ group :development, :test do
   gem 'selenium-webdriver'
 
   # Matchers/Helpers
-  gem 'accept_values_for'
+  gem 'accept_values_for', '~> 0.4.3'
 
   # Debugger
   gem 'pry-rails'
