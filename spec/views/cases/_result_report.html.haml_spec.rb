@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe 'cases/_result_report.html.haml' do
+describe 'cases/_result_report.html.haml', type: :view do
   let(:a_case) do
     stub_model(Case, :praxistar_eingangsnr => 'B12345')
   end

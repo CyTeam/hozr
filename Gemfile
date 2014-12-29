@@ -121,7 +121,7 @@ end
 # ============
 group :development, :test do
   # Testing Framework
-  gem 'rspec-rails', '~> 2.12'
+  gem 'rspec-rails'
   gem 'rspec-activemodel-mocks'
 
   # Browser
@@ -131,7 +131,7 @@ group :development, :test do
   gem 'selenium-webdriver'
 
   # Matchers/Helpers
-  gem 'accept_values_for', '~> 0.4.3'
+  gem 'accept_values_for'
 
   # Debugger
   gem 'pry-rails'
