@@ -22,14 +22,6 @@ gem 'unicorn'
 # ========
 gem 'mysql2'
 
-# Development
-# ===========
-group :development do
-
-  # Capistrano
-  gem 'capones_recipes'
-end
-
 # Asset Pipeline
 # ==============
 gem 'less-rails'
@@ -119,15 +111,13 @@ gem 'fastercsv'
 # Rails 3 Migration
 gem 'dynamic_form'
 
-# Test
-# ====
-group :test do
-  # Matchers/Helpers
-  gem 'shoulda'
-  gem 'accept_values_for'
+group :development do
+  # Debugging
+  gem 'better_errors'
+  gem 'binding_of_caller'  # Needed by binding_of_caller to enable html console
 
-  # Browser
-  gem 'capybara'
+  # Deployment
+  gem 'capones_recipes'
 end
 
 # Dev and Test
@@ -136,7 +126,21 @@ group :development, :test do
   # Testing Framework
   gem 'rspec-rails'
 
+  # Browser
+  gem 'capybara'
+  gem 'capybara-screenshot'
+  gem 'poltergeist'
+  gem 'selenium-webdriver'
+
+  # Matchers/Helpers
+  gem 'accept_values_for'
+
+  # Debugger
+  gem 'pry-rails'
+  gem 'pry-byebug'
+
   # Fixtures
+  gem 'connection_pool'
   gem "factory_girl_rails"
 end
 

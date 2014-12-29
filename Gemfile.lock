@@ -61,12 +61,22 @@ GEM
     activesupport (3.2.21)
       i18n (~> 0.6, >= 0.6.4)
       multi_json (~> 1.0)
-    addressable (2.2.8)
+    addressable (2.3.6)
     arel (3.0.3)
     autocompletion (0.0.3)
     barby (0.6.2)
     bcrypt-ruby (3.0.1)
+    better_errors (2.0.0)
+      coderay (>= 1.0.0)
+      erubis (>= 2.6.6)
+      rack (>= 0.9.0)
+    binding_of_caller (0.7.2)
+      debug_inspector (>= 0.0.1)
     builder (3.0.4)
+    byebug (3.5.1)
+      columnize (~> 0.8)
+      debugger-linecache (~> 1.2)
+      slop (~> 3.6)
     cancan (1.6.7)
     cap-recipes (0.3.39)
     capistrano (2.14.1)
@@ -83,18 +93,23 @@ GEM
       capistrano
       capistrano-ext
       capistrano_colors
-    capybara (1.1.2)
+    capybara (2.4.4)
       mime-types (>= 1.16)
       nokogiri (>= 1.3.3)
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
-      selenium-webdriver (~> 2.0)
-      xpath (~> 0.1.4)
+      xpath (~> 2.0)
+    capybara-screenshot (1.0.3)
+      capybara (>= 1.0, < 3)
+      colored
+      launchy
     carrierwave (0.7.0)
       activemodel (>= 3.2.0)
       activesupport (>= 3.2.0)
-    childprocess (0.3.6)
-      ffi (~> 1.0, >= 1.0.6)
+    childprocess (0.5.5)
+      ffi (~> 1.0, >= 1.0.11)
+    cliver (0.3.2)
+    coderay (1.1.0)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
       railties (~> 3.2.0)
@@ -102,12 +117,17 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.3.1)
+    colored (1.2)
+    columnize (0.8.9)
     commonjs (0.2.6)
+    connection_pool (2.1.0)
     css_parser (1.2.6)
       addressable
       rdoc
     cupsffi (0.1.4)
       ffi
+    debug_inspector (0.0.2)
+    debugger-linecache (1.2.0)
     devise (2.2.3)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.1)
@@ -124,7 +144,7 @@ GEM
       factory_girl (~> 4.1.0)
       railties (>= 3.0.0)
     fastercsv (1.5.4)
-    ffi (1.3.1)
+    ffi (1.9.6)
     haml (4.0.4)
       tilt
     has_scope (0.5.1)
@@ -152,6 +172,8 @@ GEM
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
     kgio (2.7.4)
+    launchy (2.4.3)
+      addressable (~> 2.3)
     ledermann-rails-settings (1.2.0)
       activerecord (>= 2.3)
     less (2.2.2)
@@ -160,15 +182,15 @@ GEM
       actionpack (>= 3.1)
       less (~> 2.2.0)
     libv8 (3.16.14.7)
-    libwebsocket (0.1.3)
-      addressable
     lyb_devise_admin (0.3.5)
     lyb_sidebar (0.1.1)
       rails (~> 3.1)
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
+    method_source (0.8.2)
     mime-types (1.25.1)
+    mini_portile (0.6.1)
     multi_json (1.10.1)
     mysql2 (0.3.11)
     net-scp (1.0.4)
@@ -178,11 +200,17 @@ GEM
     net-ssh (2.6.3)
     net-ssh-gateway (1.1.0)
       net-ssh (>= 1.99.1)
-    nokogiri (1.5.5)
+    nokogiri (1.6.5)
+      mini_portile (~> 0.6.0)
     orm_adapter (0.4.0)
     pdf-reader (1.1.0)
       Ascii85 (~> 1.0.0)
       ruby-rc4
+    poltergeist (1.5.1)
+      capybara (~> 2.1)
+      cliver (~> 0.3.1)
+      multi_json (~> 1.0)
+      websocket-driver (>= 0.2.0)
     polyglot (0.3.5)
     prawn (0.12.0)
       pdf-reader (>= 0.9.0)
@@ -190,6 +218,15 @@ GEM
     prawnto (0.1.1)
       prawn
       rails (>= 2.1)
+    pry (0.10.1)
+      coderay (~> 1.1.0)
+      method_source (~> 0.8.1)
+      slop (~> 3.4)
+    pry-byebug (2.0.0)
+      byebug (~> 3.4)
+      pry (~> 0.10)
+    pry-rails (0.3.2)
+      pry (>= 0.9.10)
     rack (1.4.5)
     rack-cache (1.2)
       rack (>= 0.4)
@@ -245,22 +282,17 @@ GEM
       tilt (~> 1.3)
     select2-rails (3.2.1)
       thor (~> 0.14)
-    selenium-webdriver (2.21.2)
-      childprocess (>= 0.2.5)
-      ffi (~> 1.0)
-      libwebsocket (~> 0.1.3)
+    selenium-webdriver (2.44.0)
+      childprocess (~> 0.5)
       multi_json (~> 1.0)
-      rubyzip
-    shoulda (3.0.1)
-      shoulda-context (~> 1.0.0)
-      shoulda-matchers (~> 1.0.0)
-    shoulda-context (1.0.0)
-    shoulda-matchers (1.0.0)
+      rubyzip (~> 1.0)
+      websocket (~> 1.0)
     simple-navigation (3.9.0)
       activesupport (>= 2.3.2)
     simple_form (2.0.2)
       actionpack (~> 3.0)
       activemodel (~> 3.0)
+    slop (3.6.0)
     sprockets (2.2.3)
       hike (~> 1.2)
       multi_json (~> 1.0)
@@ -315,7 +347,9 @@ GEM
       timeliness (~> 0.3.6)
     warden (1.2.1)
       rack (>= 1.0)
-    xpath (0.1.4)
+    websocket (1.2.1)
+    websocket-driver (0.4.0)
+    xpath (2.0.0)
       nokogiri (~> 1.3)
 
 PLATFORMS
@@ -325,11 +359,15 @@ DEPENDENCIES
   accept_values_for
   autocompletion
   barby
+  better_errors
+  binding_of_caller
   cancan
   capones_recipes
   capybara
+  capybara-screenshot
   carrierwave
   coffee-rails
+  connection_pool
   cupsffi
   devise
   dynamic_form
@@ -350,10 +388,13 @@ DEPENDENCIES
   lyb_sidebar
   mysql2
   nokogiri
+  poltergeist
   prawn
   prawnto
   premailer!
   premailer-rails3!
+  pry-byebug
+  pry-rails
   rails (~> 3.2)
   rails3-jquery-autocomplete!
   rdoc
@@ -361,7 +402,7 @@ DEPENDENCIES
   rspec-rails
   sass-rails
   select2-rails
-  shoulda
+  selenium-webdriver
   simple-navigation
   simple_form
   swissmatch
