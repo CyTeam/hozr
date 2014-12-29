@@ -19,17 +19,8 @@ gem 'rails', '~> 3.2'
 gem 'unicorn'
 
 # Database
+# ========
 gem 'mysql2'
-
-# Gems used only for assets and not required
-# in production environments by default.
-group :assets do
-  gem 'coffee-rails'
-  gem 'therubyracer'
-  gem 'uglifier'
-end
-
-gem 'jquery-rails'
 
 # Development
 # ===========
@@ -63,34 +54,39 @@ group :development do
   gem 'rdoc'
 end
 
-# Standard helpers
-# ================
+# Asset Pipeline
+# ==============
+gem 'less-rails'
+gem 'sass-rails'
+gem 'uglifier'
+gem 'coffee-rails'
+gem 'therubyracer'
+
 # CRUD
+# ====
+gem 'inherited_resources'
+gem 'has_scope'
 gem 'kaminari'
 
-# Application
-# ===========
-# Authentication
+# UI
+# ==
+gem 'jquery-rails'
+gem 'haml'
+gem 'simple_form'
+gem 'twitter-bootstrap-rails'
+gem 'select2-rails'
+gem 'lyb_sidebar'
+gem 'simple-navigation'
+
+# I18n
+# ====
+gem 'i18n_rails_helpers'
+
+# Access Control
+# ==============
 gem 'devise'
 gem 'cancan'
 gem 'lyb_devise_admin'
-
-# Helpers
-gem 'inherited_resources'
-gem 'has_scope'
-gem 'i18n_rails_helpers'
-gem 'haml'
-gem 'sass-rails'
-
-# Layout
-gem 'lyb_sidebar'
-
-# Bootstrap
-gem 'less-rails'
-gem 'twitter-bootstrap-rails'
-gem 'simple_form'
-gem 'select2-rails'
-gem 'simple-navigation'
 
 # Validations
 gem 'validates_timeliness'
