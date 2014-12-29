@@ -134,7 +134,6 @@ GEM
       activesupport (>= 3.2.0)
     childprocess (0.3.6)
       ffi (~> 1.0, >= 1.0.6)
-    coderay (1.0.9)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
       railties (~> 3.2.0)
@@ -163,19 +162,6 @@ GEM
       railties (>= 3.0.0)
     fastercsv (1.5.4)
     ffi (1.3.1)
-    guard (1.6.2)
-      listen (>= 0.6.0)
-      lumberjack (>= 1.0.2)
-      pry (>= 0.9.10)
-      terminal-table (>= 1.4.3)
-      thor (>= 0.14.6)
-    guard-rspec (2.4.1)
-      guard (>= 1.1)
-      rspec (~> 2.11)
-    guard-spork (1.4.2)
-      childprocess (>= 0.2.3)
-      guard (>= 1.1)
-      spork (>= 0.8.4)
     haml (4.0.4)
       tilt
     has_scope (0.5.1)
@@ -213,8 +199,6 @@ GEM
     libv8 (3.16.14.7)
     libwebsocket (0.1.3)
       addressable
-    listen (0.7.3)
-    lumberjack (1.0.2)
     lyb_devise_admin (0.3.5)
     lyb_sidebar (0.1.1)
       rails (~> 3.1)
@@ -222,7 +206,6 @@ GEM
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
-    method_source (0.8.1)
     mime-types (1.21)
     multi_json (1.10.1)
     mysql2 (0.3.11)
@@ -245,10 +228,6 @@ GEM
     prawnto (0.1.1)
       prawn
       rails (>= 2.1)
-    pry (0.9.12)
-      coderay (~> 1.0.5)
-      method_source (~> 0.8)
-      slop (~> 3.4)
     rack (1.4.5)
     rack-cache (1.2)
       rack (>= 0.4)
@@ -273,8 +252,6 @@ GEM
       thor (>= 0.14.6, < 2.0)
     raindrops (0.10.0)
     rake (10.4.2)
-    rb-inotify (0.9.0)
-      ffi (>= 0.5.0)
     rdoc (3.12.2)
       json (~> 1.4)
     ref (1.0.5)
@@ -322,7 +299,6 @@ GEM
     simple_form (2.0.2)
       actionpack (~> 3.0)
       activemodel (~> 3.0)
-    slop (3.4.3)
     spork (1.0.0rc3)
     spork-rails (3.2.0)
       rails (>= 3.0.0, < 3.3.0)
@@ -332,7 +308,6 @@ GEM
       multi_json (~> 1.0)
       rack (~> 1.0)
       tilt (~> 1.1, != 1.3.0)
-    terminal-table (1.4.5)
     therubyracer (0.12.1)
       libv8 (~> 3.16.14.0)
       ref
@@ -390,8 +365,6 @@ DEPENDENCIES
   factory_girl_rails
   fastercsv
   file-column!
-  guard-rspec
-  guard-spork
   haml
   has_scope
   has_vcards
@@ -412,7 +385,6 @@ DEPENDENCIES
   premailer-rails3!
   rails
   rails3-jquery-autocomplete!
-  rb-inotify
   rdoc
   rmagick
   rspec-rails

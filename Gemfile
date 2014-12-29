@@ -54,12 +54,6 @@ group :test, :development do
   gem "factory_girl_rails", :require => false # To make Spork happy
 end
 
-group :tools do
-  gem 'guard-spork'
-  gem 'guard-rspec'
-  gem 'rb-inotify'
-end
-
 group :development do
   # RDoc
   gem 'rdoc'
