@@ -30,30 +30,6 @@ group :development do
   gem 'capones_recipes'
 end
 
-# Test
-# ====
-group :test do
-  # Matchers/Helpers
-  gem 'shoulda'
-  gem 'accept_values_for'
-
-  # Browser
-  gem 'capybara'
-end
-
-group :test, :development do
-  # Framework
-  gem 'rspec-rails'
-
-  # Fixtures
-  gem "factory_girl_rails"
-end
-
-group :development do
-  # RDoc
-  gem 'rdoc'
-end
-
 # Asset Pipeline
 # ==============
 gem 'less-rails'
@@ -142,3 +118,31 @@ gem 'fastercsv'
 
 # Rails 3 Migration
 gem 'dynamic_form'
+
+# Test
+# ====
+group :test do
+  # Matchers/Helpers
+  gem 'shoulda'
+  gem 'accept_values_for'
+
+  # Browser
+  gem 'capybara'
+end
+
+# Dev and Test
+# ============
+group :development, :test do
+  # Testing Framework
+  gem 'rspec-rails'
+
+  # Fixtures
+  gem "factory_girl_rails"
+end
+
+# Docs
+# ====
+group :doc do
+  # Docs
+  gem 'rdoc'
+end
