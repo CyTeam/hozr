@@ -7,13 +7,6 @@ GIT
       htmlentities (>= 4.0.0)
 
 GIT
-  remote: git://github.com/huerlisi/cupsffi.git
-  revision: 4821cbef6d3ff150721799c6d81c5f960126d428
-  specs:
-    cupsffi (0.0.9)
-      ffi
-
-GIT
   remote: git://github.com/tdgs/premailer-rails3.git
   revision: 4b8234369168fdfeaa590e28a52e73cf4223ccd7
   specs:
@@ -113,6 +106,8 @@ GEM
     css_parser (1.2.6)
       addressable
       rdoc
+    cupsffi (0.1.4)
+      ffi
     devise (2.2.3)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.1)
@@ -335,7 +330,7 @@ DEPENDENCIES
   capybara
   carrierwave
   coffee-rails
-  cupsffi!
+  cupsffi
   devise
   dynamic_form
   factory_girl_rails

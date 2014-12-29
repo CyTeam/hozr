@@ -131,7 +131,7 @@ gem 'jcrop-rails'
 gem 'barby'
 
 # Printing
-gem 'cupsffi', :git => 'git://github.com/huerlisi/cupsffi.git'
+gem 'cupsffi'
 
 # Postalcode
 gem 'fastercsv'
