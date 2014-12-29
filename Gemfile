@@ -38,7 +38,7 @@ gem 'kaminari'
 
 # UI
 # ==
-gem 'jquery-rails', '~> 2.0'
+gem 'jquery-rails'
 gem 'haml'
 gem 'simple_form'
 gem 'twitter-bootstrap-rails'
