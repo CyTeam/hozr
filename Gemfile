@@ -122,6 +122,7 @@ end
 group :development, :test do
   # Testing Framework
   gem 'rspec-rails', '~> 2.12'
+  gem 'rspec-activemodel-mocks'
 
   # Browser
   gem 'capybara'

@@ -257,6 +257,10 @@ GEM
       rspec-core (~> 2.99.0)
       rspec-expectations (~> 2.99.0)
       rspec-mocks (~> 2.99.0)
+    rspec-activemodel-mocks (1.0.1)
+      activemodel (>= 3.0)
+      activesupport (>= 3.0)
+      rspec-mocks (>= 2.99, < 4.0)
     rspec-collection_matchers (1.1.2)
       rspec-expectations (>= 2.99.0.beta1)
     rspec-core (2.99.2)
@@ -399,6 +403,7 @@ DEPENDENCIES
   rails (~> 3.2)
   rdoc
   rmagick
+  rspec-activemodel-mocks
   rspec-rails (~> 2.12)
   sass-rails
   select2-rails
