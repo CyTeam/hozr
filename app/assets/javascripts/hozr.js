@@ -21,13 +21,6 @@ function guessDoctorIdFromPreviousCase() {
   $(this).val(getValueFromPreviousCase('doctor_id', this));
 }
 
-function setupCaseAssignment() {
-  var unassigned_sort_queue = $('#unassigned_sort_queue');
-  unassigned_sort_queue.find("[name$='[intra_day_id]']").live('focus', guessIntraDayIdFromPreviousCase);
-  unassigned_sort_queue.find("[name$='[examination_date]']").live('focus', guessExaminationDateFromPreviousCase);
-  unassigned_sort_queue.find("[name$='[doctor_id]']").live('focus', guessDoctorIdFromPreviousCase);
-}
-
 // Billing Address switch
 function updateBillingAddressUsage() {
   var usage_toggle = $('#patient_use_billing_address');
@@ -84,7 +77,7 @@ function showPatientHistory(element) {
 }
 
 function setupPatientHistoryHover() {
-  $('.patient').live('hover', function(event) {
+  $(document).on('hover', '.patient', function(event) {
     showPatientHistory(this);
   });
 }
