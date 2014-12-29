@@ -12,7 +12,6 @@ gem 'unicorn'
 
 # Database
 gem 'mysql2'
-gem 'activerecord-sqlserver-adapter'
 
 # Gems used only for assets and not required
 # in production environments by default.
