@@ -10,7 +10,7 @@ describe 'cases/_result_report.html.haml', type: :view do
 
     render
 
-    rendered.should match /B12345/
+    expect(rendered).to match /B12345/
   end
 
   context 'with case_copy_tos' do
