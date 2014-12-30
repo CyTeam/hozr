@@ -1,0 +1,21 @@
+sudo: false
+cache: bundler
+
+before_script:
+  - mysql -e 'create database hozr_test;'
+  - cp config/database.yml.travis-ci config/database.yml
+  - bundle exec rake db:schema:load
+
+env:
+  - DB=mysql
+
+script: "bundle exec rake spec"
+
+rvm:
+  - 2.1.5
+
+bundler_args: "--binstubs --without development"
+
+# IRC notification
+notifications:
+  irc: "irc.freenode.org#cyt"
