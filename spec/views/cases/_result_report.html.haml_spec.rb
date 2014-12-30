@@ -1,4 +1,4 @@
-require "spec_helper"
+require "rails_helper"
 
 describe 'cases/_result_report.html.haml', type: :view do
   let(:a_case) do
