@@ -1,0 +1,12 @@
+# MySQL
+mysql: &mysql
+  adapter:  mysql2
+  encoding: utf8
+  host:     localhost
+  username: root
+
+# Environments
+# ============
+test:
+  <<: *<%= ENV['DB'] %>
+  database: hozr_test

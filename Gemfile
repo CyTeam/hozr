@@ -100,7 +100,7 @@ gem 'jcrop-rails'
 gem 'barby'
 
 # Printing
-gem 'cupsffi'
+gem 'cupsffi', require: !ENV['CI']
 
 # Postalcode
 gem 'fastercsv'

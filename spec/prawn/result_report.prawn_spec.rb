@@ -1,4 +1,4 @@
-require "spec_helper"
+require "rails_helper"
 
 describe ResultReport do
   let(:a_case) do
