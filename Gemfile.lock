@@ -419,6 +419,7 @@ DEPENDENCIES
   simple-navigation
   simple_form
   swissmatch
+  swissmatch-location
   therubyracer
   thinking-sphinx
   tinymce-rails

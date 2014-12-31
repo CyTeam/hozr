@@ -67,6 +67,7 @@ gem 'unicode_utils'
 gem 'has_vcards', '~> 0.20'
 gem 'autocompletion'
 gem 'swissmatch'
+gem 'swissmatch-location', :require => 'swissmatch/location/autoload'
 
 # Uploads
 gem 'carrierwave'
