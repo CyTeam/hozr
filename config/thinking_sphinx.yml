@@ -13,6 +13,7 @@ development:
 
 test:
   <<: *common
+  mysql41: 9307
   pid_file: tmp/pids/searchd.test.pid
 
 demo:
