@@ -14,8 +14,7 @@ feature 'overall functionality' do
     expect(page).to have_text('Auftragsformulare')
 
     # Create a doctor
-    click_link 'Suche'
-    click_link 'Ärzte'
+    navigate_to 'Suche/Ärzte'
 
     click_link 'Erfassen'
     fill_in 'doctor_vcard_attributes_family_name', with: 'Muster'
@@ -24,8 +23,7 @@ feature 'overall functionality' do
     click_button 'Arzt erstellen'
 
     # Check doctors list
-    click_link 'Suche'
-    click_link 'Ärzte'
+    navigate_to 'Suche/Ärzte'
 
     expect(page).to have_text('Muster Peter')
   end
