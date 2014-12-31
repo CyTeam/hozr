@@ -108,41 +108,6 @@ class Patient < ActiveRecord::Base
   has_many :tiers
   has_many :treatments
 
-  # Sphinx Search
-  # =============
-  define_index do
-    # Delta index
-    set_property :delta => true
-
-    indexes birth_date
-
-    indexes vcard.full_name
-    indexes vcard.nickname
-    indexes vcard.family_name, :as => :family_name, :sortable => true
-    indexes vcard.given_name, :as => :given_name, :sortable => true
-    indexes vcard.additional_name
-    indexes vcard.address.street_address
-    indexes vcard.address.postal_code
-    indexes vcard.address.locality
-    indexes vcard.address.extended_address
-    indexes vcard.address.post_office_box
-
-    indexes billing_vcard.full_name
-    indexes billing_vcard.nickname
-    indexes billing_vcard.family_name
-    indexes billing_vcard.given_name
-    indexes billing_vcard.additional_name
-    indexes billing_vcard.address.street_address
-    indexes billing_vcard.address.postal_code
-    indexes billing_vcard.address.locality
-    indexes billing_vcard.address.extended_address
-    indexes billing_vcard.address.post_office_box
-
-    indexes doctor_patient_nr
-
-    indexes cases.praxistar_eingangsnr
-  end
-
   def self.by_text(query, options = {})
     options.merge!({:match_mode => :extended, :order => 'family_name ASC, given_name ASC'})
 
