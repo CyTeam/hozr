@@ -138,6 +138,7 @@ group :development, :test do
   gem 'pry-byebug'
 
   # Fixtures
+  gem 'database_cleaner'
   gem 'connection_pool'
   gem "factory_girl_rails"
 end
