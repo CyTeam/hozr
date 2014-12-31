@@ -41,24 +41,6 @@ class PatientsController < AuthorizedController
     @patient.vcard.honorific_prefix = 'Frau'
   end
 
-  def create
-    @patient = Patient.new(params[:patient])
-
-    # Deduce sex from honorific_prefix
-    @patient.sex = HonorificPrefix.find_by_name(@patient.vcard.honorific_prefix).sex
-
-    create!
-  end
-
-  def update
-    @patient = Patient.find(params[:id])
-
-    # Deduce sex from honorific_prefix
-    @patient.sex = HonorificPrefix.find_by_name(@patient.vcard.honorific_prefix).sex
-
-    update!
-  end
-
   # Merging
   def propose_merge
     @patient1 = Patient.find(params[:patient1_id])

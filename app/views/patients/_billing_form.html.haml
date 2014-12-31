@@ -3,6 +3,8 @@
     .row-fluid
       .span7
         = f.input :use_billing_address, :label_html => {:class => 'input-important'}
+      .span5
+        = f.input :dunning_stop
     .row-fluid
       .span7
         .control-group{:class => "#{'error' if v.object.errors.include?(:honorific_prefix)}"}
