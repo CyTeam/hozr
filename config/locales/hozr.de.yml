@@ -214,6 +214,8 @@ de:
     index:
       title:         Dokumente
   cases:
+    index:
+      title:         Fälle
     first_entry:
       title:           Ersteingabe
     first_entry_queue:
@@ -265,6 +267,9 @@ de:
       title:              Patienten mit Mahnstopp
     index:
       title:            Patienten
+  doctors:
+    index:
+      title:            Ärzte
 
   simple_form:
     labels:
