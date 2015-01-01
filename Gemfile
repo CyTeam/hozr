@@ -103,9 +103,6 @@ gem 'barby'
 # Printing
 gem 'cupsffi', require: !ENV['CI']
 
-# Postalcode
-gem 'fastercsv'
-
 group :development do
   # Debugging
   gem 'better_errors'
