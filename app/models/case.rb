@@ -245,16 +245,6 @@ class Case < ActiveRecord::Base
     )
   end
 
-  # Sphinx Search
-  # =============
-  define_index do
-    indexes :praxistar_eingangsnr
-    indexes :remarks
-
-    has :entry_date
-    has :assigned_at
-  end
-
   # Slidepath
   def location_index
     Slidepath::LocationIndex.where("fileName LIKE ?", "#{id}_%")

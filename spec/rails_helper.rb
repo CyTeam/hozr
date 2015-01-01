@@ -50,8 +50,32 @@ RSpec.configure do |config|
   config.include Devise::TestHelpers, type: :controller
   config.include Devise::TestHelpers, type: :helper
 
-  # Run each example in a transaction
-  config.use_transactional_fixtures = true
+  # Database cleaning for specs
+  # We cannot use transactional_fixtures in feature specs as we do use sphinx search.
+  require 'database_cleaner'
+
+  config.use_transactional_fixtures = false
+
+  config.before(:suite) do
+    DatabaseCleaner.clean_with(:truncation)
+  end
+
+  config.before(:each) do
+    DatabaseCleaner.strategy = :transaction
+  end
+
+  config.before(:each, type: :feature) do
+    DatabaseCleaner.strategy = :truncation
+  end
+
+  config.before(:each) do
+    DatabaseCleaner.start
+  end
+
+  config.after(:each) do
+    DatabaseCleaner.clean
+  end
+
 end
 
 module ActiveRecord
