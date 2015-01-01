@@ -9,7 +9,7 @@
             = link_to '#', 'data-directory-lookup' => 'patient[vcard_attributes]', :title => t_action(:directory_lookup) do
               %i.icon-search.btn
       .span5
-        = f.input :dunning_stop
+        = f.input :sex, :as => :radio_buttons, :collection => ['M', 'F'], item_wrapper_class: 'inline'
     .row-fluid
       .span7
         .control-group{:class => "#{'error' if v.object.errors.include?(:family_name) or v.object.errors.include?(:given_name)}"}

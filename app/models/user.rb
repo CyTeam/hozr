@@ -33,6 +33,7 @@ class User < ActiveRecord::Base
   # Tenancy
   belongs_to :tenant
   attr_accessible :tenant
+  validates :tenant, :presence => true
 
   # Authorization roles
   has_and_belongs_to_many :roles, :autosave => true

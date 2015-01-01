@@ -28,7 +28,7 @@ class PatientsController < AuthorizedController
   end
 
   def new
-    # Use default sex from doctor settings
+    # Use default sex from tenant settings
     case current_tenant.settings['patients.sex']
       when 'M'
         resource.sex = 'M'
@@ -39,24 +39,6 @@ class PatientsController < AuthorizedController
     end
 
     @patient.vcard.honorific_prefix = 'Frau'
-  end
-
-  def create
-    @patient = Patient.new(params[:patient])
-
-    # Deduce sex from honorific_prefix
-    @patient.sex = HonorificPrefix.find_by_name(@patient.vcard.honorific_prefix).sex
-
-    create!
-  end
-
-  def update
-    @patient = Patient.find(params[:id])
-
-    # Deduce sex from honorific_prefix
-    @patient.sex = HonorificPrefix.find_by_name(@patient.vcard.honorific_prefix).sex
-
-    update!
   end
 
   # Merging
