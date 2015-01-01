@@ -106,9 +106,6 @@ gem 'cupsffi', require: !ENV['CI']
 # Postalcode
 gem 'fastercsv'
 
-# Rails 3 Migration
-gem 'dynamic_form'
-
 group :development do
   # Debugging
   gem 'better_errors'
