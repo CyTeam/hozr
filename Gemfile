@@ -88,8 +88,8 @@ gem 'prawnto'
 
 # Mail
 gem 'nokogiri'
-gem 'premailer', :git => "git://github.com/alexdunae/premailer.git", :ref => '023af276c8106294980eb9007e7ca4901fd568fd'
-gem "premailer-rails3", :git => "git://github.com/tdgs/premailer-rails3.git"
+gem 'premailer'
+gem "premailer-rails"
 #gem 'actionmailer-instyle', :require => 'action_mailer/in_style', :path => '../actionmailer-instyle'
 
 # Search
