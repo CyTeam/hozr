@@ -1,8 +1,11 @@
 1.1.0 (unreleased)
 =====
 This release contains lots of usability fixes based on feedback by ZytoLabor.
+It also got quite some cleanups to make the code simpler.
 
 We also implemented the basic framework for Fax result sending.
+
+Then there's the start of testing:-)
 
 There's also a bunch of small usability fixes and enhancements:
 * Use common table styling for patients/dunning_stopped list.
@@ -53,6 +56,15 @@ There's also a bunch of small usability fixes and enhancements:
 * Mailings list usability fixes.
 * Add presence validation to OrderForm.file.
 * Sow full vcard for in doctor view.
+* Include tenant in page header.
+* Only show header menus and search when logged in.
+* Drop bootstrap header collapsing.
+* Add footer.
+* Validate presence of tenant in User.
+* Improve i18n for some index pages.
+* Start overall feature specs.
+* Unhide submit action in patients form.
+* Include sex radio boxes in patient form.
 
 Bugfixes
 * Do not use https for slidepath link.
