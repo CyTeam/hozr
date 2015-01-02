@@ -18,7 +18,7 @@ class Ability
     self.roles.map{|role| [I18n.translate(role, :scope => 'cancan.roles'), role]}
   end
 
-  def admin_abilities
+  def admin_abilities(user)
     can :label_print, :label_print
     can :print, :doctor_order_form
     can :manage, Mailing
@@ -29,11 +29,11 @@ class Ability
     can :manage, Doctor
   end
 
-  def zyto_abilities
+  def zyto_abilities(user)
     can :sign, Case
   end
 
-  def doctor_abilities
+  def doctor_abilities(user)
     can :review_done, Case, :review_at => nil
     can :reactivate, Case do |a_case|
       a_case.review_at
@@ -60,19 +60,19 @@ class Ability
     end
 
     if user.role? :admin
-      admin_abilities
+      admin_abilities(user)
     end
     cannot :sign, Case
     if user.role? :zyto
-      admin_abilities
-      zyto_abilities
+      admin_abilities(user)
+      zyto_abilities(user)
     end
     cannot :review_done, Case
     cannot :reactivate, Case
     if user.role? :doctor
-      admin_abilities
-      zyto_abilities
-      doctor_abilities
+      admin_abilities(user)
+      zyto_abilities(user)
+      doctor_abilities(user)
     end
 
     cannot :destroy, Case
