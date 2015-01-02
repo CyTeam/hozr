@@ -29,6 +29,7 @@ gem 'sass-rails'
 gem 'uglifier'
 gem 'coffee-rails'
 gem 'therubyracer'
+gem 'quiet_assets'
 
 # CRUD
 # ====
