@@ -50,7 +50,6 @@ class Ability
   # Main role/ability definitions.
   def initialize(user)
     alias_action :index, :to => :list
-    alias_action [:show, :current], :to => :show
     alias_action [:case_label, :case_label_print, :post_label, :post_label_print], :to => :label_print
 
     return unless user
@@ -90,5 +89,8 @@ class Ability
     # Allow setting password
     can [:show, :update], User, :id => user.id
 
+    # Allow viewing own tenant
+    can :current, Tenant
+    can :show, Tenant, :id => user.tenant_id
   end
 end
