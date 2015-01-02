@@ -5,7 +5,7 @@ GIT
     file-column (0.3.3)
 
 GEM
-  remote: http://rubygems.org/
+  remote: https://rubygems.org/
   specs:
     accept_values_for (0.7.1)
       activemodel (>= 3, < 5)
@@ -387,7 +387,6 @@ DEPENDENCIES
   lyb_devise_admin
   lyb_sidebar
   mysql2
-  nokogiri
   poltergeist
   prawn
   prawnto
