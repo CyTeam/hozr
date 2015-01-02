@@ -64,7 +64,7 @@ gem 'ledermann-rails-settings', '~> 1.2', :require => 'rails-settings' # Changed
 
 # Addresses
 gem 'unicode_utils'
-gem 'has_vcards', '~> 0.20'
+gem 'has_vcards', '~> 0.20' # Data model changes, needs synced release with CyDoc
 gem 'autocompletion'
 gem 'swissmatch'
 gem 'swissmatch-location', :require => 'swissmatch/location/autoload'
