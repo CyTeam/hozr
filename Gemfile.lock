@@ -55,7 +55,7 @@ GEM
       columnize (~> 0.8)
       debugger-linecache (~> 1.2)
       slop (~> 3.6)
-    cancan (1.6.7)
+    cancan (1.6.10)
     cap-recipes (0.3.39)
     capistrano (2.15.5)
       highline
@@ -360,7 +360,7 @@ DEPENDENCIES
   barby
   better_errors
   binding_of_caller
-  cancan (= 1.6.7)
+  cancan
   capones_recipes
   capybara
   capybara-screenshot

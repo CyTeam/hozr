@@ -53,7 +53,7 @@ gem 'i18n_rails_helpers'
 # Access Control
 # ==============
 gem 'devise', '~> 2.2' # Changed API
-gem 'cancan', '1.6.7'
+gem 'cancan'
 gem 'lyb_devise_admin'
 
 # Validations
