@@ -8,7 +8,7 @@
 
 # Settings
 # ========
-source 'http://rubygems.org'
+source 'https://rubygems.org'
 
 # Rails
 # =====
@@ -29,34 +29,35 @@ gem 'sass-rails'
 gem 'uglifier'
 gem 'coffee-rails'
 gem 'therubyracer'
+gem 'quiet_assets'
 
 # CRUD
 # ====
 gem 'inherited_resources'
 gem 'has_scope'
 gem 'kaminari'
+gem 'i18n_rails_helpers'
 
 # UI
 # ==
 gem 'jquery-rails'
 gem 'haml'
-gem 'simple_form'
 gem 'twitter-bootstrap-rails'
-gem 'select2-rails'
 gem 'lyb_sidebar'
 gem 'simple-navigation'
 
-# I18n
-# ====
-gem 'i18n_rails_helpers'
+# Forms
+# =====
+gem 'simple_form'
+gem 'select2-rails'
 
 # Access Control
 # ==============
 gem 'devise', '~> 2.2' # Changed API
-gem 'cancan', '1.6.7'
+gem 'cancan'
 gem 'lyb_devise_admin'
 
-# Validations
+# Date/Time handling
 gem 'validates_timeliness'
 
 # Application Settings
@@ -64,51 +65,44 @@ gem 'ledermann-rails-settings', '~> 1.2', :require => 'rails-settings' # Changed
 
 # Addresses
 gem 'unicode_utils'
-gem 'has_vcards', '~> 0.20'
+gem 'has_vcards', '~> 0.20' # Data model changes, needs synced release with CyDoc
 gem 'autocompletion'
 gem 'swissmatch'
 gem 'swissmatch-location', :require => 'swissmatch/location/autoload'
 
-# Uploads
-gem 'carrierwave'
+# Multiple Databases
+gem 'use_db'
 
 # Wysiwyg
 gem 'tinymce-rails'
 
 # Files
+gem 'carrierwave'
 gem 'file-column', :git => 'https://github.com/huerlisi/file_column.git'
+
+# Images
+gem 'jcrop-rails'
 gem 'rmagick'
 
-# Multiple Databases
-gem 'use_db'
+# Barcode
+gem 'barby'
 
-# PDF generation with PRAWN
+# PDF generation
 gem 'prawn'
-gem 'prawnto'
+
+# Printing
+gem 'cupsffi', require: !ENV['CI']
 
 # Mail
-gem 'nokogiri'
-gem 'premailer', :git => "git://github.com/alexdunae/premailer.git", :ref => '023af276c8106294980eb9007e7ca4901fd568fd'
-gem "premailer-rails3", :git => "git://github.com/tdgs/premailer-rails3.git"
+gem 'premailer'
+gem "premailer-rails"
 #gem 'actionmailer-instyle', :require => 'action_mailer/in_style', :path => '../actionmailer-instyle'
 
 # Search
 gem 'thinking-sphinx'
 
-gem 'jcrop-rails'
-
-# Barcode
-gem 'barby'
-
-# Printing
-gem 'cupsffi', require: !ENV['CI']
-
-# Postalcode
-gem 'fastercsv'
-
-# Rails 3 Migration
-gem 'dynamic_form'
-
+# Development
+# ===========
 group :development do
   # Debugging
   gem 'better_errors'

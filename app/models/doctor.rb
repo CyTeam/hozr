@@ -4,16 +4,16 @@ class Doctor < Person
   # Access restrictions
   attr_accessible :vcard
 
-  scope :active, where(:active => true)
+  scope :active, lambda { where(:active => true) }
 
   # Helpers
   # =======
   def to_s(format = :default)
     case format
     when :select
-      [vcard.full_name].join(", ") + " (#{vcard.locality})"
+      [vcard.full_name].join(', ') + " (#{vcard.locality})"
     else
-      [vcard.honorific_prefix, vcard.full_name].map(&:presence).compact.join(" ")
+      [vcard.honorific_prefix, vcard.full_name].map(&:presence).compact.join(' ')
     end
   end
 
@@ -24,11 +24,12 @@ class Doctor < Person
 
   # ZSR and EAN
   attr_accessible :ean_party, :zsr
+
   # ZSR sanitation
   def zsr=(value)
     value.delete!(' .') unless value.nil?
 
-    write_attribute(:zsr, value)
+    self[:zsr] = value
   end
 
   has_many :patients
@@ -36,6 +37,7 @@ class Doctor < Person
   # User
   has_one :user, :as => :object, :autosave => true
   attr_accessible :user
+
   def email
     vcard.contacts.where(:phone_number_type => 'E-Mail').first
   end
