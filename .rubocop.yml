@@ -1,0 +1,41 @@
+require: rubocop-rspec
+
+AllCops:
+  Include:
+    - Rakefile
+    - config.ru
+  Exclude:
+    - bin/**/*
+    - db/**/*
+    - .bundle/**/*
+  RunRailsCops: true
+
+# Main style rules
+# ================
+
+Metrics/LineLength:
+  Max: 120
+
+Style/PredicateName:
+  Exclude:
+    - 'app/*/concerns/**/*.rb'
+    - 'spec/support/*.rb'
+
+# RSpec rules
+# ===========
+
+RSpec/DescribeClass:
+  Exclude:
+    - spec/features/**/*
+    - spec/routing/**/*
+
+# Temporary rules
+# ===============
+Style/Documentation:
+  Enabled: false
+
+Style/HashSyntax:
+  Enabled: false
+
+Style/Lambda:
+  Enabled: false
