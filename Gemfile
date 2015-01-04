@@ -89,7 +89,6 @@ gem 'barby'
 
 # PDF generation
 gem 'prawn'
-gem 'prawnto'
 
 # Printing
 gem 'cupsffi', require: !ENV['CI']
