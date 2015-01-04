@@ -24,11 +24,11 @@ class ReportsController < ApplicationController
       if case_params[:entry_date].match /bis/
         lower_bound, higher_bound = case_params[:entry_date].split('bis')
         case_keys.push "entry_date BETWEEN ? AND ?"
-        case_values.push Date.parse_date(lower_bound.strip)
-        case_values.push Date.parse_date(higher_bound.strip)
+        case_values.push Date.parse(lower_bound.strip)
+        case_values.push Date.parse(higher_bound.strip)
       else
         case_keys.push "entry_date = ? "
-        case_values.push Date.parse_date(case_params[:entry_date])
+        case_values.push Date.parse(case_params[:entry_date])
       end
     end
 
@@ -36,11 +36,11 @@ class ReportsController < ApplicationController
       if case_params[:screened_at].match /bis/
         lower_bound, higher_bound = case_params[:screened_at].split('bis')
         case_keys.push "screened_at BETWEEN ? AND ?"
-        case_values.push Date.parse_date(lower_bound.strip)
-        case_values.push Date.parse_date(higher_bound.strip)
+        case_values.push Date.parse(lower_bound.strip)
+        case_values.push Date.parse(higher_bound.strip)
       else
         case_keys.push "screened_at = ? "
-        case_values.push Date.parse_date(case_params[:screened_at])
+        case_values.push Date.parse(case_params[:screened_at])
       end
     end
 
@@ -48,11 +48,11 @@ class ReportsController < ApplicationController
       if case_params[:examination_date].match /bis/
         lower_bound, higher_bound = case_params[:examination_date].split('bis')
         case_keys.push "examination_date BETWEEN ? AND ?"
-        case_values.push Date.parse_date(lower_bound.strip)
-        case_values.push Date.parse_date(higher_bound.strip)
+        case_values.push Date.parse(lower_bound.strip)
+        case_values.push Date.parse(higher_bound.strip)
       else
         case_keys.push "examination_date = ? "
-        case_values.push Date.parse_date(case_params[:examination_date])
+        case_values.push Date.parse(case_params[:examination_date])
       end
     end
 
