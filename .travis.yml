@@ -11,9 +11,6 @@ env:
 
 script: "bundle exec rake spec"
 
-rvm:
-  - 2.1.5
-
 bundler_args: "--binstubs --without development"
 
 # IRC notification
