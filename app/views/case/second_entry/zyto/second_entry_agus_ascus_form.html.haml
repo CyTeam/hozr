@@ -1,0 +1,23 @@
+.row-fluid
+  .row-fluid
+    .span12.well.well-small
+      .span7
+        = link_to image_tag(inline_order_form_url(@case.order_form, :type => :result_remarks)), order_form_path(@case.order_form), :remote => true
+      .span5
+        = link_to image_tag(inline_order_form_url(@case.order_form, :type => :head)), order_form_path(@case.order_form), :remote => true
+
+.row-fluid
+
+- if @case.classification.code == '2A'
+  .row-fluid
+    .span3= classification_button('2AG')
+    .span3= classification_button('2AG_AS')
+    .span3= classification_button('2AS')
+- elsif @case.classification.code == '2-3A'
+  .row-fluid
+    .span3= classification_button('2-3AG')
+    .span3= classification_button('2-3AG_AS')
+    .span3= classification_button('2-3AS')
+
+- content_for :sidebar do
+  = render 'info'

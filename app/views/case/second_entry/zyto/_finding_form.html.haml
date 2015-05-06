@@ -1,0 +1,14 @@
+- quality_findings = @case.classification.code == '1' ? ['a', 'b'] : ['a', 'b', 'c']
+#quality_findings.row-fluid
+  - FindingClass.find_all_by_code(quality_findings).each do |finding_class|
+    .span3= link_to_add_finding_class(@case, finding_class)
+
+#top_findings
+  - @case.classification.top_finding_classes.in_groups_of(4, false).each do |finding_classes|
+    .row-fluid
+      - finding_classes.each do |finding_class|
+        .span3= link_to_add_finding_class(@case, finding_class)
+
+= form_tag add_finding_case_path(@case), :remote => true, :id => "finding_classes" do
+  %label{:for => "case_praxistar_eingangsnr"} Text/Code:
+  = autocomplete_field_tag 'finding_class[selection]', '', autocomplete_finding_class_code_cases_path, :size => 12, 'data-autofocus' => true

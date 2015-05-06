@@ -1,0 +1,4 @@
+%li{:style => "list-style-type: none"}
+  = link_to remove_finding_case_path(@case, :finding_id => list_item.id), :remote => true, :method => :delete do
+    %i.icon-trash
+  = list_item.name.html_safe

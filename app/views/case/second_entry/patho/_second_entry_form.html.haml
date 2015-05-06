@@ -1,5 +1,5 @@
 .row-fluid
-  = render "finding_form"
+  = render "case/second_entry/" + current_tenant.settings['hozr.type'] + "/finding_form"
 
 = simple_form_for @case, :url => second_entry_update_case_path(@case) do |f|
   .row-fluid

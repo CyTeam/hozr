@@ -876,14 +876,6 @@ ActiveRecord::Schema.define(:version => 20130507081556) do
     t.datetime "updated_at"
   end
 
-  add_index "tiers", ["biller_id"], :name => "index_tiers_on_biller_id"
-  add_index "tiers", ["employer_id"], :name => "index_tiers_on_employer_id"
-  add_index "tiers", ["guarantor_id"], :name => "index_tiers_on_guarantor_id"
-  add_index "tiers", ["insurance_id"], :name => "index_tiers_on_insurance_id"
-  add_index "tiers", ["patient_id"], :name => "index_tiers_on_patient_id"
-  add_index "tiers", ["provider_id"], :name => "index_tiers_on_provider_id"
-  add_index "tiers", ["referrer_id"], :name => "index_tiers_on_referrer_id"
-
   create_table "top_finding_classes", :id => false, :force => true do |t|
     t.integer "classification_id"
     t.integer "finding_class_id"

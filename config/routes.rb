@@ -102,6 +102,9 @@ Hozr::Application.routes.draw do
       get :unassigned_sort_queue, :unassigned_form, :assignings_list
       get :billing_queue
       post :assign
+
+      # Second Entry
+      get :autocomplete_finding_class_code, :controller => 'case/second_entry'
     end
 
     member do
@@ -117,15 +120,19 @@ Hozr::Application.routes.draw do
 
       post :print_result_report
 
-      get :first_entry, :second_entry_form
-      post :sign
+      get :first_entry
       get :next_first_entry
+
+      # Second Entry
+      get :second_entry_form, :controller => 'case/second_entry'
+      post :second_entry_form, :controller => 'case/second_entry'
+      put :second_entry_update, :controller => 'case/second_entry'
+      post :sign, :controller => 'case/second_entry'
+      post :add_finding, :controller => 'case/second_entry'
+      delete :remove_finding, :controller => 'case/second_entry'
 
       get :classification_form
       post :classification_update
-
-      post :second_entry_form
-      put :second_entry_update
 
       post :resend
     end

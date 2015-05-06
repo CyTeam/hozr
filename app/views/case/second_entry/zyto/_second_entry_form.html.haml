@@ -1,0 +1,41 @@
+.row-fluid
+  = render "case/second_entry/zyto/finding_form"
+
+= simple_form_for @case, :url => second_entry_update_case_path(@case) do |f|
+  .row-fluid
+    #findings.span6
+      = render 'finding_classes/list_findings'
+
+  .form-actions
+    .span3
+      = button_tag :submit, :value => :save, :class => 'span12 btn btn-big btn-primary' do
+        = t_action(:save)
+    .span3.btn-group
+      = button_tag :submit, :value => :queue_for_review, :class => 'btn btn-big' do
+        = t_action(:queue_for_review)
+      - if current_tenant.settings['modules.p16']
+        = button_tag :submit, :value => 'P16', :class => 'btn btn-big' do
+          P16
+      - if current_tenant.settings['modules.p16']
+        = button_tag :submit, :value => 'P16+HPV', :class => 'btn btn-big' do
+          P16+HPV
+
+  .row-fluid
+    .span12
+      .span6
+        = link_to image_tag(inline_order_form_url(@case.order_form, :type => :result_remarks), :size => "680x305"), order_form_path(@case.order_form), :remote => true
+      .span6
+        .row-fluid
+          .span6= f.association :doctor, :as => :select, :collection => doctors_collection, :required => true, :input_html => {'data-placeholder' => 'Arzt auswählen', :class => 'select2'}
+        .row-fluid
+          .control-group
+            %label.control-label= t_attr(:case_copy_tos, Case)
+            .controls
+              = render 'case_copy_tos/list', :a_case => @case, :collection => @case.case_copy_tos
+        .row-fluid
+          .span12= f.association :classification, :required => true, :input_html => {'data-placeholder' => 'Klassifikation auswählen', :class => 'select2'}
+        .row-fluid
+          .span12= f.input :remarks, :input_html => {:class => 'span12', :rows => 4}
+
+- content_for :sidebar do
+  = render 'cases/info'

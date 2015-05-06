@@ -42,16 +42,16 @@
           = case_info.entry_date.strftime('%d.%m.%Y')
           = "(%s)" % case_info.first_entry_submitter.code if case_info.first_entry_submitter
       - if case_info.attachments.present?
-        %dt= t_attr(:attachments)
+        %dt= t_attr(:attachments, Case)
         - for attachment in case_info.attachments
           %dd= link_to attachment, [:download, attachment]
       - if case_info.examination_method
-        %dt= t_attr(:examination_method)
+        %dt= t_attr(:examination_method, Case)
         %dd= case_info.examination_method.name
 
       - if current_tenant.settings['modules.slidepath']
         - if case_info.location_index.present?
-          %dt= t_attr(:slidepath, Case)
+          %dt= t_attr(:slidepath, Case, Case)
           - for location_index in case_info.location_index
             %dd= link_to_slidepath_scan(location_index)
 

@@ -1,0 +1,5 @@
+= boot_alert(flash[:error], 'error') if flash[:error]
+%ul
+  = render :partial => 'finding_classes/list_item', :collection => @case.finding_classes
+= javascript_tag do
+  $('#finding_class_selection').val('');
