@@ -105,7 +105,7 @@ gem 'thinking-sphinx'
 # ===========
 group :development do
   # Debugging
-  gem 'better_errors'
+  gem 'better_errors', '~> 1.1.0'
   gem 'binding_of_caller'  # Needed by binding_of_caller to enable html console
 
   # Deployment
@@ -130,7 +130,7 @@ group :development, :test do
 
   # Debugger
   gem 'pry-rails'
-  gem 'pry-byebug'
+  #gem 'pry-byebug'
 
   # Fixtures
   gem 'database_cleaner'
